@@ -5,7 +5,7 @@ const course_data = [
     duration: '4 Weeks',
     course_outline:'Online + Onsite',
     level: 'Advanced',
-    title: 'Starting SEO as your Home Based Business',
+    title: 'The Complete 2023 Web Development Bootcamp',
     rating: '4.9',
     rating_count: 8,
     course_price: '49.00',
