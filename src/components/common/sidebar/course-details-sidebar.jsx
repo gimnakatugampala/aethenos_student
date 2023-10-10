@@ -3,6 +3,10 @@ import useModal from '../../../hooks/use-modal';
 import { Books } from '../../../svg';
 import VideoModal from '../popup-modal/video-modal';
 
+const mainfs = {
+    fontSize: '40px',
+  };
+
 const CourseDetailsSidebar = ({ course,details_2=false }) => {
     const { img, certificate, videoId, course_price, instructor, duration, student, language } = course || {};
     const { isVideoOpen, setIsVideoOpen } = useModal();
@@ -20,9 +24,10 @@ const CourseDetailsSidebar = ({ course,details_2=false }) => {
                         <div className="content">
                             <h4 className="widget-title">Course Includes:</h4>
                             <div >
-                            <span className="value price fs-1 fw-bolder text-black ">${course_price}</span>
-                            <span className='text-decoration-line-through m-lg-3 text-black'> $74.99</span>
-                            <span className='m-lg-3 fw-semibold text-black'>83% off</span>
+                           
+                            <span style={mainfs} className="value price  fw-bolder text-black ">${course_price}</span>
+                            <span className='text-decoration-line-through m-lg-2 text-black'> $74.99</span>
+                            <span className='m-lg-1 fw-semibold text-black'>83% off</span>
                             </div>
                             <span className=" fw-semibold ">2 days left at this price!</span>
 
