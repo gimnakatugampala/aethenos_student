@@ -19,11 +19,18 @@ const CourseDetailsSidebar = ({ course,details_2=false }) => {
                         </div>
                         <div className="content">
                             <h4 className="widget-title">Course Includes:</h4>
+                            <div >
+                            <span className="value price fs-1 fw-bolder text-black ">${course_price}</span>
+                            <span className='text-decoration-line-through m-lg-3 text-black'> $74.99</span>
+                            <span className='m-lg-3 fw-semibold text-black'>83% off</span>
+                            </div>
+                            <span className=" fw-semibold ">2 days left at this price!</span>
+
                             <ul className="course-item">
-                                <li>
+                                {/* <li>
                                     <span className="label"><i className="icon-60"></i>Price:</span>
                                     <span className="value price">${course_price}</span>
-                                </li>
+                                </li> */}
 
                                 <li>
                                     <span className="label"><i className="icon-62"></i>Instrutor:</span>
