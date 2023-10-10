@@ -41,9 +41,9 @@ const FooterThree = () => {
                             <div className="edu-footer-widget">
                                 <div className="logo">
                                     <Link href="/">
-                                        <a>
-                                            <img className="logo-dark" src="/assets/images/logo/logo-white.png" alt="Corporate Logo" />
-                                        </a>
+
+                                        <img className="logo-dark" src="/assets/images/logo/logo-white.png" alt="Corporate Logo" />
+
                                     </Link>
                                 </div>
                                 <p className="description">Lorem ipsum dolor amet consecto adi pisicing elit sed eiusm tempor incidid unt labore dolore magna aliqua enim.</p>
@@ -58,7 +58,7 @@ const FooterThree = () => {
                                         <ul className="footer-link link-hover">
                                             {w.footer_links.map((l, i) => 
                                                 <li key={i}>
-                                                    <Link href={`/${l.link}`}><a>{l.title}</a></Link>
+                                                    <Link href={`/${l.link}`}>{l.title}</Link>
                                                 </li>
                                             )}
                                         </ul>
@@ -105,7 +105,7 @@ const FooterThree = () => {
                 </div>
             </div>
         </footer>
-    )
+    );
 }
 
 export default FooterThree;

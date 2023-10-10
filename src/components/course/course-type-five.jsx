@@ -49,12 +49,12 @@ const CourseTypeFive = ({ data, classes }) => {
             <div className="inner">
                 <div className="thumbnail">
                     <Link href={`/course-details/${data.id}`}>
-                        <a>
-                            <img
-                                src={`/assets/images/course/course-06/${data.img}`}
-                                alt="Course Thumb"
-                            />
-                        </a>
+
+                        <img
+                            src={`/assets/images/course/course-06/${data.img}`}
+                            alt="Course Thumb"
+                        />
+
                     </Link>
                     <div className="time-top">
                         <span className="duration">
@@ -71,7 +71,7 @@ const CourseTypeFive = ({ data, classes }) => {
 
                     <h6 className="title">
                         <Link href={`/course-details/${data.id}`}>
-                            <a>{data.title}</a>
+                            {data.title}
                         </Link>
                     </h6>
 
@@ -110,7 +110,7 @@ const CourseTypeFive = ({ data, classes }) => {
 
                     <h5 className="title">
                         <Link href={`/course-details/${data.id}`}>
-                            <a>{data.title}</a>
+                            {data.title}
                         </Link>
                     </h5>
 
@@ -158,7 +158,7 @@ const CourseTypeFive = ({ data, classes }) => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default CourseTypeFive;

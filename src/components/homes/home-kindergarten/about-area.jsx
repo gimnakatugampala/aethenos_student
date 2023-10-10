@@ -60,15 +60,20 @@ const AboutArea = () => {
                                     </div>
                                 </div>
                             </div>
-                            <Link href="/contact-us">
-                                <a className="edu-btn btn-curved" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">Get Start Today <i className="icon-4"></i></a>
+                            <Link
+                                href="/contact-us"
+                                className="edu-btn btn-curved"
+                                data-sal-delay="150"
+                                data-sal="slide-up"
+                                data-sal-duration="800">
+                                Get Start Today<i className="icon-4"></i>
                             </Link>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default AboutArea;

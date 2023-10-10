@@ -45,7 +45,7 @@ const RegisterForm = () => {
                     <input value={values.terms} onChange={handleChange} onBlur={handleBlur} type="checkbox" name='terms' id="terms-condition" />
                     <label htmlFor="terms-condition">I agree the User Agreement and
                         <Link href="/terms-condition">
-                            <a>Terms & Condition.</a>
+                            Terms & Condition.
                         </Link>
                     </label>
                 </div>
@@ -56,7 +56,7 @@ const RegisterForm = () => {
                 <button type="submit" className="edu-btn btn-medium">Create Account <i className="icon-4"></i></button>
             </div>
         </form>
-    )
+    );
 }
 
 export default RegisterForm;

@@ -15,7 +15,7 @@ const BreadcrumbThree = ({ title, subtitle }) => {
                     <ul className="edu-breadcrumb">
                         <li className="breadcrumb-item">
                             <Link href="/">
-                            <a>Home</a>
+                            Home
                             </Link>
                         </li>
                         <li className="separator"><i className="icon-angle-right"></i></li>
@@ -56,7 +56,7 @@ const BreadcrumbThree = ({ title, subtitle }) => {
                 </motion.li>
             </ul>
         </div>
-    )
+    );
 }
 
 export default BreadcrumbThree;

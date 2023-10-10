@@ -63,15 +63,15 @@ const AboutArea = () => {
                                 <p>Magna aliquaenim minim veniam quis nostrud exercitation ullamco laborisLorem ipsum dolor sit amet consectetur adipisicing elit sed do eius tempor incididunt labore.</p>
                             </div>
                             <ul className="features-list"> {lists.map((l, i) => <li key={i}>{l}</li>)} </ul>
-                            <Link href="/about-1">
-                                <a className="edu-btn">Get Start Today <i className="icon-4"></i></a>
+                            <Link href="/about-1" className="edu-btn">
+                                Get Start Today<i className="icon-4"></i>
                             </Link>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default AboutArea;

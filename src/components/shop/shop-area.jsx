@@ -34,21 +34,21 @@ const ShopArea = () => {
                                     <div className="inner">
                                         <div className="thumbnail">
                                             <Link href={`/product-details/${id}`}>
-                                                <a>
-                                                    <img src={img} alt="Shop Images" />
-                                                </a>
+
+                                                <img src={img} alt="Shop Images" />
+
                                             </Link>
                                             <div className="product-hover-info">
                                                 <ul>
                                                     <li><a href="#" role="button"><i className="icon-2"></i></a></li>
                                                     <li>
                                                         <Link href="/wishlist">
-                                                        <a><i className="icon-22"></i></a>
+                                                        <i className="icon-22"></i>
                                                         </Link>
                                                     </li>
                                                     <li>
                                                         <Link href="/cart">
-                                                        <a><i className="icon-3"></i></a>
+                                                        <i className="icon-3"></i>
                                                         </Link>
                                                     </li>
                                                 </ul>
@@ -58,7 +58,7 @@ const ShopArea = () => {
                                         <div className="content">
                                             <h6 className="title">
                                                 <Link href={`/product-details/${id}`}>
-                                                    <a>{title}</a>
+                                                    {title}
                                                 </Link>
                                             </h6>
 
@@ -73,7 +73,7 @@ const ShopArea = () => {
                                     </div>
                                 </div>
                             </div>
-                        )
+                        );
                     })}
                 </div>
 
@@ -88,7 +88,7 @@ const ShopArea = () => {
                 </ul>
             </div>
         </section>
-    )
+    );
 }
 
 export default ShopArea;

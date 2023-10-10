@@ -22,17 +22,17 @@ const Cart = () => {
                             <li key={index} className="each-item">
                                 <div className="thumb">
                                     <Link href={`/course-details/${item.id}`}>
-                                        <a>
-                                            <img src={item.img} alt="course-thumb" />
-                                        </a>
+
+                                        <img src={item.img} alt="course-thumb" />
+
                                     </Link>
                                 </div>
                                 <div className="content">
                                     <h5 className="title">
                                         <Link href={`/course-details/${item.id}`}>
-                                            <a>
-                                                {item.title}
-                                                </a>
+
+                                            {item.title}
+
                                         </Link>
                                     </h5>
                                     <div className="price-and-quantity">
@@ -56,18 +56,18 @@ const Cart = () => {
                     </div>
 
                     <div className="cart-checkout-buttons">
-                        <Link href="/cart">
-                            <a className="edu-btn btn-small cart-btn">View Cart</a>
+                        <Link href="/cart" className="edu-btn btn-small cart-btn">
+                            View Cart
                         </Link>
 
-                        <Link href="/checkout">
-                            <a className="edu-btn btn-small btn-secondary checkout-btn">Checkout</a>
+                        <Link href="/checkout" className="edu-btn btn-small btn-secondary checkout-btn">
+                            Checkout
                         </Link>
                     </div>
                 </div>
             }
         </div>
-    )
+    );
 }
 
 export default Cart;

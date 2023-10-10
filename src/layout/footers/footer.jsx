@@ -2,8 +2,8 @@ import Link from "next/link";
 import FooterSocial from "./component/footer-social";
 
 const footer_contents = {
-    logoLight: '/assets/images/logo/logo-dark.png',
-    logoDark: '/assets/images/logo/logo-white.png',
+    logoLight: '/assets/images/logo/Athenos_logo.png',
+    logoDark: '/assets/images/logo/Athenos_logo.png',
     desc: 'Lorem ipsum dolor amet consecto adi pisicing elit sed eiusm tempor incidid unt labore dolore.',
     add: '70-80 Upper St Norwich NR2',
     call: '+01 123 5641 231',
@@ -51,18 +51,18 @@ const Footer = ({ style_2, dark_bg,home_4 }) => {
                             <div className="edu-footer-widget">
                                 <div className="logo">
                                     <Link href={'/'}>
-                                        <a>
-                                            {!dark_bg && <>
-                                                {!style_2 && <img className="logo-light" src={logoLight} alt="Corporate Logo" />}
-                                                <img className="logo-dark" src={logoDark} alt="Corporate Logo" />
-                                            </>}
-                                        </a>
+
+                                        {!dark_bg && <>
+                                            {!style_2 && <img className="logo-light" src={logoLight} alt="Corporate Logo" />}
+                                            <img className="logo-dark" src={logoDark} alt="Corporate Logo" />
+                                        </>}
+
                                     </Link>
 
                                     <Link href={'/'}>
-                                        <a>
-                                            {dark_bg && <img className="logo-light" src={home_4?'/assets/images/logo/logo-white.png' :'/assets/images/logo/logo-light-2.png'} alt="Corporate Logo" />}
-                                        </a>
+
+                                        {dark_bg && <img className="logo-light" src={home_4?'/assets/images/logo/logo-white.png' :'/assets/images/logo/logo-light-2.png'} alt="Corporate Logo" />}
+
                                     </Link>
                                 </div>
 
@@ -83,7 +83,7 @@ const Footer = ({ style_2, dark_bg,home_4 }) => {
                                     <h4 className="widget-title">{w.widget_title}</h4>
                                     <div className="inner">
                                         <ul className="footer-link link-hover">
-                                            {w.footer_links.map((l, i) => <li key={i}><Link href={`/${l.link}`}><a>{l.title}</a></Link></li>)}
+                                            {w.footer_links.map((l, i) => <li key={i}><Link href={`/${l.link}`}>{l.title}</Link></li>)}
                                         </ul>
                                     </div>
                                 </div>
@@ -121,7 +121,7 @@ const Footer = ({ style_2, dark_bg,home_4 }) => {
                 </div>
             </div>
         </footer>
-    )
+    );
 }
 
 export default Footer;

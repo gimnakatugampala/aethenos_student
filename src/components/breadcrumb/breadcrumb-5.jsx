@@ -13,13 +13,13 @@ const CourseBreadcrumb = ({ course, subtitle }) => {
                     <ul className="edu-breadcrumb">
                         <li className="breadcrumb-item">
                             <Link href="/">
-                                <a>Home</a>
+                                Home
                             </Link>
                         </li>
                         <li className="separator"><i className="icon-angle-right"></i></li>
                         <li className="breadcrumb-item">
                             <Link href="/course-style-1">
-                                <a>Courses</a>
+                                Courses
                             </Link>
                         </li>
                         <li className="separator"><i className="icon-angle-right"></i></li>
@@ -77,7 +77,7 @@ const CourseBreadcrumb = ({ course, subtitle }) => {
                 </motion.li>
             </ul>
         </div>
-    )
+    );
 }
 
 export default CourseBreadcrumb;

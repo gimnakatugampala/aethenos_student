@@ -10,11 +10,11 @@ const HeroArea = () => {
                 <div className="row align-items-center">
                     <div className="col-lg-6">
                         <div className="banner-content">
-                            <h1 className="title" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">Get <span className="color-secondary">2500+</span> <br />Best Online Courses From EduBlink</h1>
-                            <p data-sal-delay="200" data-sal="slide-up" data-sal-duration="1000">Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit.</p>
+                            <h1 className="title" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">Learning that lasts Invest in yourself. Courses as low as <span className="color-secondary">$12.99</span> through Oct 12.</h1>
+                            <p data-sal-delay="200" data-sal="slide-up" data-sal-duration="1000">Trusted by over 14,400 companies and millions of learners around the world</p>
                             <div className="banner-btn" data-sal-delay="400" data-sal="slide-up" data-sal-duration="1000">
-                                <Link href="/course-style-1">
-                                    <a className="edu-btn">Find courses <i className="icon-4"></i></a>
+                                <Link href="/course-style-1" className="edu-btn">
+                                    Find courses<i className="icon-4"></i>
                                 </Link>
                             </div>
                             <ul className="shape-group">
@@ -32,20 +32,10 @@ const HeroArea = () => {
                     <div className="col-lg-6">
                         <div className="banner-thumbnail">
                             <div className="thumbnail" data-sal-delay="500" data-sal="slide-left" data-sal-duration="1000">
-                                <img src="/assets/images/banner/girl-1.webp" alt="Girl Image" />
+                                <img src="/assets/images/banner/Banner-image-1.jpg" alt="Girl Image" />
                             </div>
                             <div className="instructor-info" data-sal-delay="600" data-sal="slide-up" data-sal-duration="1000">
-                                <div className="inner">
-                                    <h5 className="title">Instructor</h5>
-                                    <div className="media">
-                                        <div className="thumb">
-                                            <img src="/assets/images/banner/author-1.png" alt="Images" />
-                                        </div>
-                                        <div className="content">
-                                            <span>200+</span> Instructors
-                                        </div>
-                                    </div>
-                                </div>
+                              
                             </div>
                             <ul className="shape-group">
                                 <li className="shape-1" data-sal-delay="1000" data-sal="fade" data-sal-duration="1000">
@@ -70,7 +60,7 @@ const HeroArea = () => {
                                 </motion.li>
 
                                 <li className="shape-4" data-sal-delay="1000" data-sal="fade" data-sal-duration="1000">
-                                    <img src="/assets/images/counterup/shape-02.png" alt="Shape" />
+                                   
                                 </li>
                                 <motion.li className="shape-5 scene" data-sal-delay="1000" data-sal="fade" data-sal-duration="1000"
                                     animate={ {
@@ -97,7 +87,7 @@ const HeroArea = () => {
                 <img src="/assets/images/about/h-1-shape-01.png" alt="Shape" />
             </div>
         </div>
-    )
+    );
 }
 
 export default HeroArea;

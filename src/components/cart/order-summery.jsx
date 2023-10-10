@@ -5,7 +5,7 @@ import useCartInfo from '../../hooks/use-cart-info';
 const OrderSummery = () => {
   	const { total } = useCartInfo();
   	return (
-		<div className="order-summery">
+        <div className="order-summery">
 			<h4 className="title">Cart Totals</h4>
 			<table className="table summery-table">
 				<tbody>
@@ -19,11 +19,11 @@ const OrderSummery = () => {
 					</tr>
 				</tbody>
 			</table>
-			<Link href="/checkout">
-				<a className="edu-btn btn-medium checkout-btn">Process to Checkout <i className="icon-4"></i></a>
-			</Link>
+			<Link href="/checkout" className="edu-btn btn-medium checkout-btn">
+                Process to Checkout<i className="icon-4"></i>
+            </Link>
 		</div>
-  	)
+    );
 }
 
 export default OrderSummery;

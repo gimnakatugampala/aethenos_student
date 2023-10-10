@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { course_data } from "../../../data";
-import CourseTypeOne from '../../course/course-type-one';
+import CourseTypeSeven from '../../course/course-type-seven';
 
-const CourseArea = () => {
+const CourseArea1 = () => {
     return (
         <div className="edu-course-area course-area-1 edu-section-gap bg-lighten01">
             <div className="container">
                 <div className="section-title section-center" data-sal-delay="150" data-sal="slide-up"
                     data-sal-duration="800">
-                    <span className="pre-title">Recomended Courses</span>
+                    <span className="pre-title">Popular Courses</span>
                     <h2 className="title">Pick A Course To Get Started</h2> 
                     <span className="shape-line"><i className="icon-19"></i></span>
                 </div>
@@ -16,7 +16,7 @@ const CourseArea = () => {
                     {course_data.slice(0,4).map((course) => {
                         return (
                             <div className="col-md-6 col-xl-3" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800" key={course.id}>
-                                <CourseTypeOne data={course} />
+                                <CourseTypeSeven data={course} />
                             </div>
                         )
                     })}
@@ -31,4 +31,4 @@ const CourseArea = () => {
     );
 }
 
-export default CourseArea;
+export default CourseArea1;

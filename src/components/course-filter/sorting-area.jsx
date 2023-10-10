@@ -34,13 +34,13 @@ const SortingArea = ({course_items, num, setCourses, courses,course_list, items 
                     <label>{course_list ? 'List' : 'Grid' }</label>
                     <ul className="switcher-btn">
                         <li>
-                            <Link href="/course-style-1">
-                                <a className={!course_list?"active":''}><i className="icon-53"></i></a>
+                            <Link href="/course-style-1" className={!course_list?"active":''}>
+                                <i className="icon-53"></i>
                             </Link>
                         </li>
                         <li>
-                            <Link href="/course-style-4">
-                                <a className={course_list?"active":''}><i className="icon-54"></i></a>
+                            <Link href="/course-style-4" className={course_list?"active":''}>
+                                <i className="icon-54"></i>
                             </Link>
                         </li>
                     </ul>
@@ -55,7 +55,7 @@ const SortingArea = ({course_items, num, setCourses, courses,course_list, items 
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default SortingArea;

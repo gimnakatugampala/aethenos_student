@@ -25,9 +25,9 @@ const CoursesArea = () => {
                                     <div className="inner">
                                         <div className="thumbnail">
                                             <Link href={`/course-details/${id}`}>
-                                                <a>
+
                                                 <img src={`/assets/images/course/course-04/${img}`} alt="Course Meta" />
-                                                </a>
+
                                             </Link>
                                             <div className="course-price price-round">${Math.trunc(course_price)}</div>
                                         </div>
@@ -35,7 +35,7 @@ const CoursesArea = () => {
                                             <span className="course-level">{level}</span>
                                             <h5 className="title">
                                                 <Link href={`/course-details/${id}`}>
-                                                    <a>{title}</a>
+                                                    {title}
                                                 </Link>
                                             </h5>
                                             <ul className="course-meta">
@@ -47,7 +47,7 @@ const CoursesArea = () => {
                                     </div>
                                 </div>
                             </div>
-                        )
+                        );
                     })}
                 </div>
 
@@ -81,7 +81,7 @@ const CoursesArea = () => {
                 </motion.li>
             </ul>
         </div>
-    )
+    );
 }
 
 export default CoursesArea;

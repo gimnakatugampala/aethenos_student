@@ -21,9 +21,9 @@ const CourseTypeSix = ({ data, classes }) => {
             <div className="inner">
                 <div className="thumbnail">
                     <Link href={`/course-details/${data.id}`}>
-                        <a>
-                            <img src={`/assets/images/course/course-04/${data.img}`} alt="Course Meta" />
-                        </a>
+
+                        <img src={`/assets/images/course/course-04/${data.img}`} alt="Course Meta" />
+
                     </Link>
                     <div className="time-top">
                         <span className="duration"><i className="icon-61"></i>{data.course_outline}</span>
@@ -34,7 +34,7 @@ const CourseTypeSix = ({ data, classes }) => {
                     <span className="course-level">{data.level}</span>
                     <h5 className="title">
                         <Link href={`/course-details/${data.id}`}>
-                            <a>{data.title}</a>
+                            {data.title}
                         </Link>
                     </h5>
                     <p>{data.short_desc}</p>
@@ -57,6 +57,6 @@ const CourseTypeSix = ({ data, classes }) => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 export default CourseTypeSix;

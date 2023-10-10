@@ -27,15 +27,15 @@ const BlogSidebar = () => {
                             <div key={blog.id} className="latest-post">
                                 <div className="thumbnail">
                                     <Link href={`/blog-details/${blog.id}`}>
-                                        <a>
-                                            <img src={blog.img} alt="Blog Images" />
-                                        </a>
+
+                                        <img src={blog.img} alt="Blog Images" />
+
                                     </Link>
                                 </div>
                                 <div className="post-content">
                                     <h6 className="title">
                                         <Link href={`/blog-details/${blog.id}`}>
-                                            <a>{blog.title.substring(0, 25)}...</a>
+                                            {blog.title.substring(0, 25)}...
                                         </Link>
                                     </h6>
                                     <ul className="blog-meta">
@@ -103,7 +103,7 @@ const BlogSidebar = () => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default BlogSidebar;

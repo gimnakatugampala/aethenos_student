@@ -26,9 +26,9 @@ const EventArea = () => {
                                     <div className="inner">
                                         <div className="thumbnail">
                                             <Link href={`/event-details/${id}`}>
-                                                <a>
-                                                    <img src={img} alt="Event Images" />
-                                                </a>
+
+                                                <img src={img} alt="Event Images" />
+
                                             </Link>
                                         </div>
                                         <div className="content">
@@ -37,21 +37,23 @@ const EventArea = () => {
                                             </ul>
                                             <h4 className="title">
                                                 <Link href={`/event-details/${id}`}>
-                                                    <a>{title}</a>
+                                                    {title}
                                                 </Link>
                                             </h4>
                                             <span className="event-location"><i className="icon-40"></i>{event_meta}</span>
                                             <p>{sm_desc}</p>
                                             <div className="read-more-btn">
-                                                <Link href={`/event-details/${id}`}>
-                                                    <a className="edu-btn btn-medium curved-medium">Attend <i className="icon-4"></i></a>
+                                                <Link
+                                                    href={`/event-details/${id}`}
+                                                    className="edu-btn btn-medium curved-medium">
+                                                    Attend<i className="icon-4"></i>
                                                 </Link>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        )
+                        );
                     })}
                 </div>
 
@@ -75,7 +77,7 @@ const EventArea = () => {
                 </ul>
             </div>
         </div>
-    )
+    );
 }
 
 export default EventArea;

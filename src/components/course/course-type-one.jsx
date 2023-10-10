@@ -49,9 +49,9 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
             <div className="inner">
                 <div className="thumbnail">
                     <Link href={`/course-details/${data.id}`}>
-                        <a>
-                            <img src={`/assets/images/course/course-${image_location_path}/${data.img}`} alt="Course Meta" />
-                        </a>
+
+                        <img src={`/assets/images/course/course-${image_location_path}/${data.img}`} alt="Course Meta" />
+
                     </Link>
                     <div className="time-top">
                         <span className="duration"><i className="icon-61"></i>{data.duration}</span>
@@ -92,7 +92,7 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                     <span className="course-level">{data.level}</span>
                         <h6 className="title">
                             <Link href={`/course-details/${data.id}`}>
-                                <a>{data.title}</a>
+                                {data.title}
                             </Link>
                         </h6>
                     <div className="course-rating">
@@ -118,7 +118,7 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default CourseTypeOne;

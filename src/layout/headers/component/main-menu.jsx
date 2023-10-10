@@ -12,11 +12,11 @@ const MainMenu = () => {
                             {menu.submenus.map((nav, i) => (
                                 <li key={i}>
                                     <Link href={`${nav.link}`}>
-                                        <a>
-                                            {nav.title}
-                                            {nav?.hot && <span className="badge-1">hot</span>}
-                                            {nav?.new && <span className="badge">new</span>}
-                                        </a>
+
+                                        {nav.title}
+                                        {nav?.hot && <span className="badge-1">hot</span>}
+                                        {nav?.new && <span className="badge">new</span>}
+
                                     </Link>
                                 </li>
                             ))}
@@ -31,7 +31,7 @@ const MainMenu = () => {
                                         {nav.mega_submenu.map((m, i) => (
                                             <li key={i}>
                                                 <Link href={`${m.link}`}>
-                                                    <a>{m.title}</a>
+                                                    {m.title}
                                                 </Link>
                                             </li>
                                         ))}
@@ -43,7 +43,7 @@ const MainMenu = () => {
                 </li>
             ))}
         </ul>
-    )
+    );
 }
 
 export default MainMenu;

@@ -9,7 +9,7 @@ const BreadcrumbTwo = ({ subtitle }) => {
                     <ul className="edu-breadcrumb">
                         <li className="breadcrumb-item">
                             <Link href="/">
-                                <a>Home</a>
+                                Home
                             </Link>
                         </li>
                         <li className="separator"><i className="icon-angle-right"></i></li>
@@ -20,7 +20,7 @@ const BreadcrumbTwo = ({ subtitle }) => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default BreadcrumbTwo;

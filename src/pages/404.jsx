@@ -56,10 +56,9 @@ const ErrorPage = () => {
                         <div className="content">
                             <h2 className="title">404 - Page Not Found</h2>
                             <h4 className="subtitle">The page you are looking for does not exist.</h4>
-                            <Link href="/">
-                                <a className="edu-btn">
-                                    <i className="icon-west"></i>Back to Homepage
-                                </a>
+                            <Link href="/" className="edu-btn">
+
+                                <i className="icon-west"></i>Back to Homepage
                             </Link>
                         </div>
                     </div>
@@ -72,7 +71,7 @@ const ErrorPage = () => {
             </section>
             <Footer style_2={'footer-dark bg-image footer-style-2'} />
         </Wrapper>
-    )
+    );
 }
 
 export default ErrorPage;

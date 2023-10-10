@@ -10,15 +10,15 @@ function Category({ delay, color, icon, icon_class, title, course }) {
                 </div>
                 <div className="content">
                     <Link href="/course-style-1">
-                        <a>
-                            <h5 className="title">{title}</h5>
-                        </a>
+
+                        <h5 className="title">{title}</h5>
+
                     </Link>
                     <span className="course-count">{course} Courses</span>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 const TopCategories = () => {

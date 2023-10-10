@@ -58,9 +58,9 @@ const CategoryArea = () => {
                                 </div>
                                 <div className="content">
                                     <Link href="/course-style-1">
-                                        <a>
-                                            <h5 className="title">{category.title}</h5>
-                                        </a>
+
+                                        <h5 className="title">{category.title}</h5>
+
                                     </Link>
                                     <p>{category.text}</p>
                                     <div className="course-remain">{category.courses} Courses</div>
@@ -71,7 +71,7 @@ const CategoryArea = () => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default CategoryArea;

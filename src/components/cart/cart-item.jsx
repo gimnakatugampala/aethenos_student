@@ -14,15 +14,15 @@ const CartItem = ({ item }) => {
 
             <td className="product-thumbnail">
                 <Link href={`/course-details/${item.id}`}>
-                    <a>
-                        <img src={item.img} alt="Books" />
-                    </a>
+
+                    <img src={item.img} alt="Books" />
+
                 </Link>
             </td>
 
             <td className="product-title">
                 <Link href={`/course-details/${item.id}`}>
-                    <a>{item.title}</a>
+                    {item.title}
                 </Link>
             </td>
 
@@ -42,7 +42,7 @@ const CartItem = ({ item }) => {
                 <span className="currency-symbol">$</span>{(item.quantity * item.price).toFixed(2)}
             </td>
         </tr>
-    )
+    );
 }
 
 export default CartItem;

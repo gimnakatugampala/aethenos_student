@@ -12,6 +12,7 @@ import HeroArea from './hero-area';
 import TeamArea from './team-area';
 import TestimonialArea from './testimonial-area';
 import TopCategories from './top-categories';
+import CourseArea1 from './course-area-two';
 
 const index = () => {
     return (
@@ -21,15 +22,16 @@ const index = () => {
                 <HeroArea/>
                 <CategoryArea/>
                 <TopCategories/>
-                <AboutArea/>
+                {/* <AboutArea/> */}
                 <CourseArea/>
                 <CounterUpArea/>
-                <TestimonialArea/>
-                <CtaArea/>
-                <TeamArea/>
-                <AdBanner/>
+                {/* <TestimonialArea/> */}
+                {/* <CtaArea/> */}
+                {/* <TeamArea/> */}
+                <CourseArea1/>
+                {/* <AdBanner/> */}
                 <BrandArea/>
-                <BlogArea/>
+                {/* <BlogArea/> */}
                 <Footer/>
             </div>
         </div>

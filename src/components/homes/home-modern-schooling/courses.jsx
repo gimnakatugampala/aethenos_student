@@ -20,8 +20,8 @@ const Courses = () => {
                     </li>
                     <li>
                         <div className="course-view-all" data-sal-delay="150" data-sal="slide-up" data-sal-duration="1200">
-                            <Link href="/course-style-1">
-                                <a className="edu-btn">Browse more courses <i className="icon-4"></i></a>
+                            <Link href="/course-style-1" className="edu-btn">
+                                Browse more courses<i className="icon-4"></i>
                             </Link>
                         </div>
                     </li>
@@ -62,7 +62,7 @@ const Courses = () => {
                 </ul>
             </div>
         </div>
-    )
+    );
 }
 
 export default Courses;

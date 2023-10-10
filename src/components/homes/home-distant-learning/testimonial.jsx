@@ -55,8 +55,8 @@ const Testimonial = () => {
                                 <h2 className="title">{title}</h2>
                                 <span className="shape-line"><i className="icon-19"></i></span>
                                 <p>{text}</p>
-                                <Link href="/about-1">
-                                    <a className="edu-btn btn-large">View All<i className="icon-4"></i></a>
+                                <Link href="/about-1" className="edu-btn btn-large">
+                                    View All<i className="icon-4"></i>
                                 </Link>
                             </div>
                         </div>
@@ -115,7 +115,7 @@ const Testimonial = () => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Testimonial;

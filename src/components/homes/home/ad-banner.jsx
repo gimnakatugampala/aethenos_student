@@ -12,9 +12,9 @@ const AdBanner = () => {
                         <div className="col-lg-7">
                             <div className="section-title section-center" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
                                 <h2 className="title">Get Your Quality Skills <span className="color-secondary">Certificate</span> Through EduBlink </h2>
-                                <Link href="/contact-us">
-                                    <a className="edu-btn">Get started now <i className="icon-4"></i>
-                                    </a>
+                                <Link href="/contact-us" className="edu-btn">
+                                    Get started now<i className="icon-4"></i>
+
                                 </Link>
                             </div>
                         </div>
@@ -56,7 +56,7 @@ const AdBanner = () => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default AdBanner;

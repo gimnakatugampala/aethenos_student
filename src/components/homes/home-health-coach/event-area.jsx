@@ -32,8 +32,8 @@ const EventArea = ({ event_2 }) => {
                 </div>
 
                 <div className="event-view-all-btn" data-sal-delay="150" data-sal="slide-up" data-sal-duration="1200">
-                    <h6 className="view-text">The Latest Events from EduBlink. <Link href="/event-grid">
-                        <a className="btn-transparent">View All <i className="icon-4"></i></a>
+                    <h6 className="view-text">The Latest Events from EduBlink. <Link href="/event-grid" className="btn-transparent">
+                        View All<i className="icon-4"></i>
                     </Link>
                     </h6>
                 </div>
@@ -53,7 +53,7 @@ const EventArea = ({ event_2 }) => {
                 </ul>
             </div>
         </div>
-    )
+    );
 }
 
 export default EventArea;

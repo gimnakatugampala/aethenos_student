@@ -7,17 +7,17 @@ const BlogPostOne = ({ param }) => {
             <div className="inner">
                 <div className="thumbnail">
                     <Link href={`/blog-details/${param.id}`}>
-                        <a>
-                            <img src={param.img} alt="Blog Images" />
-                        </a>
+
+                        <img src={param.img} alt="Blog Images" />
+
                     </Link>
                 </div>
                 <div className="content position-top">
                     <div className="read-more-btn">
-                        <Link href={`/blog-details/${param.id}`}>
-                            <a className="btn-icon-round">
-                                <i className="icon-4"></i>
-                            </a>
+                        <Link href={`/blog-details/${param.id}`} className="btn-icon-round">
+
+                            <i className="icon-4"></i>
+
                         </Link>
                     </div>
                     <div className="category-wrap">
@@ -25,7 +25,7 @@ const BlogPostOne = ({ param }) => {
                     </div>
                     <h5 className="title">
                         <Link href={`/blog-details/${param.id}`}>
-                            <a>{param.title}</a>
+                            {param.title}
                         </Link>
                     </h5>
                     <ul className="blog-meta">
@@ -40,7 +40,7 @@ const BlogPostOne = ({ param }) => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default BlogPostOne;
