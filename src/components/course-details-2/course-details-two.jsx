@@ -3,8 +3,19 @@ import CourseDetailsSidebar from '../common/sidebar/course-details-sidebar';
 import SingleComment from '../course-details/single-comment';
 import SingleProgressbar from '../course-details/single-progressbar';
 import SingleAccordion from './single-accordion';
+import { useState } from 'react';
+import { course_data } from '../../data';
+import SortingArea from '../course-filter/sorting-area';
+import CourseTypeSix from '../course/course-type-six';
 
 const CourseDetailsTwo = ({ course }) => {
+    const coursePerView = 3;
+    const [next, setNext] = useState(coursePerView);
+    const [courses,setCourses] = useState(course_data);
+    // handleLoadData
+    const handleLoadData = () => {
+        setNext(value => value + 3)
+    }
   const { course_desc, course_desc_2, learn_list, course_desc_3, curriculum_desc, course_lessons, instructor_img, instructor_title, instructor_desc, social_links, reviews, instructor, rating, rating_count } = course || {};
     return (
         <section className="edu-section-gap course-details-area">
@@ -13,9 +24,9 @@ const CourseDetailsTwo = ({ course }) => {
                     <div className="col-lg-8">
                         <div className="course-details-content course-details-2">
                             <div className="course-overview">
-                                <h3 className="heading-title" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">About This Course</h3>
-                                <p data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">{course_desc}</p>
-                                <p data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">{course_desc_2}</p>
+                                {/* <h3 className="heading-title" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">About This Course</h3> */}
+                                {/* <p data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">{course_desc}</p> */}
+                                {/* <p data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">{course_desc_2}</p> */}
                                 <div className="border-box">
                                     <h5 className="title" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">What You’ll Learn?</h5>
                                     <div className="row g-5">
@@ -43,12 +54,37 @@ const CourseDetailsTwo = ({ course }) => {
                                     <li>Basic JavaScript knowledge is required</li>
                                 </ul>
 
-                                <h3 className="heading-title" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">Target Audience</h3>
+                                <div className='mb-5'>
+
+                             
+                                <h3 className="heading-title" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">Students also bought</h3>
+
+                                <div className="edu-course-area course-area-1 ">
+
+            <div className="container">
+                {/* <SortingArea course_items={course_data} num={courses?.slice(0,next)?.length} setCourses={setCourses} courses={courses} /> */}
+
+                <div className="row g-5">
+                    {courses?.slice(0, next)?.map((course) => (
+                        <div key={course.id} className="col-md-6 col-lg-4">
+                            <CourseTypeSix data={course} classes="course-box-shadow" />
+                        </div>
+                    ))}
+                </div>
+
+                {/* {next < courses.length && 
+                    <div onClick={handleLoadData} className="load-more-btn" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1200">
+                        <a className="edu-btn" style={{ cursor: 'pointer' }}>Load More <i className="icon-56"></i></a>
+                    </div>
+                } */}
+            </div>
+        </div>
+        </div>
+                            <h3 className="heading-title" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">Description</h3>
                                 <ul className="mb--90" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                                    <li>Newcomer as well as experienced frontend developers interested in learning a modern JavaScript framework</li>
-                                    <li>If you want to learn to master Wordpress without getting bogged down with technical jargon, this course is for you.</li>
-                                    <li>This course is for you if you want to build a website, whether for personal or business reasons.</li>
-                                    <li>This course is perfect for you if you are taking over an existing Wordpress website, or want to build one from</li>
+                                    <p>Welcome to the Complete Web Development Bootcamp, the only course you need to learn to code and become a full-stack web developer. With 150,000+ ratings and a 4.8 average, my Web Development course is one of the HIGHEST RATED courses in the history of Udemy! 
+
+At 65+ hours, this Web Development course is without a doubt the most comprehensive web development course available online. <br /> Even if you have zero programming experience, this course will take you from beginner</p>
                                 </ul>
                             </div>
 
@@ -154,7 +190,34 @@ const CourseDetailsTwo = ({ course }) => {
                                     </div>
                                 </div>
                             </div>
+                            <div>
+
+                             
+                                 <h3 className="heading-title" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">More Courses by Dr. Angela Yu</h3>
+
+                                   <div className="edu-course-area course-area-1 ">
+
+                                     <div className="container">
+                                       <SortingArea course_items={course_data} num={courses?.slice(0,next)?.length} setCourses={setCourses} courses={courses} />
+
+                                          <div className="row g-5">
+                                             {courses?.slice(0, next)?.map((course) => (
+                                                 <div key={course.id} className="col-md-6 col-lg-4">
+                                                      <CourseTypeSix data={course} classes="course-box-shadow" />
+                                                 </div>
+                                                 ))}
+                                         </div>
+
+                                      {next < courses.length && 
+                                  <div onClick={handleLoadData} className="load-more-btn" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1200">
+                                       <a className="edu-btn" style={{ cursor: 'pointer' }}>Load More <i className="icon-56"></i></a>
+                                        </div>
+                                          }
+                                       </div>
+                                 </div>
+                            </div>
                         </div>
+
                     </div>
                     <div className="col-lg-4">
                         <CourseDetailsSidebar course={course} details_2={true} />
