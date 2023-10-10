@@ -16,7 +16,7 @@ const menu_data = [
         ]
     },
     {
-        title: 'Pages',
+        title: 'Courses',
         link: '#',
         mega_menu: true,
         submenus: [
@@ -88,7 +88,7 @@ const menu_data = [
         ]
     },
     {
-        title: 'Courses',
+        title: 'E Portal',
         link: '#',
         mega_menu: false,
         submenus: [
@@ -103,7 +103,7 @@ const menu_data = [
         ]
     },
     {
-        title: 'Blog',
+        title: 'Instructor',
         link: '#',
         mega_menu: false,
         submenus: [
@@ -113,15 +113,15 @@ const menu_data = [
             { title: 'Blog Details', link: '/blog-details' }
         ]
     },
-    {
-        title: 'Contact',
-        link: '#',
-        mega_menu: false,
-        submenus: [
-            { title: 'Contact Us', link: '/contact-us' },
-            { title: 'Contact Me', link: '/contact-me' }
-        ]
-    }
+    // {
+    //     title: 'Contact',
+    //     link: '#',
+    //     mega_menu: false,
+    //     submenus: [
+    //         { title: 'Contact Us', link: '/contact-us' },
+    //         { title: 'Contact Me', link: '/contact-me' }
+    //     ]
+    // }
 ]
 
 export default menu_data;
