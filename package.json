@@ -1,0 +1,43 @@
+{
+    "name": "edu-blink",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "export": "next build && next export",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@popperjs/core": "^2.11.6",
+        "@reduxjs/toolkit": "^1.8.5",
+        "@svgr/webpack": "^6.3.1",
+        "bootstrap": "^5.2.0",
+        "emailjs-com": "^3.2.0",
+        "firebase": "^9.12.1",
+        "formik": "^2.2.9",
+        "framer-motion": "^7.6.7",
+        "next": "12.2.5",
+        "next-themes": "^0.2.0",
+        "react": "18.2.0",
+        "react-countup": "^6.3.1",
+        "react-dom": "18.2.0",
+        "react-image-lightbox": "^5.1.4",
+        "react-intersection-observer": "^9.4.0",
+        "react-modal-video": "^1.2.10",
+        "react-paginate": "^8.1.3",
+        "react-rangeslider": "^2.2.0",
+        "react-redux": "^8.0.2",
+        "react-responsive-masonry": "^2.1.6",
+        "react-toastify": "^9.0.8",
+        "sal.js": "^0.8.5",
+        "sass": "^1.54.5",
+        "swiper": "^8.3.2",
+        "yup": "^0.32.11"
+    },
+    "devDependencies": {
+        "eslint": "8.22.0",
+        "eslint-config-next": "12.2.5"
+    }
+}
