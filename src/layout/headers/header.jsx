@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
 import Link from 'next/link';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import MainMenu from '../headers/component/main-menu';
-import HeaderTopRight from '../headers/component/header-top-right';
-import HeaderTopLeft from '../headers/component/header-top-left';
 import SearchPopup from '../../components/common/popup-modal/search-popup';
+import OffCanvas from '../../components/common/sidebar/off-canvas';
+import useCartInfo from '../../hooks/use-cart-info';
 import useSticky from '../../hooks/use-sticky';
 import { wishlistItems } from '../../redux/features/wishlist-slice';
-import useCartInfo from '../../hooks/use-cart-info';
-import OffCanvas from '../../components/common/sidebar/off-canvas';
+import HeaderTopLeft from '../headers/component/header-top-left';
+import HeaderTopRight from '../headers/component/header-top-right';
+import MainMenu from '../headers/component/main-menu';
 import Cart from './component/cart';
 
 const categories = [
@@ -24,7 +24,7 @@ const categories = [
     { link: '/course-style-1', title: 'Motivation' }
 ]
 
-const Header = ({ header_style, no_top_bar, disable_full_width, disable_category }) => {
+const Header = ({ style_3 ,header_style, no_top_bar, disable_full_width, disable_category }) => {
     const { sticky } = useSticky();
     const { quantity } = useCartInfo();
     const wishlists = useSelector(wishlistItems);
@@ -122,10 +122,22 @@ const Header = ({ header_style, no_top_bar, disable_full_width, disable_category
                                         </Link>
                                         <Cart />
                                     </li>
-                                    <li className="header-btn">
+                                    {/* <li className="header-btn">
                                         <Link href="/contact-us">
                                             <a className="edu-btn btn-medium">Try for free
                                             <i className="icon-4"></i></a>
+                                        </Link>
+                                    </li> */}
+                                    <li className="header-info">
+                                        <Link href="/sign-in">
+                                            <a className="edu-btn btn-smoll">Login
+                                           </a>
+                                        </Link>
+                                    </li>
+                                    <li className="header-info">
+                                        <Link href="/sign-in">
+                                            <a className="edu-btn btn-smoll">Register
+                                           </a>
                                         </Link>
                                     </li>
                                     <li className="mobile-menu-bar d-block d-xl-none">
@@ -135,6 +147,13 @@ const Header = ({ header_style, no_top_bar, disable_full_width, disable_category
                                     </li>
                                 </ul>
                             </div>
+                            {/* <div className="header-top-right">
+                                    <ul className="header-info">
+                                        <li><Link href="/sign-in"><a>Login</a></Link></li>
+                                        <li><Link href="/sign-in"><a>Register</a></Link></li>
+                                       
+                                    </ul>
+                                </div> */}
                         </div>
                     </div>
                 </div>
