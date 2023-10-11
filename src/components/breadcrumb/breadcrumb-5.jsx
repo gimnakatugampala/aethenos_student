@@ -13,13 +13,19 @@ const CourseBreadcrumb = ({ course }) => {
                     <ul className="edu-breadcrumb">
                         <li className="breadcrumb-item">
                             <Link href="/">
-                                Home
+                                Finance & Accounting
                             </Link>
                         </li>
                         <li className="separator"><i className="icon-angle-right"></i></li>
                         <li className="breadcrumb-item">
                             <Link href="/course-style-1">
-                                Courses
+                            Accounting & Bookkeeping
+                            </Link>
+                        </li>
+                        <li className="separator"><i className="icon-angle-right"></i></li>
+                        <li className="breadcrumb-item">
+                            <Link href="/course-style-1">
+                            Accounting 
                             </Link>
                         </li>
                         <li className="separator"><i className="icon-angle-right"></i></li>
