@@ -1,13 +1,12 @@
 import React from 'react';
 import menu_data from '../menu-data';
-import Link from 'next/link';
 
 const MainMenu = () => {
     return (
         <ul className="mainmenu">
             {menu_data.map((menu, i) => (
-                <li key={i} className="has-droupdown"><a href="#">{menu.title}</a>
-                    {!menu.mega_menu && 
+                <li key={i} ><a href="#">{menu.title}</a>
+                    {/* {!menu.mega_menu && 
                         <ul className="submenu">
                             {menu.submenus.map((nav, i) => (
                                 <li key={i}>
@@ -21,8 +20,8 @@ const MainMenu = () => {
                                 </li>
                             ))}
                         </ul>
-                    }
-                    {menu.mega_menu && 
+                    } */}
+                    {/* {menu.mega_menu && 
                         <ul className="mega-menu">
                             {menu.submenus.map((nav, i) => (
                                 <li key={i}>
@@ -39,7 +38,7 @@ const MainMenu = () => {
                                 </li>
                             ))}
                         </ul>
-                    }
+                    } */}
                 </li>
             ))}
         </ul>
