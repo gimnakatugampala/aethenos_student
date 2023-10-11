@@ -54,7 +54,7 @@ const Header = ({ style_3 ,header_style, no_top_bar, disable_full_width, disable
                         <div className="header-navbar">
                             <div className="header-brand">
                                 <div className="logo">
-                                    <Link href={'/'}>
+                                    <Link href={'/'} legacyBehavior>
                                         <a>
                                             <img className="logo-light" src='/assets/images/logo/logo-dark.png' alt="logo" />
                                             <img className="logo-dark" src='/assets/images/logo/logo-white.png' alt="logo" />
@@ -72,7 +72,7 @@ const Header = ({ style_3 ,header_style, no_top_bar, disable_full_width, disable
                                                         {
                                                             categories.map((category, i) => (
                                                                 <li key={i}>
-                                                                    <Link href={`${category.link}`}><a>{category.title}</a></Link>
+                                                                    <Link legacyBehavior href={`${category.link}`}><a>{category.title}</a></Link>
                                                                 </li>
                                                             ) )
                                                         }
@@ -106,7 +106,7 @@ const Header = ({ style_3 ,header_style, no_top_bar, disable_full_width, disable
                                         </a>
                                     </li>
                                     <li className="icon">
-                                        <Link href="/wishlist">
+                                        <Link href="/wishlist" legacyBehavior>
                                             <a className="wishlist">
                                                 <i className="icon-22"></i>
                                                 <span className="count">{wishlists?.length}</span>
@@ -114,7 +114,7 @@ const Header = ({ style_3 ,header_style, no_top_bar, disable_full_width, disable
                                         </Link>
                                     </li>
                                     <li className="icon cart-icon">
-                                        <Link href="/cart">
+                                        <Link href="/cart" legacyBehavior>
                                             <a className="cart-icon">
                                                 <i className="icon-3"></i>
                                                 <span className="count">{quantity}</span>
@@ -129,13 +129,13 @@ const Header = ({ style_3 ,header_style, no_top_bar, disable_full_width, disable
                                         </Link>
                                     </li> */}
                                     <li className="header-info">
-                                        <Link href="/sign-in">
+                                        <Link href="/sign-in" legacyBehavior>
                                             <a className="edu-btn btn-smoll">Login
                                            </a>
                                         </Link>
                                     </li>
                                     <li className="header-info">
-                                        <Link href="/sign-in">
+                                        <Link href="/sign-in" legacyBehavior>
                                             <a className="edu-btn btn-smoll">Register
                                            </a>
                                         </Link>
