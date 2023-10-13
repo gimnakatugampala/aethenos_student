@@ -18,7 +18,7 @@ const ListArea = () => {
                                 <div key={id} className="edu-blog blog-style-list" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
                                     <div className="inner">
                                         <div className="thumbnail">
-                                            <Link href={`/blog-details/${id}`}>
+                                            <Link href={`/blog-details/${id}`} legacyBehavior>
 
                                                 <img src={img} alt="Blog Images" />
 
@@ -26,7 +26,7 @@ const ListArea = () => {
                                         </div>
                                         <div className="content">
                                             <h5 className="title">
-                                                <Link href={`/blog-details/${id}`}>
+                                                <Link href={`/blog-details/${id}`} legacyBehavior>
                                                     {title}...
                                                 </Link>
                                             </h5>
@@ -36,7 +36,10 @@ const ListArea = () => {
                                             </ul>
                                             <p>{desc}</p>
                                             <div className="read-more-btn">
-                                                <Link href={`/blog-details/${id}`} className="edu-btn btn-border btn-medium">
+                                                <Link
+                                                    href={`/blog-details/${id}`}
+                                                    className="edu-btn btn-border btn-medium"
+                                                    legacyBehavior>
                                                     Learn More<i className="icon-4"></i>
                                                 </Link>
                                             </div>

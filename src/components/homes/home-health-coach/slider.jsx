@@ -74,7 +74,7 @@ const Slider = () => {
                                         </h1>
                                         <p data-sal-delay="200">{sm_text}</p>
                                         <div className="banner-btn" data-sal-delay="400">
-                                            <Link href="/course-style-1" className="edu-btn btn-secondary">
+                                            <Link href="/course-style-1" className="edu-btn btn-secondary" legacyBehavior>
                                                 {btn_text} <i className="icon-4"></i>
                                             </Link>
                                         </div>

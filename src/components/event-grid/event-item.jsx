@@ -6,7 +6,7 @@ const EventItem = ({ item }) => {
     return (
         <div className="inner">
             <div className="thumbnail">
-                <Link href={`/event-details/${id}`}>
+                <Link href={`/event-details/${id}`} legacyBehavior>
 
                     <img src={img} alt="Blog Images" />
 
@@ -21,7 +21,7 @@ const EventItem = ({ item }) => {
                     <span className="month">{date?.split(' ')[0]}</span>
                 </div>
                 <h5 className="title">
-                    <Link href={`/event-details/${id}`}>
+                    <Link href={`/event-details/${id}`} legacyBehavior>
                         {title}
                     </Link>
                 </h5>
@@ -30,7 +30,10 @@ const EventItem = ({ item }) => {
                     <li><i className="icon-40"></i>{event_meta}</li>
                 </ul>
                 <div className="read-more-btn">
-                    <Link href={`/event-details/${id}`} className="edu-btn btn-small btn-secondary">
+                    <Link
+                        href={`/event-details/${id}`}
+                        className="edu-btn btn-small btn-secondary"
+                        legacyBehavior>
                         Learn More<i className="icon-4"></i>
 
                     </Link>

@@ -36,7 +36,7 @@ const AboutArea = () => {
                             <ul className="features-list">
                                 {lists.map((l, i) => <li key={i}>{l}</li>)}
                             </ul>
-                            <Link href="/about-1" className="edu-btn">
+                            <Link href="/about-1" className="edu-btn" legacyBehavior>
                                 Get Start Today<i className="icon-4"></i>
                             </Link>
                         </div>

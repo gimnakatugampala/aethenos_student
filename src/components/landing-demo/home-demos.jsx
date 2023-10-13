@@ -82,7 +82,11 @@ const HomeDemos = () => {
                                     { demo.new && <span className="new-wrapper">New</span> }
                                     <div className="inner">
                                         <div className="thumbnail">
-                                            <Link href={demo.link} className="thumbnail-link" target="_blank">
+                                            <Link
+                                                href={demo.link}
+                                                className="thumbnail-link"
+                                                target="_blank"
+                                                legacyBehavior>
 
                                                 <img
                                                     src={`/assets/images/preview/${demo.imgSrc}`}
@@ -91,13 +95,17 @@ const HomeDemos = () => {
 
                                             </Link>
                                             <div className="hover-action">
-                                                <Link href={demo.link} className="edu-btn btn-large" target="_blank">
+                                                <Link
+                                                    href={demo.link}
+                                                    className="edu-btn btn-large"
+                                                    target="_blank"
+                                                    legacyBehavior>
                                                     View Demo<i className="icon-4"></i>
                                                 </Link>
                                             </div>
                                         </div>
                                         <h5 className="title">
-                                            <Link href={demo.link} target="_blank">
+                                            <Link href={demo.link} target="_blank" legacyBehavior>
                                                 {demo.title}
                                             </Link>
                                         </h5>

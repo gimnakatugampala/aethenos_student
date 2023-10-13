@@ -63,7 +63,7 @@ const AboutArea = () => {
                                 <p>Magna aliquaenim minim veniam quis nostrud exercitation ullamco laborisLorem ipsum dolor sit amet consectetur adipisicing elit sed do eius tempor incididunt labore.</p>
                             </div>
                             <ul className="features-list"> {lists.map((l, i) => <li key={i}>{l}</li>)} </ul>
-                            <Link href="/about-1" className="edu-btn">
+                            <Link href="/about-1" className="edu-btn" legacyBehavior>
                                 Get Start Today<i className="icon-4"></i>
                             </Link>
                         </div>

@@ -13,7 +13,7 @@ const CartItem = ({ item }) => {
             </td>
 
             <td className="product-thumbnail">
-                <Link href={`/course-details/${item.id}`}>
+                <Link href={`/course-details/${item.id}`} legacyBehavior>
 
                     <img src={item.img} alt="Books" />
 
@@ -21,7 +21,7 @@ const CartItem = ({ item }) => {
             </td>
 
             <td className="product-title">
-                <Link href={`/course-details/${item.id}`}>
+                <Link href={`/course-details/${item.id}`} legacyBehavior>
                     {item.title}
                 </Link>
             </td>

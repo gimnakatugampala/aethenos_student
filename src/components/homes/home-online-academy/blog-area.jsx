@@ -20,7 +20,7 @@ const BlogArea = () => {
                         <div className="edu-blog blog-style-2 first-large-blog">
                             <div className="inner">
                                 <div className="thumbnail">
-                                    <Link href={`/blog-details/${large_blog.id}`}>
+                                    <Link href={`/blog-details/${large_blog.id}`} legacyBehavior>
 
                                         <img src={large_blog.img} alt="Blog Images" />
 
@@ -32,12 +32,15 @@ const BlogArea = () => {
                                         <span className="month">{large_blog.date.split(' ')[0]}</span>
                                     </div>
                                     <div className="category-wrap">
-                                        <Link href={`/blog-details/${large_blog.id}`} className="blog-category">
+                                        <Link
+                                            href={`/blog-details/${large_blog.id}`}
+                                            className="blog-category"
+                                            legacyBehavior>
                                             {large_blog.category}
                                         </Link>
                                     </div>
                                     <h4 className="title">
-                                        <Link href={`/blog-details/${large_blog.id}`}>
+                                        <Link href={`/blog-details/${large_blog.id}`} legacyBehavior>
                                             {large_blog.title}
                                         </Link>
                                     </h4>
@@ -58,7 +61,7 @@ const BlogArea = () => {
                                 <div key={id} className="edu-blog blog-style-2">
                                     <div className="inner">
                                         <div className="thumbnail">
-                                            <Link href={`/blog-details/${id}`}>
+                                            <Link href={`/blog-details/${id}`} legacyBehavior>
 
                                                 <img src={img} alt="Blog Images" />
 
@@ -70,12 +73,12 @@ const BlogArea = () => {
                                         </div>
                                         <div className="content">
                                             <div className="category-wrap">
-                                                <Link href={`/blog-details/${id}`} className="blog-category">
+                                                <Link href={`/blog-details/${id}`} className="blog-category" legacyBehavior>
                                                 {category}
                                                 </Link>
                                             </div>
                                             <h5 className="title">
-                                                <Link href={`/blog-details/${id}`}>
+                                                <Link href={`/blog-details/${id}`} legacyBehavior>
                                                 {title}
                                                 </Link>
                                             </h5>

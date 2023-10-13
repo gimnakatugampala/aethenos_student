@@ -24,7 +24,7 @@ const CoursesArea = () => {
                                 <div className={`edu-course course-style-7 ${bg_color}`}>
                                     <div className="inner">
                                         <div className="thumbnail">
-                                            <Link href={`/course-details/${id}`}>
+                                            <Link href={`/course-details/${id}`} legacyBehavior>
 
                                                 <img src={`/assets/images/course/course-04/${img}`} alt="Course Meta" />
 
@@ -34,7 +34,7 @@ const CoursesArea = () => {
                                         <div className="content">
                                             <span className="course-level">{level}</span>
                                             <h5 className="title">
-                                                <Link href={`/course-details/${id}`}>
+                                                <Link href={`/course-details/${id}`} legacyBehavior>
                                                     {title}
                                                 </Link>
                                             </h5>

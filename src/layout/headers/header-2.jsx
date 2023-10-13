@@ -47,7 +47,7 @@ const HeaderTwo = ({ style_3, no_topBar = false }) => {
                     <div className="header-navbar">
                         <div className="header-brand">
                             <div className="logo">
-                                <Link href="/">
+                                <Link href="/" legacyBehavior>
 
                                     <img className="logo-light" src={style_3 ? '/assets/images/logo/logo-dark.png' : "/assets/images/logo/logo-dark-2.png"} alt="Corporate Logo" />
                                     <img className="logo-dark" src={style_3 ? '/assets/images/logo/logo-white.png' : "/assets/images/logo/logo-light-2.png"} alt="Corporate Logo" />
@@ -71,7 +71,7 @@ const HeaderTwo = ({ style_3, no_topBar = false }) => {
                                 </li>
 
                                 <li className="icon">
-                                    <Link href="/wishlist" className="wishlist">
+                                    <Link href="/wishlist" className="wishlist" legacyBehavior>
 
                                         <i className="icon-22"></i>
                                         <span className="count">{wishlists?.length}</span>
@@ -80,7 +80,7 @@ const HeaderTwo = ({ style_3, no_topBar = false }) => {
                                 </li>
 
                                 <li className="icon cart-icon">
-                                    <Link href="/cart" className="cart-icon">
+                                    <Link href="/cart" className="cart-icon" legacyBehavior>
 
                                         <i className="icon-3"></i>
                                         <span className="count">{quantity}</span>

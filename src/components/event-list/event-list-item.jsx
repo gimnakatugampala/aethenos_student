@@ -6,7 +6,7 @@ const EventListItem = ({ item }) => {
     return (
         <div className="inner">
             <div className="thumbnail">
-                <Link href={`/event-details/${id}`}>
+                <Link href={`/event-details/${id}`} legacyBehavior>
 
                     <img src={img} alt="Event Images" />
 
@@ -18,14 +18,17 @@ const EventListItem = ({ item }) => {
                     <li><i className="icon-33"></i>{time}</li>
                 </ul>
                 <h4 className="title">
-                    <Link href={`/event-details/${id}`}>
+                    <Link href={`/event-details/${id}`} legacyBehavior>
                         {title}
                     </Link>
                 </h4>
                 <span className="event-location"><i className="icon-40"></i>{event_meta}</span>
                 <p>{sm_desc}</p>
                 <div className="read-more-btn">
-                    <Link href={`/event-details/${id}`} className="edu-btn btn-medium btn-border">
+                    <Link
+                        href={`/event-details/${id}`}
+                        className="edu-btn btn-medium btn-border"
+                        legacyBehavior>
                         Learn More<i className="icon-4"></i>
 
                     </Link>

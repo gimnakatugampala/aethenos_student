@@ -9,7 +9,7 @@ function Category({ delay, color, icon, icon_class, title, course }) {
                     <i className={`${icon} ${icon_class ? icon_class : ''}`}></i>
                 </div>
                 <div className="content">
-                    <Link href="/course-style-1">
+                    <Link href="/course-style-1" legacyBehavior>
 
                         <h5 className="title">{title}</h5>
 

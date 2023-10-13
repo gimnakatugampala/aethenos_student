@@ -40,7 +40,7 @@ const FooterThree = () => {
                         <div className="col-lg-3 col-md-6 col-sm-12 col-12">
                             <div className="edu-footer-widget">
                                 <div className="logo">
-                                    <Link href="/">
+                                    <Link href="/" legacyBehavior>
 
                                         <img className="logo-dark" src="/assets/images/logo/logo-white.png" alt="Corporate Logo" />
 
@@ -58,7 +58,7 @@ const FooterThree = () => {
                                         <ul className="footer-link link-hover">
                                             {w.footer_links.map((l, i) => 
                                                 <li key={i}>
-                                                    <Link href={`/${l.link}`}>{l.title}</Link>
+                                                    <Link href={`/${l.link}`} legacyBehavior>{l.title}</Link>
                                                 </li>
                                             )}
                                         </ul>

@@ -72,7 +72,7 @@ const FooterTwo = () => {
                                     <div className="inner">
                                         <ul className="footer-link link-hover">
                                             {w.footer_links.map((l, i) => <li key={i}>
-                                            <Link href={`/${l.link}`}>{l.title}</Link>
+                                            <Link href={`/${l.link}`} legacyBehavior>{l.title}</Link>
                                             </li>)}
                                         </ul>
                                     </div>

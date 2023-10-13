@@ -24,7 +24,7 @@ const HeaderThree = () => {
                     <div className="header-navbar">
                         <div className="header-brand">
                             <div className="logo">
-                                <Link href="/">
+                                <Link href="/" legacyBehavior>
 
                                     <img className="logo-light" src="/assets/images/logo/logo-dark.png" alt="Corporate Logo" />
                                     <img className="logo-dark" src="/assets/images/logo/logo-white.png" alt="Corporate Logo" />
@@ -55,7 +55,7 @@ const HeaderThree = () => {
                                 </li>
 
                                 <li className="icon">
-                                    <Link href="/wishlist" className="wishlist">
+                                    <Link href="/wishlist" className="wishlist" legacyBehavior>
 
                                         <i className="icon-22"></i>
                                         <span className="count">{wishlists?.length}</span>
@@ -64,7 +64,7 @@ const HeaderThree = () => {
                                 </li>
 
                                 <li className="icon cart-icon">
-                                    <Link href="/cart" className="cart-icon">
+                                    <Link href="/cart" className="cart-icon" legacyBehavior>
 
                                         <i className="icon-3"></i>
                                         <span className="count">{quantity}</span>
@@ -74,7 +74,10 @@ const HeaderThree = () => {
                                 </li>
 
                                 <li className="header-btn">
-                                    <Link href="/contact-us" className="edu-btn btn-medium btn-curved">
+                                    <Link
+                                        href="/contact-us"
+                                        className="edu-btn btn-medium btn-curved"
+                                        legacyBehavior>
                                         Try for free<i className="icon-4"></i>
                                     </Link>
                                 </li>

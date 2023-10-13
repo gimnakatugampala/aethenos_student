@@ -6,7 +6,7 @@ const BlogPostOne = ({ param }) => {
         <div className="edu-blog blog-style-1">
             <div className="inner">
                 <div className="thumbnail">
-                    <Link href={`/blog-details/${param.id}`}>
+                    <Link href={`/blog-details/${param.id}`} legacyBehavior>
 
                         <img src={param.img} alt="Blog Images" />
 
@@ -14,7 +14,10 @@ const BlogPostOne = ({ param }) => {
                 </div>
                 <div className="content position-top">
                     <div className="read-more-btn">
-                        <Link href={`/blog-details/${param.id}`} className="btn-icon-round">
+                        <Link
+                            href={`/blog-details/${param.id}`}
+                            className="btn-icon-round"
+                            legacyBehavior>
 
                             <i className="icon-4"></i>
 
@@ -24,7 +27,7 @@ const BlogPostOne = ({ param }) => {
                         <a href="#" className="blog-category">{param.category}</a>
                     </div>
                     <h5 className="title">
-                        <Link href={`/blog-details/${param.id}`}>
+                        <Link href={`/blog-details/${param.id}`} legacyBehavior>
                             {param.title}
                         </Link>
                     </h5>
