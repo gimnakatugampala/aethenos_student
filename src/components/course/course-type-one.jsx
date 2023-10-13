@@ -91,7 +91,10 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                     </button>
                     <span className="course-level">{data.level}</span>
                         <h6 className="title">
-                            <Link href={`/course-details/${data.id}`}>
+                            {/* <Link href={`/course-details/${data.id}`}>
+                                {data.title}
+                            </Link> */}
+                            <Link href={`/course-details-2/`}>
                                 {data.title}
                             </Link>
                         </h6>
