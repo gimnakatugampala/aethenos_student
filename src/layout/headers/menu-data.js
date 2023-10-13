@@ -89,7 +89,7 @@ const menu_data = [
     },
     {
         title: 'E Portal',
-        link: '#',
+        link: '/E-Portal/',
         mega_menu: false,
         submenus: [
             { title: 'Course Style 1', link: '/course-style-1' },
