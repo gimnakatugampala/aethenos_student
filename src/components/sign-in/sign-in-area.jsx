@@ -1,27 +1,22 @@
 import React from 'react';
 import LoginForm from '../forms/login-form';
-import RegisterForm from '../forms/register-form';
 
 const SignInArea = () => {
   return (
         <section className="account-page-area section-gap-equal">
             <div className="container position-relative">
                 <div className="row g-5 justify-content-center">
-                    <div className="col-lg-5">
+                     <div className="col-lg-5">
                         <div className="login-form-box">
-                            <h3 className="title">Sign in</h3>
-                            <p>Don’t have an account? <a href="#">Sign up</a></p>
-                            <LoginForm/>
+                            <h3 className="title">Sign In</h3>
+                            <p>Don’t have an account? <a href="/sign-up">Sign up</a></p>
+                           <LoginForm />
+                           
                         </div>
-                    </div>
+                    </div> 
+                   
 
-                    <div className="col-lg-5">
-                        <div className="login-form-box registration-form">
-                            <h3 className="title">Registration</h3>
-                            <p>Already have an account? <a href="#">Sign in</a></p>
-                            <RegisterForm/>
-                        </div>
-                    </div>
+                   
                 </div>
 
                 <ul className="shape-group">

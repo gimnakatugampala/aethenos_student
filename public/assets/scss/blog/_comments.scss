@@ -112,3 +112,38 @@
         }
     }
 }
+.sign-in-btn{
+    display: flex;
+    flex-direction: column;
+}
+.sign-in-btn button{
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    border-radius: 4px;
+    background: transparent;
+    border: 1px solid #999;
+    font-weight: 500;
+    cursor: pointer; 
+}
+.sign-in-btn button img{
+    width: 18px;
+    margin-right: 10px;
+    justify-content: start;
+    align-items: start;
+}
+
+
+.sign-in-btn span{
+    display: block;
+    width: 40px;
+    margin: auto;
+    font-size: 14px;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 300;
+    color: white;
+}

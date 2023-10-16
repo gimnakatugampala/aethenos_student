@@ -19,10 +19,7 @@ const OrderSummery = () => {
 					</tr>
 				</tbody>
 			</table>
-			<Link
-                href="/checkout"
-                className="edu-btn btn-medium checkout-btn"
-                legacyBehavior>
+			<Link href="/checkout" className="edu-btn btn-medium checkout-btn">
                 Process to Checkout<i className="icon-4"></i>
             </Link>
 		</div>

@@ -20,7 +20,7 @@ const BlogMasonryArea = () => {
                                       <div className="edu-blog blog-style-5">
                                           <div className="inner">
                                               <div className="thumbnail">
-                                                  <Link href={`/blog-details/${id}`} legacyBehavior>
+                                                  <Link href={`/blog-details/${id}`}>
 
                                                       <img src={img} alt="Blog Images" />
 
@@ -29,7 +29,7 @@ const BlogMasonryArea = () => {
 
                                               <div className="content position-top">
                                                   <div className="read-more-btn">
-                                                      <Link href={`/blog-details/${id}`} className="btn-icon-round" legacyBehavior>
+                                                      <Link href={`/blog-details/${id}`} className="btn-icon-round">
                                                           <i className="icon-4"></i>
                                                       </Link>
                                                   </div>
@@ -37,7 +37,7 @@ const BlogMasonryArea = () => {
                                                       <a href="#" className="blog-category">{category}</a>
                                                   </div>
                                                   <h5 className="title">
-                                                      <Link href={`/blog-details/${id}`} legacyBehavior>
+                                                      <Link href={`/blog-details/${id}`}>
                                                           {title}...
                                                       </Link>
                                                   </h5>

@@ -33,7 +33,7 @@ const ShopArea = () => {
                                 <div className="edu-product">
                                     <div className="inner">
                                         <div className="thumbnail">
-                                            <Link href={`/product-details/${id}`} legacyBehavior>
+                                            <Link href={`/product-details/${id}`}>
 
                                                 <img src={img} alt="Shop Images" />
 
@@ -42,12 +42,12 @@ const ShopArea = () => {
                                                 <ul>
                                                     <li><a href="#" role="button"><i className="icon-2"></i></a></li>
                                                     <li>
-                                                        <Link href="/wishlist" legacyBehavior>
+                                                        <Link href="/wishlist">
                                                         <i className="icon-22"></i>
                                                         </Link>
                                                     </li>
                                                     <li>
-                                                        <Link href="/cart" legacyBehavior>
+                                                        <Link href="/cart">
                                                         <i className="icon-3"></i>
                                                         </Link>
                                                     </li>
@@ -57,7 +57,7 @@ const ShopArea = () => {
 
                                         <div className="content">
                                             <h6 className="title">
-                                                <Link href={`/product-details/${id}`} legacyBehavior>
+                                                <Link href={`/product-details/${id}`}>
                                                     {title}
                                                 </Link>
                                             </h6>

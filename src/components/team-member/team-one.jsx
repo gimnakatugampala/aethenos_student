@@ -7,7 +7,7 @@ const TeamOne = ({ instructor, image_location_path='01' }) => {
             <div className="inner">
                 <div className="thumbnail-wrap">
                     <div className="thumbnail">
-                        <Link href={`/team-details/${instructor.id}`} legacyBehavior>
+                        <Link href={`/team-details/${instructor.id}`}>
 
                             <img src={`/assets/images/team/team-${image_location_path}/${instructor.img}`} alt="team images" />
 
@@ -26,7 +26,7 @@ const TeamOne = ({ instructor, image_location_path='01' }) => {
                 </div>
                 <div className="content">
                     <h5 className="title">
-                        <Link href={`/team-details/${instructor.id}`} legacyBehavior>
+                        <Link href={`/team-details/${instructor.id}`}>
                             {instructor.name}
                         </Link>
                     </h5>

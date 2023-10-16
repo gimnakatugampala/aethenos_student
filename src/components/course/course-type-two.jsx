@@ -6,7 +6,7 @@ const CourseTypeTwo = ({ data, classes }) => {
         <div className={`edu-course course-style-6 ${ classes ? classes : '' }`}>
             <div className="inner">
                 <div className="thumbnail">
-                    <Link href={`/course-details/${data.id}`} legacyBehavior>
+                    <Link href={`/course-details/${data.id}`}>
 
                         <img src={`/assets/images/course/course-05/${data.img}`} alt="Course Thumb" />
 
@@ -16,7 +16,7 @@ const CourseTypeTwo = ({ data, classes }) => {
                 <div className="content">
                     <span className="course-level">{data.level}</span>
                     <h5 className="title">
-                        <Link href={`/course-details/${data.id}`} legacyBehavior>
+                        <Link href={`/course-details/${data.id}`}>
                             {data.title}
                         </Link>
                     </h5>

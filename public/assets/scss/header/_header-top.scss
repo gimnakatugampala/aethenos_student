@@ -65,7 +65,7 @@
             font-family: var(--font-secondary);
             font-size: 14px;
             color: var(--color-white);
-            padding: 14px 30px 12px;
+            padding: 14px 20px 12px;
             position: relative;
             @media #{$sm-layout} {
                 padding: 15px; 
@@ -115,7 +115,7 @@
                 }
             }
             &.header-btn {
-                padding: 0 30px 0 0;
+                padding: 0 10px 0 0;
                 @media only screen and (max-width: 991px) {
                    padding: 0; 
                 }

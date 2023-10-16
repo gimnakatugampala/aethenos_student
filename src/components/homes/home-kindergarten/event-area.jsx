@@ -25,7 +25,7 @@ const EventArea = () => {
                                 <div className={`edu-event-list event-list-3 ${bg_style}`}>
                                     <div className="inner">
                                         <div className="thumbnail">
-                                            <Link href={`/event-details/${id}`} legacyBehavior>
+                                            <Link href={`/event-details/${id}`}>
 
                                                 <img src={img} alt="Event Images" />
 
@@ -36,7 +36,7 @@ const EventArea = () => {
                                                 <li><i className="icon-27"></i>{date}</li>
                                             </ul>
                                             <h4 className="title">
-                                                <Link href={`/event-details/${id}`} legacyBehavior>
+                                                <Link href={`/event-details/${id}`}>
                                                     {title}
                                                 </Link>
                                             </h4>
@@ -45,8 +45,7 @@ const EventArea = () => {
                                             <div className="read-more-btn">
                                                 <Link
                                                     href={`/event-details/${id}`}
-                                                    className="edu-btn btn-medium curved-medium"
-                                                    legacyBehavior>
+                                                    className="edu-btn btn-medium curved-medium">
                                                     Attend<i className="icon-4"></i>
                                                 </Link>
                                             </div>

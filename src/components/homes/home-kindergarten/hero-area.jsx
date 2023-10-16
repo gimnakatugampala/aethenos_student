@@ -28,7 +28,7 @@ const HeroArea = () => {
                             <h1 className="title" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">A Brighter Future For Kids</h1>
                             <p data-sal-delay="200" data-sal="slide-up" data-sal-duration="1000">Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit.</p>
                             <div className="banner-btn" data-sal-delay="400" data-sal="slide-up" data-sal-duration="1000">
-                                <Link href="/course-style-1" className="edu-btn btn-curved" legacyBehavior>
+                                <Link href="/course-style-1" className="edu-btn btn-curved">
                                     Find courses<i className="icon-4"></i>
                                 </Link>
                             </div>

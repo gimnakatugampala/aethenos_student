@@ -17,7 +17,7 @@ const OnlineCourse = () => {
                                     <h2 className="title" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">Learn Your Online Course Easily With EduBlink</h2>
                                     <p data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">Users can check up their active courses, update their bio, completed courses, track their progress easily and many more.</p>
                                     <div data-sal-delay="400" data-sal="slide-up" data-sal-duration="1000">
-                                        <Link href="/course-details" className="edu-btn" target="_blank" legacyBehavior>
+                                        <Link href="/course-details" className="edu-btn" target="_blank">
                                             Course Details<i className="icon-4"></i>
                                         </Link>
                                     </div>

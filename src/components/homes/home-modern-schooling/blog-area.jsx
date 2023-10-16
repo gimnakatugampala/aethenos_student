@@ -21,7 +21,7 @@ const BlogArea = () => {
                                 <div className="edu-blog blog-style-6">
                                     <div className="inner">
                                         <div className="thumbnail">
-                                            <Link href={`/blog-details/${id}`} legacyBehavior>
+                                            <Link href={`/blog-details/${id}`}>
 
                                                 <img src={img} alt="Blog Images" />
 
@@ -30,17 +30,17 @@ const BlogArea = () => {
                                         </div>
                                         <div className="content position-top">
                                             <div className="read-more-btn">
-                                                <Link href={`/blog-details/${id}`} className="btn-icon-round" legacyBehavior>
+                                                <Link href={`/blog-details/${id}`} className="btn-icon-round">
                                                     <i className="icon-4"></i>
                                                 </Link>
                                             </div>
                                             <div className="category-wrap">
-                                                <Link href={`/blog-details/${id}`} className="blog-category" legacyBehavior>
+                                                <Link href={`/blog-details/${id}`} className="blog-category">
                                                     {category}
                                                 </Link>
                                             </div>
                                             <h5 className="title">
-                                                <Link href={`/blog-details/${id}`} legacyBehavior>
+                                                <Link href={`/blog-details/${id}`}>
                                                     {title}
                                                 </Link>
                                             </h5>

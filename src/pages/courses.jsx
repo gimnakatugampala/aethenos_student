@@ -5,7 +5,7 @@ import CourseStyleOneMain from '../components/course-style-1';
 const CourseStyleOne = () => {
     return (
         <Wrapper>
-            <SEO pageTitle={'Course Style 1'} />
+            <SEO pageTitle={'All Courses'} />
             <CourseStyleOneMain />
         </Wrapper>
     )

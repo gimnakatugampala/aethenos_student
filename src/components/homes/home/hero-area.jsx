@@ -13,7 +13,7 @@ const HeroArea = () => {
                             <h1 className="title" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">Learning that lasts Invest in yourself. Courses as low as <span className="color-secondary">$12.99</span> through Oct 12.</h1>
                             <p data-sal-delay="200" data-sal="slide-up" data-sal-duration="1000">Trusted by over 14,400 companies and millions of learners around the world</p>
                             <div className="banner-btn" data-sal-delay="400" data-sal="slide-up" data-sal-duration="1000">
-                                <Link href="/course-style-1" className="edu-btn" legacyBehavior>
+                                <Link href="/course-style-1" className="edu-btn">
                                     Find courses<i className="icon-4"></i>
                                 </Link>
                             </div>

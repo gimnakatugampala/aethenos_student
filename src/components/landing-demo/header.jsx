@@ -14,7 +14,7 @@ const Header = () => {
                     <div className="header-navbar">
                         <div className="header-brand">
                             <div className="logo">
-                                <Link href="/" legacyBehavior>
+                                <Link href="/">
 
                                     <img className="logo-light" src="/assets/images/logo/logo-dark.png" alt="Corporate Logo" />
                                     <img className="logo-dark" src="/assets/images/logo/logo-white.png" alt="Corporate Logo" />
@@ -60,7 +60,7 @@ const Header = () => {
                 <div className="inner">
                     <div className="header-top">
                         <div className="logo">
-                            <Link href="/" legacyBehavior>
+                            <Link href="/">
 
                                 <img className="logo-light" src="/assets/images/logo/logo-dark.png" alt="Corporate Logo" />
                                 <img className="logo-dark" src="/assets/images/logo/logo-white.png" alt="Corporate Logo" />

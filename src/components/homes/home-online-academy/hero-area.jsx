@@ -18,7 +18,7 @@ const HeroArea = () => {
                                 Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit.    
                             </p>
                             <div className="banner-btn" data-sal-delay="400" data-sal="slide-up" data-sal-duration="1000">
-                                <Link href="/course-style-1" className="edu-btn" legacyBehavior>
+                                <Link href="/course-style-1" className="edu-btn">
                                     Find courses<i className="icon-4"></i>
                                 </Link>
                             </div>

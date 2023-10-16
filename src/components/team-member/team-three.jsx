@@ -7,7 +7,7 @@ const TeamThree = ({ instructor }) => {
             <div className="inner">
                 <div className="thumbnail-wrap">
                     <div className="thumbnail">
-                        <Link href={`/team-details/${instructor.id}`} legacyBehavior>
+                        <Link href={`/team-details/${instructor.id}`}>
 
                             <img src={`/assets/images/team/team-02/${instructor.img}`} alt="team images" />
 
@@ -25,7 +25,7 @@ const TeamThree = ({ instructor }) => {
                 </div>
                 <div className="content">
                     <h5 className="title">
-                        <Link href={`/team-details/${instructor.id}`} legacyBehavior>
+                        <Link href={`/team-details/${instructor.id}`}>
                             {instructor.name}
                         </Link>
                     </h5>

@@ -65,8 +65,7 @@ const AboutArea = () => {
                                 className="edu-btn btn-curved"
                                 data-sal-delay="150"
                                 data-sal="slide-up"
-                                data-sal-duration="800"
-                                legacyBehavior>
+                                data-sal-duration="800">
                                 Get Start Today<i className="icon-4"></i>
                             </Link>
                         </div>

@@ -6,7 +6,6 @@ import { ThemeProvider } from 'next-themes';
 if (typeof window !== 'undefined') {
   require( 'bootstrap/dist/js/bootstrap' );
 }
-
 import '../styles/index.scss';
 import { store } from '../redux/store';
 import Theme from '../components/common/theme';

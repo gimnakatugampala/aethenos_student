@@ -1,9 +1,8 @@
-import React from 'react';
 import { useFormik } from 'formik';
+import React, { useState } from 'react';
 import useFirebase from '../../hooks/use-firebase';
 import { loginSchema } from '../../utils/validation-schema';
 import ErrorMsg from './error-msg';
-import { useState } from 'react';
 
 const LoginForm = () => {
     const [showPass,setShowPass] = useState(false);
@@ -24,6 +23,14 @@ const LoginForm = () => {
         resetPassword(email);
     }
     return (
+        <div>
+        <div className='sign-in-btn'>
+        <button><i class="fa-brands fa-google mx-3 fa-2x"></i> Sign in with Google</button>
+        <button><i class="fa-brands fa-facebook mx-4 fa-2x"></i> Sign in with Facebook</button>
+       
+        <span>Or</span>
+        
+        </div>
         <form onSubmit={handleSubmit}>
             <div className="form-group">
                 <label htmlFor="current-log-email">Username or email*</label>
@@ -65,8 +72,17 @@ const LoginForm = () => {
 
             <div className="form-group">
                 <button type="submit" className="edu-btn btn-medium">Sign in <i className="icon-4"></i></button>
+                
             </div>
+
+            {/* <div className='signin-social'>
+                <img src="/assets/images/user.png" alt="" />
+                <p>Sign In Google</p>
+            </div> */}
+           
         </form>
+
+        </div>
     )
 }
 

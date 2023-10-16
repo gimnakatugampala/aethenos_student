@@ -48,7 +48,7 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
         <div className={`edu-course course-style-1 ${ classes ? classes : '' } hover-button-bg-white`}>
             <div className="inner">
                 <div className="thumbnail">
-                    <Link href={`/course-details/${data.id}`} legacyBehavior>
+                    <Link href={`/course-details/${data.id}`}>
 
                         <img src={`/assets/images/course/course-${image_location_path}/${data.img}`} alt="Course Meta" />
 
@@ -91,10 +91,7 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                     </button>
                     <span className="course-level">{data.level}</span>
                         <h6 className="title">
-                            {/* <Link href={`/course-details/${data.id}`}>
-                                {data.title}
-                            </Link> */}
-                            <Link href={`/course-details-2/`} legacyBehavior>
+                            <Link href={`/course-details/${data.id}`}>
                                 {data.title}
                             </Link>
                         </h6>

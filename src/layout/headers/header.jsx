@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import SearchPopup from '../../components/common/popup-modal/search-popup';
 import OffCanvas from '../../components/common/sidebar/off-canvas';
+import DropDownProfile from '../../components/profile/dropdwonProfile';
 import useCartInfo from '../../hooks/use-cart-info';
 import useSticky from '../../hooks/use-sticky';
 import { wishlistItems } from '../../redux/features/wishlist-slice';
@@ -24,12 +25,14 @@ const categories = [
     { link: '/course-style-1', title: 'Motivation' }
 ]
 
-const Header = ({ style_3 ,header_style, no_top_bar, disable_full_width, disable_category }) => {
+const Header = ({header_style, no_top_bar, disable_full_width, disable_category }) => {
+    const  activeUser = false;
     const { sticky } = useSticky();
     const { quantity } = useCartInfo();
     const wishlists = useSelector(wishlistItems);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [openProfile, setOpenProfile] = useState(false);
 
     return (
         <>
@@ -72,7 +75,7 @@ const Header = ({ style_3 ,header_style, no_top_bar, disable_full_width, disable
                                                         {
                                                             categories.map((category, i) => (
                                                                 <li key={i}>
-                                                                    <Link legacyBehavior href={`${category.link}`}><a>{category.title}</a></Link>
+                                                                    <Link href={`${category.link}`} legacyBehavior><a>{category.title}</a></Link>
                                                                 </li>
                                                             ) )
                                                         }
@@ -122,24 +125,32 @@ const Header = ({ style_3 ,header_style, no_top_bar, disable_full_width, disable
                                         </Link>
                                         <Cart />
                                     </li>
-                                    {/* <li className="header-btn">
-                                        <Link href="/contact-us">
-                                            <a className="edu-btn btn-medium">Try for free
-                                            <i className="icon-4"></i></a>
-                                        </Link>
-                                    </li> */}
-                                    <li className="header-info">
-                                        <Link href="/sign-in" legacyBehavior>
-                                            <a className="edu-btn btn-smoll">Login
-                                           </a>
-                                        </Link>
-                                    </li>
-                                    <li className="header-info">
-                                        <Link href="/sign-in" legacyBehavior>
-                                            <a className="edu-btn btn-smoll">Register
-                                           </a>
-                                        </Link>
-                                    </li>
+
+                                    
+                                        {activeUser ?  <li>
+                                           
+                                           <img src='/assets/images/user.png' alt='user' onClick={()=> setOpenProfile((prve)=> !prve)} style={{width :50, height: 50,borderRadius:100,border:'solid',borderColor:'black',borderWidth:1,padding:3}} />
+                                          
+                                       </li>  :  <><li className="header-info">
+                                            <Link href="/sign-in" legacyBehavior>
+                                                <a className="edu-btn btn-small">Login
+                                                </a>
+                                            </Link>
+                                        </li>
+                                        <li className="header-info">
+                                                <Link href="/sign-up" legacyBehavior>
+                                                    <a className="edu-btn btn-small">Register
+                                                    </a>
+                                                </Link>
+                                            </li></>
+
+                                }
+                                {
+                                     openProfile && <DropDownProfile />
+                                }
+                                   
+                                    
+                                    
                                     <li className="mobile-menu-bar d-block d-xl-none">
                                         <button className="hamberger-button" onClick={() => setIsOpen(true)}>
                                             <i className="icon-54"></i>
@@ -147,13 +158,7 @@ const Header = ({ style_3 ,header_style, no_top_bar, disable_full_width, disable
                                     </li>
                                 </ul>
                             </div>
-                            {/* <div className="header-top-right">
-                                    <ul className="header-info">
-                                        <li><Link href="/sign-in"><a>Login</a></Link></li>
-                                        <li><Link href="/sign-in"><a>Register</a></Link></li>
-                                       
-                                    </ul>
-                                </div> */}
+                           
                         </div>
                     </div>
                 </div>

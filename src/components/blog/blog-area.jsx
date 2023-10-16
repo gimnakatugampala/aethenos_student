@@ -29,7 +29,7 @@ const BlogArea = () => {
                                     <div className="inner">
                                         <div className="thumbnail">
                                             {!slider && 
-                                                <Link href={`/blog-details/${id}`} legacyBehavior>
+                                                <Link href={`/blog-details/${id}`}>
 
                                                     <img src={img} alt="Blog Images" />
 
@@ -59,7 +59,7 @@ const BlogArea = () => {
                                                 >
                                                     {images.map((img, i) => (
                                                         <SwiperSlide key={i}>
-                                                            <Link href={`/blog-details/${id}`} legacyBehavior>
+                                                            <Link href={`/blog-details/${id}`}>
 
                                                                 <img src={img} alt="Blog Images" />
 
@@ -84,7 +84,7 @@ const BlogArea = () => {
                                                 <a href="#" className="blog-category">{category}</a>
                                             </div>
                                             <h3 className="title">
-                                                <Link href={`/blog-details/${id}`} legacyBehavior>
+                                                <Link href={`/blog-details/${id}`}>
                                                     {title}
                                                 </Link>
                                             </h3>
@@ -94,10 +94,7 @@ const BlogArea = () => {
                                             </ul>
                                             <p>{desc}</p>
                                             <div className="read-more-btn">
-                                                <Link
-                                                    href={`/blog-details/${id}`}
-                                                    className="edu-btn btn-border btn-medium"
-                                                    legacyBehavior>
+                                                <Link href={`/blog-details/${id}`} className="edu-btn btn-border btn-medium">
                                                     Learn More<i className="icon-4"></i>
                                                 </Link>
                                             </div>
