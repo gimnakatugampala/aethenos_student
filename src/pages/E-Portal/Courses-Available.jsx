@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { course_data } from '../../data';
-import CourseSidebar from '../../pages/E-Portal/side-bar-ePortal';
-import SortingArea from '../../pages/E-Portal/sorting-ePortal';
-import CourseItems from '../../pages/E-Portal/course-item';
+import CourseSidebar from '../../pages/e-portal/side-bar-ePortal';
+import SortingArea from '../../pages/e-portal/sorting-ePortal';
+import CourseItems from '../../pages/e-portal/course-item';
 
 // course_items
 const course_items = course_data.filter((arr, index, self) =>

@@ -41,7 +41,7 @@ const CourseDetailsArea1 = ({}) => {
                   </div>
                   <div class="">
                     <h6 class="title">
-                      <a href="/E-Portal/course-details">
+                      <a href="/e-portal/course-details">
                         Web Development Bootcamp Part 1
                       </a>
                     </h6>
@@ -80,7 +80,7 @@ const CourseDetailsArea1 = ({}) => {
                   </div>
                   <div class="" >
                     <h6 class="title">
-                      <a href="/E-Portal/course-details">
+                      <a href="/e-portal/course-details">
                       Web Development Bootcamp Part 2
                       </a>
                     </h6>
@@ -142,7 +142,7 @@ const CourseDetailsArea1 = ({}) => {
                   </div>
                   <div class="">
                     <h6 class="title">
-                      <a href="/E-Portal/course-details">
+                      <a href="/e-portal/course-details">
                         The Complete 2023 Web Development Bootcamp
                       </a>
                     </h6>
@@ -203,7 +203,7 @@ const CourseDetailsArea1 = ({}) => {
                   </div>
                   <div class="">
                     <h6 class="title">
-                      <a href="/E-Portal/course-details">
+                      <a href="/e-portal/course-details">
                         The Complete 2023 Web Development Bootcamp
                       </a>
                     </h6>

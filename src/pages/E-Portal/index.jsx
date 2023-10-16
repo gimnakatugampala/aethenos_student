@@ -1,5 +1,5 @@
 import React from 'react';
-import CourseTypeFour from '../../pages/E-Portal/Courses-Available';
+import CourseTypeFour from '../../pages/e-portal/Courses-Available';
 import { Footer, Header } from '../../layout';
 
 

@@ -6,7 +6,7 @@ import {
     add_item_offset
 } from "../../redux/features/filter-slice";
 import Pagination from "../../ui/pagination";
-import CourseTypeFive from '../../pages/E-Portal/purchase-courses';
+import CourseTypeFive from '../../pages/e-portal/purchase-courses';
 
 const CourseItems = ({ itemsPerPage, items, course_style, setShowing }) => {
     const { page_count, item_offset, forcePage } = useSelector(
