@@ -8,7 +8,7 @@ const footer_contents = {
     desc: 'Lorem ipsum dolor amet consecto adi pisicing elit sed eiusm tempor incidid unt labore dolore.',
     add: '70-80 Upper St Norwich NR2',
     call: '+01 123 5641 231',
-    email: 'info@edublink.com',
+    email: 'info@Aethenos.com',
     widgets: [
         {
             col: '3',
@@ -57,7 +57,7 @@ const FooterTwo = () => {
                                         <ul className="information-list">
                                             <li><span>Add:</span>{add}</li>
                                             <li><span>Call:</span><a href="tel:+011235641231">{call}</a></li>
-                                            <li><span>Email:</span><a href="mailto:info@edublink.com"
+                                            <li><span>Email:</span><a href="mailto:info@Aethenos.com"
                                             target="_blank" rel="noreferrer">{email}</a></li>
                                         </ul>
                                     </div>
@@ -143,7 +143,7 @@ const FooterTwo = () => {
                         <div className="col-lg-12">
                             <div className="inner text-center">
                                 <p>Copyright {new Date().getFullYear()} 
-                                    <a href="https://1.envato.market/AoJezj" rel="noreferrer" target="_blank">EduBlink</a> Designed By <a href="https://1.envato.market/YgGJbj" target="_blank" rel="noreferrer">DevsBlink</a>. All Rights Reserved
+                                    <a href="https://1.envato.market/AoJezj" rel="noreferrer" target="_blank">Aethenos</a> Designed By <a href="https://1.envato.market/YgGJbj" target="_blank" rel="noreferrer">DevsBlink</a>. All Rights Reserved
                                 </p>
                             </div>
                         </div>

@@ -8,7 +8,7 @@ const BlogArea = ({ style_2 }) => {
             <div className="container">
                 <div className="section-title section-center" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
                     <span className="pre-title">Latest Articles</span>
-                    <h2 className="title">Get News with EduBlink</h2>
+                    <h2 className="title">Get News with Aethenos</h2>
                     <span className="shape-line">
                         <i className="icon-19"></i>
                     </span>

@@ -34,7 +34,7 @@ const CoursesArea = () => {
                     })}
                 </div>
                 <div className="course-view-all" data-sal-delay="150" data-sal="slide-up" data-sal-duration="1200">
-                    <h5 className="view-text">Get the Most Dedicated Kitchen Course from EduBlink. 
+                    <h5 className="view-text">Get the Most Dedicated Kitchen Course from Aethenos. 
                     <Link href="/course-style-1" className="btn-transparent">
                         All Courses<i className="icon-4"></i>
                     </Link>

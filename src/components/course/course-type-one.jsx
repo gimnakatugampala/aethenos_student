@@ -54,7 +54,7 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
 
                     </Link>
                     <div className="time-top">
-                        <span className="duration"><i className="icon-61"></i>{data.duration}</span>
+                        <span className="duration" style={{background:'#e01D20'}}>{data.duration} OFF</span>
                     </div>
                 </div>
                 <div className="content">

@@ -2,7 +2,7 @@ const course_data = [
   {
     id: 1,
     img: 'course-01.jpg',
-    duration: '4 Weeks',
+    duration: '50%',
     course_outline:'Online + Onsite',
     level: 'Advanced',
     title: 'The Complete 2023 Web Development Bootcamp',
@@ -71,7 +71,7 @@ const course_data = [
   {
     id: 2,
     img: 'course-02.jpg',
-    duration: '3 Weeks',
+    duration: '50%',
     course_outline:'Online Only',
     level: 'Beginner',
     title: 'Java Programming Masterclass for Software Developers',
@@ -140,7 +140,7 @@ const course_data = [
   {
     id: 3,
     img: 'course-03.jpg',
-    duration: '10 Weeks',
+    duration: '50%',
     course_outline:'Onsite Only',
     level: 'Advanced',
     title: 'Building A Better World One Student At A Time',
@@ -209,7 +209,7 @@ const course_data = [
   {
     id: 4,
     img: 'course-04.jpg',
-    duration: '6 Weeks',
+    duration: '30%',
     course_outline:'Online Only',
     level: 'Intermediate',
     title: 'Master Your Personal Brand Like a Marketing Pro',
@@ -278,7 +278,7 @@ const course_data = [
   {
     id: 5,
     img: 'course-05.jpg',
-    duration: '6 Weeks',
+    duration: '10%',
     course_outline:'Online + Onsite',
     level: 'Advanced',
     title: 'The Complete 2023 Web Development Bootcamp',

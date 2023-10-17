@@ -10,6 +10,10 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@emotion/react": "^11.11.1",
+        "@emotion/styled": "^11.11.0",
+        "@mui/icons-material": "^5.14.13",
+        "@mui/material": "^5.14.13",
         "@popperjs/core": "^2.11.6",
         "@reduxjs/toolkit": "^1.8.5",
         "@svgr/webpack": "^6.3.1",
@@ -21,6 +25,7 @@
         "next": "12.2.5",
         "next-themes": "^0.2.0",
         "react": "18.2.0",
+        "react-bootstrap": "^2.9.0",
         "react-countup": "^6.3.1",
         "react-dom": "18.2.0",
         "react-image-lightbox": "^5.1.4",
@@ -30,13 +35,17 @@
         "react-rangeslider": "^2.2.0",
         "react-redux": "^8.0.2",
         "react-responsive-masonry": "^2.1.6",
+        "react-simple-star-rating": "^5.1.7",
         "react-toastify": "^9.0.8",
         "sal.js": "^0.8.5",
         "sass": "^1.54.5",
+        "styled-components": "^6.0.8",
         "swiper": "^8.3.2",
+        "video-react": "^0.16.0",
         "yup": "^0.32.11"
     },
     "devDependencies": {
+        "encoding": "^0.1.13",
         "eslint": "8.22.0",
         "eslint-config-next": "12.2.5"
     }

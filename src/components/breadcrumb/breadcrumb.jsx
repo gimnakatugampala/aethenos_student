@@ -11,9 +11,9 @@ const Breadcrumb = ({ title, current_page }) => {
                     </div>
                     <ul className="edu-breadcrumb">
                         <li className="breadcrumb-item">
-                            <Link href="/">
+                            <a href="/" >
                                 Home
-                            </Link>
+                            </a>
                         </li>
                         <li className="separator"><i className="icon-angle-right"></i></li>
                         <li className="breadcrumb-item"><a href="#">Pages</a></li>

@@ -27,7 +27,7 @@ const WhyChose = () => {
         <section className="why-choose-area-4 edu-section-gap">
             <div className="container edublink-animated-shape">
                 <div className="section-title section-center" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                    <span className="pre-title">Why choose edublink</span>
+                    <span className="pre-title">Why choose Aethenos</span>
                     <h2 className="title">The Best <span className="color-secondary">Beneficial</span> Side <br /> of EduBlink</h2>
                     <span className="shape-line"><i className="icon-19"></i></span>
                 </div>

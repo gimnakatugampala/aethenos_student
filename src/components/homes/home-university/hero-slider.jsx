@@ -9,7 +9,7 @@ const slider_data = [
     {
         id: 1,
         src: '/assets/images/bg/bg-image-17.webp',
-        subtitle: 'Welcome to EduBlink',
+        subtitle: 'Welcome to Aethenos',
         title: 'World Best Program Best University',
         sm_text: 'Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit.',
         btn_text: 'Find courses'

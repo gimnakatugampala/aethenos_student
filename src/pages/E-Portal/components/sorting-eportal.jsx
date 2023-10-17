@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { add_force_page, add_item_offset } from '../../redux/features/filter-slice';
+import { add_force_page, add_item_offset } from '../../../redux/features/filter-slice';
 
 const SortingArea = ({course_items, num, setCourses, courses,course_list, items }) => {
     const dispatch = useDispatch();

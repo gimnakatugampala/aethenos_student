@@ -56,13 +56,13 @@ const Cart = () => {
                     </div>
 
                     <div className="cart-checkout-buttons">
-                        <Link href="/cart" className="edu-btn btn-small cart-btn">
+                        <a href="/cart" className="edu-btn btn-small cart-btn">
                             View Cart
-                        </Link>
+                        </a>
 
-                        <Link href="/checkout" className="edu-btn btn-small btn-secondary checkout-btn">
+                        <a href="/checkout" className="edu-btn btn-small btn-secondary checkout-btn">
                             Checkout
-                        </Link>
+                        </a>
                     </div>
                 </div>
             }

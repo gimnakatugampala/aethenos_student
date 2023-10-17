@@ -10,9 +10,9 @@ const HeroArea = () => {
                     <div className="col-lg-10">
                         <div className="banner-content">
                             <span className="subtitle" data-sal="slide-up" data-sal-duration="1000">Online Course & Education Template</span>
-                            <h1 className="title" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">EduBlink Education & Online Course HTML Template</h1>
+                            <h1 className="title" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">Aethenos Education & Online Course HTML Template</h1>
                             <div className="banner-btn" data-sal-delay="400" data-sal="slide-up" data-sal-duration="1000">
-                                <a href="https://1.envato.market/AoJezj" target="_blank" className="edu-btn">Download EduBlink Now <i className="icon-4"></i></a>
+                                <a href="https://1.envato.market/AoJezj" target="_blank" className="edu-btn">Download Aethenos Now <i className="icon-4"></i></a>
                             </div>
                         </div>
                     </div>

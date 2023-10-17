@@ -14,12 +14,12 @@ const Header = () => {
                     <div className="header-navbar">
                         <div className="header-brand">
                             <div className="logo">
-                                <Link href="/">
+                                <a href="/">
 
                                     <img className="logo-light" src="/assets/images/logo/logo-dark.png" alt="Corporate Logo" />
                                     <img className="logo-dark" src="/assets/images/logo/logo-white.png" alt="Corporate Logo" />
 
-                                </Link>
+                                </a>
                             </div>
                         </div>
                         <div className="header-mainnav">
@@ -60,12 +60,12 @@ const Header = () => {
                 <div className="inner">
                     <div className="header-top">
                         <div className="logo">
-                            <Link href="/">
+                            <a href="/">
 
                                 <img className="logo-light" src="/assets/images/logo/logo-dark.png" alt="Corporate Logo" />
                                 <img className="logo-dark" src="/assets/images/logo/logo-white.png" alt="Corporate Logo" />
 
-                            </Link>
+                            </a>
                         </div>
                         <div className="close-menu">
                             <button className="close-button">

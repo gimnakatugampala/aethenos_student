@@ -9,7 +9,7 @@ const slider_data = [
     {
         id: 1,
         src: '/assets/images/bg/bg-image-17.jpg',
-        subtitle: 'Welcome to EduBlink',
+        subtitle: 'Welcome to Aethenos',
         title: 'Reclaim Your Body, Your Confidence & Your Life.',
         sm_text: 'Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit.',
         btn_text: 'Find courses'
@@ -17,7 +17,7 @@ const slider_data = [
     {
         id: 2,
         src: '/assets/images/bg/bg-image-28.jpg',
-        subtitle: 'Welcome to edublink',
+        subtitle: 'Welcome to aethenos',
         title: 'Expart & chaged Your Life',
         sm_text: 'Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit.',
         btn_text: 'Find courses'
@@ -25,7 +25,7 @@ const slider_data = [
     {
         id: 3,
         src: '/assets/images/bg/bg-image-26.jpg',
-        subtitle: 'Welcome to edublink',
+        subtitle: 'Welcome to aethenos',
         title: 'We Can Help Your Reignite That Speak',
         sm_text: 'Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit.',
         btn_text: 'Find courses'

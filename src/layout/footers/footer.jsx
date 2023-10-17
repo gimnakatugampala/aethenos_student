@@ -7,7 +7,7 @@ const footer_contents = {
   desc: "Lorem ipsum dolor amet consecto adi pisicing elit sed eiusm tempor incidid unt labore dolore.",
   add: "70-80 Upper St Norwich NR2",
   call: "+01 123 5641 231",
-  email: "info@edublink.com",
+  email: "info@Aethenos.com",
   widgets: [
     {
       col: "3",
@@ -71,7 +71,7 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
                     <li>
                       <span>Email:</span>
                       <a
-                        href="mailto:info@edublink.com"
+                        href="mailto:info@Aethenos.com"
                         rel="noreferrer"
                         target="_blank"
                       >
@@ -137,7 +137,7 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
 
       <div className="copyright-area">
         <div className="container">
-          <div className="logo">
+          {/* <div className="logo">
             <Link href={"/"} legacyBehavior>
               <a>
                 {!dark_bg && (
@@ -153,7 +153,7 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
                 )}
               </a>
             </Link>
-          </div>
+          </div> */}
           <div className="row">
             <div className="col-lg-12">
               <div className="inner text-center">
@@ -167,13 +167,7 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
                     Aethenos
                   </a>{" "}
                   Designed By{" "}
-                  <a
-                    href="https://1.envato.market/YgGJbj"
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    DevsBlink
-                  </a>
+                
                   . All Rights Reserved
                 </p>
               </div>

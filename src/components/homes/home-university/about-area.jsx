@@ -5,7 +5,7 @@ import { useMouseMoveUI } from '../../../contexts/mouse-move-context';
 const tabs = {
     title:[
         {
-            active:true,target:'about-edu',title:'About EduBlink'
+            active:true,target:'about-edu',title:'About Aethenos'
         },
         {
             target:'about-mission',title:'Our Mission'

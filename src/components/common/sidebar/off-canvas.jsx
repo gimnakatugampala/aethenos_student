@@ -18,12 +18,12 @@ const OffCanvas = ({ isOpen, setIsOpen }) => {
             <div className="inner">
                 <div className="header-top">
                     <div className="logo">
-                        <Link href="/">
+                        <a href="/" >
 
                             <img className="logo-light" src='/assets/images/logo/logo-dark.png' alt="logo" />
                             <img className="logo-dark" src='/assets/images/logo/logo-white.png' alt="logo" />
 
-                        </Link>
+                        </a>
                     </div>
 
                     <div className="close-menu" onClick={() => setIsOpen(false)}>
@@ -43,7 +43,7 @@ const OffCanvas = ({ isOpen, setIsOpen }) => {
                                 {!menu.mobile_pages_menu &&
                                     <ul className={navTitle === menu?.title ? "sub-menu active" : "sub-menu"}>
                                         {menu?.submenus?.map((sub,i) => (
-                                            <li key={i}><Link href={`${sub.link}`} legacyBehavior>{sub.title}</Link></li>
+                                            <li key={i}><a href={`${sub.link}`} >{sub.title}</a></li>
                                         ))}
                                     </ul>
                                 }
@@ -51,12 +51,12 @@ const OffCanvas = ({ isOpen, setIsOpen }) => {
                                 {menu.mobile_pages_menu &&
                                     <ul className={navTitle === menu?.title ? "sub-menu active" : "sub-menu"}>
                                         {menu?.mobile_pages_menu?.map((sub,i) => (
-                                            <li key={i}><Link href={`${sub.link}`} legacyBehavior>{sub.title}</Link></li>
+                                            <li key={i}><a href={`${sub.link}`} >{sub.title}</a></li>
                                         ))}
                                     </ul>
                                 }
                                 
-                                {!menu.submenus && <Link href={menu.link} legacyBehavior>{menu.title}</Link>}
+                                {!menu.submenus && <a href={menu.link}>{menu.title}</a>}
                             </li>
                         ))}
                     </ul>

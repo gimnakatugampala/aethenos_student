@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { cart_course } from '../../redux/features/cart-slice';
-import { add_to_wishlist, wishlistItems } from '../../redux/features/wishlist-slice';
+import { cart_course } from '../../../redux/features/cart-slice';
+import { add_to_wishlist, wishlistItems } from '../../../redux/features/wishlist-slice';
+import Colors from '../../../contexts/Colors';
+import Button from 'react-bootstrap/Button';
+
 
 const CourseTypeFive = ({ data, classes }) => {
     const {cartCourses} = useSelector(state => state.cart);
@@ -48,11 +51,14 @@ const CourseTypeFive = ({ data, classes }) => {
         <div className={`edu-course course-style-4 course-style-8 ${ classes ? classes : '' }`}>
             <div className="inner">
                 <div className="thumbnail">
-                    <Link href={`/course-details/${data.id}`}>
+                    <Link href={`/course-content/${data.id}`}>
 
                         <img
-                            src={`/assets/images/course/course-06/${data.img}`}
-                            alt="Course Thumb"
+                        width={200}
+                        height={200}
+                        className='cover-img'
+                        src={`https://www.courselounge.com/wp-content/uploads/best-udemy-courses-online.png`}
+                        alt="Course Thumb"
                         />
 
                     </Link>
@@ -69,13 +75,13 @@ const CourseTypeFive = ({ data, classes }) => {
                         ${data?.course_price}
                     </div> */}
 
-                    <h6 className="title">
-                        <Link href={`/e-portal/course-details`}>
+                    <h5 className="title mb-5">
+                        <Link href={`/e-portal/course-content`}>
                             {data.title}
                         </Link>
-                    </h6>
+                    </h5>
 
-                    <div className="course-rating">
+                    {/* <div className="course-rating">
                         <div className="rating">
                             <i className="icon-23"></i>
                             <i className="icon-23"></i>
@@ -86,13 +92,13 @@ const CourseTypeFive = ({ data, classes }) => {
                         <span className="rating-count">
                             ({data.rating} /{data.rating_count}{" "} Rating)
                         </span>
-                    </div>
+                    </div> */}
 
-                    <p>{data.short_desc}</p>
+                    {/* <p>{data.short_desc}</p> */}
 
                     <div className="progress" style={{ marginTop: '10px', marginBottom: '10px' }}>
-                <div className="progress-bar"  role="progressbar"  style={{width:`${'20'}%`,  background: '#1ab69d' }} aria-valuenow={'100'} 
-                aria-valuemin="0" aria-valuemax="100"></div>
+                        <div className="progress-bar"  role="progressbar"  style={{width:`${'20'}%`,  background: Colors.PrimaryColor }} aria-valuenow={'100'} 
+                        aria-valuemin="0" aria-valuemax="100"></div>
                  </div>
 
                     <ul className="course-meta">

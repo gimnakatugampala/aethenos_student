@@ -22,9 +22,9 @@ const CourseArea1 = () => {
                     })}
                 </div>
                 <div className="course-view-all" data-sal-delay="150" data-sal="slide-up" data-sal-duration="1200">
-                    <Link href="/courses" className="edu-btn">
+                    <a href="/courses" className="edu-btn">
                         Browse more courses<i className="icon-4"></i>
-                    </Link>
+                    </a>
                 </div>
             </div>
         </div>

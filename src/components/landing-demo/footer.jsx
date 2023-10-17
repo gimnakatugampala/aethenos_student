@@ -9,9 +9,9 @@ const Footer = () => {
             <div className="container">
                 <div className="cta-content">
                     <span className="subtitle" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">Great Solutions for Smart People</span>
-                    <h2 className="title" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">Create Your Education Website <br /> Today with EduBlink</h2>
+                    <h2 className="title" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">Create Your Education Website <br /> Today with Aethenos</h2>
                     <div className="button-group" data-sal-delay="400" data-sal="slide-up" data-sal-duration="1000">
-                        <a href="https://1.envato.market/AoJezj" target="_blank" className="edu-btn">Download EduBlink <i className="icon-4"></i></a>
+                        <a href="https://1.envato.market/AoJezj" target="_blank" className="edu-btn">Download Aethenos <i className="icon-4"></i></a>
                         <a href="#demos" className="edu-btn btn-bg-white">Demo Preview <i className="icon-4"></i></a>
                     </div>
                 </div>

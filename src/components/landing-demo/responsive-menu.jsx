@@ -17,12 +17,12 @@ const ResponsiveMenu = ({ isOpen, setIsOpen }) => {
             <div className="inner">
                 <div className="header-top">
                     <div className="logo">
-                        <Link href="/">
+                        <a href="/" >
 
                             <img className="logo-light" src='/assets/images/logo/logo-dark.png' alt="logo" />
                             <img className="logo-dark" src='/assets/images/logo/logo-white.png' alt="logo" />
 
-                        </Link>
+                        </a>
                     </div>
 
                     <div className="close-menu" onClick={() => setIsOpen(false)}>
@@ -40,12 +40,12 @@ const ResponsiveMenu = ({ isOpen, setIsOpen }) => {
                         <li>
                             <a href="#demos">Demos</a>
                         </li>
-                        <li>
+                        {/* <li>
                             <a href="https://docs.devsblink.com/edublink-react/" target="_blank">Documentation</a>
                         </li>
                         <li>
                             <a href="https://devsblink.freshdesk.com/" target="_blank">Support</a>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
             </div>

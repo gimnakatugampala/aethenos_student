@@ -33,14 +33,14 @@ const LoginForm = () => {
         </div>
         <form onSubmit={handleSubmit}>
             <div className="form-group">
-                <label htmlFor="current-log-email">Username or email*</label>
+                <label htmlFor="current-log-email">Email*</label>
                 <input 
                     value={values.email} 
                     onChange={handleChange}
                     onBlur={handleBlur} 
                     type="email" 
                     name="email"
-                    placeholder="Email or username" 
+                    placeholder="Enter Email" 
                 />
                 {touched.email && <ErrorMsg error={errors.email} />}
             </div>

@@ -66,7 +66,7 @@ const BlogSidebar = () => {
 
             <div className="edu-blog-widget widget-action">
                 <div className="inner">
-                    <h4 className="title">Get Online Courses From <span>EduBlink</span></h4>
+                    <h4 className="title">Get Online Courses From <span>Aethenos</span></h4>
                     <span className="shape-line"><i className="icon-19"></i></span>
                     <p>Nostrud exer ciation laboris aliqup</p>
                     <a href="#" className="edu-btn btn-medium">Start Now <i className="icon-4"></i></a>

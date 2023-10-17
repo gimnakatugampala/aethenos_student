@@ -11,7 +11,7 @@ const Cta = () => {
                                 <div className="content text-end">
                                     <span className="subtitle">Get In Touch:</span>
                                     <h3 className="title">
-                                        <a href="mailto:info@edublink">info@edublink</a>
+                                        <a href="mailto:info@aethenos">info@aethenos</a>
                                     </h3>
                                 </div>
                                 <div className="sparator">

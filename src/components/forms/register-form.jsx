@@ -28,8 +28,8 @@ const RegisterForm = () => {
             </div>
 
             <div className="form-group">
-                <label htmlFor="log-email">Username or email*</label>
-                <input value={values.email} onChange={handleChange} onBlur={handleBlur} type="email" name="email" id="log-email" placeholder="Email or username" />
+                <label htmlFor="log-email">Email*</label>
+                <input value={values.email} onChange={handleChange} onBlur={handleBlur} type="email" name="email" id="log-email" placeholder="Enter Email" />
                 {touched.email && <ErrorMsg error={errors.email} />}
             </div>
 

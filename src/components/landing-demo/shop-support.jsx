@@ -17,7 +17,7 @@ const ShopSupport = () => {
 
                                     <h2 className="title" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">Sell Like a Pro with <br /> E-commerce</h2>
 
-                                    <p data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">E-commerce. EduBlink provides all the tools you need to start selling online. Let your customers to experience E-commerce at its absolute-best.</p>
+                                    <p data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">E-commerce. Aethenos provides all the tools you need to start selling online. Let your customers to experience E-commerce at its absolute-best.</p>
 
                                     <div data-sal-delay="400" data-sal="slide-up" data-sal-duration="1000">
                                         <Link href="/course-style-1" className="edu-btn" target="_blank">

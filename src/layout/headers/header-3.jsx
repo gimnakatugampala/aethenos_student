@@ -25,12 +25,12 @@ const HeaderThree = () => {
                         <div className="header-navbar">
                             <div className="header-brand">
                                 <div className="logo">
-                                    <Link href="/" legacyBehavior>
-                                        <a>
+                                    {/* <Link href="/" legacyBehavior> */}
+                                        <a href="/">
                                             <img className="logo-light" src="/assets/images/logo/logo-dark.png" alt="Corporate Logo" />
                                             <img className="logo-dark" src="/assets/images/logo/logo-white.png" alt="Corporate Logo" />
                                         </a>
-                                    </Link>
+                                    {/* </Link> */}
                                 </div>
                             </div>
 
@@ -56,28 +56,28 @@ const HeaderThree = () => {
                                     </li>
 
                                     <li className="icon">
-                                        <Link href="/wishlist" legacyBehavior>
-                                            <a className="wishlist">
+                                        {/* <Link href="/wishlist" legacyBehavior> */}
+                                            <a href="/wishlist" className="wishlist">
                                                 <i className="icon-22"></i>
                                                 <span className="count">{wishlists?.length}</span>
                                             </a>
-                                        </Link>
+                                        {/* </Link> */}
                                     </li>
 
                                     <li className="icon cart-icon">
-                                        <Link href="/cart" legacyBehavior>
-                                            <a className="cart-icon">
+                                        {/* <Link href="/cart" legacyBehavior> */}
+                                            <a href="/cart" className="cart-icon">
                                                 <i className="icon-3"></i>
                                                 <span className="count">{quantity}</span>
                                             </a>
-                                        </Link>
+                                        {/* </Link> */}
                                         <Cart />
                                     </li>
 
                                     <li className="header-btn">
-                                        <Link href="/contact-us" legacyBehavior>
-                                            <a className="edu-btn btn-medium btn-curved">Try for free <i className="icon-4"></i></a>
-                                        </Link>
+                                        {/* <Link href="/contact-us" legacyBehavior> */}
+                                            <a href="/contact-us" className="edu-btn btn-medium btn-curved">Try for free <i className="icon-4"></i></a>
+                                        {/* </Link> */}
                                     </li>
 
                                     <li className="mobile-menu-bar d-block d-xl-none">

@@ -38,7 +38,7 @@ const AboutArea = () => {
                     <div className="col-lg-6">
                         <div className="about-content">
                             <div className="section-title section-left" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                                <span className="pre-title pre-textsecondary">Welcome to the EduBlink</span>
+                                <span className="pre-title pre-textsecondary">Welcome to the Aethenos</span>
                                 <h2 className="title">Welcome To Best Preschool Class Center</h2>
                                 <span className="shape-line"><i className="icon-19"></i></span>
                                 <p>Magna aliquaenim minim veniam quis nostrud exercitation ullamco laborisLorem ipsum dolor sit amet consectetur adipisicing elit sed do eius tempor incididunt labore.</p>

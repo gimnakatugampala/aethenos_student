@@ -11,12 +11,12 @@ const InstagramArea = () => {
                     <span className="shape-line"><i className="icon-19"></i></span>
                 </div>
                 <div className="row g-3">
-                    <SingleInstagram img={'01'} name={'@EduBlink.Cooking'} />
-                    <SingleInstagram img={'02'} name={'@EduBlink.Cooking'} />
-                    <SingleInstagram img={'03'} name={'@EduBlink.Cooking'} />
-                    <SingleInstagram img={'04'} name={'@EduBlink.Cooking'} />
-                    <SingleInstagram img={'05'} name={'@EduBlink.Cooking'} />
-                    <SingleInstagram img={'06'} name={'@EduBlink.Cooking'} />
+                    <SingleInstagram img={'01'} name={'@Aethenos.Cooking'} />
+                    <SingleInstagram img={'02'} name={'@Aethenos.Cooking'} />
+                    <SingleInstagram img={'03'} name={'@Aethenos.Cooking'} />
+                    <SingleInstagram img={'04'} name={'@Aethenos.Cooking'} />
+                    <SingleInstagram img={'05'} name={'@Aethenos.Cooking'} />
+                    <SingleInstagram img={'06'} name={'@Aethenos.Cooking'} />
                 </div>
             </div>
         </div>
