@@ -27,10 +27,8 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import ListItemButton from '@mui/material/ListItemButton';
 import { MessageBox } from 'react-chat-elements'
-
-
+import CardContainer from "../../contexts/CardContainer";
 import 'react-chat-elements/dist/main.css'
-// import './Messages.css'
 
 function Messages() {
   const initialMessages = {
@@ -101,15 +99,9 @@ function Messages() {
       <div className=" col-10 m-lg-auto  ">
           
         <div className="row">
-     
-        {/* <div className="col-md-2"> */}
              <Typography className="mt-5" variant="h2" gutterBottom>
              Messages
             </Typography>
-        {/* </div> */}
-
-       
-       
         </div>
         
 
@@ -119,7 +111,7 @@ function Messages() {
 
               <Col sm={5} md={5} lg={3} className="bg-light border-right">
 
-                 <Typography className="p-3" variant="h5" gutterBottom>
+                <Typography className="p-3" variant="h5" gutterBottom>
                  Chat Users
                </Typography>
 
@@ -166,26 +158,7 @@ function Messages() {
                     </>
                 ))}
 
-
-
-              
                     </List>
-
-                {/*  List Group Now */}
-                {/* <ul className="list-group">
-                  {filteredUsers.map((user) => (
-                    <li
-                      key={user}
-                      className={`list-group-item ${
-                        selectedUser === user ? "active" : ""
-                      }`}
-                      onClick={() => handleUserClick(user)}
-                    >
-                      {user}
-                    </li>
-                  ))}
-                </ul> */}
-
               </Col>
 
               <Col sm={7} md={7} lg={9}>
@@ -201,61 +174,53 @@ function Messages() {
                   style={{ minHeight: "70vh", overflowY: "auto",background:'#D5D8DC' }}
                 >
                   <List>
-                  
-                  {/* {messages.map((message, index) => (
-                    <div>{message.sender == "You" ? "Sender" : "Reciever"}</div>
-                   ))} */}
 
-<MessageBox
-styles={{width:300,color:'#000',fontWeight:'bold'}}
+                  <MessageBox
+                  styles={{width:300,color:'#000',fontWeight:'bold'}}
 
-  onReplyMessageClick={() => console.log('reply clicked!')}
-  position={'left'}
-  type={'text'}
-  text={'Tempor duis do voluptate enim duis velit veniam aute ullamco dolore duis irure.'}
-/>
-<MessageBox
-styles={{width:300,color:'#000',fontWeight:'bold'}}
+                    onReplyMessageClick={() => console.log('reply clicked!')}
+                    position={'left'}
+                    type={'text'}
+                    text={'Tempor duis do voluptate enim duis velit veniam aute ullamco dolore duis irure.'}
+                  />
+                  <MessageBox
+                  styles={{width:300,color:'#000',fontWeight:'bold'}}
 
-  onReplyMessageClick={() => console.log('reply clicked!')}
-  position={'left'}
-  type={'text'}
-  text={'Tempor duis do voluptate enim duis velit veniam aute ullamco dolore duis irure.'}
-/>
+                    onReplyMessageClick={() => console.log('reply clicked!')}
+                    position={'left'}
+                    type={'text'}
+                    text={'Tempor duis do voluptate enim duis velit veniam aute ullamco dolore duis irure.'}
+                  />
 
 
 
-<MessageBox
-styles={{width:300,background:'#e01D20',color:'#fff',fontWeight:'bold'}}
-  onReplyMessageClick={() => console.log('reply clicked!')}
-  position={'right'}
-  type={'text'}
-  text={'Tempor duis do voluptate enim duis velit veniam aute ullamco dolore duis irure.'}
-/>
-<MessageBox
-styles={{width:300,background:'#e01D20',color:'#fff',fontWeight:'bold'}}
-  onReplyMessageClick={() => console.log('reply clicked!')}
-  position={'right'}
-  type={'text'}
-  text={'Tempor duis do voluptate enim duis velit veniam aute ullamco dolore duis irure.'}
-/>
+                  <MessageBox
+                  styles={{width:300,background:'#e01D20',color:'#fff',fontWeight:'bold'}}
+                    onReplyMessageClick={() => console.log('reply clicked!')}
+                    position={'right'}
+                    type={'text'}
+                    text={'Tempor duis do voluptate enim duis velit veniam aute ullamco dolore duis irure.'}
+                  />
+                  <MessageBox
+                  styles={{width:300,background:'#e01D20',color:'#fff',fontWeight:'bold'}}
+                    onReplyMessageClick={() => console.log('reply clicked!')}
+                    position={'right'}
+                    type={'text'}
+                    text={'Tempor duis do voluptate enim duis velit veniam aute ullamco dolore duis irure.'}
+                  />
                    
                    
                   </List>
                 </Paper>
-                <InputGroup className="p-3">
-                  <FormControl
-                    placeholder="Type a message..."
-                    value={messageText}
-                    onChange={(e) => setMessageText(e.target.value)}
-                    onKeyPress={(e) => {
-                      if (e.key === "Enter") handleMessageSend();
-                    }}
-                  />
-                    <Button variant="contained" onClick={handleMessageSend}>
-                    <SendIcon />
-                  </Button>
-                </InputGroup>
+
+                
+                <div class="input-group p-2">
+                  <textarea placeholder="Type a Message" class="form-control" aria-label="With textarea"></textarea>
+                    <Button variant="contained"><SendIcon /></Button>
+                    
+                </div>
+  
+
               </Col>
 
             </Row>
