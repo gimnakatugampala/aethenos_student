@@ -20,9 +20,16 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import MessageIcon from '@mui/icons-material/Message';
 import Modal from 'react-bootstrap/Modal';
+import PersonIcon from '@mui/icons-material/Person';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { course_data } from '../../../data';
+import SingleProgressbar from "./single-progressbar";
+import SingleComment from "./single-comment";
+import CommentFormCourse from '../../../components/forms/comment-form-course';
 
+const course = course_data[0];
 
-const CourseDetailsArea1 = ({ course }) => {
+const CourseDetailsArea1 = () => {
 
   const [show, setShow] = useState(false);
 
@@ -34,6 +41,8 @@ const CourseDetailsArea1 = ({ course }) => {
 
   const handleCloseNewQuestion = () => setShowNewQuestion(false);
   const handleShowNewQuestion = () => setShowNewQuestion(true);
+
+  const { course_desc, course_desc_2, learn_list, course_desc_3, curriculum_desc, course_lessons, instructor_img, instructor_title, instructor_desc, social_links, reviews, instructor, rating, rating_count } = course || {};
 
   return (
     <section
@@ -47,7 +56,6 @@ const CourseDetailsArea1 = ({ course }) => {
               </Player>
 
               {/*  Tabs */}
-
               <div className="row">
                 <div className="col-md-12">
                 <Tabs
@@ -260,15 +268,94 @@ const CourseDetailsArea1 = ({ course }) => {
                     </Tab>
 
                     <Tab eventKey="notes" title="Notes">
-                      Tab content for Notes
+
+                   
+
+                    <InputGroup className="mb-3">
+                        <Form.Control
+                          placeholder="Create a new note at 0:00"
+                          aria-label="Create a new note at 0:00"
+                          aria-describedby="basic-addon2"
+                        />
+                        <InputGroup.Text id="basic-addon2"><AddCircleIcon /></InputGroup.Text>
+                      </InputGroup>
+
+                
+
                     </Tab>
 
                     <Tab eventKey="annoucements" title="Announcements">
-                      Tab content for Announcements
+                    <CardContainer>
+                      <ListItem>
+                        <ListItemAvatar>
+                          <Avatar>
+                            <PersonIcon />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Gimna Katugampala" secondary="Post an annoucement • 28 days ago" />
+                      </ListItem>
+                      <div className="m-3">
+                      <h4 className="heading-title">[Great News]</h4>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium aperiam excepturi, eaque adipisci itaque enim doloribus ratione voluptas asperiores error harum nemo quo nesciunt necessitatibus, repellat dolorem natus, iusto repudiandae!</p>
+                      </div>
+                      </CardContainer>
                     </Tab>
 
                     <Tab eventKey="reviews" title="Reviews">
-                      Tab content for Reviews
+                              
+                    <div className="course-review">
+                          <h3 className="heading-title">Course Rating</h3>
+                          <p>{rating} average rating based on {rating_count} rating</p>
+                          <div className="row g-0 align-items-center">
+                              <div className="col-sm-4">
+                                  <div className="rating-box">
+                                      <div className="rating-number">{rating}</div>
+                                      <div className="rating">
+                                          <i className="icon-23"></i>
+                                          <i className="icon-23"></i>
+                                          <i className="icon-23"></i>
+                                          <i className="icon-23"></i>
+                                          <i className="icon-23"></i>
+                                      </div>
+                                      <span>({rating_count} Review)</span>
+                                  </div>
+                              </div>
+                              <div className="col-sm-8">
+                                  <div className="review-wrapper">
+                                      <SingleProgressbar value={'100'} rating_value={rating_count} />
+                                      <SingleProgressbar value={'0'} rating_value={'0'} />
+                                      <SingleProgressbar value={'0'} rating_value={'0'} />
+                                      <SingleProgressbar value={'0'} rating_value={'0'} />
+                                      <SingleProgressbar value={'0'} rating_value={'0'} />
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div className="comment-area">
+                              <h3 className="heading-title">Reviews</h3>
+                              <div className="comment-list-wrapper">
+                                  {reviews?.map((review, i) => (
+                                      <SingleComment key={i} review={review} />
+                                  ))}
+                              </div>
+                          </div>
+
+                          <div className="comment-form-area">
+                              <h3 className="heading-title">Write a Review</h3>
+                              <div className="rating-icon">
+                                  <h6 className="title">Rating Here</h6>
+                                  <div className="rating">
+                                      <i className="icon-23"></i>
+                                      <i className="icon-23"></i>
+                                      <i className="icon-23"></i>
+                                      <i className="icon-23"></i>
+                                      <i className="icon-23"></i>
+                                  </div>
+                              </div>
+                              <CommentFormCourse/>
+                          </div>
+                      </div>
+
                     </Tab>
 
               </Tabs>

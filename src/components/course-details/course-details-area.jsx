@@ -113,6 +113,7 @@ const CourseDetailsArea = ({ course }) => {
 
                                 <div className="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
                                     <div className="course-tab-content">
+
                                         <div className="course-review">
                                             <h3 className="heading-title">Course Rating</h3>
                                             <p>{rating} average rating based on {rating_count} rating</p>
@@ -165,6 +166,7 @@ const CourseDetailsArea = ({ course }) => {
                                                 <CommentFormCourse/>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
