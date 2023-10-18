@@ -48,7 +48,7 @@ const CourseTypeFour = ({ data, classes }) => {
         <div className={`edu-course course-style-5 ${ classes ? classes : '' }`}>
             <div className="inner">
                 <div className="thumbnail">
-                    <Link href={`/course-details/${data.id}`}>
+                    <Link href={`/course-details/${data.id}`} legacyBehavior>
 
                         <img src={`/assets/images/course/course-04/${data.img}`} alt="Course Meta" />
 
@@ -58,7 +58,7 @@ const CourseTypeFour = ({ data, classes }) => {
                     <div className="course-price price-round">${Math.trunc(data.course_price)}</div>
                     <span className="course-level">{data.level}</span>
                     <h5 className="title">
-                        <Link href={`/course-details/${data.id}`}>
+                        <Link href={`/course-details/${data.id}`} legacyBehavior>
                             {data.title}
                         </Link>
                     </h5>

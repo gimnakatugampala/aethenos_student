@@ -48,13 +48,11 @@ const CourseTypeFive = ({ data, classes }) => {
         <div className={`edu-course course-style-4 course-style-8 ${ classes ? classes : '' }`}>
             <div className="inner">
                 <div className="thumbnail">
-                    <Link href={`/course-details/${data.id}`}>
-
+                    <Link href={`/course-details/${data.id}`} legacyBehavior>
                         <img
                             src={`/assets/images/course/course-06/${data.img}`}
                             alt="Course Thumb"
                         />
-
                     </Link>
                     <div className="time-top">
                         <span className="duration">
@@ -70,7 +68,7 @@ const CourseTypeFive = ({ data, classes }) => {
                     </div>
 
                     <h6 className="title">
-                        <Link href={`/course-details/${data.id}`}>
+                        <Link href={`/course-details/${data.id}`} legacyBehavior>
                             {data.title}
                         </Link>
                     </h6>
@@ -109,7 +107,7 @@ const CourseTypeFive = ({ data, classes }) => {
                     </span>
 
                     <h5 className="title">
-                        <Link href={`/course-details/${data.id}`}>
+                        <Link href={`/course-details/${data.id}`} legacyBehavior>
                             {data.title}
                         </Link>
                     </h5>

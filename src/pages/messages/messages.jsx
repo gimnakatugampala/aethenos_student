@@ -159,7 +159,7 @@ function Messages() {
                     </List>
               </Col>
 
-              <Col sm={7} md={7} lg={9}>
+              <Col sm={7} md={7} lg={8}>
                 <div className="d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
                 <Typography variant="h5" className="p-3" gutterBottom>
                 Chat with <b>{selectedUser}</b>

@@ -21,7 +21,7 @@ const Cart = () => {
                         {cartItems.map((item, index) => (
                             <li key={index} className="each-item">
                                 <div className="thumb">
-                                    <Link href={`/course-details/${item.id}`}>
+                                    <Link href={`/course-details/${item.id}`} legacyBehavior>
 
                                         <img src={item.img} alt="course-thumb" />
 
@@ -29,7 +29,7 @@ const Cart = () => {
                                 </div>
                                 <div className="content">
                                     <h5 className="title">
-                                        <Link href={`/course-details/${item.id}`}>
+                                        <Link href={`/course-details/${item.id}`} legacyBehavior>
 
                                             {item.title}
 
