@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Footer, Header } from '../../layout';
+
 import {
   Container,
   Row,
@@ -93,13 +93,11 @@ function Messages() {
 
   return (
     <div>
-      
-       <Header/>
        <div className="container-fluid"  >
-      <div className=" col-10 m-lg-auto  ">
+      <div className=" col-11 m-lg-auto  ">
           
         <div className="row">
-             <Typography className="mt-5" variant="h2" gutterBottom>
+             <Typography className="mt-5" variant="h4" gutterBottom>
              Messages
             </Typography>
         </div>
@@ -109,7 +107,7 @@ function Messages() {
           <Container fluid>
             <Row  className="vh-130">
 
-              <Col sm={5} md={5} lg={3} className="bg-light border-right">
+              <Col sm={5} md={5} lg={4} className="bg-light border-right">
 
                 <Typography className="p-3" variant="h5" gutterBottom>
                  Chat Users
@@ -230,7 +228,7 @@ function Messages() {
         </Card>
         </div>
         </div>
-        <Footer/>
+     
       </div>
 
   );
