@@ -52,15 +52,14 @@ const CourseFiveArea = () => {
     <div className="edu-course-area course-area-1 section-gap-equal">
       <div className="container">
         <div className="row g-5">
-          <div className="d-flex col-6">
-            <div className="col-12">
+          <div className="row col-md-12">
+
+            <div className="col-8">
               <div>
                 <h6>INSTRUCTOR</h6>
                 <h1>Dr. Angela Yu</h1>
                 <h5>Data Scientist</h5>
-                <button className="border-0 bg-danger text-white">
-                  Aethenos Instructor Partner
-                </button>
+           
               </div>
               <div className="d-flex ">
                 <div className=" m-lg-3">
@@ -94,12 +93,13 @@ const CourseFiveArea = () => {
                 </span>
               </div>
             </div>
-            <div className="col-12">
+
+            <div className="col-4">
               <div className="m-lg-5">
                 <img
                   className=" "
                   src="https://img-c.udemycdn.com/user/200_H/2364054_83cd_5.jpg"
-                  alt=""
+                  alt="Profile Instructor"
                 />
               </div>
               <a
@@ -263,6 +263,8 @@ const CourseFiveArea = () => {
                 Youtube
               </a>
             </div>
+
+
           </div>
           <div className="col-lg-3 order-lg-2">
             <CourseSidebarTwo course_items={course_items} />
