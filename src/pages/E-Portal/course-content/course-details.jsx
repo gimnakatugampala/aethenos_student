@@ -58,6 +58,7 @@ const CourseDetailsArea1 = () => {
               {/*  Tabs */}
               <div className="row">
                 <div className="col-md-12">
+   
                 <Tabs
                 defaultActiveKey="overview"
                 id="uncontrolled-tab-example"
