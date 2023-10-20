@@ -1,6 +1,6 @@
 import React from "react";
 import { Footer, Header } from "../../../../layout";
-import BreadcrumbThree from "../../../../components/breadcrumb/breadcrumb-3";
+import BreadcrumbThree from "../breadcrumb/breadcrumb-3";
 import CourseFiveArea from "./course-1-area";
 
 const index = () => {

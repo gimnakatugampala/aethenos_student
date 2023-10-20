@@ -206,7 +206,7 @@ At 65+ hours, this Web Development course is without a doubt the most comprehens
                 <div>
 
                              
-<h3 className="heading-title" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">More Courses by Dr. Angela Yu</h3>
+<h3 className="heading-title" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">More Courses by <a href="course-style-5">Dr. Angela Yu</a></h3>
 
   <div className="edu-course-area course-area-1 ">
 

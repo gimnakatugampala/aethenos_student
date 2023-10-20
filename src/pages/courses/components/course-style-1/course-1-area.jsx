@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { course_data } from "../../../../data";
 import CourseSidebarTwo from "../../../../components/common/sidebar/course-sidebar-2";
-import SortingArea from "../../../../components/course-filter/sorting-area";
+import SortingArea from "../course-filter/sorting-area";
 import CourseItems from "./course-items";
 import CourseArea from "./CourseArea";
 

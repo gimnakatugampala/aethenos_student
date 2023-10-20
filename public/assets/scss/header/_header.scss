@@ -1,6 +1,10 @@
 /*--------------------------
     Header Styles  
 --------------------------*/
+a{
+    text-decoration: none !important;
+}
+
 .edu-header {
     z-index: 99;
     .header-mainmenu {

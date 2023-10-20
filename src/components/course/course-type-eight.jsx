@@ -70,9 +70,9 @@ const CourseTypeEight = ({ data, classes }) => {
                     </div>
 
                     <h6 className="title">
-                        <Link href={`/course-details/${data.id}`}>
-                            <a>{data.title}</a>
-                        </Link>
+                        <a href={`/course-details/${data.id}`}>
+                            {data.title}
+                        </a>
                     </h6>
 
                     <div className="course-rating">
