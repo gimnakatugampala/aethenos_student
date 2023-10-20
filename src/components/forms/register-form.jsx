@@ -22,8 +22,14 @@ const RegisterForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div className="form-group">
-                <label htmlFor="reg-name">Name*</label>
-                <input value={values.name} onChange={handleChange} onBlur={handleBlur} type="text" name="name" id="reg-name" placeholder="Full name" />
+                <label htmlFor="reg-name">First Name *</label>
+                <input value={values.name} onChange={handleChange} onBlur={handleBlur} type="text" name="name" id="reg-name" placeholder="First name" />
+                {touched.name && <ErrorMsg error={errors.name} />}
+            </div>
+
+            <div className="form-group">
+                <label htmlFor="reg-name">Last Name*</label>
+                <input value={values.name} onChange={handleChange} onBlur={handleBlur} type="text" name="name" id="reg-name" placeholder="Last name" />
                 {touched.name && <ErrorMsg error={errors.name} />}
             </div>
 
