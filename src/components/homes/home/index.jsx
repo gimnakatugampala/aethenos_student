@@ -12,7 +12,7 @@ import HeroArea from './hero-area';
 import TeamArea from './team-area';
 import TestimonialArea from './testimonial-area';
 import TopCategories from './top-categories';
-import CourseArea1 from './course-area-two';
+import CourseArea1 from './course-area-homepage';
 
 const index = () => {
     return (
