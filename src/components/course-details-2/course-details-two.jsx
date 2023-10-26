@@ -99,41 +99,17 @@ const CourseDetailsTwo = ({ course }) => {
 
                                 <div className='mb-5'>
 
-                             
-                                <h3 className="heading-title" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">Students also bought</h3>
-
-                                <div className="edu-course-area course-area-1 ">
-
-            <div className="container">
-                {/* <SortingArea course_items={course_data} num={courses?.slice(0,next)?.length} setCourses={setCourses} courses={courses} /> */}
-
-                <div className="row g-5">
-                    {courses?.slice(0, next)?.map((course) => (
-                        <div key={course.id} className="col-md-6 col-lg-4">
-                            <CourseTypeSix data={course} classes="course-box-shadow" />
-                        </div>
-                    ))}
-                </div>
-
-                {/* {next < courses.length && 
-                    <div onClick={handleLoadData} className="load-more-btn" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1200">
-                        <a className="edu-btn" style={{ cursor: 'pointer' }}>Load More <i className="icon-56"></i></a>
-                    </div>
-                } */}
-            </div>
-        </div>
-        </div>
-                            <h3 className="heading-title" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">Description</h3>
+                                    {/* Description */}
+                                    <h3 className="heading-title" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">Description</h3>
                                 <ul className="mb--90" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
                                     <p>Welcome to the Complete Web Development Bootcamp, the only course you need to learn to code and become a full-stack web developer. With 150,000+ ratings and a 4.8 average, my Web Development course is one of the HIGHEST RATED courses in the history of Udemy! 
 
-At 65+ hours, this Web Development course is without a doubt the most comprehensive web development course available online. <br /> Even if you have zero programming experience, this course will take you from beginner</p>
+                                    At 65+ hours, this Web Development course is without a doubt the most comprehensive web development course available online. <br /> Even if you have zero programming experience, this course will take you from beginner</p>
                                 </ul>
                            
-
-                        
-
-                            <div className="course-instructor-wrap mb--90" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+                                    
+                                    {/* Instructor Info */}
+                                    <div className="course-instructor-wrap mb--90" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
                                 <h3 className="heading-title">Your Instructors</h3>
                                 <div className="course-instructor">
                                     <div className="thumbnail">
@@ -157,6 +133,34 @@ At 65+ hours, this Web Development course is without a doubt the most comprehens
                                 </div>
                             </div>
 
+                             {/* More Courses */}
+                                <h3 className="heading-title" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">Students also bought</h3>
+
+                                {/* <div className="edu-course-area course-area-1 ">
+
+                                    <div className="container"> */}
+                                        {/* <SortingArea course_items={course_data} num={courses?.slice(0,next)?.length} setCourses={setCourses} courses={courses} /> */}
+
+                                                <div className="row ">
+                                                    {courses?.slice(0, next)?.map((course) => (
+                                                        <div key={course.id} className="col-md-3 col-lg-4">
+                                                            <CourseTypeSix data={course} classes="course-box-shadow" />
+                                                        </div>
+                                                    ))}
+                                                </div>
+
+                                        {/* {next < courses.length && 
+                                            <div onClick={handleLoadData} className="load-more-btn" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1200">
+                                                <a className="edu-btn" style={{ cursor: 'pointer' }}>Load More <i className="icon-56"></i></a>
+                                            </div>
+                                        } */}
+                                    {/* </div>
+                                </div> */}
+                                </div>
+                    
+
+                       
+                                {/* Student Feedback */}
                             <div className="course-review" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
                                 <h3 className="heading-title">Student Feedback</h3>
                                 <p>{rating} average rating based on {rating_count} rating</p>
@@ -199,36 +203,37 @@ At 65+ hours, this Web Development course is without a doubt the most comprehens
                         </div>
 
                     </div>
+                    {/* Sidebar */}
                     <div className="col-lg-4">
                         <CourseDetailsSidebar course={course} details_2={true} />
                     </div>
                 </div>
                 <div>
 
-                             
-<h3 className="heading-title" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">More Courses by <a href="course-style-5">Dr. Angela Yu</a></h3>
+                             {/* Courses By Instructor */}
+                    <h3 className="heading-title" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">More Courses by <a href="course-style-5">Dr. Angela Yu</a></h3>
 
-  <div className="edu-course-area course-area-1 ">
+                    <div className="edu-course-area course-area-1 ">
 
-    <div className="container">
-      <SortingArea course_items={course_data} num={courses?.slice(0,next)?.length} setCourses={setCourses} courses={courses} />
+                        <div className="container">
+                        <SortingArea course_items={course_data} num={courses?.slice(0,next)?.length} setCourses={setCourses} courses={courses} />
 
-         <div className="row g-5">
-            {courses?.slice(0, next)?.map((course) => (
-                <div key={course.id} className="col-md-6 col-lg-4">
-                     <CourseTypeSix data={course} classes="course-box-shadow" />
-                </div>
-                ))}
-        </div>
+                            <div className="row g-5">
+                                {courses?.slice(0, next)?.map((course) => (
+                                    <div key={course.id} className="col-md-6 col-lg-4">
+                                        <CourseTypeSix data={course} classes="course-box-shadow" />
+                                    </div>
+                                    ))}
+                            </div>
 
-     {next < courses.length && 
- <div onClick={handleLoadData} className="load-more-btn" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1200">
-      <a className="edu-btn" style={{ cursor: 'pointer' }}>Load More <i className="icon-56"></i></a>
-       </div>
-         }
-      </div>
-</div>
-</div>
+                        {next < courses.length && 
+                    <div onClick={handleLoadData} className="load-more-btn" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1200">
+                        <a className="edu-btn" style={{ cursor: 'pointer' }}>Load More <i className="icon-56"></i></a>
+                        </div>
+                            }
+                        </div>
+                    </div>
+            </div>
             </div>
         </section>
     )

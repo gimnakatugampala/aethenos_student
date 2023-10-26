@@ -4,6 +4,7 @@ import SEO from '../../components/seo';
 import { course_data } from '../../data';
 import { Wrapper } from '../../layout';
 import CourseDetailsMain from '../../components/course-details';
+import CourseDetailsTwoMain from '../../components/course-details-2';
 
 const DynamicCourseDetails = () => {
     const router = useRouter();
@@ -12,7 +13,7 @@ const DynamicCourseDetails = () => {
     return (
         <Wrapper>
             <SEO pageTitle={'Course Details'} />
-            <CourseDetailsMain course={course} />
+            <CourseDetailsTwoMain course={course} />
         </Wrapper>
     )
 }

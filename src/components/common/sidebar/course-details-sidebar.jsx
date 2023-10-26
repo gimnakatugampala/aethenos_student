@@ -25,9 +25,9 @@ const CourseDetailsSidebar = ({ course,details_2=false }) => {
                             <h4 className="widget-title">Course Includes:</h4>
                             <div >
                            
-                            <span style={mainfs} className="value price  fw-bolder text-black ">${course_price}</span>
-                            <span className='text-decoration-line-through m-lg-2 text-black'> $74.99</span>
-                            <span className='m-lg-1 fw-semibold text-black'>83% off</span>
+                            <span style={mainfs} className="value price  fw-bolder">${course_price}</span>
+                            <span className='text-decoration-line-through m-lg-2'> $74.99</span>
+                            <span className='m-lg-1 fw-semibold'>83% off</span>
                             </div>
                             <span className=" fw-semibold ">2 days left at this price!</span>
 
@@ -71,7 +71,7 @@ const CourseDetailsSidebar = ({ course,details_2=false }) => {
                             </ul>
 
                             <div className="read-more-btn">
-                                <a href="#" className="edu-btn">Start Now <i className="icon-4"></i></a>
+                                <a href="/course-details/e-portal" className="edu-btn">Start Now <i className="icon-4"></i></a>
                             </div>
 
                             <div className="share-area">
