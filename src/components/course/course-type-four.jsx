@@ -84,7 +84,7 @@ const CourseTypeFour = ({ data, classes }) => {
                 <div className="content">
                     <span className="course-level">{ data.category }</span>
                     <h5 className="title">
-                        <n-link to="/course/course-details">{ data.title }</n-link>
+                        <n-link to="/course/course-details" >{ data.title }</n-link>
                     </h5>
                     <div className="course-rating">
                         <div className="rating">

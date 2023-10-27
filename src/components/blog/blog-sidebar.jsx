@@ -26,15 +26,13 @@ const BlogSidebar = () => {
                         {latest_blog.map((blog) => (
                             <div key={blog.id} className="latest-post">
                                 <div className="thumbnail">
-                                    <Link href={`/blog-details/${blog.id}`}>
-
+                                    <Link href={`/blog-details/${blog.id}`} legacyBehavior>
                                         <img src={blog.img} alt="Blog Images" />
-
                                     </Link>
                                 </div>
                                 <div className="post-content">
                                     <h6 className="title">
-                                        <Link href={`/blog-details/${blog.id}`}>
+                                        <Link href={`/blog-details/${blog.id}`} legacyBehavior>
                                             {blog.title.substring(0, 25)}...
                                         </Link>
                                     </h6>

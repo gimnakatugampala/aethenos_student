@@ -48,7 +48,7 @@ const CourseTypeEight = ({ data, classes }) => {
         <div className={`edu-course course-style-4 course-style-9 ${ classes ? classes : '' }`}>
             <div className="inner">
                 <div className="thumbnail">
-                    <Link href={`/course-details/${data.id}`}>
+                    <Link href={`/course-details/${data.id}`} legacyBehavior>
                         <a>
                             <img
                                 src={`/assets/images/course/course-06/${data.img}`}
@@ -109,7 +109,7 @@ const CourseTypeEight = ({ data, classes }) => {
                     </span>
 
                     <h5 className="title">
-                        <Link href={`/course-details/${data.id}`}>
+                        <Link href={`/course-details/${data.id}`} legacyBehavior>
                             <a>{data.title}</a>
                         </Link>
                     </h5>
