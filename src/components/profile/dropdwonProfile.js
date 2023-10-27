@@ -8,17 +8,17 @@ const DropDownProfile = () => {
           <h3>Isuru Fernando</h3>
         </div>
         <hr/>
-        <a href="#" className="submenu-link">
+        <a href="/viewprofile" className="submenu-link">
         <img src="/assets/images/icons/user.png" alt="user" />
         <p>My Profile</p>
         </a>
-        <a href="#" className="submenu-link">
+        <a href="/eidtprofile" className="submenu-link">
         <img src="/assets/images/icons/edit.png" alt="user" />
         <p>Edit Profile</p>
         </a>
         <a href="#" className="submenu-link">
         <img src="/assets/images/icons/envelope.png" alt="user" />
-        <p>Inbox</p>
+        <p>Messages</p>
         </a>
         <hr/>
         <a href="#" className="submenu-link">
