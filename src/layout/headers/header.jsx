@@ -11,6 +11,7 @@ import HeaderTopLeft from '../headers/component/header-top-left';
 import HeaderTopRight from '../headers/component/header-top-right';
 import MainMenu from '../headers/component/main-menu';
 import Cart from './component/cart';
+import SearchBar from '../../pages/Search/searchBar';
 
 const categories = [
     { link: '/course-style-1', title: 'Design' },
@@ -97,10 +98,11 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                 <ul className="header-action">
                                     <li className="search-bar">
                                         <div className="input-group">
-                                            <input type="text" className="form-control" placeholder="Search" />
+                                        <SearchBar/>
+                                            {/* <input type="text" className="form-control" placeholder="Search" />
                                             <button className="search-btn" type="button">
                                                 <i className="icon-2"></i>
-                                            </button>
+                                            </button> */}
                                         </div>
                                     </li>
                                     <li className="icon search-icon">
