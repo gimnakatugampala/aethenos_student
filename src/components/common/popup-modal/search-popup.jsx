@@ -7,8 +7,10 @@ const SearchPopup = ({isSearchOpen,setIsSearchOpen}) => {
         <div className={`edu-search-popup ${isSearchOpen ? 'open' : ''}`}>
             <div className="content-wrap">
                 <div className="site-logo">
+
                     <img className="logo-light" src='/assets/images/logo/logo-dark.png' alt="logo" />
                     <img className="logo-dark" src='/assets/images/logo/logo-white.png' alt="logo" />
+                    
                 </div>
                 <div className="close-button" onClick={() => setIsSearchOpen(false)}>
                     <button className="close-trigger"><i className="icon-73"></i></button>

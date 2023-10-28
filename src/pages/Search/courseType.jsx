@@ -81,7 +81,7 @@ const CourseTypeFive = ({ data, classes }) => {
           <div className="course-price float-end">${data?.course_price}</div>
           <br />
           <h4 className="title">
-            <Link href={`/E-Portal/course-details`}>{data.title}</Link>
+            <Link href={`/course-details/${data.id}`}>{data.title}</Link>
           </h4>
 
           <h6>{data.short_desc}</h6>

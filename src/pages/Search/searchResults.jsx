@@ -55,13 +55,13 @@ const searchResults = () => {
           >
             <div className="mb-5">Search Results for : {keyword}</div>
           </h1>
-          <div className="col-md-2">
+          <div className="col-md-3">
             {/* course sidebar start */}
             <CourseSidebar course_items={course_items} />
             {/* course sidebar end */}
           </div>
 
-          <div className="col-lg-10 col-pl--5">
+          <div className="col-lg-9 col-pl--5">
             <CourseItems
               itemsPerPage={8}
               items={items}
