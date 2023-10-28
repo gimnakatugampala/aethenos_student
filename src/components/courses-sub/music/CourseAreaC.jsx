@@ -1,11 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { course_data } from "../../../data";
-import SortingArea from "../../../components/course-filter/sorting-area";
-import CourseTypeOne from "../../../components/course/course-type-one";
+import SortingArea from "../../course-filter/sorting-area";
+import CourseTypeOne from "../../course/course-type-one";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
-import CardContainer from '../../../contexts/CardContainer'
 
 import MDBContainer from "./MDBContainer";
 import Instructor from "./Instructor";
@@ -20,18 +19,17 @@ const CourseArea = () => {
     setNext((value) => value + 4);
   };
   return (
-    <div >
+    <div className="edu-course-area course-area-1 gap-tb-text">
       <div className="container">
         <div className="row">
           <div className="col-12">
-            <h4 className="font-weight-bold">
-            Causes to get you started
-            </h4>
+            <h1 className="font-weight-bold display-3">Music</h1>
             <br />
+            <h2>Causes to get you started</h2>
           </div>
         </div>
       </div>
-      <div className="container">
+      <div className="container mb-5">
         <SortingArea
           course_items={course_data}
           num={courses?.slice(0, next)?.length}
@@ -64,17 +62,17 @@ const CourseArea = () => {
       <div className="container mt-5">
         <div className="row">
           <div className="col-12">
-            <h4 className="font-weight-bold mb-4">Featured course</h4>
-            <CardContainer className="mb-5">
+            <h1 className="font-weight-bold mt-5 mb-5">Featured course</h1>
+            <Card className="mb-5">
               <MDBContainer />
-            </CardContainer>
+            </Card>
           </div>
         </div>
       </div>
       <div className="container mt-5">
         <div className="row">
           <div className="col-12">
-            <h4 className="font-weight-bold">Popular Topics</h4>
+            <h1 className="font-weight-bold">Popular Topics</h1>
             <div>
               <Buttons />
             </div>
@@ -82,16 +80,25 @@ const CourseArea = () => {
         </div>
       </div>
 
-      <div className="container-fluid mt-5">
+      <div className="container mt-5">
         <div className="row">
           <div className="col-12">
-            <h4 className="font-weight-bold">Popular Instructors</h4>
+            <h1 className="font-weight-bold">Popular Instructors</h1>
             <Instructor />
           </div>
         </div>
       </div>
 
-
+      <div className="container mt-5">
+        <div className="row">
+          <div className="col-12">
+            <h1 className="font-weight-bold">All Music courses</h1>
+            <Card className="p-3">
+              <h4>Not sure? All courses have a 30-day money-back guarantee</h4>
+            </Card>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -38,20 +38,22 @@ const authorStyles = {
 };
 
 const updatedStyles = {
-  fontSize: "15px",
+  fontSize: "13px",
   fontWeight: "500",
   color: "#a0a0a0",
 };
 
 const totalHoursStyles = {
   marginLeft: "5px",
-  fontSize: "12px",
+  fontSize: "13px",
+  fontWeight: "500",
   color: "#a0a0a0",
 };
 
 const lecturerCountStyles = {
   marginLeft: "5px",
-  fontSize: "12px",
+  fontSize: "13px",
+  fontWeight: "500",
   color: "#a0a0a0",
 };
 
@@ -69,11 +71,11 @@ const price1Styles = {
   fontWeight: "bold",
 };
 const price2Styles = {
-  fontSize: "24px",
+  fontSize: "20px",
   marginLeft: "10px",
   color: "#B2BEB5",
-  marginTop: "80px",
-  fontWeight: "bold",
+  // marginTop: "60px",
+  // fontWeight: "bold",
   whiteSpace: "nowrap",
   textDecoration: "line-through",
 };
@@ -129,11 +131,11 @@ const RatingCard = ({
   price2,
 }) => {
   return (
-    <Card className="p-4" style={cardStyles}>
+    <div >
       <div className="row g-0">
         <div className="col-md-5">
           <img
-            src="./aaa.jpg"
+            src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/273312750/original/3b970e306d20082a558da2f2a43da6b4ac761c21/design-amazing-viral-youtube-thumbnail-in-3-hours.jpg"
             className="card-img"
             alt="Image"
             style={imageStyles}
@@ -144,20 +146,20 @@ const RatingCard = ({
             <h5 className="card-title" style={titleStyles}>
               {title}
             </h5>
-            <p className="card-text description mb-0" style={descriptionStyles}>
+            <p className="card-text description mb-0 my-2">
               {description}
             </p>
-            <p className="card-text" style={authorStyles}>
-              by {author}
+            <p className="card-text mt-2" style={authorStyles}>
+              by  <a href="/instructors/1">{author}</a>
             </p>
             <p>
               <span className="card-text" style={updatedStyles}>
-                <span className="font-weight-bold">Updated:</span>{" "}
+                <span>Updated Date :</span>{" "}
                 <span>{updatedDate}</span>
-              </span>
+              </span> |  
               <span className="card-text" style={totalHoursStyles}>
                 Total Hours: {totalHours}
-              </span>
+              </span> | 
               <span className="card-text" style={lecturerCountStyles}>
                 Lecturer Count: {lecturerCount}
               </span>
@@ -165,6 +167,8 @@ const RatingCard = ({
             <div className="d-flex justify-content-between align-items-center">
               <div className="container-fluid">
                 <div className="row">
+
+                  <div className="col-md-6">
                   <strong className="rating" style={ratingStyles}>
                     {[1, 2, 3, 4, 5].map((i) => (
                       <span key={i}>
@@ -176,10 +180,17 @@ const RatingCard = ({
                       </span>
                     ))}
                   </strong>
+                  </div>
+
+                  <div className="col-md-6">
+                    (4.4 Ratings / 10 Ratings)
+                  </div>
+
+
                 </div>
                 <div className="row">
                   <div className="mt-0">
-                    <p className="" style={price1Styles}>
+                    <p className="text-danger" style={price1Styles}>
                       {price1}
 
                       <span className="ml-g-5" style={price2Styles}>
@@ -193,7 +204,7 @@ const RatingCard = ({
           </div>
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
 
