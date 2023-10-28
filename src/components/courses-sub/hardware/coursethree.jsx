@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import { course_data } from "../../data";
-import SortingArea from "../course-filter/sorting-area";
-import CourseTypeFour from "../course/course-type-four";
+import { course_data } from "../../../data";
+import SortingArea from "../../course-filter/sorting-area";
+import CourseTypeFour from "../../course/course-type-four";
 
 const CourseThreeArea = () => {
   const coursePerView = 3;

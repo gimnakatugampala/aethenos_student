@@ -15,6 +15,7 @@ import SearchBar from '../../pages/Search/searchBar';
 
 const categories = [
     { link: '/courses/design', title: 'Design' },
+    { link: '/courses/it-software', title: 'IT & Software' },
     { link: '/courses/development', title: 'Development' },
     { link: '/courses/architecture', title: 'Architecture' },
     { link: '/courses/life-style', title: 'Life Style' },

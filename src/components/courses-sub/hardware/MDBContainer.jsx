@@ -133,7 +133,7 @@ const RatingCard = ({
       <div className="row g-0">
         <div className="col-md-5">
           <img
-            src="./aaa.jpg"
+            src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/273312750/original/3b970e306d20082a558da2f2a43da6b4ac761c21/design-amazing-viral-youtube-thumbnail-in-3-hours.jpg"
             className="card-img"
             alt="Image"
             style={imageStyles}

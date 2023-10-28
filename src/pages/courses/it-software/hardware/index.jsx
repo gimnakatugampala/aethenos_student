@@ -1,6 +1,6 @@
 import SEO from "../../../../components/seo";
 import { Wrapper } from "../../../../layout";
-import HardwareMain from "../../../../components/hardware";
+import HardwareMain from "../../../../components/courses-sub/hardware";
 
 const Hardware = () => {
   return (

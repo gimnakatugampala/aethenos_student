@@ -6,7 +6,7 @@ import CardContainer from "../../../contexts/CardContainer";
 const ButtonCarousel = () => {
   const items = [
     [
-      { title: "Hardware", link: "hardware" },
+      { title: "Web Development", link: "web-development-link-here" },
       { title: "Software Development", link: "reactjs-link-here" },
       { title: "React JS", link: "css-link-here" },
       { title: "Redux Framework", link: "redux-framework-link-here" },
@@ -16,12 +16,12 @@ const ButtonCarousel = () => {
       { title: "Accounting", link: "redux-framework-link-here" },
     ],
     [
-      { title: "Hardware", link: "hardware" },
-      { title: "Financial Analysis", link: "hardware" },
+      { title: "Stock Trading", link: "typescript-link-here" },
+      { title: "Financial Analysis", link: "javascript-link-here" },
       { title: "Cryptocurrency", link: "angular-link-here" },
       { title: "Forex Trading", link: "nodejs-link-here" },
       { title: "Financial Market", link: "typescript-link-here" },
-      { title: "Alogorithm Anaylisys", link: "hardware" },
+      { title: "Alogorithm Anaylisys", link: "javascript-link-here" },
       { title: "Investing", link: "angular-link-here" },
       { title: "Excel", link: "nodejs-link-here" },
     ],
@@ -37,11 +37,11 @@ const ButtonCarousel = () => {
     ],
     [
       { title: "Technical Analysis", link: "typescript-link-here" },
-      { title: "Hardware", link: "hardware" },
+      { title: "Web Development", link: "javascript-link-here" },
       { title: "IOT", link: "angular-link-here" },
       { title: "Robotics", link: "nodejs-link-here" },
       { title: "Database Management", link: "typescript-link-here" },
-      { title: "Hardware", link: "hardware" },
+      { title: "Mobile Development", link: "javascript-link-here" },
       { title: "Statistics", link: "angular-link-here" },
       { title: "IMP", link: "nodejs-link-here" },
     ],
@@ -112,7 +112,7 @@ const ButtonCarousel = () => {
                   <CardContainer
                     className="m-2"
                   >
-                    <a href={`/courses/it-software/${item.link}`}>{item.title}</a>
+                    <a href={`/courses/${item.link}`}>{item.title}</a>
                   </CardContainer>
                 </div>
               ))}
