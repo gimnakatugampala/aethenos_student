@@ -14,16 +14,16 @@ import Cart from './component/cart';
 import SearchBar from '../../pages/Search/searchBar';
 
 const categories = [
-    { link: '/course-style-1', title: 'Design' },
-    { link: '/course-style-1', title: 'Development' },
-    { link: '/course-style-1', title: 'Architecture' },
-    { link: '/course-style-1', title: 'Life Style' },
-    { link: '/course-style-1', title: 'Data Science' },
-    { link: '/course-style-1', title: 'Marketing' },
-    { link: '/course-style-1', title: 'Music' },
-    { link: '/course-style-1', title: 'Photography' },
-    { link: '/course-style-1', title: 'Finance' },
-    { link: '/course-style-1', title: 'Motivation' }
+    { link: '/courses/design', title: 'Design' },
+    { link: '/courses/development', title: 'Development' },
+    { link: '/courses/architecture', title: 'Architecture' },
+    { link: '/courses/life-style', title: 'Life Style' },
+    { link: '/courses/data-science', title: 'Data Science' },
+    { link: '/courses/marketing', title: 'Marketing' },
+    { link: '/courses/music', title: 'Music' },
+    { link: '/courses/photography', title: 'Photography' },
+    { link: '/courses/business', title: 'Finance' },
+    { link: '/courses/motivation', title: 'Motivation' }
 ]
 
 const Header = ({header_style, no_top_bar, disable_full_width, disable_category }) => {

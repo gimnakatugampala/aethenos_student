@@ -8,55 +8,64 @@ const category_contents = {
             delay: '50',
             color: 'color-primary-style',
             icon: 'icon-9',
-            title: 'Business Management'
+            title: 'Business Management',
+            link:'business'
         },
         {
             delay: '100',
             color: 'color-secondary-style',
             icon: 'icon-10 art-design',
-            title: 'Arts & Design'
+            title: 'Arts & Design',
+            link:'design'
         },
         {
             delay: '150',
             color: 'color-extra01-style',
             icon: 'icon-11 personal-development',
-            title: 'Personal Development'
+            title: 'Personal Development',
+            link:'development'
         },
         {
             delay: '50',
             color: 'color-tertiary-style',
             icon: 'icon-12 health-fitness',
-            title: 'Health & Fitness'
+            title: 'Health & Fitness',
+            link:''
         },
         {
             delay: '100',
             color: 'color-extra02-style',
             icon: 'icon-13 data-science',
-            title: 'Data Science'
+            title: 'Data Science',
+            link:''
         },
         {
             delay: '150',
             color: 'color-extra03-style',
             icon: 'icon-14',
-            title: 'Marketing'
+            title: 'Marketing',
+            link:''
         },
         {
             delay: '50',
             color: 'color-extra04-style',
             icon: 'icon-15',
-            title: 'Business & Finance'
+            title: 'Business & Finance',
+            link:'business'
         },
         {
             delay: '100',
             color: 'color-extra05-style',
             icon: 'icon-16 computer-science',
-            title: 'Computer Science'
+            title: 'Computer Science',
+            link:''
         },
         {
             delay: '150',
             color: 'color-extra06-style',
             icon: 'icon-17 video-photography',
-            title: 'Video & Photography'
+            title: 'Video & Photography',
+            link:''
         }
     ]
 }
@@ -81,10 +90,8 @@ const TopCategories = () => {
                                     <i className={item.icon}></i>
                                 </div>
                                 <div className="content">
-                                    <a href="/courses" >
-
+                                    <a href={item.link == '' ? '/courses' : `/courses/${item.link}`} >
                                         <h5 className="title">{item.title}</h5>
-
                                     </a>
                                 </div>
                             </div>
