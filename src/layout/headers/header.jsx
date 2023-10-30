@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import SearchPopup from '../../components/common/popup-modal/search-popup';
+// import SearchPopup from '../../components/common/popup-modal/search-popup';
+import PopUpSearch from '../../pages/Search/PopUpSearch';
 import OffCanvas from '../../components/common/sidebar/off-canvas';
 import DropDownProfile from '../../components/profile/dropdwonProfile';
 import useCartInfo from '../../hooks/use-cart-info';
@@ -167,7 +168,7 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                 </div>
 
                 {/* <!-- Start Search Popup  --> */}
-                <SearchPopup isSearchOpen={isSearchOpen} setIsSearchOpen={setIsSearchOpen} />
+                <PopUpSearch isSearchOpen={isSearchOpen} setIsSearchOpen={setIsSearchOpen} />
                 {/* <!-- End Search Popup  --> */}
             </header>
 
