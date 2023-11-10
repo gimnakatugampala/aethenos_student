@@ -140,7 +140,7 @@ const InstructorCarousel = () => {
       </style>
       <div className="carousel-inner">
         {items.map((page, index) => (
-          <div
+          <a href="/instructors/34"
             key={index}
             className={`carousel-item ${index === activePage ? "active" : ""}`}
           >
@@ -281,7 +281,7 @@ const InstructorCarousel = () => {
                 </CardContainer>
               ))}
             </div>
-          </div>
+          </a>
         ))}
       </div>
 
