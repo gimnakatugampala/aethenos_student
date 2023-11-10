@@ -1,12 +1,12 @@
 import SEO from "../../../../components/seo";
 import { Wrapper } from "../../../../layout";
-import GraphicDesignMain from "../../../../components/graphic_design";
+// import GraphicDesignMain from "../../../../components/graphic_design";
 
 const GraphicDesign = () => {
   return (
     <Wrapper>
       <SEO pageTitle={"Graphic Design"} />
-      <GraphicDesignMain />
+      {/* <GraphicDesignMain /> */}
     </Wrapper>
   );
 };

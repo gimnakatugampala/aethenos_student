@@ -1,6 +1,6 @@
-import EditProfileView from '../components/profile/profile-pages/editprofile';
-import SEO from '../components/seo';
-import { Wrapper } from '../layout';
+import EditProfileView from '../../components/profile/profile-pages/editprofile';
+import SEO from '../../components/seo';
+import { Wrapper } from '../../layout';
 
 export default function EditProfile() {
     return (

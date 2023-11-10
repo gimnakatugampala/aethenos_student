@@ -52,7 +52,7 @@ const CourseBreadcrumb = ({ course }) => {
                         </li>
                     </ul>
                     <div>
-                    <i className="icon-58"></i> Created by <a href="">{instructor}</a>
+                    <i className="icon-58"></i> Created by <a className='text-decoration-underline' href="/instructors/34">{instructor}</a>
                     </div>
                     <ul  className="course-meta">
                         <li className="course-rating">

@@ -1,12 +1,12 @@
 import SEO from "../../../../components/seo";
 import { Wrapper } from "../../../../layout";
-import ItMain from "../../../../components/it";
+// import ItMain from "../../../../components/it";
 
 const It = () => {
   return (
     <Wrapper>
       <SEO pageTitle={"Sales"} />
-      <ItMain />
+      {/* <ItMain /> */}
     </Wrapper>
   );
 };

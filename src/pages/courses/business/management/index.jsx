@@ -1,6 +1,6 @@
 import SEO from "../../../../components/seo";
 import { Wrapper } from "../../../../layout";
-import ManagementMain from "../../../../components/management";
+import ManagementMain from "../../../../components/courses-sub/management";
 
 const Management = () => {
   return (

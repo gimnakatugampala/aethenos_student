@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { cart_course } from '../../redux/features/cart-slice';
-import { add_to_wishlist, wishlistItems } from '../../redux/features/wishlist-slice';
+import { cart_course } from '../../../redux/features/cart-slice';
+import { add_to_wishlist, wishlistItems } from '../../../redux/features/wishlist-slice';
 
 const SingleCourseTwo = ({ course }) => {
     const { id, img, title, level, rating, rating_count, course_price, lesson, student, duration, short_desc } = course || {};

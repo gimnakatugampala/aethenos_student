@@ -1,7 +1,7 @@
 import React from 'react';
-import useModal from '../../../hooks/use-modal';
-import { Books } from '../../../svg';
-import VideoModal from '../popup-modal/video-modal';
+import useModal from '../../../../hooks/use-modal';
+import { Books } from '../../../../svg';
+import VideoModal from '../../../../components/common/popup-modal/video-modal';
 
 const mainfs = {
     fontSize: '40px',

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-rangeslider";
 import "react-rangeslider/lib/index.css";
 import { useDispatch, useSelector } from "react-redux";
-import { course_data } from "../../../data";
+import { course_data } from "../../../../data";
 import { add_category, add_force_page, add_instructor, add_item_offset, add_language, add_level, add_price, reset_filter }
-  from '../../../redux/features/filter-slice';
+  from '../../../../redux/features/filter-slice';
   
 
 const courses = course_data.filter(
