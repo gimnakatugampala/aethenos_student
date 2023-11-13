@@ -6,7 +6,7 @@ import SortingArea from './sorting-eportal';
 import CourseItems from './course-item';
 
 // course_items
-const course_items = course_data.filter((arr, index, self) =>
+const course_items = course_data != null && course_data.filter((arr, index, self) =>
     index === self.findIndex( ( i ) => ( i.img === arr.img && i.State === arr.State ) ) );
 
 const CourseFourArea = () => {

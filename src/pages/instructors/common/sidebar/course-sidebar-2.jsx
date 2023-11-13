@@ -6,7 +6,7 @@ import { course_data } from '../../../../data';
 import { add_category, add_force_page, add_instructor, add_item_offset, add_language, add_level, add_price, reset_filter }
   from '../../../../redux/features/filter-slice';
 
-const courses = course_data.filter((arr, index, self) =>
+const courses = course_data != null && course_data.filter((arr, index, self) =>
     index === self.findIndex((i) => (i.img === arr.img && i.State === arr.State))
 );
 
@@ -86,7 +86,7 @@ const CourseSidebarTwo = ({ course_items }) => {
                                 <input onClick={() => handleCategory(c)} type="checkbox" checked={categories.includes(c)} 
                                 id={`cat-check${i + 1}`} readOnly />
                                 <label htmlFor={`cat-check${i + 1}`}>{c}
-                                    <span>({course_items.filter(item => item.category === c)?.length})</span>
+                                    <span>({course_items != null &&  course_items.filter(item => item.category === c)?.length})</span>
                                 </label>
                             </div>
                         ))}
@@ -104,7 +104,7 @@ const CourseSidebarTwo = ({ course_items }) => {
                                 <input onClick={() => handleInstructor(instructor)} checked={instructors.includes(instructor)} 
                                 type="checkbox" id={`cat-check-2${i + 1}`} readOnly />
                                 <label htmlFor={`cat-check-2${i + 1}`}>{instructor}
-                                    <span>({course_items.filter(item => item.instructor === instructor)?.length})</span>
+                                    <span>({course_items != null && course_items.filter(item => item.instructor === instructor)?.length})</span>
                                 </label>
                             </div>
                         ))}
@@ -122,7 +122,7 @@ const CourseSidebarTwo = ({ course_items }) => {
                                 <input onClick={() => handleLevel(level)} checked={levels.includes(level)} 
                                 type="checkbox" id={`cat-check-3${i + 1}`} readOnly />
                                 <label htmlFor={`cat-check-3${i + 1}`}>{level}
-                                    <span>({course_items.filter(item => item.level === level)?.length})</span>
+                                    <span>({course_items != null && course_items.filter(item => item.level === level)?.length})</span>
                                 </label>
                             </div>
                         ))}
@@ -140,7 +140,7 @@ const CourseSidebarTwo = ({ course_items }) => {
                                 <input onClick={() => handleLanguage(language)} checked={languages.includes(language)} 
                                 type="checkbox" id={`cat-check-4${i + 1}`} readOnly />
                                 <label htmlFor={`cat-check-4${i + 1}`}>{language}
-                                    <span>({course_items.filter(item => item.language === language)?.length})</span>
+                                    <span>({course_items != null &&  course_items.filter(item => item.language === language)?.length})</span>
                                 </label>
                             </div>
                         ))}

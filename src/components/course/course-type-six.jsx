@@ -31,7 +31,7 @@ const CourseTypeSix = ({ data, classes }) => {
                 </div>
 
                 <div className="content">
-                    <span className="course-level">{data.level}</span>
+                    <span className="course-level">{data.level}6</span>
                     <h5 className="title">
                         <Link href={`/course-details/${data.id}`} legacyBehavior>
                             {data.title}

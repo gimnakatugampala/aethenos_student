@@ -6,7 +6,7 @@ const HomeHealthCoach = () => {
     return (
         <Wrapper>
             <SEO pageTitle={'Health Coach'} />
-            <HealthCoachContent />
+            {/* <HealthCoachContent /> */}
         </Wrapper>
     )
 }

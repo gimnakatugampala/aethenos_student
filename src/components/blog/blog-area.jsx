@@ -30,9 +30,7 @@ const BlogArea = () => {
                                         <div className="thumbnail">
                                             {!slider && 
                                                 <Link href={`/blog-details/${id}`} legacyBehavior>
-
                                                     <img src={img} alt="Blog Images" />
-
                                                 </Link>
                                             }
 
@@ -82,9 +80,7 @@ const BlogArea = () => {
                                                 <a href="#" className="blog-category">{category}</a>
                                             </div>
                                             <h3 className="title">
-                                                <Link href={`/blog-details/${id}`} legacyBehavior>
-                                                    {title}
-                                                </Link>
+                                                <Link href={`/blog-details/${id}`} legacyBehavior>{title}</Link>
                                             </h3>
                                             <ul className="blog-meta">
                                                 <li><i className="icon-27"></i>{date}</li>
@@ -93,7 +89,7 @@ const BlogArea = () => {
                                             <p>{desc}</p>
                                             <div className="read-more-btn">
                                                 <Link href={`/blog-details/${id}`} className="edu-btn btn-border btn-medium" legacyBehavior>
-                                                    Learn More<i className="icon-4"></i>
+                                                   <>Learn More<i className="icon-4"></i></>
                                                 </Link>
                                             </div>
                                         </div>

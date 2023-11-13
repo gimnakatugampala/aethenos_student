@@ -128,7 +128,7 @@ const CourseTypeEight = ({ data, classes }) => {
                     </div>
 
                     <ul className="course-meta">
-                        <li>{data.lesson} Lessons</li>
+                        <li>{data.lesson} Lessons8</li>
                         <li>{data.duration}</li>
                         <li>{data.level}</li>
                     </ul>

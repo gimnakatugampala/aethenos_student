@@ -91,7 +91,7 @@ const CourseTypeFive = ({ data, classes }) => {
                     <ul className="course-meta">
                         <li>
                             <i className="icon-24"></i>
-                            {data.lesson} Lessons
+                            {data.lesson} Lessons5
                         </li>
                         <li>
                             <i className="icon-25"></i>

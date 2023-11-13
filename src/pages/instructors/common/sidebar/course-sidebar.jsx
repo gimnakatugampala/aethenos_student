@@ -7,7 +7,7 @@ import { add_category, add_force_page, add_instructor, add_item_offset, add_lang
   from '../../../../redux/features/filter-slice';
   
 
-const courses = course_data.filter(
+const courses = course_data != null && course_data.filter(
     (arr, index, self) => index === self.findIndex((i) => i.img === arr.img && i.State === arr.State)
 );
 const max_prices = courses.map((item) => Number(item.course_price));
@@ -93,7 +93,7 @@ const CourseSidebar = ({ course_items }) => {
                                     {c}
                                     <span>
                                         (
-                                            {
+                                            {course_items != null &&
                                                 course_items.filter(
                                                 (item) =>
                                                     item.category === c
@@ -128,7 +128,7 @@ const CourseSidebar = ({ course_items }) => {
                                     {instructor}
                                     <span>
                                         (
-                                            {
+                                            {course_items != null &&
                                                 course_items.filter(
                                                 (item) =>
                                                     item.instructor ===
@@ -162,7 +162,7 @@ const CourseSidebar = ({ course_items }) => {
                                     {level}
                                     <span>
                                         (
-                                            {
+                                            {course_items != null &&
                                                 course_items.filter(
                                                 (item) =>
                                                     item.level === level
@@ -195,7 +195,7 @@ const CourseSidebar = ({ course_items }) => {
                                     {language}
                                     <span>
                                         (
-                                            {
+                                            {course_items != null &&
                                                 course_items.filter(
                                                 (item) =>
                                                     item.language ===

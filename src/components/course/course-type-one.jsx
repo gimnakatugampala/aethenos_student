@@ -60,7 +60,7 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                 <div className="content">
                     <span className="course-level">{data.level}</span>
                     <h6 className="title">
-                        <a href="#">{data.title}</a>
+                        <a href={`/course-details/${data.id}`}>{data.title}</a>
                     </h6>
                     <div className="course-rating">
                         <div className="rating">
@@ -74,7 +74,7 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                     </div>
                     <div className="course-price">${data.course_price}</div>
                     <ul className="course-meta">
-                        <li><i className="icon-24"></i>{data.lesson} Lessons</li>
+                        <li><i className="icon-24"></i>{data.lesson} Lessons1</li>
                         <li><i className="icon-25"></i>{data.student} Students</li>
                     </ul>
                 </div>

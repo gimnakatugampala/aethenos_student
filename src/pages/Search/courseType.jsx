@@ -11,37 +11,37 @@ const CourseTypeFive = ({ data, classes }) => {
   const { cartCourses } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const wishlists = useSelector(wishlistItems);
-  const isWishlistSelected = wishlists.find(
-    (w) => Number(w.id) === Number(data.id)
-  );
+  // const isWishlistSelected = wishlists.find(
+  //   (w) => Number(w.id) === Number(data.id)
+  // );
 
-  const handleWishlist = (course_item) => {
-    if (wishlists.find((i) => i.id === course_item.id)) {
-      dispatch(
-        add_to_wishlist({
-          change_type: "remove_wishlist",
-          item: {
-            id: course_item.id,
-            img: `/assets/images/course/course-06/${course_item.img}`,
-            title: course_item.title,
-            price: course_item.course_price,
-          },
-        })
-      );
-    } else {
-      dispatch(
-        add_to_wishlist({
-          change_type: "add_wishlist",
-          item: {
-            id: course_item.id,
-            img: `/assets/images/course/course-06/${course_item.img}`,
-            title: course_item.title,
-            price: course_item.course_price,
-          },
-        })
-      );
-    }
-  };
+  // const handleWishlist = (course_item) => {
+  //   if (wishlists.find((i) => i.id === course_item.id)) {
+  //     dispatch(
+  //       add_to_wishlist({
+  //         change_type: "remove_wishlist",
+  //         item: {
+  //           id: course_item.id,
+  //           img: `/assets/images/course/course-06/${course_item.img}`,
+  //           title: course_item.title,
+  //           price: course_item.course_price,
+  //         },
+  //       })
+  //     );
+  //   } else {
+  //     dispatch(
+  //       add_to_wishlist({
+  //         change_type: "add_wishlist",
+  //         item: {
+  //           id: course_item.id,
+  //           img: `/assets/images/course/course-06/${course_item.img}`,
+  //           title: course_item.title,
+  //           price: course_item.course_price,
+  //         },
+  //       })
+  //     );
+  //   }
+  // };
 
   // handle add to cart
   const handleAddToCart = (course) => {
@@ -63,16 +63,16 @@ const CourseTypeFive = ({ data, classes }) => {
     >
       <div className="inner">
         <div className="thumbnail">
-          <Link href={`/course-details/${data.id}`}>
+          <Link href={`/course-details/${data?.data.id}`}>
             <img
-              src={`/assets/images/course/course-02/${data.img}`}
+              src={`/assets/images/course/course-02/${data?.data.img}`}
               alt="Course Thumb"
             />
           </Link>
           <div className="time-top">
             <span className="duration">
               <i className="icon-61"></i>
-              {data.duration}
+              {data?.data.duration}
             </span>
           </div>
         </div>
@@ -81,12 +81,12 @@ const CourseTypeFive = ({ data, classes }) => {
           <div className="course-price float-end">${data?.course_price}</div>
           <br />
           <h4 className="title">
-            <Link href={`/course-details/${data.id}`}>{data.title}</Link>
+            <Link href={`/course-details/${data?.data.id}`}>{data?.data.title}</Link>
           </h4>
 
-          <h6>{data.short_desc}</h6>
+          <h6>{data?.data.short_desc}</h6>
 
-          <span className="course-level">{data.level}</span>
+          <span className="course-level">{data?.data.level}</span>
 
           {/* <div
             className="progress"
@@ -110,13 +110,13 @@ const CourseTypeFive = ({ data, classes }) => {
               <i className="icon-23"></i>
               <i className="icon-23"></i>
             </div>
-            <span className="rating-count ">({data.rating})</span>
+            <span className="rating-count ">({data?.data.rating})</span>
           </div>
           <ul className="course-meta">
-            <li>{data.lesson} Lessons</li>
-            <li>{data.duration}</li>
-            <li>{data.level}</li>
-            <li>{data.category}</li>
+            <li>{data?.data.lesson} Lessons</li>
+            <li>{data?.data.duration}</li>
+            <li>{data?.data.level}</li>
+            <li>{data?.data.category}</li>
           </ul>
 
           <a

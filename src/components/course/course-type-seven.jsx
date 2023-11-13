@@ -7,9 +7,7 @@ const CourseTypeSeven = ({ data, classes }) => {
             <div className="inner">
                 <div className="thumbnail">
                     <Link href={`/course-details/${data.id}`} legacyBehavior>
-
                         <img src={`/assets/images/course/course-04/${data.img}`} alt="Course Meta" />
-
                     </Link>
                  
                 </div>
@@ -17,9 +15,7 @@ const CourseTypeSeven = ({ data, classes }) => {
                 <div className="content">
                     <h6 className="title">
                         <Link href={`/course-details/${data.id}`} legacyBehavior>
-
                             {data.title}
-
                         </Link>
                     </h6>
                     <p className="text">{data.short_desc}</p>

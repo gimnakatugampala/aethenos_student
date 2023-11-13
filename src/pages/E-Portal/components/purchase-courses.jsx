@@ -51,17 +51,7 @@ const CourseTypeFive = ({ data, classes }) => {
         <div className={`edu-course course-style-4 course-style-8 ${ classes ? classes : '' }`}>
             <div className="inner">
                 <div className="thumbnail">
-                    <Link href={`/course-content/${data.id}`} legacyBehavior>
-
-                        <img
-                        width={200}
-                        height={200}
-                        className='cover-img'
-                        src={`https://www.courselounge.com/wp-content/uploads/best-udemy-courses-online.png`}
-                        alt="Course Thumb"
-                        />
-
-                    </Link>
+                    <a href={`/course-content/${data?.data.id}`} ><img width={200} height={200} className='cover-img' src={`https://www.courselounge.com/wp-content/uploads/best-udemy-courses-online.png`} alt="Course Thumb" /></a>
                     {/* <div className="time-top">
                         <span className="duration">
                             <i className="icon-61"></i>
@@ -72,13 +62,11 @@ const CourseTypeFive = ({ data, classes }) => {
 
                 <div className="content">
                     {/* <div className="course-price">
-                        ${data?.course_price}
+                        ${course_price}
                     </div> */}
 
                     <h5 className="title mb-5">
-                        <Link href={`/e-portal/course-content`} legacyBehavior>
-                            {data.title}
-                        </Link>
+                        <a href={`/e-portal/course-content`} >{data?.data.title}</a>
                     </h5>
 
                     {/* <div className="course-rating">
@@ -104,13 +92,13 @@ const CourseTypeFive = ({ data, classes }) => {
                     <ul className="course-meta">
                         <li>  <i className="icon-24"></i>
                          
-                         {data.lesson} Lessons Completed
+                         {data?.data.lesson} Lessons Completed
                           
                         </li>
                     
                         <li>
                         <i className="icon-24"></i>
-                            {data.student} Lessons 
+                            {data?.data.student} Lessons 
                         </li>
                     </ul>
                 </div>

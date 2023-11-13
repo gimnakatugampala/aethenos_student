@@ -14,7 +14,7 @@ import {
   reset_filter,
 } from "../../redux/features/filter-slice";
 
-const courses = course_data.filter(
+const courses = course_data != null && course_data.filter(
   (arr, index, self) =>
     index === self.findIndex((i) => i.img === arr.img && i.State === arr.State)
 );
@@ -128,7 +128,7 @@ const CourseSidebar = ({ course_items }) => {
                   {c}
                   <span>
                     (
-                    {course_items.filter((item) => item.category === c)?.length}
+                    {course_items != null && course_items.filter((item) => item.category === c)?.length}
                     )
                   </span>
                 </label>
@@ -156,7 +156,7 @@ const CourseSidebar = ({ course_items }) => {
                   {level}
                   <span>
                     (
-                    {
+                    {course_items != null &&
                       course_items.filter((item) => item.level === level)
                         ?.length
                     }
@@ -187,7 +187,7 @@ const CourseSidebar = ({ course_items }) => {
                   {language}
                   <span>
                     (
-                    {
+                    {course_items != null &&
                       course_items.filter((item) => item.language === language)
                         ?.length
                     }

@@ -33,7 +33,7 @@ const BlogSidebar = () => {
                                 <div className="post-content">
                                     <h6 className="title">
                                         <Link href={`/blog-details/${blog.id}`} legacyBehavior>
-                                            {blog.title.substring(0, 25)}...
+                                            {blog.title.substring(0, 25)}
                                         </Link>
                                     </h6>
                                     <ul className="blog-meta">

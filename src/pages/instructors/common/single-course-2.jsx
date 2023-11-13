@@ -48,9 +48,7 @@ const SingleCourseTwo = ({ course }) => {
             <div className="edu-course course-style-1 hover-button-bg-white">
                 <div className="inner">
                     <div className="thumbnail">
-                        <Link href={`/course-details/${id}`} legacyBehavior>
-                            <img src={`/assets/images/course/${img}`} alt="Course Meta" />
-                        </Link>
+                        <a href={`/course-details/${id}`} ><img src={`/assets/images/course/${img}`} alt="Course Meta" /></a>
                         <div className="time-top">
                             <span className="duration"><i className="icon-61"></i>{duration}</span>
                         </div>
@@ -95,9 +93,7 @@ const SingleCourseTwo = ({ course }) => {
                         <span className="course-level">{level}</span>
 
                         <h6 className="title">
-                            <Link href={`/course-details/${id}`} legacyBehavior>
-                                {title}
-                            </Link>
+                            <a href={`/course-details/${id}`} >{title}</a>
                         </h6>
 
                         <div className="course-rating">
