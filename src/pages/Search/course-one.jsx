@@ -78,7 +78,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = "06" }) => {
           <div className="content">
             <span className="course-level">{course.level}</span>
             <h6 className="title">
-              <a style={{ color: "inherit" }} href="/course-style-1">{course.title}</a>
+              <a style={{ color: "inherit" }} href="/courses">{course.title}</a>
             </h6>
             <div className="course-rating">
               <div className="rating">

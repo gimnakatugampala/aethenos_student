@@ -51,7 +51,7 @@ const CourseTypeFive = ({ data, classes }) => {
         <div className={`edu-course course-style-4 course-style-8 ${ classes ? classes : '' }`}>
             <div className="inner">
                 <div className="thumbnail">
-                    <a href={`/course-content/${data?.data.id}`} ><img width={200} height={200} className='cover-img' src={`https://www.courselounge.com/wp-content/uploads/best-udemy-courses-online.png`} alt="Course Thumb" /></a>
+                    <Link href={`/course-content/${data && data.id}`} legacyBehavior><img width={300} height={200} className='cover-img' src={`https://www.courselounge.com/wp-content/uploads/best-udemy-courses-online.png`} alt="Course Thumb" /></Link>
                     {/* <div className="time-top">
                         <span className="duration">
                             <i className="icon-61"></i>
@@ -66,7 +66,7 @@ const CourseTypeFive = ({ data, classes }) => {
                     </div> */}
 
                     <h5 className="title mb-5">
-                        <a href={`/e-portal/course-content`} >{data?.data.title}</a>
+                        <a href={`/e-portal/course-content`} >{data && data.title}</a>
                     </h5>
 
                     {/* <div className="course-rating">
@@ -92,13 +92,13 @@ const CourseTypeFive = ({ data, classes }) => {
                     <ul className="course-meta">
                         <li>  <i className="icon-24"></i>
                          
-                         {data?.data.lesson} Lessons Completed
+                         {data && data.lesson} Lessons Completed
                           
                         </li>
                     
                         <li>
                         <i className="icon-24"></i>
-                            {data?.data.student} Lessons 
+                            {data && data.student} Lessons 
                         </li>
                     </ul>
                 </div>

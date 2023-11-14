@@ -63,30 +63,30 @@ const CourseTypeFive = ({ data, classes }) => {
     >
       <div className="inner">
         <div className="thumbnail">
-          <Link href={`/course-details/${data?.data.id}`}>
+          <Link href={`/course-details/${data != undefined && data.id}`}>
             <img
-              src={`/assets/images/course/course-02/${data?.data.img}`}
+              src={`/assets/images/course/course-02/${data != undefined && data.img}`}
               alt="Course Thumb"
             />
           </Link>
           <div className="time-top">
             <span className="duration">
               <i className="icon-61"></i>
-              {data?.data.duration}
+              {data != undefined && data.duration}
             </span>
           </div>
         </div>
 
         <div className="content">
-          <div className="course-price float-end">${data?.course_price}</div>
+          <div className="course-price float-end">${data != undefined && data.course_price}</div>
           <br />
           <h4 className="title">
-            <Link href={`/course-details/${data?.data.id}`}>{data?.data.title}</Link>
+            <Link href={`/course-details/${data != undefined && data.id}`}>{data != undefined && data.title}</Link>
           </h4>
 
-          <h6>{data?.data.short_desc}</h6>
+          <h6>{data != undefined && data.short_desc}</h6>
 
-          <span className="course-level">{data?.data.level}</span>
+          <span className="course-level">{data != undefined && data.level}</span>
 
           {/* <div
             className="progress"
@@ -110,13 +110,13 @@ const CourseTypeFive = ({ data, classes }) => {
               <i className="icon-23"></i>
               <i className="icon-23"></i>
             </div>
-            <span className="rating-count ">({data?.data.rating})</span>
+            <span className="rating-count ">({data != undefined && data.rating})</span>
           </div>
           <ul className="course-meta">
-            <li>{data?.data.lesson} Lessons</li>
-            <li>{data?.data.duration}</li>
-            <li>{data?.data.level}</li>
-            <li>{data?.data.category}</li>
+            <li>{data != undefined && data.lesson} Lessons</li>
+            <li>{data != undefined && data.duration}</li>
+            <li>{data != undefined && data.level}</li>
+            <li>{data != undefined && data.category}</li>
           </ul>
 
           <a
