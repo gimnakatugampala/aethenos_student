@@ -12,6 +12,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 // course_items
 const course_items = course_data.filter(
   (arr, index, self) =>
@@ -102,6 +103,38 @@ const CourseFiveArea = () => {
                   alt="Profile Instructor"
                 />
               </div>
+              <a
+                className="btn btn-outline-dark text-center fs-4 my-2"
+                style={{
+                  fontWeight: "900",
+                  width: "250px",
+                  marginLeft: "10px",
+                  paddingRight: "10px",
+                  marginTop: "10px",
+                  marginBottom: "10px",
+                  height: "50px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: "0",
+                  transition: "background-color 0.3s",
+                  backgroundColor: "transparent",
+                  color: "inherit",
+                  borderWidth: "0.0005px",
+                  borderColor: "black",
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = "#F0FFFF";
+                  e.target.style.color = "inherit";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = "transparent";
+                  e.target.style.color = "inherit";
+                }}
+              >
+                <AlternateEmailIcon />
+                Email
+              </a>
               <a
                 className="btn btn-outline-dark text-center fs-4 my-2"
                 style={{
@@ -230,6 +263,7 @@ const CourseFiveArea = () => {
                 <LinkedInIcon />
                 LinkedIn
               </a>
+
               <a
                 className="btn btn-outline-dark text-center fs-4 my-2"
                 style={{
@@ -262,6 +296,7 @@ const CourseFiveArea = () => {
                 <YouTubeIcon />
                 Youtube
               </a>
+           
             </div>
 
 

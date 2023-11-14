@@ -66,7 +66,7 @@ const CourseTypeFive = ({ data, classes }) => {
                     </div> */}
 
                     <h5 className="title mb-5">
-                        <a href={`/e-portal/course-content`} >{data && data.title}</a>
+                        <a href={`/my-courses/course-content`} >{data && data.title}</a>
                     </h5>
 
                     {/* <div className="course-rating">

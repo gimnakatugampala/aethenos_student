@@ -71,7 +71,7 @@ const CourseDetailsSidebar = ({ course,details_2=false }) => {
                             </ul>
 
                             <div className="read-more-btn">
-                                <a href="/course-details/e-portal" className="edu-btn">Start Now <i className="icon-4"></i></a>
+                                <a href="/my-courses" className="edu-btn">Start Now <i className="icon-4"></i></a>
                             </div>
 
                             <div className="share-area">

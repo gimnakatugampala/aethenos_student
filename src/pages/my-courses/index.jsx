@@ -9,7 +9,7 @@ const index = () => {
     return (
         <div id='portal-container' className='sticky-header'>
             <div id="main-wrapper" className="main-wrapper">
-            <SEO pageTitle={'Your E Portal'}  />
+            <SEO pageTitle={'My Courses'}  />
             <Header/>
             <CourseTypeFour/>
             <Footer/>
