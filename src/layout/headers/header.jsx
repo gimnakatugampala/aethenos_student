@@ -107,10 +107,11 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                             </button> */}
                                         </div>
                                     </li>
-                                    <li className="icon search-icon">
+                                    <li className="icon search-icon search-bar">
                                         <a style={{cursor:'pointer'}} onClick={() => setIsSearchOpen(true)} className="search-trigger">
                                             <i className="icon-2"></i>
                                         </a>
+                                        
                                     </li>
                                     <li className="icon">
                                         <Link href="/wishlist" legacyBehavior>

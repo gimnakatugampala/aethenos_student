@@ -17,7 +17,7 @@ const CourseRangeList = () => {
 
   return (
     <>
-            <SortingArea
+        <SortingArea
           course_items={course_data}
           num={courses?.slice(0, next)?.length}
           setCourses={setCourses}

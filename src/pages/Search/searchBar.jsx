@@ -24,7 +24,6 @@ const SearchBar = () => {
 
   return (
     <div className="input-group">
-     
       <input
         type="text"
         className="form-control"
