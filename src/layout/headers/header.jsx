@@ -73,7 +73,7 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                         <nav className="mainmenu-nav">
                                             <ul className="mainmenu">
                                                 <li className="has-droupdown">
-                                                    <a href="#"><i className="icon-1"></i>Category</a>
+                                                    <a href="#"><i className="icon-1"></i>Categories</a>
                                                     <ul className="submenu">
                                                         {
                                                             categories.map((category, i) => (

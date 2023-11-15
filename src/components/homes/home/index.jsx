@@ -13,6 +13,9 @@ import TeamArea from './team-area';
 import TestimonialArea from './testimonial-area';
 import TopCategories from './top-categories';
 import CourseArea1 from './course-area-homepage';
+import Topics from './Topics'
+import BecomeInstructor from './become-instrctor';
+import CourseRange from './course-range';
 
 const index = () => {
     return (
@@ -21,18 +24,21 @@ const index = () => {
                 <Header/>
                 <HeroArea/>
                 <CategoryArea/>
+                <CourseRange />
                 <TopCategories/>
                 {/* <AboutArea/> */}
 
                 <CourseArea/>
-                <CounterUpArea/>
+                <Topics />
+                
+                {/* <CounterUpArea/> */}
                 {/* <TestimonialArea/> */}
                 {/* <CtaArea/> */}
                 {/* <TeamArea/> */}
 
                 <CourseArea1/>
                 {/* <AdBanner/> */}
-                <BrandArea/>
+                <BecomeInstructor/>
                 {/* <BlogArea/> */}
                 <Footer/>
             </div>

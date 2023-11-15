@@ -1,20 +1,20 @@
 const menu_data = [
-    {
-        title: 'Home',
-        link: '/',
-        mega_menu: false,
-        // submenus: [
-        //     { title: 'EduBlink Education', link: '/', hot: true },
-        //     { title: 'Distant Learning', link: '/home-distant-learning' },
-        //     { title: 'University', link: '/home-university' },
-        //     { title: 'Online Academy', link: '/home-online-academy' },
-        //     { title: 'Kitchen Coach', link: '/home-kitchen' },
-        //     { title: 'Yoga Instructor', link: '/home-yoga-instructor' },
-        //     { title: 'Kindergarten', link: '/home-kindergarten' },
-        //     { title: 'Modern Schooling', link: '/home-modern-schooling', new: true },
-        //     { title: 'Landing Demo', link: '/landing-demo' }
-        // ]
-    },
+    // {
+    //     title: 'Home',
+    //     link: '/',
+    //     mega_menu: false,
+    //     // submenus: [
+    //     //     { title: 'EduBlink Education', link: '/', hot: true },
+    //     //     { title: 'Distant Learning', link: '/home-distant-learning' },
+    //     //     { title: 'University', link: '/home-university' },
+    //     //     { title: 'Online Academy', link: '/home-online-academy' },
+    //     //     { title: 'Kitchen Coach', link: '/home-kitchen' },
+    //     //     { title: 'Yoga Instructor', link: '/home-yoga-instructor' },
+    //     //     { title: 'Kindergarten', link: '/home-kindergarten' },
+    //     //     { title: 'Modern Schooling', link: '/home-modern-schooling', new: true },
+    //     //     { title: 'Landing Demo', link: '/landing-demo' }
+    //     // ]
+    // },
     // {
     //     // title: 'Courses',
     //     // link: '/courses',
