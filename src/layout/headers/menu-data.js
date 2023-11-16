@@ -104,7 +104,7 @@ const menu_data = [
     },
     {
         title: 'Instructor',
-        link: 'http://aethenos-instructor.infinityfreeapp.com/',
+        link: '/instructor',
         mega_menu: false,
         // submenus: [
         //     { title: 'Blog Standard', link: '/blog-standard' },
