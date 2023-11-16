@@ -3,8 +3,12 @@ import { CertificateTwo, HybridDistanceProgramsTwo, SkilledLecturersTwo, UserTwo
 
 const CategoryArea = () => {
     return (
-        <div className="features-area-1 gap-top-equal">
+        <div className="features-area-1 py-5">
             <div className="container">
+                <div className='text-center'>
+                <h2>So many reasons to start</h2>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi harum deserunt facere! Et quaerat quo, dolorum adipisci unde ipsa assumenda provident. Hic, praesentium. Sequi, error. Dignissimos est voluptatibus dicta in?</p>
+                </div>
                 <div className="row g-5">
                     <FeatureBox delay={'50'} color={'color-primary-style'} icon={<SkilledLecturersTwo />}
                     title={<><span>Skilled </span>Lecturers</>} text={'Lorem ipsum dolor consec tur elit adicing sed umod tempor.'} />

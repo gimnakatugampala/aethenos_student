@@ -12,10 +12,11 @@ const AdBanner = () => {
                     <div className="row justify-content-center">
                         <div className="col-lg-9">
                             <div className="section-title section-center" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                                <h2 className="title">Register To Get Quality Kitchen <span className="color-primary">Courses</span> Through Aethenos</h2>
-                                <Link href="/contact-us" className="edu-btn">
-                                    Get started now<i className="icon-4"></i>
-                                </Link>
+                                <h2>Become an instructor today</h2>
+                                <p>Join one of the world’s largest online learning marketplaces.</p>
+                                <a className="edu-btn btn-medium">
+                                    Get Started
+                                </a>
                             </div>
                         </div>
                     </div>

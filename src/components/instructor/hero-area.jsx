@@ -1,29 +1,38 @@
 import React from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useMouseMoveUI } from '../../contexts/mouse-move-context';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
+
 
 const HeroArea = () => {
     const { mouseDirection, mouseReverse } = useMouseMoveUI();
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     return (
         <div className="hero-banner hero-style-5">
             <div className="container">
                 <div className="row align-items-center">
-                    <div className="col-lg-6">
+                    <div className="col-lg-4">
                         <div className="banner-content">
-                            <h1 className="title" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">Take Your Cooking Skill To The Next Level</h1>
-                            <p data-sal-delay="200" data-sal="slide-up" data-sal-duration="1000">Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit.</p>
+                            <h1 className="title" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">Come teach with us</h1>
+                            <p data-sal-delay="200" data-sal="slide-up" data-sal-duration="1000">Become an instructor and change lives — including your own.</p>
                             <div className="banner-btn" data-sal-delay="400" data-sal="slide-up" data-sal-duration="1000">
-                                <Link href="/course-style-1" className="edu-btn">
-                                    Find courses<i className="icon-4"></i>
-                                </Link>
+                                <a onClick={handleShow} className="edu-btn btn-medium" >
+                                    Get Started
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-6">
+                    <div className="col-lg-8">
                         <div className="banner-thumbnail">
                             <div className="thumbnail" data-sal-delay="500" data-sal="slide-left" data-sal-duration="1000">
-                                <img src="/assets/images/banner/couple-cooking.webp" alt="Couple Image" />
+                                <img src="/assets/images/instructor/instructor-hero.jpg" alt="Couple Image" />
                             </div>
                             <ul className="shape-group">
                                 <li className="shape-1" data-sal-delay="1000" data-sal="fade" data-sal-duration="1000">
@@ -89,6 +98,37 @@ const HeroArea = () => {
                     <img src="/assets/images/others/shape-01.png" alt="Shape" />
                 </motion.li>
             </ul>
+
+            <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Become a Udemy instructor</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+      
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="First name" />
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Last name" />
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Email</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email" />
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Password" />
+        </div>
+        <div className='row'>
+        <div className='col-md-12'>
+        <button className='edu-btn btn-small w-100'>SignUp</button>
+        </div>
+        </div>
+        </Modal.Body>
+      </Modal>
         </div>
     );
 };

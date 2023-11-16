@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const testimonial_contents = {
     pre_title: 'Testimonials',
-    title: 'What Our Students Have To Say',
+    title: 'What Our Instructors Have To Say',
     text: 'Lorem ipsum dolor sit amet consectur adipiscing elit sed eiusmod tempor incididunt labore dolore magna aliquaenim ad minim.',
     testimonial_data: [
         {
@@ -45,7 +45,7 @@ const Testimonial = () => {
     const [loop, setLoop] = useState(false);
     useEffect(() => setLoop(true), [])
     return (
-        <div className="testimonial-area-5 gap-lg-bottom-equal">
+        <div className="testimonial-area-5 py-5">
             <div className="container">
                 <div className="row g-lg-5">
                     <div className="col-lg-5">
@@ -55,9 +55,6 @@ const Testimonial = () => {
                                 <h2 className="title">{title}</h2>
                                 <span className="shape-line"><i className="icon-19"></i></span>
                                 <p>{text}</p>
-                                <Link href="/about-1" className="edu-btn btn-large">
-                                    View All<i className="icon-4"></i>
-                                </Link>
                             </div>
                         </div>
                     </div>
