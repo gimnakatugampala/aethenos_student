@@ -5,7 +5,9 @@ import { registerSchema } from '../../utils/validation-schema';
 import Link from 'next/link';
 import { useState } from 'react';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
+import { StudentSignUp } from '../../api';
 import validateEmail from '../../functions/emailValid';
+import LoadingBtn from '../../functions/LoadingBtn';
 import 'sweetalert2/src/sweetalert2.scss'
 
 const RegisterForm = () => {
@@ -16,6 +18,8 @@ const RegisterForm = () => {
     const [password, setpassword] = useState("")
     const [conpassword, setconpassword] = useState("")
     const [termsconditions, settermsconditions] = useState(false)
+
+    const [loading, setloading] = useState(false)
 
     const [showPass, setshowPass] = useState(false)
 
@@ -100,21 +104,14 @@ const RegisterForm = () => {
 
         }else{
 
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title:"Registered!",
-                text: "Successfully Registered",
-                showConfirmButton: false,
-                timer: 1500
-              });
+     
 
-            console.log(fname)
-            console.log(lname)
-            console.log(email)
-            console.log(password)
-            console.log(conpassword)
-            console.log(termsconditions)
+              StudentSignUp(
+                fname,
+                lname,
+                email,
+                conpassword
+                )
         }
 
     }
@@ -122,6 +119,9 @@ const RegisterForm = () => {
 
 
     return (
+        <>
+        <LoadingBtn disapear={loading} />
+
         <form onSubmit={handleSubmit}>
             <div className="form-group">
                 <label htmlFor="reg-name">First Name *</label>
@@ -176,14 +176,15 @@ const RegisterForm = () => {
                 <p>OR</p>
                 {/* <hr /> */}
                 </div>
-        <button><i class="fa-brands fa-google mx-3 fa-2x"></i> Sign in with Google</button>
-        <button><i class="fa-brands fa-facebook mx-4 fa-2x"></i> Sign in with Facebook</button>
+            <button><i class="fa-brands fa-google mx-3 fa-2x"></i> Sign in with Google</button>
+            <button><i class="fa-brands fa-facebook mx-4 fa-2x"></i> Sign in with Facebook</button>
        
         
         </div>
             
 
         </form>
+        </>
     );
 }
 

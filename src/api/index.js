@@ -1,12 +1,13 @@
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
 
-export const StudentSignUp = async() =>{
+export const StudentSignUp = async(fname, lname, email , conpassword) =>{
 
     var formdata = new FormData();
-    formdata.append("email", "sample39@gmail.com");
-    formdata.append("firstName", "sdfghngf");
-    formdata.append("lastName", "dfbgnhgf");
-    formdata.append("password", "Gd@2001");
-    formdata.append("profileImg", fileInput.files[0], "[PROXY]");
+    formdata.append("email", `${email}`);
+    formdata.append("firstName", `${fname}`);
+    formdata.append("lastName", `${lname}`);
+    formdata.append("password", `${conpassword}`);
     formdata.append("gup_type", "1");
     
     var requestOptions = {
@@ -16,8 +17,23 @@ export const StudentSignUp = async() =>{
     };
     
     fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/register/add", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
+      .then(response => response.json())
+      .then(result => {
+        console.log(result)
+
+        if(result.variable == "00"){
+
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title:"Registered!",
+                text: "Successfully Registered",
+                showConfirmButton: false,
+                timer: 1500
+              });
+
+        }
+    })
       .catch(error => console.log('error', error));
-      
+
 }
