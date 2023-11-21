@@ -4,10 +4,10 @@ import useFirebase from '../../hooks/use-firebase';
 import { registerSchema } from '../../utils/validation-schema';
 import Link from 'next/link';
 import { useState } from 'react';
-import Swal from 'sweetalert2/dist/sweetalert2.js'
 import { StudentSignUp } from '../../api';
 import validateEmail from '../../functions/emailValid';
 import LoadingBtn from '../../functions/LoadingBtn';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 
 const RegisterForm = () => {
@@ -120,7 +120,7 @@ const RegisterForm = () => {
 
     return (
         <>
-        <LoadingBtn disapear={loading} />
+        {/* <LoadingBtn disapear={loading} /> */}
 
         <form onSubmit={handleSubmit}>
             <div className="form-group">

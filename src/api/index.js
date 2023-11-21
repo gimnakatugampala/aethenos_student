@@ -32,8 +32,56 @@ export const StudentSignUp = async(fname, lname, email , conpassword) =>{
                 timer: 1500
               });
 
+        }else if(result.variable == "01"){
+
+            Swal.fire({
+                title: 'Login Error!',
+                text: `${result.message}`,
+                icon: 'error',
+              })
         }
+
     })
       .catch(error => console.log('error', error));
+
+}
+
+
+
+export const StudentSignIn = async(email, password) =>{
+
+    var formdata = new FormData();
+    formdata.append("email", `${email}`);
+    formdata.append("password", `${password}`);
+
+    var requestOptions = {
+    method: 'POST',
+    body: formdata,
+    redirect: 'follow'
+    };
+
+    fetch("https://aethenosadmin.exon.lk:2053/aethenos-api/authentication/student", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+        console.log(result)
+
+        if(result.message == "User not found"){
+
+            Swal.fire({
+                title: `${result.message}`,
+                text: `${result.variable}`,
+                icon: 'error',
+              })
+
+        }else if(result.message == "incorrect password."){
+
+            Swal.fire({
+                title: `${result.message}`,
+                text: `${result.variable}`,
+                icon: 'error',
+              })
+        }
+    })
+    .catch(error => console.log('error', error));
 
 }
