@@ -6,7 +6,7 @@ const SignUpArea = () => {
         <section className="account-page-area section-gap-equal">
             <div className="container position-relative">
                 <div className="row g-5 justify-content-center">
-                      <div className="col-lg-5">
+                      <div className="col-lg-7">
                         <div className="login-form-box registration-form">
                             <h3 className="title">Registration</h3>
                             <p>Already have an account? <a href="/sign-in">Sign in</a></p>
