@@ -74,7 +74,6 @@ export const StudentSignUp = async(fname, lname, email , conpassword) =>{
 }
 
 
-
 export const StudentSignIn = async(email, password) =>{
 
     var formdata = new FormData();
@@ -192,4 +191,26 @@ export const InstructorSignUp = async(firstname,lastname,email,conpassword) =>{
 
   })
     .catch(error => console.log('error', error));
+}
+
+export const InstructorVerify = async() =>{
+  const CURRENT_USER = JSON.parse(window.localStorage.getItem("aethenos"));
+    
+    if(CURRENT_USER != null){
+
+      if(CURRENT_USER.status == "Instructor"){
+
+        return true
+
+      }else if(CURRENT_USER.status == "Student"){
+        return false
+      }
+
+      // console.log(CURRENT_USER.status)
+        
+    }else{
+
+      return false
+    }
+
 }
