@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { useSelector } from 'react-redux';
 // import SearchPopup from '../../components/common/popup-modal/search-popup';
 import PopUpSearch from '../../pages/Search/PopUpSearch';
@@ -13,6 +13,7 @@ import HeaderTopRight from '../headers/component/header-top-right';
 import MainMenu from '../headers/component/main-menu';
 import Cart from './component/cart';
 import SearchBar from '../../pages/Search/searchBar';
+import { getUserStatus } from '../../api';
 
 const categories = [
     { link: '/courses/design', title: 'Design' },
@@ -28,14 +29,34 @@ const categories = [
     { link: '/courses/motivation', title: 'Motivation' }
 ]
 
+
 const Header = ({header_style, no_top_bar, disable_full_width, disable_category }) => {
-    const  activeUser = false;
+
+    const [activeUser, setactiveUser] = useState(false)
+    // let  activeUser = false;
     const { sticky } = useSticky();
     const { quantity } = useCartInfo();
     const wishlists = useSelector(wishlistItems);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [openProfile, setOpenProfile] = useState(false);
+
+    useEffect(() => {
+
+        getUserStatus()
+        .then(res => {
+            if(res){
+                setactiveUser(true);
+            }else{
+                setactiveUser(false);
+            }
+        })
+     
+       
+     
+    })
+    
+
 
     return (
         <>
@@ -132,30 +153,30 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                     </li>
 
                                     
-                                        {activeUser ?  <li>
-                                           
-                                           <img src='/assets/images/user.png' alt='user' onClick={()=> setOpenProfile((prve)=> !prve)} style={{width :50, height: 50,borderRadius:100,border:'solid',borderColor:'black',borderWidth:1,padding:3}} />
-                                          
-                                       </li>  :  <><li className="header-info">
-                                            <Link href="/sign-in" legacyBehavior>
-                                                <a className="edu-btn btn-small">Login
-                                                </a>
-                                            </Link>
-                                        </li>
-                                        <li className="header-info">
-                                                <Link href="/sign-up" legacyBehavior>
-                                                    <a className="edu-btn btn-small">Register
-                                                    </a>
-                                                </Link>
-                                            </li></>
+                                {activeUser ? 
+                                (<li> 
+                                    <i onClick={()=> setOpenProfile((prve)=> !prve)} class="fas fa-user-circle fa-2x"></i>
+                                    {/* <img src='/assets/images/user.png' alt='user' onClick={()=> setOpenProfile((prve)=> !prve)} style={{width :50, height: 50,borderRadius:100,border:'solid',borderColor:'black',borderWidth:1,padding:3}} />       */}
+                                </li>) :  (
+                                <>
+                                <li className="header-info">
+                                    <Link href="/sign-in" legacyBehavior>
+                                        <a className="edu-btn btn-small">Login
+                                        </a>
+                                    </Link>
+                                </li>
+                                <li className="header-info">
+                                        <Link href="/sign-up" legacyBehavior>
+                                            <a className="edu-btn btn-small">Register
+                                            </a>
+                                        </Link>
+                                    </li>
+                                </>)
 
                                 }
-                                {
-                                     openProfile && <DropDownProfile />
-                                }
+                                
+                                {openProfile && <DropDownProfile />}
                                    
-                                    
-                                    
                                     <li className="mobile-menu-bar d-block d-xl-none">
                                         <button className="hamberger-button" onClick={() => setIsOpen(true)}>
                                             <i className="icon-54"></i>

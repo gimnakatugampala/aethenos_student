@@ -1,6 +1,21 @@
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 
+
+
+export const getUserStatus = async() => {
+    const CURRENT_USER = JSON.parse(window.localStorage.getItem("aethenos_student"));
+    
+    if(CURRENT_USER != null){
+        return true
+    }else{
+        return false
+    }
+
+
+
+}
+
 export const StudentSignUp = async(fname, lname, email , conpassword) =>{
 
     var formdata = new FormData();
@@ -80,6 +95,30 @@ export const StudentSignIn = async(email, password) =>{
                 text: `${result.variable}`,
                 icon: 'error',
               })
+        }else{
+
+            
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title:"Logged In!",
+                text: "Successfully LoggedIn",
+                showConfirmButton: false,
+                timer: 1500
+              });
+
+              const user = {
+                token:result.token,
+                email:result.email,
+                firstname:result.fname,
+                lastname:result.lname
+              }
+
+              window.localStorage.setItem("aethenos_student", JSON.stringify(user));
+
+              window.location.href = "/?login=success"
+
+
         }
     })
     .catch(error => console.log('error', error));

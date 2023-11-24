@@ -20,8 +20,8 @@ const OffCanvas = ({ isOpen, setIsOpen }) => {
                     <div className="logo">
                         <a href="/" >
 
-                            <img className="logo-light" src='/assets/images/logo/logo-dark.png' alt="logo" />
-                            <img className="logo-dark" src='/assets/images/logo/logo-white.png' alt="logo" />
+                            <img className="logo-light" src='/assets/images/logo/Header_Athenos_logo.png' alt="logo" />
+                            <img className="logo-dark" src='/assets/images/logo/Header_Athenos_logo.png' alt="logo" />
 
                         </a>
                     </div>

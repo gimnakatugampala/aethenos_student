@@ -1,11 +1,13 @@
 import React from "react";
 const DropDownProfile = () => {
+
+
   return (
     <div className="submenu-wrapper">
       <div className="submenu">
         <div className="user-info">
           <img src="/assets/images/user.png" alt="user" />
-          <h3>Isuru Fernando</h3>
+          <h3>GIMNA KATUGAMPALA</h3>
         </div>
         <hr/>
         <a href="/viewprofile" className="submenu-link">
