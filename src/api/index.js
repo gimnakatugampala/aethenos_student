@@ -138,6 +138,58 @@ export const StudentSignIn = async(email, password) =>{
 
 }
 
-export const InstructorSignUp = async() =>{
+export const InstructorSignUp = async(firstname,lastname,email,conpassword) =>{
 
+  var formdata = new FormData();
+  formdata.append("email", `${email}`);
+  formdata.append("firstName", `${firstname}`);
+  formdata.append("lastName", `${lastname}`);
+  formdata.append("password", `${conpassword}`);
+  formdata.append("gup_type", "2");
+  
+  var requestOptions = {
+    method: 'POST',
+    body: formdata,
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/register/add", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+
+      if(result.variable == "200"){
+
+          Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title:"Registered!",
+              text: `${result.message}`,
+              showConfirmButton: false,
+              timer: 1500
+            });
+
+            const user = {
+              token:result.token,
+              email:"gimna@gmail.com",
+              firstname:"Gimna",
+              lastname:"Kavishka",
+              status:"Instructor"
+            }
+
+            window.localStorage.setItem("aethenos", JSON.stringify(user));
+
+            window.location.href = "/?login=success"
+
+      }else{
+
+          Swal.fire({
+              title: 'Login Error!',
+              text: `${result.message}`,
+              icon: 'error',
+            })
+      }
+
+  })
+    .catch(error => console.log('error', error));
 }
