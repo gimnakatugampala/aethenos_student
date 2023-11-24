@@ -4,7 +4,7 @@ import 'sweetalert2/src/sweetalert2.scss'
 
 
 export const getUserStatus = async() => {
-    const CURRENT_USER = JSON.parse(window.localStorage.getItem("aethenos_student"));
+    const CURRENT_USER = JSON.parse(window.localStorage.getItem("aethenos"));
     
     if(CURRENT_USER != null){
         return true
@@ -36,18 +36,30 @@ export const StudentSignUp = async(fname, lname, email , conpassword) =>{
       .then(result => {
         console.log(result)
 
-        if(result.variable == "00"){
+        if(result.variable == "200"){
 
             Swal.fire({
                 position: "top-end",
                 icon: "success",
                 title:"Registered!",
-                text: "Successfully Registered",
+                text: `${result.message}`,
                 showConfirmButton: false,
                 timer: 1500
               });
 
-        }else if(result.variable == "01"){
+              const user = {
+                token:result.token,
+                email:"gimna@gmail.com",
+                firstname:"Gimna",
+                lastname:"Kavishka",
+                status:"Student"
+              }
+
+              window.localStorage.setItem("aethenos", JSON.stringify(user));
+
+              window.location.href = "/?login=success"
+
+        }else{
 
             Swal.fire({
                 title: 'Login Error!',
@@ -111,10 +123,11 @@ export const StudentSignIn = async(email, password) =>{
                 token:result.token,
                 email:result.email,
                 firstname:result.fname,
-                lastname:result.lname
+                lastname:result.lname,
+                status:"Student"
               }
 
-              window.localStorage.setItem("aethenos_student", JSON.stringify(user));
+              window.localStorage.setItem("aethenos", JSON.stringify(user));
 
               window.location.href = "/?login=success"
 
@@ -122,5 +135,9 @@ export const StudentSignIn = async(email, password) =>{
         }
     })
     .catch(error => console.log('error', error));
+
+}
+
+export const InstructorSignUp = async() =>{
 
 }
