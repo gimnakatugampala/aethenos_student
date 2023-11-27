@@ -5,7 +5,10 @@ import { motion } from 'framer-motion';
 import { useMouseMoveUI } from '../../contexts/mouse-move-context';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-
+import { InstructorSignUp } from '../../api';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
+import validateEmail from '../../functions/emailValid';
 
 
 const HeroArea = () => {
@@ -14,6 +17,107 @@ const HeroArea = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [showPass, setshowPass] = useState(false)
+
+    const [firstname, setfirstname] = useState("")
+    const [lastname, setlastname] = useState("")
+    const [email, setemail] = useState("")
+    const [password, setpassword] = useState("")
+    const [conpassword, setconpassword] = useState("")
+    const [termsconditions, settermsconditions] = useState(false)
+
+
+    const onFormSubmit = (e) =>{
+        e.preventDefault();
+
+       
+
+        if(firstname == ""){
+
+            Swal.fire({
+                title: 'Empty Field!',
+                text: 'Please Fill First Name',
+                icon: 'error',
+                })
+
+        }else if(lastname == ""){
+
+            Swal.fire({
+                title: 'Empty Field!',
+                text: 'Please Fill Last Name',
+                icon: 'error',
+                })
+            
+        }else if(email == ""){
+
+            Swal.fire({
+                title: 'Empty Field!',
+                text: 'Please Fill Email Address',
+                icon: 'error',
+                })
+
+        }else if(password == ""){
+
+            Swal.fire({
+                title: 'Empty Field!',
+                text: 'Please Fill Password',
+                icon: 'error',
+                })
+
+        }else if(conpassword == ""){
+
+            Swal.fire({
+                title: 'Empty Field!',
+                text: 'Please Fill Confirm Password',
+                icon: 'error',
+                })
+
+        }else if(!validateEmail(email)){
+
+            Swal.fire({
+                title: 'Email Error!',
+                text: 'Please Enter a Valid Email Address',
+                icon: 'error',
+              })
+
+        }else if(password != conpassword){
+
+            Swal.fire({
+                title: 'Password Error!',
+                text: 'Passwords do not match',
+                icon: 'error',
+              })
+
+        }else if(password.length < 8 || conpassword < 8){
+
+            Swal.fire({
+                title: 'Password Error!',
+                text: 'Password must be at least 8 characters or more',
+                icon: 'error',
+              })
+
+        }else if(termsconditions == false){
+
+            Swal.fire({
+                title: 'Terms & Conditions Error!',
+                text: 'Please Accept our Terms & Conditions',
+                icon: 'error',
+              })
+
+        }else{
+            console.log("OK")
+            InstructorSignUp(firstname,lastname,email,conpassword)
+            // console.log(firstname)
+            // console.log(lastname)
+            // console.log(email)
+            // console.log(password)
+            // console.log(conpassword)
+        }
+
+
+    }
+
     return (
         <div className="hero-banner hero-style-5">
             <div className="container">
@@ -99,34 +203,63 @@ const HeroArea = () => {
                 </motion.li>
             </ul>
 
-            <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Become a Udemy instructor</Modal.Title>
+          <Modal.Title  className='m-0 p-0'>Become a Udemy instructor</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
-      
+      <form onSubmit={onFormSubmit}>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="First name" />
+            <input onChange={(e) => setfirstname(e.target.value)} type="text" class="form-control" id="exampleFormControlInput1" placeholder="First name" />
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Last name" />
+            <input onChange={(e) => setlastname(e.target.value)} type="text" class="form-control" id="exampleFormControlInput1" placeholder="Last name" />
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Email</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email" />
+            <input onChange={(e) => setemail(e.target.value)} type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email" />
         </div>
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Password" />
+     
+
+        <label for="exampleFormControlInput1" class="form-label">Password</label>
+        <div class="input-group mb-3">
+            <input onChange={(e) => setpassword(e.target.value)} type={showPass?"text":"password"}  class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2" />
+            <span class="input-group-text" id="basic-addon2">
+            {showPass ? (<span onClick={() => setshowPass(!showPass)} className="password-show"><i class="fas fa-eye-slash fa-lg"></i></span>) : (<span onClick={() => setshowPass(!showPass)} className="password-show"><i class="far fa-eye fa-lg"></i></span>)} 
+            </span>
         </div>
+
+
+        <label for="exampleFormControlInput1" class="form-label">Confirm Password</label>
+        <div class="input-group mb-3">
+            <input onChange={(e) => setconpassword(e.target.value)}  type={showPass?"text":"password"}  class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon2" />
+            <span class="input-group-text" id="basic-addon2">
+            {showPass ? (<span onClick={() => setshowPass(!showPass)} className="password-show"><i class="fas fa-eye-slash fa-lg"></i></span>) : (<span onClick={() => setshowPass(!showPass)} className="password-show"><i class="far fa-eye fa-lg"></i></span>)} 
+            </span>
+            
+        </div>
+
+        <div className="form-group chekbox-area">
+                <div className="edu-form-check">
+                    <input value={termsconditions} onChange={(e) => settermsconditions(e.target.checked)} type="checkbox" name='terms' id="terms-condition" />
+                    <label htmlFor="terms-condition">I agree the User Agreement and
+                        <Link href="/terms-condition">
+                            Terms & Condition.
+                        </Link>
+                    </label>
+                </div>
+            </div>
+        
+
         <div className='row'>
         <div className='col-md-12'>
-        <button className='edu-btn btn-small w-100'>SignUp</button>
+        <button type='submit' className='edu-btn btn-small w-100'>SignUp</button>
         </div>
         </div>
+        </form>
         </Modal.Body>
       </Modal>
         </div>

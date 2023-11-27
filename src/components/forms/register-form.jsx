@@ -90,7 +90,7 @@ const RegisterForm = () => {
 
             Swal.fire({
                 title: 'Terms & Conditions Error!',
-                text: 'Please Accept our Terms & Co',
+                text: 'Please Accept our Terms & Conditions',
                 icon: 'error',
               })
 

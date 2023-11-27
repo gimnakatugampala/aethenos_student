@@ -1583,9 +1583,7 @@ textarea {
   font-size: 15px;
   background-color: var(--color-white);
   box-shadow: none;
-  padding: 0 25px;
   outline: none;
-  border: none;
   border-radius: 5px;
   color: var(--color-heading);
   /* -- Placeholder -- */
