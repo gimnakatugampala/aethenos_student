@@ -57,8 +57,9 @@ export const StudentSignUp = async(fname, lname, email , conpassword) =>{
 
               window.localStorage.setItem("aethenos", JSON.stringify(user));
 
-              window.location.href = "/?login=success"
-
+              window.location.href = "/student-interests"
+              
+           
         }else{
 
             Swal.fire({
