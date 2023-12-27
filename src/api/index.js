@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
-
+import Cookies from 'js-cookie';
 
 
 export const getUserStatus = async() => {
@@ -47,15 +47,7 @@ export const StudentSignUp = async(fname, lname, email , conpassword) =>{
                 timer: 1500
               });
 
-              const user = {
-                token:result.token,
-                email:"gimna@gmail.com",
-                firstname:"Gimna",
-                lastname:"Kavishka",
-                status:"Student"
-              }
-
-              window.localStorage.setItem("aethenos", JSON.stringify(user));
+              Cookies.set('aethenos', `${result.token}`, { expires: 7 })
 
               window.location.href = "/student-interests"
               
@@ -119,15 +111,8 @@ export const StudentSignIn = async(email, password) =>{
                 timer: 1500
               });
 
-              const user = {
-                token:result.token,
-                email:result.email,
-                firstname:result.fname,
-                lastname:result.lname,
-                status:"Student"
-              }
 
-              window.localStorage.setItem("aethenos", JSON.stringify(user));
+              Cookies.set('aethenos', `${result.token}`, { expires: 7 })
 
               window.location.href = "/?login=success"
 
@@ -177,7 +162,7 @@ export const InstructorSignUp = async(firstname,lastname,email,conpassword) =>{
               status:"Instructor"
             }
 
-            window.localStorage.setItem("aethenos", JSON.stringify(user));
+            Cookies.set('aethenos', `${result.token}`, { expires: 7 })
 
             window.location.href = "/?login=success"
 

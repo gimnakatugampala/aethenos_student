@@ -1,4 +1,12 @@
 import React from "react";
+
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import SwitchAccountIcon from '@mui/icons-material/SwitchAccount';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import MessageIcon from '@mui/icons-material/Message';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
+
 const DropDownProfile = () => {
 
 
@@ -6,37 +14,28 @@ const DropDownProfile = () => {
     <div className="submenu-wrapper">
       <div className="submenu">
         <div className="user-info">
-          <img src="/assets/images/user.png" alt="user" />
+          <AccountCircleIcon className="m-2" />
           <h3>GIMNA KATUGAMPALA</h3>
         </div>
         <hr/>
         <a href="/viewprofile" className="submenu-link">
-        <img src="/assets/images/icons/user.png" alt="user" />
+        <SwitchAccountIcon />
         <p>My Profile</p>
         </a>
         <a href="/eidtprofile" className="submenu-link">
-        <img src="/assets/images/icons/edit.png" alt="user" />
+        <ManageAccountsIcon />
         <p>Edit Profile</p>
         </a>
         <a href="#" className="submenu-link">
-        <img src="/assets/images/icons/envelope.png" alt="user" />
+        <MessageIcon />
         <p>Messages</p>
         </a>
-        <hr/>
         <a href="#" className="submenu-link">
-        <img src="/assets/images/icons/settings.png" alt="user" />
+        <SettingsIcon />
         <p>Setting</p>
         </a>
         <a href="#" className="submenu-link">
-        <img src="/assets/images/icons/question.png" alt="user" />
-        <p>Helps</p>
-        </a>
-        <a href="#" className="submenu-link">
-        <img src="/assets/images/icons/night.png" alt="user" />
-        <p>Edit Profile</p>
-        </a>
-        <a href="#" className="submenu-link">
-        <img src="/assets/images/icons/log-out.png" alt="user" />
+        <LogoutIcon />
         <p>Log out</p>
         </a>
         
