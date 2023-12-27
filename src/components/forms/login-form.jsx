@@ -76,24 +76,12 @@ const LoginForm = () => {
                 {showPass ? (<span onClick={() => setshowPass(!showPass)} className="password-show"><i class="fas fa-eye-slash fa-lg"></i></span>) : (<span onClick={() => setshowPass(!showPass)} className="password-show"><i class="far fa-eye fa-lg"></i></span>)} 
             </div>
 
-            {/* <div className="form-group chekbox-area">
-                <div className="edu-form-check">
-                    <input type="checkbox" id="remember-me" />
-                    <label htmlFor="remember-me">Remember Me</label>
-                </div>
-                <a href="#" onClick={()=> handleResetPass(values.email)} 
-                className="password-reset">Lost your password?</a>
-            </div> */}
-
             <div className="form-group">
                 <button type="submit" className="edu-btn btn-medium">Sign in <i className="icon-4"></i></button>
                 
             </div>
 
-            {/* <div className='signin-social'>
-                <img src="/assets/images/user.png" alt="" />
-                <p>Sign In Google</p>
-            </div> */}
+
            
         </form>
 

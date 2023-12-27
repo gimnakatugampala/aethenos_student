@@ -2,19 +2,8 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 import Cookies from 'js-cookie';
 
+export const USERTOKEN = Cookies.get('aethenos') 
 
-export const getUserStatus = async() => {
-    const CURRENT_USER = JSON.parse(window.localStorage.getItem("aethenos"));
-    
-    if(CURRENT_USER != null){
-        return true
-    }else{
-        return false
-    }
-
-
-
-}
 
 export const StudentSignUp = async(fname, lname, email , conpassword) =>{
 
@@ -49,7 +38,7 @@ export const StudentSignUp = async(fname, lname, email , conpassword) =>{
 
               Cookies.set('aethenos', `${result.token}`, { expires: 7 })
 
-              window.location.href = "/student-interests"
+              window.location.href = `/student-interests&token=${result.token}`
               
            
         }else{

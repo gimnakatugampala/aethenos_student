@@ -11,7 +11,6 @@ const SignInArea = () => {
                             <h3 className="title">Sign In</h3>
                             <p>Don’t have an account? <a href="/register">Register</a></p>
                            <LoginForm />
-                           
                         </div>
                     </div> 
                    

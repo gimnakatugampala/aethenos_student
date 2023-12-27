@@ -170,17 +170,6 @@ const RegisterForm = () => {
                 <button type="submit" className="edu-btn btn-medium">Create Account <i className="icon-4"></i></button>
             </div>
 
-            <div className='sign-in-btn'>
-                <div className='text-center'>
-                {/* <hr /> */}
-                <p>OR</p>
-                {/* <hr /> */}
-                </div>
-            <button><i class="fa-brands fa-google mx-3 fa-2x"></i> Sign in with Google</button>
-            <button><i class="fa-brands fa-facebook mx-4 fa-2x"></i> Sign in with Facebook</button>
-       
-        
-        </div>
             
 
         </form>
