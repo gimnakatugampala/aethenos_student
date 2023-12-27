@@ -5,7 +5,7 @@ import SignInMain from '../components/sign-in';
 export default function SignIn() {
     return (
         <Wrapper>
-            <SEO pageTitle={'Sign In'} />
+            <SEO pageTitle={'Login'} />
             <SignInMain />
         </Wrapper>
     )

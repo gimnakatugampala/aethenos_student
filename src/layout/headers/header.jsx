@@ -41,20 +41,6 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
     const [isOpen, setIsOpen] = useState(false);
     const [openProfile, setOpenProfile] = useState(false);
 
-    useEffect(() => {
-
-        getUserStatus()
-        .then(res => {
-            if(res){
-                setactiveUser(true);
-            }else{
-                setactiveUser(false);
-            }
-        })
-     
-       
-     
-    })
     
 
 
@@ -160,13 +146,13 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                 </li>) :  (
                                 <>
                                 <li className="header-info">
-                                    <Link href="/sign-in" legacyBehavior>
+                                    <Link href="/login" legacyBehavior>
                                         <a className="edu-btn btn-small">Login
                                         </a>
                                     </Link>
                                 </li>
                                 <li className="header-info">
-                                        <Link href="/sign-up" legacyBehavior>
+                                        <Link href="/register" legacyBehavior>
                                             <a className="edu-btn btn-small">Register
                                             </a>
                                         </Link>

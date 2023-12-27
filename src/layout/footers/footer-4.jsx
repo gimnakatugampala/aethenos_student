@@ -32,7 +32,7 @@ const footer_contents = {
                 { link: 'gallery-grid', title: 'Gallery' },
                 { link: 'blog-standard', title: 'News & Articles' },
                 { link: 'faq', title: "FAQ's" },
-                { link: 'sign-in', title: 'Sign In/Registration' },
+                { link: 'login', title: 'Sign In/Registration' },
                 { link: 'coming-soon', title: 'Coming Soon' }
             ]
         }

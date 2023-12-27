@@ -9,7 +9,7 @@ const SignUpArea = () => {
                       <div className="col-lg-7">
                         <div className="login-form-box registration-form">
                             <h3 className="title">Registration</h3>
-                            <p>Already have an account? <a href="/sign-in">Sign in</a></p>
+                            <p>Already have an account? <a href="/login">Login</a></p>
                             <RegisterForm />
                         </div>
                     </div>

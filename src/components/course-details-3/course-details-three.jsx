@@ -52,7 +52,7 @@ const CourseDetailsThree = () => {
                                     <a href="#" className="edu-btn btn-medium enroll-btn">Take This Course</a>
                                     <div className="login-btn">
                                         <span>or</span>
-                                        <Link href="/sign-in">
+                                        <Link href="/login">
                                             Login
                                         </Link>
                                     </div>

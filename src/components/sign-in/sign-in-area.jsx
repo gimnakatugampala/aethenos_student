@@ -9,7 +9,7 @@ const SignInArea = () => {
                      <div className="col-lg-6">
                         <div className="login-form-box">
                             <h3 className="title">Sign In</h3>
-                            <p>Don’t have an account? <a href="/sign-up">Sign up</a></p>
+                            <p>Don’t have an account? <a href="/register">Register</a></p>
                            <LoginForm />
                            
                         </div>

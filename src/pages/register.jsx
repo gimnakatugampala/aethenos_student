@@ -5,7 +5,7 @@ import { Wrapper } from '../layout';
 export default function Signup() {
     return (
         <Wrapper>
-            <SEO pageTitle={'Sign up'} />
+            <SEO pageTitle={'Register'} />
             <SignUpMain />
         </Wrapper>
     )
