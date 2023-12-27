@@ -56,7 +56,9 @@ export const StudentSignUp = async(fname, lname, email , conpassword) =>{
 }
 
 
-export const StudentSignIn = async(email, password) =>{
+export const StudentSignIn = async(email, password,setloading) =>{
+
+  setloading(true)
 
     var formdata = new FormData();
     formdata.append("email", `${email}`);
@@ -81,6 +83,8 @@ export const StudentSignIn = async(email, password) =>{
                 icon: 'error',
               })
 
+              setloading(false)
+
         }else if(result.message == "incorrect password."){
 
             Swal.fire({
@@ -88,6 +92,8 @@ export const StudentSignIn = async(email, password) =>{
                 text: `${result.variable}`,
                 icon: 'error',
               })
+
+              setloading(false)
         }else{
 
             
@@ -99,6 +105,8 @@ export const StudentSignIn = async(email, password) =>{
                 showConfirmButton: false,
                 timer: 1500
               });
+
+              setloading(false)
 
 
               Cookies.set('aethenos', `${result.token}`, { expires: 7 })

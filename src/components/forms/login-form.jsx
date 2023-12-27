@@ -7,16 +7,20 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 import ErrorMsg from './error-msg';
 import { StudentSignIn } from '../../api';
+import Spinner from 'react-bootstrap/Spinner';
 
 const LoginForm = () => {
 
     const [showPass, setshowPass] = useState(false)
+    const [loading, setloading] = useState(false)
 
     const [email, setemail] = useState("")
     const [password, setpassword] = useState("")
 
     const handleSubmit = (e) =>{
         e.preventDefault()
+
+        setloading(true)
 
         // Validate
         if(email == ""){
@@ -27,6 +31,8 @@ const LoginForm = () => {
                 icon: 'error',
               })
 
+            setloading(false)
+
         }else if(!validateEmail(email)){
 
             Swal.fire({
@@ -34,6 +40,8 @@ const LoginForm = () => {
                 text: 'Please Enter a Valid Email Address',
                 icon: 'error',
               })
+
+              setloading(false)
 
         }else if(password == ""){
 
@@ -43,8 +51,10 @@ const LoginForm = () => {
                 icon: 'error',
               })
 
+              setloading(false)
+
         }else{
-            StudentSignIn(email, password)
+            StudentSignIn(email, password,setloading)
 
         }
 
@@ -77,8 +87,14 @@ const LoginForm = () => {
             </div>
 
             <div className="form-group">
-                <button type="submit" className="edu-btn btn-medium">Sign in <i className="icon-4"></i></button>
-                
+                {loading ? (
+                <button type="button" className="edu-btn btn-medium p-2">
+                    <Spinner animation="border" variant="light" />
+                </button>) : (
+                <button type="submit" className="edu-btn btn-medium">Login <i className="icon-4"></i></button>
+                )}
+
+             
             </div>
 
 
