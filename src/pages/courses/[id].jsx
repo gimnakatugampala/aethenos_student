@@ -14,7 +14,13 @@ const GetCourseByCategory = () => {
 
     const router = useRouter();
     const { id } = router.query;
-    const [courses, setcourses] = useState(course_data)
+    const coursePerView = 8;
+    const [next, setNext] = useState(coursePerView);
+    const [courses, setCourses] = useState(course_data);
+    // handleLoadData
+    const handleLoadData = () => {
+      setNext((value) => value + 4);
+    };
 
     useEffect(() => {
         
@@ -67,11 +73,17 @@ const GetCourseByCategory = () => {
 
                     <div className="tab-content" id="myTabContent">
 
-
                         <div className="tab-pane fade show active" id="most-popular" role="tabpanel" aria-labelledby="most-popular-tab">
                             <div className="course-tab-content">
-                                <div className="course-overview">
-                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit provident cupiditate quis porro, tempora nulla dicta, distinctio cumque, aspernatur magnam quam eligendi! Autem voluptatem soluta commodi iusto impedit quis odio.
+                                <div className="row course-overview">
+                                {courses.slice(0, next)?.map((course) => {
+                                            return (
+                                            <div key={course.id} className="col-md-6 col-xl-3">
+                                                <CourseTypeOne data={course} classes="course-box-shadow" />
+                                            </div>
+                                            );
+                                        })}
+                                 
                                     
                                 </div>
                             </div>
