@@ -13,7 +13,9 @@ import HeaderTopRight from '../headers/component/header-top-right';
 import MainMenu from '../headers/component/main-menu';
 import Cart from './component/cart';
 import SearchBar from '../../pages/Search/searchBar';
-import { getUserStatus } from '../../api';
+import { USERTOKEN, getUserStatus } from '../../api';
+import SmallRedLoading from '../../functions/Loading/SmallRedLoading';
+
 
 const categories = [
     { link: '/courses/design', title: 'Design' },
@@ -41,8 +43,18 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
     const [isOpen, setIsOpen] = useState(false);
     const [openProfile, setOpenProfile] = useState(false);
 
-    
+    const [isUserLoading, setisUserLoading] = useState(true)
 
+    
+    useEffect(() => {
+        console.log(USERTOKEN)
+
+        setTimeout(() => {
+            setisUserLoading(false)
+        }, 1500);
+
+    }, [])
+    
 
     return (
         <>
@@ -138,28 +150,45 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                         <Cart />
                                     </li>
 
-                                    
-                                {activeUser ? 
-                                (<li> 
-                                    <i onClick={()=> setOpenProfile((prve)=> !prve)} class="fas fa-user-circle fa-2x"></i>
-                                    {/* <img src='/assets/images/user.png' alt='user' onClick={()=> setOpenProfile((prve)=> !prve)} style={{width :50, height: 50,borderRadius:100,border:'solid',borderColor:'black',borderWidth:1,padding:3}} />       */}
-                                </li>) :  (
-                                <>
-                                <li className="header-info">
-                                    <Link href="/login" legacyBehavior>
-                                        <a className="edu-btn btn-small">Login
-                                        </a>
-                                    </Link>
-                                </li>
-                                <li className="header-info">
+                                    {/* A Loading */}
+                                    {isUserLoading ? (
+                                        <SmallRedLoading />
+                                    ) : (
+                                    <>
+
+                                    {USERTOKEN == null ? (
+                                        <>
+                                        <li className="header-info">
+                                                <Link href="/login" legacyBehavior>
+                                                    <a className="edu-btn btn-small">Login
+                                                    </a>
+                                                </Link>
+                                            </li>
+
+                                        <li className="header-info">
                                         <Link href="/register" legacyBehavior>
                                             <a className="edu-btn btn-small">Register
                                             </a>
                                         </Link>
-                                    </li>
-                                </>)
+                                        </li>
+                                        </>
+                                    ) : (
 
-                                }
+                                    <li> 
+                                        <i onClick={()=> setOpenProfile((prve)=> !prve)} class="fas fa-user-circle fa-2x"></i>
+                                    </li>
+                                    )}
+                                            
+                                    </>
+                                    )}
+
+
+                          
+
+                               
+
+                            
+                                
                                 
                                 {openProfile && <DropDownProfile />}
                                    
