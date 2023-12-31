@@ -75,14 +75,31 @@ const GetCourseByCategory = () => {
 
                         <div className="tab-pane fade show active" id="most-popular" role="tabpanel" aria-labelledby="most-popular-tab">
                             <div className="course-tab-content">
-                                <div className="row course-overview">
+                                <div className="course-overview">
+
+                                <div className="row g-5 mb-5">
                                 {courses.slice(0, next)?.map((course) => {
-                                            return (
-                                            <div key={course.id} className="col-md-6 col-xl-3">
-                                                <CourseTypeOne data={course} classes="course-box-shadow" />
-                                            </div>
-                                            );
-                                        })}
+                                    return (
+                                    <div key={course.id} className="col-md-6 col-xl-3">
+                                        <CourseTypeOne data={course} classes="course-box-shadow" />
+                                    </div>
+                                    );
+                                })}
+                                </div>
+
+                                {next < courses.length && (
+                                    <div
+                                        onClick={handleLoadData}
+                                        className="load-more-btn"
+                                        data-sal-delay="100"
+                                        data-sal="slide-up"
+                                        data-sal-duration="1200"
+                                    >
+                                        <a className="edu-btn mb-5" style={{ cursor: "pointer" }}>
+                                        Load More <i className="icon-56"></i>
+                                        </a>
+                                    </div>
+                                    )}
                                  
                                     
                                 </div>
