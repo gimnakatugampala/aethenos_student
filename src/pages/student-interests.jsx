@@ -8,18 +8,25 @@ import { USERTOKEN } from '../api';
 
 const index = () => {
 
-    var router = useRouter();
-    var TOKEN = router.query["token"];
+    const { query } = useRouter();
+    const router = useRouter();
 
     useEffect(() => {
 
-        if(TOKEN == null){
-            window.location.href = "/"
-        }else if(USERTOKEN == null){
-            window.location.href = "/"
+        if(query.token != null){
+            if(USERTOKEN == null){
+                router.push("/")
+            }
+            console.log(query.token)
         }
-      
-    }, [])
+
+        if(router.asPath == "/student-interests"){
+            router.push("/")
+        }
+
+        console.log(router)
+
+    })
     
 
     return (

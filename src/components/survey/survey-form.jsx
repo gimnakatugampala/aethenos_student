@@ -70,13 +70,13 @@ const Surveyform = () => {
     if (selectedSuggestions.length === 0) {
       Swal.fire({
         title: "Empty Field!",
-        text: "Please Fill in Your Profession",
+        text: "Please Fill in Your Interest",
         icon: "error",
       });
     } else if (selectedSuggestions.length < 5) {
       Swal.fire({
-        title: "Insufficient Professions!",
-        text: "Please select five professions",
+        title: "Insufficient Interest!",
+        text: "Please select five Interest",
         icon: "error",
       });
     } else {
@@ -96,7 +96,7 @@ const Surveyform = () => {
         <div className="form-group">
           <label htmlFor="current-log-profession">
             <h4>
-              What is your current profession? (Please Select 5 professions.)
+             What are Your Favorite Topics ? (Please Select 5 Topics.)
             </h4>
           </label>
 
@@ -145,7 +145,7 @@ const Surveyform = () => {
               type="text"
               onChange={handleInputChange}
               value={profession}
-              placeholder="Enter your profession (e.g., Web Developer)"
+              placeholder="Enter your Topics (e.g., Web Developer)"
               disabled={selectedSuggestions.length >= 5}
               style={{ display: "inline-block", padding: "15px" }}
             />

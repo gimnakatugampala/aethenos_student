@@ -9,6 +9,7 @@ import validateEmail from '../../functions/emailValid';
 import LoadingBtn from '../../functions/LoadingBtn';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
+import ButtonLoadingMedium from '../../functions/Loading/ButtonLoadingMedium';
 
 const RegisterForm = () => {
 
@@ -29,6 +30,8 @@ const RegisterForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        setloading(true)
+
         // Validate
         if(fname == ""){
 
@@ -38,6 +41,8 @@ const RegisterForm = () => {
                 icon: 'error',
               })
 
+            setloading(false)
+
         }else if(lname == ""){
 
             Swal.fire({
@@ -45,6 +50,8 @@ const RegisterForm = () => {
                 text: 'Please Fill Last Name',
                 icon: 'error',
               })
+
+              setloading(false)
 
         }else if(email == ""){
 
@@ -54,6 +61,8 @@ const RegisterForm = () => {
                 icon: 'error',
               })
 
+              setloading(false)
+
         }else if(password == ""){
 
             Swal.fire({
@@ -61,6 +70,8 @@ const RegisterForm = () => {
                 text: 'Please Fill Password',
                 icon: 'error',
               })
+
+              setloading(false)
 
         }else if(conpassword == ""){
 
@@ -70,6 +81,8 @@ const RegisterForm = () => {
                 icon: 'error',
               })
 
+              setloading(false)
+
         }else if(password != conpassword){
 
             Swal.fire({
@@ -77,6 +90,8 @@ const RegisterForm = () => {
                 text: 'Passwords do not match',
                 icon: 'error',
               })
+
+              setloading(false)
 
         }else if(!validateEmail(email)){
 
@@ -86,6 +101,8 @@ const RegisterForm = () => {
                 icon: 'error',
               })
 
+              setloading(false)
+
         }else if(termsconditions == false){
 
             Swal.fire({
@@ -93,6 +110,8 @@ const RegisterForm = () => {
                 text: 'Please Accept our Terms & Conditions',
                 icon: 'error',
               })
+
+              setloading(false)
 
         }else if(password.length < 8 || conpassword < 8){
 
@@ -102,15 +121,18 @@ const RegisterForm = () => {
                 icon: 'error',
               })
 
+              setloading(false)
+
         }else{
 
-     
+            setloading(true)
 
               StudentSignUp(
                 fname,
                 lname,
                 email,
-                conpassword
+                conpassword,
+                setloading
                 )
         }
 
@@ -167,7 +189,11 @@ const RegisterForm = () => {
         
             
             <div className="form-group">
-                <button type="submit" className="edu-btn btn-medium">Create Account <i className="icon-4"></i></button>
+                {loading ? (
+                    <ButtonLoadingMedium />
+                ) : (
+                    <button type="submit" className="edu-btn btn-medium">Create Account <i className="icon-4"></i></button>
+                )}
             </div>
 
             

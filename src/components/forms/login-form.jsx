@@ -7,7 +7,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 import ErrorMsg from './error-msg';
 import { StudentSignIn } from '../../api';
-import Spinner from 'react-bootstrap/Spinner';
+import ButtonLoadingMedium from '../../functions/Loading/ButtonLoadingMedium';
 
 const LoginForm = () => {
 
@@ -88,9 +88,8 @@ const LoginForm = () => {
 
             <div className="form-group">
                 {loading ? (
-                <button type="button" className="edu-btn btn-medium p-2">
-                    <Spinner animation="border" variant="light" />
-                </button>) : (
+                    <ButtonLoadingMedium />
+                ) : (
                 <button type="submit" className="edu-btn btn-medium">Login <i className="icon-4"></i></button>
                 )}
 

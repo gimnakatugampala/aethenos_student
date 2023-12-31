@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 export const USERTOKEN = Cookies.get('aethenos') 
 
 
-export const StudentSignUp = async(fname, lname, email , conpassword) =>{
+export const StudentSignUp = async(fname, lname, email , conpassword,setloading) =>{
 
     var formdata = new FormData();
     formdata.append("email", `${email}`);
@@ -36,9 +36,11 @@ export const StudentSignUp = async(fname, lname, email , conpassword) =>{
                 timer: 1500
               });
 
+              setloading(false)
+
               Cookies.set('aethenos', `${result.token}`, { expires: 7 })
 
-              window.location.href = `/student-interests&token=${result.token}`
+              window.location.href = `/student-interests?token=${result.token}`
               
            
         }else{
@@ -48,6 +50,8 @@ export const StudentSignUp = async(fname, lname, email , conpassword) =>{
                 text: `${result.message}`,
                 icon: 'error',
               })
+
+              setloading(false)
         }
 
     })

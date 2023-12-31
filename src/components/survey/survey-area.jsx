@@ -8,7 +8,7 @@ const SurveyArea = () => {
         <div className="row g-5 justify-content-center">
           <div className="col-lg-10">
             <div className="login-form-box">
-              <h1 className="title">Student Interests</h1>
+              <h1 className="title">Interested Topics</h1>
                 <h3>Please answer this question for personalized recommendations</h3>
               <Surveyform />
             </div>
