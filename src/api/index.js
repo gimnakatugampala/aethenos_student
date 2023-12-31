@@ -3,6 +3,8 @@ import 'sweetalert2/src/sweetalert2.scss'
 import Cookies from 'js-cookie';
 import ErrorAlert from '../functions/Alert/ErrorAlert';
 import { useRouter } from "next/router";
+import SuccessAlert from '../functions/Alert/SuccessAlert';
+import { useState } from 'react';
 
 export const USERTOKEN = Cookies.get('aethenos') 
 const CURRENT_USER = Cookies.get('aethenos') 
@@ -242,7 +244,7 @@ export const GetStudentTopics = async(setSuggestions,setFilteredSuggestions) =>{
     .then(response => response.json())
     .then(result => {
       
-      Unauthorized(result.status,`/student-interests?query=${CURRENT_USER}`)
+      Unauthorized(result.status,`/student-interests?token=${CURRENT_USER}`)
 
       if(result.message == "Error"){
         ErrorAlert(result.message,result.variable)
@@ -256,19 +258,42 @@ export const GetStudentTopics = async(setSuggestions,setFilteredSuggestions) =>{
     .catch(error => console.log('error', error));
 }
 
-export const AddStudentTopic = async() =>{
+export const AddStudentTopic = async(selectedSuggestions,setloading,router) =>{
+
+  
+  setloading(true)
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
 
   var formdata = new FormData();
- formdata.append("topic", "1,2,3,4,5");
+ formdata.append("topic", `${selectedSuggestions[0].id},${selectedSuggestions[1].id},${selectedSuggestions[2].id},${selectedSuggestions[3].id},${selectedSuggestions[4].id}`);
 
 var requestOptions = {
   method: 'POST',
   body: formdata,
+  headers: myHeaders,
   redirect: 'follow'
 };
 
 fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/setTopics", requestOptions)
   .then(response => response.json())
-  .then(result => console.log(result))
+  .then(result => {
+    Unauthorized(result.status,`/student-interests?token=${CURRENT_USER}`)
+
+    
+
+    if(result.variable =="200"){
+      SuccessAlert("Added",result.message)
+      setloading(false)
+      Cookies.set('aethenos_topic_filled', true)
+      router.push(`/?login=success`)
+    }
+
+  })
   .catch(error => console.log('error', error));
+
+
+
+
 }

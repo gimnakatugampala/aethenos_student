@@ -2,14 +2,18 @@ import { delay } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
-import { GetStudentTopics } from "../../api";
+import { AddStudentTopic, GetStudentTopics } from "../../api";
 import ErrorAlert from "../../functions/Alert/ErrorAlert";
+import ButtonLoadingMedium from "../../functions/Loading/ButtonLoadingMedium";
+import { useRouter } from "next/router";
 
 const Surveyform = () => {
   const [profession, setProfession] = useState("");
   const [suggestions, setSuggestions] = useState();
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [selectedSuggestions, setSelectedSuggestions] = useState([]);
+  const [loading, setloading] = useState(false)
+  const router = useRouter();
   
 
   useEffect(() => {
@@ -99,13 +103,17 @@ const Surveyform = () => {
 
   const handleStudentInterestedTopics = (e) =>{
     e.preventDefault()
+
+    setloading(true)
+
     if(selectedSuggestions.length != 5){
       console.log(selectedSuggestions)
       ErrorAlert("Error","Please Select 5 Topics")
+      setloading(false)
       return
     }
-
-    console.log(selectedSuggestions)
+    AddStudentTopic(selectedSuggestions,setloading,router)
+    // console.log(selectedSuggestions)
 
   }
 
@@ -200,9 +208,12 @@ const Surveyform = () => {
         </div>
 
         <div className="form-group">
-          <button type="submit" className="edu-btn btn-medium">
-            Submit <i className="icon-4"></i>
-          </button>
+          {loading ? <ButtonLoadingMedium /> : (
+            <button type="submit" className="edu-btn btn-medium">
+              Submit <i className="icon-4"></i>
+            </button>
+          )}
+            
         </div>
       </form>
     </div>
