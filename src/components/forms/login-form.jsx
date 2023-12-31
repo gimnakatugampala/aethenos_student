@@ -8,6 +8,7 @@ import 'sweetalert2/src/sweetalert2.scss'
 import ErrorMsg from './error-msg';
 import { StudentSignIn } from '../../api';
 import ButtonLoadingMedium from '../../functions/Loading/ButtonLoadingMedium';
+import { useRouter } from "next/router";
 
 const LoginForm = () => {
 
@@ -16,6 +17,8 @@ const LoginForm = () => {
 
     const [email, setemail] = useState("")
     const [password, setpassword] = useState("")
+
+    const router = useRouter();
 
     const handleSubmit = (e) =>{
         e.preventDefault()
@@ -54,7 +57,7 @@ const LoginForm = () => {
               setloading(false)
 
         }else{
-            StudentSignIn(email, password,setloading)
+            StudentSignIn(email, password,setloading,router)
 
         }
 

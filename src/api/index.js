@@ -2,7 +2,6 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 import Cookies from 'js-cookie';
 import ErrorAlert from '../functions/Alert/ErrorAlert';
-import { useRouter } from "next/router";
 import SuccessAlert from '../functions/Alert/SuccessAlert';
 import { useState } from 'react';
 
@@ -20,9 +19,8 @@ const Unauthorized = (result,rediect_url) =>{
 
 
 
-export const StudentSignUp = async(fname, lname, email , conpassword,setloading) =>{
+export const StudentSignUp = async(fname, lname, email , conpassword,setloading,router) =>{
 
-    const router = useRouter();
 
     var formdata = new FormData();
     formdata.append("email", `${email}`);
@@ -79,11 +77,10 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading)
 }
 
 
-export const StudentSignIn = async(email, password,setloading) =>{
+export const StudentSignIn = async(email, password,setloading,router) =>{
 
   setloading(true)
 
-  const router = useRouter();
 
     var formdata = new FormData();
     formdata.append("email", `${email}`);
@@ -147,9 +144,9 @@ export const StudentSignIn = async(email, password,setloading) =>{
 
 }
 
-export const InstructorSignUp = async(firstname,lastname,email,conpassword) =>{
+export const InstructorSignUp = async(firstname,lastname,email,conpassword,router) =>{
 
-  const router = useRouter();
+
 
   var formdata = new FormData();
   formdata.append("email", `${email}`);
@@ -179,14 +176,6 @@ export const InstructorSignUp = async(firstname,lastname,email,conpassword) =>{
               showConfirmButton: false,
               timer: 1500
             });
-
-            const user = {
-              token:result.token,
-              email:"gimna@gmail.com",
-              firstname:"Gimna",
-              lastname:"Kavishka",
-              status:"Instructor"
-            }
 
             Cookies.set('aethenos', `${result.token}`, { expires: 7 })
 

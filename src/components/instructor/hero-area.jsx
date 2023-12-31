@@ -9,6 +9,8 @@ import { InstructorSignUp } from '../../api';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 import validateEmail from '../../functions/emailValid';
+import { useRouter } from 'next/router';
+
 
 
 const HeroArea = () => {
@@ -26,6 +28,8 @@ const HeroArea = () => {
     const [password, setpassword] = useState("")
     const [conpassword, setconpassword] = useState("")
     const [termsconditions, settermsconditions] = useState(false)
+
+    const router = useRouter();
 
 
     const onFormSubmit = (e) =>{
@@ -106,8 +110,7 @@ const HeroArea = () => {
               })
 
         }else{
-            console.log("OK")
-            InstructorSignUp(firstname,lastname,email,conpassword)
+            InstructorSignUp(firstname,lastname,email,conpassword,router)
             // console.log(firstname)
             // console.log(lastname)
             // console.log(email)

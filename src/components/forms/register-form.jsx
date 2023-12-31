@@ -10,6 +10,7 @@ import LoadingBtn from '../../functions/LoadingBtn';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 import ButtonLoadingMedium from '../../functions/Loading/ButtonLoadingMedium';
+import { useRouter } from "next/router";
 
 const RegisterForm = () => {
 
@@ -23,6 +24,7 @@ const RegisterForm = () => {
     const [loading, setloading] = useState(false)
 
     const [showPass, setshowPass] = useState(false)
+    const router = useRouter();
 
     
     
@@ -132,7 +134,8 @@ const RegisterForm = () => {
                 lname,
                 email,
                 conpassword,
-                setloading
+                setloading,
+                router
                 )
         }
 
