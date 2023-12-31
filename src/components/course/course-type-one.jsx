@@ -49,9 +49,8 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
             <div className="inner">
                 <div className="thumbnail">
                     <Link href={`/course-details/${data.id}`} legacyBehavior>
-
-                        <img src={`/assets/images/course/course-${image_location_path}/${data.img}`} alt="Course Meta" />
-
+                        <img style={{width:'100%'}} src={`/assets/images/course/course-${image_location_path}/${data.img}`} alt="Course Meta" />
+                  
                     </Link>
                     <div className="time-top">
                         <span className="duration" style={{background:'#e01D20'}}>{data.duration} OFF</span>
@@ -73,8 +72,8 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                         <span className="rating-count">({data.rating} /{data.rating_count} Rating)</span>
                     </div>
                     <div className="course-price">${data.course_price}</div>
-                    <ul className="course-meta">
-                        <li><i className="icon-24"></i>{data.lesson} Lessons1</li>
+                    <ul className="d-flex course-meta">
+                        <li><i className="icon-24"></i>{data.lesson} Lessons</li>
                         <li><i className="icon-25"></i>{data.student} Students</li>
                     </ul>
                 </div>
