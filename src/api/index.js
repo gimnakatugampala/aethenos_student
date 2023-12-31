@@ -304,7 +304,7 @@ export const GetCourseCategory = async(setcategories) =>{
     .then(response => response.json())
     .then(result => {
       setcategories(result.map((item) => ({
-        link: `/courses/${item.linkName}`,
+        link: `/courses/${item.linkName}/`,
         title: item.name
       })))
     })

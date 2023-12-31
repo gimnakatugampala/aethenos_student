@@ -5,7 +5,7 @@ import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRound
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import courseImage from "./aaa.jpg";
+import courseImage from "http://185.209.223.202:8080/manager/images/tomcat.svg";
 import { Card } from "react-bootstrap";
 import styled from "styled-components";
 
