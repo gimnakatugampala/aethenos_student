@@ -29,14 +29,13 @@ const GetCourseByCategory = () => {
         <SEO pageTitle={"Marketing"} />
         <Header/>
 
-        <CourseArea />
 
         <section className="edu-section-gap course-details-area">
             <div className="container">
+                    <div className="row">
                     <h2>Development Courses</h2>
 
                     <h4>Courses to get you started</h4>
-                    <div className="row">
 
                     <div className="col-lg-5">
                         <div className="course-details-content">
