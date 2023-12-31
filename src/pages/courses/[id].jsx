@@ -21,14 +21,16 @@ const GetCourseByCategory = () => {
     const { id } = router.query;
     const coursePerView = 8;
     const [next, setNext] = useState(coursePerView);
-    const [courses, setCourses] = useState(course_data);
+    const [most_popular_courses, setmost_popular_courses] = useState(course_data)
+    const [new_courses, setnew_courses] = useState(course_data)
+    const [trending_courses, settrending_courses] = useState(course_data)
     // handleLoadData
     const handleLoadData = () => {
       setNext((value) => value + 4);
     };
 
     useEffect(() => {
-        console.log(courses)
+        // console.log(courses)
         GetCourseCategoryTitle()
     }, [])
     
@@ -82,7 +84,7 @@ const GetCourseByCategory = () => {
                                 <div className="course-overview">
 
                                 <div className="row g-3 mb-5">
-                                {courses.slice(0, next)?.map((course) => {
+                                {most_popular_courses.slice(0, next)?.map((course) => {
                                     return (
                                     <div key={course.id} className="col-md-6 col-xl-3">
                                         <CourseTypeOne data={course} classes="course-box-shadow" />
@@ -91,7 +93,7 @@ const GetCourseByCategory = () => {
                                 })}
                                 </div>
 
-                                {next < courses.length && (
+                                {next < most_popular_courses.length && (
                                     <div
                                         onClick={handleLoadData}
                                         className="load-more-btn"
@@ -113,8 +115,30 @@ const GetCourseByCategory = () => {
                         
                         <div className="tab-pane fade show active" id="new" role="tabpanel" aria-labelledby="new-tab">
                             <div className="course-tab-content">
-                                <div className="course-overview">
-                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit provident cupiditate quis porro, tempora nulla dicta, distinctio cumque, aspernatur magnam quam eligendi! Autem voluptatem soluta commodi iusto impedit quis odio.
+                            <div className="course-overview">
+                                <div className="row g-3 mb-5">
+                                {new_courses.slice(0, next)?.map((course) => {
+                                    return (
+                                    <div key={course.id} className="col-md-6 col-xl-3">
+                                        <CourseTypeOne data={course} classes="course-box-shadow" />
+                                    </div>
+                                    );
+                                })}
+                                </div>
+
+                                {next < new_courses.length && (
+                                    <div
+                                        onClick={handleLoadData}
+                                        className="load-more-btn"
+                                        data-sal-delay="100"
+                                        data-sal="slide-up"
+                                        data-sal-duration="1200"
+                                    >
+                                        <a className="edu-btn mb-5" style={{ cursor: "pointer" }}>
+                                        Load More <i className="icon-56"></i>
+                                        </a>
+                                    </div>
+                                    )}
                                     
                                 </div>
                             </div>
@@ -122,8 +146,30 @@ const GetCourseByCategory = () => {
 
                         <div className="tab-pane fade show active" id="trending" role="tabpanel" aria-labelledby="trending-tab">
                             <div className="course-tab-content">
-                                <div className="course-overview">
-                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit provident cupiditate quis porro, tempora nulla dicta, distinctio cumque, aspernatur magnam quam eligendi! Autem voluptatem soluta commodi iusto impedit quis odio.
+                            <div className="course-overview">
+                                <div className="row g-3 mb-5">
+                                {trending_courses.slice(0, next)?.map((course) => {
+                                    return (
+                                    <div key={course.id} className="col-md-6 col-xl-3">
+                                        <CourseTypeOne data={course} classes="course-box-shadow" />
+                                    </div>
+                                    );
+                                })}
+                                </div>
+
+                                {next < trending_courses.length && (
+                                    <div
+                                        onClick={handleLoadData}
+                                        className="load-more-btn"
+                                        data-sal-delay="100"
+                                        data-sal="slide-up"
+                                        data-sal-duration="1200"
+                                    >
+                                        <a className="edu-btn mb-5" style={{ cursor: "pointer" }}>
+                                        Load More <i className="icon-56"></i>
+                                        </a>
+                                    </div>
+                                    )}
                                     
                                 </div>
                             </div>
