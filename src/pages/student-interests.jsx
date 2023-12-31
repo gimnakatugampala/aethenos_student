@@ -17,14 +17,11 @@ const index = () => {
             if(USERTOKEN == null){
                 router.push("/")
             }
-            console.log(query.token)
         }
 
         if(router.asPath == "/student-interests"){
             router.push("/")
         }
-
-        console.log(router)
 
     })
     

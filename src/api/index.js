@@ -1,11 +1,26 @@
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 import Cookies from 'js-cookie';
+import ErrorAlert from '../functions/Alert/ErrorAlert';
+import { useRouter } from "next/router";
 
 export const USERTOKEN = Cookies.get('aethenos') 
+const CURRENT_USER = Cookies.get('aethenos') 
+
+// Unauthorized
+const Unauthorized = (result,rediect_url) =>{
+
+  if(result == 401){
+    Cookies.remove('aethenos', { path: '' })
+    window.location.href = `/login?sessionTimeout=true&rediect-url=${rediect_url}`
+  }
+}
+
 
 
 export const StudentSignUp = async(fname, lname, email , conpassword,setloading) =>{
+
+    const router = useRouter();
 
     var formdata = new FormData();
     formdata.append("email", `${email}`);
@@ -39,8 +54,10 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading)
               setloading(false)
 
               Cookies.set('aethenos', `${result.token}`, { expires: 7 })
+              Cookies.set('aethenos_topic_filled', false)
 
-              window.location.href = `/student-interests?token=${result.token}`
+              router.push(`/student-interests?token=${result.token}`)
+              // window.location.href = `/student-interests?token=${result.token}`
               
            
         }else{
@@ -63,6 +80,8 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading)
 export const StudentSignIn = async(email, password,setloading) =>{
 
   setloading(true)
+
+  const router = useRouter();
 
     var formdata = new FormData();
     formdata.append("email", `${email}`);
@@ -115,7 +134,9 @@ export const StudentSignIn = async(email, password,setloading) =>{
 
               Cookies.set('aethenos', `${result.token}`, { expires: 7 })
 
-              window.location.href = "/?login=success"
+              // window.location.href = "/?login=success"
+
+              router.push(`/?login=success`)
 
 
         }
@@ -125,6 +146,8 @@ export const StudentSignIn = async(email, password,setloading) =>{
 }
 
 export const InstructorSignUp = async(firstname,lastname,email,conpassword) =>{
+
+  const router = useRouter();
 
   var formdata = new FormData();
   formdata.append("email", `${email}`);
@@ -165,7 +188,9 @@ export const InstructorSignUp = async(firstname,lastname,email,conpassword) =>{
 
             Cookies.set('aethenos', `${result.token}`, { expires: 7 })
 
-            window.location.href = "/?login=success"
+            // window.location.href = "/?login=success"
+
+            router.push(`/?login=success`)
 
       }else{
 
@@ -200,4 +225,50 @@ export const InstructorVerify = async() =>{
       return false
     }
 
+}
+
+export const GetStudentTopics = async(setSuggestions,setFilteredSuggestions) =>{
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/getTopics", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      
+      Unauthorized(result.status,`/student-interests?query=${CURRENT_USER}`)
+
+      if(result.message == "Error"){
+        ErrorAlert(result.message,result.variable)
+        return
+      }
+
+      setSuggestions(result)
+      setFilteredSuggestions(result)
+
+    })
+    .catch(error => console.log('error', error));
+}
+
+export const AddStudentTopic = async() =>{
+
+  var formdata = new FormData();
+ formdata.append("topic", "1,2,3,4,5");
+
+var requestOptions = {
+  method: 'POST',
+  body: formdata,
+  redirect: 'follow'
+};
+
+fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/setTopics", requestOptions)
+  .then(response => response.json())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
 }

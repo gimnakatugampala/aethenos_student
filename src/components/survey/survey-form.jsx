@@ -2,66 +2,72 @@ import { delay } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import { GetStudentTopics } from "../../api";
+import ErrorAlert from "../../functions/Alert/ErrorAlert";
 
 const Surveyform = () => {
   const [profession, setProfession] = useState("");
-  const [suggestions, setSuggestions] = useState([
-    "Web Developer",
-    "Software Engineer",
-    "Graphic Designer",
-    "Data Analyst",
-    "UX Designer",
-    "Data Scientists",
-    "UX Designer",
-    "Data Scientists",
-  ]);
+  const [suggestions, setSuggestions] = useState();
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [selectedSuggestions, setSelectedSuggestions] = useState([]);
+  
 
   useEffect(() => {
-    setFilteredSuggestions(suggestions);
-  }, [suggestions]);
+    GetStudentTopics(setSuggestions,setFilteredSuggestions)
+   
+  }, []);
+
+
 
   const handleInputChange = (e) => {
     const userInput = e.target.value;
-    setProfession(userInput);
+    setProfession(e.target.value);
 
     const filtered = suggestions
       .filter((suggest) =>
-        suggest.toLowerCase().includes(userInput.toLowerCase())
+        suggest.topic.toLowerCase().includes(userInput.toLowerCase())
       )
       .sort((a, b) => {
-        const aIndex = a.toLowerCase().indexOf(userInput.toLowerCase());
-        const bIndex = b.toLowerCase().indexOf(userInput.toLowerCase());
+        const aIndex = a.topic.toLowerCase().indexOf(userInput.toLowerCase());
+        const bIndex = b.topic.toLowerCase().indexOf(userInput.toLowerCase());
         return aIndex - bIndex;
+
       });
 
     setFilteredSuggestions(filtered);
-  };
-  const handleSuggestionClick = (suggest) => {
-    if (selectedSuggestions.length < 5) {
-      setProfession("");
-      setSelectedSuggestions([...selectedSuggestions, suggest]);
 
-      const updatedSuggestions = suggestions.filter((item) => item !== suggest);
+    console.log(filtered)
+  };
+
+  const handleSuggestionClick = (suggest) => {
+
+    if (selectedSuggestions.length < 5) {
+      setSelectedSuggestions([...selectedSuggestions, suggest]);
+      const updatedSuggestions = suggestions.filter((item) => item.id != suggest.id);
       setSuggestions(updatedSuggestions);
       setFilteredSuggestions(updatedSuggestions);
-    } else {
-      Swal.fire({
-        title: "Limit Exceeded!",
-        text: "You can only select up to five professions.",
-        icon: "warning",
-      });
+      setProfession("")
+
+    }else{
+      ErrorAlert("Limit Exceeded!","You can only select up to 5 Topics.")
+      return
     }
+
+
+
+    console.log(suggest)
+    console.log(selectedSuggestions)
   };
 
   const removeTag = (removedSuggestion) => {
     const updatedSuggestions = selectedSuggestions.filter(
-      (suggest) => suggest !== removedSuggestion
+      (suggest) => suggest.id != removedSuggestion.id
     );
+    
     setSelectedSuggestions(updatedSuggestions);
 
     setSuggestions([...suggestions, removedSuggestion]);
+    setFilteredSuggestions([...suggestions, removedSuggestion]);
   };
 
   const handleSubmit = (e) => {
@@ -90,9 +96,22 @@ const Surveyform = () => {
     }
   };
 
+
+  const handleStudentInterestedTopics = (e) =>{
+    e.preventDefault()
+    if(selectedSuggestions.length != 5){
+      console.log(selectedSuggestions)
+      ErrorAlert("Error","Please Select 5 Topics")
+      return
+    }
+
+    console.log(selectedSuggestions)
+
+  }
+
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleStudentInterestedTopics}>
         <div className="form-group">
           <label htmlFor="current-log-profession">
             <h4>
@@ -115,7 +134,7 @@ const Surveyform = () => {
                     padding: "5px",
                   }}
                 >
-                  {suggest}
+                  {suggest.topic}
                   <button
                     key={index}
                     className="tag mx-1"
@@ -132,7 +151,7 @@ const Surveyform = () => {
                     }}
                     onClick={() => removeTag(suggest)}
                   >
-                    x
+                    <i className="fa-solid fa-xmark"></i>
                   </button>
                 </span>
               ))}
@@ -158,9 +177,9 @@ const Surveyform = () => {
               }}
             >
               <h6 className="mt-3" style={{ width: "100%" }}>
-                Popular professions <i class="icon-2 mx-1"></i>
+                Popular Topics <i class="icon-2 mx-1"></i>
               </h6>
-              {filteredSuggestions.map((suggest, index) => (
+              {filteredSuggestions != null && filteredSuggestions.map((suggest, index) => (
                 <span
                   key={index}
                   onClick={() => handleSuggestionClick(suggest)}
@@ -173,7 +192,7 @@ const Surveyform = () => {
                     display: "inline-block",
                   }}
                 >
-                  {suggest}
+                  {suggest.topic}
                 </span>
               ))}
             </div>
