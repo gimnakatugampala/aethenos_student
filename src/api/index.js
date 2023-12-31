@@ -311,3 +311,15 @@ export const GetCourseCategory = async(setcategories) =>{
     .catch(error => console.log('error', error));
 
 }
+
+export const GetCourseCategoryTitle = async() =>{
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCourseTitleBylinkName/design", requestOptions)
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+}

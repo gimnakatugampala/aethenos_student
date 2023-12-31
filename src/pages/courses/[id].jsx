@@ -3,12 +3,15 @@ import { useRouter } from 'next/router';
 import { Footer, Header, Wrapper } from "../../layout";
 
 import SEO from "../../components/seo";
+import { GetCourseCategoryTitle } from '../../api';
 
 
 const GetCourseByCategory = () => {
 
     const router = useRouter();
     const { id } = router.query;
+    
+    GetCourseCategoryTitle()
 
   return (
     <Wrapper>
@@ -19,85 +22,71 @@ const GetCourseByCategory = () => {
             <div className="container">
                 <div className="row">
 
-                    <div className="col-lg-4">
+                    <div className="col-lg-5">
                         <div className="course-details-content">
 
                             <ul className="nav nav-tabs" id="myTab" role="tablist">
+
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview"
-                                    type="button" role="tab" aria-controls="overview" aria-selected="true">Overview</button>
+                                    <button className="nav-link active" id="most-popular-tab" data-bs-toggle="tab" data-bs-target="#most-popular"
+                                    type="button" role="tab" aria-controls="most-popular" aria-selected="true">Most Popular</button>
                                 </li>
+
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link" id="carriculam-tab" data-bs-toggle="tab" data-bs-target="#carriculam"
-                                    type="button" role="tab" aria-controls="carriculam" aria-selected="false">Carriculam</button>
+                                    <button className="nav-link" id="new-tab" data-bs-toggle="tab" data-bs-target="#new"
+                                    type="button" role="tab" aria-controls="new" aria-selected="false">New</button>
+                                </li>
+
+                                <li className="nav-item" role="presentation">
+                                    <button className="nav-link" id="trending-tab" data-bs-toggle="tab" data-bs-target="#trending"
+                                    type="button" role="tab" aria-controls="trending" aria-selected="false">Trending</button>
                                 </li>
                            
                             
                             </ul>
-
                           
                         </div>
                     </div>
 
+                    <div className="col-lg-12 p-3">
+
                     <div className="tab-content" id="myTabContent">
-                                <div className="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
-                                    <div className="course-tab-content">
-                                        <div className="course-overview">
-                                            <h3 className="heading-title">Course Description</h3>
-                                            <p>d</p>
-                                            <p className="mb--60">f</p>
-                                            <h5 className="title">What You’ll Learn?</h5>
-                                           
-                                        </div>
-                                    </div>
+
+
+                        <div className="tab-pane fade show active" id="most-popular" role="tabpanel" aria-labelledby="most-popular-tab">
+                            <div className="course-tab-content">
+                                <div className="course-overview">
+                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit provident cupiditate quis porro, tempora nulla dicta, distinctio cumque, aspernatur magnam quam eligendi! Autem voluptatem soluta commodi iusto impedit quis odio.
+                                    
                                 </div>
+                            </div>
+                        </div>
+
+                        
+                        <div className="tab-pane fade show active" id="new" role="tabpanel" aria-labelledby="new-tab">
+                            <div className="course-tab-content">
+                                <div className="course-overview">
+                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit provident cupiditate quis porro, tempora nulla dicta, distinctio cumque, aspernatur magnam quam eligendi! Autem voluptatem soluta commodi iusto impedit quis odio.
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="tab-pane fade show active" id="trending" role="tabpanel" aria-labelledby="trending-tab">
+                            <div className="course-tab-content">
+                                <div className="course-overview">
+                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit provident cupiditate quis porro, tempora nulla dicta, distinctio cumque, aspernatur magnam quam eligendi! Autem voluptatem soluta commodi iusto impedit quis odio.
+                                    
+                                </div>
+                            </div>
+                        </div>
 
                            
 
-                                <div className="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
-                                    <div className="course-tab-content">
+                    
+                    </div>
+                    </div>
 
-                                        <div className="course-review">
-                                            <h3 className="heading-title">Course Rating</h3>
-                                            <p>4 average rating based on 4 rating</p>
-                                            <div className="row g-0 align-items-center">
-                                                <div className="col-sm-4">
-                                                    <div className="rating-box">
-                                                        <div className="rating-number">5</div>
-                                                        <div className="rating">
-                                                            <i className="icon-23"></i>
-                                                            <i className="icon-23"></i>
-                                                            <i className="icon-23"></i>
-                                                            <i className="icon-23"></i>
-                                                            <i className="icon-23"></i>
-                                                        </div>
-                                                        <span>(4 Review)</span>
-                                                    </div>
-                                                </div>
-                                           
-                                            </div>
-
-                                          
-                                            <div className="comment-form-area">
-                                                <h3 className="heading-title">Write a Review</h3>
-                                                <div className="rating-icon">
-                                                    <h6 className="title">Rating Here</h6>
-                                                    <div className="rating">
-                                                        <i className="icon-23"></i>
-                                                        <i className="icon-23"></i>
-                                                        <i className="icon-23"></i>
-                                                        <i className="icon-23"></i>
-                                                        <i className="icon-23"></i>
-                                                    </div>
-                                                </div>
-                                        
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-
-                            </div>
     
                 </div>
             </div>
