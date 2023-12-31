@@ -50,7 +50,6 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                 <div className="thumbnail">
                     <Link href={`/course-details/${data.id}`} legacyBehavior>
                         <img style={{width:'100%'}} src={`/assets/images/course/course-${image_location_path}/${data.img}`} alt="Course Meta" />
-                  
                     </Link>
                     <div className="time-top">
                         <span className="duration" style={{background:'#e01D20'}}>{data.duration} OFF</span>
@@ -71,7 +70,11 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                         </div>
                         <span className="rating-count">({data.rating} /{data.rating_count} Rating)</span>
                     </div>
-                    <div className="course-price">${data.course_price}</div>
+                    <div className='d-flex'>
+                    <div className="course-price discounted-price m-1"><b>${data.course_price}</b></div>
+                    <div className="course-price text-decoration-line-through m-2">${data.course_price}</div>
+
+                    </div>
                     <ul className="d-flex course-meta">
                         <li><i className="icon-24"></i>{data.lesson} Lessons</li>
                         <li><i className="icon-25"></i>{data.student} Students</li>
@@ -104,9 +107,14 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                         </div>
                         <span className="rating-count">({data.rating} /{data.rating_count} Rating)</span>
                     </div>
-                    <div className="course-price">${data.course_price}</div>
+
+                    <div className='d-flex'>
+                    <div className="course-price discounted-price m-1"><b>${data.course_price}</b></div>
+                    <div className="course-price text-decoration-line-through m-2">${data.course_price}</div>
+                    </div>
+
                     <p>{data.short_desc}</p>
-                    <ul className="course-meta">
+                    <ul className="d-flex course-meta">
                         <li><i className="icon-24"></i>{data.lesson} Lessons</li>
                         <li><i className="icon-25"></i>{data.student} Students</li>
                     </ul>

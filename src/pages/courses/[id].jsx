@@ -6,6 +6,11 @@ import SEO from "../../components/seo";
 import { GetCourseCategoryTitle } from '../../api';
 
 import CourseTypeOne from '../../components/course/course-type-one';
+import CourseTypeTwo from '../../components/course/course-type-two';
+import CourseTypeSix from '../../components/course/course-type-six'
+import CourseTypeSeven from '../../components/course/course-type-seven'
+import CourseTypeThree from '../../components/course/course-type-three'
+
 import { course_data } from '../../data';
 import { useState } from 'react';
 
@@ -23,7 +28,6 @@ const GetCourseByCategory = () => {
     };
 
     useEffect(() => {
-        
         console.log(courses)
         GetCourseCategoryTitle()
     }, [])

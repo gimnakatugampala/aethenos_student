@@ -120,7 +120,7 @@
             }
         }
         .course-price {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: var(--p-semi-bold);
             color: var(--color-secondary);
             font-family: var(--font-secondary);
@@ -136,6 +136,9 @@
                 background-color: var(--color-primary);
                 border-radius: 50%;
                 text-align: center;
+            }
+            &.discounted-price{
+                font-size: 19px;
             }
         }
         .course-meta {

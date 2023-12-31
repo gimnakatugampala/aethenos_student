@@ -7105,7 +7105,7 @@ body.sal-disabled [data-sal|=flip] {
   transition: var(--transition);
 }
 .edu-course .content .course-price {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: var(--p-semi-bold);
   color: var(--color-secondary);
   font-family: var(--font-secondary);
@@ -7122,6 +7122,9 @@ body.sal-disabled [data-sal|=flip] {
   background-color: var(--color-primary);
   border-radius: 50%;
   text-align: center;
+}
+.edu-course .content .course-price.discounted-price {
+  font-size: 19px;
 }
 .edu-course .content .course-meta li {
   display: inline-block;
