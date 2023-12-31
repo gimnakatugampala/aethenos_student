@@ -13,7 +13,7 @@ import HeaderTopRight from '../headers/component/header-top-right';
 import MainMenu from '../headers/component/main-menu';
 import Cart from './component/cart';
 import SearchBar from '../../pages/Search/searchBar';
-import {  getUserStatus } from '../../api';
+import {  GetCourseCategory } from '../../api';
 import SmallRedLoading from '../../functions/Loading/SmallRedLoading';
 import Cookies from 'js-cookie';
 
@@ -34,7 +34,6 @@ const categories = [
 
 const Header = ({header_style, no_top_bar, disable_full_width, disable_category }) => {
 
-    const [activeUser, setactiveUser] = useState(false)
     // let  activeUser = false;
     const { sticky } = useSticky();
     const { quantity } = useCartInfo();
@@ -46,13 +45,20 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
     const [isUserLoading, setisUserLoading] = useState(true)
     const [CURRENTUSER, setCURRENTUSER] = useState(Cookies.get('aethenos'))
 
+    const [categories, setcategories] = useState([])
+
+    
+
     
     useEffect(() => {
         setTimeout(() => {
             setisUserLoading(false)
         }, 1500);
 
-    }, [])
+        // Get Categories
+        GetCourseCategory(setcategories)
+
+    }, [categories])
     
 
     return (
@@ -94,7 +100,7 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                                     <a href="#"><i className="icon-1"></i>Categories</a>
                                                     <ul className="submenu">
                                                         {
-                                                            categories.map((category, i) => (
+                                                           categories != null && categories.map((category, i) => (
                                                                 <li key={i}>
                                                                     <Link href={`${category.link}`} legacyBehavior><a>{category.title}</a></Link>
                                                                 </li>

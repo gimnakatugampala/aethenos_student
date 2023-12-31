@@ -292,3 +292,22 @@ export const Logout = async(setCURRENTUSER) =>{
   setCURRENTUSER(Cookies.get('aethenos'))
 
 }
+
+export const GetCourseCategory = async(setcategories) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCourseCategory", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      setcategories(result.map((item) => ({
+        link: `/courses/${item.linkName}`,
+        title: item.name
+      })))
+    })
+    .catch(error => console.log('error', error));
+
+}
