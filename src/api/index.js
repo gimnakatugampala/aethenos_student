@@ -286,3 +286,9 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/setTo
 
 
 }
+
+export const Logout = async(setCURRENTUSER) =>{
+  Cookies.remove('aethenos')
+  setCURRENTUSER(Cookies.get('aethenos'))
+
+}

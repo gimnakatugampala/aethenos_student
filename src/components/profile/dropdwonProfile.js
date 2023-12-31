@@ -6,8 +6,28 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import MessageIcon from '@mui/icons-material/Message';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { Logout } from "../../api";
+import SuccessAlert from "../../functions/Alert/SuccessAlert";
+import { useRouter } from "next/router";
 
-const DropDownProfile = () => {
+const DropDownProfile = ({setOpenProfile, setisUserLoading, setCURRENTUSER}) => {
+
+  const router = useRouter()
+
+  const handleLogout = () =>{
+
+    setisUserLoading(true)
+    setOpenProfile(false)
+
+    Logout(setCURRENTUSER)
+    SuccessAlert("Success","Logout Success")
+
+    setTimeout(() => {
+      setisUserLoading(false)
+  }, 1500);
+
+ 
+  }
 
 
   return (
@@ -34,7 +54,7 @@ const DropDownProfile = () => {
         <SettingsIcon />
         <p>Setting</p>
         </a>
-        <a href="#" className="submenu-link">
+        <a onClick={handleLogout} className="submenu-link">
         <LogoutIcon />
         <p>Log out</p>
         </a>

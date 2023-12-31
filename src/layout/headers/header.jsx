@@ -13,9 +13,9 @@ import HeaderTopRight from '../headers/component/header-top-right';
 import MainMenu from '../headers/component/main-menu';
 import Cart from './component/cart';
 import SearchBar from '../../pages/Search/searchBar';
-import { USERTOKEN, getUserStatus } from '../../api';
+import {  getUserStatus } from '../../api';
 import SmallRedLoading from '../../functions/Loading/SmallRedLoading';
-
+import Cookies from 'js-cookie';
 
 const categories = [
     { link: '/courses/design', title: 'Design' },
@@ -44,11 +44,10 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
     const [openProfile, setOpenProfile] = useState(false);
 
     const [isUserLoading, setisUserLoading] = useState(true)
+    const [CURRENTUSER, setCURRENTUSER] = useState(Cookies.get('aethenos'))
 
     
     useEffect(() => {
-        console.log(USERTOKEN)
-
         setTimeout(() => {
             setisUserLoading(false)
         }, 1500);
@@ -156,7 +155,7 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                     ) : (
                                     <>
 
-                                    {USERTOKEN == null ? (
+                                    {CURRENTUSER == null ? (
                                         <>
                                         <li className="header-info">
                                                 <Link href="/login" legacyBehavior>
@@ -183,14 +182,7 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                     )}
 
 
-                          
-
-                               
-
-                            
-                                
-                                
-                                {openProfile && <DropDownProfile />}
+                                {openProfile && <DropDownProfile setOpenProfile={setOpenProfile} setisUserLoading={setisUserLoading} setCURRENTUSER={setCURRENTUSER}  />}
                                    
                                     <li className="mobile-menu-bar d-block d-xl-none">
                                         <button className="hamberger-button" onClick={() => setIsOpen(true)}>
