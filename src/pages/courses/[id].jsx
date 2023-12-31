@@ -1,26 +1,42 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { Footer, Header, Wrapper } from "../../layout";
 
 import SEO from "../../components/seo";
 import { GetCourseCategoryTitle } from '../../api';
 
+import CourseTypeOne from '../../components/course/course-type-one';
+import { course_data } from '../../data';
+import { useState } from 'react';
+
 
 const GetCourseByCategory = () => {
 
     const router = useRouter();
     const { id } = router.query;
+    const [courses, setcourses] = useState(course_data)
+
+    useEffect(() => {
+        
+        console.log(courses)
+        GetCourseCategoryTitle()
+    }, [])
     
-    GetCourseCategoryTitle()
+    
 
   return (
     <Wrapper>
         <SEO pageTitle={"Marketing"} />
         <Header/>
 
+        <CourseArea />
+
         <section className="edu-section-gap course-details-area">
             <div className="container">
-                <div className="row">
+                    <h2>Development Courses</h2>
+
+                    <h4>Courses to get you started</h4>
+                    <div className="row">
 
                     <div className="col-lg-5">
                         <div className="course-details-content">
@@ -81,9 +97,6 @@ const GetCourseByCategory = () => {
                             </div>
                         </div>
 
-                           
-
-                    
                     </div>
                     </div>
 
