@@ -50,7 +50,7 @@ const CourseTypeFive = ({ data, classes }) => {
                 <div className="thumbnail">
                     <Link href={`/course-details/${data.id}`} legacyBehavior>
                         <img
-               
+                        style={{width:'100%'}}
                             src={`/assets/images/course/course-06/${data.img}`}
                             alt="Course Thumb"
                         />

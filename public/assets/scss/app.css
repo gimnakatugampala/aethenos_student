@@ -7664,7 +7664,7 @@ body.sal-disabled [data-sal|=flip] {
   margin: -10px 0;
 }
 .edu-course.course-style-8 .hover-content-aside {
-  top: 100%;
+  top: -80%;
   left: 50%;
   transform: translateY(0) translateX(-50%);
   padding-top: 12px;
