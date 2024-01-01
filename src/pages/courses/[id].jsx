@@ -189,6 +189,7 @@ const GetCourseByCategory = () => {
     const [loading_most_popular_courses, setloading_most_popular_courses] = useState(true)
     const [loading_topics_list, setloading_topics_list] = useState(true)
     const [loading_instructors_list, setloading_instructors_list] = useState(true)
+    const [loading_all_courses_list, setloading_all_courses_list] = useState(true)
 
     const [CategoryName, setCategoryName] = useState("")
 
@@ -206,6 +207,7 @@ const GetCourseByCategory = () => {
             setloading_most_popular_courses(false)
             setloading_topics_list(false)
             setloading_instructors_list(false)
+            setloading_all_courses_list(false)
         }, 2000);
 
     }, [CategoryName,loading_top_title])
@@ -226,7 +228,7 @@ const GetCourseByCategory = () => {
 
   return (
     <Wrapper>
-        <SEO pageTitle={CategoryName == "" ? "Aethenos" : CategoryName} />
+        <SEO pageTitle={CategoryName == "" ? "Loading Content ..." : CategoryName} />
         <Header/>
 
             {loading_sub_categories ? (
@@ -627,11 +629,19 @@ const GetCourseByCategory = () => {
                     </div>
                                 
                     <div className='col-lg-12 mb-5'>
-
+                   
+                        {loading_top_title ? (
+                            <OneLineSkeleton height={20} />
+                        ) :(
+                            <h4 className='p-2'>All {CategoryName} courses</h4>
+                        )}
                         
-                <LandscapeListSkeleton />
-                    <h4 className='p-2'>All {CategoryName} courses</h4>
-                        <CourseFourArea />                            
+
+                        {loading_all_courses_list ? (
+                            <LandscapeListSkeleton />
+                        ) :(
+                            <CourseFourArea />                            
+                        )}
                     </div>
 
                 </div>
