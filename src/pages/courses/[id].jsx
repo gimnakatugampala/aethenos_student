@@ -22,6 +22,7 @@ import OneLineSkeleton from '../../functions/Skeletons/OneLineSkeleton';
 import CoursesPotraitSkeleton from '../../functions/Skeletons/CoursesPotraitSkeleton';
 import TopicsListSkeleton from '../../functions/Skeletons/TopicsListSkeleton';
 import InstructorsListSkeleton from '../../functions/Skeletons/InstructorsListSkeleton';
+import LandscapeListSkeleton from '../../functions/Skeletons/LandscapeListSkeleton';
 
 
 var items = [{
@@ -225,7 +226,7 @@ const GetCourseByCategory = () => {
 
   return (
     <Wrapper>
-        <SEO pageTitle={"Marketing"} />
+        <SEO pageTitle={CategoryName == "" ? "Aethenos" : CategoryName} />
         <Header/>
 
             {loading_sub_categories ? (
@@ -627,6 +628,8 @@ const GetCourseByCategory = () => {
                                 
                     <div className='col-lg-12 mb-5'>
 
+                        
+                <LandscapeListSkeleton />
                     <h4 className='p-2'>All {CategoryName} courses</h4>
                         <CourseFourArea />                            
                     </div>
