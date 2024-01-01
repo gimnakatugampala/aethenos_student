@@ -21,6 +21,7 @@ import Menu from '@mui/material/Menu';
 import OneLineSkeleton from '../../functions/Skeletons/OneLineSkeleton';
 import CoursesPotraitSkeleton from '../../functions/Skeletons/CoursesPotraitSkeleton';
 import TopicsListSkeleton from '../../functions/Skeletons/TopicsListSkeleton';
+import InstructorsListSkeleton from '../../functions/Skeletons/InstructorsListSkeleton';
 
 
 var items = [{
@@ -186,6 +187,7 @@ const GetCourseByCategory = () => {
     const [loading_top_title, setloading_top_title] = useState(true)
     const [loading_most_popular_courses, setloading_most_popular_courses] = useState(true)
     const [loading_topics_list, setloading_topics_list] = useState(true)
+    const [loading_instructors_list, setloading_instructors_list] = useState(true)
 
     const [CategoryName, setCategoryName] = useState("")
 
@@ -202,6 +204,7 @@ const GetCourseByCategory = () => {
             setloading_sub_categories(false)
             setloading_most_popular_courses(false)
             setloading_topics_list(false)
+            setloading_instructors_list(false)
         }, 2000);
 
     }, [CategoryName,loading_top_title])
@@ -480,134 +483,146 @@ const GetCourseByCategory = () => {
                 
                     <div className='col-lg-12 mb-5'>
                     <h4 className='p-2'>Popular Instructors</h4>
-                    <Carousel autoPlay={false} duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
-                        {instructors.map((page, index) => (
-                            <div className="row">
-                                  {page.single.map((item, itemIndex) => (
-                                    <CardContainer key={itemIndex} className="col-md-4 mb-3">
-                                    <a href="/users/123">
-                                    <div
-                                        className="row"
-                                        style={{
-                                        borderRadius: "0",
-                                        transition: "background-color 0.3s",
-                                        backgroundColor: "transparent",
-                                        color: "inherit",
-                                        textAlign: "left",
-                                        }}
-                                    >
-                                        <div className="col-md-3">
-                                        <img
-                                            src={item.image}
-                                            alt={item.title}
-                                            style={{borderRadius:'50%'}}
-                                        />
-                                        </div>
-                                        <div className="col-md-9">
-                                        <h3 className='m-0' style={{ fontWeight: "bold", fontSize: "16px" }}>
-                                            {item.title.length > 12 ?  item.title.slice(0, 17) + "..." : item.title}
-                                        </h3>
-                                        <div>
-                                        <p className="m-0" style={{fontSize:'13px'}}>{item.description.length > 10 ?  item.description.slice(0, 50) + "...": item.description}</p>
-                                        </div>
 
-                                        <div className="d-flex align-items-center">
 
-                                        <span>
-                                            <span
+                    {loading_instructors_list ? (
+                    <div className='row'>
+                    <InstructorsListSkeleton />
+                    <InstructorsListSkeleton />
+                    <InstructorsListSkeleton />
+                    </div>
+                    ) : (
+                        <Carousel autoPlay={false} duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
+                            {instructors.map((page, index) => (
+                                <div className="row">
+                                      {page.single.map((item, itemIndex) => (
+                                        <CardContainer key={itemIndex} className="col-md-4 mb-3">
+                                        <a href="/users/123">
+                                        <div
+                                            className="row"
                                             style={{
-                                                fontWeight: "bold",
-                                                fontSize: "18px",
-                                                color: "#B4690E",
+                                            borderRadius: "0",
+                                            transition: "background-color 0.3s",
+                                            backgroundColor: "transparent",
+                                            color: "inherit",
+                                            textAlign: "left",
                                             }}
-                                            >
-                                            {item.rating}
-                                            </span>
-                                            <StarIcon
-                                            style={{
-                                                fontSize: "20px",
-                                                color: "#B4690E",
-                                            }}
+                                        >
+                                            <div className="col-md-3">
+                                            <img
+                                                src={item.image}
+                                                alt={item.title}
+                                                style={{borderRadius:'50%'}}
                                             />
-                                            </span>
-
-                                            <p
-                                            className="m-0 p-0 align-self-center mt-1 ml-1"
-                                            style={{
-                                                fontSize: "12px",
-                                                color: "#B4690E",
-                                            }}
-                                            >
-                                            Instructor Rating
-                                            </p>
-
-                                        </div>
+                                            </div>
+                                            <div className="col-md-9">
+                                            <h3 className='m-0' style={{ fontWeight: "bold", fontSize: "16px" }}>
+                                                {item.title.length > 12 ?  item.title.slice(0, 17) + "..." : item.title}
+                                            </h3>
+                                            <div>
+                                            <p className="m-0" style={{fontSize:'13px'}}>{item.description.length > 10 ?  item.description.slice(0, 50) + "...": item.description}</p>
+                                            </div>
+    
+                                            <div className="d-flex align-items-center">
+    
+                                            <span>
+                                                <span
+                                                style={{
+                                                    fontWeight: "bold",
+                                                    fontSize: "18px",
+                                                    color: "#B4690E",
+                                                }}
+                                                >
+                                                {item.rating}
+                                                </span>
+                                                <StarIcon
+                                                style={{
+                                                    fontSize: "20px",
+                                                    color: "#B4690E",
+                                                }}
+                                                />
+                                                </span>
+    
+                                                <p
+                                                className="m-0 p-0 align-self-center mt-1 ml-1"
+                                                style={{
+                                                    fontSize: "12px",
+                                                    color: "#B4690E",
+                                                }}
+                                                >
+                                                Instructor Rating
+                                                </p>
+    
+                                            </div>
+                                                
+                                        
                                             
-                                    
-                                        
-
-                                        <div>
-
-                                        
-
-                                        <div className="d-flex align-items-center">
-                                            <p
-                                            className="mx-1 mb-0 mt-0"
-                                            style={{
-                                                fontWeight: "bold",
-                                                fontSize: "15px",
-                                                // color: "black",
-                                            }}
-                                            >
-                                            {item.students}
-                                            </p>
-                                            <p
-                                            className="mx-1 mb-0 mt-0"
-                                            style={{
-                                                // fontWeight: "bold",
-                                                fontSize: "13px",
-                                                // color: "black",
-                                            }}
-                                            >
-                                            {" "}
-                                            students
-                                            </p>
-
-                                        </div>
-                                
-                                        <div className="d-flex align-items-center">
-                                            <p
-                                            className="mx-1 mb-0 mt-0"
-                                            style={{
-                                                fontWeight: "bold",
-                                                fontSize: "15px",
-                                                // color: "black",
-                                            }}
-                                            >
-                                            {item.courses}
-                                            </p>
+    
+                                            <div>
+    
+                                            
+    
+                                            <div className="d-flex align-items-center">
                                                 <p
                                                 className="mx-1 mb-0 mt-0"
                                                 style={{
-                                                    marginLeft: "5px",
+                                                    fontWeight: "bold",
+                                                    fontSize: "15px",
+                                                    // color: "black",
+                                                }}
+                                                >
+                                                {item.students}
+                                                </p>
+                                                <p
+                                                className="mx-1 mb-0 mt-0"
+                                                style={{
+                                                    // fontWeight: "bold",
                                                     fontSize: "13px",
                                                     // color: "black",
                                                 }}
                                                 >
-                                                courses
-                                                </p>  
+                                                {" "}
+                                                students
+                                                </p>
+    
+                                            </div>
+                                    
+                                            <div className="d-flex align-items-center">
+                                                <p
+                                                className="mx-1 mb-0 mt-0"
+                                                style={{
+                                                    fontWeight: "bold",
+                                                    fontSize: "15px",
+                                                    // color: "black",
+                                                }}
+                                                >
+                                                {item.courses}
+                                                </p>
+                                                    <p
+                                                    className="mx-1 mb-0 mt-0"
+                                                    style={{
+                                                        marginLeft: "5px",
+                                                        fontSize: "13px",
+                                                        // color: "black",
+                                                    }}
+                                                    >
+                                                    courses
+                                                    </p>  
+                                            </div>
+    
+                                            </div>
+    
+                                            </div>
                                         </div>
+                                        </a>
+                                        </CardContainer>
+                                    ))}
+                                </div>
+                            ))}
+                        </Carousel>
+                    )}
 
-                                        </div>
 
-                                        </div>
-                                    </div>
-                                    </a>
-                                    </CardContainer>
-                                ))}
-                            </div>
-                        ))}
-                    </Carousel>
                     </div>
                                 
                     <div className='col-lg-12 mb-5'>
