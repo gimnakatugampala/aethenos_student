@@ -179,14 +179,16 @@ const GetCourseByCategory = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
+    const [CategoryName, setCategoryName] = useState("")
+
     // handleLoadData
     const handleLoadData = () => {
       setNext((value) => value + 4);
     };
 
     useEffect(() => {
-        // console.log(items)
-        GetCourseCategoryTitle()
+        console.log(id)
+        GetCourseCategoryTitle(setCategoryName,id)
     }, [])
 
     const ITEM_HEIGHT = 48;
@@ -268,7 +270,7 @@ const GetCourseByCategory = () => {
         <section className="edu-section-gap course-details-area p-0">
             <div className="container">
                     <div className="row">
-                    <h2>Development Courses</h2>
+                    <h2>{CategoryName} Courses</h2>
                     <h4>Courses to get you started</h4>
 
                     <div className="col-lg-5">
@@ -549,7 +551,7 @@ const GetCourseByCategory = () => {
                                 
                     <div className='col-lg-12 mb-5'>
 
-                    <h4 className='p-2'>All Development courses</h4>
+                    <h4 className='p-2'>All {CategoryName} courses</h4>
                         <CourseFourArea />                            
                     </div>
 

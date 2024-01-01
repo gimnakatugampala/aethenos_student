@@ -312,17 +312,17 @@ export const GetCourseCategory = async(setcategories) =>{
 
 }
 
-export const GetCourseCategoryTitle = async() =>{
+export const GetCourseCategoryTitle = async(setCategoryName,id) =>{
   var requestOptions = {
     method: 'GET',
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCategorynameBylinkName/it-software1", requestOptions)
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCategorynameBylinkName/${id}`, requestOptions)
     .then(response => response.text())
     .then(result => {
-      console.log(result)
-      console.log(result.message)
+      setCategoryName(result)
+      // console.log(result.message)
 
 
     })
