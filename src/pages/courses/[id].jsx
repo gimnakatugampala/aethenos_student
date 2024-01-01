@@ -7,6 +7,10 @@ import { GetCourseCategoryTitle } from '../../api';
 
 import CourseTypeOne from '../../components/course/course-type-one';
 
+
+import CourseFourArea from '../../components/course-category/course-4-area'
+
+
 import { course_data } from '../../data';
 import { useState } from 'react';
 
@@ -461,8 +465,12 @@ const GetCourseByCategory = () => {
                         ))}
                     </Carousel>
                     </div>
+                                
+                    <div className='col-lg-12 mb-5'>
 
-
+                    <h4 className='p-2'>All Development courses</h4>
+                        <CourseFourArea />                            
+                    </div>
 
                 </div>
             </div>

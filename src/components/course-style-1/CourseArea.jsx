@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import { course_data } from "../../../../data";
-import SortingArea from "../../../../components/course-filter/sorting-area";
-import CourseTypeOne from "../../../../components/course/course-type-one";
+import { course_data } from "../../data";
+import SortingArea from "../../components/course-filter/sorting-area";
+import CourseTypeOne from "../../components/course/course-type-one";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 

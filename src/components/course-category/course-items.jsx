@@ -6,7 +6,7 @@ import {
     add_item_offset
 } from "../../redux/features/filter-slice";
 import Pagination from "../../ui/pagination";
-import CourseTypeEight from '../../components/course/course-type-eight';
+import CourseTypeFive from '../course/course-type-five';
 
 const CourseItems = ({ itemsPerPage, items, course_style, setShowing }) => {
     const { page_count, item_offset, forcePage } = useSelector(
@@ -50,7 +50,7 @@ const CourseItems = ({ itemsPerPage, items, course_style, setShowing }) => {
         <>
             {currentItems && currentItems.map((course, i) => {
                 return (
-                    <CourseTypeEight key={i} data={course} />
+                    <CourseTypeFive key={i} data={course} />
                 )
             })}
 
