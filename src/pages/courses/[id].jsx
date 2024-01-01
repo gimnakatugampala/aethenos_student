@@ -422,7 +422,7 @@ const GetCourseByCategory = () => {
                             <div className="row">
                                   {page.single.map((item, itemIndex) => (
                                     <CardContainer key={itemIndex} className="col-md-4 mb-3">
-                                    <a href="/instructors/123">
+                                    <a href="/users/123">
                                     <div
                                         className="row"
                                         style={{

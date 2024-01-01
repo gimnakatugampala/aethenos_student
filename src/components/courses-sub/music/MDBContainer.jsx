@@ -150,7 +150,7 @@ const RatingCard = ({
               {description}
             </p>
             <p className="card-text mt-2" style={authorStyles}>
-              by  <a href="/instructors/1">{author}</a>
+              by  <a href="/users/1">{author}</a>
             </p>
             <p>
               <span className="card-text" style={updatedStyles}>
