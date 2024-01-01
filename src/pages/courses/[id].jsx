@@ -20,6 +20,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import OneLineSkeleton from '../../functions/Skeletons/OneLineSkeleton';
 import CoursesPotraitSkeleton from '../../functions/Skeletons/CoursesPotraitSkeleton';
+import TopicsListSkeleton from '../../functions/Skeletons/TopicsListSkeleton';
 
 
 var items = [{
@@ -184,6 +185,7 @@ const GetCourseByCategory = () => {
     const [loading_sub_categories, setloading_sub_categories] = useState(true)
     const [loading_top_title, setloading_top_title] = useState(true)
     const [loading_most_popular_courses, setloading_most_popular_courses] = useState(true)
+    const [loading_topics_list, setloading_topics_list] = useState(true)
 
     const [CategoryName, setCategoryName] = useState("")
 
@@ -199,6 +201,7 @@ const GetCourseByCategory = () => {
         setTimeout(() => {
             setloading_sub_categories(false)
             setloading_most_popular_courses(false)
+            setloading_topics_list(false)
         }, 2000);
 
     }, [CategoryName,loading_top_title])
@@ -222,9 +225,6 @@ const GetCourseByCategory = () => {
         <SEO pageTitle={"Marketing"} />
         <Header/>
 
-
-        
-            
             {loading_sub_categories ? (
             <div className='container-fluid p-3'>
             <OneLineSkeleton height={60} />
@@ -302,7 +302,7 @@ const GetCourseByCategory = () => {
                         </>
                     )}
                     
-                    
+                   
                     
 
                     <div className="col-lg-5">
@@ -334,6 +334,8 @@ const GetCourseByCategory = () => {
                     <div className="tab-content" id="myTabContent">
                         <div className="tab-pane fade show active" id="most-popular" role="tabpanel" aria-labelledby="most-popular-tab">
                             <div className="course-tab-content">
+                                <div className="course-overview">
+
                                 {loading_most_popular_courses ? (
                                     <div className='row'>
                                     <CoursesPotraitSkeleton />
@@ -346,7 +348,6 @@ const GetCourseByCategory = () => {
                                     <CoursesPotraitSkeleton />
                                     </div>
                                 ) : (
-                                    <div className="course-overview">
                                     <div className="row g-3 mb-5">
                                     {most_popular_courses.slice(0, next)?.map((course) => {
                                         return (
@@ -356,21 +357,25 @@ const GetCourseByCategory = () => {
                                         );
                                     })}
                                     </div>
-                                    {next < most_popular_courses.length && (
-                                        <div
-                                            onClick={handleLoadData}
-                                            className="load-more-btn"
-                                            data-sal-delay="100"
-                                            data-sal="slide-up"
-                                            data-sal-duration="1200"
-                                        >
-                                            <a className="edu-btn mb-5" style={{ cursor: "pointer" }}>
-                                            Load More <i className="icon-56"></i>
-                                            </a>
-                                        </div>
-                                        )}
-                                    </div>
                                 )}
+
+
+                                {next < most_popular_courses.length && (
+                                    <div
+                                        onClick={handleLoadData}
+                                        className="load-more-btn"
+                                        data-sal-delay="100"
+                                        data-sal="slide-up"
+                                        data-sal-duration="1200"
+                                    >
+                                        <a className="edu-btn mb-5" style={{ cursor: "pointer" }}>
+                                        Load More <i className="icon-56"></i>
+                                        </a>
+                                    </div>
+                                    )}
+                                 
+                                    
+                                </div>
                             </div>
                         </div>
 
@@ -442,19 +447,34 @@ const GetCourseByCategory = () => {
 
                     <div className='col-lg-12 mb-5'>
                     <h4 className='p-2'>Popular Topics</h4>
+
+                    {loading_topics_list ? (
+                         <div className='row'>
+                         <TopicsListSkeleton />
+                         <TopicsListSkeleton />
+                         <TopicsListSkeleton />
+                         <TopicsListSkeleton />
+                         </div>
+                    ) : (
+
                     <Carousel autoPlay={false} duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
-                        {items.map((item, i) => (
-                            <div className='row'>
-                                {item.topics.map((topic,index) => (
-                                    <div key={index} className='col-md-3 text-center'>
-                                    <CardContainer>
-                                        <a href={topic.link}>{topic.name}</a>
-                                    </CardContainer>
-                                    </div>  
-                                ))}
-                            </div>
+                    {items.map((item, i) => (
+                        <div className='row'>
+                            {item.topics.map((topic,index) => (
+                                <div key={index} className='col-md-3 text-center'>
+                                <CardContainer>
+                                    <a href={topic.link}>{topic.name}</a>
+                                </CardContainer>
+                                </div>  
                             ))}
+                        </div>
+                        ))}
                     </Carousel>
+                    )}
+
+                   
+
+                
                     </div>
 
                 
