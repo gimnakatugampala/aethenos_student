@@ -318,8 +318,13 @@ export const GetCourseCategoryTitle = async() =>{
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCourseTitleBylinkName/design", requestOptions)
-    .then(response => response.json())
-    .then(result => console.log(result))
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCategorynameBylinkName/it-software1", requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      console.log(result)
+      console.log(result.message)
+
+
+    })
     .catch(error => console.log('error', error));
 }

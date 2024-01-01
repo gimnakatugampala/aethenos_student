@@ -1,22 +1,24 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { Footer, Header, Wrapper } from "../../layout";
-
 import SEO from "../../components/seo";
 import { GetCourseCategoryTitle } from '../../api';
-
 import CourseTypeOne from '../../components/course/course-type-one';
-
-
 import CourseFourArea from '../../components/course-category/landscape-courses/course-4-area'
-
-
 import { course_data } from '../../data';
 import { useState } from 'react';
-
 import Carousel from 'react-material-ui-carousel'
 import CardContainer from '../../contexts/CardContainer';
 import StarIcon from "@mui/icons-material/Star";
+import { Card } from '@mui/material';
+import CardContent from '@mui/material/CardContent';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import MenuItem from '@mui/material/MenuItem';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Menu from '@mui/material/Menu';
+
 
 var items = [{
     topics: [
@@ -157,6 +159,14 @@ var items = [{
     }
   ];
 
+  
+const options = [
+    'Software Testing',
+    'Software Engineering',
+    'Software Development Tools',
+    'Non-Code Development'
+  ];
+
 const GetCourseByCategory = () => {
 
     const router = useRouter();
@@ -166,15 +176,30 @@ const GetCourseByCategory = () => {
     const [most_popular_courses, setmost_popular_courses] = useState(course_data)
     const [new_courses, setnew_courses] = useState(course_data)
     const [trending_courses, settrending_courses] = useState(course_data)
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+
     // handleLoadData
     const handleLoadData = () => {
       setNext((value) => value + 4);
     };
 
     useEffect(() => {
-        console.log(items)
+        // console.log(items)
         GetCourseCategoryTitle()
     }, [])
+
+    const ITEM_HEIGHT = 48;
+
+
+  
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
     
     
 
@@ -183,8 +208,64 @@ const GetCourseByCategory = () => {
         <SEO pageTitle={"Marketing"} />
         <Header/>
 
+        <CardContainer className='p-3' >
+        <Box  sx={{ display: 'flex', alignItems: 'center',justifyContent:'space-between'}}>
 
-        <section className="edu-section-gap course-details-area">
+        <div className='d-flex'>
+        <Typography className='mx-3'><a href='/courses/it-software/development'><b>Development</b></a></Typography>
+
+        <Typography className='mx-3'><a href='/courses/it-software/development'>Web Development</a></Typography>
+
+        <Typography className='mx-3'><a href='/courses/it-software/development'>Data Science</a></Typography>
+
+        <Typography className='mx-3'><a href='/courses/it-software/development'>Mobile Development</a></Typography>
+
+        <Typography className='mx-3'><a href='/courses/it-software/development'>Programming Languages</a></Typography>
+
+        <Typography className='mx-3'><a href='/courses/it-software/development'>Game Development</a></Typography>
+        </div>
+
+
+
+
+        <IconButton
+        aria-label="more"
+        id="long-button"
+        aria-controls={open ? 'long-menu' : undefined}
+        aria-expanded={open ? 'true' : undefined}
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
+        <MoreVertIcon />
+      </IconButton>
+      <Menu
+        id="long-menu"
+        MenuListProps={{
+          'aria-labelledby': 'long-button',
+        }}
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          style: {
+            maxHeight: ITEM_HEIGHT * 4.5
+          },
+        }}
+      >
+        {options.map((option) => (
+          <MenuItem key={option} onClick={handleClose}>
+            <a href='/courses/development/web-development'>
+                {option}
+            </a>
+          </MenuItem>
+        ))}
+      </Menu>
+
+        </Box>
+        </CardContainer>
+
+
+        <section className="edu-section-gap course-details-area p-0">
             <div className="container">
                     <div className="row">
                     <h2>Development Courses</h2>
