@@ -312,7 +312,7 @@ export const GetCourseCategory = async(setcategories) =>{
 
 }
 
-export const GetCourseCategoryTitle = async(setCategoryName,id) =>{
+export const GetCourseCategoryTitle = async(setCategoryName,id,setloading_top_title) =>{
   var requestOptions = {
     method: 'GET',
     redirect: 'follow'
@@ -324,6 +324,10 @@ export const GetCourseCategoryTitle = async(setCategoryName,id) =>{
       setCategoryName(result)
       // console.log(result.message)
 
+      setTimeout(() => {
+        
+        setloading_top_title(false)
+      }, 1500);
 
     })
     .catch(error => console.log('error', error));

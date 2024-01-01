@@ -18,6 +18,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
+import OneLineSkeleton from '../../functions/Skeletons/OneLineSkeleton';
 
 
 var items = [{
@@ -179,6 +180,9 @@ const GetCourseByCategory = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
+    const [loading_sub_categories, setloading_sub_categories] = useState(true)
+    const [loading_top_title, setloading_top_title] = useState(true)
+
     const [CategoryName, setCategoryName] = useState("")
 
     // handleLoadData
@@ -188,8 +192,14 @@ const GetCourseByCategory = () => {
 
     useEffect(() => {
         console.log(id)
-        GetCourseCategoryTitle(setCategoryName,id)
-    }, [])
+        GetCourseCategoryTitle(setCategoryName,id,setloading_top_title)
+
+        setTimeout(() => {
+            setloading_sub_categories(false)
+            // setLoading(false)
+        }, 2000);
+
+    }, [CategoryName,loading_top_title])
 
     const ITEM_HEIGHT = 48;
 
@@ -210,68 +220,87 @@ const GetCourseByCategory = () => {
         <SEO pageTitle={"Marketing"} />
         <Header/>
 
-        <CardContainer className='p-3' >
-        <Box  sx={{ display: 'flex', alignItems: 'center',justifyContent:'space-between'}}>
 
-        <div className='d-flex'>
-        <Typography className='mx-3'><a href='/courses/it-software/development'><b>Development</b></a></Typography>
+        
+            
+            {loading_sub_categories ? (
+            <div className='container-fluid p-3'>
+            <OneLineSkeleton height={60} />
+            </div>
+            ) : (
+            <CardContainer className='p-3' >
+                <Box  sx={{ display: 'flex', alignItems: 'center',justifyContent:'space-between'}}>
 
-        <Typography className='mx-3'><a href='/courses/it-software/development'>Web Development</a></Typography>
+                <div className='d-flex'>
+                <Typography className='mx-3'><a href='/courses/it-software/development'><b>Development</b></a></Typography>
 
-        <Typography className='mx-3'><a href='/courses/it-software/development'>Data Science</a></Typography>
+                <Typography className='mx-3'><a href='/courses/it-software/development'>Web Development</a></Typography>
 
-        <Typography className='mx-3'><a href='/courses/it-software/development'>Mobile Development</a></Typography>
+                <Typography className='mx-3'><a href='/courses/it-software/development'>Data Science</a></Typography>
 
-        <Typography className='mx-3'><a href='/courses/it-software/development'>Programming Languages</a></Typography>
+                <Typography className='mx-3'><a href='/courses/it-software/development'>Mobile Development</a></Typography>
 
-        <Typography className='mx-3'><a href='/courses/it-software/development'>Game Development</a></Typography>
-        </div>
+                <Typography className='mx-3'><a href='/courses/it-software/development'>Programming Languages</a></Typography>
 
+                <Typography className='mx-3'><a href='/courses/it-software/development'>Game Development</a></Typography>
+                </div>
 
+                <IconButton
+                aria-label="more"
+                id="long-button"
+                aria-controls={open ? 'long-menu' : undefined}
+                aria-expanded={open ? 'true' : undefined}
+                aria-haspopup="true"
+                onClick={handleClick}
+            >
+                <MoreVertIcon />
+            </IconButton>
+            <Menu
+                id="long-menu"
+                MenuListProps={{
+                'aria-labelledby': 'long-button',
+                }}
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                PaperProps={{
+                style: {
+                    maxHeight: ITEM_HEIGHT * 4.5
+                },
+                }}
+            >
+                {options.map((option) => (
+                <MenuItem key={option} onClick={handleClose}>
+                    <a href='/courses/development/web-development'>
+                        {option}
+                    </a>
+                </MenuItem>
+                ))}
+                </Menu>
 
-
-        <IconButton
-        aria-label="more"
-        id="long-button"
-        aria-controls={open ? 'long-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
-        aria-haspopup="true"
-        onClick={handleClick}
-      >
-        <MoreVertIcon />
-      </IconButton>
-      <Menu
-        id="long-menu"
-        MenuListProps={{
-          'aria-labelledby': 'long-button',
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          style: {
-            maxHeight: ITEM_HEIGHT * 4.5
-          },
-        }}
-      >
-        {options.map((option) => (
-          <MenuItem key={option} onClick={handleClose}>
-            <a href='/courses/development/web-development'>
-                {option}
-            </a>
-          </MenuItem>
-        ))}
-      </Menu>
-
-        </Box>
-        </CardContainer>
+                </Box>
+                </CardContainer>
+            )}
+            
 
 
         <section className="edu-section-gap course-details-area p-0">
             <div className="container">
                     <div className="row">
-                    <h2>{CategoryName} Courses</h2>
-                    <h4>Courses to get you started</h4>
+
+                    {loading_top_title ? (
+                        <>
+                        <OneLineSkeleton height={20} />
+                        <OneLineSkeleton height={20} />
+                        </>
+                    ) : (
+                        <>
+                        <h2>{CategoryName} Courses</h2>
+                        <h4>Courses to get you started</h4>
+                        </>
+                    )}
+                    
+                    
 
                     <div className="col-lg-5">
                         <div className="course-details-content">
