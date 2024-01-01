@@ -8,7 +8,7 @@ import { GetCourseCategoryTitle } from '../../api';
 import CourseTypeOne from '../../components/course/course-type-one';
 
 
-import CourseFourArea from '../../components/course-category/course-4-area'
+import CourseFourArea from '../../components/course-category/landscape-courses/course-4-area'
 
 
 import { course_data } from '../../data';

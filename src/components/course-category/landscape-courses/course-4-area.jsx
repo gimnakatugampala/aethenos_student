@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { course_data } from '../../data';
-import CourseSidebar from '../common/sidebar/course-sidebar';
-import SortingArea from '../course-filter/sorting-area';
+import { course_data } from '../../../data';
+import CourseSidebar from '../../common/sidebar/course-sidebar';
+import SortingArea from '../../course-filter/sorting-area';
 import CourseItems from './course-items';
 
 // course_items
