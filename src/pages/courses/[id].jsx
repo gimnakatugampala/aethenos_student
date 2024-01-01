@@ -19,6 +19,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import OneLineSkeleton from '../../functions/Skeletons/OneLineSkeleton';
+import CoursesPotraitSkeleton from '../../functions/Skeletons/CoursesPotraitSkeleton';
 
 
 var items = [{
@@ -182,6 +183,7 @@ const GetCourseByCategory = () => {
 
     const [loading_sub_categories, setloading_sub_categories] = useState(true)
     const [loading_top_title, setloading_top_title] = useState(true)
+    const [loading_most_popular_courses, setloading_most_popular_courses] = useState(true)
 
     const [CategoryName, setCategoryName] = useState("")
 
@@ -196,7 +198,7 @@ const GetCourseByCategory = () => {
 
         setTimeout(() => {
             setloading_sub_categories(false)
-            // setLoading(false)
+            setloading_most_popular_courses(false)
         }, 2000);
 
     }, [CategoryName,loading_top_title])
@@ -301,6 +303,7 @@ const GetCourseByCategory = () => {
                     )}
                     
                     
+                    
 
                     <div className="col-lg-5">
                         <div className="course-details-content">
@@ -331,34 +334,43 @@ const GetCourseByCategory = () => {
                     <div className="tab-content" id="myTabContent">
                         <div className="tab-pane fade show active" id="most-popular" role="tabpanel" aria-labelledby="most-popular-tab">
                             <div className="course-tab-content">
-                                <div className="course-overview">
-
-                                <div className="row g-3 mb-5">
-                                {most_popular_courses.slice(0, next)?.map((course) => {
-                                    return (
-                                    <div key={course.id} className="col-md-6 col-xl-3">
-                                        <CourseTypeOne data={course} classes="course-box-shadow" />
+                                {loading_most_popular_courses ? (
+                                    <div className='row'>
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
                                     </div>
-                                    );
-                                })}
-                                </div>
-
-                                {next < most_popular_courses.length && (
-                                    <div
-                                        onClick={handleLoadData}
-                                        className="load-more-btn"
-                                        data-sal-delay="100"
-                                        data-sal="slide-up"
-                                        data-sal-duration="1200"
-                                    >
-                                        <a className="edu-btn mb-5" style={{ cursor: "pointer" }}>
-                                        Load More <i className="icon-56"></i>
-                                        </a>
+                                ) : (
+                                    <div className="course-overview">
+                                    <div className="row g-3 mb-5">
+                                    {most_popular_courses.slice(0, next)?.map((course) => {
+                                        return (
+                                        <div key={course.id} className="col-md-6 col-xl-3">
+                                            <CourseTypeOne data={course} classes="course-box-shadow" />
+                                        </div>
+                                        );
+                                    })}
                                     </div>
-                                    )}
-                                 
-                                    
-                                </div>
+                                    {next < most_popular_courses.length && (
+                                        <div
+                                            onClick={handleLoadData}
+                                            className="load-more-btn"
+                                            data-sal-delay="100"
+                                            data-sal="slide-up"
+                                            data-sal-duration="1200"
+                                        >
+                                            <a className="edu-btn mb-5" style={{ cursor: "pointer" }}>
+                                            Load More <i className="icon-56"></i>
+                                            </a>
+                                        </div>
+                                        )}
+                                    </div>
+                                )}
                             </div>
                         </div>
 
