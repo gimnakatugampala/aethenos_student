@@ -12,6 +12,7 @@ import { useState } from 'react';
 
 import Carousel from 'react-material-ui-carousel'
 import CardContainer from '../../contexts/CardContainer';
+import StarIcon from "@mui/icons-material/Star";
 
 var items = [{
     topics: [
@@ -85,6 +86,85 @@ var items = [{
         },
     ],
     },
+  ];
+
+  const instructors = [
+    [
+      {
+        title: "John Doe",
+        link: "web-development-link-here",
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        rating: 4.5,
+        students: 1000,
+        courses: 10,
+        image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+      },
+      {
+        title: "James Manner",
+        link: "reactjs-link-here",
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        rating: 4.8,
+        students: 800,
+        courses: 8,
+        image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+      },
+      {
+        title: "Micheal Doe",
+        link: "web-development-link-here",
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        rating: 4.5,
+        students: 1000,
+        courses: 10,
+        image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+      },
+      {
+        title: "John Jons",
+        link: "reactjs-link-here",
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        rating: 4.8,
+        students: 800,
+        courses: 8,
+        image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+      },
+    ],
+    [
+      {
+        title: "James Moore",
+        link: "web-development-link-here",
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        rating: 4.5,
+        students: 1000,
+        courses: 10,
+        image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+      },
+      {
+        title: "Sam Moore",
+        link: "reactjs-link-here",
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        rating: 4.8,
+        students: 800,
+        courses: 8,
+        image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+      },
+      {
+        title: "Sean Mask",
+        link: "web-development-link-here",
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        rating: 4.5,
+        students: 1000,
+        courses: 10,
+        image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+      },
+      {
+        title: "Tom Sawyer",
+        link: "reactjs-link-here",
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        rating: 4.8,
+        students: 800,
+        courses: 8,
+        image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+      },
+    ],
   ];
 
 const GetCourseByCategory = () => {
@@ -246,11 +326,9 @@ const GetCourseByCategory = () => {
                     </div>
                     </div>
 
-                    <div className='col-lg-12'>
-                    <h4>Popular Topics</h4>
-
-                  
-                    <Carousel duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
+                    <div className='col-lg-12 mb-5'>
+                    <h4 className='p-2'>Popular Topics</h4>
+                    <Carousel autoPlay={false} duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
                         {items.map((item, i) => (
                             <div className='row'>
                                 {item.topics.map((topic,index) => (
@@ -263,8 +341,144 @@ const GetCourseByCategory = () => {
                             </div>
                             ))}
                     </Carousel>
-                        
                     </div>
+
+                
+                    <div className='col-lg-12'>
+                    <h4 className='p-2'>Popular Instructors</h4>
+                    <Carousel autoPlay={false} duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
+                    <div className="row">
+                        {instructors.map((page, index) => (
+                            <>
+                            {page.map((item, itemIndex) => (
+                                <CardContainer key={itemIndex} className="col-md-4 mb-3">
+                                <a href="/instructors/123">
+                                <div
+                                    className="btn fs-4 p-3 d-flex"
+                                    style={{
+                                    borderRadius: "0",
+                                    transition: "background-color 0.3s",
+                                    backgroundColor: "transparent",
+                                    color: "inherit",
+                                    textAlign: "left",
+                                    }}
+                                >
+                                    <div className="mr-4">
+                                    <img
+                                        src={item.image}
+                                        alt={item.title}
+                                        style={{ width: "60px", height: "40px" ,borderRadius:'50%'}}
+                                    />
+                                    </div>
+                                    <div className="flex-grow-2" style={{ marginLeft: "10px" }}>
+                                    <h6 style={{ fontWeight: "bold", fontSize: "16px" }}>
+                                        {item.title.length > 12 ?  item.title.slice(0, 17) + "..." : item.title}
+                                    </h6>
+                                    <div>
+                                    <p className="m-0" style={{fontSize:'13px'}}>{item.description.length > 10 ?  item.description.slice(0, 50) + "...": item.description}</p>
+                                    </div>
+    
+                                    <div className="d-flex align-items-center my-2">
+    
+                                    <span>
+                                        <span
+                                        style={{
+                                            fontWeight: "bold",
+                                            fontSize: "18px",
+                                            color: "#B4690E",
+                                        }}
+                                        >
+                                        {item.rating}
+                                        </span>
+                                        <StarIcon
+                                        style={{
+                                            fontSize: "20px",
+                                            color: "#B4690E",
+                                        }}
+                                        />
+                                        </span>
+    
+                                        <p
+                                        className="m-0 p-0 align-self-center mt-1 ml-1"
+                                        style={{
+                                            fontSize: "12px",
+                                            color: "#B4690E",
+                                        }}
+                                        >
+                                        Instructor Rating
+                                        </p>
+    
+                                    </div>
+                                        
+                                
+                                    
+    
+                                    <div>
+    
+                                    
+    
+                                    <div className="d-flex align-items-center">
+                                        <p
+                                        className="mx-1 mb-0 mt-0"
+                                        style={{
+                                            fontWeight: "bold",
+                                            fontSize: "15px",
+                                            // color: "black",
+                                        }}
+                                        >
+                                        {item.students}
+                                        </p>
+                                        <p
+                                        className="mx-1 mb-0 mt-0"
+                                        style={{
+                                            // fontWeight: "bold",
+                                            fontSize: "13px",
+                                            // color: "black",
+                                        }}
+                                        >
+                                        {" "}
+                                        students
+                                        </p>
+    
+                                    </div>
+                            
+                                    <div className="d-flex align-items-center">
+                                        <p
+                                        className="mx-1 mb-0 mt-0"
+                                        style={{
+                                            fontWeight: "bold",
+                                            fontSize: "15px",
+                                            // color: "black",
+                                        }}
+                                        >
+                                        {item.courses}
+                                        </p>
+                                            <p
+                                            className="mx-1 mb-0 mt-0"
+                                            style={{
+                                                marginLeft: "5px",
+                                                fontSize: "13px",
+                                                // color: "black",
+                                            }}
+                                            >
+                                            courses
+                                            </p>  
+                                    </div>
+    
+                                    </div>
+    
+                                    </div>
+                                </div>
+                                </a>
+                                </CardContainer>
+                            ))}
+                            </>
+                            ))}
+                           
+                        </div>
+                    </Carousel>
+                    </div>
+
 
 
                 </div>

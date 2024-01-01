@@ -151,25 +151,12 @@ const InstructorCarousel = () => {
                   <div
                     className="btn fs-4 p-3 d-flex"
                     style={{
-                      // width: "250px",
-                      // marginLeft: "10px",
-                      // marginTop: "10px",
-                      // marginBottom: "10px",
                       borderRadius: "0",
                       transition: "background-color 0.3s",
                       backgroundColor: "transparent",
                       color: "inherit",
-                      // borderWidth: "2px",
-                      // borderColor: "#ADD8E6",
-                      // padding: "10px",
                       textAlign: "left",
                     }}
-                    // onMouseOver={(e) => {
-                    //   e.currentTarget.style.backgroundColor = "#F0FFFF";
-                    // }}
-                    // onMouseOut={(e) => {
-                    //   e.currentTarget.style.backgroundColor = "transparent";
-                    // }}
                   >
                     <div className="mr-4">
                       <img
@@ -202,7 +189,6 @@ const InstructorCarousel = () => {
                           style={{
                             fontSize: "20px",
                             color: "#B4690E",
-                            // marginLeft: "3px",
                           }}
                         />
                         </span>
@@ -212,7 +198,6 @@ const InstructorCarousel = () => {
                           style={{
                             fontSize: "12px",
                             color: "#B4690E",
-                            // marginLeft: "3px",
                           }}
                         >
                           Instructor Rating
