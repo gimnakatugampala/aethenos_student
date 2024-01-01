@@ -58,7 +58,7 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                 <div className="content">
                     <span className="course-level">{data.level}</span>
                     <h6 className="title">
-                        <a href={`/course-details/${data.id}`}>{data.title}</a>
+                        <a href={`/course-details/${data.id}`}>{data.title.length > 18 ? data.title.substring(0, 18) + '...' : data.title}</a>
                     </h6>
                     <div className="course-rating">
                         <div className="rating">

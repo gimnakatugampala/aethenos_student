@@ -6,14 +6,86 @@ import SEO from "../../components/seo";
 import { GetCourseCategoryTitle } from '../../api';
 
 import CourseTypeOne from '../../components/course/course-type-one';
-import CourseTypeTwo from '../../components/course/course-type-two';
-import CourseTypeSix from '../../components/course/course-type-six'
-import CourseTypeSeven from '../../components/course/course-type-seven'
-import CourseTypeThree from '../../components/course/course-type-three'
 
 import { course_data } from '../../data';
 import { useState } from 'react';
 
+import Carousel from 'react-material-ui-carousel'
+import CardContainer from '../../contexts/CardContainer';
+
+var items = [{
+    topics: [
+        {
+        name: "Web Development",
+        link: "/topics/web"
+        },
+        {
+        name: "Deep Learning",
+        link: "/topics/deep-learning"
+        },
+        {
+        name: "SQL",
+        link: "/topics/sql"
+        },
+        {
+        name: "NodeJS",
+        link: "/topics/node-js"
+        },
+        {
+        name: "Angular",
+        link: "/topics/angular-js"
+        },
+        {
+        name: "Machine Learning",
+        link: "/topics/machine-learning"
+        },
+        {
+        name: "JAVA",
+        link: "/topics/java"
+        },
+        {
+        name: "React JS",
+        link: "/topics/react-js"
+        },
+    ],
+    },
+    {
+    topics: [
+        {
+        name: "Google Flutter",
+        link: "/topics/google-flutter"
+        },
+        {
+        name: "Docker",
+        link: "/topics/docker"
+        },
+        {
+        name: "Unity",
+        link: "/topics/unity"
+        },
+        {
+        name: "Typescript",
+        link: "/topics/typescript"
+        },
+        {
+        name: "Python",
+        link: "/topics/python"
+        },
+        {
+        name: "C# Programming",
+        link: "/topics/c-sharp-programming"
+        },
+        {
+        name: "Data Science",
+        link: "/topics/data-science"
+        },
+        {
+        name: "Next JS",
+        link: "/topics/next-js"
+        },
+    ],
+    },
+  ];
 
 const GetCourseByCategory = () => {
 
@@ -30,7 +102,7 @@ const GetCourseByCategory = () => {
     };
 
     useEffect(() => {
-        // console.log(courses)
+        console.log(items)
         GetCourseCategoryTitle()
     }, [])
     
@@ -46,12 +118,10 @@ const GetCourseByCategory = () => {
             <div className="container">
                     <div className="row">
                     <h2>Development Courses</h2>
-
                     <h4>Courses to get you started</h4>
 
                     <div className="col-lg-5">
                         <div className="course-details-content">
-
                             <ul className="nav nav-tabs" id="myTab" role="tablist">
 
                                 <li className="nav-item" role="presentation">
@@ -76,9 +146,7 @@ const GetCourseByCategory = () => {
                     </div>
 
                     <div className="col-lg-12 p-3">
-
                     <div className="tab-content" id="myTabContent">
-
                         <div className="tab-pane fade show active" id="most-popular" role="tabpanel" aria-labelledby="most-popular-tab">
                             <div className="course-tab-content">
                                 <div className="course-overview">
@@ -113,7 +181,7 @@ const GetCourseByCategory = () => {
                         </div>
 
                         
-                        <div className="tab-pane fade show active" id="new" role="tabpanel" aria-labelledby="new-tab">
+                        <div className="tab-pane fade" id="new" role="tabpanel" aria-labelledby="new-tab">
                             <div className="course-tab-content">
                             <div className="course-overview">
                                 <div className="row g-3 mb-5">
@@ -144,7 +212,7 @@ const GetCourseByCategory = () => {
                             </div>
                         </div>
 
-                        <div className="tab-pane fade show active" id="trending" role="tabpanel" aria-labelledby="trending-tab">
+                        <div className="tab-pane fade" id="trending" role="tabpanel" aria-labelledby="trending-tab">
                             <div className="course-tab-content">
                             <div className="course-overview">
                                 <div className="row g-3 mb-5">
@@ -178,7 +246,27 @@ const GetCourseByCategory = () => {
                     </div>
                     </div>
 
-    
+                    <div className='col-lg-12'>
+                    <h4>Popular Topics</h4>
+
+                  
+                    <Carousel duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
+                        {items.map((item, i) => (
+                            <div className='row'>
+                                {item.topics.map((topic,index) => (
+                                    <div key={index} className='col-md-3 text-center'>
+                                    <CardContainer>
+                                        <a href={topic.link}>{topic.name}</a>
+                                    </CardContainer>
+                                    </div>  
+                                ))}
+                            </div>
+                            ))}
+                    </Carousel>
+                        
+                    </div>
+
+
                 </div>
             </div>
         </section>
