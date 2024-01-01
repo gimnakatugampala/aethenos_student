@@ -1,8 +1,14 @@
 import React from 'react'
+import { Footer, Header, Wrapper } from "../../../layout";
+import SEO from "../../../components/seo";
 
 const GetCoursesBySubCategory = () => {
   return (
-    <div>GetCoursesBySubCategory</div>
+    <Wrapper>
+        <SEO pageTitle={"Sub Category"} />
+        <Header/>
+        <Footer />
+    </Wrapper>
   )
 }
 

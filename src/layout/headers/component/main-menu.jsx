@@ -3,13 +3,15 @@ import menu_data from '../menu-data';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-const MainMenu = () => {
+const MainMenu = ({CURRENTUSER}) => {
+
 
     return (
         <ul className="mainmenu">
             {menu_data.map((menu, i) => (
-                <li  key={i} >
-                   <a href={menu.link}>{menu.title}</a>
+                menu.title == "Instructors" && CURRENTUSER != null ? <li key={i}><a href={"http://aethenos-instructor.infinityfreeapp.com/"}>{menu.title}</a></li> : 
+                <li key={i} >
+                   <a  href={menu.link}>{menu.title}</a>
                     {/* {!menu.mega_menu && 
                         <ul className="submenu">
                             {menu.submenus.map((nav, i) => (
