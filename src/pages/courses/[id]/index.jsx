@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
-import { Footer, Header, Wrapper } from "../../layout";
-import SEO from "../../components/seo";
-import { GetCourseCategoryTitle } from '../../api';
-import CourseTypeOne from '../../components/course/course-type-one';
-import CourseFourArea from '../../components/course-category/landscape-courses/course-4-area'
-import { course_data } from '../../data';
+import { Footer, Header, Wrapper } from "../../../layout";
+import SEO from "../../../components/seo";
+import { GetCourseCategoryTitle } from '../../../api';
+import CourseTypeOne from '../../../components/course/course-type-one';
+import CourseFourArea from '../../../components/course-category/landscape-courses/course-4-area'
+import { course_data } from '../../../data';
 import { useState } from 'react';
 import Carousel from 'react-material-ui-carousel'
-import CardContainer from '../../contexts/CardContainer';
+import CardContainer from '../../../contexts/CardContainer';
 import StarIcon from "@mui/icons-material/Star";
 import { Card } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
@@ -18,11 +18,11 @@ import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
-import OneLineSkeleton from '../../functions/Skeletons/OneLineSkeleton';
-import CoursesPotraitSkeleton from '../../functions/Skeletons/CoursesPotraitSkeleton';
-import TopicsListSkeleton from '../../functions/Skeletons/TopicsListSkeleton';
-import InstructorsListSkeleton from '../../functions/Skeletons/InstructorsListSkeleton';
-import LandscapeListSkeleton from '../../functions/Skeletons/LandscapeListSkeleton';
+import OneLineSkeleton from '../../../functions/Skeletons/OneLineSkeleton';
+import CoursesPotraitSkeleton from '../../../functions/Skeletons/CoursesPotraitSkeleton';
+import TopicsListSkeleton from '../../../functions/Skeletons/TopicsListSkeleton';
+import InstructorsListSkeleton from '../../../functions/Skeletons/InstructorsListSkeleton';
+import LandscapeListSkeleton from '../../../functions/Skeletons/LandscapeListSkeleton';
 
 
 var items = [{
@@ -187,6 +187,8 @@ const GetCourseByCategory = () => {
     const [loading_sub_categories, setloading_sub_categories] = useState(true)
     const [loading_top_title, setloading_top_title] = useState(true)
     const [loading_most_popular_courses, setloading_most_popular_courses] = useState(true)
+    const [loading_new_courses, setloading_new_courses] = useState(true)
+    const [loading_trending_courses, setloading_trending_courses] = useState(true)
     const [loading_topics_list, setloading_topics_list] = useState(true)
     const [loading_instructors_list, setloading_instructors_list] = useState(true)
     const [loading_all_courses_list, setloading_all_courses_list] = useState(true)
@@ -208,6 +210,8 @@ const GetCourseByCategory = () => {
             setloading_topics_list(false)
             setloading_instructors_list(false)
             setloading_all_courses_list(false)
+            setloading_new_courses(false)
+            setloading_trending_courses(false)
         }, 2000);
 
     }, [CategoryName,loading_top_title])
@@ -389,6 +393,19 @@ const GetCourseByCategory = () => {
                         <div className="tab-pane fade" id="new" role="tabpanel" aria-labelledby="new-tab">
                             <div className="course-tab-content">
                             <div className="course-overview">
+
+                              {loading_new_courses ? (
+                                  <div className='row'>
+                                  <CoursesPotraitSkeleton />
+                                  <CoursesPotraitSkeleton />
+                                  <CoursesPotraitSkeleton />
+                                  <CoursesPotraitSkeleton />
+                                  <CoursesPotraitSkeleton />
+                                  <CoursesPotraitSkeleton />
+                                  <CoursesPotraitSkeleton />
+                                  <CoursesPotraitSkeleton />
+                                  </div>
+                              ) : (
                                 <div className="row g-3 mb-5">
                                 {new_courses.slice(0, next)?.map((course) => {
                                     return (
@@ -398,6 +415,8 @@ const GetCourseByCategory = () => {
                                     );
                                 })}
                                 </div>
+                              )}
+
 
                                 {next < new_courses.length && (
                                     <div
@@ -420,6 +439,19 @@ const GetCourseByCategory = () => {
                         <div className="tab-pane fade" id="trending" role="tabpanel" aria-labelledby="trending-tab">
                             <div className="course-tab-content">
                             <div className="course-overview">
+
+                              {loading_trending_courses ? (
+                                   <div className='row'>
+                                   <CoursesPotraitSkeleton />
+                                   <CoursesPotraitSkeleton />
+                                   <CoursesPotraitSkeleton />
+                                   <CoursesPotraitSkeleton />
+                                   <CoursesPotraitSkeleton />
+                                   <CoursesPotraitSkeleton />
+                                   <CoursesPotraitSkeleton />
+                                   <CoursesPotraitSkeleton />
+                                   </div>
+                              ) : (
                                 <div className="row g-3 mb-5">
                                 {trending_courses.slice(0, next)?.map((course) => {
                                     return (
@@ -429,6 +461,7 @@ const GetCourseByCategory = () => {
                                     );
                                 })}
                                 </div>
+                              )}
 
                                 {next < trending_courses.length && (
                                     <div
