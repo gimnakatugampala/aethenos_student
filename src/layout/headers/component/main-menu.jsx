@@ -2,14 +2,16 @@ import React from 'react';
 import menu_data from '../menu-data';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import Cookies from 'js-cookie';
 
-const MainMenu = ({CURRENTUSER}) => {
+const MainMenu = () => {
 
+    const [CURRENTUSER, setCURRENTUSER] = useState(Cookies.get('aethenos'))
 
     return (
         <ul className="mainmenu">
             {menu_data.map((menu, i) => (
-                menu.title == "Instructors" && CURRENTUSER != null ? <li key={i}><a href={"http://aethenos-instructor.infinityfreeapp.com/"}>{menu.title}</a></li> : 
+                menu.link == "/instructor" && CURRENTUSER != null ? <li key={i}><a href={"http://aethenos-instructor.infinityfreeapp.com/"}>{menu.title}</a></li> : 
                 <li key={i} >
                    <a  href={menu.link}>{menu.title}</a>
                     {/* {!menu.mega_menu && 

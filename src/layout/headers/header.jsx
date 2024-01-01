@@ -116,7 +116,7 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                             <div className="header-mainnav">
                                 <nav className="mainmenu-nav">
                                     {/* main menu start */}
-                                    <MainMenu CURRENTUSER={CURRENTUSER} />
+                                    <MainMenu  />
                                     {/* main menu end */}
                                 </nav>
                             </div>
