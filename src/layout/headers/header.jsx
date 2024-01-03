@@ -13,9 +13,12 @@ import HeaderTopRight from '../headers/component/header-top-right';
 import MainMenu from '../headers/component/main-menu';
 import Cart from './component/cart';
 import SearchBar from '../../pages/Search/searchBar';
-import {  GetCourseCategory } from '../../api';
+import {  GetCourseCategory , GetCategoriesMenu } from '../../api';
 import SmallRedLoading from '../../functions/Loading/SmallRedLoading';
 import Cookies from 'js-cookie';
+import { Menu, MenuItem, MenuButton, SubMenu } from '@szhsin/react-menu';
+import '@szhsin/react-menu/dist/index.css';
+
 
 const categories = [
     { link: '/courses/design', title: 'Design' },
@@ -47,6 +50,8 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
 
     const [categories, setcategories] = useState([])
 
+    const [navbar_list, setnavbar_list] = useState([])
+
     
 
     
@@ -57,6 +62,8 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
 
         // Get Categories
         GetCourseCategory(setcategories)
+
+        GetCategoriesMenu(setnavbar_list)
 
     }, [categories])
     
@@ -97,16 +104,32 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                         <nav className="mainmenu-nav">
                                             <ul className="mainmenu">
                                                 <li className="has-droupdown">
-                                                    <a href="#"><i className="icon-1"></i>Categories</a>
-                                                    <ul className="submenu">
-                                                        {
-                                                           categories != null && categories.map((category, i) => (
-                                                                <li key={i}>
-                                                                    <a href={`${category.link}`} >{category.title}</a>
-                                                                </li>
-                                                            ) )
-                                                        }
-                                                    </ul>
+                                                <Menu menuButton={<a href="#"><i className="icon-1"></i>Categories</a>}>
+
+                                                {navbar_list != null && navbar_list.map((list,index) =>(
+                                                <a style={{display:'block'}} href={`/courses/${list.categoryLinkName}`} key={index}>
+                                                    <SubMenu label={list.category}>
+
+                                                    {list.subCategoryList.map((sub_list,i) => (
+                                                        <a style={{display:'block'}} key={i} href={`/courses/${list.categoryLinkName}/${sub_list.subCategoryLinkName}`}>
+                                                        <SubMenu label={sub_list.subCategory}>
+                                                        
+                                                        {sub_list.topics.map((topic,id) => (
+                                                        <a href={`/topic/${topic.topicLinkName}`} style={{display:'block'}} key={id}>
+                                                            <MenuItem>{topic.topic}</MenuItem>
+                                                        </a>
+                                                        ))}
+                                                        
+                                                        </SubMenu>
+                                                        </a>
+                                                    ))}
+
+                                                </SubMenu>
+                                                </a>
+                                                )) }
+                                                
+                                                </Menu>
+                                                
                                                 </li>
                                             </ul>
                                         </nav>
@@ -118,6 +141,8 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                     {/* main menu start */}
                                     <MainMenu  />
                                     {/* main menu end */}
+
+                                 
                                 </nav>
                             </div>
                             <div className="header-right">

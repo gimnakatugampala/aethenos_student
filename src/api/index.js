@@ -196,6 +196,23 @@ export const InstructorSignUp = async(firstname,lastname,email,conpassword,route
     .catch(error => console.log('error', error));
 }
 
+export const GetCategoriesMenu = async(setnavbar_list) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getAllCategorySubCategoryTopics", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      setnavbar_list(result)
+      console.log(result)
+    })
+    .catch(error => console.log('error', error));
+
+}
+
 export const InstructorVerify = async() =>{
   const CURRENT_USER = JSON.parse(window.localStorage.getItem("aethenos"));
     
