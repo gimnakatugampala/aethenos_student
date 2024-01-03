@@ -332,3 +332,23 @@ export const GetCourseCategoryTitle = async(setCategoryName,id,setloading_top_ti
     })
     .catch(error => console.log('error', error));
 }
+
+export const GetCourseSubCategoryTitle = async(code,setCategoryName,setSubCategoryName,setloading_top_title) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCategoryAndSubCategorynameBylinkName/${code}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+      setCategoryName(result.categoryName)
+      setSubCategoryName(result.subCategoryName)
+      setloading_top_title(false)
+
+    })
+    .catch(error => console.log('error', error));
+
+}

@@ -242,7 +242,7 @@ const GetCourseByCategory = () => {
                 <Box  sx={{ display: 'flex', alignItems: 'center',justifyContent:'space-between'}}>
 
                 <div className='d-flex'>
-                <Typography className='mx-3'><a href='/courses/it-software/development'><b>Development</b></a></Typography>
+                <Typography className='mx-3'><a href={`/courses/${id}`}><b>{CategoryName == "" ? "Loading" : CategoryName}</b></a></Typography>
 
                 <Typography className='mx-3'><a href='/courses/it-software/development'>Web Development</a></Typography>
 

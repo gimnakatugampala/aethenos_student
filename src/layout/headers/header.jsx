@@ -102,7 +102,7 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                                         {
                                                            categories != null && categories.map((category, i) => (
                                                                 <li key={i}>
-                                                                    <Link href={`${category.link}`} legacyBehavior><a>{category.title}</a></Link>
+                                                                    <a href={`${category.link}`} >{category.title}</a>
                                                                 </li>
                                                             ) )
                                                         }
