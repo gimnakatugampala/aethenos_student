@@ -243,7 +243,7 @@ const GetCourseByCategory = () => {
 
   return (
     <Wrapper>
-        <SEO pageTitle={CategoryName == "" ? "Loading Content ..." : CategoryName} />
+        <SEO pageTitle={CategoryName == "" ? "Loading ..." : CategoryName} />
         <Header/>
 
             {loading_sub_categories ? (
@@ -253,15 +253,19 @@ const GetCourseByCategory = () => {
             ) : (
             <CardContainer className='p-3' >
                 <Box  sx={{ display: 'flex', alignItems: 'center',justifyContent:'space-between'}}>
-                <div className='d-flex'>
+                <div className='d-flex align-items-center'>
 
                 <Typography className='mx-3'><a href={`/courses/${id}`}><b>{CategoryName == "" ? "Loading" : CategoryName}</b></a></Typography>
+
+                <i className="fas fa-chevron-right fa-2x"></i>
+
                 {sub_categories != null && sub_categories.length > 0 &&  sub_categories.slice(0, 5).map((subCategory,index) => (
                     <Typography key={index} className='mx-3'><a href={`/courses/${id}/${subCategory.subLinkName}`}>{subCategory.subCategory}</a></Typography>
                 ))}
 
                 </div>
 
+                {sub_categories != null && sub_categories.length > 5 && (
                 <IconButton
                 aria-label="more"
                 id="long-button"
@@ -272,6 +276,8 @@ const GetCourseByCategory = () => {
             >
                 <MoreVertIcon />
             </IconButton>
+                )}
+
             <Menu
                 id="long-menu"
                 MenuListProps={{
@@ -286,6 +292,7 @@ const GetCourseByCategory = () => {
                 },
                 }}
             >
+
                 {sub_categories != null && sub_categories.length > 0 && sub_categories.slice(5).map((sub_cat_option,index) => (
                 <MenuItem key={index} onClick={handleClose}>
                     <a href={`/courses/${id}/${sub_cat_option.subLinkName}`}>

@@ -405,6 +405,7 @@ export const GetCoursesByCategoryNew = async(setnew_courses,setloading_new_cours
         return
       }
         setnew_courses(result)
+        setloading_new_courses(false)
       
     })
     .catch(error => console.log('error', error));
