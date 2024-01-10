@@ -370,21 +370,42 @@ export const GetCourseSubCategoryTitle = async(code,setCategoryName,setSubCatego
 
 }
 
-export const GetCoursesByCategoryNew = async(setnew_courses,setloading_new_courses) =>{
+export const GetSubCategoriesByCategoryLinkName = async(id,setsub_categories,setloading_sub_categories) =>{
 
   var requestOptions = {
     method: 'GET',
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getNewCourses/design", requestOptions)
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getSubCategoryByCourseLinkName/${id}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+      setsub_categories(result)
+      setloading_sub_categories(false)
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetCoursesByCategoryNew = async(setnew_courses,setloading_new_courses,id) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getNewCourses/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       console.log(result)
       if(result.message == "Error"){
         setnew_courses([])
         setloading_new_courses(false)
+        return
       }
+        setnew_courses(result)
+      
     })
     .catch(error => console.log('error', error));
 

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { Footer, Header, Wrapper } from "../../../layout";
 import SEO from "../../../components/seo";
-import { GetCourseCategoryTitle, GetCoursesByCategoryMostPopular, GetCoursesByCategoryNew } from '../../../api';
+import { GetCourseCategoryTitle, GetCoursesByCategoryMostPopular, GetCoursesByCategoryNew, GetSubCategoriesByCategoryLinkName } from '../../../api';
 import CourseTypeOne from '../../../components/course/course-type-one';
 import CourseFourArea from '../../../components/course-category/landscape-courses/course-4-area'
 import { course_data } from '../../../data';
@@ -176,6 +176,9 @@ const GetCourseByCategory = () => {
     const { id } = router.query;
     const coursePerView = 8;
     const [next, setNext] = useState(coursePerView);
+
+    const [sub_categories, setsub_categories] = useState([])
+
     const [most_popular_courses, setmost_popular_courses] = useState(course_data)
     const [new_courses, setnew_courses] = useState([])
     const [trending_courses, settrending_courses] = useState(course_data)
@@ -199,15 +202,21 @@ const GetCourseByCategory = () => {
     };
 
     useEffect(() => {
-        console.log(id)
+
         if(id != null){
+
+            GetSubCategoriesByCategoryLinkName(id,setsub_categories,setloading_sub_categories)
             GetCourseCategoryTitle(setCategoryName,id,setloading_top_title)
-            GetCoursesByCategoryNew(setnew_courses,setloading_new_courses)
+            GetCoursesByCategoryNew(setnew_courses,setloading_new_courses,id)
             GetCoursesByCategoryMostPopular()
+            console.log(id)
         }
+        
+       
+        
 
         setTimeout(() => {
-            setloading_sub_categories(false)
+            // setloading_sub_categories(false)
             setloading_most_popular_courses(false)
             setloading_topics_list(false)
             setloading_instructors_list(false)
@@ -244,19 +253,13 @@ const GetCourseByCategory = () => {
             ) : (
             <CardContainer className='p-3' >
                 <Box  sx={{ display: 'flex', alignItems: 'center',justifyContent:'space-between'}}>
-
                 <div className='d-flex'>
+
                 <Typography className='mx-3'><a href={`/courses/${id}`}><b>{CategoryName == "" ? "Loading" : CategoryName}</b></a></Typography>
+                {sub_categories != null && sub_categories.length > 0 &&  sub_categories.slice(0, 5).map((subCategory,index) => (
+                    <Typography key={index} className='mx-3'><a href={`/courses/${id}/${subCategory.subLinkName}`}>{subCategory.subCategory}</a></Typography>
+                ))}
 
-                <Typography className='mx-3'><a href='/courses/it-software/development'>Web Development</a></Typography>
-
-                <Typography className='mx-3'><a href='/courses/it-software/development'>Data Science</a></Typography>
-
-                <Typography className='mx-3'><a href='/courses/it-software/development'>Mobile Development</a></Typography>
-
-                <Typography className='mx-3'><a href='/courses/it-software/development'>Programming Languages</a></Typography>
-
-                <Typography className='mx-3'><a href='/courses/it-software/development'>Game Development</a></Typography>
                 </div>
 
                 <IconButton
@@ -283,10 +286,10 @@ const GetCourseByCategory = () => {
                 },
                 }}
             >
-                {options.map((option) => (
-                <MenuItem key={option} onClick={handleClose}>
-                    <a href='/courses/development/web-development'>
-                        {option}
+                {sub_categories != null && sub_categories.length > 0 && sub_categories.slice(5).map((sub_cat_option,index) => (
+                <MenuItem key={index} onClick={handleClose}>
+                    <a href={`/courses/${id}/${sub_cat_option.subLinkName}`}>
+                        {sub_cat_option.subCategory}
                     </a>
                 </MenuItem>
                 ))}
@@ -300,6 +303,7 @@ const GetCourseByCategory = () => {
 
         <section className="edu-section-gap course-details-area p-0">
             <div className="container">
+
                     <div className="row">
 
                     {loading_top_title ? (
@@ -500,7 +504,7 @@ const GetCourseByCategory = () => {
 
                     <Carousel autoPlay={false} duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
                     {items.map((item, i) => (
-                        <div className='row'>
+                        <div key={i} className='row'>
                             {item.topics.map((topic,index) => (
                                 <div key={index} className='col-md-3 text-center'>
                                 <CardContainer>
@@ -532,7 +536,7 @@ const GetCourseByCategory = () => {
                     ) : (
                         <Carousel autoPlay={false} duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
                             {instructors.map((page, index) => (
-                                <div className="row">
+                                <div key={index} className="row">
                                       {page.single.map((item, itemIndex) => (
                                         <CardContainer key={itemIndex} className="col-md-4 mb-3">
                                         <a href="/users/123">
