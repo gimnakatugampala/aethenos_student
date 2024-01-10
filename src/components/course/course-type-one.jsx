@@ -3,6 +3,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cart_course } from '../../redux/features/cart-slice';
 import { add_to_wishlist, wishlistItems } from '../../redux/features/wishlist-slice';
+import { IMG_HOST } from '../../api';
+
 
 const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
     const {cartCourses} = useSelector(state => state.cart);

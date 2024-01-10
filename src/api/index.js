@@ -6,6 +6,7 @@ import SuccessAlert from '../functions/Alert/SuccessAlert';
 import { useState } from 'react';
 
 export const USERTOKEN = Cookies.get('aethenos') 
+export const IMG_HOST = `http://185.209.223.202:8080/aethenos-assert/`
 const CURRENT_USER = Cookies.get('aethenos') 
 
 // Unauthorized
