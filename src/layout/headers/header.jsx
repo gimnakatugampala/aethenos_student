@@ -16,7 +16,8 @@ import SearchBar from '../../pages/Search/searchBar';
 import {  GetCourseCategory , GetCategoriesMenu } from '../../api';
 import SmallRedLoading from '../../functions/Loading/SmallRedLoading';
 import Cookies from 'js-cookie';
-import { Menu, MenuItem, MenuButton, SubMenu } from '@szhsin/react-menu';
+import { Menu, MenuItem, MenuButton, SubMenu ,MenuHeader } from '@szhsin/react-menu';
+import OneLineSkeleton from '../../functions/Skeletons/OneLineSkeleton'
 import '@szhsin/react-menu/dist/index.css';
 
 
@@ -63,7 +64,11 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
         // Get Categories
         GetCourseCategory(setcategories)
 
-        GetCategoriesMenu(setnavbar_list)
+       
+            
+            GetCategoriesMenu(setnavbar_list)
+       
+
 
     }, [categories])
     
@@ -99,21 +104,37 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                     </Link>
                                 </div>
 
-                                { ! disable_category &&
+                                 { ! disable_category &&
                                     <div className="header-category">
                                         <nav className="mainmenu-nav">
                                             <ul className="mainmenu">
-                                                <li className="has-droupdown">
-                                                <Menu menuButton={<a href="#"><i className="icon-1"></i>Categories</a>}>
 
+                                                
+                                                <li style={{top:'5px'}} className="has-droupdown">
+                                                <Menu menuButton={<a href="#"><i className="icon-1"></i>Categories</a>}>
+                                                {navbar_list.length == 0 && <div className='container'>
+                                                    <OneLineSkeleton height={20} />
+                                                    <OneLineSkeleton height={20} />
+                                                    <OneLineSkeleton height={20} />
+                                                    <OneLineSkeleton height={20} />
+                                                    <OneLineSkeleton height={20} />
+                                                    <OneLineSkeleton height={20} />
+                                                    <OneLineSkeleton height={20} />
+                                                    <OneLineSkeleton height={20} />
+                                                    <OneLineSkeleton height={20} />
+                                                    <OneLineSkeleton height={20} />
+                                                    <OneLineSkeleton height={20} />
+                                                    <OneLineSkeleton height={20} />
+                                                </div>}
+                                                
                                                 {navbar_list != null && navbar_list.map((list,index) =>(
                                                 <a style={{display:'block'}} href={`/courses/${list.categoryLinkName}`} key={index}>
                                                     <SubMenu label={list.category}>
-
                                                     {list.subCategoryList.map((sub_list,i) => (
                                                         <a style={{display:'block'}} key={i} href={`/courses/${list.categoryLinkName}/${sub_list.subCategoryLinkName}`}>
                                                         <SubMenu label={sub_list.subCategory}>
-                                                        
+
+                                                        <MenuHeader><b>Popular Topics</b></MenuHeader>
                                                         {sub_list.topics.map((topic,id) => (
                                                         <a href={`/topic/${topic.topicLinkName}`} style={{display:'block'}} key={id}>
                                                             <MenuItem>{topic.topic}</MenuItem>
@@ -126,15 +147,18 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
 
                                                 </SubMenu>
                                                 </a>
-                                                )) }
-                                                
+                                                ))}
+
                                                 </Menu>
-                                                
                                                 </li>
+                                               
+
+
+
                                             </ul>
                                         </nav>
                                     </div>
-                                }
+                                } 
                             </div>
                             <div className="header-mainnav">
                                 <nav className="mainmenu-nav">

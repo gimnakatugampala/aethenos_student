@@ -38,7 +38,7 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading,
     fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/register/add", requestOptions)
       .then(response => response.json())
       .then(result => {
-        console.log(result)
+        // console.log(result)
 
         if(result.variable == "200"){
 
@@ -95,7 +95,7 @@ export const StudentSignIn = async(email, password,setloading,router) =>{
     fetch("https://aethenosadmin.exon.lk:2053/aethenos-api/authentication/student", requestOptions)
     .then(response => response.json())
     .then(result => {
-        console.log(result)
+        // console.log(result)
 
         if(result.message == "User not found"){
 
@@ -164,7 +164,7 @@ export const InstructorSignUp = async(firstname,lastname,email,conpassword,route
   fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/register/add", requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
 
       if(result.variable == "200"){
 
@@ -207,7 +207,7 @@ export const GetCategoriesMenu = async(setnavbar_list) =>{
     .then(response => response.json())
     .then(result => {
       setnavbar_list(result)
-      console.log(result)
+      // console.log(result)
     })
     .catch(error => console.log('error', error));
 
@@ -339,7 +339,7 @@ export const GetCourseCategoryTitle = async(setCategoryName,id,setloading_top_ti
     .then(response => response.text())
     .then(result => {
       setCategoryName(result)
-      // console.log(result.message)
+      console.log(result)
 
       setTimeout(() => {
         
@@ -360,12 +360,46 @@ export const GetCourseSubCategoryTitle = async(code,setCategoryName,setSubCatego
   fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCategoryAndSubCategorynameBylinkName/${code}`, requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
       setCategoryName(result.categoryName)
       setSubCategoryName(result.subCategoryName)
       setloading_top_title(false)
 
     })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetCoursesByCategoryNew = async(setnew_courses,setloading_new_courses) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getNewCourses/design", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+      if(result.message == "Error"){
+        setnew_courses([])
+        setloading_new_courses(false)
+      }
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetCoursesByCategoryMostPopular = async() =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getMostPopularCourses/design", requestOptions)
+    .then(response => response.json())
+    .then(result => console.log(result))
     .catch(error => console.log('error', error));
 
 }

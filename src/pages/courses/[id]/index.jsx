@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { Footer, Header, Wrapper } from "../../../layout";
 import SEO from "../../../components/seo";
-import { GetCourseCategoryTitle } from '../../../api';
+import { GetCourseCategoryTitle, GetCoursesByCategoryMostPopular, GetCoursesByCategoryNew } from '../../../api';
 import CourseTypeOne from '../../../components/course/course-type-one';
 import CourseFourArea from '../../../components/course-category/landscape-courses/course-4-area'
 import { course_data } from '../../../data';
@@ -177,7 +177,7 @@ const GetCourseByCategory = () => {
     const coursePerView = 8;
     const [next, setNext] = useState(coursePerView);
     const [most_popular_courses, setmost_popular_courses] = useState(course_data)
-    const [new_courses, setnew_courses] = useState(course_data)
+    const [new_courses, setnew_courses] = useState([])
     const [trending_courses, settrending_courses] = useState(course_data)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -200,7 +200,11 @@ const GetCourseByCategory = () => {
 
     useEffect(() => {
         console.log(id)
-        GetCourseCategoryTitle(setCategoryName,id,setloading_top_title)
+        if(id != null){
+            GetCourseCategoryTitle(setCategoryName,id,setloading_top_title)
+            GetCoursesByCategoryNew(setnew_courses,setloading_new_courses)
+            GetCoursesByCategoryMostPopular()
+        }
 
         setTimeout(() => {
             setloading_sub_categories(false)
@@ -208,11 +212,11 @@ const GetCourseByCategory = () => {
             setloading_topics_list(false)
             setloading_instructors_list(false)
             setloading_all_courses_list(false)
-            setloading_new_courses(false)
+            // setloading_new_courses(false)
             setloading_trending_courses(false)
         }, 2000);
 
-    }, [CategoryName,loading_top_title])
+    }, [CategoryName,loading_top_title,id])
 
     const ITEM_HEIGHT = 48;
 
@@ -357,13 +361,13 @@ const GetCourseByCategory = () => {
                                     </div>
                                 ) : (
                                     <div className="row g-3 mb-5">
-                                    {most_popular_courses.slice(0, next)?.map((course) => {
+                                    {most_popular_courses.length > 0 ? most_popular_courses.slice(0, next)?.map((course) => {
                                         return (
                                         <div key={course.id} className="col-md-6 col-xl-3">
                                             <CourseTypeOne data={course} classes="course-box-shadow" />
                                         </div>
                                         );
-                                    })}
+                                    }) : <h4>No Most Popular Courses Available</h4>}
                                     </div>
                                 )}
 
@@ -405,13 +409,13 @@ const GetCourseByCategory = () => {
                                   </div>
                               ) : (
                                 <div className="row g-3 mb-5">
-                                {new_courses.slice(0, next)?.map((course) => {
+                                {new_courses.length > 0 ? new_courses.slice(0, next)?.map((course) => {
                                     return (
                                     <div key={course.id} className="col-md-6 col-xl-3">
                                         <CourseTypeOne data={course} classes="course-box-shadow" />
                                     </div>
                                     );
-                                })}
+                                }) : <h4 >No New Courses Available</h4>}
                                 </div>
                               )}
 
