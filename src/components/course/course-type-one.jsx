@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cart_course } from '../../redux/features/cart-slice';
 import { add_to_wishlist, wishlistItems } from '../../redux/features/wishlist-slice';
+import StarsRating from 'stars-rating'
 import { IMG_HOST } from '../../api';
 
 
@@ -18,7 +19,7 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                 add_to_wishlist({
                     change_type: 'remove_wishlist', item: {
                     id: course_item.id,
-                    img: `/assets/images/course/course-06/${course_item.img}`,
+                    img: `${course_item.img}`,
                     title: course_item.title,
                     price: course_item.course_price
                 }
@@ -28,7 +29,7 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                 add_to_wishlist({
                     change_type: 'add_wishlist', item: {
                     id: course_item.id,
-                    img: `/assets/images/course/course-06/${course_item.img}`,
+                    img: `${course_item.img}`,
                     title: course_item.title,
                     price: course_item.course_price
                 }
@@ -40,37 +41,41 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
     const handleAddToCart = (course) => {
         dispatch(cart_course({
             id:course.id,
-            img:`/assets/images/course/course-06/${course.img}`,
+            img:`${course.img}`,
             price:course.course_price,
             title:course.title
         }))
     }
 
     return (
-        <div className={`edu-course course-style-1 ${ classes ? classes : '' } hover-button-bg-white`}>
+        <div className={`edu-course course-style-1 ${ classes ? classes : '' } hover-button-bg-white h-100`}>
             <div className="inner">
                 <div className="thumbnail">
                     <Link href={`/course-details/${data.id}`} legacyBehavior>
-                        <img style={{width:'100%'}} src={`/assets/images/course/course-${image_location_path}/${data.img}`} alt="Course Meta" />
+                        <img style={{width:'100%',objectFit:'cover'}} src={`${IMG_HOST}/${data.img}`} alt={data.title} />
                     </Link>
                     <div className="time-top">
-                        <span className="duration" style={{background:'#e01D20'}}>{data.duration} OFF</span>
+                        <span className="duration" style={{background:'#e01D20'}}>{data.duration} % OFF</span>
                     </div>
                 </div>
                 <div className="content">
                     <span className="course-level">{data.level}</span>
-                    <h6 className="title">
-                        <a href={`/course-details/${data.id}`}>{data.title.length > 18 ? data.title.substring(0, 18) + '...' : data.title}</a>
-                    </h6>
+                    <p className="title m-0 p-0">
+                        <b>
+                            <a href={`/course-details/${data.id}`}>{data.title.length > 60 ? data.title.substring(0, 60) + '...' : data.title}</a>
+                        </b>
+                    </p>
+                    <p style={{fontSize:'12px'}} className='m-0 p-0'>{data.instructor}</p>
                     <div className="course-rating">
                         <div className="rating">
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
+                            <StarsRating
+                                count={5}
+                                size={24}
+                                value={3.5}
+                                color1={'gray'}
+                                color2={'#F39C12'} />
                         </div>
-                        <span className="rating-count">({data.rating} /{data.rating_count} Rating)</span>
+                        <span className="rating-count ml-4"><b>{Number.parseFloat(data.rating).toFixed(1)}</b></span>
                     </div>
                     <div className='d-flex'>
                     <div className="course-price discounted-price m-1"><b>${data.course_price}</b></div>
@@ -95,19 +100,20 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                     </button>
                     <span className="course-level">{data.level}</span>
                         <h6 className="title">
-                            <Link href={`/course-details/${data.id}`} legacyBehavior>
-                                {data.title}
-                            </Link>
+                            <b>
+                                <a href={`/course-details/${data.id}`}>{data.title.length > 60 ? data.title.substring(0, 60) + '...' : data.title}</a>
+                            </b>
                         </h6>
                     <div className="course-rating">
                         <div className="rating">
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
+                                <StarsRating
+                                count={5}
+                                size={24}
+                                value={3.5}
+                                color1={'gray'}
+                                color2={'#F39C12'} />
                         </div>
-                        <span className="rating-count">({data.rating} /{data.rating_count} Rating)</span>
+                        <span className="rating-count ml-4"><b>{Number.parseFloat(data.rating).toFixed(1)}</b></span>
                     </div>
 
                     <div className='d-flex'>
@@ -115,7 +121,7 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                     <div className="course-price text-decoration-line-through m-2">${data.course_price}</div>
                     </div>
 
-                    <p>{data.short_desc}</p>
+                    <p>{data.curriculum_desc.length > 60 ? data.curriculum_desc.substring(0, 60) + '...' : data.curriculum_desc}</p>
                     <ul className="d-flex course-meta">
                         <li><i className="icon-24"></i>{data.lesson} Lessons</li>
                         <li><i className="icon-25"></i>{data.student} Students</li>

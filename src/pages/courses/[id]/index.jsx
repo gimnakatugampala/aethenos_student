@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { Footer, Header, Wrapper } from "../../../layout";
 import SEO from "../../../components/seo";
-import { GetCourseCategoryTitle, GetCoursesByCategoryMostPopular, GetCoursesByCategoryNew, GetSubCategoriesByCategoryLinkName } from '../../../api';
+import { GetCourseCategoryTitle, GetCoursesByCategoryInstructor, GetCoursesByCategoryMostPopular, GetCoursesByCategoryNew, GetSubCategoriesByCategoryLinkName } from '../../../api';
 import CourseTypeOne from '../../../components/course/course-type-one';
 import CourseFourArea from '../../../components/course-category/landscape-courses/course-4-area'
 import { course_data } from '../../../data';
@@ -21,6 +21,7 @@ import CoursesPotraitSkeleton from '../../../functions/Skeletons/CoursesPotraitS
 import TopicsListSkeleton from '../../../functions/Skeletons/TopicsListSkeleton';
 import InstructorsListSkeleton from '../../../functions/Skeletons/InstructorsListSkeleton';
 import LandscapeListSkeleton from '../../../functions/Skeletons/LandscapeListSkeleton';
+
 
 
 var items = [{
@@ -97,70 +98,70 @@ var items = [{
     },
   ];
 
-  const instructors = [
-    {
-        single:[
-            {
-                title: "John Doe",
-                link: "web-development-link-here",
-                description: "ReactJS,NodeJS",
-                rating: 4.5,
-                students: 1000,
-                courses: 10,
-                image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-            },
-            {
-            title: "John Doe",
-            link: "web-development-link-here",
-            description: "ReactJS,NodeJS",
-            rating: 4.5,
-            students: 1000,
-            courses: 10,
-            image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-            },
-            {
-                title: "John Doe",
-                link: "web-development-link-here",
-                description: "ReactJS,NodeJS",
-                rating: 4.5,
-                students: 1000,
-                courses: 10,
-                image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-            },
-            {
-                title: "John Doe",
-                link: "web-development-link-here",
-                description: "ReactJS,NodeJS",
-                rating: 4.5,
-                students: 1000,
-                courses: 10,
-                image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-                }
-        ]
-    },
-    {
-        single:[
-            {
-                title: "Jeff",
-                link: "web-development-link-here",
-                description: "ReactJS,NodeJS",
-                rating: 4.5,
-                students: 1000,
-                courses: 10,
-                image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-            },
-            {
-            title: "Smith",
-            link: "web-development-link-here",
-            description: "ReactJS,Angular",
-            rating: 4.5,
-            students: 1000,
-            courses: 10,
-            image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-            }
-        ]
-    }
-  ];
+//   const instructors = [
+//     {
+//         single:[
+//             {
+//                 title: "John Doe",
+//                 link: "web-development-link-here",
+//                 description: "ReactJS,NodeJS",
+//                 rating: 4.5,
+//                 students: 1000,
+//                 courses: 10,
+//                 image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+//             },
+//             {
+//             title: "John Doe",
+//             link: "web-development-link-here",
+//             description: "ReactJS,NodeJS",
+//             rating: 4.5,
+//             students: 1000,
+//             courses: 10,
+//             image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+//             },
+//             {
+//                 title: "John Doe",
+//                 link: "web-development-link-here",
+//                 description: "ReactJS,NodeJS",
+//                 rating: 4.5,
+//                 students: 1000,
+//                 courses: 10,
+//                 image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+//             },
+//             {
+//                 title: "John Doe",
+//                 link: "web-development-link-here",
+//                 description: "ReactJS,NodeJS",
+//                 rating: 4.5,
+//                 students: 1000,
+//                 courses: 10,
+//                 image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+//                 }
+//         ]
+//     },
+//     {
+//         single:[
+//             {
+//                 title: "Jeff",
+//                 link: "web-development-link-here",
+//                 description: "ReactJS,NodeJS",
+//                 rating: 4.5,
+//                 students: 1000,
+//                 courses: 10,
+//                 image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+//             },
+//             {
+//             title: "Smith",
+//             link: "web-development-link-here",
+//             description: "ReactJS,Angular",
+//             rating: 4.5,
+//             students: 1000,
+//             courses: 10,
+//             image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+//             }
+//         ]
+//     }
+//   ];
 
   
 const options = [
@@ -181,6 +182,8 @@ const GetCourseByCategory = () => {
 
     const [most_popular_courses, setmost_popular_courses] = useState(course_data)
     const [new_courses, setnew_courses] = useState([])
+
+    const [instructors, setinstructors] = useState([])
     const [trending_courses, settrending_courses] = useState(course_data)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -209,11 +212,11 @@ const GetCourseByCategory = () => {
             GetCourseCategoryTitle(setCategoryName,id,setloading_top_title)
             GetCoursesByCategoryNew(setnew_courses,setloading_new_courses,id)
             GetCoursesByCategoryMostPopular()
+            GetCoursesByCategoryInstructor(id,setinstructors)
             console.log(id)
         }
         
        
-        
 
         setTimeout(() => {
             // setloading_sub_categories(false)
@@ -542,11 +545,11 @@ const GetCourseByCategory = () => {
                     </div>
                     ) : (
                         <Carousel autoPlay={false} duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
-                            {instructors.map((page, index) => (
+                            {instructors != null && instructors.map((page, index) => (
                                 <div key={index} className="row">
                                       {page.single.map((item, itemIndex) => (
                                         <CardContainer key={itemIndex} className="col-md-4 mb-3">
-                                        <a href="/users/123">
+                                        <a href={`/users/${item.code}`}>
                                         <div
                                             className="row"
                                             style={{

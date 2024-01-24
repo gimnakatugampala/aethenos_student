@@ -11,6 +11,7 @@ import { store } from '../redux/store';
 import Theme from '../components/common/theme';
 import { MouseMoveProvider } from '../contexts/mouse-move-context';
 import SEO from '../components/seo';
+import { getUserCountry } from '../api';
 
 function MyApp( { Component, pageProps } ) {
     const router = useRouter();
@@ -21,6 +22,13 @@ function MyApp( { Component, pageProps } ) {
     useEffect( () => {
         sal();
     }, [] );
+
+    // Get User Country
+    useEffect(() => {
+        getUserCountry()
+    })
+    
+
     return (
         <React.Fragment>
             <SEO font="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Spartan:wght@400;500;600;700;800&display=swap" />

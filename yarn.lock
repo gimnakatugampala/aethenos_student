@@ -5465,6 +5465,11 @@ stable@^0.1.8:
   resolved "https://registry.npmjs.org/stable/-/stable-0.1.8.tgz"
   integrity sha512-ji9qxRnOVfcuLDySj9qzhGSEFVobyt1kIOSkj1qZzYLzq7Tos/oUUWvotUPQLlrsidqsK6tBH89Bc9kL5zHA6w==
 
+stars-rating@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/stars-rating/-/stars-rating-1.1.0.tgz"
+  integrity sha512-fsINHyvaDiCqf6uue19l13A7YwW1eMD6M1BsvZh5xZIKTxZb+bsCmtOa2qej1hmHltnI+D8FvMqjAp/KoeR2Sg==
+
 streamsearch@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/streamsearch/-/streamsearch-1.1.0.tgz"

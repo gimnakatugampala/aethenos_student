@@ -6,7 +6,7 @@ import SuccessAlert from '../functions/Alert/SuccessAlert';
 import { useState } from 'react';
 
 export const USERTOKEN = Cookies.get('aethenos') 
-export const IMG_HOST = `http://185.209.223.202:8080/aethenos-assert/`
+export const IMG_HOST = `https://aethenosinstructor.exon.lk:2053/aethenos-assert/`
 const CURRENT_USER = Cookies.get('aethenos') 
 
 // Unauthorized
@@ -18,6 +18,25 @@ const Unauthorized = (result,rediect_url) =>{
   }
 }
 
+
+export const getUserCountry = async() =>{
+  fetch('https://ipapi.co/json/')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    // console.log(data)
+
+    Cookies.set('aethenos_user_origin', JSON.stringify(data), { expires: 7 })
+
+    console.log(JSON.parse(Cookies.get('aethenos_user_origin')).currency)
+
+
+  })
+  .catch(function(error) {
+    console.log("Error fetching IP geolocation:", error);
+  });
+}
 
 
 export const StudentSignUp = async(fname, lname, email , conpassword,setloading,router) =>{
@@ -425,4 +444,58 @@ export const GetCoursesByCategoryMostPopular = async() =>{
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
 
+}
+
+export const GetCoursesByCategoryInstructor = async(id,setinstructors) =>{
+  
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getPopularInstructors/design`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+
+      const maxObjectsPerSingleArray = 6;
+
+const instructors = result.map(item => {
+    const singleArrays = [];
+    let currentSingleArray = [];
+
+    for (let i = 0; i < item.coursesCount; i++) {
+        if (currentSingleArray.length === maxObjectsPerSingleArray) {
+            singleArrays.push({ single: currentSingleArray });
+            currentSingleArray = [];
+        }
+
+        currentSingleArray.push({
+            title: item.name,
+            link: "web-development-link-here",
+            description: "ReactJS,NodeJS",
+            rating: item.rating,
+            students: item.studentsCount,
+            courses: item.coursesCount,
+            image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+        });
+    }
+
+    if (currentSingleArray.length > 0) {
+        singleArrays.push({ single: currentSingleArray });
+    }
+
+    return singleArrays;
+}).flat();
+ 
+      setinstructors(instructors)
+      console.log(instructors)
+      // setinstructors(result)
+
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const SearchCourseByKeyword = async() =>{
+  console.log("123")
 }
