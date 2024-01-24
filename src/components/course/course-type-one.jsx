@@ -1,10 +1,12 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cart_course } from '../../redux/features/cart-slice';
 import { add_to_wishlist, wishlistItems } from '../../redux/features/wishlist-slice';
 import StarsRating from 'stars-rating'
 import { IMG_HOST } from '../../api';
+import CalculateListPrice from '../../functions/pricing/CalculateListPrice';
+import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
 
 
 const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
@@ -47,6 +49,12 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
         }))
     }
 
+    useEffect(() => {
+        // CalculateListPrice(data)
+        CalculateDiscountedPrice(data)
+    },[])
+    
+
     return (
         <div className={`edu-course course-style-1 ${ classes ? classes : '' } hover-button-bg-white h-100`}>
             <div className="inner">
@@ -78,8 +86,8 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                         <span className="rating-count ml-4"><b>{Number.parseFloat(data.rating).toFixed(1)}</b></span>
                     </div>
                     <div className='d-flex'>
-                    <div className="course-price discounted-price m-1"><b>${data.course_price}</b></div>
-                    <div className="course-price text-decoration-line-through m-2">${data.course_price}</div>
+                    <div className="course-price discounted-price m-1"><b>${CalculateDiscountedPrice(data)}</b></div>
+                    <div className="course-price text-decoration-line-through m-2">${CalculateListPrice(data)}</div>
 
                     </div>
                     <ul className="d-flex course-meta">
@@ -117,8 +125,8 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                     </div>
 
                     <div className='d-flex'>
-                    <div className="course-price discounted-price m-1"><b>${data.course_price}</b></div>
-                    <div className="course-price text-decoration-line-through m-2">${data.course_price}</div>
+                    <div className="course-price discounted-price m-1"><b>${CalculateDiscountedPrice(data)}</b></div>
+                    <div className="course-price text-decoration-line-through m-2">${CalculateListPrice(data)}</div>
                     </div>
 
                     <p>{data.curriculum_desc.length > 60 ? data.curriculum_desc.substring(0, 60) + '...' : data.curriculum_desc}</p>
