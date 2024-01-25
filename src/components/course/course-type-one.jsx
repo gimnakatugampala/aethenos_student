@@ -64,7 +64,9 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
             <div className="inner">
                 <div className="thumbnail">
                     <Link href={`/course-details/${data.id}`} legacyBehavior>
-                        {data.img == "" || data.img == null ? <img style={{width:'100%',objectFit:'cover'}} src={`/images/course/aethenos_course_img.jpg`} alt={data.title} /> :  <img style={{width:'100%',objectFit:'cover'}} src={`${IMG_HOST}/${data.img}`} alt={data.title} />}
+                        {data.img == "" || data.img == null || data.img.includes("https://") ? 
+                        <img style={{width:'100%',objectFit:'cover'}} src={`/images/course/aethenos_course_img.jpg`} alt={data.title} /> :  
+                        <img style={{width:'100%',objectFit:'cover'}} src={`${IMG_HOST}${data.img}`} alt={data.title} />}
                        
                     </Link>
                     {CalculateDiscountPrice(data) != "" && (
