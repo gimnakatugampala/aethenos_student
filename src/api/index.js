@@ -624,6 +624,74 @@ export const GetCoursesBySubCategoryMostPopular = async(code,setloading_most_pop
 
 }
 
+export const GetCoursesBySubCategoryInstructor = async(code,setinstructors,setloading_instructors_list) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getPopularInstructorsBySubCategory/${code}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+
+      console.log(result)
+
+      const itemsPerPage = 6;
+      const resultArray = [];
+
+      for (let i = 0; i < result.length; i += itemsPerPage) {
+          const singleArray = result.slice(i, i + itemsPerPage).map(item => ({
+              title: item.name == null ? "" : item.name,
+              description: item.about == null ? "" : item.about,
+              rating: item.rating == null ? 0 : item.rating,
+              students: item.studentsCount == null ? 0 : item.studentsCount,
+              courses: item.coursesCount == null ? 0 : item.coursesCount,
+              image: item.profile_img == null ? "/images/course/instructor_profile_img.png" : `${IMG_HOST}/${item.profile_img}`,
+              userCode:item.userCode
+          }));
+
+          resultArray.push({ single: singleArray });
+      }
+
+    // console.log(resultArray);
+    setinstructors(resultArray);
+    setloading_instructors_list(false)
+
+
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetCoursesBySubCategoryTopics = async(code,setloading_topics_list,setpopular_topics) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getPopularTopicBySubLinkName/${code}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+
+      const itemsPerPage = 8;
+      const resultArray = [];
+
+      for (let i = 0; i < result.length; i += itemsPerPage) {
+          const topicSubset = result.slice(i, i + itemsPerPage);
+          resultArray.push({ topics: topicSubset });
+      }
+
+      setpopular_topics(resultArray);
+      setloading_topics_list(false)
+
+    })
+    .catch(error => console.log('error', error));
+
+}
+
 export const SearchCourseByKeyword = async() =>{
   console.log("123")
 }

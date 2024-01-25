@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { Footer, Header, Wrapper } from "../../../layout";
 import SEO from "../../../components/seo";
-import { GetCourseCategoryTitle, GetCourseSubCategoryTitle, GetCoursesBySubCategoryMostPopular, GetCoursesBySubCategoryNew, GetCoursesBySubCategoryTrending } from '../../../api';
+import { GetCourseCategoryTitle, GetCourseSubCategoryTitle, GetCoursesBySubCategoryInstructor, GetCoursesBySubCategoryMostPopular, GetCoursesBySubCategoryNew, GetCoursesBySubCategoryTopics, GetCoursesBySubCategoryTrending, GetSubCategoriesByCategoryLinkName } from '../../../api';
 import CourseTypeOne from '../../../components/course/course-type-one';
 import CourseFourArea from '../../../components/course-category/landscape-courses/course-4-area'
 import { course_data } from '../../../data';
@@ -22,144 +22,144 @@ import TopicsListSkeleton from '../../../functions/Skeletons/TopicsListSkeleton'
 import InstructorsListSkeleton from '../../../functions/Skeletons/InstructorsListSkeleton';
 import LandscapeListSkeleton from '../../../functions/Skeletons/LandscapeListSkeleton';
 
-var items = [{
-  topics: [
-      {
-      name: "Web Development",
-      link: "/topics/web"
-      },
-      {
-      name: "Deep Learning",
-      link: "/topics/deep-learning"
-      },
-      {
-      name: "SQL",
-      link: "/topics/sql"
-      },
-      {
-      name: "NodeJS",
-      link: "/topics/node-js"
-      },
-      {
-      name: "Angular",
-      link: "/topics/angular-js"
-      },
-      {
-      name: "Machine Learning",
-      link: "/topics/machine-learning"
-      },
-      {
-      name: "JAVA",
-      link: "/topics/java"
-      },
-      {
-      name: "React JS",
-      link: "/topics/react-js"
-      },
-  ],
-  },
-  {
-  topics: [
-      {
-      name: "Google Flutter",
-      link: "/topics/google-flutter"
-      },
-      {
-      name: "Docker",
-      link: "/topics/docker"
-      },
-      {
-      name: "Unity",
-      link: "/topics/unity"
-      },
-      {
-      name: "Typescript",
-      link: "/topics/typescript"
-      },
-      {
-      name: "Python",
-      link: "/topics/python"
-      },
-      {
-      name: "C# Programming",
-      link: "/topics/c-sharp-programming"
-      },
-      {
-      name: "Data Science",
-      link: "/topics/data-science"
-      },
-      {
-      name: "Next JS",
-      link: "/topics/next-js"
-      },
-  ],
-  },
-];
+// var items = [{
+//   topics: [
+//       {
+//       name: "Web Development",
+//       link: "/topics/web"
+//       },
+//       {
+//       name: "Deep Learning",
+//       link: "/topics/deep-learning"
+//       },
+//       {
+//       name: "SQL",
+//       link: "/topics/sql"
+//       },
+//       {
+//       name: "NodeJS",
+//       link: "/topics/node-js"
+//       },
+//       {
+//       name: "Angular",
+//       link: "/topics/angular-js"
+//       },
+//       {
+//       name: "Machine Learning",
+//       link: "/topics/machine-learning"
+//       },
+//       {
+//       name: "JAVA",
+//       link: "/topics/java"
+//       },
+//       {
+//       name: "React JS",
+//       link: "/topics/react-js"
+//       },
+//   ],
+//   },
+//   {
+//   topics: [
+//       {
+//       name: "Google Flutter",
+//       link: "/topics/google-flutter"
+//       },
+//       {
+//       name: "Docker",
+//       link: "/topics/docker"
+//       },
+//       {
+//       name: "Unity",
+//       link: "/topics/unity"
+//       },
+//       {
+//       name: "Typescript",
+//       link: "/topics/typescript"
+//       },
+//       {
+//       name: "Python",
+//       link: "/topics/python"
+//       },
+//       {
+//       name: "C# Programming",
+//       link: "/topics/c-sharp-programming"
+//       },
+//       {
+//       name: "Data Science",
+//       link: "/topics/data-science"
+//       },
+//       {
+//       name: "Next JS",
+//       link: "/topics/next-js"
+//       },
+//   ],
+//   },
+// ];
 
-const instructors = [
-  {
-      single:[
-          {
-              title: "John Doe",
-              link: "web-development-link-here",
-              description: "ReactJS,NodeJS",
-              rating: 4.5,
-              students: 1000,
-              courses: 10,
-              image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-          },
-          {
-          title: "John Doe",
-          link: "web-development-link-here",
-          description: "ReactJS,NodeJS",
-          rating: 4.5,
-          students: 1000,
-          courses: 10,
-          image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-          },
-          {
-              title: "John Doe",
-              link: "web-development-link-here",
-              description: "ReactJS,NodeJS",
-              rating: 4.5,
-              students: 1000,
-              courses: 10,
-              image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-          },
-          {
-              title: "John Doe",
-              link: "web-development-link-here",
-              description: "ReactJS,NodeJS",
-              rating: 4.5,
-              students: 1000,
-              courses: 10,
-              image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-              }
-      ]
-  },
-  {
-      single:[
-          {
-              title: "Jeff",
-              link: "web-development-link-here",
-              description: "ReactJS,NodeJS",
-              rating: 4.5,
-              students: 1000,
-              courses: 10,
-              image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-          },
-          {
-          title: "Smith",
-          link: "web-development-link-here",
-          description: "ReactJS,Angular",
-          rating: 4.5,
-          students: 1000,
-          courses: 10,
-          image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-          }
-      ]
-  }
-];
+// const instructors = [
+//   {
+//       single:[
+//           {
+//               title: "John Doe",
+//               link: "web-development-link-here",
+//               description: "ReactJS,NodeJS",
+//               rating: 4.5,
+//               students: 1000,
+//               courses: 10,
+//               image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+//           },
+//           {
+//           title: "John Doe",
+//           link: "web-development-link-here",
+//           description: "ReactJS,NodeJS",
+//           rating: 4.5,
+//           students: 1000,
+//           courses: 10,
+//           image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+//           },
+//           {
+//               title: "John Doe",
+//               link: "web-development-link-here",
+//               description: "ReactJS,NodeJS",
+//               rating: 4.5,
+//               students: 1000,
+//               courses: 10,
+//               image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+//           },
+//           {
+//               title: "John Doe",
+//               link: "web-development-link-here",
+//               description: "ReactJS,NodeJS",
+//               rating: 4.5,
+//               students: 1000,
+//               courses: 10,
+//               image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+//               }
+//       ]
+//   },
+//   {
+//       single:[
+//           {
+//               title: "Jeff",
+//               link: "web-development-link-here",
+//               description: "ReactJS,NodeJS",
+//               rating: 4.5,
+//               students: 1000,
+//               courses: 10,
+//               image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+//           },
+//           {
+//           title: "Smith",
+//           link: "web-development-link-here",
+//           description: "ReactJS,Angular",
+//           rating: 4.5,
+//           students: 1000,
+//           courses: 10,
+//           image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+//           }
+//       ]
+//   }
+// ];
 
 
 const options = [
@@ -180,6 +180,10 @@ const GetCoursesBySubCategory = () => {
   const [trending_courses, settrending_courses] = useState(course_data)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const [sub_categories, setsub_categories] = useState([])
+
+  const [instructors, setinstructors] = useState([])
+  const [popular_topics, setpopular_topics] = useState([])
 
   const [loading_sub_categories, setloading_sub_categories] = useState(true)
   const [loading_top_title, setloading_top_title] = useState(true)
@@ -201,24 +205,29 @@ const GetCoursesBySubCategory = () => {
 
   useEffect(() => {
 
-    if(code != null){
+    if(code != null && id != null){
+        console.log(id)
+        GetSubCategoriesByCategoryLinkName(id,setsub_categories,setloading_sub_categories)
         GetCourseSubCategoryTitle(code,setCategoryName,setSubCategoryName,setloading_top_title)
         GetCoursesBySubCategoryNew(code,setloading_new_courses,setnew_courses)
         GetCoursesBySubCategoryTrending(code,setloading_trending_courses,settrending_courses)
         GetCoursesBySubCategoryMostPopular(code,setloading_most_popular_courses,setmost_popular_courses)
+        GetCoursesBySubCategoryInstructor(code,setinstructors,setloading_instructors_list)
+        GetCoursesBySubCategoryTopics(code,setloading_topics_list,setpopular_topics)
+       
     }
 
   }, [code])
   
 
   useEffect(() => {
-      console.log(code)
+    //   console.log(code)
 
       setTimeout(() => {
-          setloading_sub_categories(false)
+        //   setloading_sub_categories(false)
         //   setloading_most_popular_courses(false)
-          setloading_topics_list(false)
-          setloading_instructors_list(false)
+        //   setloading_topics_list(false)
+        //   setloading_instructors_list(false)
           setloading_all_courses_list(false)
         //   setloading_new_courses(false)
         //   setloading_trending_courses(false)
@@ -250,28 +259,26 @@ const handleClose = () => {
         <SEO pageTitle={SubCategoryName == "" ? "Loading Content ..." : `${CategoryName} > ${SubCategoryName}`} />
         <Header/>
 
-            {loading_sub_categories ? (
+        {loading_sub_categories ? (
             <div className='container-fluid p-3'>
             <OneLineSkeleton height={60} />
             </div>
             ) : (
             <CardContainer className='p-3' >
                 <Box  sx={{ display: 'flex', alignItems: 'center',justifyContent:'space-between'}}>
+                <div className='d-flex align-items-center'>
 
-                <div className='d-flex'>
-                <Typography className='mx-3'><a href={`/courses/${id}/`}><b>{CategoryName == "" ? "Loading" : CategoryName}</b></a></Typography>
+                <Typography className='mx-3'><a href={`/courses/${id}`}><b>{CategoryName == "" ? "Loading" : CategoryName}</b></a></Typography>
 
-                <Typography className='mx-3'><a href='/courses/it-software/development'>Web Development</a></Typography>
+                <i className="fas fa-chevron-right fa-2x"></i>
 
-                <Typography className='mx-3'><a href='/courses/it-software/development'>Data Science</a></Typography>
+                {sub_categories != null && sub_categories.length > 0 &&  sub_categories.slice(0, 5).map((subCategory,index) => (
+                    <Typography key={index} className='mx-3'><a href={`/courses/${id}/${subCategory.subLinkName}`}>{subCategory.subCategory}</a></Typography>
+                ))}
 
-                <Typography className='mx-3'><a href='/courses/it-software/development'>Mobile Development</a></Typography>
-
-                <Typography className='mx-3'><a href='/courses/it-software/development'>Programming Languages</a></Typography>
-
-                <Typography className='mx-3'><a href='/courses/it-software/development'>Game Development</a></Typography>
                 </div>
 
+                {sub_categories != null && sub_categories.length > 5 && (
                 <IconButton
                 aria-label="more"
                 id="long-button"
@@ -282,6 +289,8 @@ const handleClose = () => {
             >
                 <MoreVertIcon />
             </IconButton>
+                )}
+
             <Menu
                 id="long-menu"
                 MenuListProps={{
@@ -296,10 +305,11 @@ const handleClose = () => {
                 },
                 }}
             >
-                {options.map((option) => (
-                <MenuItem key={option} onClick={handleClose}>
-                    <a href='/courses/development/web-development'>
-                        {option}
+
+                {sub_categories != null && sub_categories.length > 0 && sub_categories.slice(5).map((sub_cat_option,index) => (
+                <MenuItem key={index} onClick={handleClose}>
+                    <a href={`/courses/${id}/${sub_cat_option.subLinkName}`}>
+                        {sub_cat_option.subCategory}
                     </a>
                 </MenuItem>
                 ))}
@@ -511,24 +521,21 @@ const handleClose = () => {
                          </div>
                     ) : (
 
-                    <Carousel autoPlay={false} duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
-                    {items.map((item, i) => (
-                        <div key={i} className='row'>
-                            {item.topics.map((topic,index) => (
-                                <div key={index} className='col-md-3 text-center'>
-                                <CardContainer>
-                                    <a href={topic.link}>{topic.name}</a>
-                                </CardContainer>
-                                </div>  
-                            ))}
-                        </div>
-                        ))}
-                    </Carousel>
+                        <Carousel autoPlay={false} duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
+                        {popular_topics != null || popular_topics.length > 0 ? popular_topics.map((item, i) => (
+                            <div key={i} className='row'>
+                                {item.topics.map((topic,index) => (
+                                    <div key={index} className='col-md-3 text-center'>
+                                    <CardContainer>
+                                        <a href={`/topic/${topic.topicLinkName}`}>{topic.topic}</a>
+                                    </CardContainer>
+                                    </div>  
+                                ))}
+                            </div>
+                            )) : <h4>No Topics Available</h4>}
+                        </Carousel>
                     )}
 
-                   
-
-                
                     </div>
 
                 
@@ -544,133 +551,129 @@ const handleClose = () => {
                     </div>
                     ) : (
                         <Carousel autoPlay={false} duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
-                            {instructors.map((page, index) => (
-                                <div key={index} className="row">
-                                      {page.single.map((item, itemIndex) => (
-                                        <CardContainer key={itemIndex} className="col-md-4 mb-3">
-                                        <a href="/users/123">
-                                        <div
-                                            className="row"
+                        {instructors != null || instructors.length > 0 ? instructors.map((page, index) => (
+                            <div key={index} className="row">
+                                  {page.single.map((item, itemIndex) => (
+                                    <CardContainer  key={itemIndex} className="col-md-4 mb-2">
+                                    <a  href={`/users/${item.userCode}`}>
+                                    <div
+                                        className="row h-100"
+                                        style={{
+                                        borderRadius: "0",
+                                        transition: "background-color 0.3s",
+                                        backgroundColor: "transparent",
+                                        color: "inherit",
+                                        textAlign: "left",
+                                        }}
+                                    >
+                                        <div className="col-md-3">
+                                        <img
+                                            src={item.image}
+                                            alt={item.title}
+                                            style={{borderRadius:'50%'}}
+                                        />
+                                        </div>
+                                        <div className="col-md-9">
+                                        <h6 className='m-0' style={{ fontWeight: "bold"}}>
+                                            {item.title.length > 17 ?  item.title.slice(0, 17) + "..." : item.title}
+                                        </h6>
+                                        <div>
+                                        <p className="m-0" style={{fontSize:'13px'}}>{item.description.length > 35 ?  item.description.slice(0, 35) + "...": item.description}</p>
+                                        </div>
+
+                                        <div className="d-flex align-items-center">
+
+                                        <span>
+                                            <span
                                             style={{
-                                            borderRadius: "0",
-                                            transition: "background-color 0.3s",
-                                            backgroundColor: "transparent",
-                                            color: "inherit",
-                                            textAlign: "left",
+                                                fontWeight: "bold",
+                                                fontSize: "18px",
+                                                color: "#B4690E",
                                             }}
-                                        >
-                                            <div className="col-md-3">
-                                            <img
-                                                src={item.image}
-                                                alt={item.title}
-                                                style={{borderRadius:'50%'}}
+                                            >
+                                            {item.rating}
+                                            </span>
+                                            <StarIcon
+                                            style={{
+                                                fontSize: "20px",
+                                                color: "#B4690E",
+                                            }}
                                             />
-                                            </div>
-                                            <div className="col-md-9">
-                                            <h3 className='m-0' style={{ fontWeight: "bold", fontSize: "16px" }}>
-                                                {item.title.length > 12 ?  item.title.slice(0, 17) + "..." : item.title}
-                                            </h3>
-                                            <div>
-                                            <p className="m-0" style={{fontSize:'13px'}}>{item.description.length > 10 ?  item.description.slice(0, 50) + "...": item.description}</p>
-                                            </div>
-    
-                                            <div className="d-flex align-items-center">
-    
-                                            <span>
-                                                <span
-                                                style={{
-                                                    fontWeight: "bold",
-                                                    fontSize: "18px",
-                                                    color: "#B4690E",
-                                                }}
-                                                >
-                                                {item.rating}
-                                                </span>
-                                                <StarIcon
-                                                style={{
-                                                    fontSize: "20px",
-                                                    color: "#B4690E",
-                                                }}
-                                                />
-                                                </span>
-    
-                                                <p
-                                                className="m-0 p-0 align-self-center mt-1 ml-1"
-                                                style={{
-                                                    fontSize: "12px",
-                                                    color: "#B4690E",
-                                                }}
-                                                >
-                                                Instructor Rating
-                                                </p>
-    
-                                            </div>
-                                                
+                                            </span>
+
+                                            <p
+                                            className="m-0 p-0 align-self-center mt-1 ml-1"
+                                            style={{
+                                                fontSize: "12px",
+                                                color: "#B4690E",
+                                            }}
+                                            >
+                                            Instructor Rating
+                                            </p>
+
+                                        </div>
+                                        <div>
+
                                         
-                                            
-    
-                                            <div>
-    
-                                            
-    
-                                            <div className="d-flex align-items-center">
+
+                                        <div className="d-flex align-items-center">
+                                            <p
+                                            className="mx-1 mb-0 mt-0"
+                                            style={{
+                                                fontWeight: "bold",
+                                                fontSize: "15px",
+                                                // color: "black",
+                                            }}
+                                            >
+                                            {item.students}
+                                            </p>
+                                            <p
+                                            className="mx-1 mb-0 mt-0"
+                                            style={{
+                                                // fontWeight: "bold",
+                                                fontSize: "13px",
+                                                // color: "black",
+                                            }}
+                                            >
+                                            {" "}
+                                            students
+                                            </p>
+
+                                        </div>
+                                
+                                        <div className="d-flex align-items-center">
+                                            <p
+                                            className="mx-1 mb-0 mt-0"
+                                            style={{
+                                                fontWeight: "bold",
+                                                fontSize: "15px",
+                                                // color: "black",
+                                            }}
+                                            >
+                                            {item.courses}
+                                            </p>
                                                 <p
                                                 className="mx-1 mb-0 mt-0"
                                                 style={{
-                                                    fontWeight: "bold",
-                                                    fontSize: "15px",
-                                                    // color: "black",
-                                                }}
-                                                >
-                                                {item.students}
-                                                </p>
-                                                <p
-                                                className="mx-1 mb-0 mt-0"
-                                                style={{
-                                                    // fontWeight: "bold",
+                                                    marginLeft: "5px",
                                                     fontSize: "13px",
                                                     // color: "black",
                                                 }}
                                                 >
-                                                {" "}
-                                                students
-                                                </p>
-    
-                                            </div>
-                                    
-                                            <div className="d-flex align-items-center">
-                                                <p
-                                                className="mx-1 mb-0 mt-0"
-                                                style={{
-                                                    fontWeight: "bold",
-                                                    fontSize: "15px",
-                                                    // color: "black",
-                                                }}
-                                                >
-                                                {item.courses}
-                                                </p>
-                                                    <p
-                                                    className="mx-1 mb-0 mt-0"
-                                                    style={{
-                                                        marginLeft: "5px",
-                                                        fontSize: "13px",
-                                                        // color: "black",
-                                                    }}
-                                                    >
-                                                    courses
-                                                    </p>  
-                                            </div>
-    
-                                            </div>
-    
-                                            </div>
+                                                courses
+                                                </p>  
                                         </div>
-                                        </a>
-                                        </CardContainer>
-                                    ))}
-                                </div>
-                            ))}
-                        </Carousel>
+
+                                        </div>
+
+                                        </div>
+                                    </div>
+                                    </a>
+                                    </CardContainer>
+                                ))}
+                            </div>
+                        )) : <h4>No Instructors Found</h4>}
+                    </Carousel>
                     )}
 
 
