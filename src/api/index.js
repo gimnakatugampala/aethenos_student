@@ -552,6 +552,78 @@ export const GetCoursesByCategoryTopics = async(id,setpopular_topics,setloading_
 
 }
 
+export const GetCoursesBySubCategoryNew = async(code,setloading_new_courses,setnew_courses) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getNewCoursesBySubCategory/${code}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      // console.log(result)
+      if(result.message == "Error"){
+        setnew_courses([])
+        setloading_new_courses(false)
+        return
+      }
+        setnew_courses(result)
+        setloading_new_courses(false)
+      
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetCoursesBySubCategoryTrending = async(code,setloading_trending_courses,settrending_courses) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getTrendingBySubCategory/${code}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      // console.log(result)
+      if(result.message == "Error"){
+        settrending_courses([])
+        setloading_trending_courses(false)
+        return
+      }
+        settrending_courses(result)
+        setloading_trending_courses(false)
+      
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetCoursesBySubCategoryMostPopular = async(code,setloading_most_popular_courses,setmost_popular_courses) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getMostPopularCoursesBySubCategory/${code}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      // console.log(result)
+      if(result.message == "Error"){
+        setmost_popular_courses([])
+        setloading_most_popular_courses(false)
+        return
+      }
+        setmost_popular_courses(result)
+        setloading_most_popular_courses(false)
+      
+    })
+    .catch(error => console.log('error', error));
+
+}
+
 export const SearchCourseByKeyword = async() =>{
   console.log("123")
 }

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { Footer, Header, Wrapper } from "../../../layout";
 import SEO from "../../../components/seo";
-import { GetCourseCategoryTitle, GetCourseSubCategoryTitle } from '../../../api';
+import { GetCourseCategoryTitle, GetCourseSubCategoryTitle, GetCoursesBySubCategoryMostPopular, GetCoursesBySubCategoryNew, GetCoursesBySubCategoryTrending } from '../../../api';
 import CourseTypeOne from '../../../components/course/course-type-one';
 import CourseFourArea from '../../../components/course-category/landscape-courses/course-4-area'
 import { course_data } from '../../../data';
@@ -203,6 +203,9 @@ const GetCoursesBySubCategory = () => {
 
     if(code != null){
         GetCourseSubCategoryTitle(code,setCategoryName,setSubCategoryName,setloading_top_title)
+        GetCoursesBySubCategoryNew(code,setloading_new_courses,setnew_courses)
+        GetCoursesBySubCategoryTrending(code,setloading_trending_courses,settrending_courses)
+        GetCoursesBySubCategoryMostPopular(code,setloading_most_popular_courses,setmost_popular_courses)
     }
 
   }, [code])
@@ -213,12 +216,12 @@ const GetCoursesBySubCategory = () => {
 
       setTimeout(() => {
           setloading_sub_categories(false)
-          setloading_most_popular_courses(false)
+        //   setloading_most_popular_courses(false)
           setloading_topics_list(false)
           setloading_instructors_list(false)
           setloading_all_courses_list(false)
-          setloading_new_courses(false)
-          setloading_trending_courses(false)
+        //   setloading_new_courses(false)
+        //   setloading_trending_courses(false)
       }, 2000);
 
   }, [SubCategoryName,loading_top_title])
@@ -371,13 +374,13 @@ const handleClose = () => {
                                     </div>
                                 ) : (
                                     <div className="row g-3 mb-5">
-                                    {most_popular_courses.slice(0, next)?.map((course) => {
+                                    {most_popular_courses.length > 0 || most_popular_courses != null  ?  most_popular_courses.slice(0, next)?.map((course) => {
                                         return (
                                         <div key={course.id} className="col-md-6 col-xl-3">
                                             <CourseTypeOne data={course} classes="course-box-shadow" />
                                         </div>
                                         );
-                                    })}
+                                    }) : <h4>No Most Popular Courses Available</h4>}
                                     </div>
                                 )}
 
@@ -419,13 +422,13 @@ const handleClose = () => {
                                   </div>
                               ) : (
                                 <div className="row g-3 mb-5">
-                                {new_courses.slice(0, next)?.map((course) => {
+                                {new_courses.length > 0 || new_courses != null ? new_courses.slice(0, next)?.map((course) => {
                                     return (
                                     <div key={course.id} className="col-md-6 col-xl-3">
                                         <CourseTypeOne data={course} classes="course-box-shadow" />
                                     </div>
                                     );
-                                })}
+                                }) : <h4>No New Courses Available</h4>}
                                 </div>
                               )}
 
@@ -465,13 +468,13 @@ const handleClose = () => {
                                    </div>
                               ) : (
                                 <div className="row g-3 mb-5">
-                                {trending_courses.slice(0, next)?.map((course) => {
+                                {trending_courses.length > 0 || trending_courses != null ? trending_courses.slice(0, next)?.map((course) => {
                                     return (
                                     <div key={course.id} className="col-md-6 col-xl-3">
                                         <CourseTypeOne data={course} classes="course-box-shadow" />
                                     </div>
                                     );
-                                })}
+                                }) : <h4>No Trending Courses Available</h4>}
                                 </div>
                               )}
 
