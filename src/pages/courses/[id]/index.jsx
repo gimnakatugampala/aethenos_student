@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { Footer, Header, Wrapper } from "../../../layout";
 import SEO from "../../../components/seo";
-import { GetCourseCategoryTitle, GetCoursesByCategoryInstructor, GetCoursesByCategoryMostPopular, GetCoursesByCategoryNew, GetCoursesByCategoryTrending, GetSubCategoriesByCategoryLinkName } from '../../../api';
+import { GetCourseCategoryTitle, GetCoursesByCategoryInstructor, GetCoursesByCategoryMostPopular, GetCoursesByCategoryNew, GetCoursesByCategoryTopics, GetCoursesByCategoryTrending, GetSubCategoriesByCategoryLinkName } from '../../../api';
 import CourseTypeOne from '../../../components/course/course-type-one';
 import CourseFourArea from '../../../components/course-category/landscape-courses/course-4-area'
 import { course_data } from '../../../data';
@@ -182,6 +182,7 @@ const GetCourseByCategory = () => {
 
     const [most_popular_courses, setmost_popular_courses] = useState(course_data)
     const [new_courses, setnew_courses] = useState([])
+    const [popular_topics, setpopular_topics] = useState([])
 
     const [instructors, setinstructors] = useState([])
     const [trending_courses, settrending_courses] = useState(course_data)
@@ -214,6 +215,7 @@ const GetCourseByCategory = () => {
             GetCoursesByCategoryMostPopular(setmost_popular_courses,setloading_most_popular_courses,id)
             GetCoursesByCategoryTrending(settrending_courses,setloading_trending_courses,id)
             GetCoursesByCategoryInstructor(id,setinstructors,setloading_instructors_list)
+            GetCoursesByCategoryTopics(id,setpopular_topics,setloading_topics_list)
             console.log(id)
         }
         
@@ -222,7 +224,7 @@ const GetCourseByCategory = () => {
         setTimeout(() => {
             // setloading_sub_categories(false)
             // setloading_most_popular_courses(false)
-            setloading_topics_list(false)
+            // setloading_topics_list(false)
             // setloading_instructors_list(false)
             setloading_all_courses_list(false)
             // setloading_new_courses(false)
@@ -230,6 +232,11 @@ const GetCourseByCategory = () => {
         }, 2000);
 
     }, [CategoryName,loading_top_title,id])
+
+    useEffect(() => {
+        
+    }, [])
+    
 
     const ITEM_HEIGHT = 48;
 
@@ -514,23 +521,20 @@ const GetCourseByCategory = () => {
                     ) : (
 
                     <Carousel autoPlay={false} duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
-                    {items.map((item, i) => (
+                    {popular_topics != null || popular_topics.length > 0 ? popular_topics.map((item, i) => (
                         <div key={i} className='row'>
                             {item.topics.map((topic,index) => (
                                 <div key={index} className='col-md-3 text-center'>
                                 <CardContainer>
-                                    <a href={topic.link}>{topic.name}</a>
+                                    <a href={`/topic/${topic.topicLinkName}`}>{topic.topic}</a>
                                 </CardContainer>
                                 </div>  
                             ))}
                         </div>
-                        ))}
+                        )) : <h4>No Topics Available</h4>}
                     </Carousel>
                     )}
 
-                   
-
-                
                     </div>
 
                 
@@ -607,10 +611,6 @@ const GetCourseByCategory = () => {
                                                 </p>
     
                                             </div>
-                                                
-                                        
-                                            
-    
                                             <div>
     
                                             

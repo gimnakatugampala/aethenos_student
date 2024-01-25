@@ -507,7 +507,7 @@ export const GetCoursesByCategoryInstructor = async(id,setinstructors,setloading
               rating: item.rating == null ? 0 : item.rating,
               students: item.studentsCount == null ? 0 : item.studentsCount,
               courses: item.coursesCount == null ? 0 : item.coursesCount,
-              image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+              image: item.profile_img == null ? "/images/course/instructor_profile_img.png" : `${IMG_HOST}/${item.profile_img}`,
               userCode:item.userCode
           }));
 
@@ -518,6 +518,34 @@ export const GetCoursesByCategoryInstructor = async(id,setinstructors,setloading
     setinstructors(resultArray);
     setloading_instructors_list(false)
 
+
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetCoursesByCategoryTopics = async(id,setpopular_topics,setloading_topics_list) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getPopularTopicByLinkName/${id}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+
+      const itemsPerPage = 8;
+      const resultArray = [];
+
+      for (let i = 0; i < result.length; i += itemsPerPage) {
+          const topicSubset = result.slice(i, i + itemsPerPage);
+          resultArray.push({ topics: topicSubset });
+      }
+
+      setpopular_topics(resultArray);
+      setloading_topics_list(false)
 
     })
     .catch(error => console.log('error', error));
