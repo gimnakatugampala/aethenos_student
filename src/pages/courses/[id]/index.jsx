@@ -233,9 +233,7 @@ const GetCourseByCategory = () => {
 
     }, [CategoryName,loading_top_title,id])
 
-    useEffect(() => {
-        
-    }, [])
+    
     
 
     const ITEM_HEIGHT = 48;
