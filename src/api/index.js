@@ -422,7 +422,7 @@ export const GetCoursesByCategoryNew = async(setnew_courses,setloading_new_cours
   fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getNewCourses/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
       if(result.message == "Error"){
         setnew_courses([])
         setloading_new_courses(false)
@@ -436,16 +436,26 @@ export const GetCoursesByCategoryNew = async(setnew_courses,setloading_new_cours
 
 }
 
-export const GetCoursesByCategoryMostPopular = async() =>{
+export const GetCoursesByCategoryMostPopular = async(setmost_popular_courses,setloading_most_popular_courses,id) =>{
 
   var requestOptions = {
     method: 'GET',
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getMostPopularCourses/design", requestOptions)
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getMostPopularCourses/${id}`, requestOptions)
     .then(response => response.json())
-    .then(result => console.log(result))
+    .then(result => {
+      console.log(result)
+      if(result.message == "Error"){
+        setmost_popular_courses([])
+        setloading_most_popular_courses(false)
+        return
+      }
+        setmost_popular_courses(result)
+        setloading_most_popular_courses(false)
+      
+    })
     .catch(error => console.log('error', error));
 
 }

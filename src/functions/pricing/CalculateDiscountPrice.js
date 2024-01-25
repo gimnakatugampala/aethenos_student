@@ -18,7 +18,7 @@ const CalculateDiscountPrice = (data) => {
     
 let discount = ""
 
-if (data.course_prices != null) {
+if (data.course_prices != null  && data.course_prices.prices != null) {
     let foundPrice = null; 
 
     data.course_prices.prices.some(single_price => {
@@ -57,7 +57,11 @@ if (data.course_prices != null) {
     }
 
     return discount
+}else{
+    return discount = ""
 }
+
+
 }
 
 export default CalculateDiscountPrice

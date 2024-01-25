@@ -19,7 +19,7 @@ const CalculateListPrice = (data) => {
         
     let list_price = ""
 
-    if (data.course_prices != null) {
+    if (data.course_prices != null && data.course_prices.prices != null) {
         let foundPrice = null; 
     
         data.course_prices.prices.some(single_price => {
@@ -48,6 +48,8 @@ const CalculateListPrice = (data) => {
         }
 
         return list_price
+    }else{
+        return list_price = "0"
     }
    
 }

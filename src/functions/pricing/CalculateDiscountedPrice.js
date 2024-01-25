@@ -20,7 +20,7 @@ const CalculateDiscountedPrice = (data) => {
     
     let net_price = ""
 
-    if (data.course_prices != null) {
+    if (data.course_prices != null && data.course_prices.prices != null) {
         let foundPrice = null; 
     
         data.course_prices.prices.some(single_price => {
@@ -49,6 +49,8 @@ const CalculateDiscountedPrice = (data) => {
         }
 
         return net_price
+    }else{
+        return net_price = "0"
     }
 
 }

@@ -19,7 +19,7 @@ const GetCurrencyByCountry = (data) => {
 
     let currency_code = ""
 
-    if (data.course_prices != null) {
+    if (data.course_prices != null && data.course_prices.prices != null) {
         let foundPrice = null; 
     
         data.course_prices.prices.some(single_price => {
@@ -48,6 +48,8 @@ const GetCurrencyByCountry = (data) => {
         }
 
         return currency_code
+    }else{
+        return currency_code = 'USD'
     }
 }
 

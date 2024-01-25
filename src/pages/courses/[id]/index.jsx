@@ -211,7 +211,7 @@ const GetCourseByCategory = () => {
             GetSubCategoriesByCategoryLinkName(id,setsub_categories,setloading_sub_categories)
             GetCourseCategoryTitle(setCategoryName,id,setloading_top_title)
             GetCoursesByCategoryNew(setnew_courses,setloading_new_courses,id)
-            GetCoursesByCategoryMostPopular()
+            GetCoursesByCategoryMostPopular(setmost_popular_courses,setloading_most_popular_courses,id)
             GetCoursesByCategoryInstructor(id,setinstructors)
             console.log(id)
         }
@@ -220,7 +220,7 @@ const GetCourseByCategory = () => {
 
         setTimeout(() => {
             // setloading_sub_categories(false)
-            setloading_most_popular_courses(false)
+            // setloading_most_popular_courses(false)
             setloading_topics_list(false)
             setloading_instructors_list(false)
             setloading_all_courses_list(false)
@@ -375,7 +375,7 @@ const GetCourseByCategory = () => {
                                     </div>
                                 ) : (
                                     <div className="row g-3 mb-5">
-                                    {most_popular_courses.length > 0 ? most_popular_courses.slice(0, next)?.map((course) => {
+                                    {most_popular_courses.length > 0 || most_popular_courses != null  ? most_popular_courses.slice(0, next)?.map((course) => {
                                         return (
                                         <div key={course.id} className="col-md-6 col-xl-3">
                                             <CourseTypeOne data={course} classes="course-box-shadow" />
