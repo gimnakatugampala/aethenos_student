@@ -9,6 +9,7 @@ import CalculateListPrice from '../../functions/pricing/CalculateListPrice';
 import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
 import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
 import getSymbolFromCurrency from 'currency-symbol-map'
+import CalculateDiscountPrice from '../../functions/pricing/CalculateDiscountPrice';
 
 const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
     const {cartCourses} = useSelector(state => state.cart);
@@ -50,11 +51,12 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
         }))
     }
 
-    // useEffect(() => {
+    useEffect(() => {
         // CalculateListPrice(data)
         // CalculateDiscountedPrice(data)
         // GetCurrencyByCountry(data)
-    // },[])
+        // CalculateDiscountPrice(data)
+    },[])
     
 
     return (
@@ -64,9 +66,11 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                     <Link href={`/course-details/${data.id}`} legacyBehavior>
                         <img style={{width:'100%',objectFit:'cover'}} src={`${IMG_HOST}/${data.img}`} alt={data.title} />
                     </Link>
+                    {CalculateDiscountPrice(data) != "" && (
                     <div className="time-top">
-                        <span className="duration" style={{background:'#e01D20'}}>{data.duration} % OFF</span>
+                        <span className="duration" style={{background:'#e01D20'}}>{CalculateDiscountPrice(data)} OFF</span>
                     </div>
+                    )}
                 </div>
                 <div className="content">
                     <span className="course-level">{data.level}</span>
