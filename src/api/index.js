@@ -20,6 +20,10 @@ const Unauthorized = (result,rediect_url) =>{
 
 
 export const getUserCountry = async() =>{
+
+  // Remove Cookie
+  // Cookies.remove('aethenos_user_origin')
+
   fetch('https://ipapi.co/json/')
   .then(function(response) {
     return response.json();
@@ -29,7 +33,7 @@ export const getUserCountry = async() =>{
 
     Cookies.set('aethenos_user_origin', JSON.stringify(data), { expires: 7 })
 
-    console.log(JSON.parse(Cookies.get('aethenos_user_origin')).currency)
+    // console.log(JSON.parse(Cookies.get('aethenos_user_origin')).currency)
 
 
   })

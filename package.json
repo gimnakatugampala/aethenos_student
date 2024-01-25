@@ -20,6 +20,7 @@
         "@szhsin/react-menu": "^4.1.0",
         "antd": "^5.12.6",
         "bootstrap": "^5.2.0",
+        "currency-symbol-map": "^5.1.0",
         "emailjs-com": "^3.2.0",
         "firebase": "^9.12.1",
         "formik": "^2.2.9",

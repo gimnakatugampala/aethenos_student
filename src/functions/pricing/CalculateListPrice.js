@@ -6,7 +6,17 @@ const COUNTRY = Cookies.get('aethenos_user_origin')
 
 const CalculateListPrice = (data) => {
 
-    const countryToFind = JSON.parse(COUNTRY).country_name;
+    let countryToFind = "";
+
+        if (COUNTRY) {
+            try {
+                const parsedCountry = JSON.parse(COUNTRY);
+                countryToFind = parsedCountry.country_name;
+            } catch (error) {
+                console.error("Error parsing COUNTRY:", error);
+            }
+        }
+        
     let list_price = ""
 
     if (data.course_prices != null) {

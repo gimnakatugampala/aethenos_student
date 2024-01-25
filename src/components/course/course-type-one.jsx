@@ -7,7 +7,8 @@ import StarsRating from 'stars-rating'
 import { IMG_HOST } from '../../api';
 import CalculateListPrice from '../../functions/pricing/CalculateListPrice';
 import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
-
+import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
+import getSymbolFromCurrency from 'currency-symbol-map'
 
 const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
     const {cartCourses} = useSelector(state => state.cart);
@@ -49,10 +50,11 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
         }))
     }
 
-    useEffect(() => {
+    // useEffect(() => {
         // CalculateListPrice(data)
-        CalculateDiscountedPrice(data)
-    },[])
+        // CalculateDiscountedPrice(data)
+        // GetCurrencyByCountry(data)
+    // },[])
     
 
     return (
@@ -86,9 +88,9 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                         <span className="rating-count ml-4"><b>{Number.parseFloat(data.rating).toFixed(1)}</b></span>
                     </div>
                     <div className='d-flex'>
-                    <div className="course-price discounted-price m-1"><b>${CalculateDiscountedPrice(data)}</b></div>
-                    <div className="course-price text-decoration-line-through m-2">${CalculateListPrice(data)}</div>
-
+                    <div className="course-price discounted-price m-1"><b>{getSymbolFromCurrency(GetCurrencyByCountry(data))}{CalculateDiscountedPrice(data)}</b></div>
+                    <div className="course-price text-decoration-line-through m-2">{getSymbolFromCurrency(GetCurrencyByCountry(data))}{CalculateListPrice(data)}</div>
+                    
                     </div>
                     <ul className="d-flex course-meta">
                         <li><i className="icon-24"></i>{data.lesson} Lessons</li>
@@ -125,8 +127,8 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                     </div>
 
                     <div className='d-flex'>
-                    <div className="course-price discounted-price m-1"><b>${CalculateDiscountedPrice(data)}</b></div>
-                    <div className="course-price text-decoration-line-through m-2">${CalculateListPrice(data)}</div>
+                    <div className="course-price discounted-price m-1"><b>{getSymbolFromCurrency(GetCurrencyByCountry(data))}{CalculateDiscountedPrice(data)}</b></div>
+                    <div className="course-price text-decoration-line-through m-2">{getSymbolFromCurrency(GetCurrencyByCountry(data))}{CalculateListPrice(data)}</div>
                     </div>
 
                     <p>{data.curriculum_desc.length > 60 ? data.curriculum_desc.substring(0, 60) + '...' : data.curriculum_desc}</p>
