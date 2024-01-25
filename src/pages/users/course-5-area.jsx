@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from 'next/router';
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { course_data } from "../../data";
@@ -13,13 +14,40 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import { useEffect } from "react";
+import { GetInstructorDetails, IMG_HOST } from "../../api";
+import MainLoading from "../../functions/Loading/MainLoading";
+import { SpinnerCircular } from 'spinners-react';
+
+
+
 // course_items
 const course_items = course_data.filter(
   (arr, index, self) =>
     index === self.findIndex((i) => i.img === arr.img && i.State === arr.State)
 );
 
+const stylesBlock = {
+  fontWeight: "600",
+  width: "200px",
+  marginBottom: "10px",
+  height: "50px",
+  borderRadius: "0",
+  transition: "background-color 0.3s",
+  backgroundColor: "transparent",
+  color: "inherit",
+  borderWidth: "0.0005px",
+  borderColor: "black",
+}
+
 const CourseFiveArea = () => {
+
+  const router = useRouter();
+  const { id } = router.query;
+
+  const [instructor_details, setinstructor_details] = useState("")
+  const [loading, setloading] = useState(true)
+
   const [courses, setCourses] = useState(course_items);
   const [showing, setShowing] = useState(0);
   const { categories, instructors, levels, languages, price } = useSelector(
@@ -49,80 +77,66 @@ const CourseFiveArea = () => {
     )
     .filter((item) => Number(item.course_price) <= price);
 
+
+    useEffect(() => {
+
+      if(id != null){
+        GetInstructorDetails(id,setinstructor_details,setloading)
+      }
+   
+    }, [id])
+    
+
   return (
     <div className="edu-course-area course-area-1 section-gap-equal">
       <div className="container">
         <div className="row g-5">
-          <div className="row col-md-12">
 
-            <div className="col-8">
+          {loading ? <div className="col-md-5 m-auto">  <SpinnerCircular size={100} thickness={150} speed={100} color="#e01D20" /> </div>: (
+
+          <div className="row col-md-12">
+            <div className="col-md-8">
               <div>
-                <h6>INSTRUCTOR</h6>
-                <h1>Dr. Angela Yu</h1>
-                <h5>Data Scientist</h5>
+                <p className="m-0 p-0"><b>INSTRUCTOR</b></p>
+                <h1 className="m-0 p-0">{instructor_details.name}</h1>
+                <h6 className="m-0 p-0">{instructor_details.headline}</h6>
            
               </div>
-              <div className="d-flex ">
-                <div className=" m-lg-3">
-                  <h4>Total students</h4>
-                  <h3>2,543,010</h3>
+
+              <div className="d-flex my-2">
+
+                <div className="m-3">
+                  <p className="m-0 p-0">Total students</p>
+                  <h5 className="m-0 p-0">{instructor_details.totalStudents}</h5>
                 </div>
 
-                <div className=" m-lg-3">
-                  <h4>Reviews</h4>
-                  <h3>677,929</h3>
+                <div className="m-3">
+                  <p className="m-0 p-0">Reviews</p>
+                  <h5 className="m-0 p-0">{instructor_details.reviews}</h5>
                 </div>
               </div>
-              <div>
-                <h3>About me</h3>
+              
+              <div className="my-3">
+                <h5 className="m-0 p-0">About me</h5>
                 <span className="ri-1x">
-                  My name is Kirill Eremenko and I am super-psyched that you are
-                  reading this! Professionally, I come from the Data Science
-                  consulting space with experience in finance, retail, transport
-                  and other industries. I was trained by the best analytics
-                  mentors at Deloitte Australia and since starting on Udemy I
-                  have passed on my knowledge to thousands of aspiring data
-                  scientists. From my courses you will straight away notice how
-                  I combine my real-life experience and academic background in
-                  Physics and Mathematics to deliver professional step-by-step
-                  coaching in the space of Data Science. One of the strongest
-                  sides of my teaching style is that I focus on intuitive
-                  explanations, so you can be sure that you will truly
-                  understand even the most complex topics. To sum up, I am
-                  absolutely and utterly passionate about Data Science and I am
-                  looking forward to sharing my passion and knowledge with you!
+                  {instructor_details.about}
                 </span>
               </div>
             </div>
 
-            <div className="col-4">
-              <div className="m-lg-5">
+            <div className="col-md-4 text-center mx-auto">
+              <div className="m-5">
                 <img
-                  className=" "
-                  src="https://img-c.udemycdn.com/user/200_H/2364054_83cd_5.jpg"
-                  alt="Profile Instructor"
+                  className="rounded-circle w-75"
+                  style={{height:'220px',objectFit:'cover'}}
+                  src={`${IMG_HOST}${instructor_details.profileImage}`}
+                  alt={`${instructor_details.name}`}
                 />
               </div>
               <a
-                className="btn btn-outline-dark text-center fs-4 my-2"
-                style={{
-                  fontWeight: "900",
-                  width: "250px",
-                  marginLeft: "10px",
-                  paddingRight: "10px",
-                  marginTop: "10px",
-                  marginBottom: "10px",
-                  height: "50px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: "0",
-                  transition: "background-color 0.3s",
-                  backgroundColor: "transparent",
-                  color: "inherit",
-                  borderWidth: "0.0005px",
-                  borderColor: "black",
-                }}
+                href={`mailto:${instructor_details.email}`}
+                className="btn btn-outline-dark text-center fs-6 mb-1"
+                style={stylesBlock}
                 onMouseEnter={(e) => {
                   e.target.style.backgroundColor = "#F0FFFF";
                   e.target.style.color = "inherit";
@@ -132,29 +146,16 @@ const CourseFiveArea = () => {
                   e.target.style.color = "inherit";
                 }}
               >
-                <AlternateEmailIcon />
-                Email
+                
+                  <AlternateEmailIcon />
+                  Email
+              
               </a>
+
               <a
-                className="btn btn-outline-dark text-center fs-4 my-2"
-                style={{
-                  fontWeight: "900",
-                  width: "250px",
-                  marginLeft: "10px",
-                  paddingRight: "10px",
-                  marginTop: "10px",
-                  marginBottom: "10px",
-                  height: "50px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: "0",
-                  transition: "background-color 0.3s",
-                  backgroundColor: "transparent",
-                  color: "inherit",
-                  borderWidth: "0.0005px",
-                  borderColor: "black",
-                }}
+                href={`https://${instructor_details.website}`}
+                className="btn btn-outline-dark text-center fs-6 mb-1"
+                style={stylesBlock}
                 onMouseEnter={(e) => {
                   e.target.style.backgroundColor = "#F0FFFF";
                   e.target.style.color = "inherit";
@@ -167,26 +168,12 @@ const CourseFiveArea = () => {
                 <LanguageIcon />
                 Website
               </a>
+
+
               <a
-                className="btn btn-outline-dark text-center fs-4 my-2"
-                style={{
-                  fontWeight: "900",
-                  width: "250px",
-                  marginLeft: "10px",
-                  paddingRight: "10px",
-                  marginTop: "10px",
-                  marginBottom: "10px",
-                  height: "50px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: "0",
-                  transition: "background-color 0.3s",
-                  backgroundColor: "transparent",
-                  color: "inherit",
-                  borderWidth: "0.0005px",
-                  borderColor: "black",
-                }}
+                href={`https://twitter.com/${instructor_details.twitter}`}
+                className="btn btn-outline-dark text-center fs-6 mb-1"
+                style={stylesBlock}
                 onMouseEnter={(e) => {
                   e.target.style.backgroundColor = "#F0FFFF";
                   e.target.style.color = "inherit";
@@ -199,26 +186,11 @@ const CourseFiveArea = () => {
                 <TwitterIcon />
                 Twitter
               </a>
+
               <a
-                className="btn btn-outline-dark text-center fs-4 my-2"
-                style={{
-                  fontWeight: "900",
-                  width: "250px",
-                  marginLeft: "10px",
-                  paddingRight: "10px",
-                  marginTop: "10px",
-                  marginBottom: "10px",
-                  height: "50px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: "0",
-                  transition: "background-color 0.3s",
-                  backgroundColor: "transparent",
-                  color: "inherit",
-                  borderWidth: "0.0005px",
-                  borderColor: "black",
-                }}
+                href={`https://www.facebook.com/${instructor_details.facebook}`}
+                className="btn btn-outline-dark text-center fs-6 mb-1"
+                style={stylesBlock}
                 onMouseEnter={(e) => {
                   e.target.style.backgroundColor = "#F0FFFF";
                   e.target.style.color = "inherit";
@@ -231,26 +203,11 @@ const CourseFiveArea = () => {
                 <FacebookIcon />
                 Facebook
               </a>
+
               <a
-                className="btn btn-outline-dark text-center fs-4 my-2"
-                style={{
-                  fontWeight: "900",
-                  width: "250px",
-                  marginLeft: "10px",
-                  paddingRight: "10px",
-                  marginTop: "10px",
-                  marginBottom: "10px",
-                  height: "50px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: "0",
-                  transition: "background-color 0.3s",
-                  backgroundColor: "transparent",
-                  color: "inherit",
-                  borderWidth: "0.0005px",
-                  borderColor: "black",
-                }}
+                href={`https://www.linkedin.com/in/${instructor_details.linkedin}`}
+                className="btn btn-outline-dark text-center fs-6 mb-1"
+                style={stylesBlock}
                 onMouseEnter={(e) => {
                   e.target.style.backgroundColor = "#F0FFFF";
                   e.target.style.color = "inherit";
@@ -264,26 +221,11 @@ const CourseFiveArea = () => {
                 LinkedIn
               </a>
 
+                {/* Youtube */}
               <a
-                className="btn btn-outline-dark text-center fs-4 my-2"
-                style={{
-                  fontWeight: "900",
-                  width: "250px",
-                  marginLeft: "10px",
-                  paddingRight: "10px",
-                  marginTop: "10px",
-                  marginBottom: "10px",
-                  height: "50px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: "0",
-                  transition: "background-color 0.3s",
-                  backgroundColor: "transparent",
-                  color: "inherit",
-                  borderWidth: "0.0005px",
-                  borderColor: "black",
-                }}
+                href={`https://www.youtube.com/c/${instructor_details.youtube}`}
+                className="btn btn-outline-dark text-center fs-6 mb-1"
+                style={stylesBlock}
                 onMouseEnter={(e) => {
                   e.target.style.backgroundColor = "#F0FFFF";
                   e.target.style.color = "inherit";
@@ -298,9 +240,9 @@ const CourseFiveArea = () => {
               </a>
            
             </div>
-
-
           </div>
+          )}
+
           <div className="col-lg-3 order-lg-2">
             <CourseSidebarTwo course_items={course_items} />
           </div>

@@ -56,9 +56,9 @@ const CourseTypeFive = ({ data, classes }) => {
                         />
                     </Link>
                     <div className="time-top">
-                        <span className="duration">
+                        <span style={{background:'#e01D20'}} className="duration">
                             <i className="icon-61"></i>
-                            {data.duration}
+                            {data.duration} OFF
                         </span>
                     </div>
                 </div>
@@ -92,7 +92,7 @@ const CourseTypeFive = ({ data, classes }) => {
                     <ul className="course-meta">
                         <li>
                             <i className="icon-24"></i>
-                            {data.lesson} Lessons5
+                            {data.lesson} Lessons
                         </li>
                         <li>
                             <i className="icon-25"></i>

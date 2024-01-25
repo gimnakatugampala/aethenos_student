@@ -692,6 +692,24 @@ export const GetCoursesBySubCategoryTopics = async(code,setloading_topics_list,s
 
 }
 
+export const GetInstructorDetails = async(id,setinstructor_details,setloading) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getInstructorDetails/${id}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+      setinstructor_details(result)
+      setloading(false)
+    })
+    .catch(error => console.log('error', error));
+
+}
+
 export const SearchCourseByKeyword = async() =>{
   console.log("123")
 }

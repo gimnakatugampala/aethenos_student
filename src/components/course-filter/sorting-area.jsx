@@ -30,7 +30,7 @@ const SortingArea = ({course_items, num, setCourses, courses,course_list, items 
                 }
             </div>
             <div className="sorting-right">
-                <div className="layout-switcher">
+                {/* <div className="layout-switcher">
                     <label>{course_list ? 'List' : 'Grid' }</label>
                     <ul className="switcher-btn">
                         <li>
@@ -44,7 +44,7 @@ const SortingArea = ({course_items, num, setCourses, courses,course_list, items 
                             </a>
                         </li>
                     </ul>
-                </div>
+                </div> */}
                 <div className="edu-sorting">
                     <div className="icon"><i className="icon-55"></i></div>
                     <select onChange={handleChange} className="edu-select">
