@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { Footer, Header, Wrapper } from "../../../layout";
 import SEO from "../../../components/seo";
-import { GetCourseCategoryTitle, GetCoursesByCategoryInstructor, GetCoursesByCategoryMostPopular, GetCoursesByCategoryNew, GetSubCategoriesByCategoryLinkName } from '../../../api';
+import { GetCourseCategoryTitle, GetCoursesByCategoryInstructor, GetCoursesByCategoryMostPopular, GetCoursesByCategoryNew, GetCoursesByCategoryTrending, GetSubCategoriesByCategoryLinkName } from '../../../api';
 import CourseTypeOne from '../../../components/course/course-type-one';
 import CourseFourArea from '../../../components/course-category/landscape-courses/course-4-area'
 import { course_data } from '../../../data';
@@ -212,7 +212,8 @@ const GetCourseByCategory = () => {
             GetCourseCategoryTitle(setCategoryName,id,setloading_top_title)
             GetCoursesByCategoryNew(setnew_courses,setloading_new_courses,id)
             GetCoursesByCategoryMostPopular(setmost_popular_courses,setloading_most_popular_courses,id)
-            GetCoursesByCategoryInstructor(id,setinstructors)
+            GetCoursesByCategoryTrending(settrending_courses,setloading_trending_courses,id)
+            GetCoursesByCategoryInstructor(id,setinstructors,setloading_instructors_list)
             console.log(id)
         }
         
@@ -222,10 +223,10 @@ const GetCourseByCategory = () => {
             // setloading_sub_categories(false)
             // setloading_most_popular_courses(false)
             setloading_topics_list(false)
-            setloading_instructors_list(false)
+            // setloading_instructors_list(false)
             setloading_all_courses_list(false)
             // setloading_new_courses(false)
-            setloading_trending_courses(false)
+            // setloading_trending_courses(false)
         }, 2000);
 
     }, [CategoryName,loading_top_title,id])
@@ -423,7 +424,7 @@ const GetCourseByCategory = () => {
                                   </div>
                               ) : (
                                 <div className="row g-3 mb-5">
-                                {new_courses.length > 0 ? new_courses.slice(0, next)?.map((course) => {
+                                {new_courses.length > 0 || new_courses != null ? new_courses.slice(0, next)?.map((course) => {
                                     return (
                                     <div key={course.id} className="col-md-6 col-xl-3">
                                         <CourseTypeOne data={course} classes="course-box-shadow" />
@@ -469,13 +470,13 @@ const GetCourseByCategory = () => {
                                    </div>
                               ) : (
                                 <div className="row g-3 mb-5">
-                                {trending_courses.slice(0, next)?.map((course) => {
+                                {trending_courses.length > 0 || trending_courses != null ? trending_courses.slice(0, next)?.map((course) => {
                                     return (
                                     <div key={course.id} className="col-md-6 col-xl-3">
                                         <CourseTypeOne data={course} classes="course-box-shadow" />
                                     </div>
                                     );
-                                })}
+                                }) : <h4 >No Trending Courses Available</h4>}
                                 </div>
                               )}
 
@@ -545,13 +546,13 @@ const GetCourseByCategory = () => {
                     </div>
                     ) : (
                         <Carousel autoPlay={false} duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
-                            {instructors != null && instructors.map((page, index) => (
+                            {instructors != null || instructors.length > 0 ? instructors.map((page, index) => (
                                 <div key={index} className="row">
                                       {page.single.map((item, itemIndex) => (
-                                        <CardContainer key={itemIndex} className="col-md-4 mb-3">
-                                        <a href={`/users/${item.code}`}>
+                                        <CardContainer  key={itemIndex} className="col-md-4 mb-2">
+                                        <a  href={`/users/${item.userCode}`}>
                                         <div
-                                            className="row"
+                                            className="row h-100"
                                             style={{
                                             borderRadius: "0",
                                             transition: "background-color 0.3s",
@@ -568,11 +569,11 @@ const GetCourseByCategory = () => {
                                             />
                                             </div>
                                             <div className="col-md-9">
-                                            <h3 className='m-0' style={{ fontWeight: "bold", fontSize: "16px" }}>
-                                                {item.title.length > 12 ?  item.title.slice(0, 17) + "..." : item.title}
-                                            </h3>
+                                            <h6 className='m-0' style={{ fontWeight: "bold"}}>
+                                                {item.title.length > 17 ?  item.title.slice(0, 17) + "..." : item.title}
+                                            </h6>
                                             <div>
-                                            <p className="m-0" style={{fontSize:'13px'}}>{item.description.length > 10 ?  item.description.slice(0, 50) + "...": item.description}</p>
+                                            <p className="m-0" style={{fontSize:'13px'}}>{item.description.length > 35 ?  item.description.slice(0, 35) + "...": item.description}</p>
                                             </div>
     
                                             <div className="d-flex align-items-center">
@@ -670,7 +671,7 @@ const GetCourseByCategory = () => {
                                         </CardContainer>
                                     ))}
                                 </div>
-                            ))}
+                            )) : <h4>No Instructors Found</h4>}
                         </Carousel>
                     )}
 

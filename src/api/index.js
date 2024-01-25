@@ -436,6 +436,30 @@ export const GetCoursesByCategoryNew = async(setnew_courses,setloading_new_cours
 
 }
 
+export const GetCoursesByCategoryTrending = async(settrending_courses,setloading_trending_courses,id) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getTrendingByCourseLinkName/${id}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      // console.log(result)
+      if(result.message == "Error"){
+        settrending_courses([])
+        setloading_trending_courses(false)
+        return
+      }
+        settrending_courses(result)
+        setloading_trending_courses(false)
+      
+    })
+    .catch(error => console.log('error', error));
+
+}
+
 export const GetCoursesByCategoryMostPopular = async(setmost_popular_courses,setloading_most_popular_courses,id) =>{
 
   var requestOptions = {
@@ -446,7 +470,7 @@ export const GetCoursesByCategoryMostPopular = async(setmost_popular_courses,set
   fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getMostPopularCourses/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
       if(result.message == "Error"){
         setmost_popular_courses([])
         setloading_most_popular_courses(false)
@@ -460,50 +484,40 @@ export const GetCoursesByCategoryMostPopular = async(setmost_popular_courses,set
 
 }
 
-export const GetCoursesByCategoryInstructor = async(id,setinstructors) =>{
+export const GetCoursesByCategoryInstructor = async(id,setinstructors,setloading_instructors_list) =>{
   
   var requestOptions = {
     method: 'GET',
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getPopularInstructors/design`, requestOptions)
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getPopularInstructors/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
 
-      const maxObjectsPerSingleArray = 6;
+      console.log(result)
 
-const instructors = result.map(item => {
-    const singleArrays = [];
-    let currentSingleArray = [];
+      const itemsPerPage = 6;
+      const resultArray = [];
 
-    for (let i = 0; i < item.coursesCount; i++) {
-        if (currentSingleArray.length === maxObjectsPerSingleArray) {
-            singleArrays.push({ single: currentSingleArray });
-            currentSingleArray = [];
-        }
+      for (let i = 0; i < result.length; i += itemsPerPage) {
+          const singleArray = result.slice(i, i + itemsPerPage).map(item => ({
+              title: item.name == null ? "" : item.name,
+              description: item.about == null ? "" : item.about,
+              rating: item.rating == null ? 0 : item.rating,
+              students: item.studentsCount == null ? 0 : item.studentsCount,
+              courses: item.coursesCount == null ? 0 : item.coursesCount,
+              image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+              userCode:item.userCode
+          }));
 
-        currentSingleArray.push({
-            title: item.name,
-            link: "web-development-link-here",
-            description: "ReactJS,NodeJS",
-            rating: item.rating,
-            students: item.studentsCount,
-            courses: item.coursesCount,
-            image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-        });
-    }
+          resultArray.push({ single: singleArray });
+      }
 
-    if (currentSingleArray.length > 0) {
-        singleArrays.push({ single: currentSingleArray });
-    }
+    console.log(resultArray);
+    setinstructors(resultArray);
+    setloading_instructors_list(false)
 
-    return singleArrays;
-}).flat();
- 
-      setinstructors(instructors)
-      console.log(instructors)
-      // setinstructors(result)
 
     })
     .catch(error => console.log('error', error));
