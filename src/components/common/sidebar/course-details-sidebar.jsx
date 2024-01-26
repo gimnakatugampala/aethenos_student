@@ -2,34 +2,84 @@ import React from 'react';
 import useModal from '../../../hooks/use-modal';
 import { Books } from '../../../svg';
 import VideoModal from '../popup-modal/video-modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { wishlistItems , add_to_wishlist } from '../../../redux/features/wishlist-slice';
+import { cart_course } from '../../../redux/features/cart-slice';
+import { IMG_HOST } from '../../../api';
+
 
 const mainfs = {
     fontSize: '40px',
   };
 
 const CourseDetailsSidebar = ({ course,details_2=false }) => {
+
+
+    
+    const {cartCourses} = useSelector(state => state.cart);
+    const dispatch = useDispatch();
+    const wishlists = useSelector(wishlistItems);
+    const isWishlistSelected = wishlists.find(w => Number(w.id) == Number(course.id));
+    
+
     const { img, certificate, videoId, course_price, instructor, duration, student, language } = course || {};
     const { isVideoOpen, setIsVideoOpen } = useModal();
+
+    const handleWishlist = (course_item) => {
+        if (wishlists.find(i => i.id === course_item.id)) {
+            dispatch(
+                add_to_wishlist({
+                    change_type: 'remove_wishlist', item: {
+                    id: course_item.id,
+                    img: `${course_item.img}`,
+                    title: course_item.title,
+                    price: course_item.course_price
+                }
+            }))
+        } else {
+            dispatch(
+                add_to_wishlist({
+                    change_type: 'add_wishlist', item: {
+                    id: course_item.id,
+                    img: `${course_item.img}`,
+                    title: course_item.title,
+                    price: course_item.course_price
+                }
+            }))
+        }
+    }
+
+    // handle add to cart
+    const handleAddToCart = (course) => {
+        dispatch(cart_course({
+            id:course.id,
+            img:`${course.img}`,
+            price:course.course_price,
+            title:course.title
+        }))
+        console.log(course)
+    }
+
     return (
         <>
             <div className={`course-sidebar-3 ${details_2?'':'sidebar-top-position'}`}>
                 <div className="edu-course-widget widget-course-summery">
                     <div className="inner">
                         <div className="thumbnail">
-                            <img src={`/assets/images/course/course-01/${img}`} alt="Course Thumb" />
+                            <img src={`${IMG_HOST}${img}`} alt="Course Thumb" />
                             <a onClick={() => setIsVideoOpen(true)} style={{ cursor: 'pointer' }} className="play-btn video-popup-activation">
                                 <i className="icon-18"></i>
                             </a>
                         </div>
                         <div className="content">
-                            <h4 className="widget-title">Course Includes:</h4>
-                            <div >
-                           
-                            <span style={mainfs} className="value price  fw-bolder">${course_price}</span>
-                            <span className='text-decoration-line-through m-lg-2'> $74.99</span>
-                            <span className='m-lg-1 fw-semibold'>83% off</span>
+                            {/* <h4 className="widget-title">Course Includes:</h4> */}
+
+                            <div>
+                                <span style={mainfs} className="value price fw-bolder">${course_price}</span>
+                                <span className='text-decoration-line-through m-lg-2'> $74.99</span>
+                                <span className='m-lg-1 fw-semibold'>83% off</span>
                             </div>
-                            <span className=" fw-semibold ">2 days left at this price!</span>
+                         
 
                             <ul className="course-item">
                                 {/* <li>
@@ -38,40 +88,42 @@ const CourseDetailsSidebar = ({ course,details_2=false }) => {
                                 </li> */}
 
                                 <li>
-                                    <span className="label"><i className="icon-62"></i>Instrutor:</span>
-                                    <span className="value">{instructor}</span>
+                                    <span className="label"><i className="icon-62"></i>Articles</span>
+                                    <span className="value">74</span>
                                 </li>
 
                                 <li>
-                                    <span className="label"><i className="icon-61"></i>Duration:</span>
+                                    <span className="label"><i className="icon-61"></i>No. Of Videos</span>
                                     <span className="value">{duration}</span>
                                 </li>
 
                                 <li>
-                                    <span className="label">
-                                        <Books />
-                                        Lessons:</span>
-                                    <span className="value">8</span>
+                                    <span className="label"><i className="icon-61"></i>Downloadable Resources</span>
+                                    <span className="value">{duration}</span>
                                 </li>
 
                                 <li>
-                                    <span className="label"><i className="icon-63"></i>Enrolled:</span>
+                                    <span className="label"><i className="icon-63"></i>Enrolled</span>
                                     <span className="value">{student} students</span>
                                 </li>
 
                                 <li>
-                                    <span className="label"><i className="icon-59"></i>Language:</span>
+                                    <span className="label"><i className="icon-59"></i>Language</span>
                                     <span className="value">{language}</span>
                                 </li>
 
                                 <li>
-                                    <span className="label"><i className="icon-64"></i>Certificate:</span>
-                                    <span className="value">{certificate}</span>
+                                    <span className="label"><i className="icon-64"></i>Certificate of completion</span>
+                                    <span className="value">Yes</span>
                                 </li>
                             </ul>
 
                             <div className="read-more-btn">
-                                <a href="/my-courses" className="edu-btn">Start Now <i className="icon-4"></i></a>
+                                {/* <a href="/my-courses" className="edu-btn">Start Now <i className="icon-4"></i></a> */}
+                                <a onClick={() => handleAddToCart(course)} className="edu-btn" style={{ cursor: 'pointer' }}> 
+                                        {cartCourses.some(item => item.id == course.id) ? 'Added to cart' : 'Add to cart'} 
+                                        <i className="icon-4"></i>
+                                    </a>
                             </div>
 
                             <div className="share-area">

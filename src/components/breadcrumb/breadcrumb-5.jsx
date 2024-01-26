@@ -10,56 +10,74 @@ const CourseBreadcrumb = ({ course }) => {
         <div className="edu-breadcrumb-area breadcrumb-style-3 ">
             <div className="container">
                 <div className="breadcrumb-inner">
-                    <ul className="edu-breadcrumb">
-                        <li className="breadcrumb-item">
-                            <a href="/" >
-                                Finance & Accounting
-                            </a>
-                        </li>
-                        <li className="separator"><i className="icon-angle-right"></i></li>
-                        <li className="breadcrumb-item">
-                            <a href="/course-style-1" >
-                            Accounting & Bookkeeping
-                            </a>
-                        </li>
-                        <li className="separator"><i className="icon-angle-right"></i></li>
-                        <li className="breadcrumb-item">
-                            <a href="/course-style-1" >
-                            Accounting 
-                            </a>
-                        </li>
-                        <li className="separator"><i className="icon-angle-right"></i></li>
-                        <li className="breadcrumb-item active" aria-current="page">{subtitle}</li>
-                    </ul>
-                    <div className="page-title  ">
-                        <h1 className="title col-12">{title}</h1>
-                        <h4 className='fw-light'>Become a Full-Stack Web Developer with just ONE course. HTML, CSS, Javascript, Node, React, MongoDB, Web3 and DApps</h4>
-                    </div>
-                    <ul className="course-meta">
-                        
-                        
-                        <li className="course-rating">
-                        <div className="rating">
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                        </div>
-                        <span className="rating-count"><a  href="">({rating_count} Rating)</a></span>
-                       <li> <span className="">1,092,422 students</span></li>
 
+                    <ul className="edu-breadcrumb m-0 p-0">
+                        <li className="breadcrumb-item">
+                            <a href={`/courses/${course.category_link_name}`}>
+                                {course.category}
+                            </a>
                         </li>
+                        <li className="separator"><i className="icon-angle-right"></i></li>
+                        <li className="breadcrumb-item">
+                            <a href={`/courses/${course.category_link_name}/${course.sub_category_link_name}`} >
+                                {course.sub_category}
+                            </a>
+                        </li>
+                        <li className="separator"><i className="icon-angle-right"></i></li>
+                        <li className="breadcrumb-item">
+                            <a href={`/topic/${course.topic_link_name}`} >
+                                {course.topic} 
+                            </a>
+                        </li>
+                        <li className="separator"></li>
+                        {/* <li className="breadcrumb-item active" aria-current="page">{subtitle}</li> */}
                     </ul>
-                    <div>
-                    <i className="icon-58"></i> Created by <a className='text-decoration-underline' href="/users/34">{instructor}</a>
+
+
+                    <div className="page-title">
+                        <h3 className="col-md-12">{course.title}</h3>
+                        <h5 className='col-md-9 fw-light m-0 p-0'>{course.sub_title}</h5>
                     </div>
-                    <ul  className="course-meta">
-                        <li className="course-rating">
-                            <span>Last updated 9/2023</span>
-                            <li> <i className="icon-59"></i>{language}</li>
-                            <li><span>English [Auto], Arabic [Auto]</span></li>
+
+
+                    <ul className="course-meta">
+                        <li className="course-rating"> 
+                            <div className="rating">
+                                <i className="icon-23"></i>
+                                <i className="icon-23"></i>
+                                <i className="icon-23"></i>
+                                <i className="icon-23"></i>
+                                <i className="icon-23"></i>
+                            </div>
+
+                            <span className="rating-count">
+                                <a><b>({Number.parseFloat(course.rating).toFixed(1)})</b></a>
+                            </span>
+                            </li>
+
+                       <li> 
+                        <span className='text-decoration-underline'>({course.rating_count} ratings)</span>
+                      </li>
+
+                       <li> 
+                        <span>{course.student} students</span>
                         </li>
+
+                        
+                    </ul>
+                    <p className='m-0 p-0'>
+                    <i className="icon-58"></i> Created by <a className='text-decoration-underline' href={`/users/${course.instructor_code}`}>{course.instructor}</a>
+                    </p>
+                    <ul  className="course-meta">
+                        {/* <li className="course-rating"> */}
+                   
+                            <li><span className='m-0 p-0'><i style={{fontSize:'17px'}} className="fa-solid fa-calendar-days m-0"></i> Last updated 9/2023</span></li>
+                            
+                            <li><i style={{fontSize:'17px'}}  className="fa-solid fa-globe m-0"></i> {course.language}</li>
+                           
+                            <li><span><i style={{fontSize:'17px'}} className="fa-solid fa-layer-group m-0"></i> {course.level}</span></li>
+                         
+                        {/* </li> */}
                     </ul>
                     
                 </div>

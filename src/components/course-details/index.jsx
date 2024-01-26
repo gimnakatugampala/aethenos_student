@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Footer, Header } from '../../layout';
 import CourseBreadcrumb from '../breadcrumb/breadcrumb-5';
 import CourseDetailsArea from './course-details-area';
 
 const index = ({course}) => {
+
+    useEffect(() => {
+        console.log(course)
+    }, [course])
+    
+
     return (
         <div className='sticky-header'>
             <div id="main-wrapper" className="main-wrapper">

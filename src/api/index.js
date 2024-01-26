@@ -710,6 +710,20 @@ export const GetInstructorDetails = async(id,setinstructor_details,setloading) =
 
 }
 
-export const SearchCourseByKeyword = async() =>{
-  console.log("123")
+export const GetCourseDetails = async(code,setcourse) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCourseByStudent/${code}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+      setcourse(result)
+    })
+    .catch(error => console.log('error', error));
+
 }
+

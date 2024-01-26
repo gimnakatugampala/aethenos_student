@@ -126,12 +126,21 @@ const CourseFiveArea = () => {
 
             <div className="col-md-4 text-center mx-auto">
               <div className="m-5">
-                <img
+                {instructor_details.profileImage == null ? (
+                  <img
+                  className="rounded-circle"
+               
+                  src={`/images/course/instructor_profile_img.png`}
+                  alt={`${instructor_details.name}`}
+                />
+                ) : (
+                  <img
                   className="rounded-circle w-75"
                   style={{height:'220px',objectFit:'cover'}}
                   src={`${IMG_HOST}${instructor_details.profileImage}`}
                   alt={`${instructor_details.name}`}
                 />
+                )}
               </div>
               <a
                 href={`mailto:${instructor_details.email}`}

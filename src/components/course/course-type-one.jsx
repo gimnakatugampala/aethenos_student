@@ -56,14 +56,15 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
         // CalculateDiscountedPrice(data)
         // GetCurrencyByCountry(data)
         // CalculateDiscountPrice(data)
-    },[])
+        // console.log(data)
+    },[data])
     
 
     return (
         <div className={`edu-course course-style-1 ${ classes ? classes : '' } hover-button-bg-white h-100`}>
             <div className="inner">
                 <div className="thumbnail">
-                    <Link href={`/course-details/${data.id}`} legacyBehavior>
+                    <Link href={`/course-details/${data.course_code}`} legacyBehavior>
                         {data.img == "" || data.img == null || data.img.includes("https://") ? 
                         <img style={{width:'100%',objectFit:'cover'}} src={`/images/course/aethenos_course_img.jpg`} alt={data.title} /> :  
                         <img style={{width:'100%',objectFit:'cover'}} src={`${IMG_HOST}${data.img}`} alt={data.title} />}
@@ -79,7 +80,7 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                     <span className="course-level">{data.level}</span>
                     <p className="title m-0 p-0">
                         <b>
-                            <a href={`/course-details/${data.id}`}>{data.title.length > 60 ? data.title.substring(0, 60) + '...' : data.title}</a>
+                            <a href={`/course-details/${data.course_code}`}>{data.title.length > 60 ? data.title.substring(0, 60) + '...' : data.title}</a>
                         </b>
                     </p>
                     <p style={{fontSize:'12px'}} className='m-0 p-0'>{data.instructor}</p>
@@ -118,7 +119,7 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                     <span className="course-level">{data.level}</span>
                         <h6 className="title">
                             <b>
-                                <a href={`/course-details/${data.id}`}>{data.title.length > 60 ? data.title.substring(0, 60) + '...' : data.title}</a>
+                                <a href={`/course-details/${data.course_code}`}>{data.title.length > 60 ? data.title.substring(0, 60) + '...' : data.title}</a>
                             </b>
                         </h6>
                     <div className="course-rating">
