@@ -4,13 +4,12 @@ import CourseTypeOne from "./course-one";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-const CourseArea = ({ searchKey }) => { // Destructure the props to get searchTerm
-  const [next, setNext] = useState(5);
+const CourseArea = ({ searchKey }) => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      try {        
+      try {
         const coursesData = await getNewCourses(searchKey);
         setCourses(coursesData);
         console.log("Courses:", coursesData);
@@ -18,10 +17,11 @@ const CourseArea = ({ searchKey }) => { // Destructure the props to get searchTe
         console.error("Error fetching courses:", error);
       }
     };
-  
+
     fetchData();
   }, [searchKey]);
 
+  const numSets = Math.floor(courses.length / 4);
 
   return (
     <div className="edu-course-area">
@@ -35,37 +35,39 @@ const CourseArea = ({ searchKey }) => { // Destructure the props to get searchTe
           Hot and Fresh Courses
         </h3>
 
-        <Carousel
-          showThumbs={false}
-          showStatus={false}
-          infiniteLoop={true}
-          emulateTouch={true}
-          autoPlay={false}
-          centerMode={false}
-          showArrows={true}
-          selectedItem={0}
-          interval={5000}
-          transitionTime={500}
-          showIndicators={false}
-          stopOnHover={true}
-        >
-          
-          {courses.slice(1, next).map((course, index) => (
-            <div
-              className="col-12"
-              key={course.id}
-              style={{ display: "flex", gap: "15px" }}
-            >
-              {[1, 2, 3, 4].map((offset) => (
-                <div key={course.id + offset} style={{ flex: 1 }}>
-                  <CourseTypeOne
-                    course={courses[index + offset]} 
-                  />
-                </div>
-              ))}
-            </div>
-          ))}
-        </Carousel>
+        {numSets > 0 && (
+          <Carousel
+            showThumbs={false}
+            showStatus={false}
+            infiniteLoop={true}
+            emulateTouch={true}
+            autoPlay={false}
+            centerMode={false}
+            showArrows={true}
+            selectedItem={0}
+            interval={5000}
+            transitionTime={500}
+            showIndicators={false}
+            stopOnHover={true}
+          >
+            {Array.from({ length: numSets }, (_, setIndex) => (
+              <div
+                className="col-12"
+                key={setIndex}
+                style={{ display: "flex", gap: "15px" }}
+              >
+                {[0, 1, 2, 3].map((offset) => (
+                  <div
+                    key={courses[setIndex * 4 + offset].id}
+                    style={{ flex: 1 }}
+                  >
+                    <CourseTypeOne course={courses[setIndex * 4 + offset]} />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </Carousel>
+        )}
       </div>
     </div>
   );

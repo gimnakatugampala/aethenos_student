@@ -713,3 +713,66 @@ export const GetInstructorDetails = async(id,setinstructor_details,setloading) =
 export const SearchCourseByKeyword = async() =>{
   console.log("123")
 }
+
+export const searchCourses = async (keyword, setCourses) => {
+  var requestOptions = {
+    method: "GET",
+    redirect: "follow",
+  };
+
+  try {
+    const response = await fetch(
+      `https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/searchCourses/${keyword}`,
+      requestOptions
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log(result);
+
+    if (result.message === "Error") {
+      console.log("Error");
+      return [];
+    }
+
+    setCourses(result);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    setCourses([]);
+  }
+};
+
+export const getNewCourses = async (searchKey) => {
+
+  var requestOptions = {
+    method: "GET",
+    redirect: "follow",
+  };
+
+  try {
+    const response = await fetch(
+      `https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/searchCourses/${searchKey}`,
+      requestOptions
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log("API Response:", result);
+
+    if (result.message === "Error") {
+      console.log("Error");
+      return [];
+    }
+
+    return result;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+};
