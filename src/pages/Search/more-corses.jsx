@@ -1,12 +1,27 @@
-import React, { useState } from "react";
-import { course_data } from "../../data";
+import React, { useState, useEffect } from "react";
+import { getNewCourses } from "../../api/index";
 import CourseTypeOne from "./course-one";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-const CourseArea = () => {
-  const [next, setNext] = useState(5); // Adjust the number of items as needed
-  const [courses, setCourses] = useState(course_data);
+const CourseArea = ({ searchKey }) => { // Destructure the props to get searchTerm
+  const [next, setNext] = useState(5);
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {        
+        const coursesData = await getNewCourses(searchKey);
+        setCourses(coursesData);
+        console.log("Courses:", coursesData);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+  
+    fetchData();
+  }, [searchKey]);
+
 
   return (
     <div className="edu-course-area">
@@ -34,17 +49,19 @@ const CourseArea = () => {
           showIndicators={false}
           stopOnHover={true}
         >
+          
           {courses.slice(1, next).map((course, index) => (
             <div
-              className="col-12  px-3"
+              className="col-12"
               key={course.id}
-              style={{ display: "flex", gap: "25px" }}
+              style={{ display: "flex", gap: "15px" }}
             >
               {[1, 2, 3, 4].map((offset) => (
-                <CourseTypeOne
-                  key={course.id + offset}
-                  data={[courses[index + offset]]}
-                />
+                <div key={course.id + offset} style={{ flex: 1 }}>
+                  <CourseTypeOne
+                    course={courses[index + offset]} 
+                  />
+                </div>
               ))}
             </div>
           ))}

@@ -9,9 +9,16 @@ import Pagination from "../../ui/pagination";
 import CourseTypeFive from "./courseType";
 import CourseArea1 from "./more-corses";
 import { Chip, Stack } from "@mui/material";
+
 // import CourseOne from "./course-one";
 
-const CourseItems = ({ itemsPerPage, items, course_style, setShowing }) => {
+const CourseItems = ({
+  items,
+  itemsPerPage,
+  searchTerm,
+  course_style,
+  setShowing,
+}) => {
   const { page_count, item_offset, forcePage } = useSelector(
     (state) => state.filter
   );
@@ -19,6 +26,8 @@ const CourseItems = ({ itemsPerPage, items, course_style, setShowing }) => {
   const [pageCount, setPageCount] = useState(page_count);
   const [itemOffset, setItemOffset] = useState(item_offset);
   const dispatch = useDispatch();
+
+
   // side effect
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -56,7 +65,7 @@ const CourseItems = ({ itemsPerPage, items, course_style, setShowing }) => {
           return <CourseTypeFive key={i} data={course} />;
         })}
 
-      <CourseArea1 />
+      <CourseArea1 searchKey = {searchTerm}/>
 
       <Pagination
         handlePageClick={handlePageClick}
@@ -75,34 +84,69 @@ const CourseItems = ({ itemsPerPage, items, course_style, setShowing }) => {
         </h3>
         <Stack direction="row" spacing={2}>
           <Chip
+            style={{
+              backgroundColor: "red",
+              color: "white",
+              padding: "10px",
+              height: "2.4rem",
+              borderRadius: "9999px",
+            }}
             label="Web Development"
-            color="primary"
             variant="outlined"
-            sx={{ fontSize: "1.5rem" }}
+            color="primary"
+            sx={{ fontSize: "1.0rem", fontFamily: "Poppins, sans-serif" }}
           />
           <Chip
-            label="Database Manegment"
+            style={{
+              backgroundColor: "red",
+              color: "white",
+              padding: "10px",
+              height: "2.4rem",
+              borderRadius: "9999px",
+            }}
+            label="Database Management"
             color="primary"
             variant="outlined"
-            sx={{ fontSize: "1.5rem" }}
+            sx={{ fontSize: "1.0rem", fontFamily: "Poppins, sans-serif" }}
           />
           <Chip
+            style={{
+              backgroundColor: "red",
+              color: "white",
+              padding: "10px",
+              height: "2.4rem",
+              borderRadius: "9999px",
+            }}
             label="Complete Web Development"
             color="primary"
             variant="outlined"
-            sx={{ fontSize: "1.5rem" }}
+            sx={{ fontSize: "1.0rem", fontFamily: "Poppins, sans-serif" }}
           />
           <Chip
+            style={{
+              backgroundColor: "red",
+              color: "white",
+              padding: "10px",
+              height: "2.4rem",
+              borderRadius: "9999px",
+            }}
             label="Manual QA"
             color="primary"
             variant="outlined"
-            sx={{ fontSize: "1.5rem" }}
+            sx={{ fontSize: "1.0rem", fontFamily: "Poppins, sans-serif" }}
           />
           <Chip
+            style={{
+              backgroundColor: "red",
+              color: "white",
+              padding: "10px",
+              height: "2.4rem",
+              borderRadius: "9999px",
+            }}
             label="Web Developer"
             color="primary"
             variant="outlined"
-            sx={{ fontSize: "1.5rem" }}
+            sx={{ fontSize: "1.0rem", fontFamily: "Poppins, sans-serif" }}
           />
         </Stack>
       </div>

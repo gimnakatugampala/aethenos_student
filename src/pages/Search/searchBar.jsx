@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
 const SearchBar = () => {
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
 
   const handleSearch = () => {
-    console.log(keyword , "jlhasldkhjas")
     router.push(`/Search?keyword=${keyword}`);
   };
 

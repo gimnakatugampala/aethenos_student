@@ -1,25 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { course_data } from "../../data";
 import { useRouter } from "next/router";
 import CourseSidebar from "./side-bar";
 import CourseItems from "./course-item";
+import { searchCourses } from "../../api/index";
+import SortingArea from "./sortingAreaSearch";
 
-// course_items
-const course_items = course_data.filter(
-  (arr, index, self) =>
-    index === self.findIndex((i) => i.img === arr.img && i.State === arr.State)
-);
-
-const searchResults = () => {
-  const [courses, setCourses] = useState(course_items);
+const SearchResults = () => {
+  const [courses, setCourses] = useState([]);
   const [showing, setShowing] = useState(0);
   const { categories, instructors, levels, languages } = useSelector(
     (state) => state.filter
   );
 
+
   const router = useRouter();
   const { keyword } = router.query;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await searchCourses(keyword, setCourses);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    if (keyword) {    
+      fetchData();
+    }
+  }, [keyword, setCourses]);
 
   let items = courses
     ?.filter((item1) =>
@@ -41,7 +51,17 @@ const searchResults = () => {
       languages?.length !== 0
         ? languages?.some((item2) => item1.language == item2)
         : item1
+    )
+    .filter((item1) =>
+      keyword
+        ? item1.title?.toLowerCase().includes(keyword.toString().toLowerCase())
+        : item1
     );
+
+  const handleSortChange = (sortedCourses) => {
+    setCourses(sortedCourses);
+    setShowing(0);
+  };
 
   return (
     <div className="edu-course-area  section-gap-equal">
@@ -53,18 +73,25 @@ const searchResults = () => {
             data-sal="slide-up"
             data-sal-duration="400"
           >
-            <div className="mb-5">Search Results for : {keyword}</div>
+            <div className="mb-5">Search Results for: {keyword}</div>
           </h1>
           <div className="col-md-3">
-            {/* course sidebar start */}
-            <CourseSidebar course_items={course_items} />
-            {/* course sidebar end */}
+            <CourseSidebar course_items={courses} />
           </div>
 
           <div className="col-lg-9 col-pl--5">
+            <SortingArea
+              course_items={courses}
+              num={showing}
+              setCourses={handleSortChange}
+              courses={courses}
+              items={items}
+            />
+
             <CourseItems
               itemsPerPage={8}
-              items={items}
+              items={courses}
+              searchTerm={keyword}
               course_style="2"
               setShowing={setShowing}
             />
@@ -75,4 +102,4 @@ const searchResults = () => {
   );
 };
 
-export default searchResults;
+export default SearchResults;

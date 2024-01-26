@@ -63,44 +63,50 @@ const CourseTypeFive = ({ data, classes }) => {
     >
       <div className="inner">
         <div className="thumbnail">
-          <Link href={`/course-details/${data != undefined && data.id}`}>
+          <Link href={`/course-details/${data.title}`}>
             <img
-              src={`/assets/images/course/course-02/${data != undefined && data.img}`}
+              src={`http://185.209.223.202:8080/aethenos-assert/${
+                data != undefined && data.img
+              }`}
               alt="Course Thumb"
+              style={{ width: "350px", height: "200px" }}
             />
           </Link>
           <div className="time-top">
-            <span className="duration">
-              <i className="icon-61"></i>
-              {data != undefined && data.duration}
+            <span className="duration" style={{ background: "#e01D20" }}>
+              {data.course_prices.discount &&
+              data.course_prices.discount.length > 0
+                ? `${data.course_prices.discount[0].discountAmount}% OFF`
+                : "No Discount"}
             </span>
           </div>
         </div>
 
         <div className="content">
-          <div className="course-price float-end">${data != undefined && data.course_price}</div>
+          <div className="course-price float-end">
+            $
+            {data && data.course_prices && data.course_prices.length > 0
+              ? data.course_prices[0].globalListPrice
+              : "0"}
+          </div>
           <br />
           <h4 className="title">
-            <Link href={`/course-details/${data != undefined && data.id}`}>{data != undefined && data.title}</Link>
+            <Link href={`/course-details/${data != undefined && data.title}`}>
+              {data != undefined && data.title}
+            </Link>
           </h4>
 
-          <h6>{data != undefined && data.short_desc}</h6>
+          <h6 className="">
+            {data != undefined && data.short_desc && data.short_desc.length > 50
+              ? `${data.short_desc.slice(0, 50)}...`
+              : data.short_desc}
+          </h6>
 
-          <span className="course-level">{data != undefined && data.level}</span>
+          <p>{data != undefined && data.instructor}</p>
 
-          {/* <div
-            className="progress"
-            style={{ marginTop: "10px", marginBottom: "10px" }}
-          >
-            <div
-              className="progress-bar"
-              role="progressbar"
-              style={{ width: `${"20"}%`, background: "#1ab69d" }}
-              aria-valuenow={"100"}
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div> */}
+          <span className="course-level">
+            {data != undefined && data.level}
+          </span>
 
           <div className="course-rating">
             <div className="rating">
@@ -110,12 +116,14 @@ const CourseTypeFive = ({ data, classes }) => {
               <i className="icon-23"></i>
               <i className="icon-23"></i>
             </div>
-            <span className="rating-count ">({data != undefined && data.rating})</span>
+            <span className="rating-count ">
+              ({data != undefined && data.rating})
+            </span>
           </div>
           <ul className="course-meta">
-            <li>{data != undefined && data.lesson} Lessons</li>
-            <li>{data != undefined && data.duration}</li>
-            <li>{data != undefined && data.level}</li>
+            <li>{data != undefined && data.language} </li>
+            <li>{data != undefined && data.lessons} Lessons</li>
+            <li>{data != undefined && data.student} Students</li>
             <li>{data != undefined && data.category}</li>
           </ul>
 

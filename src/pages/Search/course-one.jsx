@@ -7,7 +7,9 @@ import {
   wishlistItems,
 } from "../../redux/features/wishlist-slice";
 
-const CourseTypeOne = ({ data, classes, image_location_path = "06" }) => {
+const CourseTypeOne = ({ course }) => {
+  if (!course || !course.id) return null;
+  
   const { cartCourses } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const wishlists = useSelector(wishlistItems);
@@ -19,7 +21,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = "06" }) => {
           change_type: "remove_wishlist",
           item: {
             id: course_item.id,
-            img: `/assets/images/course/course-06/${course_item.img}`,
+            img: `http://185.209.223.202:8080/aethenos-assert/${course_item.img}`,
             title: course_item.title,
             price: course_item.course_price,
           },
@@ -31,7 +33,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = "06" }) => {
           change_type: "add_wishlist",
           item: {
             id: course_item.id,
-            img: `/assets/images/course/course-06/${course_item.img}`,
+            img: `http://185.209.223.202:8080/aethenos-assert/${course_item.img}`,
             title: course_item.title,
             price: course_item.course_price,
           },
@@ -41,11 +43,11 @@ const CourseTypeOne = ({ data, classes, image_location_path = "06" }) => {
   };
 
   // handle add to cart
-  const handleAddToCart = (course) => {
+  const handleAddToCart = () => {
     dispatch(
       cart_course({
         id: course.id,
-        img: `/assets/images/course/course-06/${course.img}`,
+        img: `http://185.209.223.202:8080/aethenos-assert/${course.img}`,
         price: course.course_price,
         title: course.title,
       })
@@ -54,58 +56,58 @@ const CourseTypeOne = ({ data, classes, image_location_path = "06" }) => {
 
   return (
     <div className={`edu-course`}>
-      {data != null && data.map((course) => (
-        <div
-          className="inner"
-          key={course.id}
-          style={{ textAlign: "left", width: "280px" }}
-        >
-          <div className="thumbnail">
-            <Link href={`/course-details-/${course.id}`}>
-              <img
-                src={`/assets/images/course/course-${image_location_path}/${course.img}`}
-                alt="Course Meta"
-                // style={{ width: "300px", height: "150px" }}
-              />
-            </Link>
-            <div className="time-top">
-              <span className="duration">
-                <i className="icon-61"></i>
-                {course.duration}
-              </span>
-            </div>
-          </div>
-          <div className="content">
-            <span className="course-level">{course.level}</span>
-            <h6 className="title">
-              <a style={{ color: "inherit" }} href="/courses">{course.title}</a>
-            </h6>
-            <div className="course-rating">
-              <div className="rating">
-                <i className="icon-23"></i>
-                <i className="icon-23"></i>
-                <i className="icon-23"></i>
-                <i className="icon-23"></i>
-                <i className="icon-23"></i>
-              </div>
-            </div>
-            <span className="rating-count">
-              ({course.rating} / {course.rating_count} Rating)
+      <div
+        className="inner"
+        key={course.id}
+        style={{ textAlign: "left", width: "auto", height: "450px"}}
+      >
+        <div className="thumbnail">
+          <Link href={`/course-details-/${course.id}`}>
+            <img
+              src={`http://185.209.223.202:8080/aethenos-assert/${course.img}`}
+              alt="Course Meta"
+              style={{ width: "100%", height: "150px" }}
+            />
+          </Link>
+          <div className="time-top">
+            <span className="duration">
+              <i className="icon-61"></i>
+              {course.duration}
             </span>
-            <div className="course-price">${course.course_price}</div>
-            <ul className="course-meta">
-              <li>
-                <i className="icon-24"></i>
-                {course.lesson} Lessons
-              </li>
-              <li>
-                <i className="icon-25"></i>
-                {course.student} Students
-              </li>
-            </ul>
           </div>
         </div>
-      ))}
+        <div className="content">
+          <span className="course-level">{course.level}</span>
+          <h6 className="title">
+            <a style={{ color: "inherit" }} href="/courses">
+              {course.title}
+            </a>
+          </h6>
+          <div className="course-rating">
+            <div className="rating">
+              <i className="icon-23"></i>
+              <i className="icon-23"></i>
+              <i className="icon-23"></i>
+              <i className="icon-23"></i>
+              <i className="icon-23"></i>
+            </div>
+          </div>
+          <span className="rating-count">
+            ({course.rating} / {course.rating_count} Rating)
+          </span>
+          <div className="course-price">${course.course_prices.prices[0].listPrice}</div>
+          <ul className="course-meta">
+            <li>
+              <i className="icon-24"></i>
+              {course.lesson} Lessons
+            </li>
+            <li>
+              <i className="icon-25"></i>
+              {course.student} Students
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };

@@ -26,7 +26,7 @@
         "formik": "^2.2.9",
         "framer-motion": "^7.6.7",
         "js-cookie": "^3.0.5",
-        "next": "^14.0.0",
+        "next": "^14.1.0",
         "next-themes": "^0.2.0",
         "rc-menu": "^9.12.4",
         "react": "18.2.0",
@@ -59,7 +59,7 @@
         "spinners-react": "^1.0.7",
         "stars-rating": "^1.1.0",
         "styled-components": "^6.0.8",
-        "sweetalert2": "^11.10.1",
+        "sweetalert2": "^11.6.13",
         "swiper": "^8.3.2",
         "video-react": "^0.16.0",
         "yup": "^0.32.11"
