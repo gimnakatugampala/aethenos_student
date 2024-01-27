@@ -6,6 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { wishlistItems , add_to_wishlist } from '../../../redux/features/wishlist-slice';
 import { cart_course } from '../../../redux/features/cart-slice';
 import { IMG_HOST } from '../../../api';
+import CalculateDiscountedPrice from '../../../functions/pricing/CalculateDiscountedPrice';
+import GetCurrencyByCountry from '../../../functions/pricing/GetCurrencyByCountry';
+import getSymbolFromCurrency from 'currency-symbol-map'
+import CalculateListPrice from '../../../functions/pricing/CalculateListPrice';
+import CalculateDiscountPrice from '../../../functions/pricing/CalculateDiscountPrice';
+
 
 
 const mainfs = {
@@ -75,9 +81,9 @@ const CourseDetailsSidebar = ({ course,details_2=false }) => {
                             {/* <h4 className="widget-title">Course Includes:</h4> */}
 
                             <div>
-                                <span style={mainfs} className="value price fw-bolder">${course_price}</span>
-                                <span className='text-decoration-line-through m-lg-2'> $74.99</span>
-                                <span className='m-lg-1 fw-semibold'>83% off</span>
+                                <span style={mainfs} className="value price fw-bolder">{getSymbolFromCurrency(GetCurrencyByCountry(course))}{CalculateDiscountedPrice(course)}</span>
+                                <span className='text-decoration-line-through m-lg-2'> {getSymbolFromCurrency(GetCurrencyByCountry(course))}{CalculateListPrice(course)}</span>
+                               {CalculateDiscountPrice(course) != "" && (<span className='m-lg-1 fw-semibold'>{CalculateDiscountPrice(course)} OFF</span>)} 
                             </div>
                          
 
@@ -89,32 +95,32 @@ const CourseDetailsSidebar = ({ course,details_2=false }) => {
 
                                 <li>
                                     <span className="label"><i className="icon-62"></i>Articles</span>
-                                    <span className="value">74</span>
+                                    <span className="value">{course.articles_count}</span>
                                 </li>
 
                                 <li>
                                     <span className="label"><i className="icon-61"></i>No. Of Videos</span>
-                                    <span className="value">{duration}</span>
+                                    <span className="value">{course.no_of_videos}</span>
                                 </li>
 
                                 <li>
                                     <span className="label"><i className="icon-61"></i>Downloadable Resources</span>
-                                    <span className="value">{duration}</span>
+                                    <span className="value">{course.downloadable_resources_count}</span>
                                 </li>
 
                                 <li>
                                     <span className="label"><i className="icon-63"></i>Enrolled</span>
-                                    <span className="value">{student} students</span>
+                                    <span className="value">{course.student} students</span>
                                 </li>
 
                                 <li>
                                     <span className="label"><i className="icon-59"></i>Language</span>
-                                    <span className="value">{language}</span>
+                                    <span className="value">{course.language}</span>
                                 </li>
 
                                 <li>
                                     <span className="label"><i className="icon-64"></i>Certificate of completion</span>
-                                    <span className="value">Yes</span>
+                                    <span className="value text-uppercase">{course.certificate}</span>
                                 </li>
                             </ul>
 

@@ -9,6 +9,8 @@ import SortingArea from '../course-filter/sorting-area';
 import CourseTypeSix from '../course/course-type-six';
 
 const CourseDetailsTwo = ({ course }) => {
+
+    console.log(course)
     const coursePerView = 3;
     const [next, setNext] = useState(coursePerView);
     const [courses,setCourses] = useState(course_data);

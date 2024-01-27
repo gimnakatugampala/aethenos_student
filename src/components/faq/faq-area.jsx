@@ -33,6 +33,7 @@ const FaqArea = () => {
                     <div className="col-lg-8">
                         <div className="tab-content faq-page-tab-content" id="faq-accordion">
                             <div className="tab-pane fade show active" id="gn-ques" role="tabpanel">
+                                
                                 <div className="faq-accordion">
                                     <div className="accordion">
                                         <SingleFaq show={true} id="1" title="How can I contact a school directly?" desc="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco qui laboris nis aliquip commodo consequat." />

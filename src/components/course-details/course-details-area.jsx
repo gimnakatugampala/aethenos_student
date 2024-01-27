@@ -4,15 +4,20 @@ import CommentFormCourse from '../forms/comment-form-course';
 import SingleComment from './single-comment';
 import SingleProgressbar from './single-progressbar';
 import { IMG_HOST } from '../../api';
+import Accordian from './accordian';
+
+
 
 const CourseDetailsArea = ({ course }) => {
   const { course_desc, course_desc_2, learn_list, course_desc_3, curriculum_desc, course_lessons, instructor_img, instructor_title, instructor_desc, social_links, reviews, instructor, rating, rating_count } = course || {};
     return (
-        <section className="edu-section-gap course-details-area">
+        <section className="edu-section-gap course-details-3">
             <div className="container">
                 <div className="row row--30">
-                    <div className="col-lg-8">
-                        <div className="course-details-content">
+                    <div className="col-lg-8 pt-0">
+
+                        <div className="course-details-content pt-0">
+
                             <ul className="nav nav-tabs" id="myTab" role="tablist">
                                 <li className="nav-item" role="presentation">
                                     <button className="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview"
@@ -20,12 +25,9 @@ const CourseDetailsArea = ({ course }) => {
                                 </li>
                                 <li className="nav-item" role="presentation">
                                     <button className="nav-link" id="carriculam-tab" data-bs-toggle="tab" data-bs-target="#carriculam"
-                                    type="button" role="tab" aria-controls="carriculam" aria-selected="false">Carriculam</button>
+                                    type="button" role="tab" aria-controls="carriculam" aria-selected="false">Curriculam</button>
                                 </li>
-                                <li className="nav-item" role="presentation">
-                                    <button className="nav-link" id="instructor-tab" data-bs-toggle="tab" data-bs-target="#instructor"
-                                    type="button" role="tab" aria-controls="instructor" aria-selected="false">Instructor</button>
-                                </li>
+                            
                                 <li className="nav-item" role="presentation">
                                     <button className="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review" type="button"
                                     role="tab" aria-controls="review" aria-selected="false">Reviews</button>
@@ -36,22 +38,27 @@ const CourseDetailsArea = ({ course }) => {
                                 <div className="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
                                     <div className="course-tab-content">
                                         <div className="course-overview">
+                                    
+                                      
+
                                             <h3 className="heading-title">Course Description</h3>
                                             <p>{course.course_main_desc}</p>
-                                            {/* <p className="mb--60">{course_desc_2}</p> */}
+                                         
                                             <h5 className="title">What You’ll Learn?</h5>
                                             <ul className="mb--60">
-                                                {/* {learn_list?.map((l, i) => <li key={i}>{l}</li>)} */}
                                                 <div className='row'>
-                                                <li className='col-md-6'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, dolore porro? Corporis voluptas sunt, sit natus ex, perferendis aliquid id doloremque, blanditiis facere cum ducimus reiciendis molestiae iure ullam atque!</li>
-                                                <li className='col-md-6'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, dolore porro? Corporis voluptas sunt, sit natus ex, perferendis aliquid id doloremque, blanditiis facere cum ducimus reiciendis molestiae iure ullam atque!</li>
-                                                <li className='col-md-6'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, dolore porro? Corporis voluptas sunt, sit natus ex, perferendis aliquid id doloremque, blanditiis facere cum ducimus reiciendis molestiae iure ullam atque!</li>
+                                                {course.intended_learners?.map((l, i) => (
+                                                    l.intended_learner_type == " students learn" && <li className='col-md-6' key={i}>{l.intended_learner}</li>
+                                                ))}
                                                 </div>
                                             </ul>
                                       
                                             <h5 className="title">Requirements</h5>
                                             <ul className="mb--60">
-                                                    <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, dolore porro? Corporis voluptas sunt, sit natus ex, perferendis aliquid id doloremque, blanditiis facere cum ducimus reiciendis molestiae iure ullam atque!</li>
+                                            {course.intended_learners?.map((l, i) => (
+                                                l.intended_learner_type == "requirements" &&  <li key={i}>{l.intended_learner}</li>
+                                            ))}
+                                                   
                                             </ul>
                                         </div>
                                     </div>
@@ -61,8 +68,20 @@ const CourseDetailsArea = ({ course }) => {
                                     <div className="course-tab-content">
                                         <div className="course-curriculam">
                                             <h3 className="heading-title">Course Curriculum</h3>
-                                            <p>{curriculum_desc}</p>
-                                            {/* {course_lessons.map((lesson, i) => (
+
+                                    <div className="faq-accordion">
+                                        <div className="accordion">
+
+                                        <Accordian show={true} id="1" title="Introduction" lectures="8" desc="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco qui laboris nis aliquip commodo consequat." />
+
+                                        <Accordian id="2" title="Moving Data" lectures="9" desc="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco qui laboris nis aliquip commodo consequat." />
+
+                                   
+                                    </div>
+                                </div>
+
+
+                                            {/* {course.course_lessons.map((lesson, i) => (
                                                 <div key={i} className="course-lesson">
                                                     <h5 className="title">{lesson?.title}</h5>
                                                     <p>{lesson?.text}</p>
@@ -93,34 +112,15 @@ const CourseDetailsArea = ({ course }) => {
                                                     </ul>
                                                 </div>
                                             ))} */}
+
+
+
+        
+
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="tab-pane fade" id="instructor" role="tabpanel" aria-labelledby="instructor-tab">
-                                    <div className="course-tab-content">
-                                        <div className="course-instructor">
-                                            <div className="thumbnail">
-                                                {course.instructor_img == null ? <img style={{width:'70%'}} src={`/images/course/instructor_profile_img.png`} alt="team images" /> : <img src={`${IMG_HOST}/${course.instructor_img}`} alt="team images" />}
-                                                
-                                            </div>
-                                            <div className="author-content">
-                                                <h6 className="title">{instructor}</h6>
-                                                <span className="subtitle">{instructor_title}</span>
-                                                <p>{instructor_desc}</p>
-                                                <ul className="social-share">
-                                                    {social_links?.map((social, i) => (
-                                                        <li key={i}>
-                                                            <a href={social.link} target={social.target ? social.target : ''}>
-                                                                <i className={social.icon}></i>
-                                                            </a>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div className="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
                                     <div className="course-tab-content">

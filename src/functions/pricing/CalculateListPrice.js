@@ -47,9 +47,9 @@ const CalculateListPrice = (data) => {
             
         }
 
-        return list_price
+        return Number.parseFloat(list_price).toFixed(2)
     }else{
-        return list_price = "0"
+        return list_price = "0.00"
     }
    
 }

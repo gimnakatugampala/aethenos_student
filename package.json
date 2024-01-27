@@ -18,6 +18,7 @@
         "@reduxjs/toolkit": "^1.8.5",
         "@svgr/webpack": "^6.3.1",
         "@szhsin/react-menu": "^4.1.0",
+        "accordion-js": "^3.3.4",
         "antd": "^5.12.6",
         "bootstrap": "^5.2.0",
         "currency-symbol-map": "^5.1.0",

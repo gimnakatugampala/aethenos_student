@@ -710,14 +710,14 @@ export const GetInstructorDetails = async(id,setinstructor_details,setloading) =
 
 }
 
-export const GetCourseDetails = async(code,setcourse) =>{
+export const GetCourseDetails = async(id,setcourse) =>{
 
   var requestOptions = {
     method: 'GET',
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCourseByStudent/${code}`, requestOptions)
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCourseByStudent/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       console.log(result)
