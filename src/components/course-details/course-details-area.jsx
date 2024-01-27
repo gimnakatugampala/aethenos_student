@@ -3,6 +3,7 @@ import CourseDetailsSidebar from '../common/sidebar/course-details-sidebar';
 import CommentFormCourse from '../forms/comment-form-course';
 import SingleComment from './single-comment';
 import SingleProgressbar from './single-progressbar';
+import { IMG_HOST } from '../../api';
 
 const CourseDetailsArea = ({ course }) => {
   const { course_desc, course_desc_2, learn_list, course_desc_3, curriculum_desc, course_lessons, instructor_img, instructor_title, instructor_desc, social_links, reviews, instructor, rating, rating_count } = course || {};
@@ -36,13 +37,22 @@ const CourseDetailsArea = ({ course }) => {
                                     <div className="course-tab-content">
                                         <div className="course-overview">
                                             <h3 className="heading-title">Course Description</h3>
-                                            <p>{course_desc}</p>
-                                            <p className="mb--60">{course_desc_2}</p>
+                                            <p>{course.course_main_desc}</p>
+                                            {/* <p className="mb--60">{course_desc_2}</p> */}
                                             <h5 className="title">What You’ll Learn?</h5>
                                             <ul className="mb--60">
-                                                {learn_list?.map((l, i) => <li key={i}>{l}</li>)}
+                                                {/* {learn_list?.map((l, i) => <li key={i}>{l}</li>)} */}
+                                                <div className='row'>
+                                                <li className='col-md-6'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, dolore porro? Corporis voluptas sunt, sit natus ex, perferendis aliquid id doloremque, blanditiis facere cum ducimus reiciendis molestiae iure ullam atque!</li>
+                                                <li className='col-md-6'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, dolore porro? Corporis voluptas sunt, sit natus ex, perferendis aliquid id doloremque, blanditiis facere cum ducimus reiciendis molestiae iure ullam atque!</li>
+                                                <li className='col-md-6'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, dolore porro? Corporis voluptas sunt, sit natus ex, perferendis aliquid id doloremque, blanditiis facere cum ducimus reiciendis molestiae iure ullam atque!</li>
+                                                </div>
                                             </ul>
-                                            <p>{course_desc_3}</p>
+                                      
+                                            <h5 className="title">Requirements</h5>
+                                            <ul className="mb--60">
+                                                    <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, dolore porro? Corporis voluptas sunt, sit natus ex, perferendis aliquid id doloremque, blanditiis facere cum ducimus reiciendis molestiae iure ullam atque!</li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +101,8 @@ const CourseDetailsArea = ({ course }) => {
                                     <div className="course-tab-content">
                                         <div className="course-instructor">
                                             <div className="thumbnail">
-                                                <img src={`/assets/images/team/team-02/${instructor_img}`} alt="team images" />
+                                                {course.instructor_img == null ? <img style={{width:'70%'}} src={`/images/course/instructor_profile_img.png`} alt="team images" /> : <img src={`${IMG_HOST}/${course.instructor_img}`} alt="team images" />}
+                                                
                                             </div>
                                             <div className="author-content">
                                                 <h6 className="title">{instructor}</h6>

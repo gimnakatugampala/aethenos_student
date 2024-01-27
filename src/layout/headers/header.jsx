@@ -110,8 +110,8 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                             <ul className="mainmenu">
 
                                                 
-                                                <li style={{top:'5px'}} className="has-droupdown">
-                                                <Menu menuButton={<a href="#"><i className="icon-1"></i>Categories</a>}>
+                                                <li className="has-droupdown">
+                                                <Menu menuButton={<a ><i className="icon-1"></i>Categories</a>}>
                                                 {navbar_list.length == 0 && <div className='container'>
                                                     <OneLineSkeleton height={20} />
                                                     <OneLineSkeleton height={20} />
