@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { GetCourseDetails } from '../../../api';
 import { useState } from 'react';
 
+import LargeLoading from '../../../functions/Loading/LargeLoading';
 
 // const course = course_data[0];
 
@@ -29,13 +30,15 @@ const CourseDetails = () => {
 
     return (
         <Wrapper>
-           {course != null && (
+           {course != null ? (
             <SEO pageTitle={`${course.title}`} />
-           )}
-            {course != null && (
+           ) : <SEO pageTitle={`Loading...`} />
+           }
+
+            {course != null ? (
             <CourseDetailsMain course={course} />
             // <CourseDetailsTwoMain course={course} />
-            )}
+            ) : <LargeLoading />}
         </Wrapper>
     )
 }

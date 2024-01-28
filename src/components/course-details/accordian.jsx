@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Accordian = ({show=false,id,title,desc,lectures}) => {
+const Accordian = ({show=false,id,title,lectures,lists}) => {
     return (
         <div className="accordion-item mb-2">
             <p className="accordion-header">
@@ -12,13 +12,23 @@ const Accordian = ({show=false,id,title,desc,lectures}) => {
             <div id={`question-${id}`} className={`accordion-collapse collapse ${show?'show':''}`} data-bs-parent="#faq-accordion">
                 <div className="accordion-body">
                     <ul className='list-unstyled'>
-                        <li className='d-flex justify-content-between align-items-center'>
+                        {lists.map((list,index) => (
+                            list.curriculum_item_type == "Lecture" ? 
+                        <li key={index} className='d-flex justify-content-between align-items-center'>
                             <span>
-                            <i className="fa-solid fa-circle-play mx-2"></i>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores, ex.
+                            <i className="fa-solid fa-circle-play mx-2"></i> {list.title}
                             </span>
+                            {/* <span>01:00</span> */}
+                        </li> 
+                        : 
+                        <li key={index} className='d-flex justify-content-between align-items-center'>
+                        <span>
+                        <i className="fa-solid fa-circle-question mx-2"></i> {list.title}
+                        </span>
 
-                            <span>01:00</span>
+                        {/* <span>01:00</span> */}
                         </li>
+                        ))}
                     </ul>
                 </div>
             </div>

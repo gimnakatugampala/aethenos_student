@@ -72,9 +72,12 @@ const CourseDetailsArea = ({ course }) => {
                                     <div className="faq-accordion">
                                         <div className="accordion">
 
-                                        <Accordian show={true} id="1" title="Introduction" lectures="8" desc="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco qui laboris nis aliquip commodo consequat." />
+                                            {course.course_content.map((content,index) => (
+                                             <Accordian key={index} id={index} title={`${content.section_name}`} lectures="9" lists={content.section_curriculum_item} />
+                                            ))}
 
-                                        <Accordian id="2" title="Moving Data" lectures="9" desc="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco qui laboris nis aliquip commodo consequat." />
+                                        {/* <Accordian show={true} id="1" title="Introduction" lectures="8" desc="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco qui laboris nis aliquip commodo consequat." /> */}
+
 
                                    
                                     </div>
