@@ -211,7 +211,7 @@ const GetCoursesBySubCategory = () => {
         GetCourseSubCategoryTitle(code,setCategoryName,setSubCategoryName,setloading_top_title)
         GetCoursesBySubCategoryNew(code,setloading_new_courses,setnew_courses)
         GetCoursesBySubCategoryTrending(code,setloading_trending_courses,settrending_courses)
-        GetCoursesBySubCategoryMostPopular(code,setloading_most_popular_courses,setmost_popular_courses)
+        // GetCoursesBySubCategoryMostPopular(code,setloading_most_popular_courses,setmost_popular_courses)
         GetCoursesBySubCategoryInstructor(code,setinstructors,setloading_instructors_list)
         GetCoursesBySubCategoryTopics(code,setloading_topics_list,setpopular_topics)
        

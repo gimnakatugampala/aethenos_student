@@ -63,7 +63,7 @@ const CourseTypeFive = ({ data, classes }) => {
     >
       <div className="inner">
         <div className="thumbnail">
-          <Link href={`/course-details/${data.title}`}>
+          <Link href={`/course-details/${data!= null && data.title}`}>
             <img
               src={`http://185.209.223.202:8080/aethenos-assert/${
                 data != undefined && data.img
@@ -74,7 +74,7 @@ const CourseTypeFive = ({ data, classes }) => {
           </Link>
           <div className="time-top">
             <span className="duration" style={{ background: "#e01D20" }}>
-              {data.course_prices.discount &&
+              {data !=null && data.course_prices.discount &&
               data.course_prices.discount.length > 0
                 ? `${data.course_prices.discount[0].discountAmount}% OFF`
                 : "No Discount"}
@@ -85,7 +85,7 @@ const CourseTypeFive = ({ data, classes }) => {
         <div className="content">
           <div className="course-price float-end">
             $
-            {data && data.course_prices && data.course_prices.length > 0
+            {data !=null  && data.course_prices && data.course_prices.length > 0
               ? data.course_prices[0].globalListPrice
               : "0"}
           </div>
@@ -98,8 +98,8 @@ const CourseTypeFive = ({ data, classes }) => {
 
           <h6 className="">
             {data != undefined && data.short_desc && data.short_desc.length > 50
-              ? `${data.short_desc.slice(0, 50)}...`
-              : data.short_desc}
+              ? `${data != undefined && data.short_desc.slice(0, 50)}...`
+              : data != undefined && data.short_desc}
           </h6>
 
           <p>{data != undefined && data.instructor}</p>

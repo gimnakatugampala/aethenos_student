@@ -470,7 +470,7 @@ export const GetCoursesByCategoryMostPopular = async(setmost_popular_courses,set
   fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getMostPopularCourses/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
-      // console.log(result)
+      console.log(result)
       if(result.message == "Error"){
         setmost_popular_courses([])
         setloading_most_popular_courses(false)
@@ -480,7 +480,10 @@ export const GetCoursesByCategoryMostPopular = async(setmost_popular_courses,set
         setloading_most_popular_courses(false)
       
     })
-    .catch(error => console.log('error', error));
+    .catch(error => {
+      setloading_most_popular_courses(false)
+      setmost_popular_courses([])
+      console.log('error', error)});
 
 }
 
