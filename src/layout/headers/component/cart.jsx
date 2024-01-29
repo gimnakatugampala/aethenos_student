@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import useCartInfo from '../../../hooks/use-cart-info';
 import { remove_cart_course } from '../../../redux/features/cart-slice';
+import { IMG_HOST } from '../../../api';
 
 const Cart = () => {
     const cartItems = useSelector(state => state.cart.cartCourses);
@@ -23,7 +24,7 @@ const Cart = () => {
                                 <div className="thumb">
                                     <Link href={`/course-details/${item.id}`} legacyBehavior>
 
-                                        <img src={item.img} alt="course-thumb" />
+                                        <img src={`${IMG_HOST}${item.img}`} alt="course-thumb" />
 
                                     </Link>
                                 </div>

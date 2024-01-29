@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { Footer, Header, Wrapper } from "../../../layout";
 import SEO from "../../../components/seo";
-import { GetAllCoursesByCategory, GetCourseCategoryTitle, GetCoursesByCategoryInstructor, GetCoursesByCategoryMostPopular, GetCoursesByCategoryNew, GetCoursesByCategoryTopics, GetCoursesByCategoryTrending, GetSubCategoriesByCategoryLinkName } from '../../../api';
+import { GetAllCoursesByCategory, GetCourseCategoryTitle, GetCoursesByCategoryInstructor, GetCoursesByCategoryMostPopular, GetCoursesByCategoryNew, GetCoursesByCategoryTopics, GetCoursesByCategoryTrending, GetSubCategoriesByCategoryLinkName, GetTopicNameByLinkName } from '../../../api';
 import CourseTypeOne from '../../../components/course/course-type-one';
 import CourseFourArea from '../../../components/course-category/landscape-courses/course-4-area'
 import { course_data } from '../../../data';
@@ -98,70 +98,70 @@ var items = [{
     },
   ];
 
-//   const instructors = [
-//     {
-//         single:[
-//             {
-//                 title: "John Doe",
-//                 link: "web-development-link-here",
-//                 description: "ReactJS,NodeJS",
-//                 rating: 4.5,
-//                 students: 1000,
-//                 courses: 10,
-//                 image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-//             },
-//             {
-//             title: "John Doe",
-//             link: "web-development-link-here",
-//             description: "ReactJS,NodeJS",
-//             rating: 4.5,
-//             students: 1000,
-//             courses: 10,
-//             image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-//             },
-//             {
-//                 title: "John Doe",
-//                 link: "web-development-link-here",
-//                 description: "ReactJS,NodeJS",
-//                 rating: 4.5,
-//                 students: 1000,
-//                 courses: 10,
-//                 image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-//             },
-//             {
-//                 title: "John Doe",
-//                 link: "web-development-link-here",
-//                 description: "ReactJS,NodeJS",
-//                 rating: 4.5,
-//                 students: 1000,
-//                 courses: 10,
-//                 image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-//                 }
-//         ]
-//     },
-//     {
-//         single:[
-//             {
-//                 title: "Jeff",
-//                 link: "web-development-link-here",
-//                 description: "ReactJS,NodeJS",
-//                 rating: 4.5,
-//                 students: 1000,
-//                 courses: 10,
-//                 image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-//             },
-//             {
-//             title: "Smith",
-//             link: "web-development-link-here",
-//             description: "ReactJS,Angular",
-//             rating: 4.5,
-//             students: 1000,
-//             courses: 10,
-//             image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
-//             }
-//         ]
-//     }
-//   ];
+  const instructors = [
+    {
+        single:[
+            {
+                title: "John Doe",
+                link: "web-development-link-here",
+                description: "ReactJS,NodeJS",
+                rating: 4.5,
+                students: 1000,
+                courses: 10,
+                image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+            },
+            {
+            title: "John Doe",
+            link: "web-development-link-here",
+            description: "ReactJS,NodeJS",
+            rating: 4.5,
+            students: 1000,
+            courses: 10,
+            image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+            },
+            {
+                title: "John Doe",
+                link: "web-development-link-here",
+                description: "ReactJS,NodeJS",
+                rating: 4.5,
+                students: 1000,
+                courses: 10,
+                image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+            },
+            {
+                title: "John Doe",
+                link: "web-development-link-here",
+                description: "ReactJS,NodeJS",
+                rating: 4.5,
+                students: 1000,
+                courses: 10,
+                image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+                }
+        ]
+    },
+    {
+        single:[
+            {
+                title: "Jeff",
+                link: "web-development-link-here",
+                description: "ReactJS,NodeJS",
+                rating: 4.5,
+                students: 1000,
+                courses: 10,
+                image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+            },
+            {
+            title: "Smith",
+            link: "web-development-link-here",
+            description: "ReactJS,Angular",
+            rating: 4.5,
+            students: 1000,
+            courses: 10,
+            image: "https://img-c.udemycdn.com/user/200_H/11614232_b0fc.jpg",
+            }
+        ]
+    }
+  ];
 
   
 const options = [
@@ -177,6 +177,8 @@ const GetCourseByCategory = () => {
     const { id } = router.query;
     const coursePerView = 8;
     const [next, setNext] = useState(coursePerView);
+
+
 
     const [sub_categories, setsub_categories] = useState([])
 
@@ -200,7 +202,11 @@ const GetCourseByCategory = () => {
     const [loading_instructors_list, setloading_instructors_list] = useState(true)
     const [loading_all_courses_list, setloading_all_courses_list] = useState(true)
 
+    const [TopicName, setTopicName] = useState("")
     const [CategoryName, setCategoryName] = useState("")
+    const [CategoryLinkName, setCategoryLinkName] = useState("")
+    const [SubCategoryName, setSubCategoryName] = useState("")
+    const [SubCategoryLinkName, setSubCategoryLinkName] = useState("")
 
     // handleLoadData
     const handleLoadData = () => {
@@ -211,27 +217,29 @@ const GetCourseByCategory = () => {
 
         if(id != null){
 
-            GetSubCategoriesByCategoryLinkName(id,setsub_categories,setloading_sub_categories)
-            GetCourseCategoryTitle(setCategoryName,id,setloading_top_title)
-            GetCoursesByCategoryNew(setnew_courses,setloading_new_courses,id)
-            GetCoursesByCategoryMostPopular(setmost_popular_courses,setloading_most_popular_courses,id)
-            GetCoursesByCategoryTrending(settrending_courses,setloading_trending_courses,id)
-            GetCoursesByCategoryInstructor(id,setinstructors,setloading_instructors_list)
-            GetCoursesByCategoryTopics(id,setpopular_topics,setloading_topics_list)
-            GetAllCoursesByCategory(id)
+        //     GetSubCategoriesByCategoryLinkName(id,setsub_categories,setloading_sub_categories)
+        //     GetCourseCategoryTitle(setCategoryName,id,setloading_top_title)
+        //     GetCoursesByCategoryNew(setnew_courses,setloading_new_courses,id)
+        //     GetCoursesByCategoryMostPopular(setmost_popular_courses,setloading_most_popular_courses,id)
+        //     GetCoursesByCategoryTrending(settrending_courses,setloading_trending_courses,id)
+        //     GetCoursesByCategoryInstructor(id,setinstructors,setloading_instructors_list)
+        //     GetCoursesByCategoryTopics(id,setpopular_topics,setloading_topics_list)
+        //     GetAllCoursesByCategory(id)
+            GetTopicNameByLinkName(id,setTopicName,setCategoryName,setCategoryLinkName,setSubCategoryName,setSubCategoryLinkName,setloading_top_title)
             console.log(id)
         }
         
        
 
         setTimeout(() => {
-            // setloading_sub_categories(false)
-            // setloading_most_popular_courses(false)
-            // setloading_topics_list(false)
-            // setloading_instructors_list(false)
+            setloading_sub_categories(false)
+            setloading_most_popular_courses(false)
+            setloading_topics_list(false)
+            setloading_instructors_list(false)
             setloading_all_courses_list(false)
-            // setloading_new_courses(false)
-            // setloading_trending_courses(false)
+            setloading_new_courses(false)
+            setloading_trending_courses(false)
+            // setloading_top_title(false)
         }, 2000);
 
     }, [CategoryName,loading_top_title,id])
@@ -258,69 +266,8 @@ const GetCourseByCategory = () => {
         <SEO pageTitle={CategoryName == "" ? "Loading ..." : CategoryName} />
         <Header/>
 
-            {loading_sub_categories ? (
-            <div className='container-fluid p-3'>
-            <OneLineSkeleton height={60} />
-            </div>
-            ) : (
-            <CardContainer className='p-3' >
-                <Box  sx={{ display: 'flex', alignItems: 'center',justifyContent:'space-between'}}>
-                <div className='d-flex align-items-center'>
-
-                <Typography className='mx-3'><a href={`/courses/${id}`}><b>{CategoryName == "" ? "Loading" : CategoryName}</b></a></Typography>
-
-                <i className="fas fa-chevron-right fa-2x"></i>
-
-                {sub_categories != null && sub_categories.length > 0 &&  sub_categories.slice(0, 5).map((subCategory,index) => (
-                    <Typography key={index} className='mx-3'><a href={`/courses/${id}/${subCategory.subLinkName}`}>{subCategory.subCategory}</a></Typography>
-                ))}
-
-                </div>
-
-                {sub_categories != null && sub_categories.length > 5 && (
-                <IconButton
-                aria-label="more"
-                id="long-button"
-                aria-controls={open ? 'long-menu' : undefined}
-                aria-expanded={open ? 'true' : undefined}
-                aria-haspopup="true"
-                onClick={handleClick}
-            >
-                <MoreVertIcon />
-            </IconButton>
-                )}
-
-            <Menu
-                id="long-menu"
-                MenuListProps={{
-                'aria-labelledby': 'long-button',
-                }}
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                PaperProps={{
-                style: {
-                    maxHeight: ITEM_HEIGHT * 4.5
-                },
-                }}
-            >
-
-                {sub_categories != null && sub_categories.length > 0 && sub_categories.slice(5).map((sub_cat_option,index) => (
-                <MenuItem key={index} onClick={handleClose}>
-                    <a href={`/courses/${id}/${sub_cat_option.subLinkName}`}>
-                        {sub_cat_option.subCategory}
-                    </a>
-                </MenuItem>
-                ))}
-                </Menu>
-
-                </Box>
-                </CardContainer>
-            )}
-            
-
-
-        <section className="edu-section-gap course-details-area p-0">
+        
+        <section className="edu-section-gap course-details-area">
             <div className="container">
 
                     <div className="row">
@@ -332,15 +279,15 @@ const GetCourseByCategory = () => {
                         </>
                     ) : (
                         <>
-                        <h2>{CategoryName} Courses</h2>
-                        <h4>Courses to get you started</h4>
+                        <h2 className='m-0 p-0'>{TopicName} Courses</h2>
+                        <h5 className='m-0 p-0'>{TopicName} relates to <a className='text-danger' href={`/courses/${CategoryLinkName}`}><b>{CategoryName}</b></a>, <a className='text-danger' href={`/courses/${CategoryLinkName}/${SubCategoryLinkName}`}><b>{SubCategoryName}</b></a></h5>
                         </>
                     )}
                     
                    
                     
 
-                    <div className="col-lg-5">
+                    <div className="col-lg-6">
                         <div className="course-details-content">
                             <ul className="nav nav-tabs" id="myTab" role="tablist">
 
@@ -356,7 +303,7 @@ const GetCourseByCategory = () => {
 
                                 <li className="nav-item" role="presentation">
                                     <button className="nav-link" id="trending-tab" data-bs-toggle="tab" data-bs-target="#trending"
-                                    type="button" role="tab" aria-controls="trending" aria-selected="false">Trending</button>
+                                    type="button" role="tab" aria-controls="trending" aria-selected="false">Beginner Favorites</button>
                                 </li>
                            
                             

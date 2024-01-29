@@ -555,6 +555,20 @@ export const GetCoursesByCategoryTopics = async(id,setpopular_topics,setloading_
 
 }
 
+export const GetAllCoursesByCategory = async() =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getAllcoursesViewByLinkName/design", requestOptions)
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+
+}
+
 export const GetCoursesBySubCategoryNew = async(code,setloading_new_courses,setnew_courses) =>{
 
   var requestOptions = {
@@ -794,3 +808,25 @@ export const getNewCourses = async (searchKey) => {
     return [];
   }
 };
+
+export const GetTopicNameByLinkName = async(id,setTopicName,setCategoryName,setCategoryLinkName,setSubCategoryName,setSubCategoryLinkName,setloading_top_title) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getTopicCategorySubCategoryByTopic/${id}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+      setTopicName(result.topic)
+      setCategoryName(result.category)
+      setCategoryLinkName(result.category_linkName)
+      setSubCategoryName(result.subCategory)
+      setSubCategoryLinkName(result.subCategory_linkName)
+      setloading_top_title(false)
+    })
+    .catch(error => console.log('error', error));
+
+}

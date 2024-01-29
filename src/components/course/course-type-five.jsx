@@ -64,15 +64,32 @@ const CourseTypeFive = ({ data, classes }) => {
                 </div>
 
                 <div className="content">
-                    <div className="course-price">
-                        ${data?.course_price}
+
+                    <div className='d-flex justify-content-end text-end'>
+
+                    <div>
+                        <div style={{fontSize:'20px'}} className="course-price m-0 p-0 ">
+                            ${data?.course_price}
+                        </div>
+
+                        <div style={{fontSize:'13px'}} className="course-price m-0 p-0 text-decoration-line-through">
+                            ${data?.course_price}
+                        </div>
+                    </div>
                     </div>
 
-                    <h6 className="title">
+
+                    <p className="title m-0 p-0">
+                        <b>
                         <Link href={`/course-details/${data.id}`} legacyBehavior>
                             {data.title}
                         </Link>
-                    </h6>
+                        </b>
+                    </p>
+
+                    <p className='m-0'  style={{fontSize:'14px'}}>{data.short_desc}</p>
+
+                    <span className='m-0 p-0' style={{fontSize:'13px'}}>Gimna Katugampala</span>
 
                     <div className="course-rating">
                         <div className="rating">
@@ -83,11 +100,11 @@ const CourseTypeFive = ({ data, classes }) => {
                             <i className="icon-23"></i>
                         </div>
                         <span className="rating-count">
-                            ({data.rating} /{data.rating_count}{" "} Rating)
+                           <b>({data.rating})</b>
                         </span>
                     </div>
 
-                    <p>{data.short_desc}</p>
+                    
 
                     <ul className="course-meta">
                         <li>
