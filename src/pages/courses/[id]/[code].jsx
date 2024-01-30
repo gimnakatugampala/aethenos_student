@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { Footer, Header, Wrapper } from "../../../layout";
 import SEO from "../../../components/seo";
-import { GetCourseCategoryTitle, GetCourseSubCategoryTitle, GetCoursesBySubCategoryInstructor, GetCoursesBySubCategoryMostPopular, GetCoursesBySubCategoryNew, GetCoursesBySubCategoryTopics, GetCoursesBySubCategoryTrending, GetSubCategoriesByCategoryLinkName } from '../../../api';
+import { GetAllCoursesBySubCategory, GetCourseCategoryTitle, GetCourseSubCategoryTitle, GetCoursesBySubCategoryInstructor, GetCoursesBySubCategoryMostPopular, GetCoursesBySubCategoryNew, GetCoursesBySubCategoryTopics, GetCoursesBySubCategoryTrending, GetSubCategoriesByCategoryLinkName } from '../../../api';
 import CourseTypeOne from '../../../components/course/course-type-one';
 import CourseFourArea from '../../../components/course-category/landscape-courses/course-4-area'
 import { course_data } from '../../../data';
@@ -182,6 +182,8 @@ const GetCoursesBySubCategory = () => {
   const open = Boolean(anchorEl);
   const [sub_categories, setsub_categories] = useState([])
 
+  const [allcourses, setallcourses] = useState([])
+
   const [instructors, setinstructors] = useState([])
   const [popular_topics, setpopular_topics] = useState([])
 
@@ -214,6 +216,7 @@ const GetCoursesBySubCategory = () => {
         GetCoursesBySubCategoryMostPopular(code,setloading_most_popular_courses,setmost_popular_courses)
         GetCoursesBySubCategoryInstructor(code,setinstructors,setloading_instructors_list)
         GetCoursesBySubCategoryTopics(code,setloading_topics_list,setpopular_topics)
+        GetAllCoursesBySubCategory(code,setallcourses,setloading_all_courses_list)
        
     }
 
@@ -228,7 +231,7 @@ const GetCoursesBySubCategory = () => {
         //   setloading_most_popular_courses(false)
         //   setloading_topics_list(false)
         //   setloading_instructors_list(false)
-          setloading_all_courses_list(false)
+        //   setloading_all_courses_list(false)
         //   setloading_new_courses(false)
         //   setloading_trending_courses(false)
       }, 2000);
@@ -691,7 +694,8 @@ const handleClose = () => {
                         {loading_all_courses_list ? (
                             <LandscapeListSkeleton />
                         ) :(
-                            <CourseFourArea />                            
+                            allcourses.length > 0 &&
+                            <CourseFourArea allcourses={allcourses} />                            
                         )}
                     </div>
 

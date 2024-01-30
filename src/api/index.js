@@ -580,6 +580,24 @@ export const GetAllCoursesByCategory = async(id,setallcourses,setloading_all_cou
 
 }
 
+export const GetAllCoursesBySubCategory = async(code,setallcourses,setloading_all_courses_list) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/managecourse/getCoursesUsingSubLinkName/${code}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+      setallcourses(result)
+      setloading_all_courses_list(false)
+    })
+    .catch(error => console.log('error', error));
+
+}
+
 export const GetCoursesBySubCategoryNew = async(code,setloading_new_courses,setnew_courses) =>{
 
   var requestOptions = {
