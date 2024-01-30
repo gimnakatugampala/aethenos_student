@@ -6,7 +6,7 @@ const SearchBar = () => {
   const router = useRouter();
 
   const handleSearch = () => {
-    router.push(`/Search?keyword=${keyword}`);
+    router.push(`/search?keyword=${keyword}`);
   };
 
   const handleChange = (value) => {

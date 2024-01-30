@@ -74,7 +74,7 @@ const CourseTypeFive = ({ data, classes }) => {
               style={{width:'300px',height:'200px',objectFit:'cover'}} 
             />
           </Link>
-          {CalculateDiscountPrice(data) != "" && (
+          { data != null && CalculateDiscountPrice(data) != "" && (
                     <div className="time-top">
                         <span style={{background:'#e01D20'}} className="duration">
                             {CalculateDiscountPrice(data)} OFF
@@ -85,6 +85,8 @@ const CourseTypeFive = ({ data, classes }) => {
 
         <div className="content">
           <div className="d-flex justify-content-end text-end">
+          {data!= null && (
+
           <div>
             <div style={{fontSize:'20px'}} className="course-price m-0 p-0 ">
                 <b>
@@ -96,6 +98,7 @@ const CourseTypeFive = ({ data, classes }) => {
             {getSymbolFromCurrency(GetCurrencyByCountry(data))}{CalculateListPrice(data)}   
             </div>
         </div>
+          )}
           </div>
         
           <p className="title">
@@ -112,7 +115,7 @@ const CourseTypeFive = ({ data, classes }) => {
                 : data && data.course_main_desc}
             </p>
 
-            <span className='m-0 p-0' style={{fontSize:'12px'}}>{data.instructor}</span>
+            <span className='m-0 p-0' style={{fontSize:'12px'}}>{data != undefined && data.instructor}</span>
 
           <span className="course-level mx-4">
             {data != undefined && data.level}

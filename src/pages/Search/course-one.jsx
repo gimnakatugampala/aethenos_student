@@ -6,6 +6,13 @@ import {
   add_to_wishlist,
   wishlistItems,
 } from "../../redux/features/wishlist-slice";
+import { IMG_HOST } from "../../api";
+import getSymbolFromCurrency from 'currency-symbol-map';
+import CalculateDiscountPrice from '../../functions/pricing/CalculateDiscountedPrice'
+import GetCurrencyByCountry from "../../functions/pricing/GetCurrencyByCountry";
+import CalculateDiscountedPrice from "../../functions/pricing/CalculateDiscountedPrice";
+import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
+
 
 const CourseTypeOne = ({ course }) => {
   if (!course || !course.id) return null;
@@ -21,7 +28,7 @@ const CourseTypeOne = ({ course }) => {
           change_type: "remove_wishlist",
           item: {
             id: course_item.id,
-            img: `http://185.209.223.202:8080/aethenos-assert/${course_item.img}`,
+            img: `${course_item.img}`,
             title: course_item.title,
             price: course_item.course_price,
           },
@@ -33,7 +40,7 @@ const CourseTypeOne = ({ course }) => {
           change_type: "add_wishlist",
           item: {
             id: course_item.id,
-            img: `http://185.209.223.202:8080/aethenos-assert/${course_item.img}`,
+            img: `${course_item.img}`,
             title: course_item.title,
             price: course_item.course_price,
           },
@@ -47,7 +54,7 @@ const CourseTypeOne = ({ course }) => {
     dispatch(
       cart_course({
         id: course.id,
-        img: `http://185.209.223.202:8080/aethenos-assert/${course.img}`,
+        img: `${course.img}`,
         price: course.course_price,
         title: course.title,
       })
@@ -64,7 +71,7 @@ const CourseTypeOne = ({ course }) => {
         <div className="thumbnail">
           <Link href={`/course-details-/${course.id}`}>
             <img
-              src={`http://185.209.223.202:8080/aethenos-assert/${course.img}`}
+              src={`${IMG_HOST}/${course.img}`}
               alt="Course Meta"
               style={{ width: "100%", height: "150px" }}
             />
@@ -95,7 +102,10 @@ const CourseTypeOne = ({ course }) => {
           <span className="rating-count">
             ({course.rating} / {course.rating_count} Rating)
           </span>
-          <div className="course-price">${course.course_prices.prices[0].listPrice}</div>
+          <div className='d-flex'>
+          <div className="course-price discounted-price m-1"><b>{getSymbolFromCurrency(GetCurrencyByCountry(course))}{CalculateDiscountedPrice(course)}</b></div>
+          <div className="course-price text-decoration-line-through m-2">{getSymbolFromCurrency(GetCurrencyByCountry(course))}{CalculateListPrice(course)}</div>
+          </div>
           <ul className="course-meta">
             <li>
               <i className="icon-24"></i>
