@@ -49,7 +49,8 @@ console.log(allcourses)
                 <div className="row g-5">
                     <div className="col-lg-3">
                         {/* course sidebar start */}
-                        <CourseSidebar course_items={courses} />
+                        {courses != null && <CourseSidebar course_items={courses} />}
+                        
                         {/* course_items */}
                         {/* course sidebar end */}
                     </div>

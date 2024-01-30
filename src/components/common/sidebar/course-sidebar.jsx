@@ -20,6 +20,7 @@ const all_levels = [...new Set(courses.map((course) => course.level))];
 const all_languages = [...new Set(courses.map((course) => course.language))];
 
 const CourseSidebar = ({ course_items }) => {
+    console.log(course_items)
     const [price, setPrice] = useState(maxPrice);
     const { categories, instructors, levels, languages, forcePage } = useSelector((state) => state.filter);
     const dispatch = useDispatch();

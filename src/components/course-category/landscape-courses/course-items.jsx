@@ -22,7 +22,7 @@ const CourseItems = ({ itemsPerPage, items, course_style, setShowing }) => {
     useEffect(() => {
         const endOffset = itemOffset + itemsPerPage;
         setCurrentItems(items?.slice(itemOffset, endOffset));
-        setPageCount(Math.ceil(items.length / itemsPerPage));
+        setPageCount(Math.ceil(items == null ? 0 : items.length  / itemsPerPage));
     }, [itemOffset, itemsPerPage, items]);
 
     useEffect(() => {
