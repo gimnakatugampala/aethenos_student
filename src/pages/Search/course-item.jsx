@@ -27,7 +27,6 @@ const CourseItems = ({
   const [itemOffset, setItemOffset] = useState(item_offset);
   const dispatch = useDispatch();
 
-
   // side effect
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -65,7 +64,7 @@ const CourseItems = ({
           return <CourseTypeFive key={i} data={course} />;
         })}
 
-      <CourseArea1 searchKey = {searchTerm}/>
+      <CourseArea1 searchKey={searchTerm} />
 
       <Pagination
         handlePageClick={handlePageClick}
@@ -75,14 +74,14 @@ const CourseItems = ({
 
       <div>
         <h3
-          className="heading-title"
+          className="heading-title mt-5"
           data-sal-delay="150"
-          data-sal="slide-up"
+          // data-sal="slide-up"
           data-sal-duration="400"
         >
           Related Searches
         </h3>
-        <Stack direction="row" spacing={2}>
+        <Stack direction="row" spacing={2} style={{ display: "flex", flexWrap: "wrap", margin: "10px 0"}}>
           <Chip
             style={{
               backgroundColor: "red",
@@ -90,6 +89,7 @@ const CourseItems = ({
               padding: "10px",
               height: "2.4rem",
               borderRadius: "9999px",
+              margin: "10px",
             }}
             label="Web Development"
             variant="outlined"
@@ -103,6 +103,7 @@ const CourseItems = ({
               padding: "10px",
               height: "2.4rem",
               borderRadius: "9999px",
+              margin: "10px",
             }}
             label="Database Management"
             color="primary"
@@ -116,6 +117,7 @@ const CourseItems = ({
               padding: "10px",
               height: "2.4rem",
               borderRadius: "9999px",
+              margin: "10px",
             }}
             label="Complete Web Development"
             color="primary"
@@ -129,6 +131,7 @@ const CourseItems = ({
               padding: "10px",
               height: "2.4rem",
               borderRadius: "9999px",
+              margin: "10px",
             }}
             label="Manual QA"
             color="primary"
@@ -142,8 +145,93 @@ const CourseItems = ({
               padding: "10px",
               height: "2.4rem",
               borderRadius: "9999px",
+              margin: "10px",
             }}
-            label="Web Developer"
+            label="IT & Software"
+            color="primary"
+            variant="outlined"
+            sx={{ fontSize: "1.0rem", fontFamily: "Poppins, sans-serif" }}
+          />
+            <Chip
+            style={{
+              backgroundColor: "red",
+              color: "white",
+              padding: "10px",
+              height: "2.4rem",
+              borderRadius: "9999px",
+              margin: "10px",
+            }}
+            label="Finance & Accounting"
+            color="primary"
+            variant="outlined"
+            sx={{ fontSize: "1.0rem", fontFamily: "Poppins, sans-serif" }}
+          />
+            <Chip
+            style={{
+              backgroundColor: "red",
+              color: "white",
+              padding: "10px",
+              height: "2.4rem",
+              borderRadius: "9999px",
+              margin: "10px",
+            }}
+            label="Marketing"
+            color="primary"
+            variant="outlined"
+            sx={{ fontSize: "1.0rem", fontFamily: "Poppins, sans-serif" }}
+          />
+             <Chip
+            style={{
+              backgroundColor: "red",
+              color: "white",
+              padding: "10px",
+              height: "2.4rem",
+              borderRadius: "9999px",
+              margin: "10px",
+            }}
+            label="Music"
+            color="primary"
+            variant="outlined"
+            sx={{ fontSize: "1.0rem", fontFamily: "Poppins, sans-serif" }}
+          />
+             <Chip
+            style={{
+              backgroundColor: "red",
+              color: "white",
+              padding: "10px",
+              height: "2.4rem",
+              borderRadius: "9999px",
+              margin: "10px",
+            }}
+            label="Photography & Video"
+            color="primary"
+            variant="outlined"
+            sx={{ fontSize: "1.0rem", fontFamily: "Poppins, sans-serif" }}
+          />
+              <Chip
+            style={{
+              backgroundColor: "red",
+              color: "white",
+              padding: "10px",
+              height: "2.4rem",
+              borderRadius: "9999px",
+              margin: "10px",
+            }}
+            label="Personal Development"
+            color="primary"
+            variant="outlined"
+            sx={{ fontSize: "1.0rem", fontFamily: "Poppins, sans-serif" }}
+          />
+              <Chip
+            style={{
+              backgroundColor: "red",
+              color: "white",
+              padding: "10px",
+              height: "2.4rem",
+              borderRadius: "9999px",
+              margin: "10px",
+            }}
+            label="Health & Fitness"
             color="primary"
             variant="outlined"
             sx={{ fontSize: "1.0rem", fontFamily: "Poppins, sans-serif" }}

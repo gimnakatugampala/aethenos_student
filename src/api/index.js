@@ -947,14 +947,12 @@ export const searchCourses = async (keyword, setCourses) => {
     }
 
     const result = await response.json();
-    // console.log(result);
 
     if (result.message === "Error") {
-      // console.log("Error");
       return [];
     }
-
     setCourses(result);
+    
   } catch (error) {
     console.error("Error fetching data:", error);
     setCourses([]);

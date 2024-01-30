@@ -29,7 +29,7 @@ const CourseArea = ({ searchKey }) => {
         <h3
           className="heading-title"
           data-sal-delay="150"
-          data-sal="slide-up"
+          // data-sal="slide-up"
           data-sal-duration="400"
         >
           Hot and Fresh Courses
