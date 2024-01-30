@@ -7,6 +7,8 @@ import { searchCourses } from "../../api/index";
 import SortingArea from "./sortingAreaSearch";
 import { css } from "@emotion/react";
 import { RingLoader } from "react-spinners";
+import LargeLoading from "../../functions/Loading/LargeLoading";
+import { Triangle } from "react-loader-spinner";
 
 const SearchResults = () => {
   const [courses, setCourses] = useState([]);
@@ -79,22 +81,30 @@ const SearchResults = () => {
 
   return (
     <div className="edu-course-area section-gap-equal gap-bottom-text mb-5">
-      <div
-        className="container gap-bottom-text"
-        style={{ maxWidth: "80%", paddingBottom: "75px" }}
-      >
-        {loading ? (
-          <div className="loading-spinner col-12 mx-auto gap-bottom-text">
-            <RingLoader
-              color={"#e01D20"}
-              loading={loading}
-              css={override}
-              size={200}
-            />
-          </div>
-        ) : (
-          <div className="row g-3" >
-            <h1
+
+          
+
+                <div
+                  className="container gap-bottom-text"
+                  style={{ maxWidth: "80%", paddingBottom: "75px" }}
+                >
+
+                  {loading ? (
+                  <div className="d-flex justify-content-center align-items-center">
+
+                    <Triangle
+                    visible={true}
+                    height="150"
+                    width="150"
+                    color="#e01D20"
+                    ariaLabel="triangle-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                 />
+                  </div>
+          ) : (
+            <div className="row g-3" >
+            <h3
               className="heading-title mx-1"
               data-sal-delay="2150"
               // data-sal="slide-up"
@@ -105,7 +115,7 @@ const SearchResults = () => {
                   ? `No results for "${keyword}"`
                   : `Search Results for: ${keyword}`}
               </div>
-            </h1>
+            </h3>
 
             <div className="col-md-3">
               <CourseSidebar course_items={courses} />
@@ -133,8 +143,15 @@ const SearchResults = () => {
               />
             </div>
           </div>
-        )}
-      </div>
+          )}
+                
+                    
+
+
+                
+                </div>
+      
+      
     </div>
   );
 };

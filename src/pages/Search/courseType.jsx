@@ -6,49 +6,51 @@ import {
   add_to_wishlist,
   wishlistItems,
 } from "../../redux/features/wishlist-slice";
+import { IMG_HOST } from "../../api";
+import getSymbolFromCurrency from 'currency-symbol-map';
+import CalculateDiscountPrice from '../../functions/pricing/CalculateDiscountedPrice'
+import GetCurrencyByCountry from "../../functions/pricing/GetCurrencyByCountry";
+import CalculateDiscountedPrice from "../../functions/pricing/CalculateDiscountedPrice";
+import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
+
+
 
 const CourseTypeFive = ({ data, classes }) => {
   const { cartCourses } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const wishlists = useSelector(wishlistItems);
-  // const isWishlistSelected = wishlists.find(
-  //   (w) => Number(w.id) === Number(data.id)
-  // );
+  const isWishlistSelected = wishlists.find(w => Number(w.id) === Number(data.id));
 
-  // const handleWishlist = (course_item) => {
-  //   if (wishlists.find((i) => i.id === course_item.id)) {
-  //     dispatch(
-  //       add_to_wishlist({
-  //         change_type: "remove_wishlist",
-  //         item: {
-  //           id: course_item.id,
-  //           img: `/assets/images/course/course-06/${course_item.img}`,
-  //           title: course_item.title,
-  //           price: course_item.course_price,
-  //         },
-  //       })
-  //     );
-  //   } else {
-  //     dispatch(
-  //       add_to_wishlist({
-  //         change_type: "add_wishlist",
-  //         item: {
-  //           id: course_item.id,
-  //           img: `/assets/images/course/course-06/${course_item.img}`,
-  //           title: course_item.title,
-  //           price: course_item.course_price,
-  //         },
-  //       })
-  //     );
-  //   }
-  // };
+  const handleWishlist = (course_item) => {
+      if (wishlists.find(i => i.id === course_item.id)) {
+          dispatch(
+              add_to_wishlist({
+                  change_type: 'remove_wishlist', item: {
+                  id: course_item.id,
+                  img: `${course_item.img}`,
+                  title: course_item.title,
+                  price: course_item.course_price
+              }
+          }))
+      } else {
+          dispatch(
+              add_to_wishlist({
+                  change_type: 'add_wishlist', item: {
+                  id: course_item.id,
+                  img: `${course_item.img}`,
+                  title: course_item.title,
+                  price: course_item.course_price
+              }
+          }))
+      }
+  }
 
   // handle add to cart
   const handleAddToCart = (course) => {
     dispatch(
       cart_course({
         id: course.id,
-        img: `/assets/images/course/course-06/${course.img}`,
+        img: `${course.img}`,
         price: course.course_price,
         title: course.title,
       })
@@ -57,54 +59,62 @@ const CourseTypeFive = ({ data, classes }) => {
 
   return (
     <div
-      className={`edu-course course-style-4 course-style-8 ${
+      className={`edu-course course-style-4 course-style-8  ${
         classes ? classes : ""
       }`}
     >
       <div className="inner">
         <div className="thumbnail">
-          <Link href={`/course-details/${data!= null && data.title}`}>
+          <Link href={`/course-details/${data!= null && data.course_code}`}>
             <img
-              src={`http://185.209.223.202:8080/aethenos-assert/${
+              src={`${IMG_HOST}/${
                 data != undefined && data.img
               }`}
               alt="Course Thumb"
-              style={{ width: "350px", height: "200px" }}
+              style={{width:'300px',height:'200px',objectFit:'cover'}} 
             />
           </Link>
-          <div className="time-top">
-            <span className="duration" style={{ background: "#e01D20" }}>
-              {data !=null && data.course_prices.discount &&
-              data.course_prices.discount.length > 0
-                ? `${data.course_prices.discount[0].discountAmount}% OFF`
-                : "No Discount"}
-            </span>
-          </div>
+          {CalculateDiscountPrice(data) != "" && (
+                    <div className="time-top">
+                        <span style={{background:'#e01D20'}} className="duration">
+                            {CalculateDiscountPrice(data)} OFF
+                        </span>
+                    </div>
+                    )}
         </div>
 
         <div className="content">
-          <div className="course-price float-end">
-            $
-            {data !=null  && data.course_prices && data.course_prices.length > 0
-              ? data.course_prices[0].globalListPrice
-              : "0"}
+          <div className="d-flex justify-content-end text-end">
+          <div>
+            <div style={{fontSize:'20px'}} className="course-price m-0 p-0 ">
+                <b>
+                  {getSymbolFromCurrency(GetCurrencyByCountry(data))}{CalculateDiscountedPrice(data)}
+                </b>
+            </div>
+
+            <div style={{fontSize:'13px'}} className="course-price m-0 p-0 text-decoration-line-through">
+            {getSymbolFromCurrency(GetCurrencyByCountry(data))}{CalculateListPrice(data)}   
+            </div>
+        </div>
           </div>
-          <br />
-          <h4 className="title">
-            <Link href={`/course-details/${data != undefined && data.title}`}>
+        
+          <p className="title">
+            <b>
+            <Link href={`/course-details/${data != undefined && data.course_code}`}>
               {data != undefined && data.title}
             </Link>
-          </h4>
+            </b>
+          </p>
 
-          <h6 className="">
-            {data != undefined && data.short_desc && data.short_desc.length > 50
-              ? `${data != undefined && data.short_desc.slice(0, 50)}...`
-              : data != undefined && data.short_desc}
-          </h6>
+          <p className='m-0' style={{ fontSize: '14px' }}>
+            {data && data.course_main_desc && data.course_main_desc.length > 70
+                ? data.course_main_desc.substring(0, 70) + '...'
+                : data && data.course_main_desc}
+            </p>
 
-          <p>{data != undefined && data.instructor}</p>
+            <span className='m-0 p-0' style={{fontSize:'12px'}}>{data.instructor}</span>
 
-          <span className="course-level">
+          <span className="course-level mx-4">
             {data != undefined && data.level}
           </span>
 
@@ -122,20 +132,22 @@ const CourseTypeFive = ({ data, classes }) => {
           </div>
           <ul className="course-meta">
             <li>{data != undefined && data.language} </li>
-            <li>{data != undefined && data.lessons} Lessons</li>
+            <li>{data != undefined && data.lesson} Lessons</li>
             <li>{data != undefined && data.student} Students</li>
             <li>{data != undefined && data.category}</li>
           </ul>
 
+
           <a
             onClick={() => handleAddToCart(data)}
             style={{ cursor: "pointer" }}
-            className="edu-btn btn-medium button-group float-end"
+            className="edu-btn btn-medium button-group float-end mt-2"
           >
-            {cartCourses.some((course) => course.id === data.id)
+            {cartCourses.some((course) => course.id == data.id)
               ? "Added to cart"
               : "Add to cart"}
           </a>
+          <button  onClick={() => handleWishlist(data)} style={{ cursor: "pointer" }} className={`btn-outline-dark float-end m-2 wishlist-btn ${isWishlistSelected ? 'active' : ''}`}><i className="icon-22"></i></button>
         </div>
       </div>
     </div>

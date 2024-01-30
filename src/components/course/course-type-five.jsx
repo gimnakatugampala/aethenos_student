@@ -8,8 +8,7 @@ import CalculateDiscountPrice from '../../functions/pricing/CalculateDiscountPri
 import getSymbolFromCurrency from 'currency-symbol-map';
 import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
 import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
-import CalculateListPrice from '../../functions/pricing/CalculateListPrice';
-
+import CalculateListPrice from '../../functions/pricing/CalculateListPrice'
 
 const CourseTypeFive = ({ data, classes }) => {
     const {cartCourses} = useSelector(state => state.cart);
@@ -72,7 +71,6 @@ const CourseTypeFive = ({ data, classes }) => {
                 <div className="content">
 
                     <div className='d-flex justify-content-end text-end'>
-
                     <div>
                         <div style={{fontSize:'20px'}} className="course-price m-0 p-0 ">
                             <b>
