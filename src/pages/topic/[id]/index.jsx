@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { Footer, Header, Wrapper } from "../../../layout";
 import SEO from "../../../components/seo";
-import { GetAllCoursesByCategory, GetCourseCategoryTitle, GetCoursesByCategoryInstructor, GetCoursesByCategoryMostPopular, GetCoursesByCategoryNew, GetCoursesByCategoryTopics, GetCoursesByCategoryTrending, GetSubCategoriesByCategoryLinkName, GetTopicNameByLinkName } from '../../../api';
+import { GetAllCoursesByCategory, GetBeginnerCoursesByTopicName, GetCourseCategoryTitle, GetCoursesByCategoryInstructor, GetCoursesByCategoryMostPopular, GetCoursesByCategoryNew, GetCoursesByCategoryTopics, GetCoursesByCategoryTrending, GetMostPopularCoursesByTopicName, GetNewCoursesByTopicName, GetSubCategoriesByCategoryLinkName, GetTopCoursesByTopicName, GetTopicNameByLinkName } from '../../../api';
 import CourseTypeOne from '../../../components/course/course-type-one';
 import CourseFourArea from '../../../components/course-category/landscape-courses/course-4-area'
 import { course_data } from '../../../data';
@@ -180,7 +180,6 @@ const GetCourseByCategory = () => {
 
 
 
-    const [sub_categories, setsub_categories] = useState([])
 
     const [most_popular_courses, setmost_popular_courses] = useState(course_data)
     const [new_courses, setnew_courses] = useState([])
@@ -189,15 +188,21 @@ const GetCourseByCategory = () => {
     const [allcourses, setallcourses] = useState([])
 
     const [instructors, setinstructors] = useState([])
-    const [trending_courses, settrending_courses] = useState(course_data)
+    const [beginners_favs, setbeginners_favs] = useState(course_data)
+ 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
-    const [loading_sub_categories, setloading_sub_categories] = useState(true)
+    const [top_course_sub_cat_Name, settop_course_sub_cat_Name] = useState("")
+    const [top_course_sub_cat_link, settop_course_sub_cat_link] = useState("")
+    const [top_course_courses, settop_course_courses] = useState([])
+    const [loading_top_courses, setloading_top_courses] = useState(true)
+
+   
     const [loading_top_title, setloading_top_title] = useState(true)
     const [loading_most_popular_courses, setloading_most_popular_courses] = useState(true)
     const [loading_new_courses, setloading_new_courses] = useState(true)
-    const [loading_trending_courses, setloading_trending_courses] = useState(true)
+    const [loading_beginner_favs, setloading_beginner_favs] = useState(true)
     const [loading_topics_list, setloading_topics_list] = useState(true)
     const [loading_instructors_list, setloading_instructors_list] = useState(true)
     const [loading_all_courses_list, setloading_all_courses_list] = useState(true)
@@ -217,14 +222,10 @@ const GetCourseByCategory = () => {
 
         if(id != null){
 
-        //     GetSubCategoriesByCategoryLinkName(id,setsub_categories,setloading_sub_categories)
-        //     GetCourseCategoryTitle(setCategoryName,id,setloading_top_title)
-        //     GetCoursesByCategoryNew(setnew_courses,setloading_new_courses,id)
-        //     GetCoursesByCategoryMostPopular(setmost_popular_courses,setloading_most_popular_courses,id)
-        //     GetCoursesByCategoryTrending(settrending_courses,setloading_trending_courses,id)
-        //     GetCoursesByCategoryInstructor(id,setinstructors,setloading_instructors_list)
-        //     GetCoursesByCategoryTopics(id,setpopular_topics,setloading_topics_list)
-        //     GetAllCoursesByCategory(id)
+            GetTopCoursesByTopicName(id,settop_course_courses,settop_course_sub_cat_Name,settop_course_sub_cat_link,setloading_top_courses)
+            GetNewCoursesByTopicName(id,setnew_courses,setloading_new_courses)
+            GetBeginnerCoursesByTopicName(id,setbeginners_favs,setloading_beginner_favs)
+            GetMostPopularCoursesByTopicName(id,setmost_popular_courses,setloading_most_popular_courses)
             GetTopicNameByLinkName(id,setTopicName,setCategoryName,setCategoryLinkName,setSubCategoryName,setSubCategoryLinkName,setloading_top_title)
             console.log(id)
         }
@@ -232,13 +233,13 @@ const GetCourseByCategory = () => {
        
 
         setTimeout(() => {
-            setloading_sub_categories(false)
-            setloading_most_popular_courses(false)
+            // setloading_sub_categories(false)
+            // setloading_most_popular_courses(false)
             setloading_topics_list(false)
             setloading_instructors_list(false)
             setloading_all_courses_list(false)
-            setloading_new_courses(false)
-            setloading_trending_courses(false)
+            // setloading_new_courses(false)
+            // setloading_beginner_favs(false)
             // setloading_top_title(false)
         }, 2000);
 
@@ -278,10 +279,10 @@ const GetCourseByCategory = () => {
                         <OneLineSkeleton height={20} />
                         </>
                     ) : (
-                        <>
+                        <div className='mb-4'>
                         <h2 className='m-0 p-0'>{TopicName} Courses</h2>
                         <h5 className='m-0 p-0'>{TopicName} relates to <a className='text-danger' href={`/courses/${CategoryLinkName}`}><b>{CategoryName}</b></a>, <a className='text-danger' href={`/courses/${CategoryLinkName}/${SubCategoryLinkName}`}><b>{SubCategoryName}</b></a></h5>
-                        </>
+                        </div>
                     )}
                     
                    
@@ -331,7 +332,7 @@ const GetCourseByCategory = () => {
                                     </div>
                                 ) : (
                                     <div className="row g-3 mb-5">
-                                    {most_popular_courses.length > 0 || most_popular_courses != null  ? most_popular_courses.slice(0, next)?.map((course) => {
+                                    {most_popular_courses.length > 0 && most_popular_courses != null  ? most_popular_courses.slice(0, next)?.map((course) => {
                                         return (
                                         <div key={course.id} className="col-md-6 col-xl-3">
                                             <CourseTypeOne data={course} classes="course-box-shadow" />
@@ -412,7 +413,7 @@ const GetCourseByCategory = () => {
                             <div className="course-tab-content">
                             <div className="course-overview">
 
-                              {loading_trending_courses ? (
+                              {loading_beginner_favs ? (
                                    <div className='row'>
                                    <CoursesPotraitSkeleton />
                                    <CoursesPotraitSkeleton />
@@ -425,17 +426,17 @@ const GetCourseByCategory = () => {
                                    </div>
                               ) : (
                                 <div className="row g-3 mb-5">
-                                {trending_courses.length > 0 || trending_courses != null ? trending_courses.slice(0, next)?.map((course) => {
+                                {beginners_favs.length > 0 && beginners_favs != null ? beginners_favs.slice(0, next)?.map((course) => {
                                     return (
                                     <div key={course.id} className="col-md-6 col-xl-3">
                                         <CourseTypeOne data={course} classes="course-box-shadow" />
                                     </div>
                                     );
-                                }) : <h4 >No Trending Courses Available</h4>}
+                                }) : <h4 >No Beginner Favorites Courses Available</h4>}
                                 </div>
                               )}
 
-                                {next < trending_courses.length && (
+                                {next < beginners_favs.length && (
                                     <div
                                         onClick={handleLoadData}
                                         className="load-more-btn"
@@ -456,6 +457,52 @@ const GetCourseByCategory = () => {
                     </div>
                     </div>
 
+                    <div className='col-lg-12 mb-5'>
+                    <h4 className='p-2'>Top courses in {TopicName} and <a className='text-danger text-decoration-underline' href={`/courses/${CategoryLinkName}/${top_course_sub_cat_link}`}>{top_course_sub_cat_Name}</a></h4>
+       
+
+                    {loading_top_courses ? (
+                                   <div className='row'>
+                                   <CoursesPotraitSkeleton />
+                                   <CoursesPotraitSkeleton />
+                                   <CoursesPotraitSkeleton />
+                                   <CoursesPotraitSkeleton />
+                                   <CoursesPotraitSkeleton />
+                                   <CoursesPotraitSkeleton />
+                                   <CoursesPotraitSkeleton />
+                                   <CoursesPotraitSkeleton />
+                                   </div>
+                              ) : (
+                                <div className="row g-3 mb-5">
+                                {top_course_courses.length > 0 && top_course_courses != null ? top_course_courses.slice(0, next)?.map((course) => {
+                                    return (
+                                    <div key={course.id} className="col-md-6 col-xl-3">
+                                        <CourseTypeOne data={course} classes="course-box-shadow" />
+                                    </div>
+                                    );
+                                }) : <h4 >No Top Courses Available</h4>}
+                                </div>
+                              )}
+
+                                {next < top_course_courses.length && (
+                                    <div
+                                        onClick={handleLoadData}
+                                        className="load-more-btn"
+                                        data-sal-delay="100"
+                                        data-sal="slide-up"
+                                        data-sal-duration="1200"
+                                    >
+                                        <a className="edu-btn mb-5" style={{ cursor: "pointer" }}>
+                                        Load More <i className="icon-56"></i>
+                                        </a>
+                                    </div>
+                                    )}
+                                    
+                  
+
+                    </div>
+
+                
                     <div className='col-lg-12 mb-5'>
                     <h4 className='p-2'>Popular Topics</h4>
 
@@ -482,147 +529,6 @@ const GetCourseByCategory = () => {
                         )) : <h4>No Topics Available</h4>}
                     </Carousel>
                     )}
-
-                    </div>
-
-                
-                    <div className='col-lg-12 mb-5'>
-                    <h4 className='p-2'>Popular Instructors</h4>
-
-
-                    {loading_instructors_list ? (
-                    <div className='row'>
-                    <InstructorsListSkeleton />
-                    <InstructorsListSkeleton />
-                    <InstructorsListSkeleton />
-                    </div>
-                    ) : (
-                        <Carousel autoPlay={false} duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
-                            {instructors != null || instructors.length > 0 ? instructors.map((page, index) => (
-                                <div key={index} className="row">
-                                      {page.single.map((item, itemIndex) => (
-                                        <CardContainer  key={itemIndex} className="col-md-4 mb-2">
-                                        <a  href={`/users/${item.userCode}`}>
-                                        <div
-                                            className="row h-100"
-                                            style={{
-                                            borderRadius: "0",
-                                            transition: "background-color 0.3s",
-                                            backgroundColor: "transparent",
-                                            color: "inherit",
-                                            textAlign: "left",
-                                            }}
-                                        >
-                                            <div className="col-md-3">
-                                            <img
-                                                src={item.image}
-                                                alt={item.title}
-                                                style={{borderRadius:'50%'}}
-                                            />
-                                            </div>
-                                            <div className="col-md-9">
-                                            <h6 className='m-0' style={{ fontWeight: "bold"}}>
-                                                {item.title.length > 17 ?  item.title.slice(0, 17) + "..." : item.title}
-                                            </h6>
-                                            <div>
-                                            <p className="m-0" style={{fontSize:'13px'}}>{item.description.length > 35 ?  item.description.slice(0, 35) + "...": item.description}</p>
-                                            </div>
-    
-                                            <div className="d-flex align-items-center">
-    
-                                            <span>
-                                                <span
-                                                style={{
-                                                    fontWeight: "bold",
-                                                    fontSize: "18px",
-                                                    color: "#B4690E",
-                                                }}
-                                                >
-                                                {item.rating}
-                                                </span>
-                                                <StarIcon
-                                                style={{
-                                                    fontSize: "20px",
-                                                    color: "#B4690E",
-                                                }}
-                                                />
-                                                </span>
-    
-                                                <p
-                                                className="m-0 p-0 align-self-center mt-1 ml-1"
-                                                style={{
-                                                    fontSize: "12px",
-                                                    color: "#B4690E",
-                                                }}
-                                                >
-                                                Instructor Rating
-                                                </p>
-    
-                                            </div>
-                                            <div>
-    
-                                            
-    
-                                            <div className="d-flex align-items-center">
-                                                <p
-                                                className="mx-1 mb-0 mt-0"
-                                                style={{
-                                                    fontWeight: "bold",
-                                                    fontSize: "15px",
-                                                    // color: "black",
-                                                }}
-                                                >
-                                                {item.students}
-                                                </p>
-                                                <p
-                                                className="mx-1 mb-0 mt-0"
-                                                style={{
-                                                    // fontWeight: "bold",
-                                                    fontSize: "13px",
-                                                    // color: "black",
-                                                }}
-                                                >
-                                                {" "}
-                                                students
-                                                </p>
-    
-                                            </div>
-                                    
-                                            <div className="d-flex align-items-center">
-                                                <p
-                                                className="mx-1 mb-0 mt-0"
-                                                style={{
-                                                    fontWeight: "bold",
-                                                    fontSize: "15px",
-                                                    // color: "black",
-                                                }}
-                                                >
-                                                {item.courses}
-                                                </p>
-                                                    <p
-                                                    className="mx-1 mb-0 mt-0"
-                                                    style={{
-                                                        marginLeft: "5px",
-                                                        fontSize: "13px",
-                                                        // color: "black",
-                                                    }}
-                                                    >
-                                                    courses
-                                                    </p>  
-                                            </div>
-    
-                                            </div>
-    
-                                            </div>
-                                        </div>
-                                        </a>
-                                        </CardContainer>
-                                    ))}
-                                </div>
-                            )) : <h4>No Instructors Found</h4>}
-                        </Carousel>
-                    )}
-
 
                     </div>
                                 

@@ -590,9 +590,111 @@ export const GetAllCoursesBySubCategory = async(code,setallcourses,setloading_al
   fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/managecourse/getCoursesUsingSubLinkName/${code}`, requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
       setallcourses(result)
       setloading_all_courses_list(false)
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetMostPopularCoursesByTopicName = async(id,setmost_popular_courses,setloading_most_popular_courses) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getMostPopularCoursesByTopic/${id}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+
+      if(result.message == "Error"){
+        setmost_popular_courses([])
+        setloading_most_popular_courses(false)
+        return
+      }
+
+      console.log(result)
+      setmost_popular_courses(result)
+      setloading_most_popular_courses(false)
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetBeginnerCoursesByTopicName = async(id,setbeginners_favs,setloading_beginner_favs) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getBeginnerFavoritesCoursesByTopicLinkName/${id}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+
+      if(result.message == "Error"){
+        setbeginners_favs([])
+        setloading_beginner_favs(false)
+        return
+      }
+      setbeginners_favs(result)
+      setloading_beginner_favs(false)
+
+    })
+    .catch(error => console.log('error', error));
+
+
+}
+
+export const GetNewCoursesByTopicName = async(id,setnew_courses,setloading_new_courses) =>{
+
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+    
+    fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getNewCoursesByTopic/${id}`, requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        console.log(result)
+        if(result.message == "Error"){
+          setnew_courses([])
+          setloading_new_courses(false)
+          return
+        }
+
+        setnew_courses(result)
+        setloading_new_courses(false)
+      })
+      .catch(error => console.log('error', error));
+
+}
+
+
+export const GetTopCoursesByTopicName = async(id,settop_course_courses,settop_course_sub_cat_Name,settop_course_sub_cat_link,setloading_top_courses) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getTopSubCategoryCoursesByTopicLinkName/${id}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+
+      if(result.message == "Error"){
+        settop_course_courses([])
+        setloading_top_courses(false)
+      }
+
+      settop_course_courses(result.courses)
+      settop_course_sub_cat_Name(result.subCategory)
+      settop_course_sub_cat_link(result.subCategoryLinkName)
+      setloading_top_courses(false)
     })
     .catch(error => console.log('error', error));
 
