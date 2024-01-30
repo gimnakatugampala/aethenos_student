@@ -363,7 +363,7 @@ export const GetCourseCategoryTitle = async(setCategoryName,id,setloading_top_ti
     .then(response => response.text())
     .then(result => {
       setCategoryName(result)
-      console.log(result)
+      // console.log(result)
 
       setTimeout(() => {
         
@@ -404,7 +404,7 @@ export const GetSubCategoriesByCategoryLinkName = async(id,setsub_categories,set
   fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getSubCategoryByCourseLinkName/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
       setsub_categories(result)
       setloading_sub_categories(false)
     })
@@ -470,7 +470,7 @@ export const GetCoursesByCategoryMostPopular = async(setmost_popular_courses,set
   fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getMostPopularCourses/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
       if(result.message == "Error"){
         setmost_popular_courses([])
         setloading_most_popular_courses(false)
@@ -498,7 +498,7 @@ export const GetCoursesByCategoryInstructor = async(id,setinstructors,setloading
     .then(response => response.json())
     .then(result => {
 
-      console.log(result)
+      // console.log(result)
 
       const itemsPerPage = 6;
       const resultArray = [];
@@ -517,7 +517,7 @@ export const GetCoursesByCategoryInstructor = async(id,setinstructors,setloading
           resultArray.push({ single: singleArray });
       }
 
-    console.log(resultArray);
+    // console.log(resultArray);
     setinstructors(resultArray);
     setloading_instructors_list(false)
 
@@ -537,7 +537,7 @@ export const GetCoursesByCategoryTopics = async(id,setpopular_topics,setloading_
   fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getPopularTopicByLinkName/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
 
       const itemsPerPage = 8;
       const resultArray = [];
@@ -555,16 +555,27 @@ export const GetCoursesByCategoryTopics = async(id,setpopular_topics,setloading_
 
 }
 
-export const GetAllCoursesByCategory = async() =>{
+export const GetAllCoursesByCategory = async(id,setallcourses,setloading_all_courses_list) =>{
 
   var requestOptions = {
     method: 'GET',
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getAllcoursesViewByLinkName/design", requestOptions)
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/managecourse/getCoursesUsingLinkName/${id}`, requestOptions)
     .then(response => response.json())
-    .then(result => console.log(result))
+    .then(result => {
+
+      if(result.message == "Error"){
+        setallcourses([])
+      setloading_all_courses_list(false)
+      return
+      }
+
+      console.log(result)
+      setallcourses(result)
+      setloading_all_courses_list(false)
+    })
     .catch(error => console.log('error', error));
 
 }
@@ -652,7 +663,7 @@ export const GetCoursesBySubCategoryInstructor = async(code,setinstructors,setlo
     .then(response => response.json())
     .then(result => {
 
-      console.log(result)
+      // console.log(result)
 
       const itemsPerPage = 6;
       const resultArray = [];
@@ -691,7 +702,7 @@ export const GetCoursesBySubCategoryTopics = async(code,setloading_topics_list,s
   fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getPopularTopicBySubLinkName/${code}`, requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
 
       const itemsPerPage = 8;
       const resultArray = [];
@@ -719,7 +730,7 @@ export const GetInstructorDetails = async(id,setinstructor_details,setloading) =
   fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getInstructorDetails/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
       setinstructor_details(result)
       setloading(false)
     })
@@ -737,12 +748,13 @@ export const GetCourseDetails = async(id,setcourse) =>{
   fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCourseByStudent/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
       setcourse(result)
     })
     .catch(error => console.log('error', error));
 
 }
+
 
 
 
@@ -763,10 +775,10 @@ export const searchCourses = async (keyword, setCourses) => {
     }
 
     const result = await response.json();
-    console.log(result);
+    // console.log(result);
 
     if (result.message === "Error") {
-      console.log("Error");
+      // console.log("Error");
       return [];
     }
 
@@ -795,7 +807,7 @@ export const getNewCourses = async (searchKey) => {
     }
 
     const result = await response.json();
-    console.log("API Response:", result);
+    // console.log("API Response:", result);
 
     if (result.message === "Error") {
       console.log("Error");
@@ -819,7 +831,7 @@ export const GetTopicNameByLinkName = async(id,setTopicName,setCategoryName,setC
   fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getTopicCategorySubCategoryByTopic/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
       setTopicName(result.topic)
       setCategoryName(result.category)
       setCategoryLinkName(result.category_linkName)

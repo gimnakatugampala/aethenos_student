@@ -184,7 +184,7 @@ const GetCourseByCategory = () => {
     const [new_courses, setnew_courses] = useState([])
     const [popular_topics, setpopular_topics] = useState([])
 
-    const [allcourses, setallcourses] = useState([])
+    const [allcourses, setallcourses] = useState(course_data)
 
     const [instructors, setinstructors] = useState([])
     const [trending_courses, settrending_courses] = useState(course_data)
@@ -218,8 +218,8 @@ const GetCourseByCategory = () => {
             GetCoursesByCategoryTrending(settrending_courses,setloading_trending_courses,id)
             GetCoursesByCategoryInstructor(id,setinstructors,setloading_instructors_list)
             GetCoursesByCategoryTopics(id,setpopular_topics,setloading_topics_list)
-            GetAllCoursesByCategory(id)
-            console.log(id)
+            GetAllCoursesByCategory(id,setallcourses,setloading_all_courses_list)
+            // console.log(id)
         }
         
        
@@ -229,7 +229,7 @@ const GetCourseByCategory = () => {
             // setloading_most_popular_courses(false)
             // setloading_topics_list(false)
             // setloading_instructors_list(false)
-            setloading_all_courses_list(false)
+            // setloading_all_courses_list(false)
             // setloading_new_courses(false)
             // setloading_trending_courses(false)
         }, 2000);
@@ -691,7 +691,8 @@ const GetCourseByCategory = () => {
                         {loading_all_courses_list ? (
                             <LandscapeListSkeleton />
                         ) :(
-                            <CourseFourArea />                            
+                            allcourses.length > 0 &&
+                            <CourseFourArea allcourses={allcourses}  />                            
                         )}
                     </div>
 

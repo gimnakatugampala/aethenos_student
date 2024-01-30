@@ -263,7 +263,7 @@ const GetCourseByCategory = () => {
 
   return (
     <Wrapper>
-        <SEO pageTitle={CategoryName == "" ? "Loading ..." : CategoryName} />
+        <SEO pageTitle={TopicName == "" ? "Loading ..." : TopicName} />
         <Header/>
 
         

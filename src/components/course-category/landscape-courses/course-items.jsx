@@ -9,6 +9,8 @@ import Pagination from "../../../ui/pagination";
 import CourseTypeFive from '../../course/course-type-five';
 
 const CourseItems = ({ itemsPerPage, items, course_style, setShowing }) => {
+
+    console.log(items)
     const { page_count, item_offset, forcePage } = useSelector(
         (state) => state.filter
     );

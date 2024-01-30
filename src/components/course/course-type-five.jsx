@@ -3,6 +3,13 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cart_course } from '../../redux/features/cart-slice';
 import { add_to_wishlist, wishlistItems } from '../../redux/features/wishlist-slice';
+import { IMG_HOST } from '../../api';
+import CalculateDiscountPrice from '../../functions/pricing/CalculateDiscountPrice';
+import getSymbolFromCurrency from 'currency-symbol-map';
+import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
+import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
+import CalculateListPrice from '../../functions/pricing/CalculateListPrice';
+
 
 const CourseTypeFive = ({ data, classes }) => {
     const {cartCourses} = useSelector(state => state.cart);
@@ -16,7 +23,7 @@ const CourseTypeFive = ({ data, classes }) => {
                 add_to_wishlist({
                     change_type: 'remove_wishlist', item: {
                     id: course_item.id,
-                    img: `/assets/images/course/course-06/${course_item.img}`,
+                    img: `${course_item.img}`,
                     title: course_item.title,
                     price: course_item.course_price
                 }
@@ -26,7 +33,7 @@ const CourseTypeFive = ({ data, classes }) => {
                 add_to_wishlist({
                     change_type: 'add_wishlist', item: {
                     id: course_item.id,
-                    img: `/assets/images/course/course-06/${course_item.img}`,
+                    img: `${course_item.img}`,
                     title: course_item.title,
                     price: course_item.course_price
                 }
@@ -38,7 +45,7 @@ const CourseTypeFive = ({ data, classes }) => {
     const handleAddToCart = (course) => {
         dispatch(cart_course({
             id:course.id,
-            img:`/assets/images/course/course-06/${course.img}`,
+            img:`${course.img}`,
             price:course.course_price,
             title:course.title
         }))
@@ -48,19 +55,18 @@ const CourseTypeFive = ({ data, classes }) => {
         <div className={`edu-course course-style-4 course-style-8 ${ classes ? classes : '' }`}>
             <div className="inner">
                 <div className="thumbnail">
-                    <Link href={`/course-details/${data.id}`} legacyBehavior>
-                        <img
-                        style={{width:'100%'}}
-                            src={`/assets/images/course/course-06/${data.img}`}
-                            alt="Course Thumb"
-                        />
+                    <Link href={`/course-details/${data.course_code}`} legacyBehavior>
+                    {data.img == "" || data.img == null || data.img.includes("https://") ? 
+                        <img style={{width:'300px',height:'200px',objectFit:'cover'}} src={`/images/course/aethenos_course_img.jpg`} alt={data.title} /> :  
+                        <img style={{width:'300px',height:'200px',objectFit:'cover'}} src={`${IMG_HOST}${data.img}`} alt={data.title} />}
                     </Link>
+                    {CalculateDiscountPrice(data) != "" && (
                     <div className="time-top">
                         <span style={{background:'#e01D20'}} className="duration">
-                            <i className="icon-61"></i>
-                            {data.duration} OFF
+                            {CalculateDiscountPrice(data)} OFF
                         </span>
                     </div>
+                    )}
                 </div>
 
                 <div className="content">
@@ -69,11 +75,13 @@ const CourseTypeFive = ({ data, classes }) => {
 
                     <div>
                         <div style={{fontSize:'20px'}} className="course-price m-0 p-0 ">
-                            ${data?.course_price}
+                            <b>
+                             {getSymbolFromCurrency(GetCurrencyByCountry(data))}{CalculateDiscountedPrice(data)}
+                            </b>
                         </div>
 
                         <div style={{fontSize:'13px'}} className="course-price m-0 p-0 text-decoration-line-through">
-                            ${data?.course_price}
+                        {getSymbolFromCurrency(GetCurrencyByCountry(data))}{CalculateListPrice(data)}   
                         </div>
                     </div>
                     </div>
@@ -81,15 +89,19 @@ const CourseTypeFive = ({ data, classes }) => {
 
                     <p className="title m-0 p-0">
                         <b>
-                        <Link href={`/course-details/${data.id}`} legacyBehavior>
+                        <Link href={`/course-details/${data.course_code}`} legacyBehavior>
                             {data.title}
                         </Link>
                         </b>
                     </p>
 
-                    <p className='m-0'  style={{fontSize:'14px'}}>{data.short_desc}</p>
+                    <p className='m-0' style={{ fontSize: '14px' }}>
+                        {data && data.course_main_desc && data.course_main_desc.length > 120
+                            ? data.course_main_desc.substring(0, 120) + '...'
+                            : data && data.course_main_desc}
+                        </p>
 
-                    <span className='m-0 p-0' style={{fontSize:'13px'}}>Gimna Katugampala</span>
+                    <span className='m-0 p-0' style={{fontSize:'12px'}}>{data.instructor}</span>
 
                     <div className="course-rating">
                         <div className="rating">
@@ -125,7 +137,7 @@ const CourseTypeFive = ({ data, classes }) => {
                     </span>
 
                     <h5 className="title">
-                        <Link href={`/course-details/${data.id}`} legacyBehavior>
+                        <Link href={`/course-details/${data.course_code}`} legacyBehavior>
                             {data.title}
                         </Link>
                     </h5>
@@ -153,7 +165,7 @@ const CourseTypeFive = ({ data, classes }) => {
                         <h6 className="title">What You’ll Learn?</h6>
                         <ul>
                             { 
-                                data.features.slice(0, 3).map( (feature, featurekey) => <li key={ featurekey }>{ feature }</li> )
+                                data.intended_learners.slice(0, 3).map( (feature, featurekey) => feature.intended_learner_type == " students learn" && <li key={ featurekey }>{ feature.intended_learner }</li> )
                             }
                         </ul>
                     </div>
@@ -163,7 +175,7 @@ const CourseTypeFive = ({ data, classes }) => {
                             {
                                 cartCourses.some(
                                     (course) =>
-                                    course.id === data.id
+                                    course.id == data.id
                                 )
                                 ? "Added to cart"
                                 : "Add to cart"
