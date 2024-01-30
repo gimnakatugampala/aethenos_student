@@ -700,6 +700,58 @@ export const GetTopCoursesByTopicName = async(id,settop_course_courses,settop_co
 
 }
 
+export const GetAllCoursesByTopicName = async(id,setloading_all_courses_list,setallcourses) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/managecourse/getCoursesUsingTopicLinkName/${id}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      // console.log(result)
+      if(result.message == "Error"){
+        setallcourses([])
+        setloading_all_courses_list(false)
+        return
+      }
+        setallcourses(result)
+        setloading_all_courses_list(false)
+      
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetTopicsByTopicName = async(id,setpopular_topics,setloading_topics_list) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getRelatedTopicsByTopicLinkName/${id}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+
+      const itemsPerPage = 8;
+      const resultArray = [];
+
+      for (let i = 0; i < result.length; i += itemsPerPage) {
+          const topicSubset = result.slice(i, i + itemsPerPage);
+          resultArray.push({ topics: topicSubset });
+      }
+
+      setpopular_topics(resultArray);
+      setloading_topics_list(false)
+
+    })
+    .catch(error => console.log('error', error));
+
+}
+
 export const GetCoursesBySubCategoryNew = async(code,setloading_new_courses,setnew_courses) =>{
 
   var requestOptions = {

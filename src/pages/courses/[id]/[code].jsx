@@ -554,7 +554,7 @@ const handleClose = () => {
                     </div>
                     ) : (
                         <Carousel autoPlay={false} duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
-                        {instructors != null || instructors.length > 0 ? instructors.map((page, index) => (
+                        {instructors != null && instructors.length > 0 ? instructors.map((page, index) => (
                             <div key={index} className="row">
                                   {page.single.map((item, itemIndex) => (
                                     <CardContainer  key={itemIndex} className="col-md-4 mb-2">

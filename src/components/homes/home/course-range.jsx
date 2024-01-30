@@ -19,7 +19,29 @@ const CourseRange = () => {
 
                 <div className="col-md-12">
 
-                <Tabs
+                <div className="course-details-content">
+                    <ul className="nav nav-tabs" id="myTab" role="tablist">
+                        <li className="nav-item" role="presentation">
+                            <button className="nav-link active" id="most-popular-tab" data-bs-toggle="tab" data-bs-target="#most-popular"
+                            type="button" role="tab" aria-controls="most-popular" aria-selected="true">Most Popular</button>
+                        </li>
+
+                        <li className="nav-item" role="presentation">
+                            <button className="nav-link" id="new-tab" data-bs-toggle="tab" data-bs-target="#new"
+                            type="button" role="tab" aria-controls="new" aria-selected="false">New</button>
+                        </li>
+
+                        <li className="nav-item" role="presentation">
+                            <button className="nav-link" id="trending-tab" data-bs-toggle="tab" data-bs-target="#trending"
+                            type="button" role="tab" aria-controls="trending" aria-selected="false">Beginner Favorites</button>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                </div>
+
+                {/* <Tabs
                     defaultActiveKey="python"
                     id="uncontrolled-tab-example"
                     className="mb-3"
@@ -91,7 +113,7 @@ const CourseRange = () => {
                     </CardContainer>
                     </Tab>
                     
-                </Tabs>
+                </Tabs> */}
 
                 </div>
                    

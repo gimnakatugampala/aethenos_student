@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { Footer, Header, Wrapper } from "../../../layout";
 import SEO from "../../../components/seo";
-import { GetAllCoursesByCategory, GetBeginnerCoursesByTopicName, GetCourseCategoryTitle, GetCoursesByCategoryInstructor, GetCoursesByCategoryMostPopular, GetCoursesByCategoryNew, GetCoursesByCategoryTopics, GetCoursesByCategoryTrending, GetMostPopularCoursesByTopicName, GetNewCoursesByTopicName, GetSubCategoriesByCategoryLinkName, GetTopCoursesByTopicName, GetTopicNameByLinkName } from '../../../api';
+import { GetAllCoursesByCategory, GetAllCoursesByTopicName, GetBeginnerCoursesByTopicName, GetCourseCategoryTitle, GetCoursesByCategoryInstructor, GetCoursesByCategoryMostPopular, GetCoursesByCategoryNew, GetCoursesByCategoryTopics, GetCoursesByCategoryTrending, GetMostPopularCoursesByTopicName, GetNewCoursesByTopicName, GetSubCategoriesByCategoryLinkName, GetTopCoursesByTopicName, GetTopicNameByLinkName, GetTopicsByTopicName } from '../../../api';
 import CourseTypeOne from '../../../components/course/course-type-one';
 import CourseFourArea from '../../../components/course-category/landscape-courses/course-4-area'
 import { course_data } from '../../../data';
@@ -221,7 +221,8 @@ const GetCourseByCategory = () => {
     useEffect(() => {
 
         if(id != null){
-
+            GetTopicsByTopicName(id,setpopular_topics,setloading_topics_list)
+            GetAllCoursesByTopicName(id,setloading_all_courses_list,setallcourses)
             GetTopCoursesByTopicName(id,settop_course_courses,settop_course_sub_cat_Name,settop_course_sub_cat_link,setloading_top_courses)
             GetNewCoursesByTopicName(id,setnew_courses,setloading_new_courses)
             GetBeginnerCoursesByTopicName(id,setbeginners_favs,setloading_beginner_favs)
@@ -235,9 +236,9 @@ const GetCourseByCategory = () => {
         setTimeout(() => {
             // setloading_sub_categories(false)
             // setloading_most_popular_courses(false)
-            setloading_topics_list(false)
+            // setloading_topics_list(false)
             setloading_instructors_list(false)
-            setloading_all_courses_list(false)
+            // setloading_all_courses_list(false)
             // setloading_new_courses(false)
             // setloading_beginner_favs(false)
             // setloading_top_title(false)
@@ -380,7 +381,7 @@ const GetCourseByCategory = () => {
                                   </div>
                               ) : (
                                 <div className="row g-3 mb-5">
-                                {new_courses.length > 0 || new_courses != null ? new_courses.slice(0, next)?.map((course) => {
+                                {new_courses.length > 0 && new_courses != null ? new_courses.slice(0, next)?.map((course) => {
                                     return (
                                     <div key={course.id} className="col-md-6 col-xl-3">
                                         <CourseTypeOne data={course} classes="course-box-shadow" />
@@ -474,7 +475,7 @@ const GetCourseByCategory = () => {
                                    </div>
                               ) : (
                                 <div className="row g-3 mb-5">
-                                {top_course_courses.length > 0 && top_course_courses != null ? top_course_courses.slice(0, next)?.map((course) => {
+                                {top_course_courses != null && top_course_courses.length > 0 ? top_course_courses.slice(0, next)?.map((course) => {
                                     return (
                                     <div key={course.id} className="col-md-6 col-xl-3">
                                         <CourseTypeOne data={course} classes="course-box-shadow" />
@@ -484,7 +485,7 @@ const GetCourseByCategory = () => {
                                 </div>
                               )}
 
-                                {next < top_course_courses.length && (
+                                {next < top_course_courses != null && (
                                     <div
                                         onClick={handleLoadData}
                                         className="load-more-btn"
@@ -516,12 +517,12 @@ const GetCourseByCategory = () => {
                     ) : (
 
                     <Carousel autoPlay={false} duration={500} animation='slide' navButtonsAlwaysVisible={true} indicators={false}>
-                    {popular_topics != null || popular_topics.length > 0 ? popular_topics.map((item, i) => (
+                    {popular_topics != null && popular_topics.length > 0 ? popular_topics.map((item, i) => (
                         <div key={i} className='row'>
                             {item.topics.map((topic,index) => (
                                 <div key={index} className='col-md-3 text-center'>
                                 <CardContainer>
-                                    <a href={`/topic/${topic.topicLinkName}`}>{topic.topic}</a>
+                                    <a href={`/topic/${topic.link_name}`}>{topic.topic}</a>
                                 </CardContainer>
                                 </div>  
                             ))}
@@ -544,7 +545,8 @@ const GetCourseByCategory = () => {
                         {loading_all_courses_list ? (
                             <LandscapeListSkeleton />
                         ) :(
-                            <CourseFourArea />                            
+                            allcourses.length > 0 &&
+                            <CourseFourArea allcourses={allcourses} />                            
                         )}
                     </div>
 

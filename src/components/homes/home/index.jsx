@@ -25,18 +25,18 @@ const index = () => {
                 <HeroArea/>
                 <CategoryArea/>
                 <CourseRange />
-                <TopCategories/>
+                {/* <TopCategories/> */}
                 {/* <AboutArea/> */}
 
-                <CourseArea/>
-                <Topics />
+                {/* <CourseArea/>
+                <Topics /> */}
                 
                 {/* <CounterUpArea/> */}
                 {/* <TestimonialArea/> */}
                 {/* <CtaArea/> */}
                 {/* <TeamArea/> */}
 
-                <CourseArea1/>
+                {/* <CourseArea1/> */}
                 {/* <AdBanner/> */}
                 <BecomeInstructor/>
                 {/* <BlogArea/> */}
