@@ -2,8 +2,12 @@ import Link from 'next/link';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { cart_course, decrease_quantity, remove_cart_course } from '../../redux/features/cart-slice';
+import { IMG_HOST } from '../../api';
+
 
 const CartItem = ({ item }) => {
+
+    console.log(item)
     const dispatch = useDispatch();
     const handleChange = (e) => {}
     return (
@@ -13,13 +17,13 @@ const CartItem = ({ item }) => {
             </td>
 
             <td className="product-thumbnail">
-                <Link href={`/course-details/${item.id}`} legacyBehavior>
-                    <img src={item.img} alt="Books" />
+                <Link href={`/course-details/${item.course_code}`} legacyBehavior>
+                    <img src={`${IMG_HOST}${item.img}`} alt="Books" />
                 </Link>
             </td>
 
             <td className="product-title">
-                <Link href={`/course-details/${item.id}`} legacyBehavior>
+                <Link href={`/course-details/${item.course_code}`} legacyBehavior>
                     {item.title}
                 </Link>
             </td>
