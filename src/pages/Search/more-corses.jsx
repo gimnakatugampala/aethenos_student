@@ -21,7 +21,12 @@ const CourseArea = ({ searchKey }) => {
     fetchData();
   }, [searchKey]);
 
-  const numSets = Math.floor(courses.length / 4);
+  const numSets = Math.ceil(courses.length / 4);
+ 
+  const paddedCourses = [
+    ...courses,
+    ...Array(4 - (courses.length % 4)).fill(null),
+  ];
 
   return (
     <div className="edu-course-area">
@@ -29,45 +34,50 @@ const CourseArea = ({ searchKey }) => {
         <h3
           className="heading-title"
           data-sal-delay="150"
-          // data-sal="slide-up"
           data-sal-duration="400"
         >
           Hot and Fresh Courses
         </h3>
-
-        {numSets > 0 && (
-          <Carousel
-            showThumbs={false}
-            showStatus={false}
-            infiniteLoop={true}
-            emulateTouch={true}
-            autoPlay={false}
-            centerMode={false}
-            showArrows={true}
-            selectedItem={0}
-            interval={5000}
-            transitionTime={500}
-            showIndicators={false}
-            stopOnHover={true}
-          >
-            {Array.from({ length: numSets }, (_, setIndex) => (
-              <div
-                className="col-12"
-                key={setIndex}
-                style={{ display: "flex", gap: "15px" }}
-              >
-                {[0, 1, 2, 3].map((offset) => (
+      
+        <Carousel
+          showThumbs={false}
+          showStatus={false}
+          infiniteLoop={true}
+          emulateTouch={true}
+          autoPlay={false}
+          centerMode={false}
+          showArrows={true}
+          selectedItem={0}
+          interval={5000}
+          transitionTime={500}
+          showIndicators={false}
+          stopOnHover={true}
+        >
+ 
+          {Array.from({ length: numSets }, (_, setIndex) => (
+            <div
+              className="col-12"
+              key={setIndex}
+              style={{ display: "flex", gap: "15px" }}
+            >
+              {[0, 1, 2, 3].map((offset) => {
+                const courseIndex = (numSets - setIndex - 1) * 4 + offset;
+                return (
                   <div
-                    key={courses[setIndex * 4 + offset].id}
+                    key={paddedCourses[courseIndex]?.id || offset}
                     style={{ flex: 1 }}
                   >
-                    <CourseTypeOne course={courses[setIndex * 4 + offset]} />
+                    {paddedCourses[courseIndex] && (
+                      <CourseTypeOne
+                        course={paddedCourses[courseIndex]}
+                      />
+                    )}
                   </div>
-                ))}
-              </div>
-            ))}
-          </Carousel>
-        )}
+                );
+              })}
+            </div>
+          ))}
+        </Carousel>
       </div>
     </div>
   );

@@ -28,8 +28,8 @@ const SearchResults = () => {
         setLoading(true);
         await searchCourses(keyword, setCourses);
         setLoading(false);
-        setDisplayHeading(true); 
-      } catch (error) {       
+        setDisplayHeading(true);
+      } catch (error) {
         setLoading(false);
       }
     };
@@ -81,29 +81,24 @@ const SearchResults = () => {
 
   return (
     <div className="edu-course-area section-gap-equal gap-bottom-text mb-5">
-
-          
-
-                <div
-                  className="container gap-bottom-text"
-                  style={{ maxWidth: "80%", paddingBottom: "75px" }}
-                >
-
-                  {loading ? (
-                  <div className="d-flex justify-content-center align-items-center">
-
-                    <Triangle
-                    visible={true}
-                    height="150"
-                    width="150"
-                    color="#e01D20"
-                    ariaLabel="triangle-loading"
-                    wrapperStyle={{}}
-                    wrapperClass=""
-                 />
-                  </div>
-          ) : (
-            <div className="row g-3" >
+      <div
+        className="container gap-bottom-text"
+        style={{ maxWidth: "80%", paddingBottom: "75px" }}
+      >
+        {loading ? (
+          <div className="d-flex justify-content-center align-items-center">
+            <Triangle
+              visible={true}
+              height="150"
+              width="150"
+              color="#e01D20"
+              ariaLabel="triangle-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
+          </div>
+        ) : (
+          <div className="row g-3">
             <h3
               className="heading-title mx-1"
               data-sal-delay="2150"
@@ -143,15 +138,8 @@ const SearchResults = () => {
               />
             </div>
           </div>
-          )}
-                
-                    
-
-
-                
-                </div>
-      
-      
+        )}
+      </div>
     </div>
   );
 };

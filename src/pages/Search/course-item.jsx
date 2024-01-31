@@ -22,12 +22,12 @@ const CourseItems = ({
   const { page_count, item_offset, forcePage } = useSelector(
     (state) => state.filter
   );
+
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(page_count);
   const [itemOffset, setItemOffset] = useState(item_offset);
   const dispatch = useDispatch();
 
-  // side effect
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(items?.slice(itemOffset, endOffset));
@@ -40,15 +40,14 @@ const CourseItems = ({
     }
   }, [currentItems, setShowing]);
 
-  useEffect(() => {
+  useEffect(() => {  
     dispatch(add_count_page(pageCount));
     dispatch(add_item_offset(itemOffset));
   }, [dispatch, itemOffset, pageCount]);
 
   useEffect(() => {
-    setPageCount(page_count);
     setItemOffset(item_offset);
-  }, [item_offset, page_count]);
+  }, [item_offset]);
 
   // handlePageClick
   const handlePageClick = (event) => {
