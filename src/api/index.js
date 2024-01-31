@@ -929,7 +929,6 @@ export const GetCourseDetails = async(id,setcourse) =>{
 
 
 
-
 export const searchCourses = async (keyword, setCourses) => {
   var requestOptions = {
     method: "GET",
@@ -1008,6 +1007,24 @@ export const GetTopicNameByLinkName = async(id,setTopicName,setCategoryName,setC
       setSubCategoryName(result.subCategory)
       setSubCategoryLinkName(result.subCategory_linkName)
       setloading_top_title(false)
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetCourseHomeBusiness = async(setbusiness_courses,setloading_business_courses) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/design", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+      setbusiness_courses(result)
+      setloading_business_courses(false)
     })
     .catch(error => console.log('error', error));
 

@@ -3,6 +3,14 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cart_course } from '../../redux/features/cart-slice';
 import { add_to_wishlist, wishlistItems } from '../../redux/features/wishlist-slice';
+import { IMG_HOST } from '../../api';
+import getSymbolFromCurrency from 'currency-symbol-map';
+import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
+import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
+import CalculateDiscountPrice from '../../functions/pricing/CalculateDiscountPrice';
+
+
+
 
 const CourseTypeFour = ({ data, classes }) => {
     const {cartCourses} = useSelector(state => state.cart);
@@ -16,7 +24,7 @@ const CourseTypeFour = ({ data, classes }) => {
                 add_to_wishlist({
                     change_type: 'remove_wishlist', item: {
                     id: course_item.id,
-                    img: `/assets/images/course/course-06/${course_item.img}`,
+                    img: `${course_item.img}`,
                     title: course_item.title,
                     price: course_item.course_price
                 }
@@ -26,7 +34,7 @@ const CourseTypeFour = ({ data, classes }) => {
                 add_to_wishlist({
                     change_type: 'add_wishlist', item: {
                     id: course_item.id,
-                    img: `/assets/images/course/course-06/${course_item.img}`,
+                    img: `${course_item.img}`,
                     title: course_item.title,
                     price: course_item.course_price
                 }
@@ -38,25 +46,25 @@ const CourseTypeFour = ({ data, classes }) => {
     const handleAddToCart = (course) => {
         dispatch(cart_course({
             id:course.id,
-            img:`/assets/images/course/course-06/${course.img}`,
+            img:`${course.img}`,
             price:course.course_price,
             title:course.title
         }))
     }
 
     return (
-        <div className={`edu-course course-style-5 ${ classes ? classes : '' }`}>
+        <div className={`edu-course course-style-5 ${ classes ? classes : '' } h-100`}>
             <div className="inner">
                 <div className="thumbnail">
-                    <Link href={`/course-details/${data.id}`} legacyBehavior>
-                        <img style={{width:'100%'}} src={`/assets/images/course/course-04/${data.img}`} alt="Course Meta" />
+                    <Link href={`/course-details/${data.course_code}`} legacyBehavior>
+                        <img style={{width:'100%',objectFit:'cover'}} src={`${IMG_HOST}${data.img}`} alt={data.title} />
                     </Link>
                 </div>
                 <div className="content">
-                    <div className="course-price price-round">${Math.trunc(data.course_price)}</div>
+                    <div className="course-price price-round">{getSymbolFromCurrency(GetCurrencyByCountry(data))}{CalculateDiscountedPrice(data)}</div>
                     <span className="course-level">{data.level}</span>
                     <h5 className="title">
-                        <Link href={`/course-details/${data.id}`} legacyBehavior>
+                        <Link href={`/course-details/${data.course_code}`} legacyBehavior>
                             {data.title}
                         </Link>
                     </h5>
@@ -68,11 +76,11 @@ const CourseTypeFour = ({ data, classes }) => {
                             <i className="icon-23"></i>
                             <i className="icon-23"></i>
                         </div>
-                        <span className="rating-count">({data.rating})</span>
+                        <span className="rating-count"><b>({data.rating})</b></span>
                     </div>
-                    <p>{data.short_desc}</p>
+                    <p>{data.curriculum_desc.length > 60 ? data.curriculum_desc.substring(0, 60) + '...' : data.curriculum_desc}</p>
                     <ul className="d-flex course-meta">
-                        <li><i className="icon-24"></i>{data.lesson} Lessons4</li>
+                        <li><i className="icon-24"></i>{data.lesson} Lessons</li>
                         <li><i className="icon-25"></i>{data.student} Students</li>
                     </ul>
                 </div>
@@ -96,14 +104,14 @@ const CourseTypeFour = ({ data, classes }) => {
                     </div>
                     <ul className="course-meta">
                         <li>{ data.lesson } { data.lesson + data.lesson > 1 ? 'Lessons' : 'Lesson' }</li>
-                        <li>{ data.duration }</li>
+                        <li>{CalculateDiscountPrice(data)}</li>
                         <li>{ data.level }</li>
                     </ul>
                     <div className="course-feature">
                         <h6 className="title">What You’ll Learn?</h6>
                         <ul>
                             { 
-                                data.features.slice(0, 3).map( (feature, featurekey) => <li key={ featurekey }>{ feature }</li> )
+                                data.intended_learners.slice(0, 3).map( (feature, featurekey) => feature.intended_learner_type == " students learn" && <li key={ featurekey }>{feature.intended_learner > 25 ? feature.intended_learner.substring(0, 25) + '...' : feature.intended_learner}</li> )
                             }
                         </ul>
                     </div>

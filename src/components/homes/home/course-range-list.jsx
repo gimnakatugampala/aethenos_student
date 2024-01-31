@@ -5,11 +5,13 @@ import { course_data } from "../../../data";
 import { useState } from 'react';
 
 
-const CourseRangeList = () => {
+const CourseRangeList = ({course}) => {
+
+  // console.log(course)
 
     const coursePerView = 8;
     const [next, setNext] = useState(coursePerView);
-    const [courses, setCourses] = useState(course_data);
+    const [courses, setCourses] = useState(course);
 
     const handleLoadData = () => {
         setNext((value) => value + 4);
@@ -17,14 +19,15 @@ const CourseRangeList = () => {
 
   return (
     <>
-        <SortingArea
-          course_items={course_data}
+    {courses != null && <SortingArea
+          course_items={course}
           num={courses?.slice(0, next)?.length}
           setCourses={setCourses}
           courses={courses}
-        />
+        />}
+        
         <div className="row g-3 mb-5">
-          {courses.slice(0, next)?.map((course) => {
+          {courses != null && courses.slice(0, next)?.map((course) => {
             return (
               <div key={course.id} className="col-md-6 col-xl-3">
                 <CourseTypeFour data={course} classes="course-box-shadow" />
@@ -32,7 +35,7 @@ const CourseRangeList = () => {
             );
           })}
         </div>
-        {next < courses.length && (
+        {next < courses != null && (
           <div
             onClick={handleLoadData}
             className="load-more-btn"
