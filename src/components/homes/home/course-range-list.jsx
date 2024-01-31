@@ -23,7 +23,7 @@ const CourseRangeList = () => {
           setCourses={setCourses}
           courses={courses}
         />
-        <div className="row g-5 mb-5">
+        <div className="row g-3 mb-5">
           {courses.slice(0, next)?.map((course) => {
             return (
               <div key={course.id} className="col-md-6 col-xl-3">

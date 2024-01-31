@@ -49,7 +49,7 @@ const CourseTypeFour = ({ data, classes }) => {
             <div className="inner">
                 <div className="thumbnail">
                     <Link href={`/course-details/${data.id}`} legacyBehavior>
-                        <img src={`/assets/images/course/course-04/${data.img}`} alt="Course Meta" />
+                        <img style={{width:'100%'}} src={`/assets/images/course/course-04/${data.img}`} alt="Course Meta" />
                     </Link>
                 </div>
                 <div className="content">
@@ -71,7 +71,7 @@ const CourseTypeFour = ({ data, classes }) => {
                         <span className="rating-count">({data.rating})</span>
                     </div>
                     <p>{data.short_desc}</p>
-                    <ul className="course-meta">
+                    <ul className="d-flex course-meta">
                         <li><i className="icon-24"></i>{data.lesson} Lessons4</li>
                         <li><i className="icon-25"></i>{data.student} Students</li>
                     </ul>
