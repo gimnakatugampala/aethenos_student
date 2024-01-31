@@ -1023,6 +1023,13 @@ export const GetCourseHomeBusiness = async(setbusiness_courses,setloading_busine
     .then(response => response.json())
     .then(result => {
       console.log(result)
+
+      if(result.message == "Error"){
+        setbusiness_courses([])
+        setloading_business_courses(false)
+        return
+      }
+
       setbusiness_courses(result)
       setloading_business_courses(false)
     })
@@ -1041,6 +1048,13 @@ export const GetCourseHomeDesign = async(setdeisgn_courses,setloading_design_cou
     .then(response => response.json())
     .then(result => {
       console.log(result)
+
+      if(result.message == "Error"){
+        setdeisgn_courses([])
+        setloading_design_courses(false)
+        return
+      }
+
       setdeisgn_courses(result)
       setloading_design_courses(false)
     })
@@ -1059,6 +1073,13 @@ export const GetCourseHomePhotography = async(setloading_photography_courses,set
     .then(response => response.json())
     .then(result => {
       console.log(result)
+
+      if(result.message == "Error"){
+        setphotography_courses([])
+        setloading_photography_courses(false)
+        return
+      }
+
       setphotography_courses(result)
       setloading_photography_courses(false)
     })
@@ -1077,6 +1098,13 @@ export const GetCourseHomeDevelopment = async(setdevelopment_courses,setloading_
     .then(response => response.json())
     .then(result => {
       console.log(result)
+
+      if(result.message == "Error"){
+        setdevelopment_courses([])
+        setloading_development_courses(false)
+        return
+      }
+
       setdevelopment_courses(result)
       setloading_development_courses(false)
     })
@@ -1095,6 +1123,13 @@ export const GetCourseHomeMarketing = async(setmarketing_courses,setloading_mark
     .then(response => response.json())
     .then(result => {
       console.log(result)
+
+      if(result.message == "Error"){
+        setmarketing_courses([])
+        setloading_marketing_courses(false)
+        return
+      }
+
       setmarketing_courses(result)
       setloading_marketing_courses(false)
     })
@@ -1113,6 +1148,13 @@ export const GetCourseHomeITSoftware = async(setit_software_courses,setloading_i
     .then(response => response.json())
     .then(result => {
       console.log(result)
+
+      if(result.message == "Error"){
+        setit_software_courses([])
+        setloading_it_software_courses(false)
+        return
+      }
+
       setit_software_courses(result)
       setloading_it_software_courses(false)
     })
@@ -1131,6 +1173,13 @@ export const GetCourseHomePersonalDevelopment = async(setpersonal_development_co
     .then(response => response.json())
     .then(result => {
       console.log(result)
+
+      if(result.message == "Error"){
+        setpersonal_development_courses([])
+        setloading_personal_development_courses(false)
+        return
+      }
+
       setpersonal_development_courses(result)
       setloading_personal_development_courses(false)
     })
