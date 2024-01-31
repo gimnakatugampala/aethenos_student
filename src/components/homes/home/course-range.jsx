@@ -4,20 +4,38 @@ import Tabs from 'react-bootstrap/Tabs';
 import CourseRangeList from './course-range-list';
 import CardContainer from '../../../contexts/CardContainer';
 import { useEffect } from 'react';
-import { GetCourseHomeBusiness } from '../../../api';
+import { GetCourseHomeBusiness, GetCourseHomeDesign, GetCourseHomeDevelopment, GetCourseHomeITSoftware, GetCourseHomeMarketing, GetCourseHomePersonalDevelopment, GetCourseHomePhotography } from '../../../api';
 import { useState } from 'react';
 import CoursesPotraitSkeleton from '../../../functions/Skeletons/CoursesPotraitSkeleton'
 
 const CourseRange = () => {
 
     const [business_courses, setbusiness_courses] = useState([])
+    const [deisgn_courses, setdeisgn_courses] = useState([])
+    const [photography_courses, setphotography_courses] = useState([])
+    const [development_courses, setdevelopment_courses] = useState([])
+    const [marketing_courses, setmarketing_courses] = useState([])
+    const [it_software_courses, setit_software_courses] = useState([])
+    const [personal_development_courses, setpersonal_development_courses] = useState([])
 
 
     const [loading_business_courses, setloading_business_courses] = useState(true)
+    const [loading_design_courses, setloading_design_courses] = useState(true)
+    const [loading_photography_courses, setloading_photography_courses] = useState(true)
+    const [loading_development_courses, setloading_development_courses] = useState(true)
+    const [loading_marketing_courses, setloading_marketing_courses] = useState(true)
+    const [loading_it_software_courses, setloading_it_software_courses] = useState(true)
+    const [loading_personal_development_courses, setloading_personal_development_courses] = useState(true)
 
     useEffect(() => {
+        GetCourseHomePersonalDevelopment(setpersonal_development_courses,setloading_personal_development_courses)
+        GetCourseHomeITSoftware(setit_software_courses,setloading_it_software_courses)
+        GetCourseHomeMarketing(setmarketing_courses,setloading_marketing_courses)
+        GetCourseHomeDevelopment(setdevelopment_courses,setloading_development_courses)
+        GetCourseHomePhotography(setloading_photography_courses,setphotography_courses)
+        GetCourseHomeDesign(setdeisgn_courses,setloading_design_courses)
         GetCourseHomeBusiness(setbusiness_courses,setloading_business_courses)
-    },business_courses)
+    },[business_courses,deisgn_courses,photography_courses,development_courses,marketing_courses])
     
 
     return (
@@ -126,33 +144,26 @@ const CourseRange = () => {
                             <div className="course-tab-content">
                             <div className="course-overview">
 
-                            <CourseRangeList />
+                            {/* <CourseRangeList /> */}
 
-                              {/* {loading_new_courses ? (
-                                  <div className='row'>
-                                  <CoursesPotraitSkeleton />
-                                  <CoursesPotraitSkeleton />
-                                  <CoursesPotraitSkeleton />
-                                  <CoursesPotraitSkeleton />
-                                  <CoursesPotraitSkeleton />
-                                  <CoursesPotraitSkeleton />
-                                  <CoursesPotraitSkeleton />
-                                  <CoursesPotraitSkeleton />
-                                  </div>
-                              ) : (
-                                <div className="row g-3 mb-5">
-                                {new_courses.length > 0 || new_courses != null ? new_courses.slice(0, next)?.map((course) => {
-                                    return (
-                                    <div key={course.id} className="col-md-6 col-xl-3">
-                                        <CourseTypeOne data={course} classes="course-box-shadow" />
+                            {loading_design_courses ? (
+                                    <div className='row'>
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
                                     </div>
-                                    );
-                                }) : <h4 >No New Courses Available</h4>}
-                                </div>
-                              )}
+                                ) : (
+                                    deisgn_courses != null && deisgn_courses.length > 0   ? <CourseRangeList  course={deisgn_courses} />  : <h4>No Design Courses Available</h4> 
+                                )}
 
+                            
 
-                                {next < new_courses.length && (
+                                {/* {next < new_courses.length && (
                                     <div
                                         onClick={handleLoadData}
                                         className="load-more-btn"
@@ -164,8 +175,8 @@ const CourseRange = () => {
                                         Load More <i className="icon-56"></i>
                                         </a>
                                     </div>
-                                    )}
-                                     */}
+                                    )} */}
+                                    
                                 </div>
                             </div>
                         </div>
@@ -174,32 +185,25 @@ const CourseRange = () => {
                             <div className="course-tab-content">
                             <div className="course-overview">
 
-                            <CourseRangeList />
-
-                              {/* {loading_trending_courses ? (
-                                   <div className='row'>
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   </div>
-                              ) : (
-                                <div className="row g-3 mb-5">
-                                {trending_courses.length > 0 || trending_courses != null ? trending_courses.slice(0, next)?.map((course) => {
-                                    return (
-                                    <div key={course.id} className="col-md-6 col-xl-3">
-                                        <CourseTypeOne data={course} classes="course-box-shadow" />
+                            {/* <CourseRangeList /> */}
+                              
+                            {loading_photography_courses ? (
+                                    <div className='row'>
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
                                     </div>
-                                    );
-                                }) : <h4 >No Trending Courses Available</h4>}
-                                </div>
-                              )}
+                                ) : (
+                                    photography_courses != null && photography_courses.length > 0   ? <CourseRangeList  course={photography_courses} />  : <h4>No Photography Courses Available</h4> 
+                                )}
 
-                                {next < trending_courses.length && (
+
+                                {/* {next < trending_courses.length && (
                                     <div
                                         onClick={handleLoadData}
                                         className="load-more-btn"
@@ -221,32 +225,25 @@ const CourseRange = () => {
                             <div className="course-tab-content">
                             <div className="course-overview">
 
-                            <CourseRangeList />
+                            {/* <CourseRangeList /> */}
 
-                              {/* {loading_trending_courses ? (
-                                   <div className='row'>
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   </div>
-                              ) : (
-                                <div className="row g-3 mb-5">
-                                {trending_courses.length > 0 || trending_courses != null ? trending_courses.slice(0, next)?.map((course) => {
-                                    return (
-                                    <div key={course.id} className="col-md-6 col-xl-3">
-                                        <CourseTypeOne data={course} classes="course-box-shadow" />
+                            {loading_development_courses ? (
+                                    <div className='row'>
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
                                     </div>
-                                    );
-                                }) : <h4 >No Trending Courses Available</h4>}
-                                </div>
-                              )}
+                                ) : (
+                                    development_courses != null && development_courses.length > 0   ? <CourseRangeList  course={development_courses} />  : <h4>No Development Courses Available</h4> 
+                                )}
+                            
 
-                                {next < trending_courses.length && (
+                                {/* {next < trending_courses.length && (
                                     <div
                                         onClick={handleLoadData}
                                         className="load-more-btn"
@@ -268,32 +265,24 @@ const CourseRange = () => {
                             <div className="course-tab-content">
                             <div className="course-overview">
 
-                            <CourseRangeList />
+                            {/* <CourseRangeList /> */}
 
-                              {/* {loading_trending_courses ? (
-                                   <div className='row'>
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   </div>
-                              ) : (
-                                <div className="row g-3 mb-5">
-                                {trending_courses.length > 0 || trending_courses != null ? trending_courses.slice(0, next)?.map((course) => {
-                                    return (
-                                    <div key={course.id} className="col-md-6 col-xl-3">
-                                        <CourseTypeOne data={course} classes="course-box-shadow" />
+                            {loading_marketing_courses ? (
+                                    <div className='row'>
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
                                     </div>
-                                    );
-                                }) : <h4 >No Trending Courses Available</h4>}
-                                </div>
-                              )}
+                                ) : (
+                                    marketing_courses != null && marketing_courses.length > 0   ? <CourseRangeList  course={marketing_courses} />  : <h4>No Marketing Courses Available</h4> 
+                                )}
 
-                                {next < trending_courses.length && (
+                                {/* {next < trending_courses.length && (
                                     <div
                                         onClick={handleLoadData}
                                         className="load-more-btn"
@@ -315,32 +304,24 @@ const CourseRange = () => {
                             <div className="course-tab-content">
                             <div className="course-overview">
 
-                            <CourseRangeList />
+                            {/* <CourseRangeList /> */}
 
-                              {/* {loading_trending_courses ? (
-                                   <div className='row'>
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   </div>
-                              ) : (
-                                <div className="row g-3 mb-5">
-                                {trending_courses.length > 0 || trending_courses != null ? trending_courses.slice(0, next)?.map((course) => {
-                                    return (
-                                    <div key={course.id} className="col-md-6 col-xl-3">
-                                        <CourseTypeOne data={course} classes="course-box-shadow" />
+                            {loading_it_software_courses ? (
+                                    <div className='row'>
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
                                     </div>
-                                    );
-                                }) : <h4 >No Trending Courses Available</h4>}
-                                </div>
-                              )}
+                                ) : (
+                                    it_software_courses != null && it_software_courses.length > 0   ? <CourseRangeList  course={it_software_courses} />  : <h4>No It & Software Courses Available</h4> 
+                                )}
 
-                                {next < trending_courses.length && (
+                                {/* {next < trending_courses.length && (
                                     <div
                                         onClick={handleLoadData}
                                         className="load-more-btn"
@@ -362,32 +343,24 @@ const CourseRange = () => {
                             <div className="course-tab-content">
                             <div className="course-overview">
 
-                            <CourseRangeList />
+                            {/* <CourseRangeList /> */}
                                   
-                              {/* {loading_trending_courses ? (
-                                   <div className='row'>
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   <CoursesPotraitSkeleton />
-                                   </div>
-                              ) : (
-                                <div className="row g-3 mb-5">
-                                {trending_courses.length > 0 || trending_courses != null ? trending_courses.slice(0, next)?.map((course) => {
-                                    return (
-                                    <div key={course.id} className="col-md-6 col-xl-3">
-                                        <CourseTypeOne data={course} classes="course-box-shadow" />
+                            {loading_personal_development_courses ? (
+                                    <div className='row'>
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
+                                    <CoursesPotraitSkeleton />
                                     </div>
-                                    );
-                                }) : <h4 >No Trending Courses Available</h4>}
-                                </div>
-                              )}
+                                ) : (
+                                    personal_development_courses != null && personal_development_courses.length > 0   ? <CourseRangeList  course={personal_development_courses} />  : <h4>No Personal Development Courses Available</h4> 
+                                )}
 
-                                {next < trending_courses.length && (
+                                {/* {next < trending_courses.length && (
                                     <div
                                         onClick={handleLoadData}
                                         className="load-more-btn"

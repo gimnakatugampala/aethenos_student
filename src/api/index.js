@@ -1019,12 +1019,120 @@ export const GetCourseHomeBusiness = async(setbusiness_courses,setloading_busine
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/design", requestOptions)
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/business", requestOptions)
     .then(response => response.json())
     .then(result => {
       console.log(result)
       setbusiness_courses(result)
       setloading_business_courses(false)
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetCourseHomeDesign = async(setdeisgn_courses,setloading_design_courses) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/design", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+      setdeisgn_courses(result)
+      setloading_design_courses(false)
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetCourseHomePhotography = async(setloading_photography_courses,setphotography_courses) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/photography-video", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+      setphotography_courses(result)
+      setloading_photography_courses(false)
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetCourseHomeDevelopment = async(setdevelopment_courses,setloading_development_courses) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/development", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+      setdevelopment_courses(result)
+      setloading_development_courses(false)
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetCourseHomeMarketing = async(setmarketing_courses,setloading_marketing_courses) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/marketing", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+      setmarketing_courses(result)
+      setloading_marketing_courses(false)
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetCourseHomeITSoftware = async(setit_software_courses,setloading_it_software_courses) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/it-software", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+      setit_software_courses(result)
+      setloading_it_software_courses(false)
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetCourseHomePersonalDevelopment = async(setpersonal_development_courses,setloading_personal_development_courses) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/personal-development", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+      setpersonal_development_courses(result)
+      setloading_personal_development_courses(false)
     })
     .catch(error => console.log('error', error));
 
