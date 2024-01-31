@@ -39,7 +39,8 @@ const CourseDetailsSidebar = ({ course,details_2=false }) => {
                     id: course_item.id,
                     img: `${course_item.img}`,
                     title: course_item.title,
-                    price: course_item.course_price
+                    price: course_item.course_price,
+                    other_data:course_item
                 }
             }))
         } else {
@@ -49,7 +50,8 @@ const CourseDetailsSidebar = ({ course,details_2=false }) => {
                     id: course_item.id,
                     img: `${course_item.img}`,
                     title: course_item.title,
-                    price: course_item.course_price
+                    price: course_item.course_price,
+                    other_data:course_item
                 }
             }))
         }
@@ -61,7 +63,8 @@ const CourseDetailsSidebar = ({ course,details_2=false }) => {
             id:course.id,
             img:`${course.img}`,
             price:course.course_price,
-            title:course.title
+            title:course.title,
+            other_data:course
         }))
         console.log(course)
     }

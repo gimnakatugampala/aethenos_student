@@ -31,6 +31,7 @@ const CourseTypeOne = ({ course }) => {
             img: `${course_item.img}`,
             title: course_item.title,
             price: course_item.course_price,
+            other_data:course_item
           },
         })
       );
@@ -43,6 +44,7 @@ const CourseTypeOne = ({ course }) => {
             img: `${course_item.img}`,
             title: course_item.title,
             price: course_item.course_price,
+            other_data:course_item
           },
         })
       );
@@ -50,13 +52,15 @@ const CourseTypeOne = ({ course }) => {
   };
 
   // handle add to cart
-  const handleAddToCart = () => {
+  const handleAddToCart = (course) => {
     dispatch(
       cart_course({
         id: course.id,
         img: `${course.img}`,
         price: course.course_price,
         title: course.title,
+        other_data:course
+
       })
     );
   };

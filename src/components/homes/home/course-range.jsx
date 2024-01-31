@@ -35,7 +35,7 @@ const CourseRange = () => {
         GetCourseHomePhotography(setloading_photography_courses,setphotography_courses)
         GetCourseHomeDesign(setdeisgn_courses,setloading_design_courses)
         GetCourseHomeBusiness(setbusiness_courses,setloading_business_courses)
-    },[business_courses,deisgn_courses,photography_courses,development_courses,marketing_courses])
+    },[business_courses,deisgn_courses,personal_development_courses])
     
 
     return (

@@ -11,9 +11,10 @@ const CourseTypeSix = ({ data, classes }) => {
     const handleAddToCart = (course) => {
         dispatch(cart_course({
             id: course.id,
-            img: `/assets/images/course/course-06/${course.img}`,
+            img: `${course.img}`,
             price: course.course_price,
-            title: course.title
+            title: course.title,
+            other_data:course
         }))
     }
     return (

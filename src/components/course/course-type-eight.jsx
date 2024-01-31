@@ -16,9 +16,10 @@ const CourseTypeEight = ({ data, classes }) => {
                 add_to_wishlist({
                     change_type: 'remove_wishlist', item: {
                     id: course_item.id,
-                    img: `/assets/images/course/course-06/${course_item.img}`,
+                    img: `${course_item.img}`,
                     title: course_item.title,
-                    price: course_item.course_price
+                    price: course_item.course_price,
+                    other_data:course_item
                 }
             }))
         } else {
@@ -26,9 +27,10 @@ const CourseTypeEight = ({ data, classes }) => {
                 add_to_wishlist({
                     change_type: 'add_wishlist', item: {
                     id: course_item.id,
-                    img: `/assets/images/course/course-06/${course_item.img}`,
+                    img: `${course_item.img}`,
                     title: course_item.title,
-                    price: course_item.course_price
+                    price: course_item.course_price,
+                    other_data:course_item
                 }
             }))
         }
@@ -38,9 +40,10 @@ const CourseTypeEight = ({ data, classes }) => {
     const handleAddToCart = (course) => {
         dispatch(cart_course({
             id:course.id,
-            img:`/assets/images/course/course-06/${course.img}`,
+            img:`${course.img}`,
             price:course.course_price,
-            title:course.title
+            title:course.title,
+            other_data:course
         }))
     }
 
@@ -51,7 +54,7 @@ const CourseTypeEight = ({ data, classes }) => {
                     <Link href={`/course-details/${data.id}`} legacyBehavior>
                         <a>
                             <img
-                                src={`/assets/images/course/course-06/${data.img}`}
+                                src={`${data.img}`}
                                 alt="Course Thumb"
                             />
                         </a>

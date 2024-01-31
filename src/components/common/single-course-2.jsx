@@ -16,18 +16,20 @@ const SingleCourseTwo = ({ course }) => {
             dispatch(add_to_wishlist({
                     change_type: 'remove_wishlist', item: {
                     id: course_item.id,
-                    img: `/assets/images/course/${course_item.img}`,
+                    img: `${course_item.img}`,
                     title: course_item.title,
-                    price: course_item.course_price
+                    price: course_item.course_price,
+                    other_data:course_item
                 }
             }))
         } else {
             dispatch(add_to_wishlist({
                     change_type: 'add_wishlist', item: {
                     id: course_item.id,
-                    img: `/assets/images/course/${course_item.img}`,
+                    img: `${course_item.img}`,
                     title: course_item.title,
-                    price: course_item.course_price
+                    price: course_item.course_price,
+                    other_data:course_item
                 }
             }))
         }
@@ -37,9 +39,10 @@ const SingleCourseTwo = ({ course }) => {
     const handleAddToCart = (course) => {
         dispatch(cart_course({
             id:course.id,
-            img:`/assets/images/course/${course.img}`,
+            img:`${course.img}`,
             price:course.course_price,
-            title:course.title
+            title:course.title,
+            other_data:course
         }))
     }
 
