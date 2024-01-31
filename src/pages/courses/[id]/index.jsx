@@ -384,7 +384,7 @@ const GetCourseByCategory = () => {
                                     </div>
                                 ) : (
                                     <div className="row g-3 mb-5">
-                                    {most_popular_courses.length > 0 || most_popular_courses != null  ? most_popular_courses.slice(0, next)?.map((course) => {
+                                    { most_popular_courses != null && most_popular_courses.length > 0   ? most_popular_courses.slice(0, next)?.map((course) => {
                                         return (
                                         <div key={course.id} className="col-md-6 col-xl-3">
                                             <CourseTypeOne data={course} classes="course-box-shadow" />
@@ -432,7 +432,7 @@ const GetCourseByCategory = () => {
                                   </div>
                               ) : (
                                 <div className="row g-3 mb-5">
-                                {new_courses.length > 0 || new_courses != null ? new_courses.slice(0, next)?.map((course) => {
+                                {new_courses != null && new_courses.length > 0  ? new_courses.slice(0, next)?.map((course) => {
                                     return (
                                     <div key={course.id} className="col-md-6 col-xl-3">
                                         <CourseTypeOne data={course} classes="course-box-shadow" />
@@ -478,7 +478,7 @@ const GetCourseByCategory = () => {
                                    </div>
                               ) : (
                                 <div className="row g-3 mb-5">
-                                {trending_courses.length > 0 || trending_courses != null ? trending_courses.slice(0, next)?.map((course) => {
+                                {trending_courses != null && trending_courses.length > 0 ? trending_courses.slice(0, next)?.map((course) => {
                                     return (
                                     <div key={course.id} className="col-md-6 col-xl-3">
                                         <CourseTypeOne data={course} classes="course-box-shadow" />
