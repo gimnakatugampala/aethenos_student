@@ -1022,7 +1022,7 @@ export const GetCourseHomeBusiness = async(setbusiness_courses,setloading_busine
   fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/business", requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
 
       if(result.message == "Error"){
         setbusiness_courses([])
@@ -1047,7 +1047,7 @@ export const GetCourseHomeDesign = async(setdeisgn_courses,setloading_design_cou
   fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/design", requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
 
       if(result.message == "Error"){
         setdeisgn_courses([])
@@ -1072,7 +1072,7 @@ export const GetCourseHomePhotography = async(setloading_photography_courses,set
   fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/photography-video", requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
 
       if(result.message == "Error"){
         setphotography_courses([])
@@ -1097,7 +1097,7 @@ export const GetCourseHomeDevelopment = async(setdevelopment_courses,setloading_
   fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/development", requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
 
       if(result.message == "Error"){
         setdevelopment_courses([])
@@ -1122,7 +1122,7 @@ export const GetCourseHomeMarketing = async(setmarketing_courses,setloading_mark
   fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/marketing", requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
 
       if(result.message == "Error"){
         setmarketing_courses([])
@@ -1147,7 +1147,7 @@ export const GetCourseHomeITSoftware = async(setit_software_courses,setloading_i
   fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/it-software", requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
 
       if(result.message == "Error"){
         setit_software_courses([])
@@ -1172,7 +1172,7 @@ export const GetCourseHomePersonalDevelopment = async(setpersonal_development_co
   fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/personal-development", requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
 
       if(result.message == "Error"){
         setpersonal_development_courses([])

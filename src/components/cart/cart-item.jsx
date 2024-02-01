@@ -3,11 +3,13 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { cart_course, decrease_quantity, remove_cart_course } from '../../redux/features/cart-slice';
 import { IMG_HOST } from '../../api';
-
+import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice'
+import getSymbolFromCurrency from 'currency-symbol-map'
+import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
 
 const CartItem = ({ item }) => {
 
-    console.log(item)
+    // console.log(item)
     const dispatch = useDispatch();
     const handleChange = (e) => {}
     return (
@@ -23,13 +25,13 @@ const CartItem = ({ item }) => {
             </td>
 
             <td className="product-title">
-                <Link href={`/course-details/${item.course_code}`} legacyBehavior>
+                <Link href={`/course-details/${item.other_data.course_code}`} legacyBehavior>
                     {item.title}
                 </Link>
             </td>
 
             <td className="product-price" data-title="Price">
-                <span className="currency-symbol">$</span>{item.price}
+                <span className="currency-symbol">{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))}</span>{(CalculateDiscountedPrice(item.other_data))}
             </td>
 
             <td className="product-quantity" data-title="Qty">
@@ -41,7 +43,7 @@ const CartItem = ({ item }) => {
             </td>
             
             <td className="product-subtotal" data-title="Subtotal">
-                <span className="currency-symbol">$</span>{(item.quantity * item.price).toFixed(2)}
+                <span className="currency-symbol">{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))}</span>{(item.quantity * (CalculateDiscountedPrice(item.other_data))).toFixed(2)}
             </td>
         </tr>
     );

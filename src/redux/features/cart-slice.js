@@ -11,6 +11,8 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         cart_course: (state,{payload}) => {
+            console.log(state.cartCourses)
+            console.log(payload)
             const courseIndex = state.cartCourses.findIndex(item => Number(item.id ) === Number(payload.id));
             if(courseIndex >= 0){
                 state.cartCourses[courseIndex].quantity +=1;

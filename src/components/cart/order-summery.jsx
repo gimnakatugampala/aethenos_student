@@ -3,7 +3,10 @@ import React from 'react';
 import useCartInfo from '../../hooks/use-cart-info';
 
 const OrderSummery = () => {
-  	const { total } = useCartInfo();
+  	const { total , quantity } = useCartInfo();
+
+	console.log(total)
+	console.log(quantity)
   	return (
         <div className="order-summery">
 			<h4 className="title">Cart Totals</h4>
