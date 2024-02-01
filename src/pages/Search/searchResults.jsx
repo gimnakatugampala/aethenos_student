@@ -6,8 +6,6 @@ import CourseItems from "./course-item";
 import { searchCourses } from "../../api/index";
 import SortingArea from "./sortingAreaSearch";
 import { css } from "@emotion/react";
-import { RingLoader } from "react-spinners";
-import LargeLoading from "../../functions/Loading/LargeLoading";
 import { Triangle } from "react-loader-spinner";
 
 const SearchResults = () => {
@@ -70,14 +68,6 @@ const SearchResults = () => {
     setCourses(sortedCourses);
     setShowing(0);
   };
-
-  const override = css`
-    display: none;
-    margin: 0px 0px -850px auto;
-    justify-content: center;
-    padding: 100px;
-    border-color: red;
-  `;
 
   return (
     <div className="edu-course-area section-gap-equal gap-bottom-text mb-5">

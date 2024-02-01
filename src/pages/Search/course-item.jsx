@@ -6,7 +6,7 @@ import {
   add_item_offset,
 } from "../../redux/features/filter-slice";
 import Pagination from "../../ui/pagination";
-import CourseTypeFive from "./courseType";
+import CourseTypeFive from "./course-type-five-details";
 import CourseArea1 from "./more-corses";
 import { Chip, Stack } from "@mui/material";
 

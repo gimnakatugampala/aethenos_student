@@ -9,7 +9,6 @@ import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
 
 const CartItem = ({ item }) => {
 
-    // console.log(item)
     const dispatch = useDispatch();
     const handleChange = (e) => {}
     return (

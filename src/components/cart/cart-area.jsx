@@ -4,20 +4,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clear_cart } from '../../redux/features/cart-slice';
 import CartItem from './cart-item';
 import OrderSummery from './order-summery';
+import { useRouter } from 'next/router';
 
 const CartArea = () => {
     const { cartCourses } = useSelector(state => state.cart);
     const dispatch = useDispatch();
+    const router = useRouter();
+    const handleReturnToCourses = () => {       
+        router.back();
+    };
+
     return (
         <section className="cart-page-area edu-section-gap">
             {cartCourses.length === 0 && 
                 <div className="container py-5">
                     <h3>No Cart Items</h3>
                     <div className="update-btn">
-                        <a href="#" className="edu-btn btn-border btn-medium disabled">
-                            
-                                Return to Courses
-                            
+                    <a style={{ cursor: 'pointer' }} onClick={handleReturnToCourses} className="edu-btn btn-border btn-medium disabled">
+                            Return to Courses
                         </a>
                     </div>
                 </div>
