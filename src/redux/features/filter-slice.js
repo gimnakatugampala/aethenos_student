@@ -10,7 +10,7 @@ export const filterSlice = createSlice({
         price: 0,
         page_count: 0,
         item_offset: 0,
-        forcePage: null
+        forcePage: 0
     },
     reducers: {
         add_category: (state, { payload }) => {

@@ -11,8 +11,7 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         cart_course: (state,{payload}) => {
-            console.log(state.cartCourses)
-            console.log(payload)
+        
             const courseIndex = state.cartCourses.findIndex(item => Number(item.id ) === Number(payload.id));
             if(courseIndex >= 0){
                 state.cartCourses[courseIndex].quantity +=1;
@@ -52,7 +51,11 @@ export const cartSlice = createSlice({
             const confirmMsg = window.confirm('Are you sure deleted your all cart items ?');
             if(confirmMsg){
                 state.cartCourses = [];
+                toast.info(`All Items were removed from cart.`, {
+                    position: 'top-left'
+                })
             }
+            
             setLocalStorage('cart_items',state.cartCourses);
         },
 
