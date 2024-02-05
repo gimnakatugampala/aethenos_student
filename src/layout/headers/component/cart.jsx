@@ -3,11 +3,20 @@ import Link from 'next/link';
 import useCartInfo from '../../../hooks/use-cart-info';
 import { remove_cart_course } from '../../../redux/features/cart-slice';
 import { IMG_HOST } from '../../../api';
+import { useEffect } from 'react';
+import CalculateDiscountedPrice from '../../../functions/pricing/CalculateDiscountedPrice';
+import GetCurrencyByCountry from '../../../functions/pricing/GetCurrencyByCountry';
+import getSymbolFromCurrency from 'currency-symbol-map'
 
 const Cart = () => {
     const cartItems = useSelector(state => state.cart.cartCourses);
     const dispatch = useDispatch();
     const {total} = useCartInfo();
+
+    useEffect(() => {
+      console.log(cartItems)
+    })
+    
     
     return (
         <div className="edublink-header-mini-cart">
@@ -22,7 +31,7 @@ const Cart = () => {
                         {cartItems.map((item, index) => (
                             <li key={index} className="each-item">
                                 <div className="thumb">
-                                    <Link href={`/course-details/${item.id}`} legacyBehavior>
+                                    <Link href={`/course-details/${item.other_data.course_code}`} legacyBehavior>
 
                                         <img src={`${IMG_HOST}${item.img}`} alt="course-thumb" />
 
@@ -30,7 +39,7 @@ const Cart = () => {
                                 </div>
                                 <div className="content">
                                     <h5 className="title">
-                                        <Link href={`/course-details/${item.id}`} legacyBehavior>
+                                        <Link href={`/course-details/${item.other_data.course_code}`} legacyBehavior>
 
                                             {item.title}
 
@@ -39,7 +48,7 @@ const Cart = () => {
                                     <div className="price-and-quantity">
                                         <span className="quantity">{item.quantity}</span>
                                         <span className="quantity-symbol">×</span>
-                                        <span className="price">$ {item.price}</span>
+                                        <span className="price">{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} {CalculateDiscountedPrice(item.other_data)}</span>
                                     </div>
                                 </div>
                                 <div className="cart-item-remove">
