@@ -75,7 +75,7 @@ const OrderSummery = () => {
     }
 
 	useEffect(() => {
-		console.log(CURRENT_USER)
+		// console.log(CURRENT_USER)
 		AccountVefication(setshowLogin)
 	}, [CURRENT_USER])
 	

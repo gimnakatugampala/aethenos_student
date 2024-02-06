@@ -1,8 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import useCartInfo from '../../hooks/use-cart-info';
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
-const OrderSummery = () => {
+const OrderSummery = ({showStripe,showPaypal}) => {
     const {cartCourses} = useSelector(state => state.cart);
     const {total} = useCartInfo();
     return (
@@ -31,6 +32,13 @@ const OrderSummery = () => {
                         </tbody>
                     </table>
                 }
+
+                {showPaypal && <PayPalScriptProvider options={{ clientId: "test" }}>
+                            <PayPalButtons style={{ layout: "horizontal" }} />
+                    </PayPalScriptProvider>}
+                     
+                {showStripe && <a href="#" className="edu-btn order-place btn-medium w-100 my-2">Place Your order <i className="icon-4"></i></a>}
+                
             </div>
         </div>
     )
