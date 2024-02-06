@@ -4,8 +4,7 @@ import Cookies from 'js-cookie';
 
 const COUNTRY = Cookies.get('aethenos_user_origin')
 
-const CalculateDiscountedPrice = (data) => {
-
+const CalculateDiscountedPrice = (data) => {  
     
     let countryToFind = "";
 

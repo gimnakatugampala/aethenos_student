@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 
 const SearchBar = ({ isSearchOpen = useState(false), setIsSearchOpen }) => {
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
 
   const handleSearch = () => {
-    router.push(`/search?keyword=${keyword}`);
+    if (keyword == "") {
+      Swal.fire({
+        title: "Empty Field!",
+        text: "Please Enter Search Keyword",
+        icon: "error",
+      });
+    } else {
+      router.push(`/search?keyword=${keyword}`);
+    }
   };
 
   const handleChange = (value) => {

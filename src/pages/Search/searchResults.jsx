@@ -1,32 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import CourseSidebar from "./side-bar";
+import CourseSidebarTwo from "./course-sidebar-2";
 import CourseItems from "./course-item";
 import { searchCourses } from "../../api/index";
 import SortingArea from "./sortingAreaSearch";
 import { css } from "@emotion/react";
 import { Triangle } from "react-loader-spinner";
+import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
 
 const SearchResults = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showing, setShowing] = useState(0);
+  const [prevKeyword, setPrevKeyword] = useState(""); 
   const [displayHeading, setDisplayHeading] = useState(false);
-  const { categories, instructors, levels, languages } = useSelector(
-    (state) => state.filter
-  );
+  const { categories, instructors, levels, languages, selectPrice } =
+    useSelector((state) => state.filter);
 
   const router = useRouter();
   const { keyword } = router.query;
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        setLoading(true);
-        await searchCourses(keyword, setCourses);
-        setLoading(false);
-        setDisplayHeading(true);
+      try {       
+        if (keyword !== prevKeyword) {
+          setLoading(true);
+          await searchCourses(keyword, setCourses);
+          setLoading(false);
+          setDisplayHeading(true);
+          setPrevKeyword(keyword); 
+        }
       } catch (error) {
         setLoading(false);
       }
@@ -35,34 +39,27 @@ const SearchResults = () => {
     if (keyword) {
       fetchData();
     }
-  }, [keyword, setCourses]);
+    
+  }, [keyword, prevKeyword, categories, instructors, levels, languages, selectPrice]);
 
-  let items = courses
-    ?.filter((item1) =>
-      categories?.length !== 0
-        ? categories?.some((item2) => item1.category == item2)
-        : item1
-    )
-    .filter((item1) =>
-      instructors?.length !== 0
-        ? instructors?.some((item2) => item1.instructor == item2)
-        : item1
-    )
-    .filter((item1) =>
-      levels?.length !== 0
-        ? levels?.some((item2) => item1.level == item2)
-        : item1
-    )
-    .filter((item1) =>
-      languages?.length !== 0
-        ? languages?.some((item2) => item1.language == item2)
-        : item1
-    )
-    .filter((item1) =>
-      keyword
-        ? item1.title?.toLowerCase().includes(keyword.toString().toLowerCase())
-        : item1
+  const filteredItems = courses.filter((item) => {
+    const categoryMatch =
+      categories.length === 0 || categories.includes(item.category);
+    const instructorMatch =
+      instructors.length === 0 || instructors.includes(item.instructor);
+    const levelMatch = levels.length === 0 || levels.includes(item.level);
+    const languageMatch =
+      languages.length === 0 || languages.includes(item.language);
+    const priceMatch = CalculateListPrice(item) <= selectPrice;
+
+    return (
+      categoryMatch &&
+      instructorMatch &&
+      levelMatch &&
+      languageMatch &&
+      priceMatch
     );
+  });
 
   const handleSortChange = (sortedCourses) => {
     setCourses(sortedCourses);
@@ -101,9 +98,11 @@ const SearchResults = () => {
                   : `Search Results for: ${keyword}`}
               </div>
             </h3>
+            
 
             <div className="col-md-3">
-              <CourseSidebar course_items={courses} />
+              
+              <CourseSidebarTwo course_items={courses} />
             </div>
 
             <div
@@ -116,12 +115,12 @@ const SearchResults = () => {
                 num={showing}
                 setCourses={handleSortChange}
                 courses={courses}
-                items={items}
+                items={filteredItems}
               />
 
               <CourseItems
                 itemsPerPage={8}
-                items={courses}
+                items={filteredItems}
                 searchTerm={keyword}
                 course_style="2"
                 setShowing={setShowing}
