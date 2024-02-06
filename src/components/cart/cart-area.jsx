@@ -1,18 +1,31 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clear_cart } from '../../redux/features/cart-slice';
 import CartItem from './cart-item';
 import OrderSummery from './order-summery';
 import { useRouter } from 'next/router';
+import { ValidateCouponOnCart } from '../../api';
+import ErrorAlert from '../../functions/Alert/ErrorAlert';
 
 const CartArea = () => {
     const { cartCourses } = useSelector(state => state.cart);
+    const [coupon, setcoupon] = useState("")
     const dispatch = useDispatch();
     const router = useRouter();
     const handleReturnToCourses = () => {       
         router.back();
     };
+
+    // Handle Coupons
+    const handleCouponSubmit = () => {
+        console.log(coupon)
+        if(coupon == ""){
+            ErrorAlert("Error","Please Enter Coupon")
+            return
+        }
+        ValidateCouponOnCart(coupon)
+    }
 
     return (
         <section className="cart-page-area edu-section-gap">
@@ -48,8 +61,8 @@ const CartArea = () => {
 
                     <div className="cart-update-btn-area">
                         <div className="input-group product-cupon">
-                            <input placeholder="Coupon code..." type="text" />
-                            <button type="submit" className="submit-btn"><i className="icon-4"></i></button>
+                            <input value={coupon} onChange={(e) => setcoupon((e.target.value).toUpperCase())} placeholder="Coupon code..." type="text" />
+                            <button onClick={handleCouponSubmit} type="submit" className="submit-btn"><i className="icon-4"></i></button>
                         </div>
                         <div className="update-btn">
                             <a style={{ cursor: 'pointer' }} onClick={() => dispatch(clear_cart())} className="edu-btn btn-border btn-medium disabled">Clear Cart

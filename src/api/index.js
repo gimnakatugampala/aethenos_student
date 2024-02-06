@@ -1186,3 +1186,25 @@ export const GetCourseHomePersonalDevelopment = async(setpersonal_development_co
     .catch(error => console.log('error', error));
 
 }
+
+export const ValidateCouponOnCart = async(coupon) =>{
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getCouponValidationByCode/${coupon}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+
+      if(result.message){
+        ErrorAlert("Error",result.variable)
+        return
+      }
+      
+    })
+    .catch(error => console.log('error', error));
+
+}
