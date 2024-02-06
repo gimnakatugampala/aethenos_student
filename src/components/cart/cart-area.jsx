@@ -11,6 +11,12 @@ import ErrorAlert from '../../functions/Alert/ErrorAlert';
 const CartArea = () => {
     const { cartCourses } = useSelector(state => state.cart);
     const [coupon, setcoupon] = useState("")
+
+    const [couponEmpty, setcouponEmpty] = useState(false)
+    const [couponError, setcouponError] = useState(false)
+
+    const [CouponErrorText, setCouponErrorText] = useState("")
+
     const dispatch = useDispatch();
     const router = useRouter();
     const handleReturnToCourses = () => {       
@@ -21,10 +27,12 @@ const CartArea = () => {
     const handleCouponSubmit = () => {
         console.log(coupon)
         if(coupon == ""){
-            ErrorAlert("Error","Please Enter Coupon")
+            // ErrorAlert("Error","Please Enter Coupon")
+            setcouponEmpty(true)
             return
         }
-        ValidateCouponOnCart(coupon)
+        ValidateCouponOnCart(coupon,setcouponError,setCouponErrorText)
+        setcouponEmpty(false)
     }
 
     return (
@@ -70,6 +78,10 @@ const CartArea = () => {
                             </a>
                         </div>
                     </div>
+                    {couponEmpty && <p className='text-danger m-0 p-0'>Please Enter Coupon Code</p>}
+                    {couponError && <span className='text-danger m-0 p-0'>{CouponErrorText}</span>}
+                    
+
 
                     <div className="row">
                         <div className="col-xl-5 col-lg-7 offset-xl-7 offset-lg-5">

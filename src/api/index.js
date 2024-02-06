@@ -101,7 +101,7 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading,
 }
 
 
-export const StudentSignIn = async(email, password,setloading,router) =>{
+export const StudentSignIn = async(email, password,setloading,router,rediect_url = "none") =>{
 
   setloading(true)
 
@@ -159,7 +159,13 @@ export const StudentSignIn = async(email, password,setloading,router) =>{
 
               // window.location.href = "/?login=success"
 
-              router.push(`/?login=success`)
+              if(rediect_url == "none"){
+                router.push(`/?login=success`)
+              }else{
+                router.push(`/checkout`)
+
+              }
+
 
 
         }
@@ -1187,7 +1193,7 @@ export const GetCourseHomePersonalDevelopment = async(setpersonal_development_co
 
 }
 
-export const ValidateCouponOnCart = async(coupon) =>{
+export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorText) =>{
 
   var requestOptions = {
     method: 'GET',
@@ -1200,10 +1206,40 @@ export const ValidateCouponOnCart = async(coupon) =>{
       console.log(result)
 
       if(result.message){
-        ErrorAlert("Error",result.variable)
+        // ErrorAlert("Error",result.variable)
+        setCouponErrorText(result.variable)
+        setcouponError(true)
         return
       }
       
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const AccountVefication = async(setshowLogin) =>{
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/authentication/getAccountValidation", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+
+
+      if(result.message == "Error"){
+        setshowLogin(true)
+        return
+      }
+      setshowLogin(false)
+
     })
     .catch(error => console.log('error', error));
 
