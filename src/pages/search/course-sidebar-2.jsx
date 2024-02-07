@@ -25,7 +25,7 @@ const CourseSidebarTwo = ({ course_items }) => {
   const [showInstructor, setShowInstructor] = useState(true);
   const [showLanguage, setShowLanguage] = useState(true);
 
-  const { categories, instructors, levels, languages, selectPrice } =
+  const { categories, instructors, levels, languages } =
     useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
@@ -50,12 +50,10 @@ const CourseSidebarTwo = ({ course_items }) => {
 
       const maxPrice = Math.max(...prices);
       const minPrice = Math.min(...prices);
-      console.log(maxPrice + " Maxprice");
-      // setPrice(maxPrice);
       setMinPrice(minPrice);
       setMaxPrice(maxPrice);
 
-      dispatch(add_price(maxPrice));
+      dispatch(add_price(maxPrice));    
       handlePriceChange(maxPrice);
     }
   }, [AllCourses, dispatch]);
@@ -72,7 +70,6 @@ const CourseSidebarTwo = ({ course_items }) => {
     ...new Set(AllCourses.map((course) => course.language)),
   ];
 
-  // handleCategory
   const handleCategory = (cate) => {
     const index = categories.findIndex((item) => item === cate);
     if (index >= 0) {
@@ -84,28 +81,24 @@ const CourseSidebarTwo = ({ course_items }) => {
     dispatch(add_force_page(0));
   };
 
-  // handleInstructor
   const handleInstructor = (instructor) => {
     dispatch(add_instructor({ instructor }));
     dispatch(add_item_offset(0));
     dispatch(add_force_page(0));
   };
 
-  // handleLevel
   const handleLevel = (level) => {
     dispatch(add_level({ level, maxPrice }));
     dispatch(add_item_offset(0));
     dispatch(add_force_page(0));
   };
 
-  // handleLanguage
   const handleLanguage = (language) => {
     dispatch(add_language({ language, maxPrice }));
     dispatch(add_item_offset(0));
     dispatch(add_force_page(0));
   };
 
-  // handlePriceChange
   const handlePriceChange = (value) => {
     setPrice(value);
     dispatch(add_select_price(value));
@@ -114,9 +107,9 @@ const CourseSidebarTwo = ({ course_items }) => {
   };
 
   const handleReset = (va) => {
-    console.log("ASD");
     dispatch(reset_filter(maxPrice));
-    setPrice(maxPrice);
+    dispatch(add_price(maxPrice));
+    handlePriceChange(maxPrice);
   };
 
   return (

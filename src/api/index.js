@@ -1256,8 +1256,7 @@ export const getCourseData = async (setCourses) => {
     requestOptions
   )
     .then((response) => response.json())
-    .then((result) => {
-      console.log(result)
+    .then((result) => {     
 
       if (result.message == "Error") {
         setCourses([]);
