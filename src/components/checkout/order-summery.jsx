@@ -3,9 +3,10 @@ import { useSelector } from 'react-redux';
 import useCartInfo from '../../hooks/use-cart-info';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { loadStripe } from '@stripe/stripe-js';
-
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
+import { IMG_HOST } from '../../api';
+import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
+import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
+import getSymbolFromCurrency from 'currency-symbol-map';
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
@@ -13,7 +14,7 @@ const stripePromise = loadStripe(
 const OrderSummery = ({showStripe,showPaypal}) => {
     const {cartCourses} = useSelector(state => state.cart);
     const {total} = useCartInfo();
-
+// console.log(cartCourses)
 
     React.useEffect(() => {
         // Check to see if this is a redirect back from Checkout
@@ -42,13 +43,13 @@ const OrderSummery = ({showStripe,showPaypal}) => {
                         <tbody>
                             {cartCourses.map((item,i) => (
                                 <tr key={i}>
-                                    <td>{item.title.substring(0,20)}... <span className="quantity">x {item.quantity}</span></td>
-                                    <td>${item.price}</td>
+                                    <td><img className='mx-3 rounded' height={70} width={60} src={`${IMG_HOST}${item.other_data.img}`} />{item.title.substring(0,20)}... <span className="quantity">x {item.quantity}</span></td>
+                                    <td>{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} {(item.quantity * (CalculateDiscountedPrice(item.other_data))).toFixed(2)}</td>
                                 </tr>
                             ))}
                             <tr className="order-total">
                                 <td>Order Total</td>
-                                <td>${total}</td>
+                                <td>{cartCourses.length > 0 && getSymbolFromCurrency(GetCurrencyByCountry(cartCourses[0].other_data))}{total}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -60,39 +61,14 @@ const OrderSummery = ({showStripe,showPaypal}) => {
                      
                 {/* {showStripe && <a href="#" className="edu-btn order-place btn-medium w-100 my-2">Place Your order <i className="icon-4"></i></a>} */}
                 {showStripe && <form action="/api/checkout_sessions" method="POST">
-      <section>
-        <button type="submit" role="link">
-          Checkout
-        </button>
-      </section>
-      <style jsx>
-        {`
-          section {
-            background: #ffffff;
-            display: flex;
-            flex-direction: column;
-            width: 400px;
-            height: 112px;
-            border-radius: 6px;
-            justify-content: space-between;
-          }
-          button {
-            height: 36px;
-            background: #556cd6;
-            border-radius: 4px;
-            color: white;
-            border: 0;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
-          }
-          button:hover {
-            opacity: 0.8;
-          }
-        `}
-      </style>
-    </form>}
+                    <section>
+                        <button className="edu-btn order-place btn-medium w-100 my-2" type="submit" role="link">
+                            <span className='d-flex justify-content-center align-items-center'>
+                              Checkout via<i style={{fontSize:'30px'}} className="fa-brands fa-stripe mx-1"></i>
+                            </span>
+                        </button>
+                    </section>
+                    </form>}
                 
             </div>
         </div>

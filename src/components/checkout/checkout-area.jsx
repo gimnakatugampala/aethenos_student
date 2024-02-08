@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import OrderPayment from './order-payment';
 import OrderSummery from './order-summery';
@@ -17,7 +17,14 @@ const countries = [
 
 const CheckoutArea = () => {
     const [showPaypal, setshowPaypal] = useState(false)
-    const [showStripe, setshowStripe] = useState(false)
+    const [showStripe, setshowStripe] = useState(true)
+
+    useEffect(() => {
+     
+        setshowPaypal(false)
+        setshowStripe(true)
+    }, [])
+    
 
 
     return (
@@ -27,12 +34,10 @@ const CheckoutArea = () => {
                 <h3 className="title">Billing Details</h3>
                     <div className="row">
                         <div className="col-lg-6">
-                            {/* <div className="checkout-billing"> */}
-                                <OrderPayment setshowPaypal={setshowPaypal} setshowStripe={setshowStripe} />
-
                            
+                                <OrderPayment showStripe={showStripe} setshowPaypal={setshowPaypal} setshowStripe={setshowStripe} />
 
-                            {/* </div> */}
+    
                         </div>
                         
                         <div className="col-lg-6 ">
