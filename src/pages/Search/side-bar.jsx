@@ -3,7 +3,7 @@ import Slider from "react-rangeslider";
 import "react-rangeslider/lib/index.css";
 import { useDispatch, useSelector } from "react-redux";
 import { course_data } from "../../data";
-import {
+import { 
   add_category,
   add_force_page,
   add_instructor,

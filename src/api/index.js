@@ -1244,3 +1244,26 @@ export const AccountVefication = async(setshowLogin) =>{
     .catch(error => console.log('error', error));
 
 }
+
+export const getCourseData = async (setCourses) => {
+  var requestOptions = {
+    method: "GET",
+    redirect: "follow",
+  };
+
+  fetch(
+    "https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCoursesData",
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((result) => {     
+
+      if (result.message == "Error") {
+        setCourses([]);
+        return;
+      }
+
+      setCourses(result);
+    })
+    .catch((error) => console.log("error", error));
+};
