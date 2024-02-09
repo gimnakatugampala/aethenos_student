@@ -34,10 +34,7 @@ const CheckoutArea = () => {
                 <h3 className="title">Billing Details</h3>
                     <div className="row">
                         <div className="col-lg-6">
-                           
-                                <OrderPayment showStripe={showStripe} setshowPaypal={setshowPaypal} setshowStripe={setshowStripe} />
-
-    
+                            <OrderPayment showStripe={showStripe} setshowPaypal={setshowPaypal} setshowStripe={setshowStripe} />
                         </div>
                         
                         <div className="col-lg-6 ">

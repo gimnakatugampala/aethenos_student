@@ -7,6 +7,7 @@ import { IMG_HOST } from '../../api';
 import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
 import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
 import getSymbolFromCurrency from 'currency-symbol-map';
+import Cookies from 'js-cookie';
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
@@ -16,6 +17,15 @@ const OrderSummery = ({showStripe,showPaypal}) => {
     const {total} = useCartInfo();
 // console.log(cartCourses)
 
+const newPricing = cartCourses != null && cartCourses.map((course) => ({
+    img: course.img,
+    title:course.title,
+    qty:course.quantity,
+    desc:course.other_data.course_main_desc,
+    currency:GetCurrencyByCountry(course.other_data).toLowerCase(),
+    price:(CalculateDiscountedPrice(course.other_data)).toFixed(2)
+}))
+console.log(newPricing)
     React.useEffect(() => {
         // Check to see if this is a redirect back from Checkout
         const query = new URLSearchParams(window.location.search);
@@ -61,6 +71,8 @@ const OrderSummery = ({showStripe,showPaypal}) => {
                      
                 {/* {showStripe && <a href="#" className="edu-btn order-place btn-medium w-100 my-2">Place Your order <i className="icon-4"></i></a>} */}
                 {showStripe && <form action="/api/checkout_sessions" method="POST">
+                    <input type="hidden" name="cartCourses" value={JSON.stringify(newPricing)} />
+                    
                     <section>
                         <button className="edu-btn order-place btn-medium w-100 my-2" type="submit" role="link">
                             <span className='d-flex justify-content-center align-items-center'>
