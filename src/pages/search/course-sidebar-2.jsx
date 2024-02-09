@@ -7,6 +7,7 @@ import {
   add_category,
   add_force_page,
   add_instructor,
+  add_rating,
   add_item_offset,
   add_language,
   add_level,
@@ -23,10 +24,12 @@ const CourseSidebarTwo = ({ course_items }) => {
   const [showCategory, setShowCategory] = useState(true);
   const [showLevel, setShowLevel] = useState(true);
   const [showInstructor, setShowInstructor] = useState(true);
+  const [showRating, setShowRating] = useState(true);
   const [showLanguage, setShowLanguage] = useState(true);
 
-  const { categories, instructors, levels, languages } =
-    useSelector((state) => state.filter);
+  const { categories, instructors, levels, languages, ratings } = useSelector(
+    (state) => state.filter
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,6 +38,9 @@ const CourseSidebarTwo = ({ course_items }) => {
 
   useEffect(() => {
     if (AllCourses.length > 0) {
+
+      AllCourses.sort((a, b) => a.rating - b.rating);
+
       const prices = AllCourses.reduce((acc, course) => {
         if (
           course.course_prices &&
@@ -53,7 +59,7 @@ const CourseSidebarTwo = ({ course_items }) => {
       setMinPrice(minPrice);
       setMaxPrice(maxPrice);
 
-      dispatch(add_price(maxPrice));    
+      dispatch(add_price(maxPrice));
       handlePriceChange(maxPrice);
     }
   }, [AllCourses, dispatch]);
@@ -64,6 +70,9 @@ const CourseSidebarTwo = ({ course_items }) => {
   const all_instructors = [
     ...new Set(AllCourses.map((course) => course.instructor)),
   ];
+
+  const all_ratings = [...new Set(AllCourses.map((course) => course.rating))];
+
   const all_levels = [...new Set(AllCourses.map((course) => course.level))];
 
   const all_languages = [
@@ -83,6 +92,12 @@ const CourseSidebarTwo = ({ course_items }) => {
 
   const handleInstructor = (instructor) => {
     dispatch(add_instructor({ instructor }));
+    dispatch(add_item_offset(0));
+    dispatch(add_force_page(0));
+  };
+
+  const handleRating = (rating) => {   
+    dispatch(add_rating({ rating }));
     dispatch(add_item_offset(0));
     dispatch(add_force_page(0));
   };
@@ -110,6 +125,20 @@ const CourseSidebarTwo = ({ course_items }) => {
     dispatch(reset_filter(maxPrice));
     dispatch(add_price(maxPrice));
     handlePriceChange(maxPrice);
+  };
+
+  const generateStars = (rating) => {
+    const starArray = [];
+    for (let i = 1; i <= 5; i++) {
+      starArray.push(
+        <span
+          key={i}
+          style={{color: "#f8b81f", }}
+          className={`icon-star ${i <= rating ? " icon-star-full" : " icon-star-empty"}`}
+        ></span>
+      );
+    }
+    return starArray;
   };
 
   return (
@@ -194,6 +223,47 @@ const CourseSidebarTwo = ({ course_items }) => {
         </div>
       </div>
 
+      <div className="edu-course-widget course-rating widget-Rating">
+        <div className="inner">
+          <h5
+            className={`widget-title widget-toggle ${
+              showRating ? "active" : ""
+            }`}
+            onClick={() => setShowRating(!showRating)}
+          >
+            Rating
+          </h5>
+
+          <div
+            className="content"
+            style={{ display: showRating ? "block" : "none" }}
+          >
+            {all_ratings.map((rating, i) => (
+              <div key={i} className="edu-form-check">
+                <input
+                  onClick={() => handleRating(rating)}
+                  checked={ratings.includes(rating)}
+                  type="checkbox"
+                  id={`cat-check-3${i + 1}`}
+                  readOnly
+                />
+                <label htmlFor={`cat-check-3${i + 1}`}>
+                  {generateStars(rating)}
+                  <span>
+                    (
+                    {
+                      course_items.filter((item) => item.rating === rating)
+                        ?.length
+                    }
+                    )
+                  </span>
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div className="edu-course-widget widget-level">
         <div className="inner">
           <h5
@@ -215,10 +285,10 @@ const CourseSidebarTwo = ({ course_items }) => {
                   onClick={() => handleLevel(level)}
                   checked={levels.includes(level)}
                   type="checkbox"
-                  id={`cat-check-3${i + 1}`}
+                  id={`cat-check-4${i + 1}`}
                   readOnly
                 />
-                <label htmlFor={`cat-check-3${i + 1}`}>
+                <label htmlFor={`cat-check-4${i + 1}`}>
                   {level}
                   <span>
                     (

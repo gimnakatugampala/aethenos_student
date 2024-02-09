@@ -5,6 +5,7 @@ export const filterSlice = createSlice({
   initialState: {
     categories: [],
     instructors: [],
+    ratings: [],
     levels: [],
     languages: [],
     price: 0,
@@ -33,6 +34,17 @@ export const filterSlice = createSlice({
         );
       }
     },
+    add_rating: (state, { payload }) => {
+      const isExist = state.ratings.includes(payload.rating);
+      if (!isExist) {
+        state.ratings.push(payload.rating);
+      } else {
+        state.ratings = state.ratings.filter(
+          (rating) => rating !== payload.rating
+        );
+      }
+    },
+    
     add_level: (state, { payload }) => {
       const isExist = state.levels.includes(payload.level);
       if (!isExist) {
@@ -83,6 +95,7 @@ export const filterSlice = createSlice({
 export const {
   add_category,
   add_instructor,
+  add_rating,
   add_level,
   add_language,
   add_price,
