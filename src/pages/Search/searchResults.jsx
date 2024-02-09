@@ -13,9 +13,9 @@ const SearchResults = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showing, setShowing] = useState(0);
-  const [prevKeyword, setPrevKeyword] = useState(""); 
+  const [prevKeyword, setPrevKeyword] = useState("");
   const [displayHeading, setDisplayHeading] = useState(false);
-  const { categories, instructors, levels, languages, selectPrice } =
+  const { categories, instructors, levels, languages, ratings, selectPrice } =
     useSelector((state) => state.filter);
 
   const router = useRouter();
@@ -23,13 +23,13 @@ const SearchResults = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {       
+      try {
         if (keyword !== prevKeyword) {
           setLoading(true);
           await searchCourses(keyword, setCourses);
           setLoading(false);
           setDisplayHeading(true);
-          setPrevKeyword(keyword); 
+          setPrevKeyword(keyword);
         }
       } catch (error) {
         setLoading(false);
@@ -39,14 +39,26 @@ const SearchResults = () => {
     if (keyword) {
       fetchData();
     }
-    
-  }, [keyword, prevKeyword, categories, instructors, levels, languages, selectPrice]);
+  }, [
+    keyword,
+    prevKeyword,
+    categories,
+    instructors,
+    ratings,
+    levels,
+    languages,
+    selectPrice,
+  ]);
 
   const filteredItems = courses.filter((item) => {
     const categoryMatch =
       categories.length === 0 || categories.includes(item.category);
+
     const instructorMatch =
       instructors.length === 0 || instructors.includes(item.instructor);
+
+    const ratingMatch = ratings.length === 0 || ratings.includes(item.rating);
+
     const levelMatch = levels.length === 0 || levels.includes(item.level);
     const languageMatch =
       languages.length === 0 || languages.includes(item.language);
@@ -57,6 +69,7 @@ const SearchResults = () => {
       instructorMatch &&
       levelMatch &&
       languageMatch &&
+      ratingMatch &&
       priceMatch
     );
   });
@@ -98,10 +111,8 @@ const SearchResults = () => {
                   : `Search Results for: ${keyword}`}
               </div>
             </h3>
-            
 
             <div className="col-md-3">
-              
               <CourseSidebarTwo course_items={courses} />
             </div>
 
