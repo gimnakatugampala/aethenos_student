@@ -13,9 +13,9 @@ const Cart = () => {
     const dispatch = useDispatch();
     const {total} = useCartInfo();
 
-    // useEffect(() => {
-    //   console.log(cartItems)
-    // })
+    useEffect(() => {
+      console.log(cartItems)
+    })
     
     
     return (
@@ -62,9 +62,9 @@ const Cart = () => {
 
                     <div className="total-price-wrapper">
                         <span className="total-text">Subtotal:</span>
-                        <span className="total-amount">${parseFloat(total.toFixed(3))}</span>
+                        <span className="total-amount">{cartItems.length > 0 && getSymbolFromCurrency(GetCurrencyByCountry(cartItems[0].other_data))}{parseFloat(total.toFixed(3))}</span>
                     </div>
-
+               
                     <div className="cart-checkout-buttons">
                         <a href="/cart" className="edu-btn btn-small cart-btn">
                             View Cart

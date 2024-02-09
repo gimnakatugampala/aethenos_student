@@ -32,10 +32,13 @@ const GetCurrencyByCountry = (data) => {
         });
     
         if (foundPrice) {
+
+            // console.log(data.course_prices)
             // console.log("Country Found");
             // console.log(foundPrice); 
-            if(foundPrice.listPrice == 0 && foundPrice.netPrice){
-                currency_code = 'USD'
+
+            if(foundPrice.listPrice == 0 && foundPrice.netPrice == 0){
+                currency_code = JSON.parse(COUNTRY).currency
             }else{
                 currency_code = JSON.parse(COUNTRY).currency
             }

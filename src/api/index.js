@@ -43,6 +43,28 @@ export const getUserCountry = async() =>{
 }
 
 
+export const getCurrencyExchangeRate = async (code) => {
+  try {
+    const response = await fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd/${code}.json`);
+    const data = await response.json();
+
+    // Access the dynamic key
+    const dynamicKey = Object.keys(data)[1]; // Assuming there's only one dynamic key
+
+    const exchangeRate = data[dynamicKey];
+    // console.log(exchangeRate);
+
+    Cookies.set('aethenos_currency', `${exchangeRate}`)
+
+  } catch (error) {
+    console.log("Error fetching currency exchange rate:", error);
+    return null;
+  }
+}
+
+
+
+
 export const StudentSignUp = async(fname, lname, email , conpassword,setloading,router) =>{
 
 

@@ -1,8 +1,10 @@
 import React from 'react'
 import Cookies from 'js-cookie';
+import { getCurrencyExchangeRate } from '../../api';
 
 
 const COUNTRY = Cookies.get('aethenos_user_origin')
+const EX_RATES = Cookies.get('aethenos_currency')
 
 const CalculateListPrice = (data) => {
 
@@ -34,8 +36,10 @@ const CalculateListPrice = (data) => {
         if (foundPrice) {
             // console.log("Country Found");
             // console.log(foundPrice.listPrice); 
+            getCurrencyExchangeRate(JSON.parse(COUNTRY).currency.toLowerCase())
             if(foundPrice.listPrice == 0){
-                list_price = data.course_prices.globalListPrice
+                list_price = (Number.parseFloat(data.course_prices.globalListPrice) * Number.parseFloat(JSON.parse(EX_RATES))).toFixed(2);
+                
             }else{
                 list_price = foundPrice.listPrice
             }

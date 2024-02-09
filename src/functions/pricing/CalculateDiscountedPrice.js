@@ -1,12 +1,17 @@
 import React from 'react'
 import Cookies from 'js-cookie';
+import { getCurrencyExchangeRate } from '../../api';
 
 
 const COUNTRY = Cookies.get('aethenos_user_origin')
+const EX_RATES = Cookies.get('aethenos_currency')
 
 const CalculateDiscountedPrice = (data) => {  
     
     let countryToFind = "";
+     // -----------------------------
+     
+ 
 
     if (COUNTRY) {
         try {
@@ -32,14 +37,24 @@ const CalculateDiscountedPrice = (data) => {
         });
     
         if (foundPrice) {
+
             // console.log("Country Found");
             // console.log(foundPrice); 
-            if(foundPrice.netPrice == 0){
-                net_price = data.course_prices.globalNetPrice
-            }else{
-                net_price = foundPrice.netPrice
+            // console.log(data.course_prices); 
+            getCurrencyExchangeRate(JSON.parse(COUNTRY).currency.toLowerCase())
+            if (foundPrice.netPrice == 0) {
+                // Convert the $ to The Native Currency
+                return  net_price = (Number.parseFloat(data.course_prices.globalNetPrice) * Number.parseFloat(JSON.parse(EX_RATES))).toFixed(2);
+
+            } else {
+                return net_price = foundPrice.netPrice;
             }
+           
+
         } else {
+
+            // Not in the Price Matrics
+
             // console.log("Country Not Found");
             // console.log("Default Price");
             // console.log(data.course_prices)
