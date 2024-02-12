@@ -10,6 +10,8 @@ import {
   add_rating,
   add_item_offset,
   add_language,
+  add_topic,
+  add_subCategory,
   add_level,
   add_price,
   add_select_price,
@@ -23,22 +25,105 @@ const CourseSidebarTwo = ({ course_items }) => {
   const [minPrice, setMinPrice] = useState(0);
   const [showCategory, setShowCategory] = useState(true);
   const [showLevel, setShowLevel] = useState(true);
+  const [showTopic, setShowTopic] = useState(true);
   const [showInstructor, setShowInstructor] = useState(true);
+  const [showSubCategory, setshowSubCategory] = useState(true);
   const [showRating, setShowRating] = useState(true);
   const [showLanguage, setShowLanguage] = useState(true);
 
-  const { categories, instructors, levels, languages, ratings } = useSelector(
-    (state) => state.filter
-  );
+  const {
+    categories,
+    instructors,
+    levels,
+    languages,
+    ratings,
+    topics,
+    subcategories,
+  } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
   useEffect(() => {
     getCourseData(setCourses);
   }, []);
 
+  // useEffect(() => {
+  //   // Dummy data for testing
+  //   const dummyCourses = [
+  //     {
+  //       category: "Programming",
+  //       instructor: "John Doe",
+  //       rating: 3,
+  //       level: "Beginner",
+  //       language: "English",
+  //       sub_category: "Web Development",
+  //       topic: "Javascript",
+  //     },
+  //     {
+  //       category: "Data",
+  //       instructor: "John Smith",
+  //       rating: 3,
+  //       level: "Beginner",
+  //       language: "English",
+  //       sub_category: "Data Science",
+  //       topic: "React JS",
+  //     },
+  //     {
+  //       category: "Data Science",
+  //       instructor: "Jane Smith",
+  //       rating: 1,
+  //       level: "Intermediate",
+  //       language: "English",
+  //       sub_category: "Game Development",
+  //       topic: "Node JS",
+  //     },
+  //     {
+  //       category: "Web Development",
+  //       instructor: "Alex Johnson",
+  //       rating: 2,
+  //       level: "Advanced",
+  //       language: "Spanish",
+  //       sub_category: "Real Estate",
+  //       topic: "C++ (Programming Langauage)",
+  //     },
+  //     {
+  //       category: "Web Development",
+  //       instructor: "Alex Johnson",
+  //       rating: 3,
+  //       level: "Advanced",
+  //       language: "Spanish",
+  //       sub_category: "Finance",
+  //       topic: "App Development",
+  //     },
+  //     {
+  //       category: "Web Development",
+  //       instructor: "Alex Johnson",
+  //       rating: 4,
+  //       level: "Advanced",
+  //       language: "Spanish",
+  //       sub_category: "Investing & Trading",
+  //       topic: "Unreal Engine",
+  //     },
+  //     {
+  //       category: "Web Development",
+  //       instructor: "Alex Johnson",
+  //       rating: 1,
+  //       level: "Advanced",
+  //       language: "Spanish",
+  //       sub_category: "Nertwork & Security",
+  //       topic: "Java",
+  //     },
+  //   ];
+
+  //   // Sort courses by rating in ascending order
+  //   dummyCourses.sort((a, b) => a.rating - b.rating);
+
+  //   setCourses(dummyCourses);
+  //   // For actual data retrieval:
+  //   // getCourseData(setCourses);
+  // }, []);
+
   useEffect(() => {
     if (AllCourses.length > 0) {
-
       AllCourses.sort((a, b) => a.rating - b.rating);
 
       const prices = AllCourses.reduce((acc, course) => {
@@ -79,6 +164,12 @@ const CourseSidebarTwo = ({ course_items }) => {
     ...new Set(AllCourses.map((course) => course.language)),
   ];
 
+  const all_topics = [...new Set(AllCourses.map((course) => course.topic))];
+
+  const all_SubCategorys = [
+    ...new Set(AllCourses.map((course) => course.sub_category)),
+  ];
+
   const handleCategory = (cate) => {
     const index = categories.findIndex((item) => item === cate);
     if (index >= 0) {
@@ -96,7 +187,7 @@ const CourseSidebarTwo = ({ course_items }) => {
     dispatch(add_force_page(0));
   };
 
-  const handleRating = (rating) => {   
+  const handleRating = (rating) => {
     dispatch(add_rating({ rating }));
     dispatch(add_item_offset(0));
     dispatch(add_force_page(0));
@@ -110,6 +201,18 @@ const CourseSidebarTwo = ({ course_items }) => {
 
   const handleLanguage = (language) => {
     dispatch(add_language({ language, maxPrice }));
+    dispatch(add_item_offset(0));
+    dispatch(add_force_page(0));
+  };
+
+  const handleTopic = (topic) => {
+    dispatch(add_topic({ topic, maxPrice }));
+    dispatch(add_item_offset(0));
+    dispatch(add_force_page(0));
+  };
+
+  const handleSubCategory = (sub_category) => {
+    dispatch(add_subCategory({ sub_category, maxPrice }));
     dispatch(add_item_offset(0));
     dispatch(add_force_page(0));
   };
@@ -133,8 +236,10 @@ const CourseSidebarTwo = ({ course_items }) => {
       starArray.push(
         <span
           key={i}
-          style={{color: "#f8b81f", }}
-          className={`icon-star ${i <= rating ? " icon-star-full" : " icon-star-empty"}`}
+          style={{ color: "#f8b81f" }}
+          className={`icon-star ${
+            i <= rating ? " icon-star-full" : " icon-star-empty"
+          }`}
         ></span>
       );
     }
@@ -158,25 +263,30 @@ const CourseSidebarTwo = ({ course_items }) => {
             className="content"
             style={{ display: showCategory ? "block" : "none" }}
           >
-            {all_categories.map((c, i) => (
-              <div key={i} className="edu-form-check">
-                <input
-                  onClick={() => handleCategory(c)}
-                  type="checkbox"
-                  checked={categories.includes(c)}
-                  id={`cat-check${i + 1}`}
-                  readOnly
-                />
-                <label htmlFor={`cat-check${i + 1}`}>
-                  {c}
-                  <span>
-                    (
-                    {course_items.filter((item) => item.category === c)?.length}
-                    )
-                  </span>
-                </label>
-              </div>
-            ))}
+            {all_categories.map((category, i) => {
+              const categoryCount =
+                course_items.filter((item) => item.category === category)
+                  ?.length ?? 0;
+              if (categoryCount > 0) {
+                return (
+                  <div key={i} className="edu-form-check">
+                    <input
+                      onClick={() => handleCategory(category)}
+                      checked={categories.includes(category)}
+                      type="checkbox"
+                      id={`cat-check${i + 1}`}
+                      readOnly
+                    />
+                    <label htmlFor={`cat-check${i + 1}`}>
+                      {category}
+                      <span>({categoryCount})</span>
+                    </label>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
           </div>
         </div>
       </div>
@@ -196,29 +306,30 @@ const CourseSidebarTwo = ({ course_items }) => {
             className="content"
             style={{ display: showInstructor ? "block" : "none" }}
           >
-            {all_instructors.map((instructor, i) => (
-              <div key={i} className="edu-form-check">
-                <input
-                  onClick={() => handleInstructor(instructor)}
-                  checked={instructors.includes(instructor)}
-                  type="checkbox"
-                  id={`cat-check-2${i + 1}`}
-                  readOnly
-                />
-                <label htmlFor={`cat-check-2${i + 1}`}>
-                  {instructor}
-                  <span>
-                    (
-                    {
-                      course_items.filter(
-                        (item) => item.instructor === instructor
-                      )?.length
-                    }
-                    )
-                  </span>
-                </label>
-              </div>
-            ))}
+            {all_instructors.map((instructor, i) => {
+              const instructorCount =
+                course_items.filter((item) => item.instructor === instructor)
+                  ?.length ?? 0;
+              if (instructorCount > 0) {
+                return (
+                  <div key={i} className="edu-form-check">
+                    <input
+                      onClick={() => handleInstructor(instructor)}
+                      checked={instructors.includes(instructor)}
+                      type="checkbox"
+                      id={`cat-check-2${i + 1}`}
+                      readOnly
+                    />
+                    <label htmlFor={`cat-check-2${i + 1}`}>
+                      {instructor}
+                      <span>({instructorCount})</span>
+                    </label>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
           </div>
         </div>
       </div>
@@ -279,28 +390,30 @@ const CourseSidebarTwo = ({ course_items }) => {
             className="content"
             style={{ display: showLevel ? "block" : "none" }}
           >
-            {all_levels.map((level, i) => (
-              <div key={i} className="edu-form-check">
-                <input
-                  onClick={() => handleLevel(level)}
-                  checked={levels.includes(level)}
-                  type="checkbox"
-                  id={`cat-check-4${i + 1}`}
-                  readOnly
-                />
-                <label htmlFor={`cat-check-4${i + 1}`}>
-                  {level}
-                  <span>
-                    (
-                    {
-                      course_items.filter((item) => item.level === level)
-                        ?.length
-                    }
-                    )
-                  </span>
-                </label>
-              </div>
-            ))}
+            {all_levels.map((level, i) => {
+              const levelCount =
+                course_items.filter((item) => item.level === level)?.length ??
+                0;
+              if (levelCount > 0) {
+                return (
+                  <div key={i} className="edu-form-check">
+                    <input
+                      onClick={() => handleLevel(level)}
+                      checked={levels.includes(level)}
+                      type="checkbox"
+                      id={`cat-check-4${i + 1}`}
+                      readOnly
+                    />
+                    <label htmlFor={`cat-check-4${i + 1}`}>
+                      {level}
+                      <span>({levelCount})</span>
+                    </label>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
           </div>
         </div>
       </div>
@@ -320,28 +433,119 @@ const CourseSidebarTwo = ({ course_items }) => {
             className="content"
             style={{ display: showLanguage ? "block" : "none" }}
           >
-            {all_languages.map((language, i) => (
-              <div key={i} className="edu-form-check">
-                <input
-                  onClick={() => handleLanguage(language)}
-                  checked={languages.includes(language)}
-                  type="checkbox"
-                  id={`cat-check-4${i + 1}`}
-                  readOnly
-                />
-                <label htmlFor={`cat-check-4${i + 1}`}>
-                  {language}
-                  <span>
-                    (
-                    {
-                      course_items.filter((item) => item.language === language)
-                        ?.length
-                    }
-                    )
-                  </span>
-                </label>
-              </div>
-            ))}
+            {all_languages.map((language, i) => {
+              const languageCount =
+                course_items.filter((item) => item.language === language)
+                  ?.length ?? 0;
+              if (languageCount > 0) {
+                return (
+                  <div key={i} className="edu-form-check">
+                    <input
+                      onClick={() => handleLanguage(language)}
+                      checked={languages.includes(language)}
+                      type="checkbox"
+                      id={`cat-check-5${i + 1}`}
+                      readOnly
+                    />
+                    <label htmlFor={`cat-check-5${i + 1}`}>
+                      {language}
+                      <span>({languageCount})</span>
+                    </label>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
+          </div>
+        </div>
+      </div>
+
+      <div className="edu-course-widget widget-language">
+        <div className="inner">
+          <h5
+            className={`widget-title widget-toggle ${
+              showTopic ? "active" : ""
+            }`}
+            onClick={() => setShowTopic(!showTopic)}
+          >
+            Topic
+          </h5>
+
+          <div
+            className="content"
+            style={{ display: showTopic ? "block" : "none" }}
+          >
+            {all_topics.map((topic, i) => {
+              const topicCount =
+                course_items.filter((item) => item.topic === topic)?.length ??
+                0;
+              topic;
+              if (topicCount > 0) {
+                return (
+                  <div key={i} className="edu-form-check">
+                    <input
+                      onClick={() => handleTopic(topic)}
+                      checked={topics.includes(topic)}
+                      type="checkbox"
+                      id={`cat-check-6${i + 1}`}
+                      readOnly
+                    />
+                    <label htmlFor={`cat-check-6${i + 1}`}>
+                      {topic}
+                      <span>({topicCount})</span>
+                    </label>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
+          </div>
+        </div>
+      </div>
+
+      <div className="edu-course-widget widget-language">
+        <div className="inner">
+          <h5
+            className={`widget-title widget-toggle ${
+              showSubCategory ? "active" : ""
+            }`}
+            onClick={() => setshowSubCategory(!showSubCategory)}
+          >
+            Sub Category
+          </h5>
+
+          <div
+            className="content"
+            style={{ display: showSubCategory ? "block" : "none" }}
+          >
+            {all_SubCategorys.map((sub_category, i) => {
+              const subCategoryCount =
+                course_items.filter(
+                  (item) => item.sub_category === sub_category
+                )?.length ?? 0;
+              sub_category;
+              if (subCategoryCount > 0) {
+                return (
+                  <div key={i} className="edu-form-check">
+                    <input
+                      onClick={() => handleSubCategory(sub_category)}
+                      checked={subcategories.includes(sub_category)}
+                      type="checkbox"
+                      id={`cat-check-7${i + 1}`}
+                      readOnly
+                    />
+                    <label htmlFor={`cat-check-7${i + 1}`}>
+                      {sub_category}
+                      <span>({subCategoryCount})</span>
+                    </label>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
           </div>
         </div>
       </div>

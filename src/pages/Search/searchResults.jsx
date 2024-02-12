@@ -15,8 +15,16 @@ const SearchResults = () => {
   const [showing, setShowing] = useState(0);
   const [prevKeyword, setPrevKeyword] = useState("");
   const [displayHeading, setDisplayHeading] = useState(false);
-  const { categories, instructors, levels, languages, ratings, selectPrice } =
-    useSelector((state) => state.filter);
+  const {
+    categories,
+    instructors,
+    levels,
+    languages,
+    ratings,
+    selectPrice,
+    topics,
+    subcategories,
+  } = useSelector((state) => state.filter);
 
   const router = useRouter();
   const { keyword } = router.query;
@@ -47,6 +55,8 @@ const SearchResults = () => {
     ratings,
     levels,
     languages,
+    topics,
+    subcategories,
     selectPrice,
   ]);
 
@@ -62,6 +72,11 @@ const SearchResults = () => {
     const levelMatch = levels.length === 0 || levels.includes(item.level);
     const languageMatch =
       languages.length === 0 || languages.includes(item.language);
+
+    const topicMatch = topics.length === 0 || topics.includes(item.topic);
+
+    const subCategoryMatch = subcategories.length === 0 || subcategories.includes(item.sub_category);
+
     const priceMatch = CalculateListPrice(item) <= selectPrice;
 
     return (
@@ -69,6 +84,8 @@ const SearchResults = () => {
       instructorMatch &&
       levelMatch &&
       languageMatch &&
+      topicMatch &&
+      subCategoryMatch &&
       ratingMatch &&
       priceMatch
     );

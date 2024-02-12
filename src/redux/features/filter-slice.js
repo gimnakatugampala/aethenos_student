@@ -8,6 +8,8 @@ export const filterSlice = createSlice({
     ratings: [],
     levels: [],
     languages: [],
+    topics: [],
+    subcategories: [],
     price: 0,
     selectPrice: 0,
     page_count: 0,
@@ -44,7 +46,7 @@ export const filterSlice = createSlice({
         );
       }
     },
-    
+
     add_level: (state, { payload }) => {
       const isExist = state.levels.includes(payload.level);
       if (!isExist) {
@@ -60,6 +62,26 @@ export const filterSlice = createSlice({
       } else {
         state.languages = state.languages.filter(
           (language) => language !== payload.language
+        );
+      }
+    },
+
+    add_topic: (state, { payload }) => {
+      const isExist = state.topics.includes(payload.topic);
+      if (!isExist) {
+        state.topics.push(payload.topic);
+      } else {
+        state.topics = state.topics.filter((topic) => topic !== payload.topic);
+      }
+    },
+
+    add_subCategory: (state, { payload }) => {
+      const isExist = state.subcategories.includes(payload.sub_category);
+      if (!isExist) {
+        state.subcategories.push(payload.sub_category);
+      } else {
+        state.subcategories = state.subcategories.filter(
+          (sub_category) => sub_category !== payload.sub_category
         );
       }
     },
@@ -85,6 +107,8 @@ export const filterSlice = createSlice({
       state.categories = [];
       state.instructors = [];
       state.languages = [];
+      state.topics = [];
+      state.subcategories = [];
       state.levels = [];
       state.selectPrice = 0;
       state.price = payload;
@@ -98,6 +122,8 @@ export const {
   add_rating,
   add_level,
   add_language,
+  add_topic,
+  add_subCategory,
   add_price,
   reset_filter,
   add_select_price,
