@@ -1309,9 +1309,13 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addToStudent
   .then(response => response.json())
   .then(result => {
     console.log(result)
-
+    
     if(result.variable == "200"){
       SuccessAlert("Success",result.message)
+      
+      
+      window.localStorage.removeItem('cart_items');
+
 
       setTimeout(() => {
           window.location.href = "/my-courses"

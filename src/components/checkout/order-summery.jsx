@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 import useCartInfo from '../../hooks/use-cart-info';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { loadStripe } from '@stripe/stripe-js';
@@ -15,7 +16,7 @@ const stripePromise = loadStripe(
 const OrderSummery = ({showStripe,showPaypal}) => {
     const {cartCourses} = useSelector(state => state.cart);
     const {total} = useCartInfo();
-
+    const router = useRouter();
     const [purchasedCourse, setPurchasedCourse] = useState([]);
     const [buyCourseOrder, setBuyCourseOrder] = useState(null);
     
@@ -38,6 +39,12 @@ const newPricing = cartCourses != null && cartCourses.map((course) => ({
 
         // Check The User Token
         VerfiyCheckoutUser()
+
+
+        if(JSON.parse(window.localStorage.getItem('cart_items')) == null || JSON.parse(window.localStorage.getItem('cart_items')).length == 0){
+            router.push('/cart');
+            return
+        }
 
         if(total != 0){
 
