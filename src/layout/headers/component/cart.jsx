@@ -13,9 +13,9 @@ const Cart = () => {
     const dispatch = useDispatch();
     const {total} = useCartInfo();
 
-    useEffect(() => {
-      console.log(cartItems)
-    })
+    // useEffect(() => {
+    //   console.log(cartItems)
+    // })
     
     
     return (

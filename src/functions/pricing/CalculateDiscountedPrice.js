@@ -44,7 +44,10 @@ const CalculateDiscountedPrice = (data) => {
             getCurrencyExchangeRate(JSON.parse(COUNTRY).currency.toLowerCase())
             if (foundPrice.netPrice == 0) {
                 // Convert the $ to The Native Currency
-                return  net_price = (Number.parseFloat(data.course_prices.globalNetPrice) * Number.parseFloat(JSON.parse(EX_RATES))).toFixed(2);
+                if(EX_RATES != null){
+                    return  net_price = (Number.parseFloat(data.course_prices.globalNetPrice) * Number.parseFloat(JSON.parse(EX_RATES))).toFixed(2);
+                }
+                
 
             } else {
                 return net_price = foundPrice.netPrice;

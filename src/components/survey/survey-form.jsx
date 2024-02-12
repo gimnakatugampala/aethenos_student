@@ -185,7 +185,7 @@ const Surveyform = () => {
               }}
             >
               <h6 className="mt-3" style={{ width: "100%" }}>
-                Popular Topics <i class="icon-2 mx-1"></i>
+                Popular Topics <i className="icon-2 mx-1"></i>
               </h6>
               {filteredSuggestions != null && filteredSuggestions.map((suggest, index) => (
                 <span

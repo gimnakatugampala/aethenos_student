@@ -227,20 +227,20 @@ const HeroArea = () => {
         </div>
      
 
-        <label for="exampleFormControlInput1" class="form-label">Password</label>
-        <div class="input-group mb-3">
-            <input onChange={(e) => setpassword(e.target.value)} type={showPass?"text":"password"}  class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2" />
-            <span class="input-group-text" id="basic-addon2">
+        <label for="exampleFormControlInput1" className="form-label">Password</label>
+        <div className="input-group mb-3">
+            <input onChange={(e) => setpassword(e.target.value)} type={showPass?"text":"password"}  className="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2" />
+            <span className="input-group-text" id="basic-addon2">
             {showPass ? (<span onClick={() => setshowPass(!showPass)} className="password-show"><i class="fas fa-eye-slash fa-lg"></i></span>) : (<span onClick={() => setshowPass(!showPass)} className="password-show"><i class="far fa-eye fa-lg"></i></span>)} 
             </span>
         </div>
 
 
-        <label for="exampleFormControlInput1" class="form-label">Confirm Password</label>
-        <div class="input-group mb-3">
-            <input onChange={(e) => setconpassword(e.target.value)}  type={showPass?"text":"password"}  class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon2" />
-            <span class="input-group-text" id="basic-addon2">
-            {showPass ? (<span onClick={() => setshowPass(!showPass)} className="password-show"><i class="fas fa-eye-slash fa-lg"></i></span>) : (<span onClick={() => setshowPass(!showPass)} className="password-show"><i class="far fa-eye fa-lg"></i></span>)} 
+        <label for="exampleFormControlInput1" className="form-label">Confirm Password</label>
+        <div className="input-group mb-3">
+            <input onChange={(e) => setconpassword(e.target.value)}  type={showPass?"text":"password"}  className="form-control" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon2" />
+            <span className="input-group-text" id="basic-addon2">
+            {showPass ? (<span onClick={() => setshowPass(!showPass)} className="password-show"><i className="fas fa-eye-slash fa-lg"></i></span>) : (<span onClick={() => setshowPass(!showPass)} className="password-show"><i className="far fa-eye fa-lg"></i></span>)} 
             </span>
             
         </div>
