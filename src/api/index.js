@@ -1307,7 +1307,21 @@ var requestOptions = {
 
 fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addToStudentsPurchasedCourses", requestOptions)
   .then(response => response.json())
-  .then(result => console.log(result))
+  .then(result => {
+    console.log(result)
+
+    if(result.variable == "200"){
+      SuccessAlert("Success",result.message)
+
+      setTimeout(() => {
+          window.location.href = "/my-courses"
+      }, 1500);
+
+      return
+    }
+
+
+  })
   .catch(error => console.log('error', error));
 
 }
