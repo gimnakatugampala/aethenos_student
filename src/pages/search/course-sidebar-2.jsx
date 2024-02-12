@@ -46,82 +46,6 @@ const CourseSidebarTwo = ({ course_items }) => {
     getCourseData(setCourses);
   }, []);
 
-  // useEffect(() => {
-  //   // Dummy data for testing
-  //   const dummyCourses = [
-  //     {
-  //       category: "Programming",
-  //       instructor: "John Doe",
-  //       rating: 3,
-  //       level: "Beginner",
-  //       language: "English",
-  //       sub_category: "Web Development",
-  //       topic: "Javascript",
-  //     },
-  //     {
-  //       category: "Data",
-  //       instructor: "John Smith",
-  //       rating: 3,
-  //       level: "Beginner",
-  //       language: "English",
-  //       sub_category: "Data Science",
-  //       topic: "React JS",
-  //     },
-  //     {
-  //       category: "Data Science",
-  //       instructor: "Jane Smith",
-  //       rating: 1,
-  //       level: "Intermediate",
-  //       language: "English",
-  //       sub_category: "Game Development",
-  //       topic: "Node JS",
-  //     },
-  //     {
-  //       category: "Web Development",
-  //       instructor: "Alex Johnson",
-  //       rating: 2,
-  //       level: "Advanced",
-  //       language: "Spanish",
-  //       sub_category: "Real Estate",
-  //       topic: "C++ (Programming Langauage)",
-  //     },
-  //     {
-  //       category: "Web Development",
-  //       instructor: "Alex Johnson",
-  //       rating: 3,
-  //       level: "Advanced",
-  //       language: "Spanish",
-  //       sub_category: "Finance",
-  //       topic: "App Development",
-  //     },
-  //     {
-  //       category: "Web Development",
-  //       instructor: "Alex Johnson",
-  //       rating: 4,
-  //       level: "Advanced",
-  //       language: "Spanish",
-  //       sub_category: "Investing & Trading",
-  //       topic: "Unreal Engine",
-  //     },
-  //     {
-  //       category: "Web Development",
-  //       instructor: "Alex Johnson",
-  //       rating: 1,
-  //       level: "Advanced",
-  //       language: "Spanish",
-  //       sub_category: "Nertwork & Security",
-  //       topic: "Java",
-  //     },
-  //   ];
-
-  //   // Sort courses by rating in ascending order
-  //   dummyCourses.sort((a, b) => a.rating - b.rating);
-
-  //   setCourses(dummyCourses);
-  //   // For actual data retrieval:
-  //   // getCourseData(setCourses);
-  // }, []);
-
   useEffect(() => {
     if (AllCourses.length > 0) {
       AllCourses.sort((a, b) => a.rating - b.rating);
@@ -247,7 +171,7 @@ const CourseSidebarTwo = ({ course_items }) => {
   };
 
   return (
-    <div className="course-sidebar-2 mx-4">
+    <div className="course-sidebar-3 mx-4">
       <div className="edu-course-widget widget-category">
         <div className="inner">
           <h5
