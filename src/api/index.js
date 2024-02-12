@@ -14,7 +14,7 @@ const Unauthorized = (result,rediect_url) =>{
 
   if(result == 401){
     Cookies.remove('aethenos', { path: '' })
-    window.location.href = `/login?sessionTimeout=true&rediect-url=${rediect_url}`
+    window.location.href = `/login?rediect-url=${rediect_url}`
   }
 }
 
@@ -1354,6 +1354,28 @@ export const VerfiyCheckoutUser = async() =>{
       }
       // setshowLogin(false)
 
+    })
+    .catch(error => console.log('error', error));
+
+}
+
+export const GetMyCourses = async() =>{
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getCoursesPurchasedByTheStudent", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+
+      Unauthorized(result.status,"my-courses")
     })
     .catch(error => console.log('error', error));
 

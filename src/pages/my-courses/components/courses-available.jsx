@@ -35,16 +35,10 @@ const CourseFourArea = () => {
     return (
         <div className="edu-course-area course-area-1 section-gap-equal">
             <div className="container">
-                <div className="row g-5">
-                    <div className="col-lg-3">
-                        {/* course sidebar start */}
-                        <CourseSidebar course_items={course_items} />
-                        {/* course sidebar end */}
-                    </div>
-
-                    <div className="col-lg-9 col-pl--35">
+                <div className="row g-5 mx-auto">
+                    <div className="col-lg-11 col-pl--35">
                         {/* sorting area start */}
-                        <SortingArea course_items={course_items} course_list={true} num={showing} setCourses={setCourses} courses={courses} items={items}  />
+                        {/* <SortingArea course_items={course_items} course_list={true} num={showing} setCourses={setCourses} courses={courses} items={items}  /> */}
                         {/* sorting area end */}
 
                         <CourseItems itemsPerPage={5} items={items} course_style="6" setShowing={setShowing} />

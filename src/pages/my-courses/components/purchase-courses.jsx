@@ -5,6 +5,8 @@ import { cart_course } from '../../../redux/features/cart-slice';
 import { add_to_wishlist, wishlistItems } from '../../../redux/features/wishlist-slice';
 import Colors from '../../../contexts/Colors';
 import Button from 'react-bootstrap/Button';
+import { useEffect } from 'react';
+import { GetMyCourses } from '../../../api';
 
 
 const CourseTypeFive = ({ data, classes }) => {
@@ -13,97 +15,48 @@ const CourseTypeFive = ({ data, classes }) => {
     const wishlists = useSelector(wishlistItems);
     const isWishlistSelected = wishlists.find(w => Number(w.id) === Number(data.id));
 
-    const handleWishlist = (course_item) => {
-        if (wishlists.find(i => i.id === course_item.id)) {
-            dispatch(
-                add_to_wishlist({
-                    change_type: 'remove_wishlist', item: {
-                    id: course_item.id,
-                    img: `${course_item.img}`,
-                    title: course_item.title,
-                    price: course_item.course_price,
-                    other_data:course_item
-                }
-            }))
-        } else {
-            dispatch(
-                add_to_wishlist({
-                    change_type: 'add_wishlist', item: {
-                    id: course_item.id,
-                    img: `${course_item.img}`,
-                    title: course_item.title,
-                    price: course_item.course_price,
-                    other_data:course_item
-                }
-            }))
-        }
-    }
-
-    // handle add to cart
-    const handleAddToCart = (course) => {
-        dispatch(cart_course({
-            id:course.id,
-            img:`${course.img}`,
-            price:course.course_price,
-            title:course.title,
-            other_data:course
-        }))
-    }
+ useEffect(() => {
+    GetMyCourses()
+ }, [])
+ 
 
     return (
         <div className={`edu-course course-style-4 course-style-8 ${ classes ? classes : '' }`}>
             <div className="inner">
                 <div className="thumbnail">
-                    <Link href={`/course-content/${data && data.id}`} legacyBehavior><img width={300} height={200} className='cover-img' src={`https://www.courselounge.com/wp-content/uploads/best-udemy-courses-online.png`} alt="Course Thumb" /></Link>
-                    {/* <div className="time-top">
-                        <span className="duration">
-                            <i className="icon-61"></i>
-                            {data.duration}
-                        </span>
-                    </div> */}
+                    <Link href={`/course-content/${data && data.id}`} legacyBehavior>
+
+                        <img width={250} height={200} className='cover-img rounded' src={`https://www.courselounge.com/wp-content/uploads/best-udemy-courses-online.png`} alt="Course Thumb" />
+                    </Link>
                 </div>
 
                 <div className="content">
-                    {/* <div className="course-price">
-                        ${course_price}
-                    </div> */}
 
-                    <h5 className="title mb-5">
-                        <a href={`/my-courses/course-content`} >{data && data.title}</a>
+                    <h5 className="title m-0">
+                        <a href={`/my-courses/123`} >{data && data.title}</a>
                     </h5>
 
-                    {/* <div className="course-rating">
-                        <div className="rating">
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                        </div>
-                        <span className="rating-count">
-                            ({data.rating} /{data.rating_count}{" "} Rating)
-                        </span>
-                    </div> */}
+                    <p style={{fontSize:'13px'}} className='m-0'>Gimna Katugampala</p>
 
-                    {/* <p>{data.short_desc}</p> */}
+                    <a href={`/my-courses/123`} className='edu-btn btn-small my-3'>Start Course</a>
 
-                    <div className="progress" style={{ marginTop: '10px', marginBottom: '10px' }}>
-                        <div className="progress-bar"  role="progressbar"  style={{width:`${'20'}%`,  background: Colors.PrimaryColor }} aria-valuenow={'100'} 
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                 </div>
 
-                    <ul className="course-meta">
+        
+                    {/* <ul className="course-meta">
                         <li>  <i className="icon-24"></i>
-                         
                          {data && data.lesson} Lessons Completed
-                          
                         </li>
-                    
                         <li>
+
                         <i className="icon-24"></i>
                             {data && data.student} Lessons 
                         </li>
-                    </ul>
+                    </ul> */}
+
+                    <div className="progress">
+                        <div className="progress-bar"  role="progressbar"  style={{width:`${'20'}%`,  background: Colors.PrimaryColor }} aria-valuenow={'100'} 
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
             </div>
             {/* <div className="hover-content-aside">
