@@ -4,7 +4,7 @@ import { Footer, Header, Wrapper } from "../../../layout";
 import SEO from "../../../components/seo";
 import { GetAllCoursesByCategory, GetCourseCategoryTitle, GetCoursesByCategoryInstructor, GetCoursesByCategoryMostPopular, GetCoursesByCategoryNew, GetCoursesByCategoryTopics, GetCoursesByCategoryTrending, GetSubCategoriesByCategoryLinkName } from '../../../api';
 import CourseTypeOne from '../../../components/course/course-type-one';
-import CourseFourArea from '../../../components/course-category/landscape-courses/course-4-area'
+import CourseFourArea from '../../../components/course-category/landscape-courses/searchResults'
 import { course_data } from '../../../data';
 import { useState } from 'react';
 import Carousel from 'react-material-ui-carousel'
