@@ -1289,3 +1289,54 @@ export const getCourseData = async (setCourses) => {
     })
     .catch((error) => console.log("error", error));
 };
+
+export const BuyCourseByStudent = async(rawData) =>{
+
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  var raw = rawData;
+
+var requestOptions = {
+  method: 'POST',
+  body: raw,
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addToStudentsPurchasedCourses", requestOptions)
+  .then(response => response.json())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+}
+
+export const VerfiyCheckoutUser = async() =>{
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/authentication/getAccountValidation", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+
+
+      if(result.message == "Error"){
+        // setshowLogin(true)
+        window.location.href = "/cart"
+        return
+      }
+      // setshowLogin(false)
+
+    })
+    .catch(error => console.log('error', error));
+
+}

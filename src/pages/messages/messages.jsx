@@ -212,8 +212,8 @@ function Messages() {
                 </Paper>
 
                 
-                <div class="input-group p-2">
-                  <textarea placeholder="Type a Message" class="form-control" aria-label="With textarea"></textarea>
+                <div className="input-group p-2">
+                  <textarea placeholder="Type a Message" className="form-control" aria-label="With textarea"></textarea>
                     <Button variant="contained"><SendIcon /></Button>
                     
                 </div>

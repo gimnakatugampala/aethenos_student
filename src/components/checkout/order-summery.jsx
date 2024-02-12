@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import useCartInfo from '../../hooks/use-cart-info';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { loadStripe } from '@stripe/stripe-js';
-import { IMG_HOST } from '../../api';
+import { BuyCourseByStudent, IMG_HOST, VerfiyCheckoutUser } from '../../api';
 import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
 import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
 import getSymbolFromCurrency from 'currency-symbol-map';
@@ -15,6 +15,11 @@ const stripePromise = loadStripe(
 const OrderSummery = ({showStripe,showPaypal}) => {
     const {cartCourses} = useSelector(state => state.cart);
     const {total} = useCartInfo();
+
+    const [purchasedCourse, setPurchasedCourse] = useState([]);
+    const [buyCourseOrder, setBuyCourseOrder] = useState(null);
+    
+
 // console.log(cartCourses)
 
 const newPricing = cartCourses != null && cartCourses.map((course) => ({
@@ -25,19 +30,64 @@ const newPricing = cartCourses != null && cartCourses.map((course) => ({
     currency:GetCurrencyByCountry(course.other_data).toLowerCase(),
     price:(CalculateDiscountedPrice(course.other_data)).toFixed(2)
 }))
-console.log(newPricing)
-    React.useEffect(() => {
-        // Check to see if this is a redirect back from Checkout
+
+
+// console.log(newPricing)
+
+    useEffect(() => {
+
+        // Check The User Token
+        VerfiyCheckoutUser()
+
+        if(total != 0){
+
+            const calculatedPurchasedCourse = cartCourses != null && cartCourses.map((course) => ({
+            courseCode: course.other_data.course_code,
+            currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
+            itemPrice: course.quantity * (CalculateDiscountedPrice(course.other_data).toFixed(2))
+            }));
+    
+            setPurchasedCourse(calculatedPurchasedCourse);
+    
+            const calculatedBuyCourseOrder = {
+            "paymentMethod": "1",
+            "discount": 20,
+            "totalPrice": `${total}`,
+            "currency": GetCurrencyByCountry(cartCourses[0].other_data).toLowerCase(),
+            "courses": calculatedPurchasedCourse
+            };
+    
+            setBuyCourseOrder(calculatedBuyCourseOrder);
+            return
+        }
+
+
+    }, [cartCourses, total]);
+
+
+    useEffect(() => {
         const query = new URLSearchParams(window.location.search);
         if (query.get('success')) {
           console.log('Order placed! You will receive an email confirmation.');
-        }
+
+          if(buyCourseOrder != null && total != 0){
+              console.log(buyCourseOrder);
+              console.log(JSON.stringify(buyCourseOrder));
+             var rawData =  JSON.stringify(buyCourseOrder)
+              BuyCourseByStudent(rawData)
+
+              return
+          }
+          // Perform actions related to a successful purchase, accessing buyCourseOrder here
     
+        }
         if (query.get('canceled')) {
           console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
         }
-      }, []);
+      }, [buyCourseOrder]);
 
+
+      
     return (
         <div className="order-summery checkout-summery">
             <div className="summery-table-wrap">

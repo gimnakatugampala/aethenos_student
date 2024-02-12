@@ -25,7 +25,7 @@ const CartArea = () => {
 
     // Handle Coupons
     const handleCouponSubmit = () => {
-        console.log(coupon)
+        // console.log(coupon)
         if(coupon == ""){
             // ErrorAlert("Error","Please Enter Coupon")
             setcouponEmpty(true)

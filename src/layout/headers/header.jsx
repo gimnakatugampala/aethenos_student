@@ -229,7 +229,7 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                     ) : (
 
                                     <li> 
-                                        <i onClick={()=> setOpenProfile((prve)=> !prve)} class="fas fa-user-circle fa-2x"></i>
+                                        <i onClick={()=> setOpenProfile((prve)=> !prve)} className="fas fa-user-circle fa-2x"></i>
                                     </li>
                                     )}
                                             
