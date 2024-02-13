@@ -1374,7 +1374,6 @@ export const GetMyCourses = async() =>{
     .then(response => response.json())
     .then(result => {
       console.log(result)
-
       Unauthorized(result.status,"my-courses")
     })
     .catch(error => console.log('error', error));
