@@ -11,7 +11,7 @@ const index = () => {
             <div id="main-wrapper" className="main-wrapper">
             <SEO pageTitle={'My Courses'}  />
             <Header/>
-            <CourseTypeFour/>
+                <CourseTypeFour/>
             <Footer/>
             </div>
         </div>

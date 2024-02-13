@@ -1359,7 +1359,7 @@ export const VerfiyCheckoutUser = async() =>{
 
 }
 
-export const GetMyCourses = async() =>{
+export const GetMyCourses = async(setCourses,setloading) =>{
 
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
@@ -1375,6 +1375,10 @@ export const GetMyCourses = async() =>{
     .then(result => {
       console.log(result)
       Unauthorized(result.status,"my-courses")
+
+      setCourses(result)
+      setloading(false)
+
     })
     .catch(error => console.log('error', error));
 
