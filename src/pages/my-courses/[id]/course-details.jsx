@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Player } from 'video-react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Card from 'react-bootstrap/Card';
-import Accordion from 'react-bootstrap/Accordion';
+// import Accordion from 'react-bootstrap/Accordion';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
@@ -26,6 +26,9 @@ import { course_data } from '../../../data';
 import SingleProgressbar from "./single-progressbar";
 import SingleComment from "./single-comment";
 import CommentFormCourse from '../../../components/forms/comment-form-course';
+import Accordian from '../../../components/course-content/accordian'
+import { useEffect } from "react";
+import { GetMyCoursesDetails } from "../../../api";
 
 const course = course_data[0];
 
@@ -35,6 +38,9 @@ const CourseDetailsArea1 = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+ 
+  
 
   // Ask a new Question
   const [showNewQuestion, setShowNewQuestion] = useState(false);
@@ -46,7 +52,7 @@ const CourseDetailsArea1 = () => {
 
   return (
     <section
-      className="container my-5"
+    className="container my-5 course-details-3"
       style={{ textAlign: "left", backgroundColor: "transparent" }}>
         
         <div className="row">
@@ -55,122 +61,159 @@ const CourseDetailsArea1 = () => {
                 <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
               </Player>
 
-              {/*  Tabs */}
-              <div className="row">
+            {/* New Tab */}
+                <div className="row">
                 <div className="col-md-12">
-   
-                <Tabs
-                defaultActiveKey="overview"
-                id="uncontrolled-tab-example"
-                className="my-3">
+                <div className="course-details-content">
+                    <ul className="nav nav-tabs" id="myTab" role="tablist">
 
-                    <Tab eventKey="overview" title="Overview">
+                        <li className="nav-item" role="presentation">
+                            <button className="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview"
+                            type="button" role="tab" aria-controls="overview" aria-selected="true">Overview</button>
+                        </li>
 
-                    <div className="mt-5">
-                        <Typography variant="h4" gutterBottom>
-                          Become a Figma Pro with our in depth Advanced Figma tutorial course.
-                        </Typography>
+                        <li className="nav-item" role="presentation">
+                            <button className="nav-link" id="qa-tab" data-bs-toggle="tab" data-bs-target="#qa"
+                            type="button" role="tab" aria-controls="qa" aria-selected="false">Q&A</button>
+                        </li>
+
+                        <li className="nav-item" role="presentation">
+                            <button className="nav-link" id="announcement-tab" data-bs-toggle="tab" data-bs-target="#announcement"
+                            type="button" role="tab" aria-controls="announcement" aria-selected="false">Announcement</button>
+                        </li>
+
+                        <li className="nav-item" role="presentation">
+                            <button className="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews"
+                            type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews</button>
+                        </li>
+
+                    
+                    </ul>
+                    
+                </div>
+                </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-md-12">
+                      <div className="tab-content" id="myTabContent">
+
+                    {/* Overview */}
+                      <div className="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                            <div className="course-tab-content">
+                                <div className="course-overview">
+
+                                <div className="mt-5">
+                                  <Typography variant="h4" gutterBottom>
+                                    Become a Figma Pro with our in depth Advanced Figma tutorial course.
+                                  </Typography>
+
+                                  <div className="row mt-5">
+
+                                      <div className="col-md-2">
+                                        <div className="d-flex align-items-center">
+                                          <h6 className="m-0 p-0">4.7</h6>
+                                          <Rating  size={20} iconsCount={1} initialValue={1} />
+                                        </div>
+                                          <span>559 ratings</span>
+                                      </div>
+
+                                      <div className="col-md-2">
+                                        <div className="d-flex align-items-center">
+                                          <h6 className="m-0 p-0">4,987</h6>
+                                        </div>
+                                          <span>Students</span>
+                                      </div>
+
+                                      <div className="col-md-2">
+                                        <div className="d-flex align-items-center">
+                                          <h6 className="m-0 p-0">16 hours</h6>
+                                        </div>
+                                          <span>Total</span>
+                                      </div>
+
+
+                                  </div>
+
+
+                                
+                                  <div className="course-tab-content mt-5">
+                                      <div className="course-overview">
+                                          <h5 className="title m-0 p-0">What You’ll Learn?</h5>
+                                          <div className="row">
+                                          <ul className="col-md-6">
+                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
+                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
+                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
+                                          </ul>
+                                          <ul className="col-md-6">
+                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
+                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
+                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
+                                          </ul>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <h3 className="heading-title">Course Description</h3>
+                                  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium aperiam excepturi, eaque adipisci itaque enim doloribus ratione voluptas asperiores error harum nemo quo nesciunt necessitatibus, repellat dolorem natus, iusto repudiandae!</p>
+
+
+                                  <h3 className="heading-title">Instructor</h3>
+                                  <a href="/instructor/gimnakatugampala">Gimna Katugampala</a>
+                                  <p>Adobe Certified Instructor & Adobe Certified Expert</p>
+
+                                  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi beatae, eaque itaque aspernatur temporibus labore deleniti dolorem. Neque eos quisquam possimus reprehenderit, dolore non, maxime minus laboriosam atque doloribus sapiente similique, repudiandae sed quas eius aliquid! In nostrum exercitationem, harum molestiae delectus ad laboriosam perferendis veniam sunt, maxime labore? Nesciunt.</p>
+
+
+                                  <h3 className="heading-title">Featured Review</h3>
+
+                                <div className="my-4">
+                                <CardContainer className="p-2">
+                                    <h6 className="m-0 p-0">John Doe</h6>
+                                    <p className="m-0 p-0">101 courses</p>
+                                    <p className="m-0 p-0 mb-2">7 reviews</p>
+                                    <Rating  size={20} iconsCount={5} initialValue={5} /> <span className="mt-2">3 years</span>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, necessitatibus. Corporis, autem! Quaerat, excepturi? Quasi obcaecati quis culpa ad veniam delectus. Voluptate quam minima quos dolor ipsa reprehenderit atque assumenda nihil iure sint. Blanditiis rem modi reiciendis itaque hic perspiciatis.</p>
+                                  </CardContainer>
+                                  <CardContainer className="p-2">
+                                    <h6 className="m-0 p-0">John Doe</h6>
+                                    <p className="m-0 p-0">101 courses</p>
+                                    <p className="m-0 p-0 mb-2">7 reviews</p>
+                                    <Rating  size={20} iconsCount={5} initialValue={5} /> <span className="mt-2">3 years</span>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, necessitatibus. Corporis, autem! Quaerat, excepturi? Quasi obcaecati quis culpa ad veniam delectus. Voluptate quam minima quos dolor ipsa reprehenderit atque assumenda nihil iure sint. Blanditiis rem modi reiciendis itaque hic perspiciatis.</p>
+                                  </CardContainer>
+
+                                  <a className="m-0 p-2" href="#">3,566 Reviews <KeyboardArrowDownIcon /></a>
+
+                                </div>
+                        
+                                  
+                                  
+                                  <h3 className="heading-title">Requirements</h3>
+                                  <div className="row">
+                                          <ul className="col-md-12">
+                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
+                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
+                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
+                                          </ul>
+
+                                          </div>
+                                
+
+                                </div>
+                                          
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Q&A */}
+                        <div className="tab-pane fade" id="qa" role="tabpanel" aria-labelledby="qa-tab">
+                            <div className="course-tab-content">
+                            <div className="course-overview">
 
                         <div className="row mt-5">
-
-                            <div className="col-md-2">
-                              <div className="d-flex align-items-center">
-                                <h6 className="m-0 p-0">4.7</h6>
-                                <Rating  size={20} iconsCount={1} initialValue={1} />
-                              </div>
-                                <span>559 ratings</span>
-                            </div>
-
-                            <div className="col-md-2">
-                              <div className="d-flex align-items-center">
-                                <h6 className="m-0 p-0">4,987</h6>
-                              </div>
-                                <span>Students</span>
-                            </div>
-
-                            <div className="col-md-2">
-                              <div className="d-flex align-items-center">
-                                <h6 className="m-0 p-0">16 hours</h6>
-                              </div>
-                                <span>Total</span>
-                            </div>
-
-
-                        </div>
-
-
-                       
-                        <div className="course-tab-content mt-5">
-                            <div className="course-overview">
-                                <h5 className="title m-0 p-0">What You’ll Learn?</h5>
-                                <div className="row">
-                                <ul className="col-md-6">
-                                    <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
-                                    <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
-                                    <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
-                                </ul>
-                                <ul className="col-md-6">
-                                    <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
-                                    <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
-                                    <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
-                                </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <h3 className="heading-title">Course Description</h3>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium aperiam excepturi, eaque adipisci itaque enim doloribus ratione voluptas asperiores error harum nemo quo nesciunt necessitatibus, repellat dolorem natus, iusto repudiandae!</p>
-
-
-                        <h3 className="heading-title">Instructor</h3>
-                        <a href="/instructor/gimnakatugampala">Gimna Katugampala</a>
-                        <p>Adobe Certified Instructor & Adobe Certified Expert</p>
-
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi beatae, eaque itaque aspernatur temporibus labore deleniti dolorem. Neque eos quisquam possimus reprehenderit, dolore non, maxime minus laboriosam atque doloribus sapiente similique, repudiandae sed quas eius aliquid! In nostrum exercitationem, harum molestiae delectus ad laboriosam perferendis veniam sunt, maxime labore? Nesciunt.</p>
-
-
-                        <h3 className="heading-title">Featured Review</h3>
-
-                      <div className="my-4">
-                       <CardContainer className="p-2">
-                          <h6 className="m-0 p-0">John Doe</h6>
-                          <p className="m-0 p-0">101 courses</p>
-                          <p className="m-0 p-0 mb-2">7 reviews</p>
-                          <Rating  size={20} iconsCount={5} initialValue={5} /> <span className="mt-2">3 years</span>
-                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, necessitatibus. Corporis, autem! Quaerat, excepturi? Quasi obcaecati quis culpa ad veniam delectus. Voluptate quam minima quos dolor ipsa reprehenderit atque assumenda nihil iure sint. Blanditiis rem modi reiciendis itaque hic perspiciatis.</p>
-                        </CardContainer>
-                        <CardContainer className="p-2">
-                          <h6 className="m-0 p-0">John Doe</h6>
-                          <p className="m-0 p-0">101 courses</p>
-                          <p className="m-0 p-0 mb-2">7 reviews</p>
-                          <Rating  size={20} iconsCount={5} initialValue={5} /> <span className="mt-2">3 years</span>
-                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, necessitatibus. Corporis, autem! Quaerat, excepturi? Quasi obcaecati quis culpa ad veniam delectus. Voluptate quam minima quos dolor ipsa reprehenderit atque assumenda nihil iure sint. Blanditiis rem modi reiciendis itaque hic perspiciatis.</p>
-                        </CardContainer>
-
-                        <a className="m-0 p-2" href="#">3,566 Reviews <KeyboardArrowDownIcon /></a>
-
-                      </div>
-               
-                        
-                        
-                        <h3 className="heading-title">Requirements</h3>
-                        <div className="row">
-                                <ul className="col-md-12">
-                                    <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
-                                    <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
-                                    <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
-                                </ul>
-
-                                </div>
-                      
-
-                      </div>
-
-                    </Tab>
-
-                    <Tab eventKey="qa" title="Q&A">
-                      
-                      <div className="row">
                           <div className="col-md-12">
                           <InputGroup className="mb-3">
                               <Form.Control
@@ -220,91 +263,85 @@ const CourseDetailsArea1 = () => {
                           </div>
 
                           
-                      </div>
+                             </div>
 
-                      <div className="row my-3">
-                        <div className="col-md-12">
-                            <span className="d-flex"><h5 className="m-0 p-0">All questions in this courses</h5><span>(653)</span></span>
-                        </div>
-                      </div>
+                          <div className="row my-3">
+                            <div className="col-md-12">
+                                <span className="d-flex"><h5 className="m-0 p-0">All questions in this courses</h5><span>(653)</span></span>
+                            </div>
+                          </div>
 
-                      <div className="row my-1">
-                      <div className="col-md-12">
-                      <CardContainer>
-                      <ListItem alignItems="flex-start">
-                            <ListItemAvatar>
-                              <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                            </ListItemAvatar>
-                            <ListItemText
-                              primary="Brunch this weekend?"
-                              secondary={
-                                <React.Fragment>
-                                  {" I'll be in your neighborhood doing errands this…"}
-                                </React.Fragment>
-                              }
-                            />
+                          <div className="row my-1">
+                          <div className="col-md-12">
+                          <CardContainer>
+                          <ListItem alignItems="flex-start">
+                                <ListItemAvatar>
+                                  <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                                </ListItemAvatar>
+                                <ListItemText
+                                  primary="Brunch this weekend?"
+                                  secondary={
+                                    <React.Fragment>
+                                      {" I'll be in your neighborhood doing errands this…"}
+                                    </React.Fragment>
+                                  }
+                                />
 
-                              <Button onClick={handleShow} variant="contained" size="medium"><MessageIcon /></Button>
+                                  <Button onClick={handleShow} variant="contained" size="medium"><MessageIcon /></Button>
 
-                          </ListItem>
-                          
-                  
-                            <span className="mx-5 mt-2 d-flex">
-                            <Typography variant="body2">Sam Cane •</Typography>
+                              </ListItem>
                               
-                              <Typography className="mx-1" variant="body2">Lecture 229</Typography>
-                              <Typography className="mx-1" variant="body2">1 Year ago</Typography>
-                            </span>
-                          
-
-                    
-
-                      </CardContainer>
-                      </div>
-                      </div>
-
-                      <Button onClick={handleShowNewQuestion} className="my-3" variant="contained">Ask a new question</Button>
-
                       
-                    </Tab>
-
-                    <Tab eventKey="notes" title="Notes">
-
-                   
-
-                    <InputGroup className="mb-3">
-                        <Form.Control
-                          placeholder="Create a new note at 0:00"
-                          aria-label="Create a new note at 0:00"
-                          aria-describedby="basic-addon2"
-                        />
-                        <InputGroup.Text id="basic-addon2"><AddCircleIcon /></InputGroup.Text>
-                      </InputGroup>
-
-                
-
-                    </Tab>
-
-                    <Tab eventKey="annoucements" title="Announcements">
-                    <CardContainer>
-                      <ListItem>
-                        <ListItemAvatar>
-                          <Avatar>
-                            <PersonIcon />
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Gimna Katugampala" secondary="Post an annoucement • 28 days ago" />
-                      </ListItem>
-                      <div className="m-3">
-                      <h4 className="heading-title">[Great News]</h4>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium aperiam excepturi, eaque adipisci itaque enim doloribus ratione voluptas asperiores error harum nemo quo nesciunt necessitatibus, repellat dolorem natus, iusto repudiandae!</p>
-                      </div>
-                      </CardContainer>
-                    </Tab>
-
-                    <Tab eventKey="reviews" title="Reviews">
+                                <span className="mx-5 mt-2 d-flex">
+                                <Typography variant="body2">Sam Cane •</Typography>
+                                  
+                                  <Typography className="mx-1" variant="body2">Lecture 229</Typography>
+                                  <Typography className="mx-1" variant="body2">1 Year ago</Typography>
+                                </span>
                               
-                    <div className="course-review">
+
+                        
+
+                          </CardContainer>
+                          </div>
+                          </div>
+
+                          <Button onClick={handleShowNewQuestion} className="my-3" variant="contained">Ask a new question</Button>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                         {/* Annoucements */}
+                         <div className="tab-pane fade" id="announcement" role="tabpanel" aria-labelledby="announcement-tab">
+                            <div className="course-tab-content">
+                            <div className="course-overview">
+
+                                <CardContainer className="mt-5">
+                                <ListItem>
+                                  <ListItemAvatar>
+                                    <Avatar>
+                                      <PersonIcon />
+                                    </Avatar>
+                                  </ListItemAvatar>
+                                  <ListItemText primary="Gimna Katugampala" secondary="Post an annoucement • 28 days ago" />
+                                </ListItem>
+                                <div className="m-3">
+                                <h4 className="heading-title">[Great News]</h4>
+                                  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium aperiam excepturi, eaque adipisci itaque enim doloribus ratione voluptas asperiores error harum nemo quo nesciunt necessitatibus, repellat dolorem natus, iusto repudiandae!</p>
+                                </div>
+                                </CardContainer>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Reviews */}
+                        <div className="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                            <div className="course-tab-content">
+                            <div className="course-overview">
+
+                            <div className="course-review mt-5">
                           <h3 className="heading-title">Course Rating</h3>
                           <p>{rating} average rating based on {rating_count} rating</p>
                           <div className="row g-0 align-items-center">
@@ -356,12 +393,16 @@ const CourseDetailsArea1 = () => {
                               <CommentFormCourse/>
                           </div>
                       </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
 
-                    </Tab>
 
-              </Tabs>
-                </div>
-              </div>
+                            </div>
+                      </div>
+                  </div>
+
 
 
             </div>
@@ -372,8 +413,18 @@ const CourseDetailsArea1 = () => {
               <Card style={{backgroundColor:'transparent'}}>
                   <Card.Header><h6 className="m-2">Course Content</h6></Card.Header>
                   <Card.Body>
+                  <div className="faq-accordion">
+                      <div className="accordion">
+
+                    <Accordian />
+                    <Accordian />
+
+                    </div>
+                    </div>
+
+
                     
-                  <Accordion defaultActiveKey="0">
+                  {/* <Accordion defaultActiveKey="0">
 
                       <Accordion.Item eventKey="0">
                         <Accordion.Header >
@@ -391,7 +442,7 @@ const CourseDetailsArea1 = () => {
 
                             <li className="list-group-item py-2 my-2">
                               <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
-                              <label style={{fontSize:'13px'}} className="form-check-label" for="firstCheckbox">1. What Spacing Should I Use for Web & app design In Figma</label>
+                              <label style={{fontSize:'13px'}} className="form-check-label" for="firstCheckbox">1. What Spacing Should I Use for Web & app qa In Figma</label>
                               <div style={{fontSize:'11px'}}  className="px-5 my-2"><OndemandVideoIcon className="mx-2" /> 5min</div>
                             </li>
 
@@ -525,7 +576,7 @@ const CourseDetailsArea1 = () => {
 
              
 
-                    </Accordion>
+                    </Accordion> */}
 
                   </Card.Body>
                 </Card>

@@ -37,7 +37,6 @@ const CourseDetails = () => {
 
             {course != null ? (
             <CourseDetailsMain course={course} />
-            // <CourseDetailsTwoMain course={course} />
             ) : <LargeLoading />}
         </Wrapper>
     )

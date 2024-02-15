@@ -1383,3 +1383,26 @@ export const GetMyCourses = async(setCourses,setloading) =>{
     .catch(error => console.log('error', error));
 
 }
+
+
+export const GetMyCoursesDetails = async(id,setcourse) =>{
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow"
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getPurchasedCourseDetailsByItemCode/${id}`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result)
+      setcourse(result)
+    })
+    .catch((error) => console.error(error));
+
+
+}
