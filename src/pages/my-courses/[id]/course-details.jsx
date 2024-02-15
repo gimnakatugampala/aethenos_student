@@ -29,12 +29,14 @@ import CommentFormCourse from '../../../components/forms/comment-form-course';
 import Accordian from '../../../components/course-content/accordian'
 import { useEffect } from "react";
 import { GetMyCoursesDetails, GetReviews } from "../../../api";
-
+import moment from "moment";
 // const course = course_data[0];
 
 const CourseDetailsArea1 = ({id, course}) => {
 
   const [featured_reviews, setfeatured_reviews] = useState(null)
+
+  const [main_Video_player_url, setmain_Video_player_url] = useState(null)
 
   const [show, setShow] = useState(false);
 
@@ -77,7 +79,7 @@ const CourseDetailsArea1 = ({id, course}) => {
         <div className="row">
             <div className="col-md-8">
             <Player>
-                <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+                <source src={main_Video_player_url} />
               </Player>
 
             {/* New Tab */}
@@ -129,10 +131,10 @@ const CourseDetailsArea1 = ({id, course}) => {
 
                                   <div className="row mt-5">
 
-                                      <div className="col-md-2">
+                                      <div className="col-md-3">
                                         <div className="d-flex align-items-center">
                                           <h6 className="m-0 p-0">{Number.parseFloat(course.rating).toFixed(1)}</h6>
-                                          <Rating  size={20} iconsCount={course.rating} initialValue={1} />
+                                          <Rating  size={20}  iconsCount={course.rating} initialValue={course.rating} />
                                         </div>
                                           <span>{course.rating_count} ratings</span>
                                       </div>
@@ -191,12 +193,12 @@ const CourseDetailsArea1 = ({id, course}) => {
 
                                   featured_reviews.length > 0 ? (
 
-                                    featured_reviews.map((reviews) => (
+                                    featured_reviews.map((reviews,index) => (
 
-                                  <CardContainer className="p-2">
+                                  <CardContainer key={index} className="p-2">
                                     <h6 className="m-0 p-0">{reviews.title}</h6>
                                     <p className="m-0 p-0">{reviews.name}</p>
-                                    <Rating  size={20} iconsCount={reviews.rating} initialValue={5} /> <span className="mt-2">3 years</span>
+                                    <Rating  size={20} iconsCount={reviews.rating} initialValue={5} /> <span className="mt-2">{moment(reviews.date).startOf('day').fromNow()}</span>
                                     <p>{reviews.summary}</p>
                                   </CardContainer>
                                     ))
@@ -424,7 +426,7 @@ const CourseDetailsArea1 = ({id, course}) => {
             </div>
 
 
-
+        {/* Course Content */}
             <div className="col-md-4">
               <Card style={{backgroundColor:'transparent'}}>
                   <Card.Header><h6 className="m-2">Course Content</h6></Card.Header>
@@ -432,8 +434,11 @@ const CourseDetailsArea1 = ({id, course}) => {
                   <div className="faq-accordion">
                       <div className="accordion">
 
-                    <Accordian />
-                    <Accordian />
+                        {course.course_content.map((content,index) => (
+                           <Accordian setmain_Video_player_url={setmain_Video_player_url} id={index + 1} content={content} key={index} />
+                        ))}
+
+                  
 
                     </div>
                     </div>
