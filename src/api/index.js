@@ -1400,6 +1400,7 @@ export const GetMyCoursesDetails = async(id,setcourse) =>{
     .then((response) => response.json())
     .then((result) => {
       console.log(result)
+      Unauthorized(result.status,`my-courses/${id}`)
       setcourse(result)
     })
     .catch((error) => console.error(error));

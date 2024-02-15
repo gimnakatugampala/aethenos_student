@@ -30,16 +30,26 @@ import Accordian from '../../../components/course-content/accordian'
 import { useEffect } from "react";
 import { GetMyCoursesDetails } from "../../../api";
 
-const course = course_data[0];
+// const course = course_data[0];
 
-const CourseDetailsArea1 = () => {
+const CourseDetailsArea1 = ({course}) => {
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
- 
+  // What will who Learn
+    const chunkArray = (array, chunkSize) => {
+      const chunkedArray = [];
+      for (let i = 0; i < array.length; i += chunkSize) {
+          chunkedArray.push(array.slice(i, i + chunkSize));
+      }
+      return chunkedArray;
+  };
+
+  // Chunk the intended_learners array into groups of 3
+  const chunkedLearners = chunkArray(course.intended_learners, 3);
   
 
   // Ask a new Question
@@ -105,31 +115,31 @@ const CourseDetailsArea1 = () => {
 
                                 <div className="mt-5">
                                   <Typography variant="h4" gutterBottom>
-                                    Become a Figma Pro with our in depth Advanced Figma tutorial course.
+                                   {course.title}
                                   </Typography>
 
                                   <div className="row mt-5">
 
                                       <div className="col-md-2">
                                         <div className="d-flex align-items-center">
-                                          <h6 className="m-0 p-0">4.7</h6>
-                                          <Rating  size={20} iconsCount={1} initialValue={1} />
+                                          <h6 className="m-0 p-0">{Number.parseFloat(course.rating).toFixed(1)}</h6>
+                                          <Rating  size={20} iconsCount={course.rating} initialValue={1} />
                                         </div>
-                                          <span>559 ratings</span>
+                                          <span>{course.rating_count} ratings</span>
                                       </div>
 
                                       <div className="col-md-2">
                                         <div className="d-flex align-items-center">
-                                          <h6 className="m-0 p-0">4,987</h6>
+                                          <h6 className="m-0 p-0">{course.enrolled_count}</h6>
                                         </div>
                                           <span>Students</span>
                                       </div>
 
                                       <div className="col-md-2">
                                         <div className="d-flex align-items-center">
-                                          <h6 className="m-0 p-0">16 hours</h6>
+                                          <h6 className="m-0 p-0">{course.no_of_videos}</h6>
                                         </div>
-                                          <span>Total</span>
+                                          <span>No of Videos</span>
                                       </div>
 
 
@@ -141,29 +151,27 @@ const CourseDetailsArea1 = () => {
                                       <div className="course-overview">
                                           <h5 className="title m-0 p-0">What You’ll Learn?</h5>
                                           <div className="row">
-                                          <ul className="col-md-6">
-                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
-                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
-                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
+                                          {chunkedLearners.map((chunk, index) => (
+                                          <ul key={index} className="col-md-6">
+                                              {chunk.map((learner, idx) => (
+                                                learner.intended_learner_type == " students learn" &&
+                                                  <li key={idx}>{learner.intended_learner}</li>
+                                              ))}
                                           </ul>
-                                          <ul className="col-md-6">
-                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
-                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
-                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
-                                          </ul>
+                                      ))}
                                           </div>
                                       </div>
                                   </div>
 
                                   <h3 className="heading-title">Course Description</h3>
-                                  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium aperiam excepturi, eaque adipisci itaque enim doloribus ratione voluptas asperiores error harum nemo quo nesciunt necessitatibus, repellat dolorem natus, iusto repudiandae!</p>
+                                  <p>{course.course_main_desc}</p>
 
 
                                   <h3 className="heading-title">Instructor</h3>
-                                  <a href="/instructor/gimnakatugampala">Gimna Katugampala</a>
-                                  <p>Adobe Certified Instructor & Adobe Certified Expert</p>
+                                  <a href={`/users/${course.instructor_code}`}>{course.instructor}</a>
+                                  <p>{course.instructor_title}</p>
 
-                                  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi beatae, eaque itaque aspernatur temporibus labore deleniti dolorem. Neque eos quisquam possimus reprehenderit, dolore non, maxime minus laboriosam atque doloribus sapiente similique, repudiandae sed quas eius aliquid! In nostrum exercitationem, harum molestiae delectus ad laboriosam perferendis veniam sunt, maxime labore? Nesciunt.</p>
+                                  <p>{course.instructor_desc}</p>
 
 
                                   <h3 className="heading-title">Featured Review</h3>
@@ -193,9 +201,10 @@ const CourseDetailsArea1 = () => {
                                   <h3 className="heading-title">Requirements</h3>
                                   <div className="row">
                                           <ul className="col-md-12">
-                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
-                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
-                                              <li >Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, officiis. Corrupti fuga minus, corporis cupiditate et nostrum neque in voluptatibus?</li>
+                                            {course.intended_learners.map((req,index) => (
+                                              req.intended_learner_type == "requirements" &&
+                                              <li key={index}>{req.intended_learner}</li>
+                                            ))}
                                           </ul>
 
                                           </div>
