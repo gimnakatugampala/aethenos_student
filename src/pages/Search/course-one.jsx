@@ -13,7 +13,7 @@ import GetCurrencyByCountry from "../../functions/pricing/GetCurrencyByCountry";
 import CalculateDiscountedPrice from "../../functions/pricing/CalculateDiscountedPrice";
 import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
 
-
+ 
 const CourseTypeOne = ({ course }) => {
   if (!course || !course.id) return null;
   
@@ -65,26 +65,30 @@ const CourseTypeOne = ({ course }) => {
     );
   };
 
+  console.log(course )
+
   return (
-    <div className={`edu-course`}>
+    <div className={`edu-course `}>
       <div
         className="inner"
         key={course.id}
-        style={{ textAlign: "left", width: "auto", height: "450px"}}
+        style={{ textAlign: "left", height: "500px"}}
       >
-        <div className="thumbnail">
+        <div className=""    style={{  display: "grid"}}  >
           <Link href={`/course-details-/${course.id}`}>
             <img
               src={`${IMG_HOST}/${course.img}`}
-              alt="Course Meta"
-              style={{ width: "100%", height: "150px" }}
+              alt="Course Meta"     
+              style={{ width: "100%", height: "150px"}}     
             />
           </Link>
+          
           <div className="time-top">
             <span className="duration">
               <i className="icon-61"></i>
               {course.duration}
             </span>
+          
           </div>
         </div>
         <div className="content">

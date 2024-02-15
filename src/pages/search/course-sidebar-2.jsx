@@ -170,6 +170,9 @@ const CourseSidebarTwo = ({ course_items }) => {
     return starArray;
   };
 
+  const setShowInstructerFilter =
+    course_items.filter((item) => item.instructor)?.length ?? 0;  
+
   return (
     <div className="course-sidebar-3 mx-4">
       <div className="edu-course-widget widget-category">
@@ -215,7 +218,10 @@ const CourseSidebarTwo = ({ course_items }) => {
         </div>
       </div>
 
-      <div className="edu-course-widget widget-instructor">
+      <div
+        className="edu-course-widget widget-instructor"
+        style={{ display: setShowInstructerFilter ? "block" : "none" }}
+      >
         <div className="inner">
           <h5
             className={`widget-title widget-toggle ${
