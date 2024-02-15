@@ -64,7 +64,7 @@ const CourseTypeFive = ({ data, classes }) => {
 
   return (
     <div
-      className={`edu-course course-style-4 course-style-8 p-4  ${
+      className={`edu-course course-style-4 course-style-8 p-3  ${
         classes ? classes : ""
       }`}
     >
@@ -74,7 +74,7 @@ const CourseTypeFive = ({ data, classes }) => {
             <img
               src={`${IMG_HOST}/${data != undefined && data.img}`}
               alt="Course Thumb"
-              style={{ width: "300px", height: "200px", objectFit: "cover" }}
+              // style={{ width: "300px", height: "200px", objectFit: "cover" }}
             />
           </Link>
           {data != null && CalculateDiscountPrice(data) != "" && (
@@ -159,7 +159,7 @@ const CourseTypeFive = ({ data, classes }) => {
           <a
             onClick={() => handleAddToCart(data)}
             style={{ cursor: "pointer" }}
-            className="edu-btn btn-medium button-group float-end mt-2"
+            className="edu-btn btn-small button-group float-end mt-2 mx-2"
           >
             {cartCourses.some((course) => course.id == data.id)
               ? "Added to cart"
@@ -168,7 +168,7 @@ const CourseTypeFive = ({ data, classes }) => {
           <button
             onClick={() => handleWishlist(data)}
             style={{ cursor: "pointer" }}
-            className={`btn-outline-dark float-end m-2 wishlist-btn ${
+            className={`btn-outline-dark float-end wishlist-btn ${
               isWishlistSelected ? "active" : ""
             }`}
           >

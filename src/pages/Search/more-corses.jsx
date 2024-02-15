@@ -65,7 +65,7 @@ const CourseArea = ({ searchKey }) => {
                 return (
                   <div
                     key={paddedCourses[courseIndex]?.id || offset}
-                    style={{ flex: 1 }}
+                    // style={{ flex: 1 }}
                   >
                     {paddedCourses[courseIndex] && (
                       <CourseTypeOne
