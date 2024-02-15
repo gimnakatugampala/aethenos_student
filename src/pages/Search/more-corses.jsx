@@ -22,7 +22,9 @@ const CourseArea = ({ searchKey }) => {
   }, [searchKey]);
 
   const numSets = Math.ceil(courses.length / 4);
- 
+
+  console.log(numSets + " numsets");
+
   const paddedCourses = [
     ...courses,
     ...Array(4 - (courses.length % 4)).fill(null),
@@ -38,7 +40,7 @@ const CourseArea = ({ searchKey }) => {
         >
           Hot and Fresh Courses
         </h3>
-      
+
         <Carousel
           showThumbs={false}
           showStatus={false}
@@ -52,31 +54,29 @@ const CourseArea = ({ searchKey }) => {
           transitionTime={500}
           showIndicators={false}
           stopOnHover={true}
+          duration={500}
+          animation="slide"
+          navButtonsAlwaysVisible={true}
+          indicators={false}
         >
- 
-          {Array.from({ length: numSets }, (_, setIndex) => (
-            <div
-              className="col-12"
-              key={setIndex}
-              style={{ display: "flex", gap: "15px" }}
-            >
-              {[0, 1, 2, 3].map((offset) => {
-                const courseIndex = (numSets - setIndex - 1) * 4 + offset;
-                return (
-                  <div
-                    key={paddedCourses[courseIndex]?.id || offset}
-                    // style={{ flex: 1 }}
-                  >
-                    {paddedCourses[courseIndex] && (
-                      <CourseTypeOne
-                        course={paddedCourses[courseIndex]}
-                      />
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          ))}
+          {courses != null && courses.length > 0 ? (
+            Array.from({ length: numSets }, (_, setIndex) => (
+              <div key={setIndex} className="row">
+                {[0, 1, 2, 3].map((offset) => {
+                  const courseIndex = setIndex * 4 + offset;
+                  return (
+                    <div key={offset} className="col-md-3">
+                      {paddedCourses[courseIndex] && (
+                        <CourseTypeOne course={paddedCourses[courseIndex]} />
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            ))
+          ) : (
+            <h4>No Courses Available</h4>
+          )}
         </Carousel>
       </div>
     </div>

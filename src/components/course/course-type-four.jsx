@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { cart_course } from '../../redux/features/cart-slice';
 import { add_to_wishlist, wishlistItems } from '../../redux/features/wishlist-slice';
 import { IMG_HOST } from '../../api';
-import getSymbolFromCurrency from 'currency-symbol-map';
+import getSymbolFromCurrency from 'currency-symbol-map'; 
 import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
 import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
 import CalculateDiscountPrice from '../../functions/pricing/CalculateDiscountPrice';

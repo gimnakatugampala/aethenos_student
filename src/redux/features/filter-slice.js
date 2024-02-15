@@ -110,6 +110,7 @@ export const filterSlice = createSlice({
       state.topics = [];
       state.subcategories = [];
       state.levels = [];
+      state.ratings = [];
       state.selectPrice = 0;
       state.price = payload;
     },

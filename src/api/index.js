@@ -1471,3 +1471,26 @@ export const GetReviews = async(id,setfeatured_reviews) =>{
 
 
 }
+
+
+export const GetCourseDetailsByInstructerCode = async(id,setcourse) =>{
+
+  // var myHeaders = new Headers();
+  // myHeaders.append("Authorization", Bearer ${CURRENT_USER});
+
+  const requestOptions = {
+    method: "GET",    
+    redirect: "follow"
+  };
+  
+  fetch (`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getAllCoursesByInstructorCode/${id}`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result)
+      // Unauthorized(result.status,my-courses/${id})
+      setcourse(result)
+    })
+    .catch((error) => console.error(error));
+
+
+}

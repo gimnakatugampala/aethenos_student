@@ -74,7 +74,7 @@ const CourseTypeFive = ({ data, classes }) => {
             <img
               src={`${IMG_HOST}/${data != undefined && data.img}`}
               alt="Course Thumb"
-              // style={{ width: "300px", height: "200px", objectFit: "cover" }}
+              style={{ width: "300px", height: "200px", objectFit: "cover" }}
             />
           </Link>
           {data != null && CalculateDiscountPrice(data) != "" && (

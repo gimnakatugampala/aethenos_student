@@ -8,7 +8,7 @@ import SortingArea from "../../../../src/pages/search/sortingAreaSearch";
 import { css } from "@emotion/react";
 import { Triangle } from "react-loader-spinner";
 import CalculateListPrice from "../../../functions/pricing/CalculateListPrice";
-
+ 
 const SearchResults = ({ allcourses }) => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
