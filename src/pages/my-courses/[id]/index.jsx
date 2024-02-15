@@ -24,7 +24,11 @@ const index = () => {
 
     return (
         <Wrapper>
-            <SEO pageTitle={'Introduction to Web Development'} />
+            {course != null ? (
+                <SEO pageTitle={course.title} />
+                ) : (
+                <SEO pageTitle={'Loading..'} />
+                )}
                 <Header no_top_bar={true} />
                 {course != null ? (
                     <CourseDetails id={id} course={course} />

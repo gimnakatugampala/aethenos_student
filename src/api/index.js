@@ -1447,3 +1447,27 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/submitReview
 
 
 }
+
+
+export const GetReviews = async(id,setfeatured_reviews) =>{
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow"
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getReviewsByItemCode/${id}`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result)
+      Unauthorized(result.status,`my-courses/${id}`)
+      setfeatured_reviews(result)
+    })
+    .catch((error) => console.error(error));
+
+
+}

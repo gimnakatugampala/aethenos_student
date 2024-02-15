@@ -28,18 +28,20 @@ import SingleComment from "./single-comment";
 import CommentFormCourse from '../../../components/forms/comment-form-course';
 import Accordian from '../../../components/course-content/accordian'
 import { useEffect } from "react";
-import { GetMyCoursesDetails } from "../../../api";
+import { GetMyCoursesDetails, GetReviews } from "../../../api";
 
 // const course = course_data[0];
 
 const CourseDetailsArea1 = ({id, course}) => {
+
+  const [featured_reviews, setfeatured_reviews] = useState(null)
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // What will who Learn
+  // --------------------------- What will who Learn -----------------------
     const chunkArray = (array, chunkSize) => {
       const chunkedArray = [];
       for (let i = 0; i < array.length; i += chunkSize) {
@@ -50,6 +52,13 @@ const CourseDetailsArea1 = ({id, course}) => {
 
   // Chunk the intended_learners array into groups of 3
   const chunkedLearners = chunkArray(course.intended_learners, 3);
+  // --------------------------- What will who Learn -----------------------
+
+  // get the Reviews
+  useEffect(() => {
+    GetReviews(id,setfeatured_reviews)
+  }, [id])
+  
   
 
   // Ask a new Question
@@ -177,20 +186,28 @@ const CourseDetailsArea1 = ({id, course}) => {
                                   <h3 className="heading-title">Featured Review</h3>
 
                                 <div className="my-4">
-                                <CardContainer className="p-2">
-                                    <h6 className="m-0 p-0">John Doe</h6>
-                                    <p className="m-0 p-0">101 courses</p>
-                                    <p className="m-0 p-0 mb-2">7 reviews</p>
-                                    <Rating  size={20} iconsCount={5} initialValue={5} /> <span className="mt-2">3 years</span>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, necessitatibus. Corporis, autem! Quaerat, excepturi? Quasi obcaecati quis culpa ad veniam delectus. Voluptate quam minima quos dolor ipsa reprehenderit atque assumenda nihil iure sint. Blanditiis rem modi reiciendis itaque hic perspiciatis.</p>
-                                  </CardContainer>
+
+                                  {featured_reviews != null && (
+
+                                  featured_reviews.length > 0 ? (
+
+                                    featured_reviews.map((reviews) => (
+
                                   <CardContainer className="p-2">
-                                    <h6 className="m-0 p-0">John Doe</h6>
-                                    <p className="m-0 p-0">101 courses</p>
-                                    <p className="m-0 p-0 mb-2">7 reviews</p>
-                                    <Rating  size={20} iconsCount={5} initialValue={5} /> <span className="mt-2">3 years</span>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, necessitatibus. Corporis, autem! Quaerat, excepturi? Quasi obcaecati quis culpa ad veniam delectus. Voluptate quam minima quos dolor ipsa reprehenderit atque assumenda nihil iure sint. Blanditiis rem modi reiciendis itaque hic perspiciatis.</p>
+                                    <h6 className="m-0 p-0">{reviews.title}</h6>
+                                    <p className="m-0 p-0">{reviews.name}</p>
+                                    <Rating  size={20} iconsCount={reviews.rating} initialValue={5} /> <span className="mt-2">3 years</span>
+                                    <p>{reviews.summary}</p>
                                   </CardContainer>
+                                    ))
+
+
+                                  ) : "No Reviews Found"
+                               
+                                  )}
+
+
+                        
 
                                   <a className="m-0 p-2" href="#">3,566 Reviews <KeyboardArrowDownIcon /></a>
 
