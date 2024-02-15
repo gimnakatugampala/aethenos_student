@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CardContainer from '../../components/course-content/CardContainer';
 import { IMG_HOST } from '../../api';
 
 const Accordian = ({show=false,content,id,setmain_Video_player_url}) => {
+
+    useEffect(() => {
+        content.section_curriculum_item.map((list,index) => (
+            list.curriculum_item_type == "Lecture" && list.get_CurriculumItem_File.map((type) => (
+                type.curriculum_item_file_type == "Video" == setmain_Video_player_url(`${IMG_HOST}${type.url}`)
+            ))))
+    }, [content])
+    
+
     return (
         <div className="accordion-item mb-2">
             

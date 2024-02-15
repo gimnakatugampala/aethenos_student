@@ -36,7 +36,7 @@ const CourseDetailsArea1 = ({id, course}) => {
 
   const [featured_reviews, setfeatured_reviews] = useState(null)
 
-  const [main_Video_player_url, setmain_Video_player_url] = useState(null)
+  const [main_Video_player_url, setmain_Video_player_url] = useState('https://aethenosinstructor.exon.lk:2053/aethenos-assert/1706080568678_6da9594b-6a36-4773-85ad-a2d7ceda2727.mp4')
 
   const [show, setShow] = useState(false);
 
@@ -78,7 +78,7 @@ const CourseDetailsArea1 = ({id, course}) => {
         
         <div className="row">
             <div className="col-md-8">
-            <Player>
+            <Player autoPlay={true}>
                 <source src={main_Video_player_url} />
               </Player>
 
