@@ -2,22 +2,48 @@ import { useFormik } from 'formik';
 import React from 'react';
 import { courseSchema } from '../../utils/validation-schema';
 import ErrorMsg from './error-msg';
+import { SubmitCourseReview } from '../../api';
+import ReactStars from 'react-stars'
+import { useState } from 'react';
 
-const CommentFormCourse = () => {
+
+const CommentFormCourse = ({id}) => {
+
+    const [rating, setrating] = useState(0)
+
+    const ratingChanged = (newRating) => {
+        setrating(newRating)
+      }
+
     const { handleChange, handleSubmit, handleBlur, errors, values, touched } = useFormik({
         initialValues: { title:'',name: '', email: '', msg: '' },
         validationSchema: courseSchema,
         onSubmit: (values, { resetForm }) => {
-            toast.success(`${values.name} your review added successfully`, {
-                position: 'top-left'
-            })
-            resetForm()
+            // toast.success(`${values.name} your review added successfully`, {
+            //     position: 'top-left'
+            // })
+            SubmitCourseReview(id,values,rating)
+
+            console.log(rating)
+
+            // resetForm()
         }
     })
 
     return (
         <form className="comment-form" onSubmit={handleSubmit}>
             <div className="row g-5">
+
+            <div className="rating-icon">
+                <h6 className="title">Rating Here</h6>
+                <ReactStars
+                count={5}
+                onChange={ratingChanged}
+                size={30}
+                color2={'#ffd700'} />
+            </div>
+
+                
                 <div className="form-group col-lg-6">
                     <input type="text" value={values.title} onChange={handleChange} onBlur={handleBlur} name="title" id="comm-title" placeholder="Review Title" />
                     {touched.title && <ErrorMsg error={errors.title} />}

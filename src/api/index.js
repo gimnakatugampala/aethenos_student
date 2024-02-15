@@ -1407,3 +1407,43 @@ export const GetMyCoursesDetails = async(id,setcourse) =>{
 
 
 }
+
+export const SubmitCourseReview = async(id,values,rating) =>{
+
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  const formdata = new FormData();
+formdata.append("item_code", `${id}`);
+formdata.append("title", `${values.title}`);
+formdata.append("name", `${values.name}`);
+formdata.append("email", `${values.email}`);
+formdata.append("summary", `${values.msg}`);
+formdata.append("rating", `${rating}`);
+
+const requestOptions = {
+  method: "POST",
+  body: formdata,
+  headers: myHeaders,
+  redirect: "follow"
+};
+
+fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/submitReview", requestOptions)
+  .then((response) => response.json())
+  .then((result) => {
+    console.log(result)
+
+    Unauthorized(result.status,`my-courses/${id}`)
+
+
+    if(result.variable == "200"){
+      SuccessAlert("Added",result.message)
+      return
+    }
+
+  })
+  .catch((error) => console.error(error));
+
+
+}

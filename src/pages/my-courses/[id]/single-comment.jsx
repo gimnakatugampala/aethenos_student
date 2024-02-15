@@ -1,10 +1,11 @@
 import React from 'react';
+import { IMG_HOST } from '../../../api';
 
-const SingleComment = ({review}) => {
+const SingleComment = ({review,img}) => {
     return (
         <div className="comment">
             <div className="thumbnail">
-                <img src={review?.img} alt="Comment Images" />
+                <img src={img == null ? `/images/course/instructor_profile_img.png` : `${IMG_HOST}${img}`} alt="Comment Images" />
             </div>
             <div className="comment-content">
                 <div className="rating">

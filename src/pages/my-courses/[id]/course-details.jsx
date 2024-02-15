@@ -32,7 +32,7 @@ import { GetMyCoursesDetails } from "../../../api";
 
 // const course = course_data[0];
 
-const CourseDetailsArea1 = ({course}) => {
+const CourseDetailsArea1 = ({id, course}) => {
 
   const [show, setShow] = useState(false);
 
@@ -132,7 +132,7 @@ const CourseDetailsArea1 = ({course}) => {
                                         <div className="d-flex align-items-center">
                                           <h6 className="m-0 p-0">{course.enrolled_count}</h6>
                                         </div>
-                                          <span>Students</span>
+                                          <span>{course.enrolled_count == 1 ? "Student" : "Students"}</span>
                                       </div>
 
                                       <div className="col-md-2">
@@ -378,28 +378,18 @@ const CourseDetailsArea1 = ({course}) => {
                               </div>
                           </div>
 
-                          <div className="comment-area">
+                          {/* <div className="comment-area">
                               <h3 className="heading-title">Reviews</h3>
                               <div className="comment-list-wrapper">
                                   {reviews?.map((review, i) => (
-                                      <SingleComment key={i} review={review} />
+                                      <SingleComment img={course.instructor_img} key={i} review={review} />
                                   ))}
                               </div>
-                          </div>
+                          </div> */}
 
-                          <div className="comment-form-area">
+                          <div className="comment-form-area login-form-box">
                               <h3 className="heading-title">Write a Review</h3>
-                              <div className="rating-icon">
-                                  <h6 className="title">Rating Here</h6>
-                                  <div className="rating">
-                                      <i className="icon-23"></i>
-                                      <i className="icon-23"></i>
-                                      <i className="icon-23"></i>
-                                      <i className="icon-23"></i>
-                                      <i className="icon-23"></i>
-                                  </div>
-                              </div>
-                              <CommentFormCourse/>
+                              <CommentFormCourse id={id} />
                           </div>
                       </div>
                                    

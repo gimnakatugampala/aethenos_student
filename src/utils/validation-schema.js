@@ -22,12 +22,12 @@ export const contactSchema = Yup.object().shape({
     name: Yup.string().required().label( 'Name' ),
     email: Yup.string().required().email().label( 'Email' ),
     phone: Yup.string().required().min(11).label( 'Phone' ),
-    msg: Yup.string().required().min(20).label( 'Message' )
+    msg: Yup.string().required().min(15).label( 'Message' )
 });
 
 export const courseSchema = Yup.object().shape({
     title: Yup.string().required().label( 'Title' ),
     name: Yup.string().required().label( 'Name' ),
     email: Yup.string().required().email().label( 'Email' ),
-    msg: Yup.string().required().min(20).label( 'Summery' )
+    msg: Yup.string().required().min(15).label( 'Summery' )
 });

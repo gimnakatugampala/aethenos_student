@@ -27,7 +27,7 @@ const index = () => {
             <SEO pageTitle={'Introduction to Web Development'} />
                 <Header no_top_bar={true} />
                 {course != null ? (
-                    <CourseDetails course={course} />
+                    <CourseDetails id={id} course={course} />
                 ) : (
                     <LargeLoading />
                 )}
