@@ -35,6 +35,7 @@ import moment from "moment";
 const CourseDetailsArea1 = ({id, course}) => {
 
   const [featured_reviews, setfeatured_reviews] = useState(null)
+  let chunkedLearners;
 
   const [main_Video_player_url, setmain_Video_player_url] = useState('https://aethenosinstructor.exon.lk:2053/aethenos-assert/1706080568678_6da9594b-6a36-4773-85ad-a2d7ceda2727.mp4')
 
@@ -44,6 +45,9 @@ const CourseDetailsArea1 = ({id, course}) => {
   const handleShow = () => setShow(true);
 
   // --------------------------- What will who Learn -----------------------
+
+
+  
     const chunkArray = (array, chunkSize) => {
       const chunkedArray = [];
       for (let i = 0; i < array.length; i += chunkSize) {
@@ -52,9 +56,19 @@ const CourseDetailsArea1 = ({id, course}) => {
       return chunkedArray;
   };
 
-  // Chunk the intended_learners array into groups of 3
-  const chunkedLearners = chunkArray(course.intended_learners, 3);
-  // --------------------------- What will who Learn -----------------------
+  useEffect(() => {
+   
+    // Chunk the intended_learners array into groups of 3
+    chunkedLearners =  course.intended_learners != null && chunkArray(course.intended_learners, 3);
+    // --------------------------- What will who Learn -----------------------
+  }, [chunkedLearners])
+  
+  
+  
+    
+
+  
+
 
   // get the Reviews
   useEffect(() => {
@@ -126,29 +140,29 @@ const CourseDetailsArea1 = ({id, course}) => {
 
                                 <div className="mt-5">
                                   <Typography variant="h4" gutterBottom>
-                                   {course.title}
+                                   {course && course.title}
                                   </Typography>
 
                                   <div className="row mt-5">
 
                                       <div className="col-md-3">
                                         <div className="d-flex align-items-center">
-                                          <h6 className="m-0 p-0">{Number.parseFloat(course.rating).toFixed(1)}</h6>
-                                          <Rating  size={20}  iconsCount={Number.parseInt(course.rating)} initialValue={Number.parseInt(course.rating)} />
+                                         {course && <h6 className="m-0 p-0">{Number.parseFloat(course.rating).toFixed(1)}</h6>} 
+                                          {course && <Rating  size={20}  iconsCount={Number.parseInt(course.rating)} initialValue={Number.parseInt(course.rating)} />}
                                         </div>
-                                          <span>{course.rating_count} ratings</span>
+                                          <span>{course && course.rating_count} ratings</span>
                                       </div>
 
                                       <div className="col-md-2">
                                         <div className="d-flex align-items-center">
-                                          <h6 className="m-0 p-0">{course.enrolled_count}</h6>
+                                          <h6 className="m-0 p-0">{course && course.enrolled_count}</h6>
                                         </div>
-                                          <span>{course.enrolled_count == 1 ? "Student" : "Students"}</span>
+                                          <span>{course && course.enrolled_count == 1 ? "Student" : "Students"}</span>
                                       </div>
 
                                       <div className="col-md-2">
                                         <div className="d-flex align-items-center">
-                                          <h6 className="m-0 p-0">{course.no_of_videos}</h6>
+                                          <h6 className="m-0 p-0">{course && course.no_of_videos}</h6>
                                         </div>
                                           <span>No of Videos</span>
                                       </div>
@@ -162,7 +176,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                                       <div className="course-overview">
                                           <h5 className="title m-0 p-0">What You’ll Learn?</h5>
                                           <div className="row">
-                                          {chunkedLearners.map((chunk, index) => (
+                                          {chunkedLearners != null && chunkedLearners.map((chunk, index) => (
                                           <ul key={index} className="col-md-6">
                                               {chunk.map((learner, idx) => (
                                                 learner.intended_learner_type == " students learn" &&
@@ -175,14 +189,14 @@ const CourseDetailsArea1 = ({id, course}) => {
                                   </div>
 
                                   <h3 className="heading-title">Course Description</h3>
-                                  <p>{course.course_main_desc}</p>
+                                  <p>{course && course.course_main_desc}</p>
 
 
                                   <h3 className="heading-title">Instructor</h3>
-                                  <a href={`/users/${course.instructor_code}`}>{course.instructor}</a>
-                                  <p>{course.instructor_title}</p>
+                                  <a href={`/users/${course && course.instructor_code}`}>{course && course.instructor}</a>
+                                  <p>{course && course.instructor_title}</p>
 
-                                  <p>{course.instructor_desc}</p>
+                                  <p>{course && course.instructor_desc}</p>
 
 
                                   <h3 className="heading-title">Featured Review</h3>
@@ -220,7 +234,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                                   <h3 className="heading-title">Requirements</h3>
                                   <div className="row">
                                           <ul className="col-md-12">
-                                            {course.intended_learners.map((req,index) => (
+                                            {course != null && course.intended_learners.map((req,index) => (
                                               req.intended_learner_type == "requirements" &&
                                               <li key={index}>{req.intended_learner}</li>
                                             ))}
@@ -371,11 +385,11 @@ const CourseDetailsArea1 = ({id, course}) => {
 
                             <div className="course-review mt-5">
                           <h3 className="heading-title">Course Rating</h3>
-                          <p>{rating} average rating based on {rating_count} rating</p>
+                          <p>{course && course.rating} average rating based on {course && course.rating_count} rating</p>
                           <div className="row g-0 align-items-center">
                               <div className="col-sm-4">
                                   <div className="rating-box">
-                                      <div className="rating-number">{rating}</div>
+                                      <div className="rating-number">{course && course.rating}</div>
                                       <div className="rating">
                                           <i className="icon-23"></i>
                                           <i className="icon-23"></i>
@@ -383,12 +397,12 @@ const CourseDetailsArea1 = ({id, course}) => {
                                           <i className="icon-23"></i>
                                           <i className="icon-23"></i>
                                       </div>
-                                      <span>({rating_count} Review)</span>
+                                      <span>({course && course.rating_count} Review)</span>
                                   </div>
                               </div>
                               <div className="col-sm-8">
                                   <div className="review-wrapper">
-                                      <SingleProgressbar value={'100'} rating_value={rating_count} />
+                                      <SingleProgressbar value={'100'} rating_value={course && course.rating_count} />
                                       <SingleProgressbar value={'0'} rating_value={'0'} />
                                       <SingleProgressbar value={'0'} rating_value={'0'} />
                                       <SingleProgressbar value={'0'} rating_value={'0'} />
@@ -434,7 +448,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                   <div className="faq-accordion">
                       <div className="accordion">
 
-                        {course.course_content.map((content,index) => (
+                        {course !=null && course.course_content.map((content,index) => (
                            <Accordian setmain_Video_player_url={setmain_Video_player_url} id={index + 1} content={content} key={index} />
                         ))}
 

@@ -170,8 +170,8 @@ const CourseSidebarTwo = ({ course_items }) => {
     return starArray;
   };
 
-  const setShowInstructerFilter =
-    course_items.filter((item) => item.instructor)?.length ?? 0;  
+  const setShowInstructerFilter = 
+  course_items != null  && (course_items.filter((item) => item.instructor)?.length ?? 0);  
 
   return (
     <div className="course-sidebar-3 mx-4">
@@ -192,8 +192,8 @@ const CourseSidebarTwo = ({ course_items }) => {
           >
             {all_categories.map((category, i) => {
               const categoryCount =
-                course_items.filter((item) => item.category === category)
-                  ?.length ?? 0;
+              course_items != null  && (course_items.filter((item) => item.category === category)
+                  ?.length ?? 0);
               if (categoryCount > 0) {
                 return (
                   <div key={i} className="edu-form-check">
@@ -238,8 +238,8 @@ const CourseSidebarTwo = ({ course_items }) => {
           >
             {all_instructors.map((instructor, i) => {
               const instructorCount =
-                course_items.filter((item) => item.instructor === instructor)
-                  ?.length ?? 0;
+              course_items != null  && (course_items.filter((item) => item.instructor === instructor)
+                  ?.length ?? 0);
               if (instructorCount > 0) {
                 return (
                   <div key={i} className="edu-form-check">
@@ -293,8 +293,8 @@ const CourseSidebarTwo = ({ course_items }) => {
                   <span>
                     (
                     {
-                      course_items.filter((item) => item.rating === rating)
-                        ?.length
+                     course_items != null  && ( course_items.filter((item) => item.rating === rating)
+                        ?.length)
                     }
                     )
                   </span>
@@ -322,8 +322,8 @@ const CourseSidebarTwo = ({ course_items }) => {
           >
             {all_levels.map((level, i) => {
               const levelCount =
-                course_items.filter((item) => item.level === level)?.length ??
-                0;
+              course_items != null  && ( course_items.filter((item) => item.level === level)?.length ??
+                0);
               if (levelCount > 0) {
                 return (
                   <div key={i} className="edu-form-check">
@@ -365,8 +365,8 @@ const CourseSidebarTwo = ({ course_items }) => {
           >
             {all_languages.map((language, i) => {
               const languageCount =
-                course_items.filter((item) => item.language === language)
-                  ?.length ?? 0;
+              course_items != null  && (course_items.filter((item) => item.language === language)
+                  ?.length ?? 0);
               if (languageCount > 0) {
                 return (
                   <div key={i} className="edu-form-check">
@@ -408,8 +408,8 @@ const CourseSidebarTwo = ({ course_items }) => {
           >
             {all_topics.map((topic, i) => {
               const topicCount =
-                course_items.filter((item) => item.topic === topic)?.length ??
-                0;
+              course_items != null  && (course_items.filter((item) => item.topic === topic)?.length ??
+                0);
               topic;
               if (topicCount > 0) {
                 return (
@@ -452,9 +452,9 @@ const CourseSidebarTwo = ({ course_items }) => {
           >
             {all_SubCategorys.map((sub_category, i) => {
               const subCategoryCount =
-                course_items.filter(
+              course_items != null  && (course_items.filter(
                   (item) => item.sub_category === sub_category
-                )?.length ?? 0;
+                )?.length ?? 0);
               sub_category;
               if (subCategoryCount > 0) {
                 return (
