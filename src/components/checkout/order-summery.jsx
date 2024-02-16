@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
@@ -122,9 +123,26 @@ const newPricing = cartCourses != null && cartCourses.map((course) => ({
                     </table>
                 }
 
-                {showPaypal && <PayPalScriptProvider options={{ clientId: "test" }}>
-                            <PayPalButtons style={{ layout: "horizontal" }} />
-                    </PayPalScriptProvider>}
+                 <PayPalScriptProvider options={{
+                    clientId:"AbhfyGv-hhPIo4dZ_Wia7_0sevNZC3B871Ndw8aDEIm8h6O59L1sV0TzgFXyCpwx-_GC93sKwsU_GtEF"
+                 }}>
+                    <PayPalButtons style={{color:"blue",layout:"horizontal"}} 
+                    createOrder={async() =>{
+                        const response = await fetch('/api/paypal_checkout', {
+                            method: "POST"
+                        });
+                
+                        const order = await response.json();
+                        console.log(order);
+                        return order.id
+                       
+                    }}
+                    onApprove={(data,actions) =>{
+                        console.log(data)
+                        actions.order.capture()
+                    }}
+                    />
+                </PayPalScriptProvider>
                      
                 {/* {showStripe && <a href="#" className="edu-btn order-place btn-medium w-100 my-2">Place Your order <i className="icon-4"></i></a>} */}
                 {showStripe && <form action="/api/checkout_sessions" method="POST">

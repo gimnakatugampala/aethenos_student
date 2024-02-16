@@ -14,6 +14,7 @@
         "@emotion/styled": "^11.11.0",
         "@mui/icons-material": "^5.14.13",
         "@mui/material": "^5.14.13",
+        "@paypal/checkout-server-sdk": "^1.0.3",
         "@paypal/react-paypal-js": "^8.1.3",
         "@popperjs/core": "^2.11.6",
         "@reduxjs/toolkit": "^1.8.5",
