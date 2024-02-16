@@ -1309,6 +1309,11 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addToStudent
   .then(response => response.json())
   .then(result => {
     console.log(result)
+
+    if(result.message == "Error"){
+      ErrorAlert("Error",result.variable)
+      return
+    }
     
     if(result.variable == "200"){
       SuccessAlert("Success",result.message)

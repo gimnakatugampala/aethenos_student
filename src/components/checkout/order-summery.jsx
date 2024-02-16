@@ -132,6 +132,7 @@ console.log(newPricing)
                         </tbody>
                     </table>
                 }
+                {showPaypal && (
 
                  <PayPalScriptProvider options={{
                     clientId:"AbhfyGv-hhPIo4dZ_Wia7_0sevNZC3B871Ndw8aDEIm8h6O59L1sV0TzgFXyCpwx-_GC93sKwsU_GtEF"
@@ -157,16 +158,44 @@ console.log(newPricing)
                     onApprove={(data,actions) =>{
                         console.log(data)
                         actions.order.capture()
+
+                        // ----------- ORDER PLACE --------------
+
+                        const calculatedPurchasedCourse = cartCourses != null && cartCourses.map((course) => ({
+                            courseCode: course.other_data.course_code,
+                            currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
+                            itemPrice: course.quantity * (CalculateDiscountedPrice(course.other_data))
+                            }));
+                    
+                            // setPurchasedCourse(calculatedPurchasedCourse);
+                    
+                            const calculatedBuyCourseOrder = {
+                            "paymentMethod": "2",
+                            "discount": 20,
+                            "totalPrice": `${total}`,
+                            "currency": GetCurrencyByCountry(cartCourses[0].other_data).toLowerCase(),
+                            "courses": calculatedPurchasedCourse
+                            };
+
+                            var rawData =  JSON.stringify(calculatedBuyCourseOrder)
+                            BuyCourseByStudent(rawData)
+
+                            console.log(calculatedBuyCourseOrder)
+
+                        // ----------- ORDER PLACE --------------
+
                     }}
                     />
                 </PayPalScriptProvider>
+                )}
+
                      
             
                 {showStripe && <form action="/api/checkout_sessions" method="POST">
                     <input type="hidden" name="cartCourses" value={JSON.stringify(newPricing)} />
                     
                     <section>
-                        <button className="edu-btn order-place btn-medium w-100 my-2" type="submit" role="link">
+                        <button style={{backgroundColor:'#6B71E3'}} className="edu-btn order-place btn-medium w-100 my-2" type="submit" role="link">
                             <span className='d-flex justify-content-center align-items-center'>
                               Checkout via<i style={{fontSize:'30px'}} className="fa-brands fa-stripe mx-1"></i>
                             </span>
