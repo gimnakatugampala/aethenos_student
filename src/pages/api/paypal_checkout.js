@@ -14,6 +14,11 @@ export default async function POST(req, res){
 
     if (req.method === 'POST') {
 
+        let itemsData = req.body.cartData
+        let totalPrice = req.body.totalPrice
+
+        console.log(req.body.cartData)
+
         try {
 
             let request = new paypal.orders.OrdersCreateRequest();
@@ -24,35 +29,16 @@ export default async function POST(req, res){
                     {
                         reference_id:"d9f80740-38f0-11e8-b467-0ed5f89f718b",
                         amount: {
-                            currency_code: "USD",
-                            value: "100.00",
+                            currency_code: `${req.body.cartData[0].unit_amount.currency_code}`,
+                            value: `${totalPrice}`,
                             breakdown:{
                                 item_total:{
-                                    currency_code:"USD",
-                                    value:"100.00"
+                                    currency_code:`${req.body.cartData[0].unit_amount.currency_code}`,
+                                    value:`${totalPrice}`
                                 }
                             }
                         },
-                        items:[
-                            {
-                                name:"Book of React",
-                                description:"A Book about React",
-                                quantity:"1",
-                                unit_amount:{
-                                    currency_code:"USD",
-                                    value:"50.00"
-                                }
-                            },
-                            {
-                                name:"Book of Next",
-                                description:"A Book about Next",
-                                quantity:"1",
-                                unit_amount:{
-                                    currency_code:"USD",
-                                    value:"50.00"
-                                }
-                            }
-                        ]
+                        items:itemsData
                     }
                  ]
             });

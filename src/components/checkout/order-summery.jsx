@@ -22,7 +22,7 @@ const OrderSummery = ({showStripe,showPaypal}) => {
     const [buyCourseOrder, setBuyCourseOrder] = useState(null);
     
 
-// console.log(cartCourses)
+console.log(cartCourses)
 
 const newPricing = cartCourses != null && cartCourses.map((course) => ({
     img: course.img,
@@ -30,11 +30,23 @@ const newPricing = cartCourses != null && cartCourses.map((course) => ({
     qty:course.quantity,
     desc:course.other_data.course_main_desc,
     currency:GetCurrencyByCountry(course.other_data).toLowerCase(),
-    price:(CalculateDiscountedPrice(course.other_data)).toFixed(2)
+    price:(CalculateDiscountedPrice(course.other_data)) == null ? 0 : (CalculateDiscountedPrice(course.other_data))
 }))
 
 
-// console.log(newPricing)
+// Items For Paypal
+const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
+    name:course.title,
+    description:course.other_data.course_main_desc,
+    quantity:course.quantity,
+    unit_amount:{
+        currency_code:GetCurrencyByCountry(course.other_data),
+        value:(CalculateDiscountedPrice(course.other_data)) == null ? 0 : (CalculateDiscountedPrice(course.other_data))
+    }
+}))
+
+
+console.log(newPricing)
 
     useEffect(() => {
 
@@ -52,7 +64,7 @@ const newPricing = cartCourses != null && cartCourses.map((course) => ({
             const calculatedPurchasedCourse = cartCourses != null && cartCourses.map((course) => ({
             courseCode: course.other_data.course_code,
             currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
-            itemPrice: course.quantity * (CalculateDiscountedPrice(course.other_data).toFixed(2))
+            itemPrice: course.quantity * (CalculateDiscountedPrice(course.other_data))
             }));
     
             setPurchasedCourse(calculatedPurchasedCourse);
@@ -83,10 +95,8 @@ const newPricing = cartCourses != null && cartCourses.map((course) => ({
               console.log(JSON.stringify(buyCourseOrder));
              var rawData =  JSON.stringify(buyCourseOrder)
               BuyCourseByStudent(rawData)
-
               return
           }
-          // Perform actions related to a successful purchase, accessing buyCourseOrder here
     
         }
         if (query.get('canceled')) {
@@ -129,7 +139,14 @@ const newPricing = cartCourses != null && cartCourses.map((course) => ({
                     <PayPalButtons style={{color:"blue",layout:"horizontal"}} 
                     createOrder={async() =>{
                         const response = await fetch('/api/paypal_checkout', {
-                            method: "POST"
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                cartData:PaypalItems,
+                                totalPrice:total
+                            })
                         });
                 
                         const order = await response.json();
@@ -144,7 +161,7 @@ const newPricing = cartCourses != null && cartCourses.map((course) => ({
                     />
                 </PayPalScriptProvider>
                      
-                {/* {showStripe && <a href="#" className="edu-btn order-place btn-medium w-100 my-2">Place Your order <i className="icon-4"></i></a>} */}
+            
                 {showStripe && <form action="/api/checkout_sessions" method="POST">
                     <input type="hidden" name="cartCourses" value={JSON.stringify(newPricing)} />
                     
