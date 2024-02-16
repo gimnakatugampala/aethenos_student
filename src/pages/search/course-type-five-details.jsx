@@ -62,6 +62,22 @@ const CourseTypeFive = ({ data, classes }) => {
     );
   };
 
+  const generateStars = (rating) => {
+    const starArray = [];
+    for (let i = 1; i <= 5; i++) {
+      starArray.push(
+        <span
+          key={i}
+          style={{ color: "#f8b81f" }}
+          className={`mx-1 icon-star ${
+            i <= rating ? " icon-star-full" : " icon-star-empty"
+          }`}
+        ></span>
+      );
+    }
+    return starArray;
+  };
+
   return (
     <div
       className={`edu-course course-style-4 course-style-8 p-3  ${
@@ -138,13 +154,7 @@ const CourseTypeFive = ({ data, classes }) => {
           </span>
 
           <div className="course-rating">
-            <div className="rating">
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-            </div>
+            <div className="rating">{generateStars(data.rating)}</div>
             <span className="rating-count ">
               ({data != undefined && data.rating})
             </span>
