@@ -37,7 +37,7 @@ const newPricing = cartCourses != null && cartCourses.map((course) => ({
 // Items For Paypal
 const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
     name:course.title,
-    description:course.other_data.course_main_desc,
+    description:"Test Course Description",
     quantity:course.quantity,
     unit_amount:{
         currency_code:GetCurrencyByCountry(course.other_data),

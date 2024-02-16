@@ -27,7 +27,7 @@ export default async function POST(req, res){
                 intent: "CAPTURE",
                 purchase_units: [
                     {
-                        reference_id:"d9f80740-38f0-11e8-b467-0ed5f89f718b",
+                        reference_id:`${Date.now()}`,
                         amount: {
                             currency_code: `${req.body.cartData[0].unit_amount.currency_code}`,
                             value: `${totalPrice}`,
