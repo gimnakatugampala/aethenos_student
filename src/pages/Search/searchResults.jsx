@@ -75,7 +75,8 @@ const SearchResults = () => {
 
     const topicMatch = topics.length === 0 || topics.includes(item.topic);
 
-    const subCategoryMatch = subcategories.length === 0 || subcategories.includes(item.sub_category);
+    const subCategoryMatch =
+      subcategories.length === 0 || subcategories.includes(item.sub_category);
 
     const priceMatch = CalculateListPrice(item) <= selectPrice;
 
@@ -97,10 +98,9 @@ const SearchResults = () => {
   };
 
   return (
-    <div className="edu-course-area section-gap-equal gap-bottom-text mb-5">
+    <div className="edu-course-area section-gap-equal gap-bottom-text ">
       <div
-        className="container gap-bottom-text"
-        style={{ maxWidth: "80%", paddingBottom: "75px" }}
+        className="container-custom gap-bottom-text"       
       >
         {loading ? (
           <div className="d-flex justify-content-center align-items-center">
@@ -129,7 +129,7 @@ const SearchResults = () => {
               </div>
             </h3>
 
-            <div className="col-md-3">
+            <div className="col-md-3 container">
               <CourseSidebarTwo course_items={courses} />
             </div>
 

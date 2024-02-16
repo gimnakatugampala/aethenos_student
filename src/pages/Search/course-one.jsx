@@ -80,18 +80,20 @@ const CourseTypeOne = ({ course }) => {
   };
 
   return (
-    <div className={`edu-course `}>
+    <div
+      className={`edu-course course-style-1 course-box-shadow hover-button-bg-white h-100`}
+    >
       <div
         className="inner"
         key={course.id}
-        style={{ textAlign: "left", height: "450px" }}
+        style={{ textAlign: "left", height: "" }}
       >
         <div className="thumbnail" style={{ display: "grid" }}>
           <Link href={`/course-details-/${course.id}`}>
             <img
               src={`${IMG_HOST}/${course.img}`}
               alt="Course Meta"
-              style={{ width: "100%", height: "150px" }}
+              style={{ Width: "180px", height: "160px" }}
             />
           </Link>
 
@@ -102,22 +104,15 @@ const CourseTypeOne = ({ course }) => {
             </span>
           </div>
         </div>
-        <div className="content">
-          <span className="course-level">{course.level}</span>
+        <div className="content px-4">
+          <span className="course-level px-2">{course.level}</span>
           <h6 className="title">
-            <a style={{ color: "inherit", height: "50px" }} href="/courses">
+            <a style={{ color: "inherit" }} href="/courses">
               {course.title}
             </a>
           </h6>
           <div className="course-rating">
-            <div className="rating ">
-              {/* <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i> */}
-              {generateStars(course.rating)}
-            </div>
+            <div className="rating ">{generateStars(course.rating)}</div>
           </div>
           <span className="rating-count">
             ({course.rating} / {course.rating_count} Rating)
