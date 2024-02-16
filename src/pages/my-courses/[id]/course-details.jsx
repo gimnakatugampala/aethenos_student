@@ -134,7 +134,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                                       <div className="col-md-3">
                                         <div className="d-flex align-items-center">
                                           <h6 className="m-0 p-0">{Number.parseFloat(course.rating).toFixed(1)}</h6>
-                                          <Rating  size={20}  iconsCount={course.rating} initialValue={course.rating} />
+                                          <Rating  size={20}  iconsCount={Number.parseInt(course.rating)} initialValue={Number.parseInt(course.rating)} />
                                         </div>
                                           <span>{course.rating_count} ratings</span>
                                       </div>
