@@ -1421,9 +1421,6 @@ export const SubmitCourseReview = async(id,values,rating) =>{
 
   const formdata = new FormData();
 formdata.append("item_code", `${id}`);
-formdata.append("title", `${values.title}`);
-formdata.append("name", `${values.name}`);
-formdata.append("email", `${values.email}`);
 formdata.append("summary", `${values.msg}`);
 formdata.append("rating", `${rating}`);
 
@@ -1444,6 +1441,11 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/submitReview
 
     if(result.variable == "200"){
       SuccessAlert("Added",result.message)
+
+      setTimeout(() => {
+        window.location.reload()
+      }, 1500);
+
       return
     }
 
@@ -1470,7 +1472,7 @@ export const GetReviews = async(id,setfeatured_reviews) =>{
     .then((result) => {
       console.log(result)
       Unauthorized(result.status,`my-courses/${id}`)
-      setfeatured_reviews(result)
+      setfeatured_reviews(result.sort((a, b) => new Date(b.date) - new Date(a.date)))
     })
     .catch((error) => console.error(error));
 

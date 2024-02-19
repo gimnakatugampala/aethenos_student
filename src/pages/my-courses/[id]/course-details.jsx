@@ -35,7 +35,6 @@ import moment from "moment";
 const CourseDetailsArea1 = ({id, course}) => {
 
   const [featured_reviews, setfeatured_reviews] = useState(null)
-  let chunkedLearners;
 
   const [main_Video_player_url, setmain_Video_player_url] = useState('https://aethenosinstructor.exon.lk:2053/aethenos-assert/1706080568678_6da9594b-6a36-4773-85ad-a2d7ceda2727.mp4')
 
@@ -56,17 +55,9 @@ const CourseDetailsArea1 = ({id, course}) => {
       return chunkedArray;
   };
 
-  useEffect(() => {
-   
-    // Chunk the intended_learners array into groups of 3
-    chunkedLearners =  course.intended_learners != null && chunkArray(course.intended_learners, 3);
-    // --------------------------- What will who Learn -----------------------
-  }, [chunkedLearners])
-  
-  
-  
-    
 
+  
+  
   
 
 
@@ -148,7 +139,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                                       <div className="col-md-3">
                                         <div className="d-flex align-items-center">
                                          {course && <h6 className="m-0 p-0">{Number.parseFloat(course.rating).toFixed(1)}</h6>} 
-                                          {course && <Rating  size={20}  iconsCount={Number.parseInt(course.rating)} initialValue={Number.parseInt(course.rating)} />}
+                                          {course && <Rating  size={20} readonly={true} iconsCount={5} initialValue={Number.parseInt(course.rating)} />}
                                         </div>
                                           <span>{course && course.rating_count} ratings</span>
                                       </div>
@@ -176,7 +167,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                                       <div className="course-overview">
                                           <h5 className="title m-0 p-0">What You’ll Learn?</h5>
                                           <div className="row">
-                                          {chunkedLearners != null && chunkedLearners.map((chunk, index) => (
+                                          {chunkArray(course.intended_learners, 3) != null && chunkArray(course.intended_learners, course.intended_learners.length).map((chunk, index) => (
                                           <ul key={index} className="col-md-6">
                                               {chunk.map((learner, idx) => (
                                                 learner.intended_learner_type == " students learn" &&
@@ -188,7 +179,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                                       </div>
                                   </div>
 
-                                  <h3 className="heading-title">Course Description</h3>
+                                  <h3 className="heading-title m-0">Course Description</h3>
                                   <p>{course && course.course_main_desc}</p>
 
 
@@ -210,9 +201,9 @@ const CourseDetailsArea1 = ({id, course}) => {
                                     featured_reviews.map((reviews,index) => (
 
                                   <CardContainer key={index} className="p-2">
-                                    <h6 className="m-0 p-0">{reviews.title}</h6>
-                                    <p className="m-0 p-0">{reviews.name}</p>
-                                    <Rating  size={20} iconsCount={reviews.rating} initialValue={5} /> <span className="mt-2">{moment(reviews.date).startOf('day').fromNow()}</span>
+                                    <h6 className="m-0 p-0">{reviews.name}</h6>
+                                    <Rating  size={20} readonly={true} iconsCount={5} initialValue={Number.parseInt(reviews.rating)} />
+                                     <span className="mt-2">{moment(reviews.date).startOf('day').fromNow()}</span>
                                     <p>{reviews.summary}</p>
                                   </CardContainer>
                                     ))

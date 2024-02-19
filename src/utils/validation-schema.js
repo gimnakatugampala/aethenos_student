@@ -26,8 +26,5 @@ export const contactSchema = Yup.object().shape({
 });
 
 export const courseSchema = Yup.object().shape({
-    title: Yup.string().required().label( 'Title' ),
-    name: Yup.string().required().label( 'Name' ),
-    email: Yup.string().required().email().label( 'Email' ),
-    msg: Yup.string().required().min(15).label( 'Summery' )
+    msg: Yup.string().required().min(10).label( 'Summery' )
 });

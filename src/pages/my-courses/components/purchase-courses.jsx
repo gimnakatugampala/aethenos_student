@@ -28,7 +28,7 @@ useEffect(() => {
             <div className="inner">
                 <div className="thumbnail">
                     <Link href={`/my-courses/${data && data.item_code}`} legacyBehavior>
-                        <img  className='cover-img rounded' src={`${IMG_HOST}${data && data.img}`} alt={data && data.title} />
+                        <img width={200} className='cover-img rounded' src={`${IMG_HOST}${data && data.img}`} alt={data && data.title} />
                     </Link>
                 </div>
 
