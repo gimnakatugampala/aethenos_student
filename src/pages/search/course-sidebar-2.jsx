@@ -161,7 +161,7 @@ const CourseSidebarTwo = ({ course_items }) => {
         <span
           key={i}
           style={{ color: "#f8b81f" }}
-          className={`icon-star ${
+          className={`mx-1 icon-star ${
             i <= rating ? " icon-star-full" : " icon-star-empty"
           }`}
         ></span>
