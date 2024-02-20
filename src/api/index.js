@@ -1455,6 +1455,32 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/submitReview
 
 }
 
+export const GetAllAnnoucement = async(courseCode,setannoucements) =>{
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization",`Bearer ${CURRENT_USER}`);
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow"
+  };
+
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/communication/getAnnouncementsByCourseCode/${courseCode}`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result)
+      Unauthorized(result.status,`my-courses`)
+      setannoucements(result)
+
+      if(result.message == "Error"){
+        setannoucements([])
+      }
+      
+    })
+    .catch((error) => console.error(error));
+ }
+
 
 export const GetReviews = async(id,setfeatured_reviews) =>{
 

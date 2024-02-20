@@ -28,7 +28,7 @@ import SingleComment from "./single-comment";
 import CommentFormCourse from '../../../components/forms/comment-form-course';
 import Accordian from '../../../components/course-content/accordian'
 import { useEffect } from "react";
-import { GetMyCoursesDetails, GetReviews } from "../../../api";
+import { GetAllAnnoucement, GetMyCoursesDetails, GetReviews } from "../../../api";
 import moment from "moment";
 // const course = course_data[0];
 
@@ -42,6 +42,15 @@ const CourseDetailsArea1 = ({id, course}) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [courseCode, setcourseCode] = useState(course.course_code)
+
+
+  //  ----------------------- Annoucements -------------------------------
+  const [annoucements, setannoucements] = useState([])
+
+  //  ----------------------- Annoucements -------------------------------
+
 
   // --------------------------- What will who Learn -----------------------
 
@@ -58,6 +67,9 @@ const CourseDetailsArea1 = ({id, course}) => {
 
   
   
+  useEffect(() => {
+    GetAllAnnoucement(courseCode,setannoucements)
+  }, [annoucements])
   
 
 
@@ -351,20 +363,27 @@ const CourseDetailsArea1 = ({id, course}) => {
                             <div className="course-tab-content">
                             <div className="course-overview">
 
-                                <CardContainer className="mt-5">
+                            {annoucements.length > 0 && (
+
+                            annoucements.map((announcement,index) => (
+
+                                <CardContainer key={index} className="mt-5">
                                 <ListItem>
                                   <ListItemAvatar>
                                     <Avatar>
                                       <PersonIcon />
                                     </Avatar>
                                   </ListItemAvatar>
-                                  <ListItemText primary="Gimna Katugampala" secondary="Post an annoucement • 28 days ago" />
+                                  <ListItemText primary={course.instructor} secondary={`Post an annoucement • ${moment(announcement.createdDate).startOf('hour').fromNow()}`} />
                                 </ListItem>
                                 <div className="m-3">
-                                <h4 className="heading-title">[Great News]</h4>
-                                  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium aperiam excepturi, eaque adipisci itaque enim doloribus ratione voluptas asperiores error harum nemo quo nesciunt necessitatibus, repellat dolorem natus, iusto repudiandae!</p>
+                                <h4 className="heading-title">{announcement.tittle}</h4>
+                                  <p>{announcement.content}</p>
                                 </div>
                                 </CardContainer>
+                                ))
+                            )}
+
                                 </div>
                             </div>
                         </div>
