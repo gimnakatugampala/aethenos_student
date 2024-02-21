@@ -28,8 +28,9 @@ import SingleComment from "./single-comment";
 import CommentFormCourse from '../../../components/forms/comment-form-course';
 import Accordian from '../../../components/course-content/accordian'
 import { useEffect } from "react";
-import { GetAllAnnoucement, GetMyCoursesDetails, GetReviews } from "../../../api";
+import { AddQuestion, GetAllAnnoucement, GetAllQuestion, GetMyCoursesDetails, GetReviews } from "../../../api";
 import moment from "moment";
+import ErrorAlert from "../../../functions/Alert/ErrorAlert";
 // const course = course_data[0];
 
 const CourseDetailsArea1 = ({id, course}) => {
@@ -38,12 +39,20 @@ const CourseDetailsArea1 = ({id, course}) => {
 
   const [main_Video_player_url, setmain_Video_player_url] = useState('https://aethenosinstructor.exon.lk:2053/aethenos-assert/1706080568678_6da9594b-6a36-4773-85ad-a2d7ceda2727.mp4')
 
+  const [answer, setanswer] = useState(null)
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (code,answer) => {
+    setShow(true)
+    setanswer(answer)
+  };
 
   const [courseCode, setcourseCode] = useState(course.course_code)
+  const [itemCode, setitemCode] = useState(course.item_code)
+
+  // ======= QUESTIONS
+  const [questions, setquestions] = useState([])
 
 
   //  ----------------------- Annoucements -------------------------------
@@ -66,9 +75,9 @@ const CourseDetailsArea1 = ({id, course}) => {
 
 
   
-  
   useEffect(() => {
     GetAllAnnoucement(courseCode,setannoucements)
+    GetAllQuestion(itemCode,setquestions)
   }, [annoucements])
   
 
@@ -87,6 +96,21 @@ const CourseDetailsArea1 = ({id, course}) => {
   const handleShowNewQuestion = () => setShowNewQuestion(true);
 
   const { course_desc, course_desc_2, learn_list, course_desc_3, curriculum_desc, course_lessons, instructor_img, instructor_title, instructor_desc, social_links, reviews, instructor, rating, rating_count } = course || {};
+
+
+  // ---------------- Ask Question -------------
+  const [question, setquestion] = useState("")
+
+  const handleSubmitAskQuestion = () =>{
+      console.log(question)
+
+      if(question == ""){
+        ErrorAlert("Error","Please Enter a Question")
+        return
+      }
+
+      AddQuestion(itemCode,question,setShowNewQuestion,setquestion)
+  }
 
   return (
     <section
@@ -269,7 +293,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                               <InputGroup.Text id="basic-addon2"><SearchIcon /></InputGroup.Text>
                             </InputGroup>
 
-                            <div className="row">
+                            {/* <div className="row">
 
                               <div className="col-md-4">
                                  <Form.Label><b>Filters:</b></Form.Label>
@@ -302,7 +326,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                               </Form.Select>
                                 </div>
 
-                            </div>
+                            </div> */}
                          
 
                           </div>
@@ -312,43 +336,38 @@ const CourseDetailsArea1 = ({id, course}) => {
 
                           <div className="row my-3">
                             <div className="col-md-12">
-                                <span className="d-flex"><h5 className="m-0 p-0">All questions in this courses</h5><span>(653)</span></span>
+                                <span className="d-flex"><h5 className="m-0 p-0">All questions in this courses</h5><span>({questions.length > 0 && questions.length})</span></span>
                             </div>
                           </div>
 
                           <div className="row my-1">
-                          <div className="col-md-12">
+                            {questions.length > 0 && questions.map((question,index) => (
+
+                          <div key={index} className="col-md-12">
                           <CardContainer>
                           <ListItem alignItems="flex-start">
                                 <ListItemAvatar>
-                                  <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                                  <Avatar alt={question.userName} src={question.profileImg == null ? "/static/images/avatar/1.jpg" : question.profileImg} />
                                 </ListItemAvatar>
                                 <ListItemText
-                                  primary="Brunch this weekend?"
+                                  primary={question.userName}
                                   secondary={
                                     <React.Fragment>
-                                      {" I'll be in your neighborhood doing errands this…"}
+                                      {question.question}
                                     </React.Fragment>
                                   }
                                 />
 
-                                  <Button onClick={handleShow} variant="contained" size="medium"><MessageIcon /></Button>
+                                  <Button onClick={() => handleShow(question.questionCode,question.answer)} variant="contained" size="medium"><MessageIcon /></Button>
 
                               </ListItem>
                               
-                      
-                                <span className="mx-5 mt-2 d-flex">
-                                <Typography variant="body2">Sam Cane •</Typography>
-                                  
-                                  <Typography className="mx-1" variant="body2">Lecture 229</Typography>
-                                  <Typography className="mx-1" variant="body2">1 Year ago</Typography>
-                                </span>
-                              
-
-                        
-
+                            <span className="mx-5 mt-2 d-flex">
+                              <Typography className="mx-1" variant="body2">{question.date}</Typography>
+                            </span>
                           </CardContainer>
                           </div>
+                            ))}
                           </div>
 
                           <Button onClick={handleShowNewQuestion} className="my-3" variant="contained">Ask a new question</Button>
@@ -640,31 +659,24 @@ const CourseDetailsArea1 = ({id, course}) => {
 
         <div className="row my-1">
             <div className="col-md-12">
-            <CardContainer>
+              {answer == null ? "Instructor Not Answered Yet" : (
+
             <ListItem alignItems="flex-start">
                   <ListItemAvatar>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                    <Avatar alt={course.instructor} src="/static/images/avatar/1.jpg" />
                   </ListItemAvatar>
                   <ListItemText
-                    primary="Brunch this weekend?"
+                    primary={course.instructor}
                     secondary={
                       <React.Fragment>
-                        {" I'll be in your neighborhood doing errands this…"}
+                        {answer}
                       </React.Fragment>
                     }
                   />
 
                 </ListItem>
+              )}
                 
-        
-                  <span className="mx-5 mt-2 d-flex">
-                  <Typography variant="body2">Sam Cane •</Typography>
-                    
-                    <Typography className="mx-1" variant="body2">Lecture 229</Typography>
-                    <Typography className="mx-1" variant="body2">1 Year ago</Typography>
-                  </span>
-              
-            </CardContainer>
             </div>
           </div>
 
@@ -676,19 +688,19 @@ const CourseDetailsArea1 = ({id, course}) => {
 
       {/* Ask a New Question */}
       <Modal show={showNewQuestion} onHide={handleCloseNewQuestion}>
-      <CardContainer className="p-0 m-0">
+      {/* <CardContainer className="p-0 m-0"> */}
         <Modal.Header closeButton>
           <Modal.Title>New Question</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
         <Form.Label>Question</Form.Label>
-        <Form.Control as="textarea" rows={3} />
+        <Form.Control onChange={(e) => setquestion(e.target.value)} as="textarea" rows={3} />
       </Form.Group>
 
-      <Button className="my-2" variant="contained">Save</Button>
+      <Button onClick={handleSubmitAskQuestion} className="my-2" variant="contained">Save</Button>
         </Modal.Body>
-        </CardContainer>
+        {/* </CardContainer> */}
       </Modal>
 
     </section>

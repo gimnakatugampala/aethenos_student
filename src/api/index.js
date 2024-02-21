@@ -1476,7 +1476,7 @@ export const GetAllAnnoucement = async(courseCode,setannoucements) =>{
       if(result.message == "Error"){
         setannoucements([])
       }
-      
+
     })
     .catch((error) => console.error(error));
  }
@@ -1525,5 +1525,63 @@ export const GetCourseDetailsByInstructerCode = async(id,setcourse) =>{
     })
     .catch((error) => console.error(error));
 
+
+}
+
+export const AddQuestion = async(itemCode,question,setShowNewQuestion,setquestion) =>{
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  const formdata = new FormData();
+formdata.append("itemCode", `${itemCode}`);
+formdata.append("question", `${question}`);
+
+const requestOptions = {
+  method: "POST",
+  body: formdata,
+  headers: myHeaders,
+  redirect: "follow"
+};
+
+fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/communication/addQuestion", requestOptions)
+  .then((response) => response.json())
+  .then((result) => {
+    console.log(result)
+    Unauthorized(result.status,`my-courses`)
+
+    if(result.variable == "200"){
+      SuccessAlert("Success",result.message)
+      setShowNewQuestion(false)
+      setquestion("")
+      return
+    }
+
+  })
+  .catch((error) => console.error(error));
+
+}
+
+export const GetAllQuestion = async(itemCode,setquestions) =>{
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+
+
+const requestOptions = {
+  method: "GET",
+  headers: myHeaders,
+  redirect: "follow"
+};
+
+fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/communication/getAllQuestionsByItemCode/${itemCode}`, requestOptions)
+  .then((response) => response.json())
+  .then((result) => {
+    console.log(result)
+    Unauthorized(result.status,`my-courses`)
+    setquestions(result)
+  })
+  .catch((error) => console.error(error));
 
 }
