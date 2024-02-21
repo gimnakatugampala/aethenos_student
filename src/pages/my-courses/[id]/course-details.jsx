@@ -48,8 +48,8 @@ const CourseDetailsArea1 = ({id, course}) => {
     setanswer(answer)
   };
 
-  const [courseCode, setcourseCode] = useState(course.course_code)
-  const [itemCode, setitemCode] = useState(course.item_code)
+  const [courseCode, setcourseCode] = useState(course && course.course_code)
+  const [itemCode, setitemCode] = useState(course && course.item_code)
 
   // ======= QUESTIONS
   const [questions, setquestions] = useState([])
@@ -203,7 +203,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                                       <div className="course-overview">
                                           <h5 className="title m-0 p-0">What You’ll Learn?</h5>
                                           <div className="row">
-                                          {chunkArray(course.intended_learners, 3) != null && chunkArray(course.intended_learners, course.intended_learners.length).map((chunk, index) => (
+                                          {course && chunkArray(course.intended_learners, 3) != null && chunkArray(course.intended_learners, course.intended_learners.length).map((chunk, index) => (
                                           <ul key={index} className="col-md-6">
                                               {chunk.map((learner, idx) => (
                                                 learner.intended_learner_type == " students learn" &&
@@ -232,7 +232,7 @@ const CourseDetailsArea1 = ({id, course}) => {
 
                                   {featured_reviews != null && (
 
-                                  featured_reviews.length > 0 ? (
+                                    featured_reviews.length > 0 ? (
 
                                     featured_reviews.map((reviews,index) => (
 

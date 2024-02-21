@@ -154,7 +154,7 @@ const CourseTypeFive = ({ data, classes }) => {
           </span>
 
           <div className="course-rating">
-            <div className="rating">{generateStars(data.rating)}</div>
+            <div className="rating">{data != undefined && generateStars(data.rating)}</div>
             <span className="rating-count ">
               ({data != undefined && data.rating})
             </span>
