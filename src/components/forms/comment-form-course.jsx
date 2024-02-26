@@ -6,34 +6,47 @@ import { SubmitCourseReview } from '../../api';
 import ReactStars from 'react-stars'
 import { Rating } from 'react-simple-star-rating'
 import { useState } from 'react';
+import ErrorAlert from '../../functions/Alert/ErrorAlert';
 
 
 const CommentFormCourse = ({id}) => {
 
     const [rating, setrating] = useState(0)
+    const [msg, setmsg] = useState("")
 
     const ratingChanged = (newRating) => {
         setrating(newRating)
-        console.log(newRating)
       }
 
-    const { handleChange, handleSubmit, handleBlur, errors, values, touched } = useFormik({
-        initialValues: { title:'',name: '', email: '', msg: '' },
-        validationSchema: courseSchema,
-        onSubmit: (values, { resetForm }) => {
-            // toast.success(`${values.name} your review added successfully`, {
-            //     position: 'top-left'
-            // })
-            SubmitCourseReview(id,values,rating)
+      const handleSubmit = (e) => {
+        e.preventDefault()
 
-            console.log(rating)
-
-            // resetForm()
+        if(msg == ""){
+            ErrorAlert("Empty Field","Please Fill A Comment")
+            return
         }
-    })
+
+        console.log(msg)
+          
+          SubmitCourseReview(id,msg,rating)
+      }
+
+    // const { handleChange, handleSubmit, handleBlur, errors, values, touched } = useFormik({
+    //     initialValues: { msg: '' },
+    //     validationSchema: courseSchema,
+    //     onSubmit: (values, { resetForm }) => {
+    //         // toast.success(`${values.name} your review added successfully`, {
+    //         //     position: 'top-left'
+    //         // })
+    //         console.log(values)
+
+
+    //         // resetForm()
+    //     }
+    // })
 
     return (
-        <form className="comment-form" onSubmit={handleSubmit}>
+        <form className="comment-form">
             <div className="row g-5">
 
             <div className="rating-icon">
@@ -45,12 +58,11 @@ const CommentFormCourse = ({id}) => {
               
 
                 <div className="form-group col-12">
-                    <textarea value={values.msg} onChange={handleChange} onBlur={handleBlur} name="msg" id="comm-message" cols="30" rows="5" placeholder="Review summary"></textarea>
-                    {touched.msg && <ErrorMsg error={errors.msg} />}
+                    <textarea value={msg} onChange={(e) => setmsg(e.target.value)} name="msg" id="comm-message" cols="30" rows="5" placeholder="Review summary"></textarea>
                 </div>
 
                 <div className="form-group col-12">
-                    <button type="submit" className="edu-btn submit-btn">Submit Review <i className="icon-4"></i></button>
+                    <button onClick={handleSubmit} type="submit" className="edu-btn submit-btn">Submit Review <i className="icon-4"></i></button>
                 </div>
             </div>
         </form>

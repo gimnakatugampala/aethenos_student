@@ -417,11 +417,11 @@ const CourseDetailsArea1 = ({id, course}) => {
 
                             <div className="course-review mt-5">
                           <h3 className="heading-title">Course Rating</h3>
-                          <p>{course && course.rating} average rating based on {course && course.rating_count} rating</p>
+                          <p>{course && (course.rating).toFixed(1)} average rating based on {course && course.rating_count} rating</p>
                           <div className="row g-0 align-items-center">
                               <div className="col-sm-4">
                                   <div className="rating-box">
-                                      <div className="rating-number">{course && course.rating}</div>
+                                      <div className="rating-number">{course && (course.rating).toFixed(1)}</div>
                                       <div className="rating">
                                           <i className="icon-23"></i>
                                           <i className="icon-23"></i>
@@ -429,12 +429,12 @@ const CourseDetailsArea1 = ({id, course}) => {
                                           <i className="icon-23"></i>
                                           <i className="icon-23"></i>
                                       </div>
-                                      <span>({course && course.rating_count} Review)</span>
+                                      <span>({course && (course.rating_count).toFixed(1)} Review)</span>
                                   </div>
                               </div>
                               <div className="col-sm-8">
                                   <div className="review-wrapper">
-                                      <SingleProgressbar value={'100'} rating_value={course && course.rating_count} />
+                                      <SingleProgressbar value={'100'} rating_value={course && (course.rating_count).toFixed(1)} />
                                       <SingleProgressbar value={'0'} rating_value={'0'} />
                                       <SingleProgressbar value={'0'} rating_value={'0'} />
                                       <SingleProgressbar value={'0'} rating_value={'0'} />

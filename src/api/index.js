@@ -1413,7 +1413,7 @@ export const GetMyCoursesDetails = async(id,setcourse) =>{
 
 }
 
-export const SubmitCourseReview = async(id,values,rating) =>{
+export const SubmitCourseReview = async(id,msg,rating) =>{
 
 
   var myHeaders = new Headers();
@@ -1421,7 +1421,7 @@ export const SubmitCourseReview = async(id,values,rating) =>{
 
   const formdata = new FormData();
 formdata.append("item_code", `${id}`);
-formdata.append("summary", `${values.msg}`);
+formdata.append("comment", `${msg}`);
 formdata.append("rating", `${rating}`);
 
 const requestOptions = {
