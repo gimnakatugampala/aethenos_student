@@ -1585,3 +1585,40 @@ fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/communication/getAll
   .catch((error) => console.error(error));
 
 }
+
+export const AddReplyToReview = async(comment,reviewCode,setbtnLoading,setcomment) =>{
+
+  setbtnLoading(true)
+  
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization",`Bearer ${CURRENT_USER}`);
+
+  const formdata = new FormData();
+  formdata.append("reviewCode", `${reviewCode}`);
+  formdata.append("comment", `${comment}`);
+
+  const requestOptions = {
+    method: "POST",
+    body: formdata,
+    headers: myHeaders,
+    redirect: "follow"
+  };
+
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addRespondToReview", requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result)
+      Unauthorized(result.status,`performance/reviews`)
+
+      if(result.variable == "200"){
+        SuccessAlert("Success",result.message)
+        setbtnLoading(false)
+        setcomment("")
+        return
+      }
+
+    })
+    .catch((error) => console.error(error));
+
+ }

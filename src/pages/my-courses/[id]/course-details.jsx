@@ -31,6 +31,8 @@ import { useEffect } from "react";
 import { AddQuestion, GetAllAnnoucement, GetAllQuestion, GetMyCoursesDetails, GetReviews } from "../../../api";
 import moment from "moment";
 import ErrorAlert from "../../../functions/Alert/ErrorAlert";
+import Commentbox from "../../../components/comment-box/Commentbox";
+
 // const course = course_data[0];
 
 const CourseDetailsArea1 = ({id, course}) => {
@@ -85,7 +87,7 @@ const CourseDetailsArea1 = ({id, course}) => {
   // get the Reviews
   useEffect(() => {
     GetReviews(id,setfeatured_reviews)
-  }, [id])
+  }, [featured_reviews])
   
   
 
@@ -226,24 +228,34 @@ const CourseDetailsArea1 = ({id, course}) => {
                                   <p>{course && course.instructor_desc}</p>
 
 
-                                  <h3 className="heading-title">Featured Review</h3>
+                                  <h3 className="heading-title p-0 m-0">Requirements</h3>
+                                  <div className="row">
+                                          <ul className="col-md-12">
+                                            {course != null && course.intended_learners.map((req,index) => (
+                                              req.intended_learner_type == "requirements" &&
+                                              <li key={index}>{req.intended_learner}</li>
+                                            ))}
+                                          </ul>
+                                  </div>
+
+
+                                <h3 className="heading-title">Featured Review</h3>
 
                                 <div className="my-4">
-
                                   {featured_reviews != null && (
-
                                     featured_reviews.length > 0 ? (
-
                                     featured_reviews.map((reviews,index) => (
 
-                                  <CardContainer key={index} className="p-2">
-                                    <h6 className="m-0 p-0">{reviews.name}</h6>
-                                    <Rating  size={20} readonly={true} iconsCount={5} initialValue={Number.parseInt(reviews.rating)} />
-                                     <span className="mt-2">{moment(reviews.date).startOf('day').fromNow()}</span>
-                                    <p>{reviews.summary}</p>
-                                  </CardContainer>
+                                    <CardContainer key={index} className="p-2">
+                                      <h6 className="m-0 p-0">{reviews.fullName}</h6>
+                                      <Rating  size={20} readonly={true} iconsCount={5} initialValue={Number.parseInt(reviews.rating)} />
+                                      <span className="mt-2">{moment(reviews.date).startOf('day').fromNow()}</span>
+                                      <p>{reviews.comment}</p>
+                                      <div className="pl-5">
+                                          <Commentbox reviewCode={reviews.reviewCode}  replies={reviews.replies} />
+                                        </div>
+                                    </CardContainer>
                                     ))
-
 
                                   ) : "No Reviews Found"
                                
@@ -258,16 +270,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                         
                                   
                                   
-                                  <h3 className="heading-title">Requirements</h3>
-                                  <div className="row">
-                                          <ul className="col-md-12">
-                                            {course != null && course.intended_learners.map((req,index) => (
-                                              req.intended_learner_type == "requirements" &&
-                                              <li key={index}>{req.intended_learner}</li>
-                                            ))}
-                                          </ul>
-
-                                          </div>
+                                  
                                 
 
                                 </div>
