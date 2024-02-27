@@ -80,7 +80,7 @@ const CourseDetailsArea1 = ({id, course}) => {
   useEffect(() => {
     GetAllAnnoucement(courseCode,setannoucements)
     GetAllQuestion(itemCode,setquestions)
-  }, [annoucements])
+  }, [itemCode])
   
 
 
@@ -121,8 +121,9 @@ const CourseDetailsArea1 = ({id, course}) => {
         
         <div className="row">
             <div className="col-md-8">
+        
             <Player autoPlay={true}>
-                <source src={main_Video_player_url} />
+                <source id="videoPlayer" src={main_Video_player_url} />
               </Player>
 
             {/* New Tab */}
@@ -434,7 +435,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                               </div>
                               <div className="col-sm-8">
                                   <div className="review-wrapper">
-                                      <SingleProgressbar value={'100'} rating_value={course && (course.rating_count).toFixed(1)} />
+                                      <SingleProgressbar value={'100'} rating_value={course && course.rating_count} />
                                       <SingleProgressbar value={'0'} rating_value={'0'} />
                                       <SingleProgressbar value={'0'} rating_value={'0'} />
                                       <SingleProgressbar value={'0'} rating_value={'0'} />

@@ -6,61 +6,129 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import MessageIcon from '@mui/icons-material/Message';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Logout } from "../../api";
+// import { Logout } from "../../api";
 import SuccessAlert from "../../functions/Alert/SuccessAlert";
 import { useRouter } from "next/router";
 
-const DropDownProfile = ({setOpenProfile, setisUserLoading, setCURRENTUSER}) => {
+import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Tooltip from '@mui/material/Tooltip';
+import PersonAdd from '@mui/icons-material/PersonAdd';
+import Settings from '@mui/icons-material/Settings';
+import Logout from '@mui/icons-material/Logout';
 
-  const router = useRouter()
 
-  const handleLogout = () =>{
+const DropDownProfile = ({setisUserLoading, setCURRENTUSER}) => {
 
-    setisUserLoading(true)
-    setOpenProfile(false)
+  // const router = useRouter()
 
-    Logout(setCURRENTUSER)
-    SuccessAlert("Success","Logout Success")
+  // const handleLogout = () =>{
 
-    setTimeout(() => {
-      setisUserLoading(false)
-  }, 1500);
+  //   setisUserLoading(true)
+  //   setOpenProfile(false)
+
+  //   Logout(setCURRENTUSER)
+  //   SuccessAlert("Success","Logout Success")
+
+  //   setTimeout(() => {
+  //     setisUserLoading(false)
+  // }, 1500);
 
  
-  }
+  // }
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <div className="submenu-wrapper">
-      <div className="submenu">
-        <div className="user-info">
-          <AccountCircleIcon className="m-2" />
-          <h3>GIMNA KATUGAMPALA</h3>
-        </div>
-        <hr/>
-        <a href="/viewprofile" className="submenu-link">
-        <SwitchAccountIcon />
-        <p>My Profile</p>
-        </a>
-        <a href="/eidtprofile" className="submenu-link">
-        <ManageAccountsIcon />
-        <p>Edit Profile</p>
-        </a>
-        <a href="#" className="submenu-link">
-        <MessageIcon />
-        <p>Messages</p>
-        </a>
-        <a href="#" className="submenu-link">
-        <SettingsIcon />
-        <p>Setting</p>
-        </a>
-        <a onClick={handleLogout} className="submenu-link">
-        <LogoutIcon />
-        <p>Log out</p>
-        </a>
-        
-      </div>
-    </div>
+    <React.Fragment>
+    <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Tooltip title="Account settings">
+        <IconButton
+          onClick={handleClick}
+          size="medium"
+          // sx={{ ml: 2 }}
+          aria-controls={open ? 'account-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+        >
+          <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+        </IconButton>
+      </Tooltip>
+    </Box>
+    <Menu
+      anchorEl={anchorEl}
+      id="account-menu"
+      open={open}
+      onClose={handleClose}
+      onClick={handleClose}
+      PaperProps={{
+        elevation: 0,
+        sx: {
+          overflow: 'visible',
+          filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+          mt: 1.5,
+          '& .MuiAvatar-root': {
+            width: 32,
+            height: 32,
+            ml: -0.5,
+            mr: 1,
+          },
+          '&::before': {
+            content: '""',
+            display: 'block',
+            position: 'absolute',
+            top: 0,
+            right: 14,
+            width: 10,
+            height: 10,
+            bgcolor: 'background.paper',
+            transform: 'translateY(-50%) rotate(45deg)',
+            zIndex: 0,
+          },
+        },
+      }}
+      transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+      anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+    >
+      <a href="/profile">
+        <MenuItem>
+          <Avatar /> My Profile
+        </MenuItem>
+      </a>
+
+      <Divider />
+
+      <a href="/messages">
+      <MenuItem>
+        <ListItemIcon>
+          <MessageIcon fontSize="small" />
+        </ListItemIcon>
+        Messages
+      </MenuItem>
+      </a>
+
+      <MenuItem>
+        <ListItemIcon>
+          <Logout fontSize="small" />
+        </ListItemIcon>
+        Logout
+      </MenuItem>
+
+    </Menu>
+  </React.Fragment>
   );
 };
 

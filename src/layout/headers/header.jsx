@@ -174,10 +174,6 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                     <li className="search-bar">
                                         <div className="input-group">
                                         <SearchBar/>
-                                            {/* <input type="text" className="form-control" placeholder="Search" />
-                                            <button className="search-btn" type="button">
-                                                <i className="icon-2"></i>
-                                            </button> */}
                                         </div>
                                     </li>
                                     <li className="icon search-icon search-bar">
@@ -229,15 +225,16 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                     ) : (
 
                                     <li> 
-                                        <i onClick={()=> setOpenProfile((prve)=> !prve)} className="fas fa-user-circle fa-2x"></i>
+                                      <DropDownProfile setisUserLoading={setisUserLoading} setCURRENTUSER={setCURRENTUSER}  />
                                     </li>
                                     )}
                                             
                                     </>
                                     )}
+                                    
 
 
-                                {openProfile && <DropDownProfile setOpenProfile={setOpenProfile} setisUserLoading={setisUserLoading} setCURRENTUSER={setCURRENTUSER}  />}
+                                
                                    
                                     <li className="mobile-menu-bar d-block d-xl-none">
                                         <button className="hamberger-button" onClick={() => setIsOpen(true)}>
