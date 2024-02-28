@@ -6,7 +6,7 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import MessageIcon from '@mui/icons-material/Message';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
-// import { Logout } from "../../api";
+import { Logout as LogoutAPI } from "../../api";
 import SuccessAlert from "../../functions/Alert/SuccessAlert";
 import { useRouter } from "next/router";
 
@@ -24,24 +24,24 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 
 
-const DropDownProfile = ({setisUserLoading, setCURRENTUSER}) => {
+const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) => {
 
-  // const router = useRouter()
+  const router = useRouter()
 
-  // const handleLogout = () =>{
+  const handleLogout = () =>{
 
-  //   setisUserLoading(true)
-  //   setOpenProfile(false)
+    setisUserLoading(true)
+    setOpenProfile(false)
 
-  //   Logout(setCURRENTUSER)
-  //   SuccessAlert("Success","Logout Success")
+    LogoutAPI(setCURRENTUSER)
+    SuccessAlert("Success","Logout Success")
 
-  //   setTimeout(() => {
-  //     setisUserLoading(false)
-  // }, 1500);
+    setTimeout(() => {
+      setisUserLoading(false)
+  }, 1500);
 
  
-  // }
+  }
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -120,7 +120,7 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER}) => {
       </MenuItem>
       </a>
 
-      <MenuItem>
+      <MenuItem onClick={handleLogout}>
         <ListItemIcon>
           <Logout fontSize="small" />
         </ListItemIcon>

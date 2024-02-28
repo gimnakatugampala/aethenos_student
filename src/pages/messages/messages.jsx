@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Form from 'react-bootstrap/Form';
 
 import {
   Container,
@@ -29,6 +30,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import { MessageBox } from 'react-chat-elements'
 import CardContainer from "../../contexts/CardContainer";
 import 'react-chat-elements/dist/main.css'
+import { GetAllInstructorsofThePurchaseMsg } from "../../api";
 
 function Messages() {
   const initialMessages = {
@@ -65,6 +67,7 @@ function Messages() {
   };
 
   const [selectedUser, setSelectedUser] = useState("User1");
+  const [showAddMessage, setshowAddMessage] = useState(true)
   const [messages, setMessages] = useState(initialMessages[selectedUser]);
   const [messageText, setMessageText] = useState("");
   const [userFilter, setUserFilter] = useState("");
@@ -89,6 +92,11 @@ function Messages() {
   const filteredUsers = Object.keys(initialMessages).filter((user) =>
     user.toLowerCase().includes(userFilter.toLowerCase())
   );
+
+  useEffect(() => {
+    GetAllInstructorsofThePurchaseMsg()
+  }, [])
+  
   
 
   return (
@@ -109,9 +117,10 @@ function Messages() {
 
               <Col sm={5} md={5} lg={4} className="bg-light border-right">
 
-                <Typography className="p-3" variant="h5" gutterBottom>
-                 Chat Users
+                <Typography className="p-3 d-flex justify-content-between" variant="h5" gutterBottom>
+                 Chat Users  <Button onClick={() => setshowAddMessage(true)} className="mx-1" variant="contained"><i className="fas fa-plus"></i></Button>
                </Typography>
+
 
                 {/* <h3 className="p-3">Chat Users</h3> */}
                 <div className="input-group mb-3">
@@ -129,7 +138,10 @@ function Messages() {
                 <List sx={{ width: '100%'}}>
                 {filteredUsers.map((user) => (
                   <>
-                      <ListItem onClick={() => handleUserClick(user)} key={user} alignItems="flex-start">
+                      <ListItem onClick={() => {
+                        setshowAddMessage(false)
+                        handleUserClick(user)
+                      }} key={user} alignItems="flex-start">
                         <ListItemButton selected={selectedUser === user ? true : false}>
                         <ListItemAvatar>
                           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
@@ -159,67 +171,108 @@ function Messages() {
                     </List>
               </Col>
 
+         
+    
+              {/* New Messages */}
+              {showAddMessage ? (
               <Col sm={7} md={7} lg={8}>
                 <div className="d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
                 <Typography variant="h5" className="p-3" gutterBottom>
-                Chat with <b>{selectedUser}</b>
+                  New Messages
                </Typography>
-
                 </div>
+
                 <Paper
                   elevation={3}
                   className="p-3"
                   style={{ minHeight: "70vh", overflowY: "auto",background:'#D5D8DC' }}
                 >
-                  <List>
 
-                  <MessageBox
-                  styles={{width:300,color:'#000',fontWeight:'bold'}}
+                  <Form.Select className="my-3" size="lg" aria-label="Default select example">
+                    <option selected disabled value="">Select Instructor</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </Form.Select>
 
-                    onReplyMessageClick={() => console.log('reply clicked!')}
-                    position={'left'}
-                    type={'text'}
-                    text={'Tempor duis do voluptate enim duis velit veniam aute ullamco dolore duis irure.'}
-                  />
-                  <MessageBox
-                  styles={{width:300,color:'#000',fontWeight:'bold'}}
+                 
+                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                  <Form.Label><b>Messages</b></Form.Label>
+                  <Form.Control as="textarea" rows={5} />
+                </Form.Group>
 
-                    onReplyMessageClick={() => console.log('reply clicked!')}
-                    position={'left'}
-                    type={'text'}
-                    text={'Tempor duis do voluptate enim duis velit veniam aute ullamco dolore duis irure.'}
-                  />
+                  <Button className="mx-1" variant="text">Cancel</Button>
+                  <Button className="mx-1" variant="contained">Send</Button>
 
-
-
-                  <MessageBox
-                  styles={{width:300,background:'#e01D20',color:'#fff',fontWeight:'bold'}}
-                    onReplyMessageClick={() => console.log('reply clicked!')}
-                    position={'right'}
-                    type={'text'}
-                    text={'Tempor duis do voluptate enim duis velit veniam aute ullamco dolore duis irure.'}
-                  />
-                  <MessageBox
-                  styles={{width:300,background:'#e01D20',color:'#fff',fontWeight:'bold'}}
-                    onReplyMessageClick={() => console.log('reply clicked!')}
-                    position={'right'}
-                    type={'text'}
-                    text={'Tempor duis do voluptate enim duis velit veniam aute ullamco dolore duis irure.'}
-                  />
-                   
-                   
-                  </List>
                 </Paper>
 
                 
-                <div className="input-group p-2">
-                  <textarea placeholder="Type a Message" className="form-control" aria-label="With textarea"></textarea>
-                    <Button variant="contained"><SendIcon /></Button>
-                    
-                </div>
   
 
               </Col>
+              ) : (
+              <Col sm={7} md={7} lg={8}>
+                  <div className="d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
+                  <Typography variant="h5" className="p-3" gutterBottom>
+                  Chat with <b>{selectedUser}</b>
+                </Typography>
+
+                  </div>
+                  <Paper
+                    elevation={3}
+                    className="p-3"
+                    style={{ minHeight: "70vh", overflowY: "auto",background:'#D5D8DC' }}
+                  >
+                    <List>
+
+                    <MessageBox
+                    styles={{width:300,color:'#000',fontWeight:'bold'}}
+
+                      onReplyMessageClick={() => console.log('reply clicked!')}
+                      position={'left'}
+                      type={'text'}
+                      text={'Tempor duis do voluptate enim duis velit veniam aute ullamco dolore duis irure.'}
+                    />
+                    <MessageBox
+                    styles={{width:300,color:'#000',fontWeight:'bold'}}
+
+                      onReplyMessageClick={() => console.log('reply clicked!')}
+                      position={'left'}
+                      type={'text'}
+                      text={'Tempor duis do voluptate enim duis velit veniam aute ullamco dolore duis irure.'}
+                    />
+
+
+
+                    <MessageBox
+                    styles={{width:300,background:'#e01D20',color:'#fff',fontWeight:'bold'}}
+                      onReplyMessageClick={() => console.log('reply clicked!')}
+                      position={'right'}
+                      type={'text'}
+                      text={'Tempor duis do voluptate enim duis velit veniam aute ullamco dolore duis irure.'}
+                    />
+                    <MessageBox
+                    styles={{width:300,background:'#e01D20',color:'#fff',fontWeight:'bold'}}
+                      onReplyMessageClick={() => console.log('reply clicked!')}
+                      position={'right'}
+                      type={'text'}
+                      text={'Tempor duis do voluptate enim duis velit veniam aute ullamco dolore duis irure.'}
+                    />
+                    
+                    
+                    </List>
+                  </Paper>
+
+                  
+                  <div className="input-group p-2">
+                    <textarea placeholder="Type a Message" className="form-control" aria-label="With textarea"></textarea>
+                      <Button variant="contained"><SendIcon /></Button>
+                      
+                  </div>
+    
+
+                </Col>
+              )}
 
             </Row>
            

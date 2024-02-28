@@ -225,7 +225,7 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                     ) : (
 
                                     <li> 
-                                      <DropDownProfile setisUserLoading={setisUserLoading} setCURRENTUSER={setCURRENTUSER}  />
+                                      <DropDownProfile setOpenProfile={setOpenProfile} setisUserLoading={setisUserLoading} setCURRENTUSER={setCURRENTUSER}  />
                                     </li>
                                     )}
                                             
