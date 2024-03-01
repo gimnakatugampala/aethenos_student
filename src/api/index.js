@@ -1215,10 +1215,14 @@ export const GetCourseHomePersonalDevelopment = async(setpersonal_development_co
 
 }
 
-export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorText) =>{
+export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorText,setTags,setbtnLoading) =>{
+  setbtnLoading(true)
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
 
   var requestOptions = {
     method: 'GET',
+    headers: myHeaders,
     redirect: 'follow'
   };
   
@@ -1227,11 +1231,22 @@ export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorTe
     .then(result => {
       console.log(result)
 
-      if(result.message){
-        // ErrorAlert("Error",result.variable)
+      if(result.message == "Error"){
         setCouponErrorText(result.variable)
         setcouponError(true)
+        setbtnLoading(false)
         return
+      }
+
+      if(result.validation == "This Coupon is Valid"){
+        setTags(prevTags => [
+          ...prevTags,
+          {
+              id: result.course_Id,
+              text: coupon
+          }
+      ])
+      setbtnLoading(false)
       }
       
     })
@@ -1718,7 +1733,7 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/updat
  }
 
 
- export const GetAllInstructorsofThePurchaseMsg = async() =>{
+ export const GetAllInstructorsofThePurchaseMsg = async(setinstructors) =>{
 
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
@@ -1731,7 +1746,92 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/updat
   
   fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/getInstructorsToPurchasedCourses", requestOptions)
     .then((response) => response.json())
-    .then((result) => console.log(result))
+    .then((result) => {
+      Unauthorized(result.status,"messages") 
+      console.log(result)
+      setinstructors(result)
+    })
     .catch((error) => console.error(error));
 
+ }
+
+
+ export const AddSendMessage = async(selectedInstructor,messageTextAdd,selectedCourse,selectedChatCode,setmessageTextAdd,GetAllChatRooms,setchatRooms) =>{
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  const formdata = new FormData();
+  formdata.append("message", `${messageTextAdd}`);
+  formdata.append("courseCode", `${selectedCourse}`);
+  formdata.append("to_user_code", `${selectedInstructor}`);
+  formdata.append("chatRoomCode", `${selectedChatCode}`);
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: formdata,
+    redirect: "follow"
+  };
+
+fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/sendChat", requestOptions)
+  .then((response) => response.json())
+  .then((result) => {
+    console.log(result)
+
+    Unauthorized(result.status,"messages") 
+
+    if(result.variable == "200"){
+      setmessageTextAdd("")
+      GetAllChatRooms(setchatRooms)
+  
+    }
+  })
+  .catch((error) => console.error(error));
+
+ }
+
+
+ export const GetAllChatRooms = async(setchatRooms) =>{
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow"
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/loadMessagesInfo", requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      Unauthorized(result.status,"messages") 
+      setchatRooms(result)
+      console.log(result)
+    })
+    .catch((error) => console.error(error));
+
+ }
+
+ export const GetAllChatRoomMessages = async(chatCode,setroomMessages) =>{
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow"
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/getMessagesByStudentUsingChatRoomCode/${chatCode}`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      Unauthorized(result.status,"messages") 
+      console.log(result)
+      setroomMessages(result)
+    })
+    .catch((error) => console.error(error));
+  
  }

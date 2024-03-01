@@ -5,11 +5,18 @@ import { useRouter } from 'next/router';
 import useCartInfo from '../../hooks/use-cart-info';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { loadStripe } from '@stripe/stripe-js';
-import { BuyCourseByStudent, IMG_HOST, VerfiyCheckoutUser } from '../../api';
+import { BuyCourseByStudent, IMG_HOST, ValidateCouponOnCart, VerfiyCheckoutUser } from '../../api';
 import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
 import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import Cookies from 'js-cookie';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
+import Spinner from 'react-bootstrap/Spinner';
+import Button from 'react-bootstrap/Button';
+
+
+
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
@@ -20,9 +27,19 @@ const OrderSummery = ({showStripe,showPaypal}) => {
     const router = useRouter();
     const [purchasedCourse, setPurchasedCourse] = useState([]);
     const [buyCourseOrder, setBuyCourseOrder] = useState(null);
+    const [tags, setTags] = useState([]);
+    const [btnLoading, setbtnLoading] = useState(false)
     
 
-console.log(cartCourses)
+    const [coupon, setcoupon] = useState("")
+
+    const [couponEmpty, setcouponEmpty] = useState(false)
+    const [couponError, setcouponError] = useState(false)
+
+    const [CouponErrorText, setCouponErrorText] = useState("")
+    
+
+// console.log(cartCourses)
 
 const newPricing = cartCourses != null && cartCourses.map((course) => ({
     img: course.img,
@@ -46,7 +63,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
 }))
 
 
-console.log(newPricing)
+// console.log(newPricing)
 
     useEffect(() => {
 
@@ -104,6 +121,31 @@ console.log(newPricing)
         }
       }, [buyCourseOrder]);
 
+       // Handle Coupons
+    const handleCouponSubmit = () => {
+        if(coupon == ""){
+            setcouponEmpty(true)
+            return
+        }
+
+        const isCouponInTags = tags.some(tag => tag.text == coupon);
+        if (isCouponInTags) {
+            setCouponErrorText("Coupon is already Selected");
+            setcouponError(true)
+            return
+        } 
+
+
+        ValidateCouponOnCart(coupon,setcouponError,setCouponErrorText,setTags,setbtnLoading)
+        setcouponEmpty(false)
+    }
+
+    // Coupon
+    const handleDelete = (t) => {
+        const updatedTags = tags.filter(tag => tag.id != t.id);
+        setTags(updatedTags);
+      };
+    
 
       
     return (
@@ -121,7 +163,7 @@ console.log(newPricing)
                         <tbody>
                             {cartCourses.map((item,i) => (
                                 <tr key={i}>
-                                    <td><img className='mx-3 rounded' height={70} width={60} src={`${IMG_HOST}${item.other_data.img}`} />{item.title.substring(0,20)}... <span className="quantity">x {item.quantity}</span></td>
+                                    <td><img className='mx-3 rounded' height={70} width={60} src={`${IMG_HOST}${item.other_data.img}`} />{item.title.substring(0,25)}... <span className="quantity">x {item.quantity}</span></td>
                                     <td>{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} {(item.quantity * (CalculateDiscountedPrice(item.other_data))).toFixed(2)}</td>
                                 </tr>
                             ))}
@@ -132,6 +174,36 @@ console.log(newPricing)
                         </tbody>
                     </table>
                 }
+
+                    <div className='my-3'>
+                    {tags.length > 0 && (
+                        <Stack className='my-2' direction="row" spacing={1}>
+                            {tags.map((tag, index) => (
+                                <Chip key={index} label={tag.text} onDelete={() => handleDelete(tag)} />
+                            ))}
+                        </Stack>
+                    )}
+                   
+
+                    <div className="cart-update-btn-area d-flex">
+                        <div className="input-group product-cupon">
+                            <input value={coupon} onChange={(e) => setcoupon((e.target.value).toUpperCase())} placeholder="Coupon code..." type="text" />
+                            {btnLoading ? (
+                            <button className="submit-btn">
+                                 <Spinner animation="border" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </Spinner>
+                            </button>
+                            ) : (
+                            <button onClick={handleCouponSubmit} type="submit" className="submit-btn"><i className="icon-4"></i></button>
+                            )}
+                        </div>
+                    </div>  
+
+                    {couponEmpty && <p className='text-danger m-0 p-0'>Please Enter Coupon Code</p>}
+                    {couponError && <span className='text-danger m-0 p-0'>{CouponErrorText}</span>}
+                    </div>
+
                 {showPaypal && (
 
                  <PayPalScriptProvider options={{
@@ -195,13 +267,20 @@ console.log(newPricing)
                     <input type="hidden" name="cartCourses" value={JSON.stringify(newPricing)} />
                     
                     <section>
-                        <button style={{backgroundColor:'#6B71E3'}} className="edu-btn order-place btn-medium w-100 my-2" type="submit" role="link">
+                    <Button className='w-100 my-2' variant="primary">
+                    <span className='d-flex justify-content-center align-items-center'>
+                              Checkout via<i style={{fontSize:'30px'}} className="fa-brands fa-stripe mx-1"></i>
+                            </span>
+                    </Button>
+                        {/* <button style={{backgroundColor:'#6B71E3'}} className="order-place btn-medium w-100 my-2" type="submit" role="link">
                             <span className='d-flex justify-content-center align-items-center'>
                               Checkout via<i style={{fontSize:'30px'}} className="fa-brands fa-stripe mx-1"></i>
                             </span>
-                        </button>
+                        </button> */}
                     </section>
                     </form>}
+
+                    
                 
             </div>
         </div>
