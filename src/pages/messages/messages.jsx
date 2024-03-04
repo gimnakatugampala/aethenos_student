@@ -82,24 +82,17 @@ function Messages() {
   const [roomMessages, setroomMessages] = useState([])
 
   const [selectedChatCode, setselectedChatCode] = useState("")
+  const [selectedCourseTitleName, setselectedCourseTitleName] = useState("")
   const [chatRooms, setchatRooms] = useState([])
 
-  const handleMessageSend = () => {
-    if (messageText.trim() === "") return;
 
-    const newMessage = {
-      text: messageText,
-      sender: "You",
-    };
 
-    setMessages([...messages, newMessage]);
-    setMessageText("");
-  };
 
   const handleUserClick = (user) => {
     setSelectedUser(user.instructor);
     // setMessages(initialMessages[user]);
     console.log(user)
+    setselectedCourseTitleName(user.courseTitle)
     setselectedCourse(user.courseCode)
     setselectedChatCode(user.chatRoomCode)
     setselectedInstructor(user.instructor)
@@ -146,11 +139,26 @@ function Messages() {
   // Send Message
   const handleSelectedMessageSend = (e) =>{
     e.preventDefault();
+
+    if(selectedInstructor == ""){
+      ErrorAlert("Empty Field","Please Select Instructor")
+      return
+    }
+
+    if(messageTextAdd == ""){
+      ErrorAlert("Empty Field","Please Enter Message")
+      return
+    }
+
     AddSendMessage(selectedInstructorCode,messageTextAdd,selectedCourse,setmessageTextAdd,GetAllChatRooms,setchatRooms)
    
   }
   
-  
+  // Filter
+  const filteredChatRooms = chatRooms.filter(user => {
+    const searchText = userFilter.toLowerCase();
+    return user.instructor.toLowerCase().includes(searchText) || user.courseTitle.toLowerCase().includes(searchText);
+  });
 
   return (
     <div>
@@ -189,7 +197,7 @@ function Messages() {
                 </div>
 
                 <List sx={{ width: '100%' }}>
-                {chatRooms.map((user, index) => (
+                {filteredChatRooms.map((user, index) => (
                   <React.Fragment key={index}>
                     <ListItem
                       onClick={() => {
@@ -282,8 +290,8 @@ function Messages() {
               ) : (
               <Col sm={7} md={7} lg={8}>
                   <div className="d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
-                  <Typography variant="h5" className="p-3" gutterBottom>
-                  Chat with <b>{selectedUser}</b>
+                  <Typography variant="h6" className="p-2" gutterBottom>
+                  Chat with <b>{selectedUser} - {selectedCourseTitleName}</b>
                 </Typography>
 
                   </div>
