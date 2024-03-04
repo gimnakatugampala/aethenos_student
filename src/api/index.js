@@ -1756,7 +1756,7 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/updat
  }
 
 
- export const AddSendMessage = async(selectedInstructor,messageTextAdd,selectedCourse,selectedChatCode,setmessageTextAdd,GetAllChatRooms,setchatRooms) =>{
+ export const AddSendMessage = async(selectedInstructorCode,messageTextAdd,selectedCourse,setmessageTextAdd,GetAllChatRooms,setchatRooms) =>{
 
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
@@ -1764,8 +1764,7 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/updat
   const formdata = new FormData();
   formdata.append("message", `${messageTextAdd}`);
   formdata.append("courseCode", `${selectedCourse}`);
-  formdata.append("to_user_code", `${selectedInstructor}`);
-  formdata.append("chatRoomCode", `${selectedChatCode}`);
+  formdata.append("toUserCode", `${selectedInstructorCode}`);
 
   const requestOptions = {
     method: "POST",
@@ -1803,11 +1802,11 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/sendChat", requ
     redirect: "follow"
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/loadMessagesInfo", requestOptions)
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/getChatRoomDetailsByStudent", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       Unauthorized(result.status,"messages") 
-      setchatRooms(result)
+      setchatRooms(result.chatRoomDetails)
       console.log(result)
     })
     .catch((error) => console.error(error));
@@ -1825,7 +1824,7 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/sendChat", requ
     redirect: "follow"
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/getMessagesByStudentUsingChatRoomCode/${chatCode}`, requestOptions)
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/getChatRoomDetailsByStudentUsingChatRoomCode/${chatCode}`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
       Unauthorized(result.status,"messages") 

@@ -75,6 +75,7 @@ function Messages() {
 
   const [instructors, setinstructors] = useState([])
   const [selectedInstructor, setselectedInstructor] = useState("")
+  const [selectedInstructorCode, setselectedInstructorCode] = useState("")
   const [selectedCourse, setselectedCourse] = useState("")
   const [messageTextAdd, setmessageTextAdd] = useState("")
 
@@ -96,13 +97,14 @@ function Messages() {
   };
 
   const handleUserClick = (user) => {
-    setSelectedUser(user.to);
+    setSelectedUser(user.instructor);
     // setMessages(initialMessages[user]);
     console.log(user)
     setselectedCourse(user.courseCode)
-    setselectedChatCode(user.chatCode)
-    setselectedInstructor(user.toUserCode)
-    GetAllChatRoomMessages(user.chatCode,setroomMessages)
+    setselectedChatCode(user.chatRoomCode)
+    setselectedInstructor(user.instructor)
+    setselectedInstructorCode(user.instructorUserCode)
+    GetAllChatRoomMessages(user.chatRoomCode,setroomMessages)
   };
 
   
@@ -115,7 +117,7 @@ function Messages() {
   useEffect(() => {
     console.log(selectedChatCode)
     GetAllChatRoomMessages(selectedChatCode,setroomMessages)
-  }, [chatRooms,roomMessages,selectedChatCode])
+  }, [chatRooms,selectedChatCode])
   
 
 
@@ -123,6 +125,7 @@ function Messages() {
   const handleComposeMessage = (e) =>{
     e.preventDefault();
     console.log(selectedInstructor)
+    console.log(messageTextAdd)
     console.log(messageTextAdd)
 
     if(selectedInstructor == ""){
@@ -135,7 +138,7 @@ function Messages() {
       return
     }
 
-    AddSendMessage(selectedInstructor,messageTextAdd,selectedCourse,selectedChatCode,setmessageTextAdd,GetAllChatRooms,setchatRooms)
+    AddSendMessage(selectedInstructor,messageTextAdd,selectedCourse,setmessageTextAdd,GetAllChatRooms,setchatRooms)
     
   }
 
@@ -143,7 +146,7 @@ function Messages() {
   // Send Message
   const handleSelectedMessageSend = (e) =>{
     e.preventDefault();
-    AddSendMessage(selectedInstructor,messageTextAdd,selectedCourse,selectedChatCode,setmessageTextAdd,GetAllChatRooms,setchatRooms)
+    AddSendMessage(selectedInstructorCode,messageTextAdd,selectedCourse,setmessageTextAdd,GetAllChatRooms,setchatRooms)
    
   }
   
@@ -196,9 +199,9 @@ function Messages() {
                       }}
                       alignItems="flex-start"
                     >
-                      <ListItemButton selected={selectedUser == user ? true : false}>
+                      <ListItemButton selected={selectedUser == user.instructor ? true : false}>
                         <ListItemAvatar>
-                          <Avatar alt={user.to} src="/static/images/avatar/1.jpg" />
+                          <Avatar alt={user.instructor} src="/static/images/avatar/1.jpg" />
                         </ListItemAvatar>
                         <ListItemText
                           secondary={
@@ -209,7 +212,7 @@ function Messages() {
                                 variant="body2"
                                 color="text.primary"
                               >
-                                <b>{user.to}</b> ({user.courseTitle})
+                                <b>{user.instructor}</b> ({user.courseTitle})
                               </Typography>
                               {user.lastMessage.length > 15 ? (
                                 <span>{user.lastMessage.substring(0, 15)}...</span>
@@ -249,6 +252,7 @@ function Messages() {
                   <Form.Select onChange={(e) => {
                     console.log(e.target.value.split(':'))
 
+                    setselectedInstructorCode(e.target.value.split(':')[0])
                     setselectedInstructor(e.target.value.split(':')[0])
                     setselectedCourse(e.target.value.split(':')[1])
 
