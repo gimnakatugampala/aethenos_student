@@ -1712,7 +1712,7 @@ typeof uploadImage == "object" && formdata.append("profileImage", uploadImage);
 
 
 var requestOptions = {
-  method: 'PUT',
+  method: 'POST',
   body: formdata,
   headers: myHeaders,
   redirect: 'follow'

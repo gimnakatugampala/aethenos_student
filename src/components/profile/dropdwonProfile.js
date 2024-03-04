@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SwitchAccountIcon from '@mui/icons-material/SwitchAccount';
@@ -6,7 +6,7 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import MessageIcon from '@mui/icons-material/Message';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Logout as LogoutAPI } from "../../api";
+import { GetStudentProfileDetails, Logout as LogoutAPI } from "../../api";
 import SuccessAlert from "../../functions/Alert/SuccessAlert";
 import { useRouter } from "next/router";
 
@@ -26,13 +26,25 @@ import Logout from '@mui/icons-material/Logout';
 
 const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) => {
 
+
   const router = useRouter()
 
-  const handleLogout = () =>{
+  const [first_Name, setfirst_Name] = useState("")
+  const [last_name, setlast_name] = useState("")
+  const [headline, setheadline] = useState("")
+  const [biography, setbiography] = useState("")
+  const [website, setwebsite] = useState("")
+  const [twitter, settwitter] = useState("")
+  const [facebook, setfacebook] = useState("")
+  const [linkedin, setlinkedin] = useState("")
+  const [youtube, setyoutube] = useState("")
+  const [profile_img, setprofile_img] = useState("")
+  const [uploadImage, setuploadImage] = useState("")
+  
 
+  const handleLogout = () =>{
     setisUserLoading(true)
     setOpenProfile(false)
-
     LogoutAPI(setCURRENTUSER)
     SuccessAlert("Success","Logout Success")
 
@@ -40,7 +52,6 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
       setisUserLoading(false)
   }, 1500);
 
- 
   }
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -51,6 +62,20 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+
+  useEffect(() => {
+    GetStudentProfileDetails(setfirst_Name,
+        setlast_name,
+        setheadline,
+        setbiography,
+        setwebsite,
+        settwitter,
+        setfacebook,
+        setlinkedin,
+        setyoutube,
+        setprofile_img)
+}, [])
 
   return (
     <React.Fragment>
@@ -64,7 +89,7 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+          <Avatar alt={first_Name} src="/static/images/avatar/1.jpg" />
         </IconButton>
       </Tooltip>
     </Box>
@@ -105,7 +130,7 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
     >
       <a href="/profile">
         <MenuItem>
-          <Avatar /> My Profile
+        <Avatar alt={first_Name} src="/static/images/avatar/1.jpg" /> My Profile
         </MenuItem>
       </a>
 
