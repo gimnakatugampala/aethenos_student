@@ -1834,3 +1834,25 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/sendChat", requ
     .catch((error) => console.error(error));
   
  }
+
+
+ export const UpdateCourseProgress = async(SectionName,itemCode) =>{
+  const formdata = new FormData();
+formdata.append("itemCode", `${itemCode}`);
+formdata.append("sectionName", `${SectionName}`);
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+const requestOptions = {
+  method: "PUT",
+  body: formdata,
+  headers: myHeaders,
+  redirect: "follow"
+};
+
+fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/updateOrderHasCourseProgress", requestOptions)
+  .then((response) => response.json())
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
+ }

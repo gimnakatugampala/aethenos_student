@@ -50,7 +50,6 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
     const [CURRENTUSER, setCURRENTUSER] = useState(Cookies.get('aethenos'))
 
     const [categories, setcategories] = useState([])
-
     const [navbar_list, setnavbar_list] = useState([])
 
     

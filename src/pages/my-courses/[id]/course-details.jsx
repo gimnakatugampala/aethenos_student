@@ -482,7 +482,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                       <div className="accordion">
 
                         {course !=null && course.course_content.map((content,index) => (
-                           <Accordian setmain_Video_player_url={setmain_Video_player_url} id={index + 1} content={content} key={index} />
+                           <Accordian itemCode={itemCode} setmain_Video_player_url={setmain_Video_player_url} id={index + 1} content={content} key={index} />
                         ))}
 
                   

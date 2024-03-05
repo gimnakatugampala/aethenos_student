@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import CardContainer from '../../components/course-content/CardContainer';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { IMG_HOST } from '../../api';
+import { IMG_HOST, UpdateCourseProgress } from '../../api';
 
-const Accordian = ({show=false,content,id,setmain_Video_player_url}) => {
+const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode}) => {
 
     useEffect(() => {
         content.section_curriculum_item.map((list,index) => (
@@ -42,6 +42,13 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url}) => {
                                 videoPlayer.load();
 
                                 //  -------------- LOAD VIDEO ----------------
+
+
+                                //  --------------- UPDATE COURSE PROGRESS ------------ 
+                                UpdateCourseProgress(content.section_name,itemCode)
+                                console.log(content.section_name)
+                                console.log(itemCode)
+                                //  --------------- UPDATE COURSE PROGRESS ------------ 
                             }}>
                             <CardContainer  className="m-1 p-0 border border-dark shadow" >
                             <li  className='d-flex'>

@@ -7,6 +7,9 @@ import Colors from '../../../contexts/Colors';
 import Button from 'react-bootstrap/Button';
 import { useEffect } from 'react';
 import { IMG_HOST } from '../../../api';
+import { Progress } from 'semantic-ui-react'
+import ProgressBar from 'react-bootstrap/ProgressBar';
+
 
 
 
@@ -39,6 +42,9 @@ useEffect(() => {
 
                     <p style={{fontSize:'13px'}} className='m-0'>{data && data.instructor}</p>
                     <a href={`/my-courses/${data && data.item_code}`} className='edu-btn btn-small my-3'>Start Course</a>
+                
+                    <ProgressBar variant="danger" now={data && Number.parseInt(data.progressValue)} label={`${data && Number.parseInt(data.progressValue)}%`} />
+
                 </div>
             </div>
         </div>
