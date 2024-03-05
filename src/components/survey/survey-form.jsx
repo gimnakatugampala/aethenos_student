@@ -18,7 +18,6 @@ const Surveyform = () => {
 
   useEffect(() => {
     GetStudentTopics(setSuggestions,setFilteredSuggestions)
-   
   }, []);
 
 
@@ -40,6 +39,7 @@ const Surveyform = () => {
 
     setFilteredSuggestions(filtered);
 
+    console.log(suggestions)
     console.log(filtered)
   };
 

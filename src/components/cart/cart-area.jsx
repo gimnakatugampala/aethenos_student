@@ -68,9 +68,9 @@ const CartArea = () => {
                     </div>
 
                     <div className="cart-update-btn-area">
-                        <div className="input-group product-cupon">
-                            <input value={coupon} onChange={(e) => setcoupon((e.target.value).toUpperCase())} placeholder="Coupon code..." type="text" />
-                            <button onClick={handleCouponSubmit} type="submit" className="submit-btn"><i className="icon-4"></i></button>
+                        <div className="">
+                            {/* <input value={coupon} onChange={(e) => setcoupon((e.target.value).toUpperCase())} placeholder="Coupon code..." type="text" />
+                            <button onClick={handleCouponSubmit} type="submit" className="submit-btn"><i className="icon-4"></i></button> */}
                         </div>
                         <div className="update-btn">
                             <a style={{ cursor: 'pointer' }} onClick={() => dispatch(clear_cart())} className="edu-btn btn-border btn-medium disabled">Clear Cart
@@ -78,8 +78,8 @@ const CartArea = () => {
                             </a>
                         </div>
                     </div>
-                    {couponEmpty && <p className='text-danger m-0 p-0'>Please Enter Coupon Code</p>}
-                    {couponError && <span className='text-danger m-0 p-0'>{CouponErrorText}</span>}
+                    {/* {couponEmpty && <p className='text-danger m-0 p-0'>Please Enter Coupon Code</p>}
+                    {couponError && <span className='text-danger m-0 p-0'>{CouponErrorText}</span>} */}
                     
 
 

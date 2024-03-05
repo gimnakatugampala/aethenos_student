@@ -8,6 +8,7 @@ import Row from "react-bootstrap/Row";
 import Spinner from 'react-bootstrap/Spinner';
 import { Footer, Header } from "../../../layout";
 import { GetStudentProfileDetails, IMG_HOST, UpdateProfileDetails } from '../../../api';
+import ErrorAlert from '../../../functions/Alert/ErrorAlert';
 
 const ViewProfile = () => {
 
@@ -168,12 +169,6 @@ const ViewProfile = () => {
         </div>
 
         {btn_loading ? <Button  variant="contained"><Spinner size="sm" animation="border" variant="light" /></Button> : <Button  onClick={handleProfileData} variant="contained">Save</Button>}
-
-        
-
-        
-    
-        
 
       </Tab>
 
