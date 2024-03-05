@@ -94,6 +94,7 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
       </Tooltip>
     </Box>
     <Menu
+      className="p-3"
       anchorEl={anchorEl}
       id="account-menu"
       open={open}
@@ -130,7 +131,7 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
     >
       <a href="/profile">
         <MenuItem>
-        <Avatar alt={first_Name} src="/static/images/avatar/1.jpg" /> My Profile
+        <Avatar alt={first_Name} src="/static/images/avatar/1.jpg" /> {first_Name == null ? "My" : first_Name} {last_name == null ? "Profile" : last_name}
         </MenuItem>
       </a>
 

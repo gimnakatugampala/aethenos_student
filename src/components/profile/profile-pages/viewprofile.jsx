@@ -76,9 +76,7 @@ const ViewProfile = () => {
   // Image Upload
   const handleImageUpload = (event) =>{
       const input =  event.target;
-  //   const previewImage = document.getElementById('previewImage');
-
-       setuploadImage(input.files[0])
+     setuploadImage(input.files[0])
 
     if (input.files && input.files[0]) {
       const reader = new FileReader();
@@ -189,7 +187,7 @@ const ViewProfile = () => {
             <label>Minimum 200x200 pixels, Maximum 6000x6000 pixels</label>
 
             <div className='my-4 bg-light border p-3 text-center'>
-               {profile_img == "" ? <img src='https://img-c.udemycdn.com/user/200_H/anonymous_3.png' /> : <img style={{height:'300px'}} id='previewImage' src={`${IMG_HOST}${profile_img}`} />  } 
+               {profile_img == "" && uploadImage == "" ? <img src='https://img-c.udemycdn.com/user/200_H/anonymous_3.png' /> : uploadImage != "" ?  <img style={{height:'300px'}} id='previewImage' src={`${profile_img}`} /> : <img style={{height:'300px'}} id='previewImage' src={`${IMG_HOST}${profile_img}`} /> } 
             </div>
 
             <div class="mb-3">
