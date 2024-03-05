@@ -3,7 +3,7 @@ import CardContainer from '../../components/course-content/CardContainer';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { IMG_HOST, UpdateCourseProgress } from '../../api';
 
-const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode}) => {
+const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle}) => {
 
     useEffect(() => {
         content.section_curriculum_item.map((list,index) => (
@@ -32,6 +32,9 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode}) =>
                             // Video
                             type.curriculum_item_file_type == "Video" &&
                             <span key={index} onClick={() => {
+
+                                setshowVideoPlayer(true)
+
                                 setmain_Video_player_url(`${IMG_HOST}${type.url}`)
                                 
                                 //  -------------- LOAD VIDEO ----------------
@@ -60,8 +63,8 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode}) =>
                             
                             <div className='d-flex justify-content-around'>
                             
-                            {/* Resources */}
-                            {list.get_CurriculumItem_File.some(type => type.curriculum_item_file_type === "Downloadable Items" || type.curriculum_item_file_type === "Source Code") && (
+                        {/* Resources */}
+                        {list.get_CurriculumItem_File.some(type => type.curriculum_item_file_type === "Downloadable Items" || type.curriculum_item_file_type === "Source Code") && (
                         <Dropdown>
                             <Dropdown.Toggle size="sm" variant="danger">
                             <i className="fas fa-folder-open"></i> Resources
@@ -95,14 +98,14 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode}) =>
 
                             </div>
 
-
-
-
                             </CardContainer>
                             </span>
                             )) : (
                                 // Article
-                            <span key={index}>
+                            <span onClick={() => { 
+                                setshowVideoPlayer(false) 
+                                setarticle(list.article) 
+                                }} key={index}>
                                 <CardContainer  className="m-1 p-0 border border-dark shadow" >
                                 <li  className='d-flex'>
                                     <span>

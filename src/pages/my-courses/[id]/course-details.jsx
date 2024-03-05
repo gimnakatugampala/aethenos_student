@@ -32,6 +32,7 @@ import { AddQuestion, GetAllAnnoucement, GetAllQuestion, GetMyCoursesDetails, Ge
 import moment from "moment";
 import ErrorAlert from "../../../functions/Alert/ErrorAlert";
 import Commentbox from "../../../components/comment-box/Commentbox";
+import parse from 'html-react-parser';
 
 // const course = course_data[0];
 
@@ -40,6 +41,8 @@ const CourseDetailsArea1 = ({id, course}) => {
   const [featured_reviews, setfeatured_reviews] = useState(null)
 
   const [main_Video_player_url, setmain_Video_player_url] = useState('https://aethenosinstructor.exon.lk:2053/aethenos-assert/1706080568678_6da9594b-6a36-4773-85ad-a2d7ceda2727.mp4')
+  const [showVideoPlayer, setshowVideoPlayer] = useState(true)
+  const [article, setarticle] = useState("")
 
   const [answer, setanswer] = useState(null)
   const [show, setShow] = useState(false);
@@ -64,9 +67,6 @@ const CourseDetailsArea1 = ({id, course}) => {
 
 
   // --------------------------- What will who Learn -----------------------
-
-
-  
     const chunkArray = (array, chunkSize) => {
       const chunkedArray = [];
       for (let i = 0; i < array.length; i += chunkSize) {
@@ -122,9 +122,14 @@ const CourseDetailsArea1 = ({id, course}) => {
         <div className="row">
             <div className="col-md-8">
         
+          {showVideoPlayer ? (
             <Player autoPlay={true}>
                 <source id="videoPlayer" src={main_Video_player_url} />
               </Player>
+          ) : 
+          <div style={{ maxHeight: '500px', overflowY: 'scroll' }}>
+          {parse(article)}
+          </div>}
 
             {/* New Tab */}
                 <div className="row">
@@ -482,7 +487,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                       <div className="accordion">
 
                         {course !=null && course.course_content.map((content,index) => (
-                           <Accordian itemCode={itemCode} setmain_Video_player_url={setmain_Video_player_url} id={index + 1} content={content} key={index} />
+                           <Accordian setarticle={setarticle} setshowVideoPlayer={setshowVideoPlayer} itemCode={itemCode} setmain_Video_player_url={setmain_Video_player_url} id={index + 1} content={content} key={index} />
                         ))}
 
                   
