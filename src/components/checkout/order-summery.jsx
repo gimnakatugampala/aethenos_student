@@ -267,7 +267,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                     <input type="hidden" name="cartCourses" value={JSON.stringify(newPricing)} />
                     
                     <section>
-                    <Button className='w-100 my-2' variant="primary">
+                    <Button  type="submit" className='w-100 my-2' variant="primary">
                     <span className='d-flex justify-content-center align-items-center'>
                               Checkout via<i style={{fontSize:'30px'}} className="fa-brands fa-stripe mx-1"></i>
                             </span>
