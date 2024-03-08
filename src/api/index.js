@@ -63,6 +63,46 @@ export const getCurrencyExchangeRate = async (code) => {
 }
 
 
+export const GetStudentProfile = async(setfirst_Name,
+  setlast_name,
+  setheadline,
+  setbiography,
+  setwebsite,
+  settwitter,
+  setfacebook,
+  setlinkedin,
+  setyoutube,
+  setprofile_img) =>{
+
+  var myHeaders = new Headers();
+myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/instructor/getInstructorProfileDetails", requestOptions)
+  .then(response => response.json())
+  .then(result => {
+    console.log(result)
+
+    setfirst_Name(result.first_name == null ? "" : result.first_name)
+    setlast_name(result.last_name == null ? "" : result.last_name)
+    setheadline(result.headline == null ? "" : result.headline)
+    setbiography(result.biography == null ? "" : result.biography)
+    setwebsite(result.website == null ? "" : result.website)
+    settwitter(result.twitter == null ? "" : result.twitter)
+    setfacebook(result.facebook == null ? "" : result.facebook)
+    setlinkedin(result.linkedin == null ? "" : result.linkedin)
+    setyoutube(result.youtube == null ? "" : result.youtube)
+    setprofile_img(result.profile_img == null ? "" : result.profile_img)
+  })
+  .catch(error => console.log('error', error));
+
+ }
 
 
 export const StudentSignUp = async(fname, lname, email , conpassword,setloading,router) =>{

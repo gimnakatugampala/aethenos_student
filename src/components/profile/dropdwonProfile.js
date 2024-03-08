@@ -6,7 +6,7 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import MessageIcon from '@mui/icons-material/Message';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { GetStudentProfileDetails, Logout as LogoutAPI } from "../../api";
+import { GetStudentProfile, GetStudentProfileDetails, Logout as LogoutAPI } from "../../api";
 import SuccessAlert from "../../functions/Alert/SuccessAlert";
 import { useRouter } from "next/router";
 
@@ -65,7 +65,7 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
 
 
   useEffect(() => {
-    GetStudentProfileDetails(setfirst_Name,
+    GetStudentProfile(setfirst_Name,
         setlast_name,
         setheadline,
         setbiography,
