@@ -107,6 +107,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
         if (query.get('success')) {
           console.log('Order placed! You will receive an email confirmation.');
 
+
           if(buyCourseOrder != null && total != 0){
               console.log(buyCourseOrder);
               console.log(JSON.stringify(buyCourseOrder));

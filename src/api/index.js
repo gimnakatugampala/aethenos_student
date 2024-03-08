@@ -1360,7 +1360,14 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addToStudentsPurchasedCourses", requestOptions)
+let timerInterval;
+Swal.fire({
+  title: "Processing ...",
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading();
+
+    fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addToStudentsPurchasedCourses", requestOptions)
   .then(response => response.json())
   .then(result => {
     console.log(result)
@@ -1371,11 +1378,8 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addToStudent
     }
     
     if(result.variable == "200"){
-      SuccessAlert("Success",result.message)
-      
-      
+      SuccessAlert("Success",result.message)      
       window.localStorage.removeItem('cart_items');
-
 
       setTimeout(() => {
           window.location.href = "/my-courses"
@@ -1387,6 +1391,14 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addToStudent
 
   })
   .catch(error => console.log('error', error));
+
+    
+  }
+})
+
+//  -------------------------
+
+
 
 }
 
