@@ -127,6 +127,8 @@ const Surveyform = () => {
             </h4>
           </label>
 
+
+
           {selectedSuggestions.length > 0 && (
             <div className="tags">
               {selectedSuggestions.map((suggest, index) => (
@@ -166,6 +168,8 @@ const Surveyform = () => {
             </div>
           )}
 
+        
+
           <div className="custom-dropdown">
             <input
               className="input-field mt-3"
@@ -176,6 +180,16 @@ const Surveyform = () => {
               disabled={selectedSuggestions.length >= 5}
               style={{ display: "inline-block", padding: "15px" }}
             />
+
+
+      <div className="form-group my-2">
+          {loading ? <ButtonLoadingMedium /> : (
+            <button type="submit" className="edu-btn btn-medium">
+              Submit <i className="icon-4"></i>
+            </button>
+          )} 
+        </div>
+
             <div
               style={{
                 display: "flex",
@@ -184,6 +198,11 @@ const Surveyform = () => {
                 marginTop: "5px",
               }}
             >
+
+
+      
+
+
               <h6 className="mt-3" style={{ width: "100%" }}>
                 Popular Topics <i className="icon-2 mx-1"></i>
               </h6>
@@ -207,14 +226,7 @@ const Surveyform = () => {
           </div>
         </div>
 
-        <div className="form-group">
-          {loading ? <ButtonLoadingMedium /> : (
-            <button type="submit" className="edu-btn btn-medium">
-              Submit <i className="icon-4"></i>
-            </button>
-          )}
-            
-        </div>
+      
       </form>
     </div>
   );
