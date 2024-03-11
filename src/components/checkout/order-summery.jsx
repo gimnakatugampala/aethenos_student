@@ -14,6 +14,7 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
+import { reactLocalStorage } from 'reactjs-localstorage';
 
 
 
@@ -37,9 +38,20 @@ const OrderSummery = ({showStripe,showPaypal}) => {
     const [couponError, setcouponError] = useState(false)
 
     const [CouponErrorText, setCouponErrorText] = useState("")
+
+    // -------------------------------------
+    // const [couponValue, setcouponValue] = useState([]);
+
+    // useEffect(() => {
+    //     const storedCoupons = reactLocalStorage.get('coupons');
+    //     if (storedCoupons !== null) {
+    //         setcouponValue(storedCoupons != null ? JSON.parse(storedCoupons) : []);
+    //     }
+    // }, [couponValue]); 
+    // -------------------------------------
     
 
-console.log(cartCourses)
+// console.log(cartCourses)
 
 const newPricing = cartCourses != null && cartCourses.map((course) => ({
     img: course.img,
@@ -173,7 +185,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                             ))}
                             <tr className="order-total">
                                 <td>Order Total</td>
-                                <td>{cartCourses.length > 0 && getSymbolFromCurrency(GetCurrencyByCountry(cartCourses[0].other_data))}{total}</td>
+                                <td>{cartCourses.length > 0 && getSymbolFromCurrency(GetCurrencyByCountry(cartCourses[0].other_data))}{(total).toFixed(2)}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -189,7 +201,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                     )}
                    
 
-                    <div className="cart-update-btn-area d-flex">
+                    {/* <div className="cart-update-btn-area d-flex">
                         <div className="input-group product-cupon">
                             <input value={coupon} onChange={(e) => setcoupon((e.target.value).toUpperCase())} placeholder="Coupon code..." type="text" />
                             {btnLoading ? (
@@ -202,7 +214,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                             <button onClick={handleCouponSubmit} type="submit" className="submit-btn"><i className="icon-4"></i></button>
                             )}
                         </div>
-                    </div>  
+                    </div>   */}
 
                     {couponEmpty && <p className='text-danger m-0 p-0'>Please Enter Coupon Code</p>}
                     {couponError && <span className='text-danger m-0 p-0'>{CouponErrorText}</span>}

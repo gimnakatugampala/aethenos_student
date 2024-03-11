@@ -14,11 +14,12 @@ const useCartInfo = () => {
         if (storedCoupons !== null) {
             setcouponValue(storedCoupons != null ? JSON.parse(storedCoupons) : []);
         }
-    }, [couponValue]); // Empty dependency array to run the effect only once on component mount
+        
+    }, []); // Empty dependency array to run the effect only once on component mount
     
-    useEffect(() => {
-        console.log(couponValue);
-    }, [couponValue]); // Add couponValue to the dependency array
+    // useEffect(() => {
+    //     console.log(couponValue);
+    // }, [couponValue]); // Add couponValue to the dependency array
 
 
     useEffect(() => {
@@ -28,7 +29,7 @@ const useCartInfo = () => {
             const coupon = couponValue.length > 0 && couponValue.find(coupon => coupon.id == id);
             let itemTotal;
 
-            if (couponValue.length > 0) {
+            if (coupon != null) {
                 if (coupon.couponType == 1) {
                     // Apply discount directly to the item's price
                     itemTotal = CalculateDiscountedPrice(cartItem.other_data) - CalculateDiscountedPrice(cartItem.other_data);
@@ -41,12 +42,6 @@ const useCartInfo = () => {
                 itemTotal = CalculateDiscountedPrice(cartItem.other_data);
             }
             
-          
-            // If a matching coupon is found, apply the discount
-            // if (coupon) {
-            //     // itemTotal *= (1 - coupon.course_prices.discountAmount);
-            //     console.log(coupon)
-            // }
             
             cartTotal.total += itemTotal * quantity;
             cartTotal.quantity += quantity;
