@@ -1255,7 +1255,7 @@ export const GetCourseHomePersonalDevelopment = async(setpersonal_development_co
 
 }
 
-export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorText,setTags,setbtnLoading) =>{
+export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorText,setTags,cartCourses,setbtnLoading,setcoupon,tags) =>{
   setbtnLoading(true)
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
@@ -1269,7 +1269,7 @@ export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorTe
   fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getCouponValidationByCode/${coupon}`, requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result)
+      // console.log(result)
 
       if(result.message == "Error"){
         setCouponErrorText(result.variable)
@@ -1278,15 +1278,49 @@ export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorTe
         return
       }
 
+      
+      
       if(result.validation == "This Coupon is Valid"){
-        setTags(prevTags => [
-          ...prevTags,
-          {
-              id: result.course_Id,
-              text: coupon
+
+        // Check if the Course Exist in the Cart
+        const found = cartCourses.some(item => item.id == result.course_Id);
+        if(found){
+          console.log("One Found")
+          console.log(result)
+
+          // Check Coupon Type
+          if(result.couponTypeId == 1){
+            console.log("Free Coupon")
+          }else{
+            console.log("Discounted Coupon")
           }
-      ])
-      setbtnLoading(false)
+
+          setTags(prevTags => [
+              ...prevTags,
+              {
+                  id: result.course_Id,
+                  text: coupon,
+                  couponType:result.couponTypeId,
+                  course_prices:result.course_prices
+              }
+          ])
+
+          // Local Storage
+          window.localStorage.setItem("coupons", JSON.stringify([...tags,{
+            id: result.course_Id,
+            text: coupon,
+            couponType:result.couponTypeId,
+            course_prices:result.course_prices
+        }]))
+
+          setbtnLoading(false)
+          setcoupon("")
+
+
+
+        }else{
+          console.log("Not Found")
+        }
       }
       
     })

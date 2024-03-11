@@ -39,7 +39,7 @@ const OrderSummery = ({showStripe,showPaypal}) => {
     const [CouponErrorText, setCouponErrorText] = useState("")
     
 
-// console.log(cartCourses)
+console.log(cartCourses)
 
 const newPricing = cartCourses != null && cartCourses.map((course) => ({
     img: course.img,
@@ -137,7 +137,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
         } 
 
 
-        ValidateCouponOnCart(coupon,setcouponError,setCouponErrorText,setTags,setbtnLoading)
+        ValidateCouponOnCart(coupon,setcouponError,setCouponErrorText,setTags,cartCourses,setbtnLoading,setcoupon,tags)
         setcouponEmpty(false)
     }
 
@@ -165,7 +165,10 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                             {cartCourses.map((item,i) => (
                                 <tr key={i}>
                                     <td><img className='mx-3 rounded' height={70} width={60} src={`${IMG_HOST}${item.other_data.img}`} />{item.title.substring(0,25)}... <span className="quantity">x {item.quantity}</span></td>
-                                    <td>{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} {(item.quantity * (CalculateDiscountedPrice(item.other_data))).toFixed(2)}</td>
+                                    <td>
+                                    {getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} 
+                                    {(item.quantity * (CalculateDiscountedPrice(item.other_data))).toFixed(2)}
+                                    </td>
                                 </tr>
                             ))}
                             <tr className="order-total">
@@ -273,11 +276,6 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                               Checkout via<i style={{fontSize:'30px'}} className="fa-brands fa-stripe mx-1"></i>
                             </span>
                     </Button>
-                        {/* <button style={{backgroundColor:'#6B71E3'}} className="order-place btn-medium w-100 my-2" type="submit" role="link">
-                            <span className='d-flex justify-content-center align-items-center'>
-                              Checkout via<i style={{fontSize:'30px'}} className="fa-brands fa-stripe mx-1"></i>
-                            </span>
-                        </button> */}
                     </section>
                     </form>}
 
