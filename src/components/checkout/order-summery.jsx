@@ -40,14 +40,17 @@ const OrderSummery = ({showStripe,showPaypal}) => {
     const [CouponErrorText, setCouponErrorText] = useState("")
 
     // -------------------------------------
-    // const [couponValue, setcouponValue] = useState([]);
+    const [couponValue, setcouponValue] = useState([]);
 
-    // useEffect(() => {
-    //     const storedCoupons = reactLocalStorage.get('coupons');
-    //     if (storedCoupons !== null) {
-    //         setcouponValue(storedCoupons != null ? JSON.parse(storedCoupons) : []);
-    //     }
-    // }, [couponValue]); 
+    useEffect(() => {  
+        if(window.location.pathname.includes('/checkout')){
+            const storedCoupons = reactLocalStorage.get('coupons');
+            if (storedCoupons !== null) {
+                setcouponValue(storedCoupons != null ? JSON.parse(storedCoupons) : []);
+            }
+        }         
+
+    }, [couponValue]); 
     // -------------------------------------
     
 
@@ -59,7 +62,15 @@ const newPricing = cartCourses != null && cartCourses.map((course) => ({
     qty:course.quantity,
     desc:course.other_data.course_main_desc,
     currency:GetCurrencyByCountry(course.other_data).toLowerCase(),
-    price:(CalculateDiscountedPrice(course.other_data)) == null ? 0 : (CalculateDiscountedPrice(course.other_data))
+    price:(CalculateDiscountedPrice(course.other_data)) == null ? 0 : (course.quantity * CalculateDiscountedPrice(course.other_data) - 
+    (couponValue.length > 0 && couponValue.some(coupon => {
+        return coupon.id == course.id && coupon.couponType == 1;
+    }) ? 
+    CalculateDiscountedPrice(course.other_data) : 
+    (couponValue.length > 0 && couponValue.some(coupon => {
+        return coupon.id == course.id && coupon.couponType == 2;
+    })) ? CalculateDiscountedPrice(course.other_data) : 0)
+).toFixed(2)
 }))
 
 
@@ -156,6 +167,8 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
     // Coupon
     const handleDelete = (t) => {
         const updatedTags = tags.filter(tag => tag.id != t.id);
+        window.localStorage.setItem("coupons", updatedTags);
+
         setTags(updatedTags);
       };
     
@@ -178,8 +191,26 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                                 <tr key={i}>
                                     <td><img className='mx-3 rounded' height={70} width={60} src={`${IMG_HOST}${item.other_data.img}`} />{item.title.substring(0,25)}... <span className="quantity">x {item.quantity}</span></td>
                                     <td>
+
                                     {getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} 
-                                    {(item.quantity * (CalculateDiscountedPrice(item.other_data))).toFixed(2)}
+                                    {(item.quantity * CalculateDiscountedPrice(item.other_data) - 
+                                        (couponValue.length > 0 && couponValue.some(coupon => {
+                                            return coupon.id == item.id && coupon.couponType == 1;
+                                        }) ? 
+                                        CalculateDiscountedPrice(item.other_data) : 
+                                        (couponValue.length > 0 && couponValue.some(coupon => {
+                                            return coupon.id == item.id && coupon.couponType == 2;
+                                        })) ? CalculateDiscountedPrice(item.other_data) : 0)
+                                    ).toFixed(2)}
+
+
+                                    {couponValue.length > 0 && couponValue.some(coupon => coupon.id == item.id) && (
+                                        <span className="text-decoration-line-through mx-2">
+                                            {getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} 
+                                            {(item.quantity * CalculateDiscountedPrice(item.other_data)).toFixed(2)}
+                                        </span>
+                                    )}
+
                                     </td>
                                 </tr>
                             ))}
@@ -192,16 +223,17 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                 }
 
                     <div className='my-3'>
-                    {tags.length > 0 && (
+                        {/* CHips  */}
+                    {couponValue.length > 0 && (
                         <Stack className='my-2' direction="row" spacing={1}>
-                            {tags.map((tag, index) => (
+                            {couponValue.map((tag, index) => (
                                 <Chip key={index} label={tag.text} onDelete={() => handleDelete(tag)} />
                             ))}
                         </Stack>
                     )}
                    
 
-                    {/* <div className="cart-update-btn-area d-flex">
+                    <div className="cart-update-btn-area d-flex">
                         <div className="input-group product-cupon">
                             <input value={coupon} onChange={(e) => setcoupon((e.target.value).toUpperCase())} placeholder="Coupon code..." type="text" />
                             {btnLoading ? (
@@ -214,7 +246,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                             <button onClick={handleCouponSubmit} type="submit" className="submit-btn"><i className="icon-4"></i></button>
                             )}
                         </div>
-                    </div>   */}
+                    </div>  
 
                     {couponEmpty && <p className='text-danger m-0 p-0'>Please Enter Coupon Code</p>}
                     {couponError && <span className='text-danger m-0 p-0'>{CouponErrorText}</span>}

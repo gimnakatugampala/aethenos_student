@@ -1295,6 +1295,15 @@ export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorTe
             console.log("Discounted Coupon")
           }
 
+       
+          if(tags.some(tag => tag.id == result.course_Id)){
+            setCouponErrorText("Course Already has A Coupon")
+            setcouponError(true)
+            setbtnLoading(false)
+            setcoupon("")
+            return
+          }
+
           setTags(prevTags => [
               ...prevTags,
               {

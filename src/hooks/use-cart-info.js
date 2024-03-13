@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useLocation } from 'react-router-dom';
+
 import {reactLocalStorage} from 'reactjs-localstorage';
 import CalculateDiscountedPrice from "../functions/pricing/CalculateDiscountedPrice";
 
@@ -9,13 +11,18 @@ const useCartInfo = () => {
     const cartItems = useSelector(state => state.cart.cartCourses);
     const [couponValue, setcouponValue] = useState([]);
 
+
+    
+
     useEffect(() => {
-        const storedCoupons = reactLocalStorage.get('coupons');
-        if (storedCoupons !== null) {
-            setcouponValue(storedCoupons != null ? JSON.parse(storedCoupons) : []);
+        if(window.location.pathname.includes('/checkout')){
+            const storedCoupons = reactLocalStorage.get('coupons');
+            if (storedCoupons !== null) {
+                setcouponValue(storedCoupons != null ? JSON.parse(storedCoupons) : []);
+            }
         }
         
-    }, []); // Empty dependency array to run the effect only once on component mount
+    }, [couponValue]); // Empty dependency array to run the effect only once on component mount
     
     // useEffect(() => {
     //     console.log(couponValue);
