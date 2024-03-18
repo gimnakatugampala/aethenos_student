@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import ErrorAlert from '../functions/Alert/ErrorAlert';
 import SuccessAlert from '../functions/Alert/SuccessAlert';
 import { useState } from 'react';
+import { ENV_STATUS } from '../functions/env';
 
 export const USERTOKEN = Cookies.get('aethenos') 
 export const IMG_HOST = `https://aethenosinstructor.exon.lk:2053/aethenos-assert/`
@@ -13,7 +14,13 @@ const CURRENT_USER = Cookies.get('aethenos')
 const Unauthorized = (result,rediect_url) =>{
 
   if(result == 401){
-    Cookies.remove('aethenos', { path: '' })
+
+    if(ENV_STATUS == "dev"){
+      Cookies.remove('aethenos', { path: '' })
+    }else{
+      Cookies.remove('aethenos', { domain: '.aethenos.com' })
+    }
+
     window.location.href = `/login?rediect-url=${rediect_url}`
   }
 }
@@ -31,7 +38,12 @@ export const getUserCountry = async() =>{
   .then(function(data) {
     // console.log(data)
 
-    Cookies.set('aethenos_user_origin', JSON.stringify(data), { expires: 7 })
+    if(ENV_STATUS == "dev"){
+      Cookies.set('aethenos_user_origin', JSON.stringify(data), { expires: 7 })
+    }else{
+      Cookies.set('aethenos_user_origin', JSON.stringify(data), { expires: 7, domain: '.aethenos.com' }); 
+    }
+
 
     // console.log(JSON.parse(Cookies.get('aethenos_user_origin')).currency)
 
@@ -54,7 +66,13 @@ export const getCurrencyExchangeRate = async (code) => {
     const exchangeRate = data[dynamicKey];
     // console.log(exchangeRate);
 
-    Cookies.set('aethenos_currency', `${exchangeRate}`)
+    if(ENV_STATUS =="dev"){
+      Cookies.set('aethenos_currency', `${exchangeRate}`)
+    }else{
+      Cookies.set('aethenos_currency', `${exchangeRate}`, { domain: '.aethenos.com' });
+
+    }
+
 
   } catch (error) {
     console.log("Error fetching currency exchange rate:", error);
@@ -139,8 +157,15 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading,
 
               setloading(false)
 
-              Cookies.set('aethenos', `${result.token}`, { expires: 7 })
-              Cookies.set('aethenos_topic_filled', false)
+              if(ENV_STATUS == "dev"){
+                Cookies.set('aethenos', `${result.token}`, { expires: 7 })
+                Cookies.set('aethenos_topic_filled', false)
+              }else{
+                Cookies.set('aethenos', `${result.token}`, { expires: 7, domain: '.aethenos.com' });
+                Cookies.set('aethenos_topic_filled', false, { domain: '.aethenos.com' });
+              }
+
+              
 
               router.push(`/student-interests?token=${result.token}`)
               // window.location.href = `/student-interests?token=${result.token}`
@@ -216,8 +241,14 @@ export const StudentSignIn = async(email, password,setloading,router,rediect_url
 
               setloading(false)
 
+              if(ENV_STATUS =="dev"){
+                Cookies.set('aethenos', `${result.token}`, { expires: 7 })
+              }else{
+                Cookies.set('aethenos', `${result.token}`, { expires: 7, domain: '.aethenos.com' });
 
-              Cookies.set('aethenos', `${result.token}`, { expires: 7 })
+              }
+
+
 
               // window.location.href = "/?login=success"
 
@@ -269,7 +300,13 @@ export const InstructorSignUp = async(firstname,lastname,email,conpassword,route
               timer: 1500
             });
 
-            Cookies.set('aethenos', `${result.token}`, { expires: 7 })
+            if(ENV_STATUS == "dev"){
+              Cookies.set('aethenos', `${result.token}`, { expires: 7 })
+            }else{
+              Cookies.set('aethenos', `${result.token}`, { expires: 7, domain: '.aethenos.com' });
+
+            }
+
 
             // window.location.href = "/?login=success"
 
@@ -384,7 +421,13 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/setTo
     if(result.variable =="200"){
       SuccessAlert("Added",result.message)
       setloading(false)
-      Cookies.set('aethenos_topic_filled', true)
+
+      if(ENV_STATUS == "dev"){
+        Cookies.set('aethenos_topic_filled', true)
+      }else{
+        Cookies.set('aethenos_topic_filled', true, { domain: '.aethenos.com' });
+      }
+
       router.push(`/?login=success`)
     }
 
@@ -397,7 +440,14 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/setTo
 }
 
 export const Logout = async(setCURRENTUSER) =>{
-  Cookies.remove('aethenos')
+
+  if(ENV_STATUS == "dev"){
+    Cookies.remove('aethenos')
+  }else{
+    Cookies.remove('aethenos', { domain: '.aethenos.com' });
+
+  }
+
   setCURRENTUSER(Cookies.get('aethenos'))
 
 }

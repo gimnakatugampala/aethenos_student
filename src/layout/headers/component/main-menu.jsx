@@ -16,7 +16,7 @@ const MainMenu = () => {
     return (
         <ul className="mainmenu">
             {menu_data.map((menu, i) => (
-                menu.title == "Instructors" && CURRENTUSER != null ? <li key={i}><a href={"https://aethenosinstructor.exon.lk/"}>{menu.title}</a></li> : 
+                menu.title == "Instructors" && CURRENTUSER != null ? <li key={i}><a href={"https://instructor.aethenos.com/"}>{menu.title}</a></li> : 
                 <li key={i} >
                    <a  href={menu.link}>{menu.title}</a>
                     {/* {!menu.mega_menu && 
