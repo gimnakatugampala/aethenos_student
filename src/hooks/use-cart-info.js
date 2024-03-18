@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from 'react-router-dom';
 
 import {reactLocalStorage} from 'reactjs-localstorage';
 import CalculateDiscountedPrice from "../functions/pricing/CalculateDiscountedPrice";

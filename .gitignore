@@ -12,6 +12,7 @@ node_modules.zip
 
 # production
 /build
+/out
 
 # misc
 .DS_Store
