@@ -57,7 +57,6 @@ const CartArea = () => {
                                     <th scope="col" className="product-thumbnail"></th>
                                     <th scope="col" className="product-title">Product Name</th>
                                     <th scope="col" className="product-price">Price</th>
-                                    <th scope="col" className="product-quantity">Quantity</th>
                                     <th scope="col" className="product-subtotal">Subtotal</th>
                                 </tr>
                             </thead>

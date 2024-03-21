@@ -33,13 +33,13 @@ const CartItem = ({ item }) => {
                 <span className="currency-symbol">{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))}</span>{(CalculateDiscountedPrice(item.other_data))}
             </td>
 
-            <td className="product-quantity" data-title="Qty">
+            {/* <td className="product-quantity" data-title="Qty">
                 <div className="pro-qty">
                     <span className="dec qtybtn" onClick={() => dispatch(decrease_quantity(item))}>-</span>
                     <input type="text" onChange={handleChange} value={item.quantity} />
                     <span className="inc qtybtn" onClick={() => dispatch(cart_course(item))}>+</span>
                 </div>
-            </td>
+            </td> */}
             
             <td className="product-subtotal" data-title="Subtotal">
                 <span className="currency-symbol">{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))}</span>{(item.quantity * (CalculateDiscountedPrice(item.other_data))).toFixed(2)}
