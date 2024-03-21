@@ -12,6 +12,7 @@ import CalculateDiscountPrice from "../../functions/pricing/CalculateDiscountedP
 import GetCurrencyByCountry from "../../functions/pricing/GetCurrencyByCountry";
 import CalculateDiscountedPrice from "../../functions/pricing/CalculateDiscountedPrice";
 import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
+import StarsRating from 'stars-rating'
 
 const CourseTypeFive = ({ data, classes }) => {
   const { cartCourses } = useSelector((state) => state.cart);
@@ -138,15 +139,15 @@ const CourseTypeFive = ({ data, classes }) => {
           </span>
 
           <div className="course-rating">
-            <div className="rating">
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-            </div>
+          <StarsRating
+              edit={false}
+              count={5}
+              size={24}
+              value={data.rating}
+              color1={'gray'}
+              color2={'#F39C12'} />
             <span className="rating-count ">
-              ({data != undefined && data.rating})
+              ({data != undefined && Number.parseFloat(data.rating).toFixed(1)})
             </span>
           </div>
           <ul className="course-meta">

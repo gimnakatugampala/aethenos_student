@@ -90,9 +90,10 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                     <div className="course-rating">
                         <div className="rating">
                             <StarsRating
+                                edit={false}
                                 count={5}
                                 size={24}
-                                value={3.5}
+                                value={data.rating}
                                 color1={'gray'}
                                 color2={'#F39C12'} />
                         </div>
@@ -128,9 +129,10 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                     <div className="course-rating">
                         <div className="rating">
                                 <StarsRating
+                                edit={false}
                                 count={5}
                                 size={24}
-                                value={3.5}
+                                value={data.rating}
                                 color1={'gray'}
                                 color2={'#F39C12'} />
                         </div>

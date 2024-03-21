@@ -8,6 +8,7 @@ import getSymbolFromCurrency from 'currency-symbol-map';
 import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
 import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
 import CalculateDiscountPrice from '../../functions/pricing/CalculateDiscountPrice';
+import StarsRating from 'stars-rating'
 
 
 
@@ -72,14 +73,14 @@ const CourseTypeFour = ({ data, classes }) => {
                         </Link>
                     </h5>
                     <div className="course-rating">
-                        <div className="rating">
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                        </div>
-                        <span className="rating-count"><b>({data.rating})</b></span>
+                    <StarsRating
+                        edit={false}
+                        count={5}
+                        size={24}
+                        value={data.rating}
+                        color1={'gray'}
+                        color2={'#F39C12'} />
+                        <span className="rating-count"><b>({Number.parseFloat(data.rating).toFixed(1)})</b></span>
                     </div>
                     <p>{data.curriculum_desc.length > 60 ? data.curriculum_desc.substring(0, 60) + '...' : data.curriculum_desc}</p>
                     <ul className="d-flex course-meta">
