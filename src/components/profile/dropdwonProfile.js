@@ -131,7 +131,7 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
     >
       <a href="/profile">
         <MenuItem>
-        <Avatar alt={first_Name} src="/static/images/avatar/1.jpg" /> {first_Name == null || first_Name == ""  ? "My" : first_Name} {last_name == null || last_name =="" ? "Profile" : last_name}
+        <Avatar alt={`${first_Name} ${last_name}`} src="/static/images/avatar/1.jpg" /> {first_Name == null || first_Name == ""  ? "My" : first_Name} {last_name == null || last_name =="" ? "Profile" : last_name}
         </MenuItem>
       </a>
 
