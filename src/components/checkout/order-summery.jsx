@@ -22,6 +22,8 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
 
+const COUNTRY = Cookies.get('aethenos_user_origin')
+
 const OrderSummery = ({showStripe,showPaypal}) => {
     const {cartCourses} = useSelector(state => state.cart);
     const {total} = useCartInfo();
@@ -114,6 +116,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
             "discount": 20,
             "totalPrice": `${total}`,
             "currency": GetCurrencyByCountry(cartCourses[0].other_data).toLowerCase(),
+            "country": JSON.parse(COUNTRY).country_name,
             "courses": calculatedPurchasedCourse
             };
     
@@ -315,11 +318,11 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                     <input type="hidden" name="cartCourses" value={JSON.stringify(newPricing)} />
                     
                     <section>
-                    <Button  type="submit" className='w-100 my-2' variant="primary">
+                    <button  type="submit" className='w-100 my-2 edu-btn btn-medium checkout-btn'>
                     <span className='d-flex justify-content-center align-items-center'>
-                              Checkout via<i style={{fontSize:'30px'}} className="fa-brands fa-stripe mx-1"></i>
+                              Complete Checkout
                             </span>
-                    </Button>
+                    </button>
                     </section>
                     </form>}
 

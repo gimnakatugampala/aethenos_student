@@ -81,6 +81,7 @@ export const getCurrencyExchangeRate = async (code) => {
 
 export const GetStudentProfile = async(setfirst_Name,
   setlast_name,
+  setemail,
   setheadline,
   setbiography,
   setwebsite,
@@ -107,6 +108,7 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/instructor/getInstru
 
     setfirst_Name(result.first_name == null ? "" : result.first_name)
     setlast_name(result.last_name == null ? "" : result.last_name)
+    setemail(result.email == null ? "" : result.email)
     setheadline(result.headline == null ? "" : result.headline)
     setbiography(result.biography == null ? "" : result.biography)
     setwebsite(result.website == null ? "" : result.website)
@@ -165,8 +167,8 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading,
 
               
 
-              router.push(`/student-interests?token=${result.token}`)
-              // window.location.href = `/student-interests?token=${result.token}`
+              // router.push(`/student-interests?token=${result.token}`)
+              window.location.href = `/student-interests?token=${result.token}`
               
            
         }else{

@@ -22,6 +22,12 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import PeopleIcon from '@mui/icons-material/People';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import RestoreIcon from '@mui/icons-material/Restore';
+
 
 
 const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) => {
@@ -31,6 +37,7 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
 
   const [first_Name, setfirst_Name] = useState("")
   const [last_name, setlast_name] = useState("")
+  const [email, setemail] = useState("")
   const [headline, setheadline] = useState("")
   const [biography, setbiography] = useState("")
   const [website, setwebsite] = useState("")
@@ -67,6 +74,7 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
   useEffect(() => {
     GetStudentProfile(setfirst_Name,
         setlast_name,
+        setemail,
         setheadline,
         setbiography,
         setwebsite,
@@ -89,7 +97,13 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          <Avatar alt={first_Name} src="/static/images/avatar/1.jpg" />
+          {first_Name == null || last_name == null ? (
+              <Avatar alt={`${first_Name} ${last_name}`} src="/static/images/avatar/1.jpg" /> 
+          ) : (
+          <Avatar alt={`${first_Name} ${last_name}`} src="/static/images/avatar/1.jpg" > 
+          {first_Name[0]} {last_name[0]}
+          </Avatar>
+          )}
         </IconButton>
       </Tooltip>
     </Box>
@@ -129,22 +143,81 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
       transformOrigin={{ horizontal: 'right', vertical: 'top' }}
       anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
     >
-      <a href="/profile">
-        <MenuItem>
-        <Avatar alt={`${first_Name} ${last_name}`} src="/static/images/avatar/1.jpg" /> {first_Name == null || first_Name == ""  ? "My" : first_Name} {last_name == null || last_name =="" ? "Profile" : last_name}
+      {/* <a href="/profile"> */}
+        <MenuItem onClick={() => window.location.href = "/profile"}>
+
+          {first_Name == null || last_name == null ? (
+              <Avatar alt={`${first_Name} ${last_name}`} src="/static/images/avatar/1.jpg" /> 
+          ) : (
+          <Avatar alt={`${first_Name} ${last_name}`} src="/static/images/avatar/1.jpg" > 
+          {first_Name[0]} {last_name[0]}
+          </Avatar>
+          )}
+          
+
+       {first_Name == null || first_Name == ""  ? "My" : first_Name} {last_name == null || last_name =="" ? "Profile" : last_name}
+
+        <br />
+        {email}
         </MenuItem>
-      </a>
+      {/* </a> */}
 
       <Divider />
 
-      <a href="/messages">
+      <MenuItem onClick={() => window.location.href = "/my-courses"}>
+        <ListItemIcon>
+          <LibraryBooksIcon fontSize="small" />
+        </ListItemIcon>
+        My Courses
+      </MenuItem>
+
+      <MenuItem onClick={() => window.location.href = "/cart"}>
+        <ListItemIcon>
+          <ShoppingCartIcon fontSize="small" />
+        </ListItemIcon>
+        My Cart
+      </MenuItem>
+
+      <MenuItem onClick={() => window.location.href = "https://instructor.aethenos.com"}>
+        <ListItemIcon>
+          <PeopleIcon fontSize="small" />
+        </ListItemIcon>
+        Switch to Instructor
+      </MenuItem>
+
+      <Divider />
+
       <MenuItem>
+        <ListItemIcon>
+          <NotificationsIcon fontSize="small" />
+        </ListItemIcon>
+        Notifications
+      </MenuItem>
+
+      <MenuItem onClick={() => window.location.href = "/messages"}>
         <ListItemIcon>
           <MessageIcon fontSize="small" />
         </ListItemIcon>
         Messages
       </MenuItem>
-      </a>
+
+      <Divider />
+
+      <MenuItem>
+        <ListItemIcon>
+          <RestoreIcon fontSize="small" />
+        </ListItemIcon>
+        Purchase History
+      </MenuItem>
+
+      <MenuItem onClick={() => window.location.href = "/profile"}>
+        <ListItemIcon>
+          <AccountCircleIcon fontSize="small" />
+        </ListItemIcon>
+        Profile
+      </MenuItem>
+
+      <Divider />
 
       <MenuItem onClick={handleLogout}>
         <ListItemIcon>

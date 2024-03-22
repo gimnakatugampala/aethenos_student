@@ -43,6 +43,8 @@ const CourseFourArea = () => {
     return (
         <div className="edu-course-area course-area-1 section-gap-equal">
             <div className="container">
+
+                <h3>My Courses</h3>
                 
                     
                         {/* sorting area start */}

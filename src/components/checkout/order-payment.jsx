@@ -26,7 +26,8 @@ const OrderPayment = ({showStripe, setshowPaypal,setshowStripe}) => {
                 <div className="form-group">
                     <div className="edu-form-check">
                         <input value="stripe" onChange={(e) => selectPaymentType(e.target.value)} type="radio" id="pay-bank" name="payment" />
-                        <label htmlFor="pay-bank"><img width={20} src="/images/icons/stripe.png" /> Stripe</label>
+                        <label htmlFor="pay-bank">
+                        <i className="fa-regular fa-credit-card"></i> Credit/Debit Card</label>
                     </div>
                     {/* <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p> */}
                 </div>
