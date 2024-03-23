@@ -52,6 +52,7 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
     const [categories, setcategories] = useState([])
     const [navbar_list, setnavbar_list] = useState([])
 
+
     
 
     
@@ -101,8 +102,6 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                     <div className="header-category">
                                         <nav className="mainmenu-nav">
                                             <ul className="mainmenu">
-
-                                                
                                                 <li className="has-droupdown">
                                                 <Menu menuButton={<a ><i className="icon-1"></i>Categories</a>}>
                                                 {navbar_list.length == 0 && <div className='container'>
@@ -144,10 +143,6 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
 
                                                 </Menu>
                                                 </li>
-                                               
-
-
-
                                             </ul>
                                         </nav>
                                     </div>
@@ -155,10 +150,7 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                             </div>
                             <div className="header-mainnav">
                                 <nav className="mainmenu-nav">
-                                    {/* main menu start */}
                                     <MainMenu  />
-                                    {/* main menu end */}
-                                 
                                 </nav>
                             </div>
                             <div className="header-right">

@@ -74,17 +74,22 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
 
 
   useEffect(() => {
-    GetStudentProfile(setfirst_Name,
-        setlast_name,
-        setemail,
-        setheadline,
-        setbiography,
-        setwebsite,
-        settwitter,
-        setfacebook,
-        setlinkedin,
-        setyoutube,
-        setprofile_img)
+
+    setInterval(() => {
+      GetStudentProfile(setfirst_Name,
+          setlast_name,
+          setemail,
+          setheadline,
+          setbiography,
+          setwebsite,
+          settwitter,
+          setfacebook,
+          setlinkedin,
+          setyoutube,
+          setprofile_img)
+    },1000)
+
+
 }, [])
 
   return (
@@ -99,8 +104,8 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          {first_Name == null || last_name == null ? (
-              <Avatar alt={`${first_Name} ${last_name}`} src="/static/images/avatar/1.jpg" /> 
+          {first_Name == null || last_name == null ||  first_Name == "" || last_name == "" ? (
+              <Avatar alt={first_Name} src="/static/images/avatar/1.jpg" />
           ) : (
           <Avatar alt={`${first_Name} ${last_name}`} src="/static/images/avatar/1.jpg" > 
           {first_Name[0]} {last_name[0]}
@@ -145,9 +150,7 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
       transformOrigin={{ horizontal: 'right', vertical: 'top' }}
       anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
     >
-      {/* <a href="/profile"> */}
         <MenuItem onClick={() => window.location.href = "/profile"}>
-
           {first_Name == null || last_name == null ? (
               <Avatar alt={`${first_Name} ${last_name}`} src="/static/images/avatar/1.jpg" /> 
           ) : (
@@ -158,11 +161,10 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
           
 
        {first_Name == null || first_Name == ""  ? "My" : first_Name} {last_name == null || last_name =="" ? "Profile" : last_name}
-
         <br />
         {email}
         </MenuItem>
-      {/* </a> */}
+
 
       <Divider />
 
