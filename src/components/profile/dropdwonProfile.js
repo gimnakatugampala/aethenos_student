@@ -27,6 +27,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PeopleIcon from '@mui/icons-material/People';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import RestoreIcon from '@mui/icons-material/Restore';
+import useCartInfo from "../../hooks/use-cart-info";
 
 
 
@@ -34,6 +35,7 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
 
 
   const router = useRouter()
+  const { quantity } = useCartInfo();
 
   const [first_Name, setfirst_Name] = useState("")
   const [last_name, setlast_name] = useState("")
@@ -172,11 +174,14 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
       </MenuItem>
 
       <MenuItem onClick={() => window.location.href = "/cart"}>
-        <ListItemIcon>
-          <ShoppingCartIcon fontSize="small" />
-        </ListItemIcon>
-        My Cart
-      </MenuItem>
+  <ListItemIcon>
+    <ShoppingCartIcon fontSize="small" />
+  </ListItemIcon>
+  <div className="d-flex justify-content-between">
+    <div>My Cart</div>
+  </div>
+</MenuItem>
+
 
       <MenuItem onClick={() => window.location.href = "https://instructor.aethenos.com"}>
         <ListItemIcon>

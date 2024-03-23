@@ -9,6 +9,7 @@ import getSymbolFromCurrency from 'currency-symbol-map';
 import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
 import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
 import CalculateListPrice from '../../functions/pricing/CalculateListPrice'
+import StarsRating from 'stars-rating'
 
 const CourseTypeFive = ({ data, classes }) => {
     const {cartCourses} = useSelector(state => state.cart);
@@ -106,14 +107,16 @@ const CourseTypeFive = ({ data, classes }) => {
 
                     <div className="course-rating">
                         <div className="rating">
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
+                        <StarsRating
+                                edit={false}
+                                count={5}
+                                size={24}
+                                value={data.rating}
+                                color1={'gray'}
+                                color2={'#F39C12'} />
                         </div>
                         <span className="rating-count">
-                           <b>({data.rating})</b>
+                           <b>({Number.parseFloat(data.rating).toFixed(1)})</b>
                         </span>
                     </div>
 
@@ -145,14 +148,16 @@ const CourseTypeFive = ({ data, classes }) => {
 
                     <div className="course-rating">
                         <div className="rating">
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
-                            <i className="icon-23"></i>
+                        <StarsRating
+                                edit={false}
+                                count={5}
+                                size={24}
+                                value={data.rating}
+                                color1={'gray'}
+                                color2={'#F39C12'} />
                         </div>
                         <span className="rating-count">
-                            ({data.rating})
+                        ({Number.parseFloat(data.rating).toFixed(1)})
                         </span>
                     </div>
 
