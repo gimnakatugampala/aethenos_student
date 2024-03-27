@@ -56,6 +56,9 @@ const CourseDetailsArea1 = ({id, course}) => {
   const [courseCode, setcourseCode] = useState(course && course.course_code)
   const [itemCode, setitemCode] = useState(course && course.item_code)
 
+
+
+
   // ======= QUESTIONS
   const [questions, setquestions] = useState([])
 
@@ -244,41 +247,6 @@ const CourseDetailsArea1 = ({id, course}) => {
                                           </ul>
                                   </div>
 
-
-                                <h3 className="heading-title">Featured Review</h3>
-
-                                <div className="my-4">
-                                  {featured_reviews != null && (
-                                    featured_reviews.length > 0 ? (
-                                    featured_reviews.map((reviews,index) => (
-
-                                    <CardContainer key={index} className="p-2">
-                                      <h6 className="m-0 p-0">{reviews.fullName}</h6>
-                                      <Rating  size={20} readonly={true} iconsCount={5} initialValue={Number.parseInt(reviews.rating)} />
-                                      <span className="mt-2">{moment(reviews.date).startOf('day').fromNow()}</span>
-                                      <p>{reviews.comment}</p>
-                                      <div className="pl-5">
-                                          <Commentbox reviewCode={reviews.reviewCode}  replies={reviews.replies} />
-                                        </div>
-                                    </CardContainer>
-                                    ))
-
-                                  ) : "No Reviews Found"
-                               
-                                  )}
-
-
-                        
-
-                                  <a className="m-0 p-2" href="#">3,566 Reviews <KeyboardArrowDownIcon /></a>
-
-                                </div>
-                        
-                                  
-                                  
-                                  
-                                
-
                                 </div>
                                           
                                     
@@ -345,7 +313,7 @@ const CourseDetailsArea1 = ({id, course}) => {
 
                           <div className="row my-3">
                             <div className="col-md-12">
-                                <span className="d-flex"><h5 className="m-0 p-0">All questions in this courses</h5><span>({questions.length > 0 && questions.length})</span></span>
+                                <span className="d-flex"><h5 className="m-0 p-0">All questions in this courses</h5><span>({questions.length > 0 ? questions.length : questions.length})</span></span>
                             </div>
                           </div>
 
@@ -422,41 +390,47 @@ const CourseDetailsArea1 = ({id, course}) => {
                             <div className="course-overview">
 
                             <div className="course-review mt-5">
-                          <h3 className="heading-title">Course Rating</h3>
-                          <p>{course && (course.rating).toFixed(1)} average rating based on {course && course.rating_count} rating</p>
+                          <h3 className="heading-title">Student Feedback</h3>
+                          {/* <p>{course && (course.rating).toFixed(1)} average rating based on {course && course.rating_count} rating</p> */}
                           <div className="row g-0 align-items-center">
                               <div className="col-sm-4">
                                   <div className="rating-box">
                                       <div className="rating-number">{course && (course.rating).toFixed(1)}</div>
-                                      <div className="rating">
-                                          <i className="icon-23"></i>
-                                          <i className="icon-23"></i>
-                                          <i className="icon-23"></i>
-                                          <i className="icon-23"></i>
-                                          <i className="icon-23"></i>
-                                      </div>
-                                      <span>({course && (course.rating_count).toFixed(1)} Review)</span>
+                                      {course && <Rating  size={20} readonly={true} iconsCount={5} initialValue={Number.parseInt(course.rating)} />}
+                                      <span>({course && Number.parseInt(course.rating_count)} {Number.parseInt(course.rating_count) == 1 ? "Review" : "Reviews"})</span>
                                   </div>
                               </div>
                               <div className="col-sm-8">
                                   <div className="review-wrapper">
-                                      <SingleProgressbar value={'100'} rating_value={course && course.rating_count} />
-                                      <SingleProgressbar value={'0'} rating_value={'0'} />
-                                      <SingleProgressbar value={'0'} rating_value={'0'} />
-                                      <SingleProgressbar value={'0'} rating_value={'0'} />
-                                      <SingleProgressbar value={'0'} rating_value={'0'} />
+                                      <SingleProgressbar value={'100'} rating_value={'5'} />
+                                      <SingleProgressbar value={'0'} rating_value={'4'} />
+                                      <SingleProgressbar value={'0'} rating_value={'3'} />
+                                      <SingleProgressbar value={'0'} rating_value={'2'} />
+                                      <SingleProgressbar value={'0'} rating_value={'1'} />
                                   </div>
                               </div>
                           </div>
 
-                          {/* <div className="comment-area">
-                              <h3 className="heading-title">Reviews</h3>
-                              <div className="comment-list-wrapper">
-                                  {reviews?.map((review, i) => (
-                                      <SingleComment img={course.instructor_img} key={i} review={review} />
-                                  ))}
-                              </div>
-                          </div> */}
+                        
+                          <div className="my-3">
+                            <h3>Reviews</h3>
+                                  {featured_reviews != null && (
+                                    featured_reviews.length > 0 ? (
+                                    featured_reviews.map((reviews,index) => (
+
+                                    <CardContainer key={index} className="p-2">
+                                      <h6 className="m-0 p-0">{reviews.fullName}</h6>
+                                      <Rating  size={20} readonly={true} iconsCount={5} initialValue={Number.parseInt(reviews.rating)} />
+                                      <span className="mt-2">{moment(reviews.date).startOf('day').fromNow()}</span>
+                                      <p>{reviews.comment}</p>
+                                    </CardContainer>
+                                    ))
+
+                                  ) : "No Reviews Found"
+                               
+                                  )}
+
+                                </div>
 
                           <div className="comment-form-area login-form-box">
                               <h3 className="heading-title">Write a Review</h3>
@@ -494,162 +468,6 @@ const CourseDetailsArea1 = ({id, course}) => {
 
                     </div>
                     </div>
-
-
-                    
-                  {/* <Accordion defaultActiveKey="0">
-
-                      <Accordion.Item eventKey="0">
-                        <Accordion.Header >
-                          <span style={{fontSize:'14px'}}>
-                           <b> Section 1 : Introduction to Figma </b><br />
-                           <div className="d-flex ">
-                            <span style={{fontSize:'11px'}} className="py-1">0/9 | 5min</span>
-                           </div>
-                          </span>
-                          
-                          </Accordion.Header>
-
-                        <Accordion.Body>
-                        <ul className="list-group">
-
-                            <li className="list-group-item py-2 my-2">
-                              <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
-                              <label style={{fontSize:'13px'}} className="form-check-label" for="firstCheckbox">1. What Spacing Should I Use for Web & app qa In Figma</label>
-                              <div style={{fontSize:'11px'}}  className="px-5 my-2"><OndemandVideoIcon className="mx-2" /> 5min</div>
-                            </li>
-
-                            <li className="list-group-item py-2 my-2">
-                              <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
-                              <label style={{fontSize:'13px'}} className="form-check-label" for="firstCheckbox">2. Class Project 1 - Responsive Lower Navigation</label>
-                              <div style={{fontSize:'11px'}}  className="px-5 my-2"><OndemandVideoIcon className="mx-2" /> 15min</div>
-                            </li>
-
-
-                            <li className="list-group-item py-2 my-2">
-                              <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
-                              <label style={{fontSize:'13px'}} className="form-check-label" for="firstCheckbox">3. Assesment 1 - Responsive Lower Navigation</label>
-                              <div style={{fontSize:'11px'}}  className="px-5 my-2"><OndemandVideoIcon className="mx-2" /> 15min</div>
-                            </li>
-
-
-                          </ul>
-                        </Accordion.Body>
-                      </Accordion.Item>
-
-
-                      <Accordion.Item eventKey="1">
-                        <Accordion.Header >
-                          <span style={{fontSize:'14px'}}>
-                           <b style={{marginBottom:'15px'}}> Section 2 : Simple App Brand </b><br />
-                            <span style={{fontSize:'11px',marginTop:'50px'}} className="my-2 py-3">0/9 | 5min</span>
-                          </span>
-                          
-                          </Accordion.Header>
-
-                        <Accordion.Body>
-                        <ul className="list-group">
-
-                            <li className="list-group-item py-2 my-2">
-                              <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
-                              <label style={{fontSize:'13px'}} className="form-check-label" for="firstCheckbox">1. What Spacing Should I Use for Web & app design In Figma</label>
-                              <div style={{fontSize:'11px'}}  className="px-5 my-2"><OndemandVideoIcon className="mx-2" /> 5min</div>
-                            </li>
-
-                            <li className="list-group-item py-2 my-2">
-                              <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
-                              <label style={{fontSize:'13px'}} className="form-check-label" for="firstCheckbox">2. Class Project 1 - Responsive Lower Navigation</label>
-                              <div style={{fontSize:'11px'}}  className="px-5 my-2"><OndemandVideoIcon className="mx-2" /> 15min</div>
-                            </li>
-
-
-                            <li className="list-group-item py-2 my-2">
-                              <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
-                              <label style={{fontSize:'13px'}} className="form-check-label" for="firstCheckbox">3. Assesment 1 - Responsive Lower Navigation</label>
-                              <div style={{fontSize:'11px'}}  className="px-5 my-2"><OndemandVideoIcon className="mx-2" /> 15min</div>
-                            </li>
-
-
-                          </ul>
-                        </Accordion.Body>
-                      </Accordion.Item>
-
-                       <Accordion.Item eventKey="2">
-                        <Accordion.Header >
-                          <span style={{fontSize:'14px'}}>
-                           <b style={{marginBottom:'15px'}}> Section 3 : Grid </b><br />
-                            <span style={{fontSize:'11px',marginTop:'50px'}} className="my-2 py-3">0/9 | 5min</span>
-                          </span>
-                          
-                          </Accordion.Header>
-
-                        <Accordion.Body>
-                        <ul className="list-group">
-
-                            <li className="list-group-item py-2 my-2">
-                              <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
-                              <label style={{fontSize:'13px'}} className="form-check-label" for="firstCheckbox">1. What Spacing Should I Use for Web & app design In Figma</label>
-                              <div style={{fontSize:'11px'}}  className="px-5 my-2"><OndemandVideoIcon className="mx-2" /> 5min</div>
-                            </li>
-
-                            <li className="list-group-item py-2 my-2">
-                              <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
-                              <label style={{fontSize:'13px'}} className="form-check-label" for="firstCheckbox">2. Class Project 1 - Responsive Lower Navigation</label>
-                              <div style={{fontSize:'11px'}}  className="px-5 my-2"><OndemandVideoIcon className="mx-2" /> 15min</div>
-                            </li>
-
-
-                            <li className="list-group-item py-2 my-2">
-                              <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
-                              <label style={{fontSize:'13px'}} className="form-check-label" for="firstCheckbox">3. Assesment 1 - Responsive Lower Navigation</label>
-                              <div style={{fontSize:'11px'}}  className="px-5 my-2"><OndemandVideoIcon className="mx-2" /> 15min</div>
-                            </li>
-
-
-                          </ul>
-                        </Accordion.Body>
-                      </Accordion.Item>
-
-
-                      <Accordion.Item eventKey="3">
-                        <Accordion.Header >
-                          <span style={{fontSize:'14px'}}>
-                           <b style={{marginBottom:'15px'}}> Section 4 : Animation Level 1 </b><br />
-                            <span style={{fontSize:'11px',marginTop:'50px'}} className="my-2 py-3">0/9 | 5min</span>
-                          </span>
-                          
-                          </Accordion.Header>
-
-                        <Accordion.Body>
-                        <ul className="list-group">
-
-                            <li className="list-group-item py-2 my-2">
-                              <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
-                              <label style={{fontSize:'13px'}} className="form-check-label" for="firstCheckbox">1. What Spacing Should I Use for Web & app design In Figma</label>
-                              <div style={{fontSize:'11px'}}  className="px-5 my-2"><OndemandVideoIcon className="mx-2" /> 5min</div>
-                            </li>
-
-                            <li className="list-group-item py-2 my-2">
-                              <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
-                              <label style={{fontSize:'13px'}} className="form-check-label" for="firstCheckbox">2. Class Project 1 - Responsive Lower Navigation</label>
-                              <div style={{fontSize:'11px'}}  className="px-5 my-2"><OndemandVideoIcon className="mx-2" /> 15min</div>
-                            </li>
-
-
-                            <li className="list-group-item py-2 my-2">
-                              <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
-                              <label style={{fontSize:'13px'}} className="form-check-label" for="firstCheckbox">3. Assesment 1 - Responsive Lower Navigation</label>
-                              <div style={{fontSize:'11px'}}  className="px-5 my-2"><OndemandVideoIcon className="mx-2" /> 15min</div>
-                            </li>
-
-
-                          </ul>
-                        </Accordion.Body>
-                      </Accordion.Item>
-
-             
-
-                    </Accordion> */}
 
                   </Card.Body>
                 </Card>
@@ -711,6 +529,9 @@ const CourseDetailsArea1 = ({id, course}) => {
         </Modal.Body>
         {/* </CardContainer> */}
       </Modal>
+
+
+      
 
     </section>
   );

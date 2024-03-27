@@ -107,12 +107,12 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/instructor/getInstru
     console.log(result)
 
     if(result.status == 401){
-      if(ENV_STATUS == "dev"){
-        Cookies.remove('aethenos')
-      }else{
-        Cookies.remove('aethenos', { domain: '.aethenos.com' });
+      // if(ENV_STATUS == "dev"){
+      //   Cookies.remove('aethenos')
+      // }else{
+      //   Cookies.remove('aethenos', { domain: '.aethenos.com' });
     
-      }
+      // }
     }
 
     setfirst_Name(result.first_name == null ? "" : result.first_name)

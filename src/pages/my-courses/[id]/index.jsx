@@ -6,7 +6,7 @@ import { Wrapper } from '../../../layout';
 import SEO from '../../../components/seo';
 import { GetMyCoursesDetails } from '../../../api';
 import LargeLoading from '../../../functions/Loading/LargeLoading';
-
+import HeaderMyCourse from '../../../layout/headers/HeaderMyCourse';
 
 const index = () => {
 
@@ -24,18 +24,24 @@ const index = () => {
 
     return (
         <Wrapper>
+
             {course != null ? (
                 <SEO pageTitle={course.title} />
                 ) : (
                 <SEO pageTitle={'Loading..'} />
-                )}
-                <Header no_top_bar={true} />
-                {course != null ? (
-                    <CourseDetails id={id} course={course} />
-                ) : (
-                    <LargeLoading />
-                )}
-                <Footer/>
+            )}
+
+    
+
+                <HeaderMyCourse />
+
+                    {course != null ? (
+                        <CourseDetails id={id} course={course} />
+                    ) : (
+                        <LargeLoading />
+                    )}
+                    <Footer/>
+
          </Wrapper>
     )
 }
