@@ -231,7 +231,11 @@ const CourseDetailsArea1 = ({id, course}) => {
 
 
                                   <h3 className="heading-title">Instructor</h3>
-                                  <a href={`/users/${course && course.instructor_code}`}>{course && course.instructor}</a>
+                                  <div className="d-flex align-items-center">
+                                    {course && <Avatar alt={`${course.instructor}`} src="/static/images/avatar/1.jpg" /> }
+                                    <a className="m-1" href={`/users/${course && course.instructor_code}`}>{course && course.instructor}</a>
+                                  </div>
+                                  
                                   <p>{course && course.instructor_title}</p>
 
                                   <p>{course && course.instructor_desc}</p>
@@ -390,18 +394,18 @@ const CourseDetailsArea1 = ({id, course}) => {
                             <div className="course-overview">
 
                             <div className="course-review mt-5">
-                          <h3 className="heading-title">Student Feedback</h3>
+                          <h3 className="heading-title mb-4">Student Feedback</h3>
                           {/* <p>{course && (course.rating).toFixed(1)} average rating based on {course && course.rating_count} rating</p> */}
-                          <div className="row g-0 align-items-center">
-                              <div className="col-sm-4">
+                          <div className="row align-items-center">
+                              <div className="col-sm-3">
                                   <div className="rating-box">
                                       <div className="rating-number">{course && (course.rating).toFixed(1)}</div>
                                       {course && <Rating  size={20} readonly={true} iconsCount={5} initialValue={Number.parseInt(course.rating)} />}
                                       <span>({course && Number.parseInt(course.rating_count)} {Number.parseInt(course.rating_count) == 1 ? "Review" : "Reviews"})</span>
                                   </div>
                               </div>
-                              <div className="col-sm-8">
-                                  <div className="review-wrapper">
+                              <div className="col-md-9">
+                                  <div className="review-wrapper ">
                                       <SingleProgressbar value={'100'} rating_value={'5'} />
                                       <SingleProgressbar value={'0'} rating_value={'4'} />
                                       <SingleProgressbar value={'0'} rating_value={'3'} />
@@ -412,17 +416,20 @@ const CourseDetailsArea1 = ({id, course}) => {
                           </div>
 
                         
-                          <div className="my-3">
+                          <div className="mb-1">
                             <h3>Reviews</h3>
                                   {featured_reviews != null && (
                                     featured_reviews.length > 0 ? (
                                     featured_reviews.map((reviews,index) => (
 
-                                    <CardContainer key={index} className="p-2">
-                                      <h6 className="m-0 p-0">{reviews.fullName}</h6>
+                                    <CardContainer key={index} className="p-1">
+                                      <div className="d-flex align-items-center">
+                                        <Avatar alt={`${reviews.fullName}`} src="/static/images/avatar/1.jpg" /> 
+                                        <h6 className="m-2 p-0">{reviews.fullName}</h6>
+                                      </div>
                                       <Rating  size={20} readonly={true} iconsCount={5} initialValue={Number.parseInt(reviews.rating)} />
-                                      <span className="mt-2">{moment(reviews.date).startOf('day').fromNow()}</span>
-                                      <p>{reviews.comment}</p>
+                                      <span style={{fontSize:'12px'}} className="mt-2">{moment(reviews.date).startOf('day').fromNow()}</span>
+                                      <p style={{color:'#000'}} >{reviews.comment}</p>
                                     </CardContainer>
                                     ))
 
@@ -431,18 +438,11 @@ const CourseDetailsArea1 = ({id, course}) => {
                                   )}
 
                                 </div>
-
-                          <div className="comment-form-area login-form-box">
-                              <h3 className="heading-title">Write a Review</h3>
-                              <CommentFormCourse id={id} />
-                          </div>
-                      </div>
+                        </div>
                                    
                                 </div>
                             </div>
                         </div>
-
-
                             </div>
                       </div>
                   </div>

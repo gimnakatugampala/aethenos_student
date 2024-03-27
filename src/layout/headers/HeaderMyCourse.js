@@ -8,9 +8,10 @@ import 'react-circular-progressbar/dist/styles.css';
 import Modal from 'react-bootstrap/Modal';
 import React, { useState } from "react";
 import Button from '@mui/material/Button';
+import CommentFormCourse from '../../components/forms/comment-form-course';
 
 
-const HeaderMyCourse = () => {
+const HeaderMyCourse = ({id,course}) => {
 
       // ------------- REVIEW ----------------------
   const [showReviewModal, setshowReviewModal] = useState(false)
@@ -32,7 +33,7 @@ const HeaderMyCourse = () => {
                         <Navbar.Collapse id="responsive-navbar-nav">
 
                         <Nav className="me-auto">
-                            <Nav.Link className='text-white'>Beginner to Pro in Excel: Financial Modeling and Validation</Nav.Link>
+                            <Nav.Link className='text-white'>{course.title}</Nav.Link>
                         </Nav>
 
                         <Nav className='d-flex align-items-center'>
@@ -64,18 +65,11 @@ const HeaderMyCourse = () => {
 
         {/* Add Review */}
       <Modal show={showReviewModal} onHide={handleCloseReview}>
-      <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleCloseReview}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={handleCloseReview}>
-          Save Changes
-        </Button>
-      </Modal.Footer>
+      <Modal.Header closeButton>Leave a Rating</Modal.Header>
+
+      <Modal.Body>
+      <CommentFormCourse id={id} />
+      </Modal.Body>
     </Modal>
     </>
   )

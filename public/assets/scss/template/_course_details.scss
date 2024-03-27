@@ -435,9 +435,10 @@
         }
 
         .progress {
-            margin-right: 38px;
-            margin-left: 70px;
-            height: 6px;
+            padding: 0;
+            // margin-right: 38px;
+            // margin-left: 70px;
+            height: 10px;
             background: #f2f2f2;
             .progress-bar {
                 background-color: #f8b81f;

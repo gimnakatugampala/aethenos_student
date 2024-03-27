@@ -31,38 +31,24 @@ const CommentFormCourse = ({id}) => {
           SubmitCourseReview(id,msg,rating)
       }
 
-    // const { handleChange, handleSubmit, handleBlur, errors, values, touched } = useFormik({
-    //     initialValues: { msg: '' },
-    //     validationSchema: courseSchema,
-    //     onSubmit: (values, { resetForm }) => {
-    //         // toast.success(`${values.name} your review added successfully`, {
-    //         //     position: 'top-left'
-    //         // })
-    //         console.log(values)
-
-
-    //         // resetForm()
-    //     }
-    // })
+   
 
     return (
         <form className="comment-form">
             <div className="row g-5">
 
-            <div className="rating-icon">
-                <h6 className="title">Rating Here</h6>
+            <div className="rating-icon col-7 mx-auto">
                 <Rating onClick={ratingChanged} initialValue={rating} />
             </div>
 
                 
-              
-
+    
                 <div className="form-group col-12">
                     <textarea value={msg} onChange={(e) => setmsg(e.target.value)} name="msg" id="comm-message" cols="30" rows="5" placeholder="Review summary"></textarea>
                 </div>
 
-                <div className="form-group col-12">
-                    <button onClick={handleSubmit} type="submit" className="edu-btn submit-btn">Submit Review <i className="icon-4"></i></button>
+                <div className="form-group col-6 mx-auto">
+                    <button onClick={handleSubmit} type="submit" className="edu-btn submit-btn btn-small">Save Review <i className="icon-4"></i></button>
                 </div>
             </div>
         </form>
