@@ -115,17 +115,17 @@ const SearchResults = () => {
             />
           </div>
         ) : (
-          <div className="row g-3">
+          <div className="row g-1">
             <h3
               className="heading-title mx-1"
               data-sal-delay="2150"
               // data-sal="slide-up"
               data-sal-duration="400"
             >
-              <div className="mb-5">
-                {courses.length === 0
+              <div className="mb-2">
+                {courses.length == 0
                   ? `No results for "${keyword}"`
-                  : `Search Results for: ${keyword}`}
+                  : `${courses.length} results for "${keyword}"`}
               </div>
             </h3>
 

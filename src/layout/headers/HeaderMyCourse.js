@@ -27,7 +27,7 @@ const HeaderMyCourse = ({id,course}) => {
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
                     <Container>
 
-                        <Navbar.Brand href="#home"><img className="logo-light" src='/assets/images/logo/Header_Athenos_logo.png' alt="logo" /></Navbar.Brand>
+                        <Navbar.Brand href="/"><img className="logo-light" src='/assets/images/logo/Header_Athenos_logo.png' alt="logo" /></Navbar.Brand>
 
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
@@ -42,20 +42,12 @@ const HeaderMyCourse = ({id,course}) => {
 
                         <Nav.Link className='text-white'>
                             <div style={{ width: 40}}>    
-                            <CircularProgressbar value={100} text={`100%`} />
+                            <CircularProgressbar value={Number.parseInt(course.progressValue)} text={`${Number.parseInt(course.progressValue)}%`} />
                             </div>
                         </Nav.Link>
 
-                            <NavDropdown className='d-flex align-items-center' title="Your progress" id="collapsible-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">
-                                Another action
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">
-                                Separated link
-                            </NavDropdown.Item>
+                            <NavDropdown className='d-flex align-items-center p-2 mx-5' title="Your progress" id="collapsible-nav-dropdown">
+                            <NavDropdown.Item  ><b>166 of 496 Complete</b> <br /> Finish course to get the certificate</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
 
@@ -65,11 +57,10 @@ const HeaderMyCourse = ({id,course}) => {
 
         {/* Add Review */}
       <Modal show={showReviewModal} onHide={handleCloseReview}>
-      <Modal.Header closeButton>Leave a Rating</Modal.Header>
-
-      <Modal.Body>
-      <CommentFormCourse id={id} />
-      </Modal.Body>
+        <Modal.Header closeButton>Leave a Rating</Modal.Header>
+        <Modal.Body>
+        <CommentFormCourse course={course} id={id} />
+        </Modal.Body>
     </Modal>
     </>
   )

@@ -7,9 +7,10 @@ import ReactStars from 'react-stars'
 import { Rating } from 'react-simple-star-rating'
 import { useState } from 'react';
 import ErrorAlert from '../../functions/Alert/ErrorAlert';
+import { useEffect } from 'react';
 
 
-const CommentFormCourse = ({id}) => {
+const CommentFormCourse = ({course, id}) => {
 
     const [rating, setrating] = useState(0)
     const [msg, setmsg] = useState("")
@@ -31,7 +32,15 @@ const CommentFormCourse = ({id}) => {
           SubmitCourseReview(id,msg,rating)
       }
 
-   
+      
+
+      useEffect(() => {
+
+        setrating(course.ownReview == null ? 0 : course.ownReview[0].rating)
+        setmsg(course.ownReview == null ? "" :  course.ownReview[0].comment)
+        
+      }, [])
+      
 
     return (
         <form className="comment-form">
@@ -41,8 +50,6 @@ const CommentFormCourse = ({id}) => {
                 <Rating onClick={ratingChanged} initialValue={rating} />
             </div>
 
-                
-    
                 <div className="form-group col-12">
                     <textarea value={msg} onChange={(e) => setmsg(e.target.value)} name="msg" id="comm-message" cols="30" rows="5" placeholder="Review summary"></textarea>
                 </div>

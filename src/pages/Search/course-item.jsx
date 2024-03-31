@@ -71,7 +71,7 @@ const CourseItems = ({
         focusPage={forcePage}
       />
 
-      <div>
+      {/* <div>
         <h3
           className="heading-title mt-5"
           data-sal-delay="150"
@@ -236,7 +236,7 @@ const CourseItems = ({
             sx={{ fontSize: "1.0rem", fontFamily: "Poppins, sans-serif" }}
           />
         </Stack>
-      </div>
+      </div> */}
     </>
   );
 };

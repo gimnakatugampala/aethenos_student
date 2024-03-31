@@ -12,6 +12,7 @@ import CalculateDiscountPrice from "../../functions/pricing/CalculateDiscountedP
 import GetCurrencyByCountry from "../../functions/pricing/GetCurrencyByCountry";
 import CalculateDiscountedPrice from "../../functions/pricing/CalculateDiscountedPrice";
 import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
+import StarsRating from 'stars-rating'
 
 const CourseTypeOne = ({ course }) => {
   if (!course || !course.id) return null;
@@ -97,12 +98,14 @@ const CourseTypeOne = ({ course }) => {
             />
           </Link>
 
-          <div className="time-top">
-            <span className="duration">
-              <i className="icon-61"></i>
-              {course.duration}
-            </span>
-          </div>
+          {course != null && CalculateDiscountPrice(course) != "" && (
+            <div className="time-top">
+              <span style={{ background: "#e01D20" }} className="duration">
+                {CalculateDiscountPrice(course)} OFF
+              </span>
+            </div>
+          )}
+
         </div>
         <div className="content px-4">
           <span className="course-level px-2">{course.level}</span>
@@ -112,11 +115,17 @@ const CourseTypeOne = ({ course }) => {
             </a>
           </h6>
           <div className="course-rating">
-            <div className="rating ">{generateStars(course.rating)}</div>
+          <div className="rating">
+              <StarsRating
+                  edit={false}
+                  count={5}
+                  size={24}
+                  value={course.rating}
+                  color1={'gray'}
+                  color2={'#F39C12'} />
           </div>
-          <span className="rating-count">
-            ({course.rating} / {course.rating_count} Rating)
-          </span>
+          <span className="rating-count ml-4"><b>{Number.parseFloat(course.rating).toFixed(1)}</b></span>
+        </div>
           <div className="d-flex">
             <div className="course-price discounted-price m-1">
               <b>

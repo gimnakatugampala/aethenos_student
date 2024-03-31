@@ -145,15 +145,25 @@ const CourseDetailsArea1 = ({id, course}) => {
                             type="button" role="tab" aria-controls="overview" aria-selected="true">Overview</button>
                         </li>
 
-                        <li className="nav-item" role="presentation">
-                            <button className="nav-link" id="qa-tab" data-bs-toggle="tab" data-bs-target="#qa"
-                            type="button" role="tab" aria-controls="qa" aria-selected="false">Q&A</button>
-                        </li>
+                        {course.isPaid == true && (
+                           <li className="nav-item" role="presentation">
+                           <button className="nav-link" id="qa-tab" data-bs-toggle="tab" data-bs-target="#qa"
+                           type="button" role="tab" aria-controls="qa" aria-selected="false">Q&A</button>
+                       </li>
+                        )}
 
+
+
+                        {course.isPaid == true && (
                         <li className="nav-item" role="presentation">
-                            <button className="nav-link" id="announcement-tab" data-bs-toggle="tab" data-bs-target="#announcement"
-                            type="button" role="tab" aria-controls="announcement" aria-selected="false">Announcement</button>
+                        <button className="nav-link" id="announcement-tab" data-bs-toggle="tab" data-bs-target="#announcement"
+                        type="button" role="tab" aria-controls="announcement" aria-selected="false">Announcement</button>
                         </li>
+                        )}
+
+                       
+
+                       
 
                         <li className="nav-item" role="presentation">
                             <button className="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews"
@@ -259,6 +269,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                         </div>
 
                         {/* Q&A */}
+                        {course.isPaid == true && (
                         <div className="tab-pane fade" id="qa" role="tabpanel" aria-labelledby="qa-tab">
                             <div className="course-tab-content">
                             <div className="course-overview">
@@ -357,8 +368,10 @@ const CourseDetailsArea1 = ({id, course}) => {
                                 </div>
                             </div>
                         </div>
+                        )}
 
                          {/* Annoucements */}
+                         {course.isPaid == true && (
                          <div className="tab-pane fade" id="announcement" role="tabpanel" aria-labelledby="announcement-tab">
                             <div className="course-tab-content">
                             <div className="course-overview">
@@ -387,6 +400,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                                 </div>
                             </div>
                         </div>
+                         )}
 
                         {/* Reviews */}
                         <div className="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
@@ -406,11 +420,11 @@ const CourseDetailsArea1 = ({id, course}) => {
                               </div>
                               <div className="col-md-9">
                                   <div className="review-wrapper ">
-                                      <SingleProgressbar value={'100'} rating_value={'5'} />
-                                      <SingleProgressbar value={'0'} rating_value={'4'} />
-                                      <SingleProgressbar value={'0'} rating_value={'3'} />
-                                      <SingleProgressbar value={'0'} rating_value={'2'} />
-                                      <SingleProgressbar value={'0'} rating_value={'1'} />
+                                      <SingleProgressbar value={course.ratingDetails.fiveRatingCount} rating_value={'5'} />
+                                      <SingleProgressbar value={course.ratingDetails.fourRatingCount} rating_value={'4'} />
+                                      <SingleProgressbar value={course.ratingDetails.threeRatingCount} rating_value={'3'} />
+                                      <SingleProgressbar value={course.ratingDetails.twoRatingCount} rating_value={'2'} />
+                                      <SingleProgressbar value={course.ratingDetails.oneRatingCount} rating_value={'1'} />
                                   </div>
                               </div>
                           </div>
