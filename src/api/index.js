@@ -2026,9 +2026,34 @@ myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
     .then((result) => {
   Unauthorized(result.status,"purchase-history") 
 
-      console.log(result)
+      // console.log(result)
       setpHistory(result)
     })
     .catch((error) => console.error(error));
   
+ }
+
+ export const TransactionDetails = async(id,setdetails) =>{
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow"
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getTransactionDetailsByTransActionCode/${id}`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+
+      Unauthorized(result.status,`card-receipt/${id}`) 
+
+      console.log(result)
+      setdetails(result)
+    })
+    .catch((error) => console.error(error));
+
+
  }
