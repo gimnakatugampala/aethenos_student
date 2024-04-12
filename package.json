@@ -12,6 +12,7 @@
     "dependencies": {
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
+        "@material-ui/core": "^4.12.4",
         "@mui/icons-material": "^5.14.13",
         "@mui/material": "^5.14.13",
         "@paypal/checkout-server-sdk": "^1.0.3",
@@ -33,6 +34,7 @@
         "framer-motion": "^7.6.7",
         "html-react-parser": "^5.1.8",
         "js-cookie": "^3.0.5",
+        "material-table": "^2.0.5",
         "micro": "^10.0.0",
         "micro-cors": "^0.1.1",
         "moment": "^2.30.1",

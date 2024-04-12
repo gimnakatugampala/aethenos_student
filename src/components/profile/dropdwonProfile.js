@@ -210,9 +210,9 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
 
       <Divider />
 
-      <MenuItem>
+      <MenuItem onClick={() => window.location.href = "/purchase-history"}>
         <ListItemIcon>
-          <RestoreIcon fontSize="small" />
+          <RestoreIcon  fontSize="small" />
         </ListItemIcon>
         Purchase History
       </MenuItem>
