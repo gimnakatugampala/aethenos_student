@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import CardContainer from '../../components/course-content/CardContainer';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { IMG_HOST, UpdateCourseProgress } from '../../api';
+import { CheckBox } from '@mui/icons-material';
+import Form from 'react-bootstrap/Form';
+
 
 const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle}) => {
 
@@ -11,19 +14,25 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                 type.curriculum_item_file_type == "Video" == setmain_Video_player_url(`${IMG_HOST}${type.url}`)
             ))))
     }, [content])
-    
+
+
+ 
 
     return (
         <div className="accordion-item mb-2">
-            
+ 
             <p  className="accordion-header">
                 <button style={{fontSize:'16px'}} className={`accordion-button d-flex justify-content-between ${show?'':'collapsed'}`} type="button" data-bs-toggle="collapse" data-bs-target={`#question-${id}`} aria-expanded={show?'true':'false'}>
                     Section {id} : {content.section_name}
                 </button>
+
+              
+              
                
             </p>
             <div id={`question-${id}`} className={`accordion-collapse collapse ${show?'show':''}`} data-bs-parent="#faq-accordion">
                 <div className="accordion-body p-1">
+         
                     <ol style={{cursor:'pointer'}} className='p-0'>
                         {content.section_curriculum_item.map((list,index) => (
 
@@ -54,6 +63,14 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                 //  --------------- UPDATE COURSE PROGRESS ------------ 
                             }}>
                             <CardContainer  className="m-1 p-0 border border-dark shadow" >
+                            <Form.Check
+                            className='mb-3 p-0'
+                            checked={content.read}
+                    
+                                type={"checkbox"}
+                                id={`default-${id}`}
+                                label={""}
+                                />
                             <li  className='d-flex'>
                                 <span>
                                 {index + 1}.<i className="fa-solid fa-circle-play mx-2"></i> {list.title}

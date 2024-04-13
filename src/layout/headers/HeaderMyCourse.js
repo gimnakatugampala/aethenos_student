@@ -38,7 +38,7 @@ const HeaderMyCourse = ({id,course}) => {
 
                         <Nav className='d-flex align-items-center'>
 
-                        <Nav.Link onClick={handleShowReview} className='text-white'><i className="far fa-star"></i> Leave a rating</Nav.Link>
+                        <Nav.Link style={{fontSize:'12px'}} onClick={handleShowReview} className='text-white'><i className="far fa-star"></i> Leave a rating</Nav.Link>
 
                         <Nav.Link className='text-white'>
                             <div style={{ width: 40}}>    

@@ -2057,3 +2057,43 @@ myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
 
 
  }
+
+ export const GetRefunds = async() =>{
+
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+const requestOptions = {
+  method: "GET",
+  headers: myHeaders,
+  redirect: "follow"
+};
+
+fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getAllRefunds", requestOptions)
+  .then((response) => response.json())
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
+
+ }
+
+ export const GetNotifications = async(setnotifications) =>{
+
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow"
+  };
+  
+  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/notification/getOwnNotifications", requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      Unauthorized(result.status,`notifications`) 
+      console.log(result)
+      setnotifications(result)
+    })
+    .catch((error) => console.error(error));
+
+ }

@@ -478,8 +478,6 @@ const CourseDetailsArea1 = ({id, course}) => {
                            <Accordian setarticle={setarticle} setshowVideoPlayer={setshowVideoPlayer} itemCode={itemCode} setmain_Video_player_url={setmain_Video_player_url} id={index + 1} content={content} key={index} />
                         ))}
 
-                  
-
                     </div>
                     </div>
 

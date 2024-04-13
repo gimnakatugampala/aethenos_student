@@ -194,7 +194,7 @@ const DropDownProfile = ({setisUserLoading, setCURRENTUSER , setOpenProfile}) =>
 
       <Divider />
 
-      <MenuItem>
+      <MenuItem onClick={() => window.location.href = "/notifications"}>
         <ListItemIcon>
           <NotificationsIcon fontSize="small" />
         </ListItemIcon>
