@@ -59,7 +59,7 @@ const index = () => {
                 </div>
 
                 <div className='col-md-4 my-5'>
-                   <h6><b>Sold To:</b> Janaka Dissayake 6, LK</h6>
+                   <h6><b>Sold To:</b>{details.userName}</h6>
                 </div>
 
                 <div className='col-md-12 my-5'>

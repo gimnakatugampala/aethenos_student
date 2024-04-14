@@ -139,9 +139,7 @@ const CourseTypeEight = ({ data, classes }) => {
                     <div className="course-feature">
                         <h6 className="title">What You’ll Learn?</h6>
                         <ul>
-                            { 
-                                data.features.slice(0, 3).map( (feature, featurekey) => <li key={ featurekey }>{ feature }</li> )
-                            }
+                            {data.features.slice(0, 3).map( (feature, featurekey) => <li key={ featurekey }>{ feature }</li> )}
                         </ul>
                     </div>
 

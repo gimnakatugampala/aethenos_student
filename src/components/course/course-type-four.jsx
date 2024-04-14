@@ -119,7 +119,9 @@ const CourseTypeFour = ({ data, classes }) => {
                             }
                         </ul>
                     </div>
-                    <div className="button-group">
+
+                    {data.isPaid ? (
+                        <div className="button-group">
                         <a className="edu-btn btn-medium" onClick={()=> handleAddToCart(data)}
                         style={{cursor:'pointer'}}>
                             {cartCourses.some(item => item.id === data.id) ? 'Added to cart' : 'Add to cart'}
@@ -129,7 +131,25 @@ const CourseTypeFour = ({ data, classes }) => {
                         <button onClick={() => handleWishlist(data)} className={`wishlist-btn btn-outline-dark ${isWishlistSelected ? 'active' : ''}`}>
                             <i className="icon-22"></i>
                         </button>
+                        </div>
+
+                    ) : (
+
+                        <div className="button-group">
+                        <a className="edu-btn btn-medium" 
+                        style={{cursor:'pointer'}}>
+                            Enroll Now
+                            <i className="icon-4"></i>
+                        </a>
+
+                        <button onClick={() => handleWishlist(data)} className={`wishlist-btn btn-outline-dark ${isWishlistSelected ? 'active' : ''}`}>
+                            <i className="icon-22"></i>
+                        </button>
                     </div>
+
+                    )}
+
+                 
                 </div>
             </div>
         </div>

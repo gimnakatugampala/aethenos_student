@@ -149,10 +149,20 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                         <li><i className="icon-24"></i>{data.lesson} Lessons</li>
                         <li><i className="icon-25"></i>{data.student} Students</li>
                     </ul>
-                    <a onClick={() => handleAddToCart(data)} className="edu-btn btn-secondary btn-small" style={{ cursor: 'pointer' }}> 
+                    {data.isPaid ? (
+                        <a onClick={() => handleAddToCart(data)} className="edu-btn btn-secondary btn-small" style={{ cursor: 'pointer' }}> 
                         {cartCourses.some(item => item.id === data.id) ? 'Added to cart' : 'Add to cart'} 
                         <i className="icon-4"></i>
-                    </a>
+                        </a>
+                    ) : (
+
+                        <a  className="edu-btn btn-secondary btn-small" style={{ cursor: 'pointer' }}> 
+                        Enroll Now 
+                        <i className="icon-4"></i>
+                        </a>
+
+                    )}
+                    
                 </div>
             </div>
         </div>

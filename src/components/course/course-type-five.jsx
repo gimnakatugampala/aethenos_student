@@ -176,19 +176,34 @@ const CourseTypeFive = ({ data, classes }) => {
                         </ul>
                     </div>
 
+                    {data.isPaid ? (
+
                     <div className="button-group">
-                        <a onClick={() => handleAddToCart(data)} style={{ cursor: "pointer" }} className="edu-btn btn-medium">
-                            {
-                                cartCourses.some(
-                                    (course) =>
-                                    course.id == data.id
-                                )
-                                ? "Added to cart"
-                                : "Add to cart"
-                            }
-                        </a>
-                        <button onClick={() => handleWishlist(data)} style={{ cursor: "pointer" }} className={`btn-outline-dark wishlist-btn ${isWishlistSelected ? 'active' : ''}`}><i className="icon-22"></i></button>
+                    <a onClick={() => handleAddToCart(data)} style={{ cursor: "pointer" }} className="edu-btn btn-medium">
+                        {
+                            cartCourses.some(
+                                (course) =>
+                                course.id == data.id
+                            )
+                            ? "Added to cart"
+                            : "Add to cart"
+                        }
+                    </a>
+                    <button onClick={() => handleWishlist(data)} style={{ cursor: "pointer" }} className={`btn-outline-dark wishlist-btn ${isWishlistSelected ? 'active' : ''}`}><i className="icon-22"></i></button>
                     </div>
+                        
+                    ) : (
+
+                    <div className="button-group">
+                    <a style={{ cursor: "pointer" }} className="edu-btn btn-medium">
+                        Enroll Now
+                    </a>
+                    <button onClick={() => handleWishlist(data)} style={{ cursor: "pointer" }} className={`btn-outline-dark wishlist-btn ${isWishlistSelected ? 'active' : ''}`}><i className="icon-22"></i></button>
+                    </div>
+
+                    )}
+
+                  
                 </div>
             </div>
         </div>

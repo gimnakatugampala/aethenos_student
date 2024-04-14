@@ -180,7 +180,7 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                     <SearchBar showDropdown={showDropdown} setShowDropdown={setShowDropdown} />
 
                                     {showDropdown && (
-                                    <List sx={{ width: '400px', position:'absolute', bgcolor: 'background.paper', overflowX:'hidden',overflowY:'scroll',height:'250px' }}>
+                                    <List sx={{ width: '450px', position:'absolute', bgcolor: 'background.paper', overflowX:'hidden',overflowY:'scroll',height:'250px' }}>
 
                                     <ListItem style={{cursor:'pointer'}} alignItems="flex-start">
                                         <ListItemAvatar>
