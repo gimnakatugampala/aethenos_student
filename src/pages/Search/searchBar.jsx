@@ -4,9 +4,8 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import Dropdown from 'react-bootstrap/Dropdown';
 
 
-const SearchBar = () => {
+const SearchBar = ({setShowDropdown}) => {
   const [keyword, setKeyword] = useState("");
-  const [showDropdown, setShowDropdown] = useState(false);
   const router = useRouter();
 
   const handleSearch = () => {
@@ -63,20 +62,7 @@ const SearchBar = () => {
         <i className="icon-2"></i>
       </button>
 
-      {/* {showDropdown && ( */}
-      <Dropdown show={showDropdown} onToggle={handleDropdownToggle}>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
-        Dropdown Button
-      </Dropdown.Toggle>
-
-      <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-     
-      {/* )} */}
+      
     </div>
   );
 };

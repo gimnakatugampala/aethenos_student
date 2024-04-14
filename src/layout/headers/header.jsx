@@ -17,6 +17,15 @@ import {  GetCourseCategory , GetCategoriesMenu } from '../../api';
 import SmallRedLoading from '../../functions/Loading/SmallRedLoading';
 import Cookies from 'js-cookie';
 import { Menu, MenuItem, MenuButton, SubMenu ,MenuHeader } from '@szhsin/react-menu';
+
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
+
 import OneLineSkeleton from '../../functions/Skeletons/OneLineSkeleton'
 import '@szhsin/react-menu/dist/index.css';
 
@@ -51,6 +60,9 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
 
     const [categories, setcategories] = useState([])
     const [navbar_list, setnavbar_list] = useState([])
+
+
+  const [showDropdown, setShowDropdown] = useState(false);
 
 
     
@@ -157,7 +169,7 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                 <ul className="header-action">
                                     <li className="search-bar">
                                         <div className="input-group">
-                                        <SearchBar/>
+                                        <SearchBar showDropdown={showDropdown} setShowDropdown={setShowDropdown} />
                                         </div>
                                     </li>
                                     <li className="icon search-icon search-bar">
@@ -165,7 +177,94 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                             <i className="icon-2"></i>
                                         </a> */}
 
-                                    <SearchBar/>
+                                    <SearchBar showDropdown={showDropdown} setShowDropdown={setShowDropdown} />
+
+                                    {showDropdown && (
+                                    <List sx={{ width: '400px', position:'absolute', bgcolor: 'background.paper', overflowX:'hidden',overflowY:'scroll',height:'250px' }}>
+
+                                    <ListItem style={{cursor:'pointer'}} alignItems="flex-start">
+                                        <ListItemAvatar>
+                                        <Avatar  src="/assets/images/banner/Banner-image-1.jpg" />
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                         primary={
+                                            <b>
+                                            <Typography variant="body1" sx={{ fontSize: '14px' }}>
+                                              Web Development From Beginner To Advanced
+                                            </Typography>
+                                            </b>
+                                          }
+                                        secondary={
+                                            <React.Fragment>
+                                            {"Course: Gimna Katugampala"}
+                                            </React.Fragment>
+                                        }
+                                        />
+                                    </ListItem>
+                                    <Divider />
+                                    <ListItem style={{cursor:'pointer'}} alignItems="flex-start">
+                                        <ListItemAvatar>
+                                        <Avatar  src="/assets/images/banner/Banner-image-1.jpg" />
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                         primary={
+                                            <b>
+                                            <Typography variant="body1" sx={{ fontSize: '14px' }}>
+                                              Web Development From Beginner To Advanced
+                                            </Typography>
+                                            </b>
+                                          }
+                                        secondary={
+                                            <React.Fragment>
+                                            {"Course: Gimna Katugampala"}
+                                            </React.Fragment>
+                                        }
+                                        />
+                                    </ListItem>
+                                    <Divider />
+                                    <ListItem style={{cursor:'pointer'}} alignItems="flex-start">
+                                        <ListItemAvatar>
+                                        <Avatar  src="/assets/images/banner/Banner-image-1.jpg" />
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                         primary={
+                                            <b>
+                                            <Typography variant="body1" sx={{ fontSize: '14px' }}>
+                                              Web Development From Beginner To Advanced
+                                            </Typography>
+                                            </b>
+                                          }
+                                        secondary={
+                                            <React.Fragment>
+                                            {"Course: Gimna Katugampala"}
+                                            </React.Fragment>
+                                        }
+                                        />
+                                    </ListItem>
+                                    <Divider />
+                                    <ListItem style={{cursor:'pointer'}} alignItems="flex-start">
+                                        <ListItemAvatar>
+                                        <Avatar  src="/assets/images/banner/Banner-image-1.jpg" />
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                         primary={
+                                            <b>
+                                            <Typography variant="body1" sx={{ fontSize: '14px' }}>
+                                              Gimna Katugampala
+                                            </Typography>
+                                            </b>
+                                          }
+                                        secondary={
+                                            <React.Fragment>
+                                            {"Instructor"}
+                                            </React.Fragment>
+                                        }
+                                        />
+                                    </ListItem>
+                                    
+                                    </List>
+                                    )}
+                                    
                                         
                                     </li>
                                     <li className="icon">
