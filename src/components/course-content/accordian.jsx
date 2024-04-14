@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import CardContainer from '../../components/course-content/CardContainer';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { IMG_HOST, UpdateCourseProgress } from '../../api';
+import { IMG_HOST, UpdateCourseCurriculumProgress, UpdateCourseProgress } from '../../api';
 import { CheckBox } from '@mui/icons-material';
 import Form from 'react-bootstrap/Form';
 
@@ -57,7 +57,9 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
 
 
                                 //  --------------- UPDATE COURSE PROGRESS ------------ 
-                                UpdateCourseProgress(content.section_name,itemCode)
+                                // UpdateCourseProgress(content.section_name,itemCode)
+                                UpdateCourseCurriculumProgress(itemCode,list.curriculumItemId)
+                                console.log(list)
                                 console.log(content.section_name)
                                 console.log(itemCode)
                                 //  --------------- UPDATE COURSE PROGRESS ------------ 
@@ -65,7 +67,7 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                             <CardContainer  className="m-1 p-0 border border-dark shadow" >
                             <Form.Check
                             className='mb-3 p-0'
-                            checked={content.read}
+                            checked={list.read}
                     
                                 type={"checkbox"}
                                 id={`default-${id}`}

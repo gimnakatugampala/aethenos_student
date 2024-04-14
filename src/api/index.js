@@ -2011,6 +2011,29 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/updateOrderH
   .catch((error) => console.error(error));
  }
 
+ export const UpdateCourseCurriculumProgress = async(itemCode,curriculumItemId) =>{
+
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+const formdata = new FormData();
+formdata.append("itemCode", `${itemCode}`);
+formdata.append("curriculumItemId", `${curriculumItemId}`);
+
+const requestOptions = {
+  method: "POST",
+  headers: myHeaders,
+  body: formdata,
+  redirect: "follow"
+};
+
+fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addReadCurriculumItem", requestOptions)
+  .then((response) => response.json())
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
+
+ }
+
  export const PurchaseHistory = async(setpHistory) =>{
 
   var myHeaders = new Headers();
