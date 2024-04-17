@@ -1,18 +1,21 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cart_course } from "../../redux/features/cart-slice";
 import {
   add_to_wishlist,
   wishlistItems,
 } from "../../redux/features/wishlist-slice";
-import { IMG_HOST } from "../../api";
+import { EnrollByStudent, IMG_HOST } from "../../api";
 import getSymbolFromCurrency from "currency-symbol-map";
 import CalculateDiscountPrice from "../../functions/pricing/CalculateDiscountedPrice";
 import GetCurrencyByCountry from "../../functions/pricing/GetCurrencyByCountry";
 import CalculateDiscountedPrice from "../../functions/pricing/CalculateDiscountedPrice";
 import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
 import StarsRating from 'stars-rating'
+import Cookies from 'js-cookie';
+
+const COUNTRY = Cookies.get('aethenos_user_origin')
 
 const CourseTypeFive = ({ data, classes }) => {
   const { cartCourses } = useSelector((state) => state.cart);
@@ -62,6 +65,29 @@ const CourseTypeFive = ({ data, classes }) => {
       })
     );
   };
+
+ 
+  
+  const handleEnroll = (data) =>{
+
+    var rawData = {
+      "paymentMethod": "3",
+      "discount": 0,
+      "totalPrice": 0,
+      "currency": "USD",
+      "country": JSON.parse(COUNTRY).country_name,
+      "courses": [{
+          "courseCode": `${data.course_code}`,
+          "itemPrice": 0,
+          "currency": "USD"
+        }]
+    }
+
+    EnrollByStudent(rawData)
+
+    // console.log(rawData)
+  }
+  
 
   return (
     <div
@@ -157,15 +183,26 @@ const CourseTypeFive = ({ data, classes }) => {
             <li>{data != undefined && data.category}</li>
           </ul>
 
+          {data.isPaid ? (
+
           <a
-            onClick={() => handleAddToCart(data)}
-            style={{ cursor: "pointer" }}
-            className="edu-btn btn-medium button-group float-end mt-2"
+          onClick={() => handleAddToCart(data)}
+          style={{ cursor: "pointer" }}
+          className="edu-btn btn-medium button-group float-end mt-2"
           >
-            {cartCourses.some((course) => course.id == data.id)
-              ? "Added to cart"
-              : "Add to cart"}
+          {cartCourses.some((course) => course.id == data.id)
+            ? "Added to cart"
+            : "Add to cart"}
           </a>
+
+          ) : (
+            <a onClick={() => handleEnroll(data)}  className="edu-btn btn-medium button-group float-end mt-2" style={{ cursor: 'pointer' }}> 
+                        Enroll Now 
+                        <i className="icon-4"></i>
+              </a>
+
+          )}
+          
           <button
             onClick={() => handleWishlist(data)}
             style={{ cursor: "pointer" }}

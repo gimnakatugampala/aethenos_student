@@ -3,13 +3,15 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cart_course } from '../../redux/features/cart-slice';
 import { add_to_wishlist, wishlistItems } from '../../redux/features/wishlist-slice';
-import { IMG_HOST } from '../../api';
+import { EnrollByStudent, IMG_HOST } from '../../api';
 import getSymbolFromCurrency from 'currency-symbol-map'; 
 import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
 import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
 import CalculateDiscountPrice from '../../functions/pricing/CalculateDiscountPrice';
 import StarsRating from 'stars-rating'
+import Cookies from 'js-cookie';
 
+const COUNTRY = Cookies.get('aethenos_user_origin')
 
 
 
@@ -55,6 +57,26 @@ const CourseTypeFour = ({ data, classes }) => {
             other_data:course
         }))
     }
+
+    const handleEnroll = (data) =>{
+
+        var rawData = {
+          "paymentMethod": "3",
+          "discount": 0,
+          "totalPrice": 0,
+          "currency": "USD",
+          "country": JSON.parse(COUNTRY).country_name,
+          "courses": [{
+              "courseCode": `${data.course_code}`,
+              "itemPrice": 0,
+              "currency": "USD"
+            }]
+        }
+    
+        EnrollByStudent(rawData)
+    
+        // console.log(rawData)
+      }
 
     return (
         <div className={`edu-course course-style-5 ${ classes ? classes : '' } h-100`}>
@@ -136,7 +158,7 @@ const CourseTypeFour = ({ data, classes }) => {
                     ) : (
 
                         <div className="button-group">
-                        <a className="edu-btn btn-medium" 
+                        <a onClick={() => handleEnroll(data)} className="edu-btn btn-medium" 
                         style={{cursor:'pointer'}}>
                             Enroll Now
                             <i className="icon-4"></i>

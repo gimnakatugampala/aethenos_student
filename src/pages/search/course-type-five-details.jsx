@@ -6,13 +6,16 @@ import {
   add_to_wishlist,
   wishlistItems,
 } from "../../redux/features/wishlist-slice";
-import { IMG_HOST } from "../../api";
+import { IMG_HOST , EnrollByStudent } from "../../api";
 import getSymbolFromCurrency from "currency-symbol-map";
 import CalculateDiscountPrice from "../../functions/pricing/CalculateDiscountedPrice";
 import GetCurrencyByCountry from "../../functions/pricing/GetCurrencyByCountry";
 import CalculateDiscountedPrice from "../../functions/pricing/CalculateDiscountedPrice";
 import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
 import StarsRating from 'stars-rating'
+import Cookies from 'js-cookie';
+
+const COUNTRY = Cookies.get('aethenos_user_origin')
 
 const CourseTypeFive = ({ data, classes }) => {
   const { cartCourses } = useSelector((state) => state.cart);
@@ -78,6 +81,27 @@ const CourseTypeFive = ({ data, classes }) => {
     }
     return starArray;
   };
+
+  const handleEnroll = (data) =>{
+
+    var rawData = {
+      "paymentMethod": "3",
+      "discount": 0,
+      "totalPrice": 0,
+      "currency": "USD",
+      "country": JSON.parse(COUNTRY).country_name,
+      "courses": [{
+          "courseCode": `${data.course_code}`,
+          "itemPrice": 0,
+          "currency": "USD"
+        }]
+    }
+
+    EnrollByStudent(rawData)
+
+    // console.log(rawData)
+  }
+
 
   return (
     <div
@@ -173,6 +197,8 @@ const CourseTypeFive = ({ data, classes }) => {
             <li>{data != undefined && data.category}</li>
           </ul>
 
+          {data.isPaid ? (
+
           <a
             onClick={() => handleAddToCart(data)}
             style={{ cursor: "pointer" }}
@@ -182,6 +208,13 @@ const CourseTypeFive = ({ data, classes }) => {
               ? "Added to cart"
               : "Add to cart"}
           </a>
+          ) : (
+            <a onClick={() => handleEnroll(data)}  className="edu-btn btn-small button-group float-end mt-2 mx-2" style={{ cursor: 'pointer' }}> 
+            Enroll Now 
+            <i className="icon-4"></i>
+             </a>
+          )}
+
           <button
             onClick={() => handleWishlist(data)}
             style={{ cursor: "pointer" }}

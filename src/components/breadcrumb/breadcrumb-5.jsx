@@ -72,9 +72,7 @@ const CourseBreadcrumb = ({ course }) => {
                         {/* <li className="course-rating"> */}
                    
                             <li><span className='m-0 p-0'><i style={{fontSize:'17px'}} className="fa-solid fa-calendar-days m-0"></i> Last updated 9/2023</span></li>
-                            
                             <li><i style={{fontSize:'17px'}}  className="fa-solid fa-globe m-0"></i> {course.language}</li>
-                           
                             <li><span><i style={{fontSize:'17px'}} className="fa-solid fa-layer-group m-0"></i> {course.level}</span></li>
                          
                         {/* </li> */}

@@ -4,12 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { cart_course } from '../../redux/features/cart-slice';
 import { add_to_wishlist, wishlistItems } from '../../redux/features/wishlist-slice';
 import StarsRating from 'stars-rating'
-import { IMG_HOST } from '../../api';
+import { EnrollByStudent, IMG_HOST } from '../../api';
 import CalculateListPrice from '../../functions/pricing/CalculateListPrice';
 import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
 import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
 import getSymbolFromCurrency from 'currency-symbol-map'
 import CalculateDiscountPrice from '../../functions/pricing/CalculateDiscountPrice';
+import Cookies from 'js-cookie';
+
+
+const COUNTRY = Cookies.get('aethenos_user_origin')
 
 const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
     const {cartCourses} = useSelector(state => state.cart);
@@ -61,6 +65,28 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
         // CalculateDiscountPrice(data)
         // console.log(data)
     },[data])
+
+
+      
+  const handleEnroll = (data) =>{
+
+    var rawData = {
+      "paymentMethod": "3",
+      "discount": 0,
+      "totalPrice": 0,
+      "currency": "USD",
+      "country": JSON.parse(COUNTRY).country_name,
+      "courses": [{
+          "courseCode": `${data.course_code}`,
+          "itemPrice": 0,
+          "currency": "USD"
+        }]
+    }
+
+    EnrollByStudent(rawData)
+
+    // console.log(rawData)
+  }
     
 
     return (
@@ -156,7 +182,7 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                         </a>
                     ) : (
 
-                        <a  className="edu-btn btn-secondary btn-small" style={{ cursor: 'pointer' }}> 
+                        <a onClick={() => handleEnroll(data)} className="edu-btn btn-secondary btn-small" style={{ cursor: 'pointer' }}> 
                         Enroll Now 
                         <i className="icon-4"></i>
                         </a>

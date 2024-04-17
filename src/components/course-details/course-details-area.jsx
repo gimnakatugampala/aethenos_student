@@ -165,7 +165,7 @@ const CourseDetailsArea = ({ course }) => {
                                                 </div>
                                             </div>
 
-                                            <div className="comment-form-area">
+                                            {/* <div className="comment-form-area">
                                                 <h3 className="heading-title">Write a Review</h3>
                                                 <div className="rating-icon">
                                                     <h6 className="title">Rating Here</h6>
@@ -178,7 +178,7 @@ const CourseDetailsArea = ({ course }) => {
                                                     </div>
                                                 </div>
                                                 <CommentFormCourse/>
-                                            </div>
+                                            </div> */}
                                         </div>
                                         
                                     </div>

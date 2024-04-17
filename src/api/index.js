@@ -2120,3 +2120,61 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getAllRefund
     .catch((error) => console.error(error));
 
  }
+
+
+ export const EnrollByStudent = async(rawData) =>{
+
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  const raw = JSON.stringify(rawData);
+
+var requestOptions = {
+  method: 'POST',
+  body: raw,
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+let timerInterval;
+Swal.fire({
+  title: "Processing ...",
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading();
+
+
+    fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addToStudentsPurchasedCourses", requestOptions)
+.then(response => response.json())
+.then(result => {
+  console.log(result)
+
+  if(result.message == "Error"){
+    ErrorAlert("Error",result.variable)
+    return
+  }
+  
+  if(result.variable == "200"){
+    SuccessAlert("Success",result.message)      
+    console.log(result)
+    // return
+  }
+
+
+})
+.catch(error => console.log('error', error));
+
+
+ 
+
+    
+  }
+})
+
+//  -------------------------
+
+
+
+
+}

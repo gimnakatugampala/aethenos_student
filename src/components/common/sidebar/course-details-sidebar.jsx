@@ -5,14 +5,15 @@ import VideoModal from '../popup-modal/video-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { wishlistItems , add_to_wishlist } from '../../../redux/features/wishlist-slice';
 import { cart_course } from '../../../redux/features/cart-slice';
-import { IMG_HOST } from '../../../api';
+import { EnrollByStudent, IMG_HOST } from '../../../api';
 import CalculateDiscountedPrice from '../../../functions/pricing/CalculateDiscountedPrice';
 import GetCurrencyByCountry from '../../../functions/pricing/GetCurrencyByCountry';
 import getSymbolFromCurrency from 'currency-symbol-map'
 import CalculateListPrice from '../../../functions/pricing/CalculateListPrice';
 import CalculateDiscountPrice from '../../../functions/pricing/CalculateDiscountPrice';
+import Cookies from 'js-cookie';
 
-
+const COUNTRY = Cookies.get('aethenos_user_origin')
 
 const mainfs = {
     fontSize: '40px',
@@ -20,8 +21,6 @@ const mainfs = {
 
 const CourseDetailsSidebar = ({ course,details_2=false }) => {
 
-
-    
     const {cartCourses} = useSelector(state => state.cart);
     const dispatch = useDispatch();
     const wishlists = useSelector(wishlistItems);
@@ -68,6 +67,27 @@ const CourseDetailsSidebar = ({ course,details_2=false }) => {
         }))
         console.log(course)
     }
+
+
+    const handleEnroll = (course) =>{
+
+        var rawData = {
+          "paymentMethod": "3",
+          "discount": 0,
+          "totalPrice": 0,
+          "currency": "USD",
+          "country": JSON.parse(COUNTRY).country_name,
+          "courses": [{
+              "courseCode": `${course.course_code}`,
+              "itemPrice": 0,
+              "currency": "USD"
+            }]
+        }
+    
+        EnrollByStudent(rawData)
+    
+        // console.log(rawData)
+      }
 
     return (
         <>
@@ -127,13 +147,26 @@ const CourseDetailsSidebar = ({ course,details_2=false }) => {
                                 </li>
                             </ul>
 
-                            <div className="read-more-btn">
-                                {/* <a href="/my-courses" className="edu-btn">Start Now <i className="icon-4"></i></a> */}
+                            {course.isPaid ? (
+
+                                <div className="read-more-btn">
                                 <a onClick={() => handleAddToCart(course)} className="edu-btn" style={{ cursor: 'pointer' }}> 
                                         {cartCourses.some(item => item.id == course.id) ? 'Added to cart' : 'Add to cart'} 
                                         <i className="icon-4"></i>
                                     </a>
+                                </div>
+
+                            ) : (
+
+                                <div className="read-more-btn">
+                                <a onClick={() => handleEnroll(course)} className="edu-btn" style={{ cursor: 'pointer' }}> 
+                                        Enroll Now
+                                        <i className="icon-4"></i>
+                                    </a>
                             </div>
+                            )}
+
+                          
 
                             <div className="share-area">
                                 <h4 className="title">Share On:</h4>
