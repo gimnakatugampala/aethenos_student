@@ -259,10 +259,12 @@ export const StudentSignIn = async(email, password,setloading,router,rediect_url
 
 
 
-              // window.location.href = "/?login=success"
+              
 
               if(rediect_url == "none"){
-                router.push(`/?login=success`)
+                // router.push(`/?login=success`)
+                window.location.href = "/?login=success"
+
               }else{
                 router.push(`/checkout`)
 
@@ -437,7 +439,8 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/setTo
         Cookies.set('aethenos_topic_filled', true, { domain: '.aethenos.com' });
       }
 
-      router.push(`/?login=success`)
+      // router.push(`/?login=success`)
+      window.location.href = "/?login=success"
     }
 
   })
