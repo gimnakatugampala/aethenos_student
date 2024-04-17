@@ -81,7 +81,7 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
 
     return (
         <>
-            <header className={`edu-header header-style-${header_style ? header_style : '1'} ${ disable_full_width ? 'disbale-header-fullwidth' : 'header-fullwidth' } ${no_top_bar ? 'no-topbar' : ''}`}>
+            <header style={{zoom:'0.9'}} className={`edu-header header-style-${header_style ? header_style : '1'} ${ disable_full_width ? 'disbale-header-fullwidth' : 'header-fullwidth' } ${no_top_bar ? 'no-topbar' : ''}`}>
                 { ! no_top_bar && 
                     <div className="header-top-bar">
                         <div className="container-fluid">

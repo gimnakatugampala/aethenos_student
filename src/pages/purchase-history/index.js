@@ -6,31 +6,53 @@ import { Footer, Header } from '../../layout';
 import Table from 'react-bootstrap/Table';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Button from 'react-bootstrap/Button';
-import { GetRefunds, PurchaseHistory } from '../../api';
+import { GetMyRefunds, GetRefunds, PurchaseHistory, SendRefundReq } from '../../api';
 import { useState } from 'react';
 import moment from 'moment/moment';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import Modal from 'react-bootstrap/Modal';
-
+import LargeLoading from '../../functions/Loading/LargeLoading'
+import ErrorAlert from '../../functions/Alert/ErrorAlert';
 
 
 
 const index = () => {
 
   const [pHistory, setpHistory] = useState(null)
+  const [refunds, setrefunds] = useState(null)
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
-  const [transactionCode, settransactionCode] = useState("")
-  const [refundReason, setrefundReason] = useState("")
-  const [refundAmount, setrefundAmount] = useState(0)
+  const [refundText, setrefundText] = useState("")
+  const [selectedTransactionCode, setselectedTransactionCode] = useState("")
+  const [selectedAmount, setselectedAmount] = useState("")
+ 
+
+  const handleClose = () => setShow(false);
+  const handleShow = (p) => {
+    console.log(p)
+    setselectedTransactionCode(p.transactionCode)
+    setselectedAmount(p.amount)
+    setShow(true)
+  };
 
   useEffect(() => {
     PurchaseHistory(setpHistory)
     GetRefunds()
+    GetMyRefunds(setrefunds)
   }, [])
+
+
+  const handleRefundSubmit = () =>{
+      if(refundText == ""){
+        ErrorAlert("Empty Field","Please Fill Refund Text")
+        return
+      }
+
+      SendRefundReq(selectedTransactionCode,selectedAmount,refundText,setrefundText,setShow)
+
+
+  }
   
 
   return (
@@ -113,28 +135,44 @@ const index = () => {
                             <div className="course-tab-content">
                             <div className="course-overview">
 
-                            <Table striped bordered hover>
-                            <thead>
-                              <tr>
-                                <th></th>
-                                <th>Date</th>
-                                <th>Amount</th>
-                                <th>Refunded To</th>
-                                <th>Status</th>
-                                <th></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>Microsoft - Excel Beginner To Advanced</td>
-                                <td>Jun 11, 2020</td>
-                                <td>@21.99</td>
-                                <td>Stipe</td>
-                                <td>No Started</td>
-                                <td><Button onClick={handleShow} variant="outline-danger">Ask Refund</Button></td>
-                              </tr>
-                            </tbody>
-                          </Table>
+                            {refunds != null ? (
+                              <Table striped bordered hover>
+                                  <thead>
+                                      <tr>
+                                          <th></th>
+                                          <th>Date</th>
+                                          <th>Amount</th>
+                                          <th>Refunded To</th>
+                                          <th>Status</th>
+                                          <th></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      {refunds.length > 0 ? (
+                                          refunds.map((p, index) => (
+                                              <tr key={index}>
+                                                  <td>{p.courseTitles[0]}</td>
+                                                  <td>{moment(p.date).format('MMM DD,YYYY')}</td>
+                                                  <td>{getSymbolFromCurrency(p.currency)}{(p.amount).toUpperCase()}</td>
+                                                  <td>{p.refundedTo}</td>
+                                                  <td>{p.status}</td>
+                                                  <td>
+                                                    {p.status == "Not Started" && (
+                                                    <Button onClick={() => handleShow(p)} variant="outline-danger">Ask Refund</Button>
+                                                    )}
+                                                  </td>
+                                              </tr>
+                                          ))
+                                      ) : (
+                                         <LargeLoading />
+                                      )}
+                                  </tbody>
+                              </Table>
+                          ) : (
+                              <p>No Refunds</p>
+                          )}
+
+                            
 
                                 </div>
                             </div>
@@ -154,8 +192,8 @@ const index = () => {
 
         <div className="mb-3">
         <label for="exampleFormControlTextarea1" className="form-label">Reason</label>
-        <textarea className="form-control" placeholder='What is the Reason for the Refund ?' rows="3"></textarea>
-        <Button className='m-2' variant="danger">Submit</Button>
+        <textarea value={refundText} onChange={(e) => setrefundText(e.target.value)} className="form-control" placeholder='What is the Reason for the Refund ?' rows="3"></textarea>
+        <Button onClick={handleRefundSubmit} className='m-2' variant="danger">Submit</Button>
       </div>
           
         </Modal.Body>

@@ -2197,5 +2197,66 @@ export const GetReviewsByCode = async(course_code,setfeatured_reviews) =>{
         })
     .catch((error) => console.error(error));
 
+}
+
+
+export const GetMyRefunds = async(setrefunds) =>{
+
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+const requestOptions = {
+  method: "GET",
+  headers: myHeaders,
+  redirect: "follow"
+};
+
+fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getOwnAllRefunds", requestOptions)
+  .then((response) => response.json())
+  .then((result) => {
+    console.log(result)
+    Unauthorized(result.status,`purchase-history`) 
+    setrefunds(result)
+  })
+  .catch((error) => console.error(error));
+
+}
+
+export const SendRefundReq = async(selectedTransactionCode,selectedAmount,refundText,setrefundText,setShow) =>{
+
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+const formdata = new FormData();
+formdata.append("transactionCode", `${selectedTransactionCode}`);
+formdata.append("reason", `${refundText}`);
+formdata.append("refundAmount", `${selectedAmount}`);
+
+const requestOptions = {
+  method: "POST",
+  headers: myHeaders,
+  body: formdata,
+  redirect: "follow"
+};
+
+fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addRefund", requestOptions)
+  .then((response) => response.json())
+  .then((result) => {
+    console.log(result)
+    if(result.variable == "200"){
+      SuccessAlert("Success",result.message)
+      setrefundText("")
+      setShow(false)
+      return
+    }
+if(result.message == "Error"){
+  ErrorAlert("Error",result.variable)
+  setrefundText("")
+  return
+}
+
+
+  })
+  .catch((error) => console.error(error));
 
 }
