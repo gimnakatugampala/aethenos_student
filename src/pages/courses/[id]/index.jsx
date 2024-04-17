@@ -224,15 +224,7 @@ const GetCourseByCategory = () => {
         
        
 
-        setTimeout(() => {
-            // setloading_sub_categories(false)
-            // setloading_most_popular_courses(false)
-            // setloading_topics_list(false)
-            // setloading_instructors_list(false)
-            // setloading_all_courses_list(false)
-            // setloading_new_courses(false)
-            // setloading_trending_courses(false)
-        }, 2000);
+      console.log(instructors)
 
     }, [CategoryName,loading_top_title,id])
 
@@ -554,10 +546,10 @@ const GetCourseByCategory = () => {
                             {instructors != null || instructors.length > 0 ? instructors.map((page, index) => (
                                 <div key={index} className="row">
                                       {page.single.map((item, itemIndex) => (
-                                        <CardContainer  key={itemIndex} className="col-md-4 mb-2">
+                                        <CardContainer  key={itemIndex} className="col-md-4 mb-2 p-2">
                                         <a  href={`/users/${item.userCode}`}>
                                         <div
-                                            className="row h-100"
+                                            className="row h-100 p-0 m-0"
                                             style={{
                                             borderRadius: "0",
                                             transition: "background-color 0.3s",
@@ -574,11 +566,11 @@ const GetCourseByCategory = () => {
                                             />
                                             </div>
                                             <div className="col-md-9">
-                                            <h6 className='m-0' style={{ fontWeight: "bold"}}>
+                                            <h6 className='m-0 p-0' style={{ fontWeight: "bold"}}>
                                                 {item.title.length > 17 ?  item.title.slice(0, 17) + "..." : item.title}
                                             </h6>
                                             <div>
-                                            <p className="m-0" style={{fontSize:'13px'}}>{item.description.length > 35 ?  item.description.slice(0, 35) + "...": item.description}</p>
+                                            <p className="m-0 p-0" style={{fontSize:'13px'}}>{item.description.length > 35 ?  item.description.slice(0, 35) + "...": item.description}</p>
                                             </div>
     
                                             <div className="d-flex align-items-center">
@@ -618,7 +610,7 @@ const GetCourseByCategory = () => {
     
                                             <div className="d-flex align-items-center">
                                                 <p
-                                                className="mx-1 mb-0 mt-0"
+                                                className="mx-1 mb-0 mt-0 p-0"
                                                 style={{
                                                     fontWeight: "bold",
                                                     fontSize: "15px",
@@ -628,7 +620,7 @@ const GetCourseByCategory = () => {
                                                 {item.students}
                                                 </p>
                                                 <p
-                                                className="mx-1 mb-0 mt-0"
+                                                className="mx-1 mb-0 mt-0 p-0"
                                                 style={{
                                                     // fontWeight: "bold",
                                                     fontSize: "13px",

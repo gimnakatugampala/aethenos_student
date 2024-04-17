@@ -47,7 +47,7 @@ const HeaderMyCourse = ({id,course}) => {
                         </Nav.Link>
 
                             <NavDropdown className='d-flex align-items-center p-2 mx-5' title="Your progress" id="collapsible-nav-dropdown">
-                            <NavDropdown.Item  ><b>166 of 496 Complete</b> <br /> Finish course to get the certificate</NavDropdown.Item>
+                            <NavDropdown.Item  ><b>{course.completedItemCount} of {course.allItemsCount} Complete</b> <br /> Finish course to get the certificate</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
 
