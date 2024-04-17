@@ -2178,3 +2178,24 @@ Swal.fire({
 
 
 }
+
+
+export const GetReviewsByCode = async(course_code,setfeatured_reviews) =>{
+
+
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow"
+  };
+  
+  fetch( `https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getReviewsByCourseCode/${course_code}`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+          console.log(result)
+          // Unauthorized(result.status,`my-courses/${id}`)
+          setfeatured_reviews(result.sort((a, b) => new Date(b.date) - new Date(a.date)))
+        })
+    .catch((error) => console.error(error));
+
+
+}

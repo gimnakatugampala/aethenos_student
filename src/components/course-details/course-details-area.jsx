@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CourseDetailsSidebar from '../common/sidebar/course-details-sidebar';
 import CommentFormCourse from '../forms/comment-form-course';
 import SingleComment from './single-comment';
 import SingleProgressbar from './single-progressbar';
-import { IMG_HOST } from '../../api';
+import { GetReviewsByCode, IMG_HOST } from '../../api';
 import Accordian from './accordian';
+import { Rating } from 'react-simple-star-rating'
+import CardContainer from '../course-content/CardContainer';
+import moment from 'moment';
+import { Avatar } from '@mui/material';
 
 
 
 const CourseDetailsArea = ({ course }) => {
   const { course_desc, course_desc_2, learn_list, course_desc_3, curriculum_desc, course_lessons, instructor_img, instructor_title, instructor_desc, social_links, reviews, instructor, rating, rating_count } = course || {};
+
+  const [featured_reviews, setfeatured_reviews] = useState(null)
+    // get the Reviews
+    useEffect(() => {
+        GetReviewsByCode(course.course_code,setfeatured_reviews)
+      }, [featured_reviews])
+
     return (
         <section className="edu-section-gap course-details-3">
             <div className="container">
@@ -129,42 +140,49 @@ const CourseDetailsArea = ({ course }) => {
                                     <div className="course-tab-content">
 
                                         <div className="course-review">
-                                            <h3 className="heading-title">Course Rating</h3>
-                                            <p>{rating} average rating based on {rating_count} rating</p>
-                                            <div className="row g-0 align-items-center">
-                                                <div className="col-sm-4">
-                                                    <div className="rating-box">
-                                                        <div className="rating-number">{rating}</div>
-                                                        <div className="rating">
-                                                            <i className="icon-23"></i>
-                                                            <i className="icon-23"></i>
-                                                            <i className="icon-23"></i>
-                                                            <i className="icon-23"></i>
-                                                            <i className="icon-23"></i>
+                                            <h3 className="heading-title">Student Feedback</h3>
+
+                                             <div className="row align-items-center">
+                                                    <div className="col-sm-3">
+                                                        <div className="rating-box">
+                                                            <div className="rating-number">{course && (course.rating).toFixed(1)}</div>
+                                                            {course && <Rating  size={20} readonly={true} iconsCount={5} initialValue={Number.parseInt(course.rating)} />}
+                                                            <span>({course && Number.parseInt(course.rating_count)} {Number.parseInt(course.rating_count) == 1 ? "Review" : "Reviews"})</span>
                                                         </div>
-                                                        <span>({rating_count} Review)</span>
+                                                    </div>
+                                                    <div className="col-md-9">
+                                                        <div className="review-wrapper ">
+                                                            <SingleProgressbar value={course.ratingDetails.fiveRatingCount} rating_value={'5'} />
+                                                            <SingleProgressbar value={course.ratingDetails.fourRatingCount} rating_value={'4'} />
+                                                            <SingleProgressbar value={course.ratingDetails.threeRatingCount} rating_value={'3'} />
+                                                            <SingleProgressbar value={course.ratingDetails.twoRatingCount} rating_value={'2'} />
+                                                            <SingleProgressbar value={course.ratingDetails.oneRatingCount} rating_value={'1'} />
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div className="col-sm-8">
-                                                    <div className="review-wrapper">
-                                                        <SingleProgressbar value={'100'} rating_value={rating_count} />
-                                                        <SingleProgressbar value={'0'} rating_value={'0'} />
-                                                        <SingleProgressbar value={'0'} rating_value={'0'} />
-                                                        <SingleProgressbar value={'0'} rating_value={'0'} />
-                                                        <SingleProgressbar value={'0'} rating_value={'0'} />
-                                                    </div>
-                                                </div>
-                                            </div>
 
-                                            <div className="comment-area">
-                                                <h3 className="heading-title">Reviews</h3>
-                                                <div className="comment-list-wrapper">
-                                                    {reviews?.map((review, i) => (
-                                                        <SingleComment key={i} review={review} />
-                                                    ))}
-                                                </div>
-                                            </div>
+                                                <div className="mb-1">
+                            <h3>Reviews</h3>
+                                  {featured_reviews != null && (
+                                    featured_reviews.length > 0 ? (
+                                    featured_reviews.map((reviews,index) => (
 
+                                    <CardContainer key={index} className="p-1">
+                                      <div className="d-flex align-items-center">
+                                        <Avatar alt={`${reviews.fullName}`} src="/static/images/avatar/1.jpg" /> 
+                                        <h6 className="m-2 p-0">{reviews.fullName}</h6>
+                                      </div>
+                                      <Rating  size={20} readonly={true} iconsCount={5} initialValue={Number.parseInt(reviews.rating)} />
+                                      <span style={{fontSize:'12px'}} className="mt-2">{moment(reviews.date).startOf('day').fromNow()}</span>
+                                      <p style={{color:'#000'}} >{reviews.comment}</p>
+                                    </CardContainer>
+                                    ))
+
+                                  ) : "No Reviews Found"
+                               
+                                  )}
+
+                                </div>
                                             {/* <div className="comment-form-area">
                                                 <h3 className="heading-title">Write a Review</h3>
                                                 <div className="rating-icon">
