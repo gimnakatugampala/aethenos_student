@@ -13,7 +13,7 @@ import HeaderTopRight from '../headers/component/header-top-right';
 import MainMenu from '../headers/component/main-menu';
 import Cart from './component/cart';
 import SearchBar from '../../pages/search/searchBar';
-import {  GetCourseCategory , GetCategoriesMenu } from '../../api';
+import {  GetCourseCategory , GetCategoriesMenu, IMG_HOST } from '../../api';
 import SmallRedLoading from '../../functions/Loading/SmallRedLoading';
 import Cookies from 'js-cookie';
 import { Menu, MenuItem, MenuButton, SubMenu ,MenuHeader } from '@szhsin/react-menu';
@@ -64,8 +64,9 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
 
   const [showDropdown, setShowDropdown] = useState(false);
 
+  const [searchResults, setsearchResults] = useState(null)
 
-    
+
 
     
     useEffect(() => {
@@ -78,6 +79,8 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
         GetCategoriesMenu(setnavbar_list)
     }, [categories])
     
+
+
 
     return (
         <>
@@ -173,98 +176,73 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                         </div>
                                     </li>
                                     <li className="icon search-icon search-bar">
-                                        {/* <a style={{cursor:'pointer'}} onClick={() => setIsSearchOpen(true)} className="search-trigger">
-                                            <i className="icon-2"></i>
-                                        </a> */}
+                         
+                                    <SearchBar setsearchResults={setsearchResults} showDropdown={showDropdown} setShowDropdown={setShowDropdown} />
 
-                                    <SearchBar showDropdown={showDropdown} setShowDropdown={setShowDropdown} />
+                                    {showDropdown && searchResults != null && (
+                                            <List sx={{ width: '450px', position: 'absolute', bgcolor: 'background.paper', overflowX: 'hidden', overflowY: 'scroll', height: '250px' }}>
+                                                {searchResults.length > 0 ? searchResults.map((result, index) => (
+                                                    result.searchType === "course" ? (
+                                                        <React.Fragment key={index}>
+                                                            <a href={`/course-details/${result.courseCode}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                                            <ListItem onClick={() => window.location.href = `/course-details/${result.courseCode}`} style={{ cursor: 'pointer' }} alignItems="flex-start">
+                                                                <ListItemAvatar>
+                                                                    <Avatar src={`${IMG_HOST}${result.courseImg}`} />
+                                                                </ListItemAvatar>
+                                                                <ListItemText
+                                                                    primary={
+                                                                        <b>
+                                                                            <Typography variant="body1" sx={{ fontSize: '14px' }}>
+                                                                                {result.courseTitle}
+                                                                            </Typography>
+                                                                        </b>
+                                                                    }
+                                                                    secondary={`Instructor: ${result.instructorName}`}
+                                                                />
+                                                            </ListItem>
+                                                            <Divider />
+                                                            </a>
+                                                        </React.Fragment>
+                                                    ) : (
+                                                        <React.Fragment key={index}>
+                                                            <a href={`/users/${result.courseCode}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                                            <ListItem onClick={() => window.location.href = `/users/${result.courseCode}`} style={{ cursor: 'pointer' }} alignItems="flex-start">
+                                                                <ListItemAvatar>
+                                                                    <Avatar src={result.instructorImg} />
+                                                                </ListItemAvatar>
+                                                                <ListItemText
+                                                                    primary={
+                                                                        <b>
+                                                                            <Typography variant="body1" sx={{ fontSize: '14px' }}>
+                                                                                {result.instructorName}
+                                                                            </Typography>
+                                                                        </b>
+                                                                    }
+                                                                    secondary={"Instructor"}
+                                                                />
+                                                            </ListItem>
+                                                            <Divider />
+                                                            </a>
+                                                        </React.Fragment>
+                                                    )
+                                                )) : (
+                                               
+                                                <ListItem style={{ cursor: 'pointer' }} alignItems="flex-start">
+                                                     <ListItemText
+                                                            primary={
+                                                                <b className='text-center'>
+                                                                    <Typography variant="body1" >
+                                                                        No Results Found
+                                                                    </Typography>
+                                                                </b>
+                                                            }
+                                                                />
+                                                    </ListItem>
+                                                   
+                                                    )}
+                                            </List>
+                                        )}
 
-                                    {showDropdown && (
-                                    <List sx={{ width: '450px', position:'absolute', bgcolor: 'background.paper', overflowX:'hidden',overflowY:'scroll',height:'250px' }}>
-
-                                    <ListItem style={{cursor:'pointer'}} alignItems="flex-start">
-                                        <ListItemAvatar>
-                                        <Avatar  src="/assets/images/banner/Banner-image-1.jpg" />
-                                        </ListItemAvatar>
-                                        <ListItemText
-                                         primary={
-                                            <b>
-                                            <Typography variant="body1" sx={{ fontSize: '14px' }}>
-                                              Web Development From Beginner To Advanced
-                                            </Typography>
-                                            </b>
-                                          }
-                                        secondary={
-                                            <React.Fragment>
-                                            {"Course: Gimna Katugampala"}
-                                            </React.Fragment>
-                                        }
-                                        />
-                                    </ListItem>
-                                    <Divider />
-                                    <ListItem style={{cursor:'pointer'}} alignItems="flex-start">
-                                        <ListItemAvatar>
-                                        <Avatar  src="/assets/images/banner/Banner-image-1.jpg" />
-                                        </ListItemAvatar>
-                                        <ListItemText
-                                         primary={
-                                            <b>
-                                            <Typography variant="body1" sx={{ fontSize: '14px' }}>
-                                              Web Development From Beginner To Advanced
-                                            </Typography>
-                                            </b>
-                                          }
-                                        secondary={
-                                            <React.Fragment>
-                                            {"Course: Gimna Katugampala"}
-                                            </React.Fragment>
-                                        }
-                                        />
-                                    </ListItem>
-                                    <Divider />
-                                    <ListItem style={{cursor:'pointer'}} alignItems="flex-start">
-                                        <ListItemAvatar>
-                                        <Avatar  src="/assets/images/banner/Banner-image-1.jpg" />
-                                        </ListItemAvatar>
-                                        <ListItemText
-                                         primary={
-                                            <b>
-                                            <Typography variant="body1" sx={{ fontSize: '14px' }}>
-                                              Web Development From Beginner To Advanced
-                                            </Typography>
-                                            </b>
-                                          }
-                                        secondary={
-                                            <React.Fragment>
-                                            {"Course: Gimna Katugampala"}
-                                            </React.Fragment>
-                                        }
-                                        />
-                                    </ListItem>
-                                    <Divider />
-                                    <ListItem style={{cursor:'pointer'}} alignItems="flex-start">
-                                        <ListItemAvatar>
-                                        <Avatar  src="/assets/images/banner/Banner-image-1.jpg" />
-                                        </ListItemAvatar>
-                                        <ListItemText
-                                         primary={
-                                            <b>
-                                            <Typography variant="body1" sx={{ fontSize: '14px' }}>
-                                              Gimna Katugampala
-                                            </Typography>
-                                            </b>
-                                          }
-                                        secondary={
-                                            <React.Fragment>
-                                            {"Instructor"}
-                                            </React.Fragment>
-                                        }
-                                        />
-                                    </ListItem>
-                                    
-                                    </List>
-                                    )}
-                                    
                                         
                                     </li>
                                     <li className="icon">

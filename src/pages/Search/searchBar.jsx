@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import Dropdown from 'react-bootstrap/Dropdown';
+import { SearchItemsByKeyword } from "../../api";
 
 
-const SearchBar = ({setShowDropdown}) => {
+const SearchBar = ({setShowDropdown , setsearchResults}) => {
+  
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
 
@@ -20,10 +22,7 @@ const SearchBar = ({setShowDropdown}) => {
     }
   };
 
-  const handleChange = (value) => {
-    setInput(value);
-    fetchData(value);
-  };
+ 
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
@@ -36,14 +35,18 @@ const SearchBar = ({setShowDropdown}) => {
   };
 
   const handleBlur = () => {
-    setShowDropdown(false);
+    setTimeout(() => {
+      
+      setShowDropdown(false);
+      setsearchResults(null)
+    }, 100);
   };
 
-  const handleDropdownToggle = () => {
-    setShowDropdown(!showDropdown);
-  };
 
- 
+  const handleKeywordSearch = (e) =>{
+    SearchItemsByKeyword(e.target.value,setsearchResults)
+    setKeyword(e.target.value)
+  }
 
   return (
     <div className="input-group d-none d-sm-flex">
@@ -52,7 +55,7 @@ const SearchBar = ({setShowDropdown}) => {
         className="form-control"
         placeholder="Search"
         value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
+        onChange={handleKeywordSearch}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onKeyPress={handleKeyPress}

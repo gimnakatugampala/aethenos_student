@@ -2260,3 +2260,21 @@ if(result.message == "Error"){
   .catch((error) => console.error(error));
 
 }
+
+
+export const SearchItemsByKeyword = async(word,setsearchResults) =>{
+
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow"
+  };
+  
+  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/common/searchCourseAndInstructorDetails/${word}`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result)
+      setsearchResults(result)
+    })
+    .catch((error) => console.error(error));
+
+}
