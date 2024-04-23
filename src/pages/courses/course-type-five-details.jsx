@@ -165,6 +165,7 @@ const CourseTypeFive = ({ data, classes }) => {
           </span>
 
           <div className="course-rating">
+            {data != null && (
           <StarsRating
               edit={false}
               count={5}
@@ -172,6 +173,7 @@ const CourseTypeFive = ({ data, classes }) => {
               value={data.rating}
               color1={'gray'}
               color2={'#F39C12'} />
+            )}
             <span className="rating-count ">
               ({data != undefined && Number.parseFloat(data.rating).toFixed(1)})
             </span>
@@ -183,7 +185,7 @@ const CourseTypeFive = ({ data, classes }) => {
             <li>{data != undefined && data.category}</li>
           </ul>
 
-          {data.isPaid ? (
+          {data != null && data.isPaid ? (
 
           <a
           onClick={() => handleAddToCart(data)}

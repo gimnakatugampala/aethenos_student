@@ -9171,9 +9171,8 @@ body .tpd-size-medium .tpd-content {
   padding-left: 12px;
 }
 .course-review .review-wrapper .progress {
-  margin-right: 38px;
-  margin-left: 70px;
-  height: 6px;
+  padding: 0;
+  height: 10px;
   background: #f2f2f2;
 }
 .course-review .review-wrapper .progress .progress-bar {

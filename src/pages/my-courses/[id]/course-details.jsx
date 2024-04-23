@@ -32,6 +32,7 @@ import { AddQuestion, GetAllAnnoucement, GetAllQuestion, GetMyCoursesDetails, Ge
 import moment from "moment";
 import ErrorAlert from "../../../functions/Alert/ErrorAlert";
 import Commentbox from "../../../components/comment-box/Commentbox";
+import QuizContainer from "../components/quiz/QuizContainer";
 import parse from 'html-react-parser';
 
 // const course = course_data[0];
@@ -43,6 +44,7 @@ const CourseDetailsArea1 = ({id, course}) => {
   const [main_Video_player_url, setmain_Video_player_url] = useState('https://aethenosinstructor.exon.lk:2053/aethenos-assert/1706080568678_6da9594b-6a36-4773-85ad-a2d7ceda2727.mp4')
   const [showVideoPlayer, setshowVideoPlayer] = useState(true)
   const [article, setarticle] = useState("")
+  const [showquiz, setshowquiz] = useState(false)
 
   const [answer, setanswer] = useState(null)
   const [show, setShow] = useState(false);
@@ -52,6 +54,9 @@ const CourseDetailsArea1 = ({id, course}) => {
     setShow(true)
     setanswer(answer)
   };
+
+  // ========= QUIZ ====================
+  const [Startquiz, setStartquiz] = useState(false)
 
   const [courseCode, setcourseCode] = useState(course && course.course_code)
   const [itemCode, setitemCode] = useState(course && course.item_code)
@@ -118,21 +123,29 @@ const CourseDetailsArea1 = ({id, course}) => {
   }
 
   return (
+
     <section
     className="container my-5 course-details-3"
       style={{ textAlign: "left", backgroundColor: "transparent" }}>
-        
         <div className="row">
             <div className="col-md-8">
         
-          {showVideoPlayer ? (
-            <Player autoPlay={true}>
-                <source id="videoPlayer" src={main_Video_player_url} />
-              </Player>
-          ) : 
-          <div style={{ maxHeight: '500px', overflowY: 'scroll' }}>
-          {parse(article)}
-          </div>}
+            {showVideoPlayer ? (
+          <Player autoPlay={true}>
+              <source id="videoPlayer" src={main_Video_player_url} />
+          </Player>
+        ) : article == "" ? (
+          // Show Quiz
+          showquiz && (
+            <QuizContainer Startquiz={Startquiz} setStartquiz={setStartquiz} />
+          )
+
+        ) : (
+            <div style={{ maxHeight: '500px', overflowY: 'scroll' }}>
+                {parse(article)}
+            </div>
+        )}
+
 
             {/* New Tab */}
                 <div className="row">
@@ -145,7 +158,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                             type="button" role="tab" aria-controls="overview" aria-selected="true">Overview</button>
                         </li>
 
-                        {course.isPaid == true && (
+                        {course && course.isPaid == true && (
                            <li className="nav-item" role="presentation">
                            <button className="nav-link" id="qa-tab" data-bs-toggle="tab" data-bs-target="#qa"
                            type="button" role="tab" aria-controls="qa" aria-selected="false">Q&A</button>
@@ -154,7 +167,7 @@ const CourseDetailsArea1 = ({id, course}) => {
 
 
 
-                        {course.isPaid == true && (
+                        {course && course.isPaid == true && (
                         <li className="nav-item" role="presentation">
                         <button className="nav-link" id="announcement-tab" data-bs-toggle="tab" data-bs-target="#announcement"
                         type="button" role="tab" aria-controls="announcement" aria-selected="false">Announcement</button>
@@ -198,7 +211,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                                          {course && <h6 className="m-0 p-0">{Number.parseFloat(course.rating).toFixed(1)}</h6>} 
                                           {course && <Rating  size={20} readonly={true} iconsCount={5} initialValue={Number.parseInt(course.rating)} />}
                                         </div>
-                                          <span>{course && course.rating_count} ratings</span>
+                                          <span>{course != null && course && course.rating_count} ratings</span>
                                       </div>
 
                                       <div className="col-md-2">
@@ -269,7 +282,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                         </div>
 
                         {/* Q&A */}
-                        {course.isPaid == true && (
+                        {course && course.isPaid == true && (
                         <div className="tab-pane fade" id="qa" role="tabpanel" aria-labelledby="qa-tab">
                             <div className="course-tab-content">
                             <div className="course-overview">
@@ -371,7 +384,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                         )}
 
                          {/* Annoucements */}
-                         {course.isPaid == true && (
+                         {course && course.isPaid == true && (
                          <div className="tab-pane fade" id="announcement" role="tabpanel" aria-labelledby="announcement-tab">
                             <div className="course-tab-content">
                             <div className="course-overview">
@@ -415,16 +428,21 @@ const CourseDetailsArea1 = ({id, course}) => {
                                   <div className="rating-box">
                                       <div className="rating-number">{course && (course.rating).toFixed(1)}</div>
                                       {course && <Rating  size={20} readonly={true} iconsCount={5} initialValue={Number.parseInt(course.rating)} />}
-                                      <span>({course && Number.parseInt(course.rating_count)} {Number.parseInt(course.rating_count) == 1 ? "Review" : "Reviews"})</span>
+                                      <span>({course != null && course && Number.parseInt(course.rating_count)} {course !=null && Number.parseInt(course.rating_count) == 1 ? "Review" : "Reviews"})</span>
                                   </div>
                               </div>
                               <div className="col-md-9">
                                   <div className="review-wrapper ">
-                                      <SingleProgressbar value={course.ratingDetails.fiveRatingCount} rating_value={'5'} />
+                                    {course != null && (
+                                      <>
+                                       <SingleProgressbar value={course.ratingDetails.fiveRatingCount} rating_value={'5'} />
                                       <SingleProgressbar value={course.ratingDetails.fourRatingCount} rating_value={'4'} />
                                       <SingleProgressbar value={course.ratingDetails.threeRatingCount} rating_value={'3'} />
                                       <SingleProgressbar value={course.ratingDetails.twoRatingCount} rating_value={'2'} />
-                                      <SingleProgressbar value={course.ratingDetails.oneRatingCount} rating_value={'1'} />
+                                      <SingleProgressbar value={course.ratingDetails.oneRatingCount} rating_value={'1'} /> 
+                                      </>
+                                    )}
+                                     
                                   </div>
                               </div>
                           </div>
@@ -475,7 +493,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                       <div className="accordion">
 
                         {course !=null && course.course_content.map((content,index) => (
-                           <Accordian setarticle={setarticle} setshowVideoPlayer={setshowVideoPlayer} itemCode={itemCode} setmain_Video_player_url={setmain_Video_player_url} id={index + 1} content={content} key={index} />
+                           <Accordian setshowquiz={setshowquiz} setarticle={setarticle} setshowVideoPlayer={setshowVideoPlayer} itemCode={itemCode} setmain_Video_player_url={setmain_Video_player_url} id={index + 1} content={content} key={index} />
                         ))}
 
                     </div>

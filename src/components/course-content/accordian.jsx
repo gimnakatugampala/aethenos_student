@@ -6,7 +6,7 @@ import { CheckBox } from '@mui/icons-material';
 import Form from 'react-bootstrap/Form';
 
 
-const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle}) => {
+const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle, setshowquiz}) => {
 
     useEffect(() => {
         content.section_curriculum_item.map((list,index) => (
@@ -26,154 +26,187 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                     Section {id} : {content.section_name}
                 </button>
 
-              
-              
+    
                
             </p>
             <div id={`question-${id}`} className={`accordion-collapse collapse ${show?'show':''}`} data-bs-parent="#faq-accordion">
                 <div className="accordion-body p-1">
          
-                    <ol style={{cursor:'pointer'}} className='p-0'>
-                        {content.section_curriculum_item.map((list,index) => (
+                <ol style={{cursor:'pointer'}} className='p-0'>
+                    {content.section_curriculum_item.map((list,index) => (
+                        <React.Fragment key={index}>
 
-                            list.curriculum_item_type == "Lecture" && list.article == "N/A"  ? list.get_CurriculumItem_File.map((type) => (
-                            
-                            // Video
-                            type.curriculum_item_file_type == "Video" &&
-                            <span key={index} onClick={() => {
+                            {/* Video */}
+                            {list.curriculum_item_type == "Lecture" && list.article == "N/A" && (
+                                list.get_CurriculumItem_File.map((type, idx) => (
+                                    type.curriculum_item_file_type === "Video" && (
+                                        <span key={idx} onClick={() => {
+                                            setshowVideoPlayer(true);
+                                            setmain_Video_player_url(`${IMG_HOST}${type.url}`);
+                                            var videoPlayer = document.querySelector(".video-react-video");
+                                            var videoSource = document.getElementById("videoPlayer");
+                                            videoSource.src = `${IMG_HOST}${type.url}`;
+                                            videoPlayer.load();
+                                            UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
+                                        }}>
+                                            <CardContainer className="m-1 p-0 border border-dark shadow">
+                                                <Form.Check
+                                                    className='mb-3 p-0'
+                                                    checked={list.read}
+                                                    type={"checkbox"}
+                                                    id={`default-${index}`}
+                                                    label={""}
+                                                />
+                                                <li className='d-flex'>
+                                                    <span>
+                                                        {index + 1}.<i className="fa-solid fa-circle-play mx-2"></i> {list.title}
+                                                    </span>
+                                                </li> 
+                                                <div className='d-flex justify-content-around'>
+                                                    {/* Resources */}
+                                                    {list.get_CurriculumItem_File.some(type => type.curriculum_item_file_type === "Downloadable Items" || type.curriculum_item_file_type === "Source Code") && (
+                                                        <Dropdown>
+                                                            <Dropdown.Toggle size="sm" variant="danger">
+                                                                <i className="fas fa-folder-open"></i> Resources
+                                                            </Dropdown.Toggle>
+                                                            <Dropdown.Menu>
+                                                                {list.get_CurriculumItem_File.map((item, idx) => (
+                                                                    (item.curriculum_item_file_type === "Downloadable Items" || item.curriculum_item_file_type === "Source Code") && (
+                                                                        <Dropdown.Item download={true} key={idx} href={`${IMG_HOST}${item.url}`}>
+                                                                            {item.title}
+                                                                        </Dropdown.Item>
+                                                                    )
+                                                                ))}
+                                                            </Dropdown.Menu>
+                                                        </Dropdown>
+                                                    )}
+                                                    {/* Links */}
+                                                    <Dropdown>
+                                                        <Dropdown.Toggle  size="sm" variant="danger">
+                                                            <i className="fas fa-link"></i> Links
+                                                        </Dropdown.Toggle>
+                                                        <Dropdown.Menu>
+                                                            {list.get_CurriculumItem_File.map((item, idx) => (
+                                                                item.curriculum_item_file_type === "External Resourses" && (
+                                                                    <Dropdown.Item target='_blank' key={idx} href={`${item.url}`}>
+                                                                        {item.title}
+                                                                    </Dropdown.Item> 
+                                                                )
+                                                            ))}
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
+                                                </div>
+                                            </CardContainer>
+                                        </span>
+                                    )
+                                ))
+                            )}
 
-                                setshowVideoPlayer(true)
 
-                                setmain_Video_player_url(`${IMG_HOST}${type.url}`)
-                                
-                                //  -------------- LOAD VIDEO ----------------
-                                var videoPlayer = document.querySelector(".video-react-video");
-                                var videoSource = document.getElementById("videoPlayer");
-                              
-                                videoSource.src = `${IMG_HOST}${type.url}`;
-                                videoPlayer.load();
-
-                                //  -------------- LOAD VIDEO ----------------
-
-
-                                //  --------------- UPDATE COURSE PROGRESS ------------ 
-                                // UpdateCourseProgress(content.section_name,itemCode)
-                                UpdateCourseCurriculumProgress(itemCode,list.curriculumItemId)
-                                console.log(list)
-                                console.log(content.section_name)
-                                console.log(itemCode)
-                                //  --------------- UPDATE COURSE PROGRESS ------------ 
-                            }}>
-                            <CardContainer  className="m-1 p-0 border border-dark shadow" >
-                            <Form.Check
-                            className='mb-3 p-0'
-                            checked={list.read}
-                    
-                                type={"checkbox"}
-                                id={`default-${id}`}
-                                label={""}
-                                />
-                            <li  className='d-flex'>
-                                <span>
-                                {index + 1}.<i className="fa-solid fa-circle-play mx-2"></i> {list.title}
-                                </span>
-                            </li> 
-
-                            
-                            <div className='d-flex justify-content-around'>
-                            
-                        {/* Resources */}
-                        {list.get_CurriculumItem_File.some(type => type.curriculum_item_file_type === "Downloadable Items" || type.curriculum_item_file_type === "Source Code") && (
-                        <Dropdown>
-                            <Dropdown.Toggle size="sm" variant="danger">
-                            <i className="fas fa-folder-open"></i> Resources
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu>
-                            {list.get_CurriculumItem_File.map((type, index) => (
-                                (type.curriculum_item_file_type === "Downloadable Items" || type.curriculum_item_file_type === "Source Code") && (
-                                <Dropdown.Item download={true} key={index} href={`${IMG_HOST}${type.url}`}>
-                                    {type.title}
-                                </Dropdown.Item>
-                                )
-                            ))}
-                            </Dropdown.Menu>
-                        </Dropdown>
-                        )}
-
-
-                            {/* Links */}
-                            <Dropdown>
-                            <Dropdown.Toggle  size="sm" variant="danger">
-                                <i className="fas fa-link"></i>   Links
-                                </Dropdown.Toggle>
-                            
-                            <Dropdown.Menu>
-                            {list.get_CurriculumItem_File.map((type,index) => (
-                                type.curriculum_item_file_type == "External Resourses" &&
-                                <Dropdown.Item target='_blank' key={index} href={`${type.url}`}>{type.title}</Dropdown.Item> 
-                                ))}
-                            </Dropdown.Menu>
-                            </Dropdown>
-
-                            </div>
-
-                            </CardContainer>
-                            </span>
-                            )) : (
-                                // Article
+                            {/* Article  */}
+                            {list.curriculum_item_type == "Lecture" && list.article != "N/A" && (
                             <span onClick={() => { 
-                                setshowVideoPlayer(false) 
-                                setarticle(list.article) 
-                                }} key={index}>
-                                <CardContainer  className="m-1 p-0 border border-dark shadow" >
-                                <li  className='d-flex'>
-                                    <span>
-                                    {index + 1}.<i className="fas fa-newspaper mx-2"></i> {list.title}
-                                    </span>
-                                </li> 
-    
-                                
-                                <div className='d-flex justify-content-around'>
-                                <Dropdown>
-                                <Dropdown.Toggle size="sm" variant="danger">
-                                <i className="fas fa-folder-open"></i>   Resources
-                                </Dropdown.Toggle>
-
-                                <Dropdown.Menu>
-                                {list.get_CurriculumItem_File.map((type,index) => (
-                                    type.curriculum_item_file_type == "Downloadable Items" ?
-                                    <Dropdown.Item download={true} key={index} href={`${IMG_HOST}${type.url}`}>{type.title}</Dropdown.Item> :
-                                    type.curriculum_item_file_type == "Source Code" && <Dropdown.Item download={true} key={index} href={`${IMG_HOST}${type.url}`}>{type.title}</Dropdown.Item>
-                                ))}
-                                </Dropdown.Menu>
-
-                            </Dropdown>
-
-                            {/* Links */}
-                            <Dropdown>
-                            <Dropdown.Toggle  size="sm" variant="danger">
-                                <i className="fas fa-link"></i>   Links
-                                </Dropdown.Toggle>
-                            
-                            <Dropdown.Menu>
-                            {list.get_CurriculumItem_File.map((type,index) => (
-                                type.curriculum_item_file_type == "External Resourses" &&
-                                <Dropdown.Item target='_blank' key={index} href={`${type.url}`}>{type.title}</Dropdown.Item> 
-                                ))}
-                            </Dropdown.Menu>
-                            </Dropdown>
-    
-                                </div>
-    
-    
-    
-    
+                                setshowVideoPlayer(false); 
+                                setarticle(list.article);
+                            }} key={index}>
+                                <CardContainer className="m-1 p-0 border border-dark shadow">
+                                    <li className='d-flex'>
+                                        <span>
+                                            {index + 1}.<i className="fas fa-newspaper mx-2"></i> {list.title}
+                                        </span>
+                                    </li> 
+                                    <div className='d-flex justify-content-around'>
+                                        {/* Resources */}
+                                        <Dropdown>
+                                            <Dropdown.Toggle size="sm" variant="danger">
+                                                <i className="fas fa-folder-open"></i> Resources
+                                            </Dropdown.Toggle>
+                                            <Dropdown.Menu>
+                                                {list.get_CurriculumItem_File.map((item, idx) => (
+                                                    item.curriculum_item_file_type === "Downloadable Items" && (
+                                                        <Dropdown.Item download={true} key={idx} href={`${IMG_HOST}${item.url}`}>
+                                                            {item.title}
+                                                        </Dropdown.Item>
+                                                    )
+                                                ))}
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                        {/* Links */}
+                                        <Dropdown>
+                                            <Dropdown.Toggle  size="sm" variant="danger">
+                                                <i className="fas fa-link"></i> Links
+                                            </Dropdown.Toggle>
+                                            <Dropdown.Menu>
+                                                {list.get_CurriculumItem_File.map((item, idx) => (
+                                                    item.curriculum_item_file_type === "External Resourses" && (
+                                                        <Dropdown.Item target='_blank' key={idx} href={`${item.url}`}>
+                                                            {item.title}
+                                                        </Dropdown.Item> 
+                                                    )
+                                                ))}
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                    </div>
                                 </CardContainer>
                             </span>
-                            )
+                            )}
 
-                        ))}
-                    </ol>
+                            {/* Quiz */}
+                            {list.curriculum_item_type == "Quiz"  && (
+                                    <span onClick={() => { 
+                                        setshowVideoPlayer(false); 
+                                        setarticle("");
+                                        setshowquiz(true)
+                                    }} key={index}>
+                                        <CardContainer className="m-1 p-0 border border-dark shadow">
+                                            <li className='d-flex'>
+                                                <span>
+                                                    {index + 1}.<i className="fas fa-question mx-2"></i> {list.title}
+                                                </span>
+                                            </li> 
+                                            <div className='d-flex justify-content-around'>
+                                                {/* Resources */}
+                                                <Dropdown>
+                                                    <Dropdown.Toggle size="sm" variant="danger">
+                                                        <i className="fas fa-folder-open"></i> Resources
+                                                    </Dropdown.Toggle>
+                                                    <Dropdown.Menu>
+                                                        {list.get_CurriculumItem_File.map((item, idx) => (
+                                                            item.curriculum_item_file_type === "Downloadable Items" && (
+                                                                <Dropdown.Item download={true} key={idx} href={`${IMG_HOST}${item.url}`}>
+                                                                    {item.title}
+                                                                </Dropdown.Item>
+                                                            )
+                                                        ))}
+                                                    </Dropdown.Menu>
+                                                </Dropdown>
+                                                {/* Links */}
+                                                <Dropdown>
+                                                    <Dropdown.Toggle  size="sm" variant="danger">
+                                                        <i className="fas fa-link"></i> Links
+                                                    </Dropdown.Toggle>
+                                                    <Dropdown.Menu>
+                                                        {list.get_CurriculumItem_File.map((item, idx) => (
+                                                            item.curriculum_item_file_type === "External Resourses" && (
+                                                                <Dropdown.Item target='_blank' key={idx} href={`${item.url}`}>
+                                                                    {item.title}
+                                                                </Dropdown.Item> 
+                                                            )
+                                                        ))}
+                                                    </Dropdown.Menu>
+                                                </Dropdown>
+                                            </div>
+                                        </CardContainer>
+                                    </span>
+
+                            )}
+
+
+                            
+                        </React.Fragment>
+                    ))}
+                </ol>
+
                 </div>
             </div>
         </div>

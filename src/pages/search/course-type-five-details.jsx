@@ -66,21 +66,21 @@ const CourseTypeFive = ({ data, classes }) => {
     );
   };
 
-  const generateStars = (rating) => {
-    const starArray = [];
-    for (let i = 1; i <= 5; i++) {
-      starArray.push(
-        <span
-          key={i}
-          style={{ color: "#f8b81f" }}
-          className={`mx-1 icon-star ${
-            i <= rating ? " icon-star-full" : " icon-star-empty"
-          }`}
-        ></span>
-      );
-    }
-    return starArray;
-  };
+  // const generateStars = (rating) => {
+  //   const starArray = [];
+  //   for (let i = 1; i <= 5; i++) {
+  //     starArray.push(
+  //       <span
+  //         key={i}
+  //         style={{ color: "#f8b81f" }}
+  //         className={`mx-1 icon-star ${
+  //           i <= rating ? " icon-star-full" : " icon-star-empty"
+  //         }`}
+  //       ></span>
+  //     );
+  //   }
+  //   return starArray;
+  // };
 
   const handleEnroll = (data) =>{
 
@@ -180,15 +180,18 @@ const CourseTypeFive = ({ data, classes }) => {
 
           <div className="course-rating">
           <div className="rating">
-              <StarsRating
-                  edit={false}
-                  count={5}
-                  size={24}
-                  value={data.rating}
-                  color1={'gray'}
-                  color2={'#F39C12'} />
+            {data != null && (
+                <StarsRating
+                edit={false}
+                count={5}
+                size={24}
+                value={data.rating}
+                color1={'gray'}
+                color2={'#F39C12'} />
+            )}
+            
           </div>
-          <span className="rating-count ml-4"><b>{Number.parseFloat(data.rating).toFixed(1)}</b></span>
+          <span className="rating-count ml-4"><b>{data != null && Number.parseFloat(data.rating).toFixed(1)}</b></span>
         </div>
           <ul className="course-meta d-flex">
             <li>{data != undefined && data.language} </li>
@@ -197,7 +200,7 @@ const CourseTypeFive = ({ data, classes }) => {
             <li>{data != undefined && data.category}</li>
           </ul>
 
-          {data.isPaid ? (
+          {data !=null && data.isPaid ? (
 
           <a
             onClick={() => handleAddToCart(data)}
