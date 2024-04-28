@@ -6,7 +6,7 @@ import { CheckBox } from '@mui/icons-material';
 import Form from 'react-bootstrap/Form';
 
 
-const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle, setshowquiz}) => {
+const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle, setshowquiz, setselectedQuiz, setshowAssignment}) => {
 
     useEffect(() => {
         content.section_curriculum_item.map((list,index) => (
@@ -108,6 +108,7 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                             <span onClick={() => { 
                                 setshowVideoPlayer(false); 
                                 setarticle(list.article);
+                                UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
                             }} key={index}>
                                 <CardContainer className="m-1 p-0 border border-dark shadow">
                                     <li className='d-flex'>
@@ -157,48 +158,54 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                         setshowVideoPlayer(false); 
                                         setarticle("");
                                         setshowquiz(true)
+                                        UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
+                                        setselectedQuiz(list)
+                                        console.log(list)
                                     }} key={index}>
                                         <CardContainer className="m-1 p-0 border border-dark shadow">
+                                        <Form.Check
+                                                    className='mb-3 p-0'
+                                                    checked={list.read}
+                                                    type={"checkbox"}
+                                                    id={`default-${index}`}
+                                                    label={""}
+                                                />
                                             <li className='d-flex'>
                                                 <span>
                                                     {index + 1}.<i className="fas fa-question mx-2"></i> {list.title}
                                                 </span>
                                             </li> 
-                                            <div className='d-flex justify-content-around'>
-                                                {/* Resources */}
-                                                <Dropdown>
-                                                    <Dropdown.Toggle size="sm" variant="danger">
-                                                        <i className="fas fa-folder-open"></i> Resources
-                                                    </Dropdown.Toggle>
-                                                    <Dropdown.Menu>
-                                                        {list.get_CurriculumItem_File.map((item, idx) => (
-                                                            item.curriculum_item_file_type === "Downloadable Items" && (
-                                                                <Dropdown.Item download={true} key={idx} href={`${IMG_HOST}${item.url}`}>
-                                                                    {item.title}
-                                                                </Dropdown.Item>
-                                                            )
-                                                        ))}
-                                                    </Dropdown.Menu>
-                                                </Dropdown>
-                                                {/* Links */}
-                                                <Dropdown>
-                                                    <Dropdown.Toggle  size="sm" variant="danger">
-                                                        <i className="fas fa-link"></i> Links
-                                                    </Dropdown.Toggle>
-                                                    <Dropdown.Menu>
-                                                        {list.get_CurriculumItem_File.map((item, idx) => (
-                                                            item.curriculum_item_file_type === "External Resourses" && (
-                                                                <Dropdown.Item target='_blank' key={idx} href={`${item.url}`}>
-                                                                    {item.title}
-                                                                </Dropdown.Item> 
-                                                            )
-                                                        ))}
-                                                    </Dropdown.Menu>
-                                                </Dropdown>
-                                            </div>
                                         </CardContainer>
                                     </span>
 
+                            )}
+
+                            {/* Assignment */}
+                            {list.curriculum_item_type == "Assignment"  && (
+                                 <span onClick={() => { 
+                                    setshowVideoPlayer(false); 
+                                    setarticle("");
+                                    setshowAssignment(true)
+                                    setshowquiz(false)
+                                    UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
+                                    // setselectedQuiz(list)
+                                    console.log(list)
+                                }} key={index}>
+                                    <CardContainer className="m-1 p-0 border border-dark shadow">
+                                    <Form.Check
+                                                className='mb-3 p-0'
+                                                checked={list.read}
+                                                type={"checkbox"}
+                                                id={`default-${index}`}
+                                                label={""}
+                                            />
+                                        <li className='d-flex'>
+                                            <span>
+                                                {index + 1}.<i className="fas fa-clipboard-list mx-2"></i> {list.title}
+                                            </span>
+                                        </li> 
+                                    </CardContainer>
+                                </span>
                             )}
 
 

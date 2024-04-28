@@ -4,14 +4,24 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { useState } from 'react';
+import { Alert } from '@mui/material';
 
-const QuizContainer = ({ Startquiz , setStartquiz }) => {
+const QuizContainer = ({ Startquiz , setStartquiz , selectedQuiz}) => {
+
+  const [selectAnswer, setselectAnswer] = useState(0)
+  const [answerAlertDisplay, setanswerAlertDisplay] = useState(null)
+
+  
+
   return (
+    <>
+    {selectedQuiz !=null && (
     <div>
       {Startquiz ==false && (
         <div>
-          <h5 className='m-0 p-0'>Quiz One</h5>
-          <p className='m-0 p-0'>Quiz 2</p>
+          <h5 className='m-0 p-0'>{selectedQuiz.title}</h5>
+          <p className='m-0 p-0'>{selectedQuiz.description}</p>
 
           <button onClick={() => setStartquiz(true)} className='edu-btn btn-small my-3'>Start Quiz</button>
         </div>
@@ -21,27 +31,64 @@ const QuizContainer = ({ Startquiz , setStartquiz }) => {
       <>
         <div>
         <p>Question 1 :</p>
-        <p className='p-0 m-0'><b>Question One</b></p>
+
+        {answerAlertDisplay != null && (
+          <>
+          {answerAlertDisplay ? (
+          <Alert className='my-2' variant="filled" severity="success">
+                  Hurry! You Choose the Right Answer
+            </Alert>
+          ) : (
+            <Alert className='my-2' variant="filled" severity="error">
+                Sorry ! You have Chosen the Wrong Answer
+            </Alert>
+          )}
+
+          </>
+        )}
+
+
+
+        <p className='p-0 m-0'><b>{selectedQuiz.getQuizs[0] == null ? "" : selectedQuiz.getQuizs[0].question}</b></p>
           <FormControl>
 
+        
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="radio-buttons-group"
+            value={selectAnswer}
+            onChange={(e) => setselectAnswer(e.target.value)}
           >
-            <FormControlLabel value="one" control={<Radio />} label="Answer One" />
-            <FormControlLabel value="two" control={<Radio />} label="Answer Two" />
-            <FormControlLabel value="three" control={<Radio />} label="Answer Three" />
-            <FormControlLabel value="four" control={<Radio />} label="Answer Four" />
-            <FormControlLabel value="five" control={<Radio />} label="Answer Five" />
+            {selectedQuiz.getQuizs[0] != null && selectedQuiz.getQuizs[0].getAnswers.map((answer,index) =>(
+               <FormControlLabel key={index} value={answer.id} control={<Radio />} label={answer.name} />
+            ))}
           </RadioGroup>
           </FormControl>
       </div>
-          <button className='edu-btn btn-small my-2'>Check Quiz</button>
+          <button onClick={() => {
+
+        const selectedAnswerCorrect = selectedQuiz.getQuizs[0].getAnswers.find(answer => answer.id === selectAnswer);
+
+        if (selectedAnswerCorrect.correctAnswer) {
+          // console.log("Correct Answer!");
+          setanswerAlertDisplay(true)
+        } else {
+          // console.log("Incorrect Answer!");
+          setanswerAlertDisplay(false)
+        }
+
+        setTimeout(() => {
+          setanswerAlertDisplay(null)
+        }, 3000);
+
+
+          }} className='edu-btn btn-small my-2'>Check Quiz</button>
       </>
       )}
 
     </div>
-
+    )}
+    </>
   )
 }
 

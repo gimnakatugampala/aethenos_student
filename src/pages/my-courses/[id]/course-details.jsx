@@ -57,6 +57,11 @@ const CourseDetailsArea1 = ({id, course}) => {
 
   // ========= QUIZ ====================
   const [Startquiz, setStartquiz] = useState(false)
+  const [selectedQuiz, setselectedQuiz] = useState(null)
+
+
+  // ============= ASSIGNMENT =======================
+  const [showAssignment, setshowAssignment] = useState(false)
 
   const [courseCode, setcourseCode] = useState(course && course.course_code)
   const [itemCode, setitemCode] = useState(course && course.item_code)
@@ -131,20 +136,26 @@ const CourseDetailsArea1 = ({id, course}) => {
             <div className="col-md-8">
         
             {showVideoPlayer ? (
-          <Player autoPlay={true}>
-              <source id="videoPlayer" src={main_Video_player_url} />
-          </Player>
-        ) : article == "" ? (
-          // Show Quiz
-          showquiz && (
-            <QuizContainer Startquiz={Startquiz} setStartquiz={setStartquiz} />
-          )
+                <Player autoPlay={true}>
+                    <source id="videoPlayer" src={main_Video_player_url} />
+                </Player>
+              ) : article == "" ? (
+                <>
+                {/* // Show Quiz */}
+                {showquiz && (
+                  <QuizContainer Startquiz={Startquiz} setStartquiz={setStartquiz} selectedQuiz={selectedQuiz} />
+                )}
 
-        ) : (
-            <div style={{ maxHeight: '500px', overflowY: 'scroll' }}>
-                {parse(article)}
-            </div>
-        )}
+                {/* // Show Assignment */}
+                {showAssignment && (
+                  <p>Assignment</p>
+                )}
+                </>
+              ) : (
+                  <div style={{ maxHeight: '500px', overflowY: 'scroll' }}>
+                      {parse(article)}
+                  </div>
+              )}
 
 
             {/* New Tab */}
@@ -493,7 +504,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                       <div className="accordion">
 
                         {course !=null && course.course_content.map((content,index) => (
-                           <Accordian setshowquiz={setshowquiz} setarticle={setarticle} setshowVideoPlayer={setshowVideoPlayer} itemCode={itemCode} setmain_Video_player_url={setmain_Video_player_url} id={index + 1} content={content} key={index} />
+                           <Accordian setshowquiz={setshowquiz} setarticle={setarticle} setshowVideoPlayer={setshowVideoPlayer} itemCode={itemCode} setmain_Video_player_url={setmain_Video_player_url} id={index + 1} content={content} setselectedQuiz={setselectedQuiz} setshowAssignment={setshowAssignment} key={index} />
                         ))}
 
                     </div>
