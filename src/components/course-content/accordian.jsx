@@ -6,7 +6,7 @@ import { CheckBox } from '@mui/icons-material';
 import Form from 'react-bootstrap/Form';
 
 
-const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle, setshowquiz, setselectedQuiz, setshowAssignment}) => {
+const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle, setshowquiz, setselectedQuiz, setshowAssignment , setselectedAssignment}) => {
 
     useEffect(() => {
         content.section_curriculum_item.map((list,index) => (
@@ -188,7 +188,7 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                     setshowAssignment(true)
                                     setshowquiz(false)
                                     UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
-                                    // setselectedQuiz(list)
+                                    setselectedAssignment(list)
                                     console.log(list)
                                 }} key={index}>
                                     <CardContainer className="m-1 p-0 border border-dark shadow">

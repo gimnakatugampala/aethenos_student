@@ -34,6 +34,7 @@ import ErrorAlert from "../../../functions/Alert/ErrorAlert";
 import Commentbox from "../../../components/comment-box/Commentbox";
 import QuizContainer from "../components/quiz/QuizContainer";
 import parse from 'html-react-parser';
+import AssignmentContainer from "../components/assignment/AssignmentContainer";
 
 // const course = course_data[0];
 
@@ -62,6 +63,7 @@ const CourseDetailsArea1 = ({id, course}) => {
 
   // ============= ASSIGNMENT =======================
   const [showAssignment, setshowAssignment] = useState(false)
+  const [selectedAssignment, setselectedAssignment] = useState(null)
 
   const [courseCode, setcourseCode] = useState(course && course.course_code)
   const [itemCode, setitemCode] = useState(course && course.item_code)
@@ -148,7 +150,7 @@ const CourseDetailsArea1 = ({id, course}) => {
 
                 {/* // Show Assignment */}
                 {showAssignment && (
-                  <p>Assignment</p>
+                  <AssignmentContainer selectedAssignment={selectedAssignment} />
                 )}
                 </>
               ) : (
@@ -504,7 +506,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                       <div className="accordion">
 
                         {course !=null && course.course_content.map((content,index) => (
-                           <Accordian setshowquiz={setshowquiz} setarticle={setarticle} setshowVideoPlayer={setshowVideoPlayer} itemCode={itemCode} setmain_Video_player_url={setmain_Video_player_url} id={index + 1} content={content} setselectedQuiz={setselectedQuiz} setshowAssignment={setshowAssignment} key={index} />
+                           <Accordian setshowquiz={setshowquiz} setarticle={setarticle} setshowVideoPlayer={setshowVideoPlayer} itemCode={itemCode} setmain_Video_player_url={setmain_Video_player_url} id={index + 1} content={content} setselectedQuiz={setselectedQuiz} setshowAssignment={setshowAssignment} setselectedAssignment={setselectedAssignment} key={index} />
                         ))}
 
                     </div>
