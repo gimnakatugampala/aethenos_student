@@ -41,13 +41,21 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                 list.get_CurriculumItem_File.map((type, idx) => (
                                     type.curriculum_item_file_type === "Video" && (
                                         <span key={idx} onClick={() => {
-                                            setshowVideoPlayer(true);
+                                            setarticle("");
+                                            setshowVideoPlayer(true); 
+                                            setshowAssignment(false)
+                                            setshowquiz(false)
+                                            setshowPracticeTest(false)
+                                            setshowCodingExercise(false)
+                                            
                                             setmain_Video_player_url(`${IMG_HOST}${type.url}`);
                                             var videoPlayer = document.querySelector(".video-react-video");
                                             var videoSource = document.getElementById("videoPlayer");
                                             videoSource.src = `${IMG_HOST}${type.url}`;
                                             videoPlayer.load();
                                             UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
+
+                                           
                                         }}>
                                             <CardContainer className="m-1 p-0 border border-dark shadow">
                                                 <Form.Check
@@ -106,9 +114,17 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                             {/* Article  */}
                             {list.curriculum_item_type == "Lecture" && list.article != "N/A" && (
                             <span onClick={() => { 
-                                setshowVideoPlayer(false); 
                                 setarticle(list.article);
+                                setshowVideoPlayer(false); 
+                                setshowAssignment(false)
+                                setshowquiz(false)
+                                setshowPracticeTest(false)
+                                setshowCodingExercise(false)
+
                                 UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
+
+                              
+
                             }} key={index}>
                                 <CardContainer className="m-1 p-0 border border-dark shadow">
                                     <li className='d-flex'>
@@ -155,9 +171,14 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                             {/* Quiz */}
                             {list.curriculum_item_type == "Quiz"  && (
                                     <span onClick={() => { 
-                                        setshowVideoPlayer(false); 
+
                                         setarticle("");
+                                        setshowVideoPlayer(false); 
+                                        setshowAssignment(false)
                                         setshowquiz(true)
+                                        setshowPracticeTest(false)
+                                        setshowCodingExercise(false)
+                                    
                                         UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
                                         setselectedQuiz(list)
                                         console.log(list)
@@ -183,10 +204,14 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                             {/* Assignment */}
                             {list.curriculum_item_type == "Assignment"  && (
                                  <span onClick={() => { 
-                                    setshowVideoPlayer(false); 
+
                                     setarticle("");
+                                    setshowVideoPlayer(false); 
                                     setshowAssignment(true)
                                     setshowquiz(false)
+                                    setshowPracticeTest(false)
+                                    setshowCodingExercise(false)
+                                  
                                     UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
                                     setselectedAssignment(list)
                                     console.log(list)
@@ -211,14 +236,20 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                             {/* Practice Test */}
                             {list.curriculum_item_type == "Practice Test" && (
                                  <span onClick={() => { 
-                                    setshowVideoPlayer(false); 
+
                                     setarticle("");
+                                    setshowVideoPlayer(false); 
                                     setshowAssignment(false)
                                     setshowquiz(false)
                                     setshowPracticeTest(true)
+                                    setshowCodingExercise(false)
+
                                     UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
                                     setselectedPracticeTest(list)
                                     console.log(list)
+
+                                   
+
                                 }} key={index}>
                                     <CardContainer className="m-1 p-0 border border-dark shadow">
                                     <Form.Check
@@ -240,12 +271,14 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                             {/* Coding Exercise */}
                             {list.curriculum_item_type == "Coding Exercise" && (
                                 <span onClick={() => { 
-                                    setshowVideoPlayer(false); 
+
                                     setarticle("");
+                                    setshowVideoPlayer(false); 
                                     setshowAssignment(false)
                                     setshowquiz(false)
                                     setshowPracticeTest(false)
                                     setshowCodingExercise(true)
+
                                     UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
                                     setselectedCodingExercise(list)
                                     console.log(list)
