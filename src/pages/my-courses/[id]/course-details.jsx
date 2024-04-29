@@ -36,6 +36,7 @@ import QuizContainer from "../components/quiz/QuizContainer";
 import parse from 'html-react-parser';
 import AssignmentContainer from "../components/assignment/AssignmentContainer";
 import PraticeTestContainer from "../components/pratice-test/PraticeTestContainer";
+import CodingExerciseContainer from "../components/coding-exercise/CodingExerciseContainer";
 
 // const course = course_data[0];
 
@@ -70,6 +71,10 @@ const CourseDetailsArea1 = ({id, course}) => {
   // ============= PRACTICE TEST =========================
   const [showPracticeTest, setshowPracticeTest] = useState(false)
   const [selectedPracticeTest, setselectedPracticeTest] = useState(null)
+
+  // ============ CODING EXERCISE =====================
+  const [showCodingExercise, setshowCodingExercise] = useState(false)
+  const [selectedCodingExercise, setselectedCodingExercise] = useState(null)
 
   const [courseCode, setcourseCode] = useState(course && course.course_code)
   const [itemCode, setitemCode] = useState(course && course.item_code)
@@ -162,6 +167,11 @@ const CourseDetailsArea1 = ({id, course}) => {
                 {/* Show Practice test */}
                 {showPracticeTest && (
                   <PraticeTestContainer selectedPracticeTest={selectedPracticeTest} />
+                )}
+
+                {/* Show Coding Exercise */}
+                {showCodingExercise && (
+                  <CodingExerciseContainer selectedCodingExercise={selectedCodingExercise} />
                 )}
                 </>
               ) : (
@@ -517,7 +527,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                       <div className="accordion">
 
                         {course !=null && course.course_content.map((content,index) => (
-                           <Accordian setshowquiz={setshowquiz} setarticle={setarticle} setshowVideoPlayer={setshowVideoPlayer} itemCode={itemCode} setmain_Video_player_url={setmain_Video_player_url} id={index + 1} content={content} setselectedQuiz={setselectedQuiz} setshowAssignment={setshowAssignment} setselectedAssignment={setselectedAssignment} setshowPracticeTest={setshowPracticeTest} setselectedPracticeTest={setselectedPracticeTest} key={index} />
+                           <Accordian setshowquiz={setshowquiz} setarticle={setarticle} setshowVideoPlayer={setshowVideoPlayer} itemCode={itemCode} setmain_Video_player_url={setmain_Video_player_url} id={index + 1} content={content} setselectedQuiz={setselectedQuiz} setshowAssignment={setshowAssignment} setselectedAssignment={setselectedAssignment} setshowPracticeTest={setshowPracticeTest} setselectedPracticeTest={setselectedPracticeTest} setshowCodingExercise={setshowCodingExercise} setselectedCodingExercise={setselectedCodingExercise} key={index} />
                         ))}
 
                     </div>

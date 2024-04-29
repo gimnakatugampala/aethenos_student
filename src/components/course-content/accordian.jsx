@@ -6,7 +6,7 @@ import { CheckBox } from '@mui/icons-material';
 import Form from 'react-bootstrap/Form';
 
 
-const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle, setshowquiz, setselectedQuiz, setshowAssignment , setselectedAssignment , setshowPracticeTest , setselectedPracticeTest}) => {
+const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle, setshowquiz, setselectedQuiz, setshowAssignment , setselectedAssignment , setshowPracticeTest , setselectedPracticeTest, setshowCodingExercise , setselectedCodingExercise}) => {
 
     useEffect(() => {
         content.section_curriculum_item.map((list,index) => (
@@ -230,13 +230,42 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                             />
                                         <li className='d-flex'>
                                             <span>
-                                                {index + 1}.<i className="fas fa-clipboard-list mx-2"></i> {list.title}
+                                                {index + 1}.<i className="fas fa-tasks mx-2"></i> {list.title}
                                             </span>
                                         </li> 
                                     </CardContainer>
                                 </span>
                             )}
 
+                            {/* Coding Exercise */}
+                            {list.curriculum_item_type == "Coding Exercise" && (
+                                <span onClick={() => { 
+                                    setshowVideoPlayer(false); 
+                                    setarticle("");
+                                    setshowAssignment(false)
+                                    setshowquiz(false)
+                                    setshowPracticeTest(false)
+                                    setshowCodingExercise(true)
+                                    UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
+                                    setselectedCodingExercise(list)
+                                    console.log(list)
+                                }} key={index}>
+                                    <CardContainer className="m-1 p-0 border border-dark shadow">
+                                    <Form.Check
+                                                className='mb-3 p-0'
+                                                checked={list.read}
+                                                type={"checkbox"}
+                                                id={`default-${index}`}
+                                                label={""}
+                                            />
+                                        <li className='d-flex'>
+                                            <span>
+                                                {index + 1}.<i className="fas fa-clipboard-list mx-2"></i> {list.title}
+                                            </span>
+                                        </li> 
+                                    </CardContainer>
+                                </span>
+                            )}
 
 
                             
