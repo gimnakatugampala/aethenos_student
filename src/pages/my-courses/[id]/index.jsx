@@ -34,7 +34,7 @@ const index = () => {
         {course != null ? (
             <>
                 <HeaderMyCourse id={id} course={course} />
-                <CourseDetails id={id} course={course} />
+                <CourseDetails setcourse={setcourse} id={id} course={course} />
             </>
         ) : (
             <LargeLoading />

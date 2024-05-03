@@ -61,7 +61,7 @@ const OrderSummery = ({showStripe,showPaypal}) => {
 const newPricing = cartCourses != null && cartCourses.map((course) => ({
     img: course.img,
     title:course.title,
-    qty:course.quantity,
+    qty:1,
     desc:course.other_data.course_main_desc,
     currency:GetCurrencyByCountry(course.other_data).toLowerCase(),
     price:(CalculateDiscountedPrice(course.other_data)) == null ? 0 : (course.quantity * CalculateDiscountedPrice(course.other_data) - 
@@ -80,7 +80,7 @@ const newPricing = cartCourses != null && cartCourses.map((course) => ({
 const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
     name:course.title,
     description:"Test Course Description",
-    quantity:course.quantity,
+    quantity:1,
     unit_amount:{
         currency_code:GetCurrencyByCountry(course.other_data),
         value:(CalculateDiscountedPrice(course.other_data)) == null ? 0 : (CalculateDiscountedPrice(course.other_data))

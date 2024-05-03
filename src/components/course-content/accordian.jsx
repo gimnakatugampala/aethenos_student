@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
-import CardContainer from '../../components/course-content/CardContainer';
+import CardContainer from '../../pages/my-courses/[id]/CardContainer';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { IMG_HOST, UpdateCourseCurriculumProgress, UpdateCourseProgress } from '../../api';
+import { GetMyCoursesDetails, IMG_HOST, UpdateCourseCurriculumProgress, UpdateCourseProgress } from '../../api';
 import { CheckBox } from '@mui/icons-material';
 import Form from 'react-bootstrap/Form';
+import CardMainContainer from '../../pages/my-courses/[id]/CardMainContainer';
 
 
-const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle, setshowquiz, setselectedQuiz, setshowAssignment , setselectedAssignment , setshowPracticeTest , setselectedPracticeTest, setshowCodingExercise , setselectedCodingExercise}) => {
+const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle, setshowquiz, setselectedQuiz, setshowAssignment , setselectedAssignment , setshowPracticeTest , setselectedPracticeTest, setshowCodingExercise , setselectedCodingExercise , setcourse , courseItemCode}) => {
 
     useEffect(() => {
         content.section_curriculum_item.map((list,index) => (
@@ -54,22 +55,24 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                             videoSource.src = `${IMG_HOST}${type.url}`;
                                             videoPlayer.load();
                                             UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
-
-                                           
+                                            
+                                            GetMyCoursesDetails(courseItemCode, setcourse)
                                         }}>
-                                            <CardContainer className="m-1 p-0 border border-dark shadow">
+                                            <CardMainContainer>
+                                            <CardContainer className="m-1 p-0">
                                                 <Form.Check
-                                                    className='mb-3 p-0'
+                                                    className='mb-4 p-0'
                                                     checked={list.read}
                                                     type={"checkbox"}
                                                     id={`default-${index}`}
                                                     label={""}
                                                 />
                                                 <li className='d-flex'>
-                                                    <span>
+                                                    <p>
                                                         {index + 1}.<i className="fa-solid fa-circle-play mx-2"></i> {list.title}
-                                                    </span>
+                                                    </p>
                                                 </li> 
+                                                </CardContainer>
                                                 <div className='d-flex justify-content-around'>
                                                     {/* Resources */}
                                                     {list.get_CurriculumItem_File.some(type => type.curriculum_item_file_type === "Downloadable Items" || type.curriculum_item_file_type === "Source Code") && (
@@ -104,7 +107,7 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                                         </Dropdown.Menu>
                                                     </Dropdown>
                                                 </div>
-                                            </CardContainer>
+                                                </CardMainContainer>
                                         </span>
                                     )
                                 ))
@@ -123,48 +126,63 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
 
                                 UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
 
+                                GetMyCoursesDetails(courseItemCode, setcourse)
+
                               
 
                             }} key={index}>
-                                <CardContainer className="m-1 p-0 border border-dark shadow">
+                                <CardMainContainer>
+                                <CardContainer className="m-1 p-0 ">
+                                <Form.Check
+                                    className='mb-4 p-0'
+                                    checked={list.read}
+                                    type={"checkbox"}
+                                    id={`default-${index}`}
+                                    label={""}
+                                />
+
                                     <li className='d-flex'>
-                                        <span>
+                                        <p> 
                                             {index + 1}.<i className="fas fa-newspaper mx-2"></i> {list.title}
-                                        </span>
-                                    </li> 
-                                    <div className='d-flex justify-content-around'>
-                                        {/* Resources */}
-                                        <Dropdown>
-                                            <Dropdown.Toggle size="sm" variant="danger">
-                                                <i className="fas fa-folder-open"></i> Resources
-                                            </Dropdown.Toggle>
-                                            <Dropdown.Menu>
-                                                {list.get_CurriculumItem_File.map((item, idx) => (
-                                                    item.curriculum_item_file_type === "Downloadable Items" && (
-                                                        <Dropdown.Item download={true} key={idx} href={`${IMG_HOST}${item.url}`}>
-                                                            {item.title}
-                                                        </Dropdown.Item>
-                                                    )
-                                                ))}
-                                            </Dropdown.Menu>
-                                        </Dropdown>
-                                        {/* Links */}
-                                        <Dropdown>
-                                            <Dropdown.Toggle  size="sm" variant="danger">
-                                                <i className="fas fa-link"></i> Links
-                                            </Dropdown.Toggle>
-                                            <Dropdown.Menu>
-                                                {list.get_CurriculumItem_File.map((item, idx) => (
-                                                    item.curriculum_item_file_type === "External Resourses" && (
-                                                        <Dropdown.Item target='_blank' key={idx} href={`${item.url}`}>
-                                                            {item.title}
-                                                        </Dropdown.Item> 
-                                                    )
-                                                ))}
-                                            </Dropdown.Menu>
-                                        </Dropdown>
-                                    </div>
+                                        </p>
+                                   </li> 
                                 </CardContainer>
+            
+                                <div className='d-flex justify-content-around'>
+                                    {/* Resources */}
+                                    <Dropdown>
+                                        <Dropdown.Toggle size="sm" variant="danger">
+                                            <i className="fas fa-folder-open"></i> Resources
+                                        </Dropdown.Toggle>
+                                        <Dropdown.Menu>
+                                            {list.get_CurriculumItem_File.map((item, idx) => (
+                                                item.curriculum_item_file_type === "Downloadable Items" && (
+                                                    <Dropdown.Item download={true} key={idx} href={`${IMG_HOST}${item.url}`}>
+                                                        {item.title}
+                                                    </Dropdown.Item>
+                                                )
+                                            ))}
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                    {/* Links */}
+                                    <Dropdown>
+                                        <Dropdown.Toggle  size="sm" variant="danger">
+                                            <i className="fas fa-link"></i> Links
+                                        </Dropdown.Toggle>
+                                        <Dropdown.Menu>
+                                            {list.get_CurriculumItem_File.map((item, idx) => (
+                                                item.curriculum_item_file_type === "External Resourses" && (
+                                                    <Dropdown.Item target='_blank' key={idx} href={`${item.url}`}>
+                                                        {item.title}
+                                                    </Dropdown.Item> 
+                                                )
+                                            ))}
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                </div>
+                        
+                                    
+                                </CardMainContainer>
                             </span>
                             )}
 
@@ -181,22 +199,27 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                     
                                         UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
                                         setselectedQuiz(list)
+
+                                        GetMyCoursesDetails(courseItemCode, setcourse)
+
                                         console.log(list)
                                     }} key={index}>
-                                        <CardContainer className="m-1 p-0 border border-dark shadow">
+                                        <CardMainContainer>
+                                        <CardContainer className="m-1 p-0 ">
                                         <Form.Check
-                                                    className='mb-3 p-0'
+                                                    className='mb-4 p-0'
                                                     checked={list.read}
                                                     type={"checkbox"}
                                                     id={`default-${index}`}
                                                     label={""}
                                                 />
                                             <li className='d-flex'>
-                                                <span>
+                                                <p>
                                                     {index + 1}.<i className="fas fa-question mx-2"></i> {list.title}
-                                                </span>
+                                                </p>
                                             </li> 
                                         </CardContainer>
+                                        </CardMainContainer>
                                     </span>
 
                             )}
@@ -214,22 +237,27 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                   
                                     UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
                                     setselectedAssignment(list)
+
+                                    GetMyCoursesDetails(courseItemCode, setcourse)
+
                                     console.log(list)
                                 }} key={index}>
-                                    <CardContainer className="m-1 p-0 border border-dark shadow">
+                                    <CardMainContainer>
+                                    <CardContainer className="m-1 p-0 ">
                                     <Form.Check
-                                                className='mb-3 p-0'
+                                                className='mb-4 p-0'
                                                 checked={list.read}
                                                 type={"checkbox"}
                                                 id={`default-${index}`}
                                                 label={""}
                                             />
                                         <li className='d-flex'>
-                                            <span>
+                                            <p>
                                                 {index + 1}.<i className="fas fa-clipboard-list mx-2"></i> {list.title}
-                                            </span>
+                                            </p>
                                         </li> 
                                     </CardContainer>
+                                    </CardMainContainer>
                                 </span>
                             )}
 
@@ -248,23 +276,27 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                     setselectedPracticeTest(list)
                                     console.log(list)
 
+                                    GetMyCoursesDetails(courseItemCode, setcourse)
+
                                    
 
                                 }} key={index}>
-                                    <CardContainer className="m-1 p-0 border border-dark shadow">
+                                    <CardMainContainer>
+                                    <CardContainer className="m-1 p-0 ">
                                     <Form.Check
-                                                className='mb-3 p-0'
+                                                className='mb-4 p-0'
                                                 checked={list.read}
                                                 type={"checkbox"}
                                                 id={`default-${index}`}
                                                 label={""}
                                             />
                                         <li className='d-flex'>
-                                            <span>
+                                            <p>
                                                 {index + 1}.<i className="fas fa-tasks mx-2"></i> {list.title}
-                                            </span>
+                                            </p>
                                         </li> 
                                     </CardContainer>
+                                    </CardMainContainer>
                                 </span>
                             )}
 
@@ -282,21 +314,24 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                     UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
                                     setselectedCodingExercise(list)
                                     console.log(list)
+                                    GetMyCoursesDetails(courseItemCode, setcourse)
                                 }} key={index}>
-                                    <CardContainer className="m-1 p-0 border border-dark shadow">
+                                    <CardMainContainer>
+                                    <CardContainer className="m-1 p-0 ">
                                     <Form.Check
-                                                className='mb-3 p-0'
+                                                className='mb-4 p-0'
                                                 checked={list.read}
                                                 type={"checkbox"}
                                                 id={`default-${index}`}
                                                 label={""}
                                             />
                                         <li className='d-flex'>
-                                            <span>
+                                            <p>
                                                 {index + 1}.<i className="fas fa-clipboard-list mx-2"></i> {list.title}
-                                            </span>
+                                            </p>
                                         </li> 
                                     </CardContainer>
+                                    </CardMainContainer>
                                 </span>
                             )}
 

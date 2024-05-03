@@ -45,9 +45,11 @@ const index = () => {
                 </div>
 
                 <div className='col-md-4'>
-                   <h3 >Aethenos, Inc</h3>
-                   <h6 className='m-0'>600 Harrison Street, 3rd Floor</h6>
-                   <h6 className='m-0'>San Fransisco, CA 9417809,US</h6>
+                   <h3 >Aethenos Limited,</h3>
+                   <h6 className='m-0'>4th Floor, Silverstream House,</h6>
+                   <h6 className='m-0'>45 Fitzroy Street,</h6>
+                   <h6 className='m-0'>London W1T 6EB,</h6>
+                   <h6 className='m-0'>United Kingdom</h6>
                    <h6 className='m-0 text-danger'><a href='https://aethenos.com/'>aethenos.com</a></h6>
                 </div>
 

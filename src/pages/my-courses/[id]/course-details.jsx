@@ -40,7 +40,7 @@ import CodingExerciseContainer from "../components/coding-exercise/CodingExercis
 
 // const course = course_data[0];
 
-const CourseDetailsArea1 = ({id, course}) => {
+const CourseDetailsArea1 = ({id, course , setcourse}) => {
 
   const [featured_reviews, setfeatured_reviews] = useState(null)
 
@@ -143,7 +143,7 @@ const CourseDetailsArea1 = ({id, course}) => {
   return (
 
     <section
-    className="container my-5 course-details-3"
+    className="container-fluid my-5 course-details-3"
       style={{ textAlign: "left", backgroundColor: "transparent" }}>
         <div className="row">
             <div className="col-md-8">
@@ -182,6 +182,7 @@ const CourseDetailsArea1 = ({id, course}) => {
 
 
             {/* New Tab */}
+            <div className="container mx-2">
                 <div className="row">
                 <div className="col-md-12">
                 <div className="course-details-content">
@@ -512,7 +513,7 @@ const CourseDetailsArea1 = ({id, course}) => {
                             </div>
                       </div>
                   </div>
-
+              </div>
 
 
             </div>
@@ -527,7 +528,25 @@ const CourseDetailsArea1 = ({id, course}) => {
                       <div className="accordion">
 
                         {course !=null && course.course_content.map((content,index) => (
-                           <Accordian setshowquiz={setshowquiz} setarticle={setarticle} setshowVideoPlayer={setshowVideoPlayer} itemCode={itemCode} setmain_Video_player_url={setmain_Video_player_url} id={index + 1} content={content} setselectedQuiz={setselectedQuiz} setshowAssignment={setshowAssignment} setselectedAssignment={setselectedAssignment} setshowPracticeTest={setshowPracticeTest} setselectedPracticeTest={setselectedPracticeTest} setshowCodingExercise={setshowCodingExercise} setselectedCodingExercise={setselectedCodingExercise} key={index} />
+                           <Accordian 
+                           setshowquiz={setshowquiz} 
+                           setarticle={setarticle} 
+                           setshowVideoPlayer={setshowVideoPlayer} 
+                           itemCode={itemCode} 
+                           setmain_Video_player_url={setmain_Video_player_url}
+                           id={index + 1}
+                           content={content}
+                           setselectedQuiz={setselectedQuiz} 
+                           setshowAssignment={setshowAssignment} 
+                           setselectedAssignment={setselectedAssignment}
+                          setshowPracticeTest={setshowPracticeTest}
+                          setselectedPracticeTest={setselectedPracticeTest}
+                          setshowCodingExercise={setshowCodingExercise}
+                          setselectedCodingExercise={setselectedCodingExercise}
+                          key={index} 
+                          courseItemCode={id}
+                          setcourse={setcourse}
+                          />
                         ))}
 
                     </div>
