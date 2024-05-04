@@ -61,6 +61,8 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
   // ========= QUIZ ====================
   const [Startquiz, setStartquiz] = useState(false)
   const [selectedQuiz, setselectedQuiz] = useState(null)
+  const [answerAlertDisplay, setanswerAlertDisplay] = useState(null)
+  
 
 
   // ============= ASSIGNMENT =======================
@@ -78,6 +80,9 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
 
   const [courseCode, setcourseCode] = useState(course && course.course_code)
   const [itemCode, setitemCode] = useState(course && course.item_code)
+
+  // ========== COMMON ========================
+  const [seletedCurriculumItem, setseletedCurriculumItem] = useState(null)
 
 
 
@@ -156,7 +161,9 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
                 <>
                 {/* // Show Quiz */}
                 {showquiz && (
-                  <QuizContainer Startquiz={Startquiz} setStartquiz={setStartquiz} selectedQuiz={selectedQuiz} />
+                  <div className="container border p-4" style={{ maxHeight: '500px', overflowY: 'scroll' }}>
+                    <QuizContainer answerAlertDisplay={answerAlertDisplay} setanswerAlertDisplay={setanswerAlertDisplay} Startquiz={Startquiz} setStartquiz={setStartquiz} selectedQuiz={selectedQuiz} />
+                  </div>
                 )}
 
                 {/* // Show Assignment */}
@@ -175,7 +182,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
                 )}
                 </>
               ) : (
-                  <div style={{ maxHeight: '500px', overflowY: 'scroll' }}>
+                  <div className="container" style={{ maxHeight: '500px', overflowY: 'scroll' }}>
                       {parse(article)}
                   </div>
               )}
@@ -521,9 +528,9 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
 
         {/* Course Content */}
             <div className="col-md-4">
-              <Card style={{backgroundColor:'transparent'}}>
+              <Card  style={{backgroundColor:'transparent'}}>
                   <Card.Header><h6 className="m-2">Course Content</h6></Card.Header>
-                  <Card.Body>
+                  <Card.Body style={{ height: '550px', overflowY: 'scroll' }}>
                   <div className="faq-accordion">
                       <div className="accordion">
 
@@ -546,6 +553,10 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
                           key={index} 
                           courseItemCode={id}
                           setcourse={setcourse}
+                          setseletedCurriculumItem={setseletedCurriculumItem}
+                          seletedCurriculumItem={seletedCurriculumItem}
+                          setStartquiz={setStartquiz}
+                          setanswerAlertDisplay={setanswerAlertDisplay}
                           />
                         ))}
 

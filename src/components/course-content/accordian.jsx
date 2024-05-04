@@ -7,7 +7,8 @@ import Form from 'react-bootstrap/Form';
 import CardMainContainer from '../../pages/my-courses/[id]/CardMainContainer';
 
 
-const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle, setshowquiz, setselectedQuiz, setshowAssignment , setselectedAssignment , setshowPracticeTest , setselectedPracticeTest, setshowCodingExercise , setselectedCodingExercise , setcourse , courseItemCode}) => {
+const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle, setshowquiz, setselectedQuiz, setshowAssignment , setselectedAssignment , setshowPracticeTest , setselectedPracticeTest, setshowCodingExercise , setselectedCodingExercise , setcourse , courseItemCode,
+setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertDisplay}) => {
 
     useEffect(() => {
         content.section_curriculum_item.map((list,index) => (
@@ -54,12 +55,15 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                             var videoSource = document.getElementById("videoPlayer");
                                             videoSource.src = `${IMG_HOST}${type.url}`;
                                             videoPlayer.load();
+
+                                            setseletedCurriculumItem(list.curriculumItemId)
+
                                             UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
                                             
                                             GetMyCoursesDetails(courseItemCode, setcourse)
                                         }}>
-                                            <CardMainContainer>
-                                            <CardContainer className="m-1 p-0">
+                                            <CardMainContainer className={seletedCurriculumItem == list.curriculumItemId && `bg-secondary`}>
+                                            <CardContainer className={`m-1 p-0 ${seletedCurriculumItem == list.curriculumItemId && `bg-secondary text-white`}`}>
                                                 <Form.Check
                                                     className='mb-4 p-0'
                                                     checked={list.read}
@@ -68,7 +72,7 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                                     label={""}
                                                 />
                                                 <li className='d-flex'>
-                                                    <p>
+                                                <p className={seletedCurriculumItem == list.curriculumItemId ? 'text-white' : ''}>
                                                         {index + 1}.<i className="fa-solid fa-circle-play mx-2"></i> {list.title}
                                                     </p>
                                                 </li> 
@@ -124,6 +128,8 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                 setshowPracticeTest(false)
                                 setshowCodingExercise(false)
 
+                                setseletedCurriculumItem(list.curriculumItemId)
+
                                 UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
 
                                 GetMyCoursesDetails(courseItemCode, setcourse)
@@ -131,8 +137,8 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                               
 
                             }} key={index}>
-                                <CardMainContainer>
-                                <CardContainer className="m-1 p-0 ">
+                                <CardMainContainer className={seletedCurriculumItem == list.curriculumItemId && `bg-secondary`}>
+                                <CardContainer className={`m-1 p-0 ${seletedCurriculumItem == list.curriculumItemId && `bg-secondary text-white`}`}>
                                 <Form.Check
                                     className='mb-4 p-0'
                                     checked={list.read}
@@ -142,7 +148,7 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                 />
 
                                     <li className='d-flex'>
-                                        <p> 
+                                    <p className={seletedCurriculumItem == list.curriculumItemId ? 'text-white' : ''}>
                                             {index + 1}.<i className="fas fa-newspaper mx-2"></i> {list.title}
                                         </p>
                                    </li> 
@@ -190,6 +196,10 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                             {list.curriculum_item_type == "Quiz"  && (
                                     <span onClick={() => { 
 
+                                        setselectedQuiz(null)
+                                        setStartquiz(false)
+                                        setanswerAlertDisplay(null)
+
                                         setarticle("");
                                         setshowVideoPlayer(false); 
                                         setshowAssignment(false)
@@ -198,14 +208,18 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                         setshowCodingExercise(false)
                                     
                                         UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
+
+
                                         setselectedQuiz(list)
+
+                                        setseletedCurriculumItem(list.curriculumItemId)
 
                                         GetMyCoursesDetails(courseItemCode, setcourse)
 
                                         console.log(list)
                                     }} key={index}>
-                                        <CardMainContainer>
-                                        <CardContainer className="m-1 p-0 ">
+                                <CardMainContainer className={seletedCurriculumItem == list.curriculumItemId && `bg-secondary`}>
+                                <CardContainer className={`m-1 p-0 ${seletedCurriculumItem == list.curriculumItemId && `bg-secondary text-white`}`}>
                                         <Form.Check
                                                     className='mb-4 p-0'
                                                     checked={list.read}
@@ -214,7 +228,7 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                                     label={""}
                                                 />
                                             <li className='d-flex'>
-                                                <p>
+                                            <p className={seletedCurriculumItem == list.curriculumItemId ? 'text-white' : ''}>
                                                     {index + 1}.<i className="fas fa-question mx-2"></i> {list.title}
                                                 </p>
                                             </li> 
@@ -234,6 +248,8 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                     setshowquiz(false)
                                     setshowPracticeTest(false)
                                     setshowCodingExercise(false)
+
+                                    setseletedCurriculumItem(list.curriculumItemId)
                                   
                                     UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
                                     setselectedAssignment(list)
@@ -242,8 +258,8 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
 
                                     console.log(list)
                                 }} key={index}>
-                                    <CardMainContainer>
-                                    <CardContainer className="m-1 p-0 ">
+                                    <CardMainContainer className={seletedCurriculumItem == list.curriculumItemId && `bg-secondary`}>
+                                <CardContainer className={`m-1 p-0 ${seletedCurriculumItem == list.curriculumItemId && `bg-secondary text-white`}`}>
                                     <Form.Check
                                                 className='mb-4 p-0'
                                                 checked={list.read}
@@ -252,7 +268,7 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                                 label={""}
                                             />
                                         <li className='d-flex'>
-                                            <p>
+                                        <p className={seletedCurriculumItem == list.curriculumItemId ? 'text-white' : ''}>
                                                 {index + 1}.<i className="fas fa-clipboard-list mx-2"></i> {list.title}
                                             </p>
                                         </li> 
@@ -276,13 +292,15 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                     setselectedPracticeTest(list)
                                     console.log(list)
 
+                                    setseletedCurriculumItem(list.curriculumItemId)
+
                                     GetMyCoursesDetails(courseItemCode, setcourse)
 
                                    
 
                                 }} key={index}>
-                                    <CardMainContainer>
-                                    <CardContainer className="m-1 p-0 ">
+                                     <CardMainContainer className={seletedCurriculumItem == list.curriculumItemId && `bg-secondary`}>
+                                <CardContainer className={`m-1 p-0 ${seletedCurriculumItem == list.curriculumItemId && `bg-secondary text-white`}`}>
                                     <Form.Check
                                                 className='mb-4 p-0'
                                                 checked={list.read}
@@ -291,7 +309,7 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                                 label={""}
                                             />
                                         <li className='d-flex'>
-                                            <p>
+                                        <p className={seletedCurriculumItem == list.curriculumItemId ? 'text-white' : ''}>
                                                 {index + 1}.<i className="fas fa-tasks mx-2"></i> {list.title}
                                             </p>
                                         </li> 
@@ -313,11 +331,12 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
 
                                     UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
                                     setselectedCodingExercise(list)
+                                    setseletedCurriculumItem(list.curriculumItemId)
                                     console.log(list)
                                     GetMyCoursesDetails(courseItemCode, setcourse)
                                 }} key={index}>
-                                    <CardMainContainer>
-                                    <CardContainer className="m-1 p-0 ">
+                                       <CardMainContainer className={seletedCurriculumItem == list.curriculumItemId && `bg-secondary`}>
+                                <CardContainer className={`m-1 p-0 ${seletedCurriculumItem == list.curriculumItemId && `bg-secondary text-white`}`}>
                                     <Form.Check
                                                 className='mb-4 p-0'
                                                 checked={list.read}
@@ -326,7 +345,7 @@ const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, set
                                                 label={""}
                                             />
                                         <li className='d-flex'>
-                                            <p>
+                                        <p className={seletedCurriculumItem == list.curriculumItemId ? 'text-white' : ''}>
                                                 {index + 1}.<i className="fas fa-clipboard-list mx-2"></i> {list.title}
                                             </p>
                                         </li> 

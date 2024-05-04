@@ -7,16 +7,16 @@ import FormLabel from '@mui/material/FormLabel';
 import { useState } from 'react';
 import { Alert } from '@mui/material';
 
-const QuizContainer = ({ Startquiz , setStartquiz , selectedQuiz}) => {
+const QuizContainer = ({ answerAlertDisplay, setanswerAlertDisplay, Startquiz , setStartquiz , selectedQuiz}) => {
 
   const [selectAnswer, setselectAnswer] = useState(0)
-  const [answerAlertDisplay, setanswerAlertDisplay] = useState(null)
+  // const [answerAlertDisplay, setanswerAlertDisplay] = useState(null)
 
   
 
   return (
     <>
-    {selectedQuiz !=null && (
+    {selectedQuiz != null && (
     <div>
       {Startquiz ==false && (
         <div>
@@ -30,29 +30,35 @@ const QuizContainer = ({ Startquiz , setStartquiz , selectedQuiz}) => {
     {Startquiz && (
       <>
         <div>
-        <p>Question 1 :</p>
+  
+        <p className='p-0 m-0'><b>{selectedQuiz.getQuizs[0] == null ? "" : selectedQuiz.getQuizs[0].question}</b></p>
 
         {answerAlertDisplay != null && (
           <>
-          {answerAlertDisplay ? (
-          <Alert className='my-2' variant="filled" severity="success">
-                  Hurry! You Choose the Right Answer
+          {answerAlertDisplay == true && (
+          <Alert className='my-2'  severity="success">
+                  You Choose the Right Answer
             </Alert>
-          ) : (
-            <Alert className='my-2' variant="filled" severity="error">
-                Sorry ! You have Chosen the Wrong Answer
+          )}
+
+        {answerAlertDisplay == false && (
+            <Alert className='my-2'  severity="error">
+            Sorry ! You have Chosen the Wrong Answer
+        </Alert>
+            )}
+ 
+
+  
+          {answerAlertDisplay == 'invalid' && (
+             <Alert className='my-2' severity="error">
+                Please Select An Answer
             </Alert>
           )}
 
           </>
         )}
 
-
-
-        <p className='p-0 m-0'><b>{selectedQuiz.getQuizs[0] == null ? "" : selectedQuiz.getQuizs[0].question}</b></p>
-          <FormControl>
-
-        
+          <FormControl>        
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="radio-buttons-group"
@@ -67,6 +73,13 @@ const QuizContainer = ({ Startquiz , setStartquiz , selectedQuiz}) => {
       </div>
           <button onClick={() => {
 
+            console.log(selectAnswer)
+
+            if(selectAnswer == 0){
+              setanswerAlertDisplay('invalid')
+              return
+            }
+
         const selectedAnswerCorrect = selectedQuiz.getQuizs[0].getAnswers.find(answer => answer.id === selectAnswer);
 
         if (selectedAnswerCorrect.correctAnswer) {
@@ -76,10 +89,6 @@ const QuizContainer = ({ Startquiz , setStartquiz , selectedQuiz}) => {
           // console.log("Incorrect Answer!");
           setanswerAlertDisplay(false)
         }
-
-        setTimeout(() => {
-          setanswerAlertDisplay(null)
-        }, 3000);
 
 
           }} className='edu-btn btn-small my-2'>Check Quiz</button>
