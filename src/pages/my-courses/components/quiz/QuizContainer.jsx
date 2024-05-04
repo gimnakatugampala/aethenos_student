@@ -7,10 +7,8 @@ import FormLabel from '@mui/material/FormLabel';
 import { useState } from 'react';
 import { Alert } from '@mui/material';
 
-const QuizContainer = ({ answerAlertDisplay, setanswerAlertDisplay, Startquiz , setStartquiz , selectedQuiz}) => {
+const QuizContainer = ({ selectAnswer, setselectAnswer, answerAlertDisplay, setanswerAlertDisplay, Startquiz , setStartquiz , selectedQuiz}) => {
 
-  const [selectAnswer, setselectAnswer] = useState(0)
-  // const [answerAlertDisplay, setanswerAlertDisplay] = useState(null)
 
   
 

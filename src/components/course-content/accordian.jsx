@@ -8,7 +8,7 @@ import CardMainContainer from '../../pages/my-courses/[id]/CardMainContainer';
 
 
 const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle, setshowquiz, setselectedQuiz, setshowAssignment , setselectedAssignment , setshowPracticeTest , setselectedPracticeTest, setshowCodingExercise , setselectedCodingExercise , setcourse , courseItemCode,
-setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertDisplay}) => {
+setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertDisplay , setselectAnswer}) => {
 
     useEffect(() => {
         content.section_curriculum_item.map((list,index) => (
@@ -199,6 +199,7 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                         setselectedQuiz(null)
                                         setStartquiz(false)
                                         setanswerAlertDisplay(null)
+                                        setselectAnswer(0)
 
                                         setarticle("");
                                         setshowVideoPlayer(false); 

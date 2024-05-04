@@ -62,6 +62,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
   const [Startquiz, setStartquiz] = useState(false)
   const [selectedQuiz, setselectedQuiz] = useState(null)
   const [answerAlertDisplay, setanswerAlertDisplay] = useState(null)
+  const [selectAnswer, setselectAnswer] = useState(0)
   
 
 
@@ -162,7 +163,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
                 {/* // Show Quiz */}
                 {showquiz && (
                   <div className="container border p-4" style={{ maxHeight: '500px', overflowY: 'scroll' }}>
-                    <QuizContainer answerAlertDisplay={answerAlertDisplay} setanswerAlertDisplay={setanswerAlertDisplay} Startquiz={Startquiz} setStartquiz={setStartquiz} selectedQuiz={selectedQuiz} />
+                    <QuizContainer  setselectAnswer={setselectAnswer} selectAnswer={selectAnswer} answerAlertDisplay={answerAlertDisplay} setanswerAlertDisplay={setanswerAlertDisplay} Startquiz={Startquiz} setStartquiz={setStartquiz} selectedQuiz={selectedQuiz} />
                   </div>
                 )}
 
@@ -557,6 +558,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
                           seletedCurriculumItem={seletedCurriculumItem}
                           setStartquiz={setStartquiz}
                           setanswerAlertDisplay={setanswerAlertDisplay}
+                          setselectAnswer={setselectAnswer}
                           />
                         ))}
 
