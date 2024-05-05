@@ -169,7 +169,9 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
 
                 {/* // Show Assignment */}
                 {showAssignment && (
+                  <div className="container border p-4" style={{ maxHeight: '500px', overflowY: 'scroll' }}>
                   <AssignmentContainer selectedAssignment={selectedAssignment} />
+                  </div>
                 )}
 
                 {/* Show Practice test */}

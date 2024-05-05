@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { Player } from 'video-react';
 import { IMG_HOST } from '../../../../api';
 
-const steps = ['Assignment Information', 'Video' , 'Question', 'Solutions','Solution Video'];
+const steps = ['Assignment Information And Instructions', 'Question', 'Solutions'];
 
 const AssignmentContainer = ({ selectedAssignment }) => {
 
@@ -82,18 +82,33 @@ const AssignmentContainer = ({ selectedAssignment }) => {
         <React.Fragment>
 
             {activeStep == 0 && (
-                <>
-                <Typography sx={{ mt: 2, mb: 1 }}>
-                    {selectedAssignment.title} ({selectedAssignment.getAssignments[0].duration})
-                </Typography>
+                <div className='my-2'>
 
-                <p>{selectedAssignment.description}</p>
+              {selectedAssignment.getAssignments[0].assignmentVideo !== "" ? (
+                <div className='m-3'>
+                  <Player autoPlay={true}>
+                    <source id="videoPlayer" src={`${IMG_HOST}${selectedAssignment.getAssignments[0].assignmentVideo}`} />
+                  </Player>
+                </div>
+              ) : (
+                <p className='text-center my-4'>No Video Available</p>
+              )}
 
-                <p>{selectedAssignment.getAssignments[0].instructions}</p>
-
+              <div className='m-2'>
+                <h5 className='m-0 p-0'>
+                    <b>{selectedAssignment.title} <i>({selectedAssignment.getAssignments[0].duration})</i></b>
+                </h5>
+                <p className='m-0 p-0'>{selectedAssignment.description}</p>
+                <br />
+                <h6 className='m-0 p-0'>Instructions</h6>
+                <p className='m-0 p-0'>{selectedAssignment.getAssignments[0].instructions}</p>
                 {selectedAssignment.getAssignments[0].downloadableResource != "" && (
-                <a className='btn btn-danger my-2' href={`${IMG_HOST}${selectedAssignment.getAssignments[0].downloadableResource}`} download >Download Resource</a>
+                <a className='btn btn-danger my-4' href={`${IMG_HOST}${selectedAssignment.getAssignments[0].downloadableResource}`} download >
+                  Download Resource
+                  <i className="fas fa-download mx-2"></i>
+                </a>
                 )}
+                </div>
 
                 <br />
 
@@ -102,75 +117,71 @@ const AssignmentContainer = ({ selectedAssignment }) => {
 
                 )}
 
-                
-                </>
+
+                </div>
             )}
 
+          
             {activeStep == 1 && (
-                selectedAssignment.getAssignments[0].assignmentVideo != "" ?
-                <Player autoPlay={true}>
-                <source id="videoPlayer" src={`${IMG_HOST}${selectedAssignment.getAssignments[0].assignmentVideo}`} />
-                </Player> : "No Video Available"
-            )}
+                <div className='my-2'>
+                   <h6 className='m-0 p-0'>{selectedAssignment.getAssignments[0].question}</h6>
 
-            {activeStep == 2 && (
-                <>
-                   <h6>Questions</h6>
-                   <p>{selectedAssignment.getAssignments[0].question}</p>
-
-                   <a className='btn btn-danger my-2' href={`${IMG_HOST}${selectedAssignment.getAssignments[0].questionSheet}`} download >Download Questions</a>
+                   <a className='btn btn-danger my-2' href={`${IMG_HOST}${selectedAssignment.getAssignments[0].questionSheet}`} download >Download Questions <i className="fas fa-download"></i></a>
 
                     <br />
 
                    <a className='my-2' href={`${selectedAssignment.getAssignments[0].questionExternalLink}`}>{selectedAssignment.getAssignments[0].questionExternalLink} <i className="fas fa-external-link-alt"></i></a>
-                </>
+                </div>
             )}
 
-            {activeStep == 3 && (
+            {activeStep == 2 && (
                 <React.Fragment>
-                <>
-                    <h6>Solutions</h6>
-                    <p>{selectedAssignment.getAssignments[0].question}</p>
+                <div className='my-2'>
 
-                    <a className='btn btn-danger my-2' href={`${IMG_HOST}${selectedAssignment.getAssignments[0].solutionsSheet}`} download >Download Answers</a>
+                {selectedAssignment.getAssignments[0].solutionVideo != "" ?
+                    <Player autoPlay={true}>
+                    <source id="videoPlayer" src={`${IMG_HOST}${selectedAssignment.getAssignments[0].solutionVideo}`} />
+                    </Player> : <p className='text-center my-4'>No Video Available</p>}
+    
+                    <h6 className='m-0 p-0'>{selectedAssignment.getAssignments[0].question}</h6>
+
+                    <a className='btn btn-danger my-2' href={`${IMG_HOST}${selectedAssignment.getAssignments[0].solutionsSheet}`} download >Download Answers <i className="fas fa-download"></i></a>
 
                     <br />
                     
                     <a className='my-2' href={selectedAssignment.getAssignments[0].solutionsExternalLink}>{selectedAssignment.getAssignments[0].solutionsExternalLink} <i className="fas fa-external-link-alt"></i></a>
-                </>
+                </div>
+
+               
 
 
             </React.Fragment>
             )}
 
-            {activeStep == 4 && (
-                    selectedAssignment.getAssignments[0].solutionVideo != "" ?
-                    <Player autoPlay={true}>
-                    <source id="videoPlayer" src={`${IMG_HOST}${selectedAssignment.getAssignments[0].solutionVideo}`} />
-                    </Player> : "No Video Available"
-            )}
+          
 
-        {activeStep == 4 ? (
-             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-             <Box sx={{ flex: '1 1 auto' }} />
-             <Button onClick={handleReset}>Reset</Button>
-           </Box>
-        ) : (
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+          {activeStep == 2 ? (
+              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+              <Box sx={{ flex: '1 1 auto' }} />
+              <Button variant="contained" onClick={handleReset}>Reset</Button>
+            </Box>
+          ) : (
+            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', pt: 2 }}>
             <Button
-              color="inherit"
+            className='p-0'
+              variant="contained"
               disabled={activeStep === 0}
               onClick={handleBack}
-              sx={{ mr: 1 }}
             >
               Back
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
             <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+              {activeStep === steps.length - 1 ? <Button variant="contained">Finish</Button> : <Button variant="contained">Next</Button>}
             </Button>
           </Box>
-        )}
+          
+          )}
         </React.Fragment>
      
     </Box>
