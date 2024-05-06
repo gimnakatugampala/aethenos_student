@@ -80,6 +80,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
   // ============ CODING EXERCISE =====================
   const [showCodingExercise, setshowCodingExercise] = useState(false)
   const [selectedCodingExercise, setselectedCodingExercise] = useState(null)
+  const [activeStepCodingExercise, setCodingExerciseActiveStep] = React.useState(0);
 
   const [courseCode, setcourseCode] = useState(course && course.course_code)
   const [itemCode, setitemCode] = useState(course && course.item_code)
@@ -186,7 +187,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
                 {/* Show Coding Exercise */}
                 {showCodingExercise && (
                   <div className="container border p-4" style={{ maxHeight: '500px', overflowY: 'scroll' }}>
-                    <CodingExerciseContainer selectedCodingExercise={selectedCodingExercise} />
+                    <CodingExerciseContainer setCodingExerciseActiveStep={setCodingExerciseActiveStep} activeStepCodingExercise={activeStepCodingExercise} selectedCodingExercise={selectedCodingExercise} />
                   </div>
                 )}
                 </>
@@ -570,7 +571,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
                           activeStep={activeAssignmentStep} 
                           setActiveStep={setAssignmentActiveStep}
                           setPraticeTestActiveStep={setPraticeTestActiveStep}
-                      
+                          setCodingExerciseActiveStep={setCodingExerciseActiveStep}
                           />
                         ))}
 
