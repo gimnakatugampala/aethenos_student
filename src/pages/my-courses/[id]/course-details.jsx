@@ -69,11 +69,13 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
   // ============= ASSIGNMENT =======================
   const [showAssignment, setshowAssignment] = useState(false)
   const [selectedAssignment, setselectedAssignment] = useState(null)
+  const [activeAssignmentStep, setAssignmentActiveStep] = React.useState(0);
 
 
   // ============= PRACTICE TEST =========================
   const [showPracticeTest, setshowPracticeTest] = useState(false)
   const [selectedPracticeTest, setselectedPracticeTest] = useState(null)
+  const [PraticeTestactiveStep, setPraticeTestActiveStep] = React.useState(0);
 
   // ============ CODING EXERCISE =====================
   const [showCodingExercise, setshowCodingExercise] = useState(false)
@@ -170,22 +172,26 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
                 {/* // Show Assignment */}
                 {showAssignment && (
                   <div className="container border p-4" style={{ maxHeight: '500px', overflowY: 'scroll' }}>
-                  <AssignmentContainer selectedAssignment={selectedAssignment} />
+                  <AssignmentContainer activeStep={activeAssignmentStep} setActiveStep={setAssignmentActiveStep} selectedAssignment={selectedAssignment} />
                   </div>
                 )}
 
                 {/* Show Practice test */}
                 {showPracticeTest && (
-                  <PraticeTestContainer selectedPracticeTest={selectedPracticeTest} />
+                  <div className="container border p-4" style={{ maxHeight: '500px', overflowY: 'scroll' }}>
+                  <PraticeTestContainer PraticeTestactiveStep={PraticeTestactiveStep} setPraticeTestActiveStep={setPraticeTestActiveStep} selectedPracticeTest={selectedPracticeTest} />
+                  </div>
                 )}
 
                 {/* Show Coding Exercise */}
                 {showCodingExercise && (
-                  <CodingExerciseContainer selectedCodingExercise={selectedCodingExercise} />
+                  <div className="container border p-4" style={{ maxHeight: '500px', overflowY: 'scroll' }}>
+                    <CodingExerciseContainer selectedCodingExercise={selectedCodingExercise} />
+                  </div>
                 )}
                 </>
               ) : (
-                  <div className="container" style={{ maxHeight: '500px', overflowY: 'scroll' }}>
+                <div className="container border p-4" style={{ maxHeight: '500px', overflowY: 'scroll' }}>
                       {parse(article)}
                   </div>
               )}
@@ -561,6 +567,10 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
                           setStartquiz={setStartquiz}
                           setanswerAlertDisplay={setanswerAlertDisplay}
                           setselectAnswer={setselectAnswer}
+                          activeStep={activeAssignmentStep} 
+                          setActiveStep={setAssignmentActiveStep}
+                          setPraticeTestActiveStep={setPraticeTestActiveStep}
+                      
                           />
                         ))}
 

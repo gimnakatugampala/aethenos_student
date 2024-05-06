@@ -10,9 +10,9 @@ import { IMG_HOST } from '../../../../api';
 
 const steps = ['Assignment Information And Instructions', 'Question', 'Solutions'];
 
-const AssignmentContainer = ({ selectedAssignment }) => {
+const AssignmentContainer = ({ activeStep,  setActiveStep,  selectedAssignment }) => {
 
-    const [activeStep, setActiveStep] = React.useState(0);
+    
     const [skipped, setSkipped] = React.useState(new Set());
   
     const isStepOptional = (step) => {

@@ -8,7 +8,7 @@ import CardMainContainer from '../../pages/my-courses/[id]/CardMainContainer';
 
 
 const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle, setshowquiz, setselectedQuiz, setshowAssignment , setselectedAssignment , setshowPracticeTest , setselectedPracticeTest, setshowCodingExercise , setselectedCodingExercise , setcourse , courseItemCode,
-setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertDisplay , setselectAnswer}) => {
+setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertDisplay , setselectAnswer , activeStep, setActiveStep, setPraticeTestActiveStep}) => {
 
     useEffect(() => {
         content.section_curriculum_item.map((list,index) => (
@@ -242,7 +242,7 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                             {/* Assignment */}
                             {list.curriculum_item_type == "Assignment"  && (
                                  <span onClick={() => { 
-
+                                    setActiveStep(0)
                                     setarticle("");
                                     setshowVideoPlayer(false); 
                                     setshowAssignment(true)
@@ -281,7 +281,8 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                             {/* Practice Test */}
                             {list.curriculum_item_type == "Practice Test" && (
                                  <span onClick={() => { 
-
+                                    setPraticeTestActiveStep(0)
+                                    setselectedPracticeTest(null)
                                     setarticle("");
                                     setshowVideoPlayer(false); 
                                     setshowAssignment(false)

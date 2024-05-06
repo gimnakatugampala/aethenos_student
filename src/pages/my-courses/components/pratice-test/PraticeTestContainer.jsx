@@ -10,9 +10,9 @@ import { IMG_HOST } from '../../../../api';
 
 const steps = ['Practice test', 'Questions', 'Solutions'];
 
-const PraticeTestContainer = ({ selectedPracticeTest }) => {
+const PraticeTestContainer = ({ PraticeTestactiveStep,setPraticeTestActiveStep, selectedPracticeTest }) => {
 
-    const [activeStep, setActiveStep] = React.useState(0);
+    
   const [skipped, setSkipped] = React.useState(new Set());
 
   const isStepOptional = (step) => {
@@ -25,36 +25,36 @@ const PraticeTestContainer = ({ selectedPracticeTest }) => {
 
   const handleNext = () => {
     let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
+    if (isStepSkipped(PraticeTestactiveStep)) {
       newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
+      newSkipped.delete(PraticeTestactiveStep);
     }
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setPraticeTestActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setPraticeTestActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
+    if (!isStepOptional(PraticeTestactiveStep)) {
       // You probably want to guard against something like this,
       // it should never occur unless someone's actively trying to break something.
       throw new Error("You can't skip a step that isn't optional.");
     }
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setPraticeTestActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped((prevSkipped) => {
       const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
+      newSkipped.add(PraticeTestactiveStep);
       return newSkipped;
     });
   };
 
   const handleReset = () => {
-    setActiveStep(0);
+    setPraticeTestActiveStep(0);
   };
 
 
@@ -62,7 +62,7 @@ const PraticeTestContainer = ({ selectedPracticeTest }) => {
     <>
     {selectedPracticeTest != null && (
     <Box sx={{ width: '100%' }}>
-    <Stepper activeStep={activeStep}>
+    <Stepper activeStep={PraticeTestactiveStep}>
       {steps.map((label, index) => {
         const stepProps = {};
         const labelProps = {};
@@ -78,64 +78,65 @@ const PraticeTestContainer = ({ selectedPracticeTest }) => {
     </Stepper>
 
       <React.Fragment>
-        {activeStep == 0 && (
-        <Box>
-            <Typography sx={{ mt: 2, mb: 1 }}>{selectedPracticeTest.title} ({selectedPracticeTest.getPracticeTests[0].duration})</Typography>
-            <p>{selectedPracticeTest.description}</p>
+        {PraticeTestactiveStep == 0 && (
+        <div className='my-3'>
+            <h5 className='m-0 p-0'><b>{selectedPracticeTest.title} <i>({selectedPracticeTest.getPracticeTests[0].duration})</i></b></h5>
+            <h6 className='m-0 p-0'>Min Pass Mark - {selectedPracticeTest.getPracticeTests[0].minimumuPassMark}%</h6>
 
-            <p>Min Pass Mark - {selectedPracticeTest.getPracticeTests[0].minimumuPassMark}%</p>
-
-            <p>{selectedPracticeTest.getPracticeTests[0].instructions}</p>
+            <br />
+            <h6 className='m-0 p-0'>{selectedPracticeTest.description}</h6>
+            <h6 className='m-0 p-0'>{selectedPracticeTest.getPracticeTests[0].instructions}</h6>
 
             {selectedPracticeTest.getPracticeTests[0].externalLink != "" && (
             <a target='_blank' href={`${selectedPracticeTest.getPracticeTests[0].externalLink}`}>{selectedPracticeTest.getPracticeTests[0].externalLink} <i className="fas fa-external-link-alt"></i></a>
             )}
 
 
-        </Box>
+        </div>
         )}
 
-        {activeStep == 1 && (
-        <Box>
-            <Typography sx={{ mt: 2, mb: 1 }}>Questions</Typography>
-        
-
-            <a className='btn btn-danger my-2' href={`${IMG_HOST}${selectedPracticeTest.getPracticeTests[0].practiceTestQuestionSheet}`} download >Download Question</a>
+        {PraticeTestactiveStep == 1 && (
+        <div className="my-3">
+            <h6 className='m-0 p-0'><b>Questions</b></h6>
+      
             <br />
+            <a className='btn btn-danger my-2' href={`${IMG_HOST}${selectedPracticeTest.getPracticeTests[0].practiceTestQuestionSheet}`} download >Download Questions <i className="fas fa-download"></i></a>
+            <br />
+
             {selectedPracticeTest.getPracticeTests[0].questionLink != "" && (
             <a target='_blank' href={`${selectedPracticeTest.getPracticeTests[0].questionLink}`}>{selectedPracticeTest.getPracticeTests[0].questionLink} <i className="fas fa-external-link-alt"></i></a>
             )}
 
-        </Box>
+        </div>
         )}
 
-        {activeStep == 2 && (
-            <Box>
-                <Typography sx={{ mt: 2, mb: 1 }}>Solutions</Typography>
-            
+        {PraticeTestactiveStep == 2 && (
+            <div className='my-3'>
+                <h6 className='m-0 p-0'><b>Solutions</b></h6>
+                <br />
 
-                <a className='btn btn-danger my-2' href={`${IMG_HOST}${selectedPracticeTest.getPracticeTests[0].practiceTestSolutionSheet}`} download >Download Solutions</a>
+                <a className='btn btn-danger my-2' href={`${IMG_HOST}${selectedPracticeTest.getPracticeTests[0].practiceTestSolutionSheet}`} download >Download Solutions <i className="fas fa-download"></i></a>
                 <br />
                 {selectedPracticeTest.getPracticeTests[0].solutionLink != "" && (
                 <a target='_blank' href={`${selectedPracticeTest.getPracticeTests[0].solutionLink}`}>{selectedPracticeTest.getPracticeTests[0].solutionLink} <i className="fas fa-external-link-alt"></i></a>
                 )}
 
 
-            </Box>
+            </div>
             )}
 
 
 
-        {activeStep == steps.length - 1 ? (
+        {PraticeTestactiveStep == steps.length - 1 ? (
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Box sx={{ flex: '1 1 auto' }} />
-            <Button onClick={handleReset}>Reset</Button>
+            <Button variant="contained" onClick={handleReset}>Reset</Button>
             </Box>
             ) : (
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
-                color="inherit"
-                disabled={activeStep === 0}
+                variant="contained"
+                disabled={PraticeTestactiveStep === 0}
                 onClick={handleBack}
                 sx={{ mr: 1 }}
             >
@@ -144,7 +145,7 @@ const PraticeTestContainer = ({ selectedPracticeTest }) => {
             <Box sx={{ flex: '1 1 auto' }} />
 
             <Button onClick={handleNext}>
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                {PraticeTestactiveStep === steps.length - 1 ? <Button variant="contained">Finish</Button>  : <Button variant="contained">Next</Button>}
             </Button>
             </Box>
             )}
