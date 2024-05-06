@@ -14,6 +14,7 @@ const CommentFormCourse = ({course, id}) => {
 
     const [rating, setrating] = useState(0)
     const [msg, setmsg] = useState("")
+    const [btnloading, setbtnloading] = useState(false)
 
     const ratingChanged = (newRating) => {
         setrating(newRating)
@@ -29,15 +30,15 @@ const CommentFormCourse = ({course, id}) => {
 
         console.log(msg)
           
-          SubmitCourseReview(id,msg,rating)
+          SubmitCourseReview(id,msg,rating,setbtnloading)
       }
 
       
 
       useEffect(() => {
 
-        setrating(course.ownReview == null ? 0 : course.ownReview[0].rating)
-        setmsg(course.ownReview == null ? "" :  course.ownReview[0].comment)
+        setrating(course.ownReview == null || course.ownReview.length == 0 ? 0 : course.ownReview[0].rating)
+        setmsg(course.ownReview == null || course.ownReview.length == 0 ? "" :  course.ownReview[0].comment)
         
       }, [])
       
@@ -55,7 +56,11 @@ const CommentFormCourse = ({course, id}) => {
                 </div>
 
                 <div className="form-group col-6 mx-auto">
-                    <button onClick={handleSubmit} type="submit" className="edu-btn submit-btn btn-small">Save Review <i className="icon-4"></i></button>
+                    {btnloading ? (
+                        <button type="submit" className="edu-btn submit-btn btn-small">Loading..</button>
+                    ) : (
+                        <button onClick={handleSubmit} type="submit" className="edu-btn submit-btn btn-small">Save Review <i className="icon-4"></i></button>
+                    )}
                 </div>
             </div>
         </form>

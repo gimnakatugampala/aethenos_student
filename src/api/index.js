@@ -1585,7 +1585,9 @@ export const GetMyCoursesDetails = async(id,setcourse) =>{
 
 }
 
-export const SubmitCourseReview = async(id,msg,rating) =>{
+export const SubmitCourseReview = async(id,msg,rating,setbtnloading) =>{
+
+  setbtnloading(true)
 
 
   var myHeaders = new Headers();
@@ -1613,6 +1615,7 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/submitReview
 
     if(result.variable == "200"){
       SuccessAlert("Added",result.message)
+      setbtnloading(false)
 
       setTimeout(() => {
         window.location.reload()
@@ -2225,7 +2228,8 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getOwnAllRef
 
 }
 
-export const SendRefundReq = async(selectedTransactionCode,selectedAmount,refundText,setrefundText,setShow) =>{
+export const SendRefundReq = async(selectedTransactionCode,selectedAmount,refundText,setrefundText,setShow,setisReqSubmitted) =>{
+
 
   const myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
@@ -2247,14 +2251,16 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addRefund", 
   .then((result) => {
     console.log(result)
     if(result.variable == "200"){
-      SuccessAlert("Success",result.message)
+      // SuccessAlert("Success",result.message)
       setrefundText("")
-      setShow(false)
+      setisReqSubmitted(true)
+      // setShow(false)
       return
     }
 if(result.message == "Error"){
   ErrorAlert("Error",result.variable)
   setrefundText("")
+  setisReqSubmitted(false)
   return
 }
 
