@@ -42,7 +42,7 @@ const CartItem = ({ item }) => {
             </td> */}
             
             <td className="product-subtotal" data-title="Subtotal">
-                <span className="currency-symbol">{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))}</span>{(item.quantity * (CalculateDiscountedPrice(item.other_data))).toFixed(2)}
+                <span className="currency-symbol">{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))}</span>{(1 * (CalculateDiscountedPrice(item.other_data))).toFixed(2)}
             </td>
         </tr>
     );

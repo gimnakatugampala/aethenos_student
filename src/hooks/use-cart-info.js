@@ -49,8 +49,8 @@ const useCartInfo = () => {
             }
             
             
-            cartTotal.total += itemTotal * quantity;
-            cartTotal.quantity += quantity;
+            cartTotal.total += itemTotal * 1;
+            cartTotal.quantity += 1;
 
             return cartTotal;
         }, {

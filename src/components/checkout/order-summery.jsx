@@ -64,7 +64,7 @@ const newPricing = cartCourses != null && cartCourses.map((course) => ({
     qty:1,
     desc:course.other_data.course_main_desc,
     currency:GetCurrencyByCountry(course.other_data).toLowerCase(),
-    price:(CalculateDiscountedPrice(course.other_data)) == null ? 0 : (course.quantity * CalculateDiscountedPrice(course.other_data) - 
+    price:(CalculateDiscountedPrice(course.other_data)) == null ? 0 : (1 * CalculateDiscountedPrice(course.other_data) - 
     (couponValue.length > 0 && couponValue.some(coupon => {
         return coupon.id == course.id && coupon.couponType == 1;
     }) ? 
@@ -106,7 +106,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
             const calculatedPurchasedCourse = cartCourses != null && cartCourses.map((course) => ({
             courseCode: course.other_data.course_code,
             currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
-            itemPrice: course.quantity * (CalculateDiscountedPrice(course.other_data))
+            itemPrice: 1 * (CalculateDiscountedPrice(course.other_data))
             }));
     
             setPurchasedCourse(calculatedPurchasedCourse);
@@ -192,11 +192,11 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                         <tbody>
                             {cartCourses.map((item,i) => (
                                 <tr key={i}>
-                                    <td><img className='mx-3 rounded' height={70} width={60} src={`${IMG_HOST}${item.other_data.img}`} />{item.title.substring(0,25)}... <span className="quantity">x {item.quantity}</span></td>
+                                    <td><img className='mx-3 rounded' height={70} width={60} src={`${IMG_HOST}${item.other_data.img}`} />{item.title.substring(0,25)}... <span className="quantity">x 1</span></td>
                                     <td>
 
                                     {getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} 
-                                    {(item.quantity * CalculateDiscountedPrice(item.other_data) - 
+                                    {(1 * CalculateDiscountedPrice(item.other_data) - 
                                         (couponValue.length > 0 && couponValue.some(coupon => {
                                             return coupon.id == item.id && coupon.couponType == 1;
                                         }) ? 
@@ -210,7 +210,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                                     {couponValue.length > 0 && couponValue.some(coupon => coupon.id == item.id) && (
                                         <span className="text-decoration-line-through mx-2">
                                             {getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} 
-                                            {(item.quantity * CalculateDiscountedPrice(item.other_data)).toFixed(2)}
+                                            {(1 * CalculateDiscountedPrice(item.other_data)).toFixed(2)}
                                         </span>
                                     )}
 
@@ -287,7 +287,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                         const calculatedPurchasedCourse = cartCourses != null && cartCourses.map((course) => ({
                             courseCode: course.other_data.course_code,
                             currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
-                            itemPrice: course.quantity * (CalculateDiscountedPrice(course.other_data))
+                            itemPrice: 1 * (CalculateDiscountedPrice(course.other_data))
                             }));
                     
                             // setPurchasedCourse(calculatedPurchasedCourse);

@@ -46,7 +46,7 @@ const Cart = () => {
                                         </Link>
                                     </h5>
                                     <div className="price-and-quantity">
-                                        <span className="quantity">{item.quantity}</span>
+                                        <span className="quantity">1</span>
                                         <span className="quantity-symbol">×</span>
                                         <span className="price">{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} {CalculateDiscountedPrice(item.other_data)}</span>
                                     </div>
