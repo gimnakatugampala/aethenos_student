@@ -42,19 +42,28 @@ useEffect(() => {
 
                     <p style={{fontSize:'13px'}} className='m-0'>{data && data.instructor}</p>
 
-                    {data && data.progressValue == 0 && (
-                        <a href={`/my-courses/${data && data.item_code}`} className='edu-btn btn-small my-3'>Start Course</a>
+                    {data && (
+                        data.progressValue == 0 && (
+                            <a href={`/my-courses/${data && data.item_code}`} className='edu-btn btn-small my-3'>Start Course</a>
+                        )
                     )}
 
-                    {data && data.progressValue == 100 && (
-                        <a href={`/my-courses/${data && data.item_code}`} className='edu-btn btn-small my-3'>Retake Course</a>
+                    {data && (
+                         data.progressValue == 100 && (
+                            <a href={`/my-courses/${data && data.item_code}`} className='edu-btn btn-small my-3'>Retake Course</a>
+                        )
                     )}
 
-                    {data && data.progressValue != 100 || data.progressValue != 0  && (
-                        <a href={`/my-courses/${data && data.item_code}`} className='edu-btn btn-small my-3'>Continue Course</a>
+                    {data && (
+                        data.progressValue < 100 && data.progressValue > 0  && (
+                            <a href={`/my-courses/${data && data.item_code}`} className='edu-btn btn-small my-3'>Continue Course</a>
+                        )
                     )}
-                
-                    <ProgressBar variant="danger" now={data && Number.parseInt(data.progressValue)} label={`${data && Number.parseInt(data.progressValue)}%`} />
+
+                    {data && (
+                        
+                        <ProgressBar variant="danger" now={data && Number.parseInt(data.progressValue)} label={`${data && Number.parseInt(data.progressValue)}%`} />
+                    )}    
 
                 </div>
             </div>
