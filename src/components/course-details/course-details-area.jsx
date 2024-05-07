@@ -87,7 +87,6 @@ const CourseDetailsArea = ({ course }) => {
                                              <Accordian key={index} id={index} no_quiz={content.no_of_qize} title={`${content.section_name}`} lectures={content.no_of_lectures} lists={content.section_curriculum_item} />
                                             ))}
 
-                                        {/* <Accordian show={true} id="1" title="Introduction" lectures="8" desc="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco qui laboris nis aliquip commodo consequat." /> */}
 
 
                                    
@@ -95,41 +94,7 @@ const CourseDetailsArea = ({ course }) => {
                                 </div>
 
 
-                                            {/* {course.course_lessons.map((lesson, i) => (
-                                                <div key={i} className="course-lesson">
-                                                    <h5 className="title">{lesson?.title}</h5>
-                                                    <p>{lesson?.text}</p>
-                                                    <ul>
-                                                        {lesson?.lessons?.map((list, i) => (
-                                                            <li key={i}>
-                                                                {list.title && 
-                                                                    <div className="text">
-                                                                        <i className="icon-65"></i>
-                                                                        {list.title}
-                                                                    </div>
-                                                                }
-
-                                                                {!list?.badge_list && 
-                                                                    <div className="icon">
-                                                                        <i className={list?.icon}></i>
-                                                                    </div>
-                                                                }
-
-                                                                {list?.badge_list && 
-                                                                    <div className="badge-list">
-                                                                        <span className="badge badge-primary">{list?.question} Question</span>
-                                                                        <span className="badge badge-secondary">{list?.minutes} Minutes</span>
-                                                                    </div>
-                                                                }
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                            ))} */}
-
-
-
-        
+                                
 
                                         </div>
                                     </div>

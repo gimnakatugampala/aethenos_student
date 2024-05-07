@@ -26,6 +26,8 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 
+import { useRouter } from 'next/router';
+
 import OneLineSkeleton from '../../functions/Skeletons/OneLineSkeleton'
 import '@szhsin/react-menu/dist/index.css';
 
@@ -65,6 +67,8 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
   const [showDropdown, setShowDropdown] = useState(false);
 
   const [searchResults, setsearchResults] = useState(null)
+
+  const router = useRouter();
 
 
 
@@ -180,12 +184,15 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                     <SearchBar setsearchResults={setsearchResults} showDropdown={showDropdown} setShowDropdown={setShowDropdown} />
 
                                     {showDropdown && searchResults != null && (
-                                            <List sx={{ width: '450px', position: 'absolute', bgcolor: 'background.paper', overflowX: 'hidden', overflowY: 'scroll', height: '250px' }}>
+                                            <List sx={{ width: '450px', position: 'absolute', bgcolor: 'background.paper', overflowX: 'hidden', overflowY: 'scroll', maxHeight: '250px' }}>
                                                 {searchResults.length > 0 ? searchResults.map((result, index) => (
                                                     result.searchType === "course" ? (
                                                         <React.Fragment key={index}>
                                                             <a href={`/course-details/${result.courseCode}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                                            <ListItem onClick={() => window.location.href = `/course-details/${result.courseCode}`} style={{ cursor: 'pointer' }} alignItems="flex-start">
+                                                            <ListItem onClick={() => {
+                                                                window.location.href = `/course-details/${result.courseCode}`
+                                                                router.push(`/course-details/${result.courseCode}`);
+                                                            }} style={{ cursor: 'pointer' }} alignItems="flex-start">
                                                                 <ListItemAvatar>
                                                                     <Avatar src={`${IMG_HOST}${result.courseImg}`} />
                                                                 </ListItemAvatar>
@@ -206,7 +213,11 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                                     ) : (
                                                         <React.Fragment key={index}>
                                                             <a href={`/users/${result.courseCode}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                                            <ListItem onClick={() => window.location.href = `/users/${result.courseCode}`} style={{ cursor: 'pointer' }} alignItems="flex-start">
+                                                            <ListItem onClick={() => {
+                                                                window.location.href = `/users/${result.courseCode}`
+                                                                router.push(`/users/${result.courseCode}`);
+                                                                
+                                                            }} style={{ cursor: 'pointer' }} alignItems="flex-start">
                                                                 <ListItemAvatar>
                                                                     <Avatar src={result.instructorImg} />
                                                                 </ListItemAvatar>
