@@ -75,11 +75,11 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                                 <p className={seletedCurriculumItem == list.curriculumItemId ? 'text-white' : ''}>
                                                         {index + 1}.<i className="fa-solid fa-circle-play mx-2"></i> {list.title} 
 
-                                                        {list.videoLength !== 0 && (
+                                                        {type.videoLength !== 0 && (
                                                             <span style={{ fontSize: '12px' }}>
-                                                                <b><i><i className="fas fa-tv mx-2"></i>{list.videoLength}mins</i></b>
+                                                                <b><i><i className="fas fa-tv mx-2"></i>{(type.videoLength / 60).toFixed(2)}mins</i></b>
                                                             </span>
-                                                        )}
+                                                         )}
 
 
                                                     </p>
@@ -104,6 +104,7 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                                         </Dropdown>
                                                     )}
                                                     {/* Links */}
+                                                    {list.get_CurriculumItem_File.some(type => type.curriculum_item_file_type === "External Resourses") && (
                                                     <Dropdown>
                                                         <Dropdown.Toggle  size="sm" variant="danger">
                                                             <i className="fas fa-link"></i> Links
@@ -118,6 +119,7 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                                             ))}
                                                         </Dropdown.Menu>
                                                     </Dropdown>
+                                                    )}
                                                 </div>
                                                 </CardMainContainer>
                                         </span>
@@ -163,7 +165,10 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                 </CardContainer>
             
                                 <div className='d-flex justify-content-around'>
+
+
                                     {/* Resources */}
+                                    {list.get_CurriculumItem_File.some(type => type.curriculum_item_file_type === "Downloadable Items" || type.curriculum_item_file_type === "Source Code") && (
                                     <Dropdown>
                                         <Dropdown.Toggle size="sm" variant="danger">
                                             <i className="fas fa-folder-open"></i> Resources
@@ -178,7 +183,11 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                             ))}
                                         </Dropdown.Menu>
                                     </Dropdown>
+                                    )}
+
+
                                     {/* Links */}
+                                    {list.get_CurriculumItem_File.some(type => type.curriculum_item_file_type === "External Resourses") && (
                                     <Dropdown>
                                         <Dropdown.Toggle  size="sm" variant="danger">
                                             <i className="fas fa-link"></i> Links
@@ -193,6 +202,7 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                             ))}
                                         </Dropdown.Menu>
                                     </Dropdown>
+                                    )}
                                 </div>
                         
                                     

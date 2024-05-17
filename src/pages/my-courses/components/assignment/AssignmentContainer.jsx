@@ -162,6 +162,14 @@ const AssignmentContainer = ({ activeStep,  setActiveStep,  selectedAssignment }
 
           {activeStep == 2 ? (
               <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+               <Button
+            className='p-0'
+              variant="contained"
+              disabled={activeStep === 0}
+              onClick={handleBack}
+            >
+              Back
+            </Button>
               <Box sx={{ flex: '1 1 auto' }} />
               <Button variant="contained" onClick={handleReset}>Reset</Button>
             </Box>

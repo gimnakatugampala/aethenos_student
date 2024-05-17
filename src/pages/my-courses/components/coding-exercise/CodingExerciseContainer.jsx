@@ -84,7 +84,7 @@ const CodingExerciseContainer = ({setCodingExerciseActiveStep, activeStepCodingE
 
             {activeStepCodingExercise == 0 && (
                 <div className='my-2'>
-                {selectedCodingExercise.getCodingExercises[0].codingVideo != "" ?
+                {selectedCodingExercise.getCodingExercises[0].codingVideo != "" || selectedCodingExercise.getCodingExercises[0] != null  ?
                 <Player autoPlay={true}>
                 <source id="videoPlayer" src={`${IMG_HOST}${selectedCodingExercise.getCodingExercises[0].codingVideo}`} />
                 </Player> : <p className='text-center my-4'>No Video Available</p>
@@ -166,6 +166,14 @@ const CodingExerciseContainer = ({setCodingExerciseActiveStep, activeStepCodingE
 
         {activeStepCodingExercise == 2 ? (
              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                 <Button
+            className='p-0'
+              variant="contained"
+              disabled={activeStepCodingExercise === 0}
+              onClick={handleBack}
+            >
+              Back
+            </Button>
              <Box sx={{ flex: '1 1 auto' }} />
              <Button variant="contained" onClick={handleReset}>Reset</Button>
            </Box>
