@@ -87,7 +87,11 @@ const CourseTypeFour = ({ data, classes }) => {
                     </Link>
                 </div>
                 <div className="content">
+                {data.isPaid ? ( 
                     <div className="course-price price-round">{getSymbolFromCurrency(GetCurrencyByCountry(data))}{CalculateDiscountedPrice(data)}</div>
+                ) : (
+                    <span  className="course-price discounted-price m-lg-3">Free</span>
+                )}
                     <span className="course-level">{data.level}</span>
                     <h5 className="title">
                         <Link href={`/course-details/${data.course_code}`} legacyBehavior>

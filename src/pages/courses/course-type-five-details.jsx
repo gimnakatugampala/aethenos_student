@@ -114,30 +114,34 @@ const CourseTypeFive = ({ data, classes }) => {
         </div>
 
         <div className="content">
-          <div className="d-flex justify-content-end text-end">
-            {data != null && (
-              <div>
-                <div
-                  style={{ fontSize: "20px" }}
-                  className="course-price m-0 p-0 "
-                >
-                  <b>
-                    {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                    {CalculateDiscountedPrice(data)}
-                  </b>
-                </div>
+        <div className="d-flex justify-content-end text-end">
+            {data && (
+                data.isPaid ? (
+                    <div>
+                        <div
+                            style={{ fontSize: "20px" }}
+                            className="course-price m-0 p-0"
+                        >
+                            <b>
+                                {getSymbolFromCurrency(GetCurrencyByCountry(data))}
+                                {CalculateDiscountedPrice(data)}
+                            </b>
+                        </div>
 
-                <div
-                  style={{ fontSize: "13px" }}
-                  className="course-price m-0 p-0 text-decoration-line-through"
-                >
-                  {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                  {CalculateListPrice(data)}
-                </div>
-              </div>
+                        <div
+                            style={{ fontSize: "13px" }}
+                            className="course-price m-0 p-0 text-decoration-line-through"
+                        >
+                            {getSymbolFromCurrency(GetCurrencyByCountry(data))}
+                            {CalculateListPrice(data)}
+                        </div>
+                    </div>
+                ) : (
+                    <span className="course-price discounted-price m-lg-3">Free</span>
+                )
             )}
-          </div>
-
+        </div>
+        
           <p className="title">
             <b>
               <Link

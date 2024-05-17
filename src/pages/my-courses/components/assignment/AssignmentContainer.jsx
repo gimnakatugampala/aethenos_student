@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { Player } from 'video-react';
 import { IMG_HOST } from '../../../../api';
 
-const steps = ['Assignment Information And Instructions', 'Question', 'Solutions'];
+const steps = ['Assignment information and instructions', 'Questions', 'Solutions'];
 
 const AssignmentContainer = ({ activeStep,  setActiveStep,  selectedAssignment }) => {
 

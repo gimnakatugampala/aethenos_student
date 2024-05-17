@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { IMG_HOST } from '../../../../api';
 
 
-const steps = ['Practice test', 'Questions', 'Solutions'];
+const steps = ['Practice test information and instructions', 'Questions', 'Solutions'];
 
 const PraticeTestContainer = ({ PraticeTestactiveStep,setPraticeTestActiveStep, selectedPracticeTest }) => {
 

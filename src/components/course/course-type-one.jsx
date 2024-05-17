@@ -99,6 +99,9 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                         <img style={{width:'100%',objectFit:'cover'}} src={`${IMG_HOST}${data.img}`} alt={data.title} />}
                        
                     </Link>
+
+                    
+
                     {CalculateDiscountPrice(data) != "" && (
                     <div className="time-top">
                         <span className="duration" style={{background:'#e01D20'}}>{CalculateDiscountPrice(data)} OFF</span>
@@ -125,11 +128,19 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                         </div>
                         <span className="rating-count ml-4"><b>{Number.parseFloat(data.rating).toFixed(1)}</b></span>
                     </div>
-                    <div className='d-flex'>
+
+                    {data.isPaid ? (
+
+            <div className='d-flex'>
                     <div className="course-price discounted-price m-1"><b>{getSymbolFromCurrency(GetCurrencyByCountry(data))}{CalculateDiscountedPrice(data)}</b></div>
                     <div className="course-price text-decoration-line-through m-2">{getSymbolFromCurrency(GetCurrencyByCountry(data))}{CalculateListPrice(data)}</div>
-                    
                     </div>
+                    ) : (
+                        <span  className="course-price discounted-price m-1 m-lg-3">Free</span>
+                    )}
+
+                    
+
                     <ul className="d-flex course-meta">
                         <li><i className="icon-24"></i>{data.lesson} Lessons</li>
                         <li><i className="icon-25"></i>{data.student} Students</li>
@@ -165,10 +176,16 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
                         <span className="rating-count ml-4"><b>{Number.parseFloat(data.rating).toFixed(1)}</b></span>
                     </div>
 
+                    {data.isPaid ? ( 
+
                     <div className='d-flex'>
                     <div className="course-price discounted-price m-1"><b>{getSymbolFromCurrency(GetCurrencyByCountry(data))}{CalculateDiscountedPrice(data)}</b></div>
                     <div className="course-price text-decoration-line-through m-2">{getSymbolFromCurrency(GetCurrencyByCountry(data))}{CalculateListPrice(data)}</div>
                     </div>
+                    ) : (
+                        <span  className="course-price discounted-price m-lg-3">Free</span>
+                    )}
+
 
                     <p>{data.curriculum_desc.length > 60 ? data.curriculum_desc.substring(0, 60) + '...' : data.curriculum_desc}</p>
                     <ul className="d-flex course-meta">

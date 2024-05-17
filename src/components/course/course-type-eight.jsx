@@ -69,7 +69,7 @@ const CourseTypeEight = ({ data, classes }) => {
 
                 <div className="content">
                     <div className="course-price">
-                        ${data?.course_price}
+                        {data?.course_price}
                     </div>
 
                     <h6 className="title">

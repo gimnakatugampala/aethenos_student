@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { CircularProgressbar } from 'react-circular-progressbar';
+import { CircularProgressbar , buildStyles  } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import Modal from 'react-bootstrap/Modal';
 import React, { useState } from "react";
@@ -42,7 +42,21 @@ const HeaderMyCourse = ({id,course}) => {
 
                         <Nav.Link className='text-white'>
                             <div style={{ width: 40}}>    
-                            <CircularProgressbar value={Number.parseInt(course.progressValue)} text={`${Number.parseInt(course.progressValue)}%`} />
+                            <CircularProgressbar 
+                              value={Number.parseInt(course.progressValue)} 
+                              text={`${Number.parseInt(course.progressValue)}%`}
+                              styles={{
+                                path: {
+                                  stroke: course.progressValue == 100 ? 'green' : '', 
+                                  transition: 'stroke-dashoffset 0.5s ease 0s',
+                              
+                                },
+                                text: {
+                                  fill: course.progressValue == 100 ? 'green' : '', 
+                                }
+                              }} 
+                            />
+
                             </div>
                         </Nav.Link>
 

@@ -212,7 +212,11 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                                         </React.Fragment>
                                                     ) : (
                                                         <React.Fragment key={index}>
-                                                            <a href={`/users/${result.courseCode}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                                            <a onClick={() => {
+                                                                window.location.href = `/users/${result.courseCode}`
+                                                                router.push(`/users/${result.courseCode}`);
+                                                                
+                                                            }} href={`/users/${result.courseCode}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                                             <ListItem onClick={() => {
                                                                 window.location.href = `/users/${result.courseCode}`
                                                                 router.push(`/users/${result.courseCode}`);

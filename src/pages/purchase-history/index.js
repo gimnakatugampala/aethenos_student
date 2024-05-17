@@ -165,7 +165,7 @@ const index = () => {
                                                   <td>{p.status}</td>
                                                   <td>
                                                     {p.status == "Not Started" && (
-                                                    <Button onClick={() => handleShow(p)} variant="outline-danger">Ask Refund</Button>
+                                                    <Button onClick={() => handleShow(p)} variant="outline-danger">Request a Refund</Button>
                                                     )}
                                                   </td>
                                               </tr>
@@ -193,7 +193,7 @@ const index = () => {
 
         <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Ask Refund</Modal.Title>
+          <Modal.Title>Request a Refund</Modal.Title>
         </Modal.Header>
         <Modal.Body>
 
@@ -201,16 +201,16 @@ const index = () => {
       {isReqSubmitted ? (
           <div>
           <h4 className='text-center'>Thank You</h4>
-          <p>You have successfully submitted your refund request. You will receive an email providing more details about your request. You can also check the status of your refund in your <a href='/purchase-history'>purchase history</a>.</p>
+          <p>You have successfully submitted your refund request. You will receive an email providing more details about your request. You can also check the status of your refund in your <a className="text-danger" href='/purchase-history'><b>Purchase History</b></a>.</p>
 
           <p>
-          If you are receiving a refund back to your original payment method, most refunds will be posted to your financial account within 5 to 10 business days, though it may take longer, depending on your payment method or location.
+          Please Note that it may take 5 - 10 business days for the credit to be reflected in your account.
           </p>
           </div>
 
       ) : (
         <div className="mb-3">
-        <label for="exampleFormControlTextarea1" className="form-label">Reason</label>
+        <label for="exampleFormControlTextarea1" className="form-label">Refund Reason</label>
         <textarea value={refundText} onChange={(e) => setrefundText(e.target.value)} className="form-control" placeholder='What is the Reason for the Refund ?' rows="3"></textarea>
         <Button onClick={handleRefundSubmit} className='m-2' variant="danger">Submit</Button>
       </div>

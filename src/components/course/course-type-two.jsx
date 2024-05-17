@@ -21,7 +21,7 @@ const CourseTypeTwo = ({ data, classes }) => {
                         </Link>
                     </h5>
                     <ul className="course-meta">
-                        <li><i className="icon-24"></i>{data.lesson} Lessons2</li>
+                        <li><i className="icon-24"></i>{data.lesson} Lessons</li>
                         <li><i className="icon-25"></i>{data.student} Students</li>
                     </ul>
                 </div>

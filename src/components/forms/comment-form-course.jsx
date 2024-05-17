@@ -52,7 +52,7 @@ const CommentFormCourse = ({course, id}) => {
             </div>
 
                 <div className="form-group col-12">
-                    <textarea value={msg} onChange={(e) => setmsg(e.target.value)} name="msg" id="comm-message" cols="30" rows="5" placeholder="Review summary"></textarea>
+                    <textarea value={msg} onChange={(e) => setmsg(e.target.value)} name="msg" id="comm-message" cols="30" rows="5" placeholder="Your Comments"></textarea>
                 </div>
 
                 <div className="form-group col-6 mx-auto">

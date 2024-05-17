@@ -73,7 +73,15 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                                 />
                                                 <li className='d-flex'>
                                                 <p className={seletedCurriculumItem == list.curriculumItemId ? 'text-white' : ''}>
-                                                        {index + 1}.<i className="fa-solid fa-circle-play mx-2"></i> {list.title} <span style={{fontSize:'12px'}}><b><i><i className="fas fa-tv mx-2"></i>2min</i></b></span>
+                                                        {index + 1}.<i className="fa-solid fa-circle-play mx-2"></i> {list.title} 
+
+                                                        {list.videoLength !== 0 && (
+                                                            <span style={{ fontSize: '12px' }}>
+                                                                <b><i><i className="fas fa-tv mx-2"></i>{list.videoLength}mins</i></b>
+                                                            </span>
+                                                        )}
+
+
                                                     </p>
                                                 </li> 
                                                 </CardContainer>

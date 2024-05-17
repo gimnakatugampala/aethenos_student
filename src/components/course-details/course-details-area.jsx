@@ -83,7 +83,7 @@ const CourseDetailsArea = ({ course }) => {
                                     <div className="faq-accordion">
                                         <div className="accordion">
 
-                                            {course.course_content.map((content,index) => (
+                                            {course.course_content != null && course.course_content.map((content,index) => (
                                              <Accordian key={index} id={index} no_quiz={content.no_of_qize} title={`${content.section_name}`} lectures={content.no_of_lectures} lists={content.section_curriculum_item} />
                                             ))}
 
@@ -110,18 +110,22 @@ const CourseDetailsArea = ({ course }) => {
                                              <div className="row align-items-center">
                                                     <div className="col-sm-3">
                                                         <div className="rating-box">
-                                                            <div className="rating-number">{course && (course.rating).toFixed(1)}</div>
+                                                            <div className="rating-number">{course.rating != null && (course.rating).toFixed(1)}</div>
                                                             {course && <Rating  size={20} readonly={true} iconsCount={5} initialValue={Number.parseInt(course.rating)} />}
                                                             <span>({course && Number.parseInt(course.rating_count)} {Number.parseInt(course.rating_count) == 1 ? "Review" : "Reviews"})</span>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-9">
                                                         <div className="review-wrapper ">
-                                                            <SingleProgressbar value={course.ratingDetails.fiveRatingCount} rating_value={'5'} />
-                                                            <SingleProgressbar value={course.ratingDetails.fourRatingCount} rating_value={'4'} />
-                                                            <SingleProgressbar value={course.ratingDetails.threeRatingCount} rating_value={'3'} />
-                                                            <SingleProgressbar value={course.ratingDetails.twoRatingCount} rating_value={'2'} />
-                                                            <SingleProgressbar value={course.ratingDetails.oneRatingCount} rating_value={'1'} />
+                                                           {course.ratingDetails != null && <SingleProgressbar value={course.ratingDetails.fiveRatingCount} rating_value={'5'} />} 
+                                                           {course.ratingDetails != null && <SingleProgressbar value={course.ratingDetails.fourRatingCount} rating_value={'4'} />}
+                                                           {course.ratingDetails != null && <SingleProgressbar value={course.ratingDetails.threeRatingCount} rating_value={'3'} />}
+                                                           {course.ratingDetails != null && <SingleProgressbar value={course.ratingDetails.twoRatingCount} rating_value={'2'} />}
+                                                           {course.ratingDetails != null && <SingleProgressbar value={course.ratingDetails.oneRatingCount} rating_value={'1'} />}
+                                                            
+                                                            
+                                                            
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>

@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { Player } from 'video-react';
 import { IMG_HOST } from '../../../../api';
 
-const steps = ['Coding Exercise Information And Instructions', 'Coding Exercise Questions' , 'Solutions'];
+const steps = ['Coding exercise information and instructions', 'Coding exercise questions' , 'Solutions'];
 
 const CodingExerciseContainer = ({setCodingExerciseActiveStep, activeStepCodingExercise , selectedCodingExercise}) => {
 

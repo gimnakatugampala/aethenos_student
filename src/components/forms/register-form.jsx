@@ -182,9 +182,9 @@ const RegisterForm = () => {
             <div className="form-group chekbox-area">
                 <div className="edu-form-check">
                     <input value={termsconditions} onChange={(e) => settermsconditions(e.target.checked)} type="checkbox" name='terms' id="terms-condition" />
-                    <label htmlFor="terms-condition">I agree the User Agreement and
+                    <label htmlFor="terms-condition">I agree to the
                         <Link href="/terms-condition">
-                            Terms & Condition.
+                            Terms & Conditions.
                         </Link>
                     </label>
                 </div>

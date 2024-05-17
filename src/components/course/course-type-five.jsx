@@ -74,6 +74,7 @@ const CourseTypeFive = ({ data, classes }) => {
 
                 <div className="content">
 
+                {data.isPaid ? ( 
                     <div className='d-flex justify-content-end text-end'>
                     <div>
                         <div style={{fontSize:'20px'}} className="course-price m-0 p-0 ">
@@ -87,6 +88,10 @@ const CourseTypeFive = ({ data, classes }) => {
                         </div>
                     </div>
                     </div>
+                ) :(
+                    <span  className="course-price discounted-price m-lg-3">Free</span>
+                )}
+
 
 
                     <p className="title m-0 p-0">

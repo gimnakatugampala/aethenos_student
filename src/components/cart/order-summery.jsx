@@ -98,11 +98,11 @@ const OrderSummery = () => {
 			</table>
 
 			{showLogin && 	<button onClick={handleShow} type='button' className="edu-btn btn-medium checkout-btn">
-                Process to Checkout<i className="icon-4"></i>
+                Proceed to Checkout<i className="icon-4"></i>
             </button>}
 
 			{showLogin == false && <a href="/checkout" className="edu-btn btn-medium checkout-btn">
-                Process to Checkout<i className="icon-4"></i>
+                Proceed to Checkout<i className="icon-4"></i>
             </a>}
 			
 		

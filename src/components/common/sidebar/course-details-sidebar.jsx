@@ -102,12 +102,16 @@ const CourseDetailsSidebar = ({ course,details_2=false }) => {
                         </div>
                         <div className="content">
                             {/* <h4 className="widget-title">Course Includes:</h4> */}
-
-                            <div>
-                                <span style={mainfs} className="value price fw-bolder">{getSymbolFromCurrency(GetCurrencyByCountry(course))}{CalculateDiscountedPrice(course)}</span>
-                                <span className='text-decoration-line-through m-lg-2'> {getSymbolFromCurrency(GetCurrencyByCountry(course))}{CalculateListPrice(course)}</span>
-                               {CalculateDiscountPrice(course) != "" && (<span className='m-lg-1 fw-semibold'>{CalculateDiscountPrice(course)} OFF</span>)} 
-                            </div>
+                                {course.isPaid ? (
+                                    <div>
+                                    <span style={mainfs} className="value price fw-bolder">{getSymbolFromCurrency(GetCurrencyByCountry(course))}{CalculateDiscountedPrice(course)}</span>
+                                    <span className='text-decoration-line-through m-lg-2'> {getSymbolFromCurrency(GetCurrencyByCountry(course))}{CalculateListPrice(course)}</span>
+                                    {CalculateDiscountPrice(course) != "" && (<span className='m-lg-1 fw-semibold'>{CalculateDiscountPrice(course)} OFF</span>)} 
+                                    </div>
+                                    ) : (
+                                        <span style={mainfs} className="value price fw-bolder">Free</span>
+                                    )}
+                            
                          
 
                             <ul className="course-item">
