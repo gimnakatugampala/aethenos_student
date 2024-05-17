@@ -98,9 +98,11 @@ const AssignmentContainer = ({ activeStep,  setActiveStep,  selectedAssignment }
                 <h5 className='m-0 p-0'>
                     <b>{selectedAssignment.title} <i>({selectedAssignment.getAssignments[0].duration})</i></b>
                 </h5>
+                {selectedAssignment.description != "" && <h6 className='m-0 p-0'>Description</h6>}
                 <p className='m-0 p-0'>{selectedAssignment.description}</p>
                 <br />
-                <h6 className='m-0 p-0'>Instructions</h6>
+                {selectedAssignment.getAssignments[0].instructions != "" && <h6 className='m-0 p-0'>Instructions</h6>}
+                
                 <p className='m-0 p-0'>{selectedAssignment.getAssignments[0].instructions}</p>
                 {selectedAssignment.getAssignments[0].downloadableResource != "" && (
                 <a className='btn btn-danger my-4' href={`${IMG_HOST}${selectedAssignment.getAssignments[0].downloadableResource}`} download >

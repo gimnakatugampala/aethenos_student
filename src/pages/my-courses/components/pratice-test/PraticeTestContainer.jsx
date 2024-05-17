@@ -84,7 +84,10 @@ const PraticeTestContainer = ({ PraticeTestactiveStep,setPraticeTestActiveStep, 
             <h6 className='m-0 p-0'>Min Pass Mark - {selectedPracticeTest.getPracticeTests[0].minimumuPassMark}%</h6>
 
             <br />
+            {selectedPracticeTest.description != "" && <p className='m-0 p-0'>Description</p>}
             <h6 className='m-0 p-0'>{selectedPracticeTest.description}</h6>
+            <br />
+            {selectedPracticeTest.getPracticeTests[0].instructions != "" && <p className='m-0 p-0'>Instructions</p>}
             <h6 className='m-0 p-0'>{selectedPracticeTest.getPracticeTests[0].instructions}</h6>
 
             {selectedPracticeTest.getPracticeTests[0].externalLink != "" && (

@@ -97,7 +97,9 @@ const CodingExerciseContainer = ({setCodingExerciseActiveStep, activeStepCodingE
                   </b>
                 </h5>
 
+                {selectedCodingExercise.description != "" && <p className='m-0 p-0'>Description</p>}
                 <h6 className='m-0 p-0'>{selectedCodingExercise.description}</h6>
+                {selectedCodingExercise.getCodingExercises[0].instructions != "" && <p className='m-0 p-0'>Instructions</p>}
                 <h6 className='m-0 p-0'><i>{selectedCodingExercise.getCodingExercises[0].instructions}</i></h6>
 
                 {selectedCodingExercise.getCodingExercises[0].downloadableResource != "" && (
