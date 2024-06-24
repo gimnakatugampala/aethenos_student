@@ -80,8 +80,10 @@ const PraticeTestContainer = ({ PraticeTestactiveStep,setPraticeTestActiveStep, 
       <React.Fragment>
         {PraticeTestactiveStep == 0 && (
         <div className='my-3'>
-            <h5 className='m-0 p-0'><b>{selectedPracticeTest.title} <i>({selectedPracticeTest.getPracticeTests[0].duration})</i></b></h5>
+            <h5 className='m-0 p-0'><b>{selectedPracticeTest.title} </b></h5>
             <h6 className='m-0 p-0'>Min Pass Mark - {selectedPracticeTest.getPracticeTests[0].minimumuPassMark}%</h6>
+
+            <p>Duration <i>({selectedPracticeTest.getPracticeTests[0].duration})</i></p>
 
             <br />
             {selectedPracticeTest.description != "" && <p className='m-0 p-0'>Description</p>}

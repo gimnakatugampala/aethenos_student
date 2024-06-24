@@ -38,8 +38,8 @@ const RegisterForm = () => {
         if(fname == ""){
 
             Swal.fire({
-                title: 'Empty Field!',
-                text: 'Please Fill First Name',
+                title: 'Empty field!',
+                text: 'Please fill first name',
                 icon: 'error',
               })
 
@@ -48,8 +48,8 @@ const RegisterForm = () => {
         }else if(lname == ""){
 
             Swal.fire({
-                title: 'Empty Field!',
-                text: 'Please Fill Last Name',
+                title: 'Empty field!',
+                text: 'Please fill last name',
                 icon: 'error',
               })
 
@@ -58,8 +58,8 @@ const RegisterForm = () => {
         }else if(email == ""){
 
             Swal.fire({
-                title: 'Empty Field!',
-                text: 'Please Fill Email Address',
+                title: 'Empty field!',
+                text: 'Please fill email address',
                 icon: 'error',
               })
 
@@ -68,8 +68,8 @@ const RegisterForm = () => {
         }else if(password == ""){
 
             Swal.fire({
-                title: 'Empty Field!',
-                text: 'Please Fill Password',
+                title: 'Empty field!',
+                text: 'Please fill password',
                 icon: 'error',
               })
 
@@ -78,8 +78,8 @@ const RegisterForm = () => {
         }else if(conpassword == ""){
 
             Swal.fire({
-                title: 'Empty Field!',
-                text: 'Please Fill Confirm Password',
+                title: 'Empty field!',
+                text: 'Please fill confirm password',
                 icon: 'error',
               })
 
@@ -88,7 +88,7 @@ const RegisterForm = () => {
         }else if(password != conpassword){
 
             Swal.fire({
-                title: 'Password Error!',
+                title: 'Password error!',
                 text: 'Passwords do not match',
                 icon: 'error',
               })
@@ -98,8 +98,8 @@ const RegisterForm = () => {
         }else if(!validateEmail(email)){
 
             Swal.fire({
-                title: 'Email Error!',
-                text: 'Please Enter a Valid Email Address',
+                title: 'Email error!',
+                text: 'Please enter a valid email address',
                 icon: 'error',
               })
 
@@ -108,8 +108,8 @@ const RegisterForm = () => {
         }else if(termsconditions == false){
 
             Swal.fire({
-                title: 'Terms & Conditions Error!',
-                text: 'Please Accept our Terms & Conditions',
+                title: 'Terms & conditions error!',
+                text: 'Please accept our terms & conditions',
                 icon: 'error',
               })
 
@@ -118,7 +118,7 @@ const RegisterForm = () => {
         }else if(password.length < 8 || conpassword < 8){
 
             Swal.fire({
-                title: 'Password Error!',
+                title: 'Password error!',
                 text: 'Password must be at least 8 characters or more',
                 icon: 'error',
               })

@@ -100,10 +100,14 @@ function Messages() {
     GetAllChatRoomMessages(user.chatRoomCode,setroomMessages)
   };
 
+  useEffect(() => {
+    GetAllInstructorsofThePurchaseMsg(setinstructors)
+  }, [])
+  
+
   
 
   useEffect(() => {
-    GetAllInstructorsofThePurchaseMsg(setinstructors)
     GetAllChatRooms(setchatRooms)
   }, [])
 
@@ -131,7 +135,7 @@ function Messages() {
       return
     }
 
-    AddSendMessage(selectedInstructor,messageTextAdd,selectedCourse,setmessageTextAdd,GetAllChatRooms,setchatRooms)
+    AddSendMessage(selectedInstructor,messageTextAdd,selectedCourse,setmessageTextAdd,GetAllChatRooms,setchatRooms,setshowAddMessage)
     
   }
 
@@ -207,7 +211,7 @@ function Messages() {
                       }}
                       alignItems="flex-start"
                     >
-                      <ListItemButton selected={selectedUser == user.instructor ? true : false}>
+                      <ListItemButton selected={selectedUser == user.instructor && user.courseTitle == selectedCourseTitleName ? true : false}>
                         <ListItemAvatar>
                           <Avatar alt={user.instructor} src="/static/images/avatar/1.jpg" />
                         </ListItemAvatar>
@@ -266,8 +270,8 @@ function Messages() {
 
                   }} className="my-3" size="md" aria-label="Default select example">
                     <option selected disabled value="">Select Instructor</option>
-                    {instructors.length > 0 && instructors.map((instructor,index) => (
-                      <option key={index} value={`${instructor.userCode}:${instructor.coursesDetails[0].courseCode}`}>{instructor.name} - {instructor.coursesDetails[0].courseName}</option>
+                    {instructors != null && instructors.length > 0 && instructors.map((instructor,index) => (
+                      <option key={index} value={`${instructor.userCode}:${instructor.coursesDetails[0] != null && instructor.coursesDetails[0].courseCode}`}>{instructor.name} - {instructor.coursesDetails[0] != null && instructor.coursesDetails[0].courseName}</option>
                     ))}
                   </Form.Select>
 
@@ -298,7 +302,7 @@ function Messages() {
 
                  <Paper elevation={3} className="p-3" style={{ minHeight: "70vh", overflowY: "auto", background:'#D5D8DC' }}>
                     <List>
-                      {roomMessages.map((message, index) => (
+                      {roomMessages != null && roomMessages.map((message, index) => (
                         <MessageBox
                           key={index}
                           styles={{ width: 300, color: '#000', fontWeight: 'bold', background: message.from == selectedUser ? '#fff' : '#e01D20' }}

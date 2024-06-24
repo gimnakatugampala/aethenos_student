@@ -134,13 +134,31 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/instructor/getInstru
 
 export const StudentSignUp = async(fname, lname, email , conpassword,setloading,router) =>{
 
+  const COUNTRY = Cookies.get('aethenos_user_origin')
+  let countryToFind = "";
 
-    var formdata = new FormData();
-    formdata.append("email", `${email}`);
-    formdata.append("firstName", `${fname}`);
-    formdata.append("lastName", `${lname}`);
-    formdata.append("password", `${conpassword}`);
-    formdata.append("gup_type", "1");
+
+  
+  
+
+    if (COUNTRY) {
+      try {
+        const parsedCountry = JSON.parse(COUNTRY);
+        countryToFind = parsedCountry.country_name;
+
+        var formdata = new FormData();
+          formdata.append("email", `${email}`);
+          formdata.append("firstName", `${fname}`);
+          formdata.append("lastName", `${lname}`);
+          formdata.append("password", `${conpassword}`);
+          formdata.append("gup_type", "1");
+          formdata.append("countryName", `${countryToFind}`);
+       
+
+      } catch (error) {
+          console.error("Error parsing COUNTRY:", error);
+      }
+  }
     
     var requestOptions = {
       method: 'POST',
@@ -183,7 +201,7 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading,
         }else{
 
             Swal.fire({
-                title: 'Login Error!',
+                title: 'Login error!',
                 text: `${result.message}`,
                 icon: 'error',
               })
@@ -242,8 +260,8 @@ export const StudentSignIn = async(email, password,setloading,router,rediect_url
             Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title:"Logged In!",
-                text: "Successfully LoggedIn",
+                title:"Logged in!",
+                text: "Successfully loggedIn",
                 showConfirmButton: false,
                 timer: 1500
               });
@@ -326,7 +344,7 @@ export const InstructorSignUp = async(firstname,lastname,email,conpassword,route
       }else{
 
           Swal.fire({
-              title: 'Login Error!',
+              title: 'Login error!',
               text: `${result.message}`,
               icon: 'error',
             })
@@ -1469,6 +1487,7 @@ let timerInterval;
 Swal.fire({
   title: "Processing ...",
   timerProgressBar: true,
+  allowOutsideClick: false,
   didOpen: () => {
     Swal.showLoading();
 
@@ -1729,6 +1748,11 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/communication/addQue
       SuccessAlert("Success",result.message)
       setShowNewQuestion(false)
       setquestion("")
+
+      setTimeout(() => {
+        window.location.reload()
+      }, 1500);
+
       return
     }
 
@@ -1884,7 +1908,7 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/updat
     Unauthorized(result.status,"profile") 
     console.log(result)
     if(result.variable == "200"){
-      SuccessAlert("Success","Instructor Profile Update Successfully")
+      SuccessAlert("Success","Instructor profile update successfully")
       setbtn_loading(false)
     }
   })
@@ -1916,7 +1940,7 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/updat
  }
 
 
- export const AddSendMessage = async(selectedInstructorCode,messageTextAdd,selectedCourse,setmessageTextAdd,GetAllChatRooms,setchatRooms) =>{
+ export const AddSendMessage = async(selectedInstructorCode,messageTextAdd,selectedCourse,setmessageTextAdd,GetAllChatRooms,setchatRooms,setshowAddMessage) =>{
 
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
@@ -1943,6 +1967,7 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/sendChat", requ
     if(result.variable == "200"){
       setmessageTextAdd("")
       GetAllChatRooms(setchatRooms)
+      setshowAddMessage(false)
   
     }
   })

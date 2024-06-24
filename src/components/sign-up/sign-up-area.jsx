@@ -8,8 +8,8 @@ const SignUpArea = () => {
                 <div className="row g-5 justify-content-center">
                       <div className="col-lg-7">
                         <div className="login-form-box registration-form">
-                            <h3 className="title">Registration</h3>
-                            <p>Already have an account? <a href="/login">Login</a></p>
+                            <h3 className="title">Sign up</h3>
+                            <p>Already have an account? <a href="/login">Log in</a></p>
                             <RegisterForm />
                         </div>
                     </div>

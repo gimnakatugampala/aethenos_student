@@ -104,7 +104,7 @@ const CourseDetailsTwo = ({ course }) => {
                                     {/* Description */}
                                     <h3 className="heading-title" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">Description</h3>
                                 <ul className="mb--90" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
-                                    <p>Welcome to the Complete Web Development Bootcamp, the only course you need to learn to code and become a full-stack web developer. With 150,000+ ratings and a 4.8 average, my Web Development course is one of the HIGHEST RATED courses in the history of Udemy! 
+                                    <p>Welcome to the Complete Web Development Bootcamp, the only course you need to learn to code and become a full-stack web developer. With 150,000+ ratings and a 4.8 average, my Web Development course is one of the HIGHEST RATED courses in the history of Aethenos! 
 
                                     At 65+ hours, this Web Development course is without a doubt the most comprehensive web development course available online. <br /> Even if you have zero programming experience, this course will take you from beginner</p>
                                 </ul>

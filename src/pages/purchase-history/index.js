@@ -164,7 +164,7 @@ const index = () => {
                                                   <td>{p.refundedTo}</td>
                                                   <td>{p.status}</td>
                                                   <td>
-                                                    {p.status == "Not Started" && (
+                                                    {p.refundedTo != "Free Course" && p.status == "Not Started" && (
                                                     <Button onClick={() => handleShow(p)} variant="outline-danger">Request a Refund</Button>
                                                     )}
                                                   </td>

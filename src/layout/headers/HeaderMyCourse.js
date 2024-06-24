@@ -61,7 +61,14 @@ const HeaderMyCourse = ({id,course}) => {
                         </Nav.Link>
 
                             <NavDropdown className='d-flex align-items-center p-2 mx-5' title="Your progress" id="collapsible-nav-dropdown">
-                            <NavDropdown.Item  ><b>{course.completedItemCount} of {course.allItemsCount} Complete</b> <br /> Finish course to get the certificate</NavDropdown.Item>
+                            {course.completedItemCount == course.allItemsCount ? (
+
+                            <NavDropdown.Item  ><b>{course.completedItemCount} of {course.allItemsCount} 
+                            Complete</b> <br /> Finish course to get the certificate</NavDropdown.Item>
+                            ) : (
+                              <NavDropdown.Item  ><b>{course.completedItemCount} of {course.allItemsCount} 
+                              Complete</b> <br /> We have Emailed You The Certificate</NavDropdown.Item>
+                            )}
                             </NavDropdown>
                         </Nav>
 

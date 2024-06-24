@@ -29,8 +29,8 @@ const LoginForm = () => {
         if(email == ""){
 
             Swal.fire({
-                title: 'Empty Field!',
-                text: 'Please Fill Email Address',
+                title: 'Empty field!',
+                text: 'Please fill email address',
                 icon: 'error',
               })
 
@@ -39,8 +39,8 @@ const LoginForm = () => {
         }else if(!validateEmail(email)){
 
             Swal.fire({
-                title: 'Email Error!',
-                text: 'Please Enter a Valid Email Address',
+                title: 'Email error!',
+                text: 'Please enter a valid email address',
                 icon: 'error',
               })
 
@@ -49,8 +49,8 @@ const LoginForm = () => {
         }else if(password == ""){
 
             Swal.fire({
-                title: 'Empty Field!',
-                text: 'Please Fill Password',
+                title: 'Empty field!',
+                text: 'Please fill password',
                 icon: 'error',
               })
 
@@ -93,7 +93,7 @@ const LoginForm = () => {
                 {loading ? (
                     <ButtonLoadingMedium />
                 ) : (
-                <button type="submit" className="edu-btn btn-medium">Login <i className="icon-4"></i></button>
+                <button type="submit" className="edu-btn btn-medium">Log in <i className="icon-4"></i></button>
                 )}
 
              

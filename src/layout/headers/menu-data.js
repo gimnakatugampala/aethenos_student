@@ -103,7 +103,7 @@ const menu_data = [
         // ]
     },
     {
-        title: 'Instructors',
+        title: 'Instructor',
         link: '/instructor',
         mega_menu: false,
         // submenus: [

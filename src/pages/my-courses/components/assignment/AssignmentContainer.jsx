@@ -96,8 +96,9 @@ const AssignmentContainer = ({ activeStep,  setActiveStep,  selectedAssignment }
 
               <div className='m-2'>
                 <h5 className='m-0 p-0'>
-                    <b>{selectedAssignment.title} <i>({selectedAssignment.getAssignments[0].duration})</i></b>
+                    <b>{selectedAssignment.title} </b>
                 </h5>
+                <p className='my-2 p-0'>Duration <i>({selectedAssignment.getAssignments[0].duration})</i></p>
                 {selectedAssignment.description != "" && <h6 className='m-0 p-0'>Description</h6>}
                 <p className='m-0 p-0'>{selectedAssignment.description}</p>
                 <br />

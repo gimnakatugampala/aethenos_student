@@ -92,14 +92,14 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                 { ! no_top_bar && 
                     <div className="header-top-bar">
                         <div className="container-fluid">
-                            <div className="header-top" style={{height:40}}>
+                            {/* <div className="header-top" style={{height:40}}>
                                 <div className="header-top-left">
                                     <HeaderTopLeft />
                                 </div>
                                 <div className="header-top-right">
                                     <HeaderTopRight />
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 }
@@ -287,14 +287,14 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                         <>
                                         <li className="header-info">
                                                 <Link href="/login" legacyBehavior>
-                                                    <a className="edu-btn btn-small">Login
+                                                    <a className="edu-btn btn-small">Log in
                                                     </a>
                                                 </Link>
                                             </li>
 
                                         <li className="header-info">
-                                        <Link href="/register" legacyBehavior>
-                                            <a className="edu-btn btn-small">Register
+                                        <Link href="/signup" legacyBehavior>
+                                            <a className="edu-btn btn-small">Sign up
                                             </a>
                                         </Link>
                                         </li>

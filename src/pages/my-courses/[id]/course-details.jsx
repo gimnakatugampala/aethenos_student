@@ -597,7 +597,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
 
         <div className="row my-1">
             <div className="col-md-12">
-              {answer == null ? "Instructor Not Answered Yet" : (
+              {answer == null ? <h5 className="text-center"><b>Instructor Not Answered Yet</b></h5> : (
 
             <ListItem alignItems="flex-start">
                   <ListItemAvatar>
