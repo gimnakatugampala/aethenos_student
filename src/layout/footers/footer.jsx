@@ -49,10 +49,10 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
         <div className="container">
           <div className="row g-5">
 
-            <div className="col-lg-3 col-md-6">
-              <div className="edu-footer-widget">
+            {/* <div className="col-lg-3 col-md-6">
+              <div className="edu-footer-widget"> */}
                 {/* <p className="description">{desc}</p> */}
-                <div className="widget-information">
+                {/* <div className="widget-information">
                   <ul className="information-list">
                     <li>
                       <span>ADDRESS</span><br />
@@ -79,7 +79,7 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
                   </ul>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {widgets.map((w, i) => (
               <div key={i} className={`col-lg-${w.col} col-sm-6`}>
@@ -100,21 +100,35 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
               </div>
             ))}
 
-            <div className="col-lg-3 col-md-6 m-0">
-              <div className="edu-footer-widget">
-                {/* <h4 className="widget-title">Terms & Conditions</h4> */}
+
+         
+
+            {/* <div className="col-lg-3 col-md-6 m-0">
+              <div className="edu-footer-widget"> 
+                <h4 className="widget-title"></h4>
                 <div className="inner">
                 <img
-                        className="logo-light"
+                        className="logo-light mt-3"
                         src={logoLight}
                         alt="Corporate Logo"
-                      />
-                  <p className="description">
+                      /> */}
+                  {/* <p className="description">
                     Aethenos is an Online Learning Course Marketplace that Allows Students to Learn On Any Subject Anytime.
-                  </p>
-                </div>
+                  </p> */}
+                {/* </div>
               </div>
+            </div> */}
+
+            <div className="col-md-12">
+            <div className="col-md-3 mx-5">
+            <img
+              className="logo-light w-75"
+              src={logoLight}
+              alt="Corporate Logo"
+            />
             </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -142,8 +156,8 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
             <div className="col-lg-12">
               <div className="inner text-center">
                 <p>
-                  Copyright {new Date().getFullYear()}{" "}
-                  <a
+                © {new Date().getFullYear()} Aethenos Limited. All Rights Reserved 
+                  {/* <a
                     href="https://aethenos.com"
                     rel="noreferrer"
                     target="_blank"
@@ -152,7 +166,7 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
                   </a>{" "}
                   Designed By{" "}
                 
-                  . All Rights Reserved
+                  . All Rights Reserved */}
                 </p>
               </div>
             </div>

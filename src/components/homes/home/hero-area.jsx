@@ -10,12 +10,16 @@ const HeroArea = () => {
                 <div className="row align-items-center">
                     <div className="col-lg-6">
                         <div className="banner-content">
-                            <h1 className="title" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">Learning that lasts Invest in yourself. Courses as low as <span className="color-secondary">$12.99</span> through Oct 12.</h1>
-                            <p data-sal-delay="200" data-sal="slide-up" data-sal-duration="1000">Trusted by over 14,400 companies and millions of learners around the world</p>
+                            <h1 className="title" data-sal-delay="100" data-sal="slide-up" data-sal-duration="1000">
+                                {/* Learning that lasts Invest in yourself. Courses as low as <span className="color-secondary">$12.99</span> through Oct 12. */}
+                                </h1>
+                            <p data-sal-delay="200" data-sal="slide-up" data-sal-duration="1000">
+                                {/* Trusted by over 14,400 companies and millions of learners around the world */}
+                                </p>
                             <div className="banner-btn" data-sal-delay="400" data-sal="slide-up" data-sal-duration="1000">
-                                <a href="#" className="edu-btn">
+                                {/* <a href="#" className="edu-btn">
                                     Find courses<i className="icon-4"></i>
-                                </a>
+                                </a> */}
                             </div>
                             <ul className="shape-group">
                                 <motion.li className="shape-1 scene" data-sal-delay="1000" data-sal="fade" data-sal-duration="1000" 

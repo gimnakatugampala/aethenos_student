@@ -53,8 +53,10 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                             setmain_Video_player_url(`${IMG_HOST}${type.url}`);
                                             var videoPlayer = document.querySelector(".video-react-video");
                                             var videoSource = document.getElementById("videoPlayer");
-                                            videoSource.src = `${IMG_HOST}${type.url}`;
-                                            videoPlayer.load();
+                                            if(videoSource){
+                                                videoSource.src = `${IMG_HOST}${type.url}`;
+                                                videoPlayer.load();
+                                            }
 
                                             setseletedCurriculumItem(list.curriculumItemId)
 
@@ -271,8 +273,7 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                     setseletedCurriculumItem(list.curriculumItemId)
                                   
                                     UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
-                                    setselectedAssignment(list)
-
+                                    
                                     GetMyCoursesDetails(courseItemCode, setcourse)
 
                                     console.log(list)

@@ -113,7 +113,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
     
             const calculatedBuyCourseOrder = {
             "paymentMethod": "1",
-            "discount": 20,
+            "discount": 0,
             "totalPrice": `${total}`,
             "currency": GetCurrencyByCountry(cartCourses[0].other_data).toLowerCase(),
             "country": JSON.parse(COUNTRY).country_name,
@@ -294,7 +294,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                     
                             const calculatedBuyCourseOrder = {
                             "paymentMethod": "2",
-                            "discount": 20,
+                            "discount": 0,
                             "totalPrice": `${total}`,
                             "currency": GetCurrencyByCountry(cartCourses[0].other_data).toLowerCase(),
                             "courses": calculatedPurchasedCourse

@@ -8,6 +8,7 @@ import { ENV_STATUS } from '../functions/env';
 
 export const USERTOKEN = Cookies.get('aethenos') 
 export const IMG_HOST = `https://aethenosinstructor.exon.lk:2053/aethenos-assert/`
+const BACKEND_LINK = "https://aethenosinstructor.exon.lk:2053/aethenos-api"
 const CURRENT_USER = Cookies.get('aethenos') 
 
 // Unauthorized
@@ -101,7 +102,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/instructor/getInstructorProfileDetails", requestOptions)
+fetch(`${BACKEND_LINK}/instructor/getInstructorProfileDetails`, requestOptions)
   .then(response => response.json())
   .then(result => {
     console.log(result)
@@ -137,10 +138,6 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading,
   const COUNTRY = Cookies.get('aethenos_user_origin')
   let countryToFind = "";
 
-
-  
-  
-
     if (COUNTRY) {
       try {
         const parsedCountry = JSON.parse(COUNTRY);
@@ -166,7 +163,7 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading,
       redirect: 'follow'
     };
     
-    fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/register/add", requestOptions)
+    fetch(`${BACKEND_LINK}/register/add`, requestOptions)
       .then(response => response.json())
       .then(result => {
         // console.log(result)
@@ -230,7 +227,7 @@ export const StudentSignIn = async(email, password,setloading,router,rediect_url
     redirect: 'follow'
     };
 
-    fetch("https://aethenosadmin.exon.lk:2053/aethenos-api/authentication/student", requestOptions)
+    fetch(`https://aethenosadmin.exon.lk:2053/aethenos-api/authentication/student`, requestOptions)
     .then(response => response.json())
     .then(result => {
         // console.log(result)
@@ -297,9 +294,6 @@ export const StudentSignIn = async(email, password,setloading,router,rediect_url
 }
 
 export const InstructorSignUp = async(firstname,lastname,email,conpassword,router) =>{
-
-
-
   var formdata = new FormData();
   formdata.append("email", `${email}`);
   formdata.append("firstName", `${firstname}`);
@@ -313,7 +307,7 @@ export const InstructorSignUp = async(firstname,lastname,email,conpassword,route
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/register/add", requestOptions)
+  fetch(`${BACKEND_LINK}/register/add`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -361,7 +355,7 @@ export const GetCategoriesMenu = async(setnavbar_list) =>{
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getAllCategorySubCategoryTopics", requestOptions)
+  fetch(`${BACKEND_LINK}/course/getAllCategorySubCategoryTopics`, requestOptions)
     .then(response => response.json())
     .then(result => {
       setnavbar_list(result)
@@ -404,7 +398,7 @@ export const GetStudentTopics = async(setSuggestions,setFilteredSuggestions) =>{
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/getTopics", requestOptions)
+  fetch(`${BACKEND_LINK}/studentProfile/getTopics`, requestOptions)
     .then(response => response.json())
     .then(result => {
       
@@ -440,7 +434,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/setTopics", requestOptions)
+fetch(`${BACKEND_LINK}/studentProfile/setTopics`, requestOptions)
   .then(response => response.json())
   .then(result => {
     Unauthorized(result.status,`/student-interests?token=${CURRENT_USER}`)
@@ -489,7 +483,7 @@ export const GetCourseCategory = async(setcategories) =>{
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCourseCategory", requestOptions)
+  fetch(`${BACKEND_LINK}/course/getCourseCategory`, requestOptions)
     .then(response => response.json())
     .then(result => {
       setcategories(result.map((item) => ({
@@ -507,7 +501,7 @@ export const GetCourseCategoryTitle = async(setCategoryName,id,setloading_top_ti
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCategorynameBylinkName/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/course/getCategorynameBylinkName/${id}`, requestOptions)
     .then(response => response.text())
     .then(result => {
       setCategoryName(result)
@@ -529,7 +523,7 @@ export const GetCourseSubCategoryTitle = async(code,setCategoryName,setSubCatego
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCategoryAndSubCategorynameBylinkName/${code}`, requestOptions)
+  fetch(`${BACKEND_LINK}/course/getCategoryAndSubCategorynameBylinkName/${code}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -549,7 +543,7 @@ export const GetSubCategoriesByCategoryLinkName = async(id,setsub_categories,set
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getSubCategoryByCourseLinkName/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/course/getSubCategoryByCourseLinkName/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -567,7 +561,7 @@ export const GetCoursesByCategoryNew = async(setnew_courses,setloading_new_cours
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getNewCourses/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/course/getNewCourses/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -591,7 +585,7 @@ export const GetCoursesByCategoryTrending = async(settrending_courses,setloading
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getTrendingByCourseLinkName/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/course/getTrendingByCourseLinkName/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -615,7 +609,7 @@ export const GetCoursesByCategoryMostPopular = async(setmost_popular_courses,set
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getMostPopularCourses/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/course/getMostPopularCourses/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -642,7 +636,7 @@ export const GetCoursesByCategoryInstructor = async(id,setinstructors,setloading
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getPopularInstructors/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/course/getPopularInstructors/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
 
@@ -682,7 +676,7 @@ export const GetCoursesByCategoryTopics = async(id,setpopular_topics,setloading_
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getPopularTopicByLinkName/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/course/getPopularTopicByLinkName/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -710,7 +704,7 @@ export const GetAllCoursesByCategory = async(id,setallcourses,setloading_all_cou
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/managecourse/getCoursesUsingLinkName/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/managecourse/getCoursesUsingLinkName/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
 
@@ -735,7 +729,7 @@ export const GetAllCoursesBySubCategory = async(code,setallcourses,setloading_al
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/managecourse/getCoursesUsingSubLinkName/${code}`, requestOptions)
+  fetch(`${BACKEND_LINK}/managecourse/getCoursesUsingSubLinkName/${code}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -753,7 +747,7 @@ export const GetMostPopularCoursesByTopicName = async(id,setmost_popular_courses
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getMostPopularCoursesByTopic/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/course/getMostPopularCoursesByTopic/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
 
@@ -778,7 +772,7 @@ export const GetBeginnerCoursesByTopicName = async(id,setbeginners_favs,setloadi
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getBeginnerFavoritesCoursesByTopicLinkName/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/displayCourse/getBeginnerFavoritesCoursesByTopicLinkName/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       console.log(result)
@@ -804,7 +798,7 @@ export const GetNewCoursesByTopicName = async(id,setnew_courses,setloading_new_c
       redirect: 'follow'
     };
     
-    fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getNewCoursesByTopic/${id}`, requestOptions)
+    fetch(`${BACKEND_LINK}/course/getNewCoursesByTopic/${id}`, requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)
@@ -829,7 +823,7 @@ export const GetTopCoursesByTopicName = async(id,settop_course_courses,settop_co
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getTopSubCategoryCoursesByTopicLinkName/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/displayCourse/getTopSubCategoryCoursesByTopicLinkName/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       console.log(result)
@@ -855,7 +849,7 @@ export const GetAllCoursesByTopicName = async(id,setloading_all_courses_list,set
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/managecourse/getCoursesUsingTopicLinkName/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/managecourse/getCoursesUsingTopicLinkName/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -879,7 +873,7 @@ export const GetTopicsByTopicName = async(id,setpopular_topics,setloading_topics
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getRelatedTopicsByTopicLinkName/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/displayCourse/getRelatedTopicsByTopicLinkName/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       console.log(result)
@@ -907,7 +901,7 @@ export const GetCoursesBySubCategoryNew = async(code,setloading_new_courses,setn
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getNewCoursesBySubCategory/${code}`, requestOptions)
+  fetch(`${BACKEND_LINK}/course/getNewCoursesBySubCategory/${code}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -931,7 +925,7 @@ export const GetCoursesBySubCategoryTrending = async(code,setloading_trending_co
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getTrendingBySubCategory/${code}`, requestOptions)
+  fetch(`${BACKEND_LINK}/course/getTrendingBySubCategory/${code}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -955,7 +949,7 @@ export const GetCoursesBySubCategoryMostPopular = async(code,setloading_most_pop
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getMostPopularCoursesBySubCategory/${code}`, requestOptions)
+  fetch(`${BACKEND_LINK}/course/getMostPopularCoursesBySubCategory/${code}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -979,7 +973,7 @@ export const GetCoursesBySubCategoryInstructor = async(code,setinstructors,setlo
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getPopularInstructorsBySubCategory/${code}`, requestOptions)
+  fetch(`${BACKEND_LINK}/course/getPopularInstructorsBySubCategory/${code}`, requestOptions)
     .then(response => response.json())
     .then(result => {
 
@@ -1019,7 +1013,7 @@ export const GetCoursesBySubCategoryTopics = async(code,setloading_topics_list,s
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getPopularTopicBySubLinkName/${code}`, requestOptions)
+  fetch(`${BACKEND_LINK}/course/getPopularTopicBySubLinkName/${code}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -1047,7 +1041,7 @@ export const GetInstructorDetails = async(id,setinstructor_details,setloading) =
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getInstructorDetails/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/course/getInstructorDetails/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -1065,7 +1059,7 @@ export const GetCourseDetails = async(id,setcourse) =>{
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCourseByStudent/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/course/getCourseByStudent/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -1085,7 +1079,7 @@ export const searchCourses = async (keyword, setCourses) => {
 
   try {
     const response = await fetch(
-      `https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/searchCourses/${keyword}`,
+      `${BACKEND_LINK}/displayCourse/searchCourses/${keyword}`,
       requestOptions
     );
 
@@ -1115,7 +1109,7 @@ export const getNewCourses = async (searchKey) => {
 
   try {
     const response = await fetch(
-      `https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/searchCourses/${searchKey}`,
+      `${BACKEND_LINK}/displayCourse/searchCourses/${searchKey}`,
       requestOptions
     );
 
@@ -1145,7 +1139,7 @@ export const GetTopicNameByLinkName = async(id,setTopicName,setCategoryName,setC
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getTopicCategorySubCategoryByTopic/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/displayCourse/getTopicCategorySubCategoryByTopic/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -1167,7 +1161,7 @@ export const GetCourseHomeBusiness = async(setbusiness_courses,setloading_busine
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/business", requestOptions)
+  fetch(`${BACKEND_LINK}/displayCourse/getLimitedCountCoursesForHomeByLinkName/business`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -1192,7 +1186,7 @@ export const GetCourseHomeDesign = async(setdeisgn_courses,setloading_design_cou
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/design", requestOptions)
+  fetch(`${BACKEND_LINK}/displayCourse/getLimitedCountCoursesForHomeByLinkName/design`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -1217,7 +1211,7 @@ export const GetCourseHomePhotography = async(setloading_photography_courses,set
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/photography-video", requestOptions)
+  fetch(`${BACKEND_LINK}/displayCourse/getLimitedCountCoursesForHomeByLinkName/photography-video`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -1242,7 +1236,7 @@ export const GetCourseHomeDevelopment = async(setdevelopment_courses,setloading_
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/development", requestOptions)
+  fetch(`${BACKEND_LINK}/displayCourse/getLimitedCountCoursesForHomeByLinkName/development`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -1267,7 +1261,7 @@ export const GetCourseHomeMarketing = async(setmarketing_courses,setloading_mark
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/marketing", requestOptions)
+  fetch(`${BACKEND_LINK}/displayCourse/getLimitedCountCoursesForHomeByLinkName/marketing`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -1292,7 +1286,7 @@ export const GetCourseHomeITSoftware = async(setit_software_courses,setloading_i
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/it-software", requestOptions)
+  fetch(`${BACKEND_LINK}/displayCourse/getLimitedCountCoursesForHomeByLinkName/it-software`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -1317,7 +1311,7 @@ export const GetCourseHomePersonalDevelopment = async(setpersonal_development_co
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/displayCourse/getLimitedCountCoursesForHomeByLinkName/personal-development", requestOptions)
+  fetch(`${BACKEND_LINK}/displayCourse/getLimitedCountCoursesForHomeByLinkName/personal-development`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -1346,7 +1340,7 @@ export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorTe
     redirect: 'follow'
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getCouponValidationByCode/${coupon}`, requestOptions)
+  fetch(`${BACKEND_LINK}/payment/getCouponValidationByCode/${coupon}`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
@@ -1428,7 +1422,7 @@ export const AccountVefication = async(setshowLogin) =>{
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/authentication/getAccountValidation", requestOptions)
+  fetch(`${BACKEND_LINK}/authentication/getAccountValidation`, requestOptions)
     .then(response => response.json())
     .then(result => {
       console.log(result)
@@ -1452,7 +1446,7 @@ export const getCourseData = async (setCourses) => {
   };
 
   fetch(
-    "https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getCoursesData",
+    `${BACKEND_LINK}/course/getCoursesData`,
     requestOptions
   )
     .then((response) => response.json())
@@ -1491,7 +1485,7 @@ Swal.fire({
   didOpen: () => {
     Swal.showLoading();
 
-    fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addToStudentsPurchasedCourses", requestOptions)
+    fetch(`${BACKEND_LINK}/payment/addToStudentsPurchasedCourses`, requestOptions)
   .then(response => response.json())
   .then(result => {
     console.log(result)
@@ -1537,7 +1531,7 @@ export const VerfiyCheckoutUser = async() =>{
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/authentication/getAccountValidation", requestOptions)
+  fetch(`${BACKEND_LINK}/authentication/getAccountValidation`, requestOptions)
     .then(response => response.json())
     .then(result => {
       console.log(result)
@@ -1566,7 +1560,7 @@ export const GetMyCourses = async(setCourses,setloading) =>{
     redirect: 'follow'
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getCoursesPurchasedByTheStudent", requestOptions)
+  fetch(`${BACKEND_LINK}/payment/getCoursesPurchasedByTheStudent`, requestOptions)
     .then(response => response.json())
     .then(result => {
       console.log(result)
@@ -1592,7 +1586,7 @@ export const GetMyCoursesDetails = async(id,setcourse) =>{
     redirect: "follow"
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getPurchasedCourseDetailsByItemCode/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/payment/getPurchasedCourseDetailsByItemCode/${id}`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log(result)
@@ -1624,7 +1618,7 @@ const requestOptions = {
   redirect: "follow"
 };
 
-fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/submitReview", requestOptions)
+fetch(`${BACKEND_LINK}/payment/submitReview`, requestOptions)
   .then((response) => response.json())
   .then((result) => {
     console.log(result)
@@ -1660,7 +1654,7 @@ export const GetAllAnnoucement = async(courseCode,setannoucements) =>{
     redirect: "follow"
   };
 
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/communication/getAnnouncementsByCourseCode/${courseCode}`, requestOptions)
+  fetch(`${BACKEND_LINK}/communication/getAnnouncementsByCourseCode/${courseCode}`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log(result)
@@ -1687,7 +1681,7 @@ export const GetReviews = async(id,setfeatured_reviews) =>{
     redirect: "follow"
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getReviewsByItemCode/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/payment/getReviewsByItemCode/${id}`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log(result)
@@ -1710,7 +1704,7 @@ export const GetCourseDetailsByInstructerCode = async(id,setcourse) =>{
     redirect: "follow"
   };
   
-  fetch (`https://aethenosinstructor.exon.lk:2053/aethenos-api/course/getAllCoursesByInstructorCode/${id}`, requestOptions)
+  fetch (`${BACKEND_LINK}/course/getAllCoursesByInstructorCode/${id}`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log(result)
@@ -1738,7 +1732,7 @@ const requestOptions = {
   redirect: "follow"
 };
 
-fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/communication/addQuestion", requestOptions)
+fetch(`${BACKEND_LINK}/communication/addQuestion`, requestOptions)
   .then((response) => response.json())
   .then((result) => {
     console.log(result)
@@ -1774,7 +1768,7 @@ const requestOptions = {
   redirect: "follow"
 };
 
-fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/communication/getAllQuestionsByItemCode/${itemCode}`, requestOptions)
+fetch(`${BACKEND_LINK}/communication/getAllQuestionsByItemCode/${itemCode}`, requestOptions)
   .then((response) => response.json())
   .then((result) => {
     console.log(result)
@@ -1804,7 +1798,7 @@ export const AddReplyToReview = async(comment,reviewCode,setbtnLoading,setcommen
     redirect: "follow"
   };
 
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addRespondToReview", requestOptions)
+  fetch(`${BACKEND_LINK}/payment/addRespondToReview`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log(result)
@@ -1844,7 +1838,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/instructor/getInstructorProfileDetails", requestOptions)
+fetch(`${BACKEND_LINK}/instructor/getInstructorProfileDetails`, requestOptions)
   .then(response => response.json())
   .then(result => {
     console.log(result)
@@ -1902,7 +1896,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/updateStudentProfile", requestOptions)
+fetch(`${BACKEND_LINK}/studentProfile/updateStudentProfile`, requestOptions)
   .then(response => response.json())
   .then(result => {
     Unauthorized(result.status,"profile") 
@@ -1928,7 +1922,7 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/updat
     redirect: "follow"
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/getInstructorsToPurchasedCourses", requestOptions)
+  fetch(`${BACKEND_LINK}/chat/getInstructorsToPurchasedCourses`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
       Unauthorized(result.status,"messages") 
@@ -1957,7 +1951,7 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/studentProfile/updat
     redirect: "follow"
   };
 
-fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/sendChat", requestOptions)
+fetch(`${BACKEND_LINK}/chat/sendChat`, requestOptions)
   .then((response) => response.json())
   .then((result) => {
     console.log(result)
@@ -1987,7 +1981,7 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/sendChat", requ
     redirect: "follow"
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/getChatRoomDetailsByStudent", requestOptions)
+  fetch(`${BACKEND_LINK}/chat/getChatRoomDetailsByStudent`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
       Unauthorized(result.status,"messages") 
@@ -2009,7 +2003,7 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/sendChat", requ
     redirect: "follow"
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/chat/getChatRoomDetailsByStudentUsingChatRoomCode/${chatCode}`, requestOptions)
+  fetch(`${BACKEND_LINK}/chat/getChatRoomDetailsByStudentUsingChatRoomCode/${chatCode}`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
       Unauthorized(result.status,"messages") 
@@ -2036,7 +2030,7 @@ const requestOptions = {
   redirect: "follow"
 };
 
-fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/updateOrderHasCourseProgress", requestOptions)
+fetch(`${BACKEND_LINK}/payment/updateOrderHasCourseProgress`, requestOptions)
   .then((response) => response.json())
   .then((result) => console.log(result))
   .catch((error) => console.error(error));
@@ -2058,7 +2052,7 @@ const requestOptions = {
   redirect: "follow"
 };
 
-fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addReadCurriculumItem", requestOptions)
+fetch(`${BACKEND_LINK}/payment/addReadCurriculumItem`, requestOptions)
   .then((response) => response.json())
   .then((result) => console.log(result))
   .catch((error) => console.error(error));
@@ -2075,7 +2069,7 @@ myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
     headers: myHeaders,
     redirect: "follow"
   };
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getPurchaseHistory", requestOptions)
+  fetch(`${BACKEND_LINK}/payment/getPurchaseHistory`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
   Unauthorized(result.status,"purchase-history") 
@@ -2098,7 +2092,7 @@ myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
     redirect: "follow"
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getTransactionDetailsByTransActionCode/${id}`, requestOptions)
+  fetch(`${BACKEND_LINK}/payment/getTransactionDetailsByTransActionCode/${id}`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
 
@@ -2123,7 +2117,7 @@ const requestOptions = {
   redirect: "follow"
 };
 
-fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getAllRefunds", requestOptions)
+fetch(`${BACKEND_LINK}/payment/getAllRefunds`, requestOptions)
   .then((response) => response.json())
   .then((result) => console.log(result))
   .catch((error) => console.error(error));
@@ -2141,7 +2135,7 @@ fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getAllRefund
     redirect: "follow"
   };
   
-  fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/notification/getOwnNotifications", requestOptions)
+  fetch(`${BACKEND_LINK}/notification/getOwnNotifications`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
       Unauthorized(result.status,`notifications`) 
@@ -2172,14 +2166,17 @@ let timerInterval;
 Swal.fire({
   title: "Processing ...",
   timerProgressBar: true,
+  allowOutsideClick: false,
   didOpen: () => {
     Swal.showLoading();
 
 
-    fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addToStudentsPurchasedCourses", requestOptions)
+    fetch(`${BACKEND_LINK}/payment/addToStudentsPurchasedCourses`, requestOptions)
 .then(response => response.json())
 .then(result => {
   console.log(result)
+
+  Unauthorized(result.status,``) 
 
   if(result.message == "Error"){
     ErrorAlert("Error",result.variable)
@@ -2219,7 +2216,7 @@ export const GetReviewsByCode = async(course_code,setfeatured_reviews) =>{
     redirect: "follow"
   };
   
-  fetch( `https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getReviewsByCourseCode/${course_code}`, requestOptions)
+  fetch( `${BACKEND_LINK}/payment/getReviewsByCourseCode/${course_code}`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
           console.log(result)
@@ -2242,7 +2239,7 @@ const requestOptions = {
   redirect: "follow"
 };
 
-fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/getOwnAllRefunds", requestOptions)
+fetch(`${BACKEND_LINK}/payment/getOwnAllRefunds`, requestOptions)
   .then((response) => response.json())
   .then((result) => {
     console.log(result)
@@ -2271,7 +2268,7 @@ const requestOptions = {
   redirect: "follow"
 };
 
-fetch("https://aethenosinstructor.exon.lk:2053/aethenos-api/payment/addRefund", requestOptions)
+fetch(`${BACKEND_LINK}/payment/addRefund`, requestOptions)
   .then((response) => response.json())
   .then((result) => {
     console.log(result)
@@ -2303,7 +2300,7 @@ export const SearchItemsByKeyword = async(word,setsearchResults) =>{
     redirect: "follow"
   };
   
-  fetch(`https://aethenosinstructor.exon.lk:2053/aethenos-api/common/searchCourseAndInstructorDetails/${word}`, requestOptions)
+  fetch(`${BACKEND_LINK}/common/searchCourseAndInstructorDetails/${word}`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log(result)

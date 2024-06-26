@@ -30,37 +30,28 @@ const SearchResults = ({ allcourses }) => {
     console.log(allcourses.course_name);
   });
 
-  const filteredItems = courses.filter((item) => {
-    const categoryMatch =
-      categories.length === 0 || categories.includes(item.category);
-
-    const instructorMatch =
-      instructors.length === 0 || instructors.includes(item.instructor);
-
+  const filteredItems = Array.isArray(courses) ? courses.filter((item) => {
+    const categoryMatch = categories.length === 0 || categories.includes(item.category);
+    const instructorMatch = instructors.length === 0 || instructors.includes(item.instructor);
     const ratingMatch = ratings.length === 0 || ratings.includes(item.rating);
-
     const levelMatch = levels.length === 0 || levels.includes(item.level);
-    const languageMatch =
-      languages.length === 0 || languages.includes(item.language);
-
+    const languageMatch = languages.length === 0 || languages.includes(item.language);
     const topicMatch = topics.length === 0 || topics.includes(item.topic);
-
-    const subCategoryMatch =
-      subcategories.length === 0 || subcategories.includes(item.sub_category);
-
+    const subCategoryMatch = subcategories.length === 0 || subcategories.includes(item.sub_category);
     const priceMatch = CalculateListPrice(item) <= selectPrice;
-
+  
     return (
       categoryMatch &&
       instructorMatch &&
+      ratingMatch &&
       levelMatch &&
       languageMatch &&
       topicMatch &&
       subCategoryMatch &&
-      ratingMatch &&
       priceMatch
     );
-  });
+  }) : [];
+  
 
   const handleSortChange = (sortedCourses) => {
     setCourses(sortedCourses);
