@@ -208,7 +208,7 @@ const HeroArea = () => {
 
         <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title  className='m-0 p-0'>Become a Udemy instructor</Modal.Title>
+          <Modal.Title  className='m-0 p-0'>Become a Aethenos instructor</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>

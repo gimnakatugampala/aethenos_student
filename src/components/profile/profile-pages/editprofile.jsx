@@ -244,7 +244,7 @@ const profile = () => {
                     courses you’re enrolled in on this page.
                     <br />
                     Only students and instructors who are logged into their
-                    Udemy accounts can view another student’s account profile.
+                    Aethenos accounts can view another student’s account profile.
                     Profiles of instructors with published courses can be viewed
                     by students and instructors when they are logged in and
                     logged out.
@@ -256,7 +256,7 @@ const profile = () => {
                   </p>
                   <h2>Related Support Articles</h2>
                   <div className="link-text">
-                    <a href="#">Unsubscribe From Udemy Notifications</a>
+                    <a href="#">Unsubscribe From Aethenos Notifications</a>
                     <a href="#">Change Your Email Login</a>
                     <a href="#">Adding and Deleting Cards in Your Account</a>
                   </div>
@@ -277,7 +277,7 @@ const profile = () => {
                   <div className="section-last">
                     <h6>Related Support Articles</h6>
                     <div className="link-text">
-                      <a href="#">Unsubscribe From Udemy Notifications</a>
+                      <a href="#">Unsubscribe From Aethenos Notifications</a>
                       <a href="#">Change Your Email Login</a>
                       <a href="#">Adding and Deleting Cards in Your Account</a>
                     </div>

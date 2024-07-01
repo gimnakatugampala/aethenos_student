@@ -38,7 +38,7 @@ const index = () => {
 
                 {/* <CourseArea1/> */}
                 {/* <AdBanner/> */}
-                <BecomeInstructor/>
+                {/* <BecomeInstructor/> */}
                 {/* <BlogArea/> */}
                 <Footer/>
             </div>

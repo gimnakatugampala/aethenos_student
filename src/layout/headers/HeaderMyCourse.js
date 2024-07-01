@@ -27,7 +27,7 @@ const HeaderMyCourse = ({id,course}) => {
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
                     <Container>
 
-                        <Navbar.Brand href="/"><img className="logo-light" src='/assets/images/logo/Header_Athenos_logo.png' alt="logo" /></Navbar.Brand>
+                        <Navbar.Brand href="/"><img width={150} height={60} className="logo-light" src='/assets/images/logo/Header_Athenos_logo.png' alt="logo" /></Navbar.Brand>
 
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">

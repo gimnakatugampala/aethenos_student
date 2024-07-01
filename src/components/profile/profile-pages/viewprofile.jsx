@@ -105,7 +105,7 @@ const ViewProfile = () => {
         id="uncontrolled-tab-example"
         className="my-3"
         >
-      <Tab eventKey="up" title="Udemy Profile">
+      <Tab eventKey="up" title="Aethenos Profile">
 
         <div className='row'>
             <div className='col-md-6'>
@@ -122,7 +122,7 @@ const ViewProfile = () => {
 
             <label class="form-label">Headline</label>
             <div class="input-group mb-3">
-                <input maxLength={60} value={headline} onChange={(e) => setheadline(e.target.value)} type="text" class="form-control" placeholder="Instructor at Udemy" />
+                <input maxLength={60} value={headline} onChange={(e) => setheadline(e.target.value)} type="text" class="form-control" placeholder="Instructor at Aethenos" />
                 <span class="input-group-text" >{60 - headline.length}</span>
             </div>
 

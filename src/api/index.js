@@ -565,7 +565,7 @@ export const GetCoursesByCategoryNew = async(setnew_courses,setloading_new_cours
     .then(response => response.json())
     .then(result => {
       // console.log(result)
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         setnew_courses([])
         setloading_new_courses(false)
         return
@@ -589,7 +589,7 @@ export const GetCoursesByCategoryTrending = async(settrending_courses,setloading
     .then(response => response.json())
     .then(result => {
       // console.log(result)
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         settrending_courses([])
         setloading_trending_courses(false)
         return
@@ -613,7 +613,7 @@ export const GetCoursesByCategoryMostPopular = async(setmost_popular_courses,set
     .then(response => response.json())
     .then(result => {
       // console.log(result)
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         setmost_popular_courses([])
         setloading_most_popular_courses(false)
         return
@@ -708,7 +708,7 @@ export const GetAllCoursesByCategory = async(id,setallcourses,setloading_all_cou
     .then(response => response.json())
     .then(result => {
 
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         setallcourses([])
       setloading_all_courses_list(false)
       return
@@ -751,7 +751,7 @@ export const GetMostPopularCoursesByTopicName = async(id,setmost_popular_courses
     .then(response => response.json())
     .then(result => {
 
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         setmost_popular_courses([])
         setloading_most_popular_courses(false)
         return
@@ -777,7 +777,7 @@ export const GetBeginnerCoursesByTopicName = async(id,setbeginners_favs,setloadi
     .then(result => {
       console.log(result)
 
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         setbeginners_favs([])
         setloading_beginner_favs(false)
         return
@@ -802,7 +802,7 @@ export const GetNewCoursesByTopicName = async(id,setnew_courses,setloading_new_c
       .then(response => response.json())
       .then(result => {
         console.log(result)
-        if(result.message == "Error"){
+        if(result.variable == "404"){
           setnew_courses([])
           setloading_new_courses(false)
           return
@@ -828,7 +828,7 @@ export const GetTopCoursesByTopicName = async(id,settop_course_courses,settop_co
     .then(result => {
       console.log(result)
 
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         settop_course_courses([])
         setloading_top_courses(false)
       }
@@ -853,7 +853,7 @@ export const GetAllCoursesByTopicName = async(id,setloading_all_courses_list,set
     .then(response => response.json())
     .then(result => {
       // console.log(result)
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         setallcourses([])
         setloading_all_courses_list(false)
         return
@@ -905,7 +905,7 @@ export const GetCoursesBySubCategoryNew = async(code,setloading_new_courses,setn
     .then(response => response.json())
     .then(result => {
       // console.log(result)
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         setnew_courses([])
         setloading_new_courses(false)
         return
@@ -929,7 +929,7 @@ export const GetCoursesBySubCategoryTrending = async(code,setloading_trending_co
     .then(response => response.json())
     .then(result => {
       // console.log(result)
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         settrending_courses([])
         setloading_trending_courses(false)
         return
@@ -953,7 +953,7 @@ export const GetCoursesBySubCategoryMostPopular = async(code,setloading_most_pop
     .then(response => response.json())
     .then(result => {
       // console.log(result)
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         setmost_popular_courses([])
         setloading_most_popular_courses(false)
         return
@@ -1089,7 +1089,7 @@ export const searchCourses = async (keyword, setCourses) => {
 
     const result = await response.json();
 
-    if (result.message === "Error") {
+    if (result.variable == "404") {
       return [];
     }
     setCourses(result);
@@ -1120,7 +1120,7 @@ export const getNewCourses = async (searchKey) => {
     const result = await response.json();
     // console.log("API Response:", result);
 
-    if (result.message === "Error") {
+    if (result.variable == "404") {
       console.log("Error");
       return [];
     }
@@ -1166,7 +1166,7 @@ export const GetCourseHomeBusiness = async(setbusiness_courses,setloading_busine
     .then(result => {
       // console.log(result)
 
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         setbusiness_courses([])
         setloading_business_courses(false)
         return
@@ -1191,7 +1191,7 @@ export const GetCourseHomeDesign = async(setdeisgn_courses,setloading_design_cou
     .then(result => {
       // console.log(result)
 
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         setdeisgn_courses([])
         setloading_design_courses(false)
         return
@@ -1216,7 +1216,7 @@ export const GetCourseHomePhotography = async(setloading_photography_courses,set
     .then(result => {
       // console.log(result)
 
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         setphotography_courses([])
         setloading_photography_courses(false)
         return
@@ -1241,7 +1241,7 @@ export const GetCourseHomeDevelopment = async(setdevelopment_courses,setloading_
     .then(result => {
       // console.log(result)
 
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         setdevelopment_courses([])
         setloading_development_courses(false)
         return
@@ -1266,7 +1266,7 @@ export const GetCourseHomeMarketing = async(setmarketing_courses,setloading_mark
     .then(result => {
       // console.log(result)
 
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         setmarketing_courses([])
         setloading_marketing_courses(false)
         return
@@ -1291,7 +1291,7 @@ export const GetCourseHomeITSoftware = async(setit_software_courses,setloading_i
     .then(result => {
       // console.log(result)
 
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         setit_software_courses([])
         setloading_it_software_courses(false)
         return
@@ -1316,7 +1316,7 @@ export const GetCourseHomePersonalDevelopment = async(setpersonal_development_co
     .then(result => {
       // console.log(result)
 
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         setpersonal_development_courses([])
         setloading_personal_development_courses(false)
         return
@@ -1345,8 +1345,8 @@ export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorTe
     .then(result => {
       // console.log(result)
 
-      if(result.message == "Error"){
-        setCouponErrorText(result.variable)
+      if(result.variable == "404"){
+        setCouponErrorText(result.message)
         setcouponError(true)
         setbtnLoading(false)
         return
@@ -1428,7 +1428,7 @@ export const AccountVefication = async(setshowLogin) =>{
       console.log(result)
 
 
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         setshowLogin(true)
         return
       }
@@ -1452,7 +1452,7 @@ export const getCourseData = async (setCourses) => {
     .then((response) => response.json())
     .then((result) => {     
 
-      if (result.message == "Error") {
+      if (result.variable == "404") {
         setCourses([]);
         return;
       }
@@ -1490,8 +1490,8 @@ Swal.fire({
   .then(result => {
     console.log(result)
 
-    if(result.message == "Error"){
-      ErrorAlert("Error",result.variable)
+    if(result.variable == "404"){
+      ErrorAlert("Error",result.message)
       return
     }
     
@@ -1537,7 +1537,7 @@ export const VerfiyCheckoutUser = async() =>{
       console.log(result)
 
 
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         // setshowLogin(true)
         window.location.href = "/cart"
         return
@@ -1661,7 +1661,7 @@ export const GetAllAnnoucement = async(courseCode,setannoucements) =>{
       Unauthorized(result.status,`my-courses`)
       setannoucements(result)
 
-      if(result.message == "Error"){
+      if(result.variable == "404"){
         setannoucements([])
       }
 
@@ -1904,6 +1904,8 @@ fetch(`${BACKEND_LINK}/studentProfile/updateStudentProfile`, requestOptions)
     if(result.variable == "200"){
       SuccessAlert("Success","Instructor profile update successfully")
       setbtn_loading(false)
+    }else{
+      ErrorAlert("Error",result.message)
     }
   })
   .catch(error => console.log('error', error));
@@ -1962,7 +1964,6 @@ fetch(`${BACKEND_LINK}/chat/sendChat`, requestOptions)
       setmessageTextAdd("")
       GetAllChatRooms(setchatRooms)
       setshowAddMessage(false)
-  
     }
   })
   .catch((error) => console.error(error));
@@ -2178,8 +2179,8 @@ Swal.fire({
 
   Unauthorized(result.status,``) 
 
-  if(result.message == "Error"){
-    ErrorAlert("Error",result.variable)
+  if(result.variable == "404"){
+    ErrorAlert("Error",result.message)
     return
   }
   
@@ -2278,13 +2279,12 @@ fetch(`${BACKEND_LINK}/payment/addRefund`, requestOptions)
       setisReqSubmitted(true)
       // setShow(false)
       return
+    }else{
+      ErrorAlert("Error",result.message)
+      setrefundText("")
+      setisReqSubmitted(false)
+      return
     }
-if(result.message == "Error"){
-  ErrorAlert("Error",result.variable)
-  setrefundText("")
-  setisReqSubmitted(false)
-  return
-}
 
 
   })

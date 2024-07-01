@@ -1,10 +1,10 @@
 import { Certificate, Instructor, OnlineClass, User } from '../../../svg';
 
 const category_contents = [
-  { icon: <OnlineClass/>, title: '3020', subtitle: 'Online Courses' },
+//   { icon: <OnlineClass/>, title: '3020', subtitle: 'Online Courses' },
   { icon: <Instructor/>, title: 'Top', subtitle: 'Instructors' },
-  { icon: <Certificate/>, title: 'Online', subtitle: 'Certifications' },
-  { icon: <User/>, title: '6000', subtitle: 'Members' },
+  { icon: <Certificate/>, title: 'Online', subtitle: 'Certifications' }
+//   { icon: <User/>, title: '6000', subtitle: 'Members' },
 ]
 
 const CategoryArea = () => {

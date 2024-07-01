@@ -111,8 +111,8 @@ const Header = ({header_style, no_top_bar, disable_full_width, disable_category 
                                 <div className="logo">
                                     <Link href={'/'} legacyBehavior>
                                         <a>
-                                            <img className="logo-light" src='/assets/images/logo/Header_Athenos_logo.png' alt="logo" />
-                                            <img className="logo-dark" src='/assets/images/logo/Header_Athenos_logo.png' alt="logo" />
+                                            <img width={150} height={50} className="logo-light" src='/assets/images/logo/Header_Athenos_logo.png' alt="logo" />
+                                            <img width={150} height={50} className="logo-dark" src='/assets/images/logo/Header_Athenos_logo.png' alt="logo" />
                                         </a>
                                     </Link>
                                 </div>
