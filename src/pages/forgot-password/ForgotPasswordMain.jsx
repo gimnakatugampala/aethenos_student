@@ -1,6 +1,6 @@
 import React from 'react'
-import { Footer, Header } from '../../layout';
-import ForgotPasswordArea from './ForgotPasswordArea';
+import { Footer, Header } from '../../layout/index.jsx';
+import ForgotPasswordArea from './ForgotPasswordArea.jsx'
 
 const ForgotPasswordMain = () => {
   return (
