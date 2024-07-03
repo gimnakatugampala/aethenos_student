@@ -8,6 +8,9 @@ import { GetMyCoursesDetails } from '../../../api';
 import LargeLoading from '../../../functions/Loading/LargeLoading';
 import HeaderMyCourse from '../../../layout/headers/HeaderMyCourse';
 
+
+
+
 const index = () => {
 
     const router = useRouter();

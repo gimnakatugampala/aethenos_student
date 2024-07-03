@@ -8,7 +8,7 @@ import CardMainContainer from '../../pages/my-courses/[id]/CardMainContainer';
 
 
 const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle, setshowquiz, setselectedQuiz, setshowAssignment , setselectedAssignment , setshowPracticeTest , setselectedPracticeTest, setshowCodingExercise , setselectedCodingExercise , setcourse , courseItemCode,
-setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertDisplay , setselectAnswer , activeStep, setActiveStep, setPraticeTestActiveStep , setCodingExerciseActiveStep}) => {
+setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertDisplay , setselectAnswer , activeStep, setActiveStep, setPraticeTestActiveStep , setCodingExerciseActiveStep, setTitleVideo}) => {
 
     useEffect(() => {
         content.section_curriculum_item.map((list,index) => (
@@ -57,6 +57,8 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                                 videoSource.src = `${IMG_HOST}${type.url}`;
                                                 videoPlayer.load();
                                             }
+
+                                            setTitleVideo(list.title)
 
                                             setseletedCurriculumItem(list.curriculumItemId)
 

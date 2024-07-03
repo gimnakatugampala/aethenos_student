@@ -2542,7 +2542,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.8 || ^17.0 || ^18.0", "@types/react@^16.8.6 || ^17.0.0", "@types/react@^16.x || ^17.x || ^18.x", "@types/react@^17.0.0 || ^18.0.0", "@types/react@>= 16", "@types/react@>=16.14.8", "@types/react@>=16.9.11", "@types/react@17 || 18":
+"@types/react@*", "@types/react@^16.8 || ^17.0 || ^18.0", "@types/react@^16.8.6 || ^17.0.0", "@types/react@^16.x || ^17.x || ^18.x", "@types/react@^17.0.0 || ^18.0.0", "@types/react@^18.0.0", "@types/react@>= 16", "@types/react@>=16.14.8", "@types/react@>=16.9.11", "@types/react@17 || 18":
   version "17.0.80"
   resolved "https://registry.npmjs.org/@types/react/-/react-17.0.80.tgz"
   integrity sha512-LrgHIu2lEtIo8M7d1FcI3BdwXWoRQwMoXOZ7+dPTW0lYREjmlHl3P0U1VD0i/9tppOuv8/sam7sOjx34TxSFbA==
@@ -2614,6 +2614,13 @@
   dependencies:
     "@typescript-eslint/types" "5.35.1"
     eslint-visitor-keys "^3.3.0"
+
+"@vidstack/react@^1.11.24":
+  version "1.11.24"
+  resolved "https://registry.npmjs.org/@vidstack/react/-/react-1.11.24.tgz"
+  integrity sha512-7tgJUJdIKIidzziZ9QqpU73g0BI3BvgYnIim3FrHsxFMRUgZbLKLbSJP1c16NQijS6kljUTWPJErCOm+n27xPg==
+  dependencies:
+    media-captions "^1.0.1"
 
 accordion-js@^3.3.4:
   version "3.3.4"
@@ -4922,6 +4929,11 @@ mdn-data@2.0.14:
   version "2.0.14"
   resolved "https://registry.npmjs.org/mdn-data/-/mdn-data-2.0.14.tgz"
   integrity sha512-dn6wd0uw5GsdswPFfsgMp5NSB0/aDe6fK94YJV/AJDYXL6HVLWBsxeq7js7Ad+mU2K9LAlwpk6kN2D5mwCPVow==
+
+media-captions@^1.0.1:
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/media-captions/-/media-captions-1.0.3.tgz"
+  integrity sha512-y2Qi5rqjwgH97zoko1vzu5Q6nnS0KzEQSvd4NOjnFym9JqnFb5VSsUg21RNb5cQ/nhCFJ0wz/XK+2uMwFCr6TQ==
 
 memoize-one@^5.1.1:
   version "5.2.1"

@@ -90,6 +90,10 @@ const LoginForm = () => {
             </div>
 
             <div className="form-group">
+                <a href='/forgot-password'>Forgot Password ?</a>
+            </div>
+
+            <div className="form-group">
                 {loading ? (
                     <ButtonLoadingMedium />
                 ) : (

@@ -38,6 +38,16 @@ import AssignmentContainer from "../components/assignment/AssignmentContainer";
 import PraticeTestContainer from "../components/pratice-test/PraticeTestContainer";
 import CodingExerciseContainer from "../components/coding-exercise/CodingExerciseContainer";
 
+
+import '@vidstack/react/player/styles/default/theme.css';
+import '@vidstack/react/player/styles/default/layouts/audio.css';
+import '@vidstack/react/player/styles/default/layouts/video.css';
+
+import { MediaPlayer, MediaProvider, Gesture ,useVideoQualityOptions , Menu  , SeekButton , Captions   } from '@vidstack/react';
+import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/layouts/default';
+// import { SeekForward10Icon } from '@vidstack/react/icons';
+
+
 // const course = course_data[0];
 
 const CourseDetailsArea1 = ({id, course , setcourse}) => {
@@ -88,6 +98,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
   // ========== COMMON ========================
   const [seletedCurriculumItem, setseletedCurriculumItem] = useState(null)
   const [LoadVideo, setLoadVideo] = useState(false)
+  const [TitleVideo, setTitleVideo] = useState("")
 
 
 
@@ -285,6 +296,10 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
       AddQuestion(itemCode,question,setShowNewQuestion,setquestion)
   }
 
+
+  // ===============
+
+
   return (
 
     <section
@@ -294,9 +309,22 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
             <div className="col-md-8">
         
             {showVideoPlayer ? (
-                <Player autoPlay={true}>
-                    <source id="videoPlayer" src={main_Video_player_url} />
-                </Player>
+                // <Player autoPlay={true}>
+                //     <source id="videoPlayer" src={main_Video_player_url} />
+                // </Player>
+                
+
+                <MediaPlayer autoPlay={true} title={TitleVideo} src={main_Video_player_url} >
+                <MediaProvider  />
+                {/* https://files.vidstack.io/sprite-fight/thumbnails.vtt */}
+                <DefaultVideoLayout  thumbnails={main_Video_player_url} icons={defaultLayoutIcons} >
+                </DefaultVideoLayout>
+              </MediaPlayer>
+
+              
+
+              //  ==================
+          
               ) : article == "" ? (
                 <>
                 {/* // Show Quiz */}
@@ -708,6 +736,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
                           setActiveStep={setAssignmentActiveStep}
                           setPraticeTestActiveStep={setPraticeTestActiveStep}
                           setCodingExerciseActiveStep={setCodingExerciseActiveStep}
+                          setTitleVideo={setTitleVideo}
                           />
                         ))}
 
