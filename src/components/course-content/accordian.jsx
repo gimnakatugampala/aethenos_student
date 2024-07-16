@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import CardContainer from '../../pages/my-courses/[id]/CardContainer';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { GetMyCoursesDetails, IMG_HOST, UpdateCourseCurriculumProgress, UpdateCourseProgress } from '../../api';
+import { GetMyCoursesDetails, IMG_HOST, StoreLastMarkedCurriculum, UpdateCourseCurriculumProgress, UpdateCourseProgress } from '../../api';
 import { CheckBox } from '@mui/icons-material';
 import Form from 'react-bootstrap/Form';
 import CardMainContainer from '../../pages/my-courses/[id]/CardMainContainer';
@@ -61,12 +61,18 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
 
                                             setTitleVideo(list.title)
 
-
+                                            //  --------------------- CALCULATE THE MARK --------------------
                                             let delay = (2 / 3) * type.videoLength * 1000;
 
                                             setTimeout(()=> {
                                                 UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId,setcourse);
                                             },delay)
+
+                                            //  --------------------- CALCULATE THE MARK --------------------
+
+                                            // ---------------- STORE AS LAST POSITION -------
+                                            StoreLastMarkedCurriculum(itemCode,list.curriculumItemId)
+                                            // ---------------- STORE AS LAST POSITION -------
 
                                             setseletedCurriculumItem(list.curriculumItemId)
 
@@ -153,7 +159,14 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
 
                                 setseletedCurriculumItem(list.curriculumItemId)
 
+                                //  --------------------- CALCULATE THE MARK --------------------
                                 UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId,setcourse);
+                                //  --------------------- CALCULATE THE MARK --------------------
+
+
+                                  // ---------------- STORE AS LAST POSITION -------
+                                  StoreLastMarkedCurriculum(itemCode,list.curriculumItemId)
+                                  // ---------------- STORE AS LAST POSITION -------
 
                                 GetMyCoursesDetails(courseItemCode, setcourse)
 
@@ -239,8 +252,13 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                         setshowPracticeTest(false)
                                         setshowCodingExercise(false)
                                     
+                                        //  --------------------- CALCULATE THE MARK --------------------
                                         UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId,setcourse);
+                                        //  --------------------- CALCULATE THE MARK --------------------
 
+                                          // ---------------- STORE AS LAST POSITION -------
+                                          StoreLastMarkedCurriculum(itemCode,list.curriculumItemId)
+                                          // ---------------- STORE AS LAST POSITION -------
 
                                         setselectedQuiz(list)
 
@@ -283,7 +301,13 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
 
                                     setseletedCurriculumItem(list.curriculumItemId)
                                   
+                                    //  --------------------- CALCULATE THE MARK --------------------
                                     UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId,setcourse);
+                                    //  --------------------- CALCULATE THE MARK --------------------
+
+                                      // ---------------- STORE AS LAST POSITION -------
+                                      StoreLastMarkedCurriculum(itemCode,list.curriculumItemId)
+                                      // ---------------- STORE AS LAST POSITION -------
                                     
                                     GetMyCoursesDetails(courseItemCode, setcourse)
 
@@ -320,7 +344,15 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                     setshowPracticeTest(true)
                                     setshowCodingExercise(false)
 
+                                    //  --------------------- CALCULATE THE MARK --------------------
                                     UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId,setcourse);
+                                    //  --------------------- CALCULATE THE MARK --------------------
+
+                                      // ---------------- STORE AS LAST POSITION -------
+                                      StoreLastMarkedCurriculum(itemCode,list.curriculumItemId)
+                                      // ---------------- STORE AS LAST POSITION -------
+
+
                                     setselectedPracticeTest(list)
                                     console.log(list)
 
@@ -361,7 +393,14 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                     setshowPracticeTest(false)
                                     setshowCodingExercise(true)
 
+                                    //  --------------------- CALCULATE THE MARK --------------------
                                     UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId,setcourse);
+                                    //  --------------------- CALCULATE THE MARK --------------------
+
+                                      // ---------------- STORE AS LAST POSITION -------
+                                      StoreLastMarkedCurriculum(itemCode,list.curriculumItemId)
+                                      // ---------------- STORE AS LAST POSITION -------
+
                                     setselectedCodingExercise(list)
                                     setseletedCurriculumItem(list.curriculumItemId)
                                     console.log(list)

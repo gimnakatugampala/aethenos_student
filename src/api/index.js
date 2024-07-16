@@ -1657,7 +1657,7 @@ export const GetAllAnnoucement = async(courseCode,setannoucements) =>{
   fetch(`${BACKEND_LINK}/communication/getAnnouncementsByCourseCode/${courseCode}`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
-      console.log(result)
+      // console.log(result)
       Unauthorized(result.status,`my-courses`)
       setannoucements(result)
 
@@ -1684,7 +1684,7 @@ export const GetReviews = async(id,setfeatured_reviews) =>{
   fetch(`${BACKEND_LINK}/payment/getReviewsByItemCode/${id}`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
-      console.log(result)
+      // console.log(result)
       Unauthorized(result.status,`my-courses/${id}`)
       setfeatured_reviews(result.sort((a, b) => new Date(b.date) - new Date(a.date)))
     })
@@ -2224,7 +2224,7 @@ export const GetReviewsByCode = async(course_code,setfeatured_reviews) =>{
   fetch( `${BACKEND_LINK}/payment/getReviewsByCourseCode/${course_code}`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
-          console.log(result)
+          // console.log(result)
           // Unauthorized(result.status,`my-courses/${id}`)
           setfeatured_reviews(result.sort((a, b) => new Date(b.date) - new Date(a.date)))
         })
@@ -2416,5 +2416,49 @@ formdata.append("newPassword", `${conPassword}`);
       }
     })
     .catch((error) => console.error(error));
+
+}
+
+export const StoreLastMarkedCurriculum = async(itemCode,curriculumID) =>{
+
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+const formdata = new FormData();
+formdata.append("itemCode", `${itemCode}`);
+formdata.append("sectionCurriculumItemId", `${curriculumID}`);
+
+const requestOptions = {
+  method: "POST",
+  headers: myHeaders,
+  body: formdata,
+  redirect: "follow"
+};
+
+fetch(`${BACKEND_LINK}/payment/addPreviousView`, requestOptions)
+  .then((response) => response.json())
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
+
+}
+
+export const GetLastMarkedCurriculum = async(id,setseletedCurriculumItem) =>{
+
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+const requestOptions = {
+  method: "GET",
+  headers: myHeaders,
+  redirect: "follow"
+};
+
+fetch(`${BACKEND_LINK}/payment/getPreviousView/${id}`, requestOptions)
+  .then((response) => response.json())
+  .then((result) => {
+    console.log(result)
+    setseletedCurriculumItem(result.previousSectionCurriculumItemId)
+  })
+  .catch((error) => console.error(error));
 
 }

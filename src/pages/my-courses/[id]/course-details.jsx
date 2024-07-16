@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { Player } from 'video-react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -28,7 +28,7 @@ import SingleComment from "./single-comment";
 import CommentFormCourse from '../../../components/forms/comment-form-course';
 import Accordian from '../../../components/course-content/accordian'
 import { useEffect } from "react";
-import { AddQuestion, GetAllAnnoucement, GetAllQuestion, GetMyCoursesDetails, GetReviews, IMG_HOST } from "../../../api";
+import { AddQuestion, GetAllAnnoucement, GetAllQuestion, GetLastMarkedCurriculum, GetMyCoursesDetails, GetReviews, IMG_HOST } from "../../../api";
 import moment from "moment";
 import ErrorAlert from "../../../functions/Alert/ErrorAlert";
 import Commentbox from "../../../components/comment-box/Commentbox";
@@ -136,17 +136,16 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
   // get the Reviews
   useEffect(() => {
     GetReviews(id,setfeatured_reviews)
-    // console.log(course.course_content[0].section_curriculum_item[0])
-    // console.log(course.course_content)    
-
   }, [featured_reviews])
 
   useEffect(() => {
 
+    GetLastMarkedCurriculum(id,setseletedCurriculumItem)
+
     const curriculumItem = course?.course_content?.[0]?.section_curriculum_item?.[0];
     const curriculumItemType = curriculumItem?.curriculum_item_type;
     
-    console.log(curriculumItemType);
+    // console.log(curriculumItemType);
     
    
      if (curriculumItemType == "Quiz") {
@@ -166,7 +165,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
 
         setselectedQuiz(curriculumItem)
 
-        setseletedCurriculumItem(curriculumItem.curriculumItemId)
+        // setseletedCurriculumItem(curriculumItem.curriculumItemId)
 
         console.log(curriculumItem);
     } else if (curriculumItemType == "Practice Test") {
@@ -182,7 +181,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
         setshowCodingExercise(false)
 
         setselectedPracticeTest(curriculumItem)
-        setseletedCurriculumItem(curriculumItem.curriculumItemId)
+        // setseletedCurriculumItem(curriculumItem.curriculumItemId)
 
         console.log(curriculumItem);
     } else if (curriculumItemType == "Coding Exercise") {
@@ -197,11 +196,11 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
         setshowCodingExercise(true)
 
         setselectedCodingExercise(curriculumItem)
-        setseletedCurriculumItem(curriculumItem.curriculumItemId)
+        // setseletedCurriculumItem(curriculumItem.curriculumItemId)
 
         console.log(curriculumItem);
     } else if (curriculumItemType == "Assignment") {
-        setActiveStep(0)
+      setActiveStep(0)
       setarticle("");
       setshowVideoPlayer(false); 
       setshowAssignment(true)
@@ -210,10 +209,15 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
       setshowCodingExercise(false)
 
       setselectedAssignment(curriculumItem)
-      setseletedCurriculumItem(curriculumItem.curriculumItemId)
+      // setseletedCurriculumItem(curriculumItem.curriculumItemId)
 
         console.log(curriculumItem);
     }
+
+    
+   
+
+
   }, [])
 
   useEffect(() => {
@@ -302,6 +306,21 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
 
   // ===============
 
+  const [storedVideoPlayerTimestamp, setstoredVideoPlayerTimestamp] = useState(0)
+  const playerRef = useRef(null);
+
+
+  const handleEnded = () => {
+
+    setstoredVideoPlayerTimestamp(parseInt(playerRef.current?.currentTime))
+      const currentTime = parseInt(playerRef.current?.currentTime);
+      
+      if(currentTime > storedVideoPlayerTimestamp){
+        setstoredVideoPlayerTimestamp(currentTime)
+      }
+      
+  };
+
 
   return (
 
@@ -312,7 +331,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
             <div className="col-md-8">
         
             {showVideoPlayer ? (
-                <MediaPlayer onPlay={(e) => console.log(e)} autoPlay={true} title={TitleVideo} src={main_Video_player_url} >
+                <MediaPlayer ref={playerRef}   onTimeUpdate={handleEnded} autoPlay={true} title={TitleVideo} src={main_Video_player_url} >
                 <MediaProvider  />
                 {/* https://files.vidstack.io/sprite-fight/thumbnails.vtt */}
                 <DefaultVideoLayout  thumbnails={main_Video_player_url} icons={defaultLayoutIcons} >
