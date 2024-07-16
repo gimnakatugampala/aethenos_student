@@ -51,6 +51,7 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                             setshowCodingExercise(false)
                                             
                                             setmain_Video_player_url(`${IMG_HOST}${type.url}`);
+
                                             var videoPlayer = document.querySelector(".video-react-video");
                                             var videoSource = document.getElementById("videoPlayer");
                                             if(videoSource){
@@ -60,9 +61,17 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
 
                                             setTitleVideo(list.title)
 
+
+                                            let delay = (2 / 3) * type.videoLength * 1000;
+
+                                            setTimeout(()=> {
+                                                UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId,setcourse);
+                                            },delay)
+
                                             setseletedCurriculumItem(list.curriculumItemId)
 
-                                            UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
+
+                                            // console.log(list)
                                             
                                             GetMyCoursesDetails(courseItemCode, setcourse)
                                         }}>
@@ -144,7 +153,7 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
 
                                 setseletedCurriculumItem(list.curriculumItemId)
 
-                                UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
+                                UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId,setcourse);
 
                                 GetMyCoursesDetails(courseItemCode, setcourse)
 
@@ -230,7 +239,7 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                         setshowPracticeTest(false)
                                         setshowCodingExercise(false)
                                     
-                                        UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
+                                        UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId,setcourse);
 
 
                                         setselectedQuiz(list)
@@ -274,7 +283,7 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
 
                                     setseletedCurriculumItem(list.curriculumItemId)
                                   
-                                    UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
+                                    UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId,setcourse);
                                     
                                     GetMyCoursesDetails(courseItemCode, setcourse)
 
@@ -311,7 +320,7 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                     setshowPracticeTest(true)
                                     setshowCodingExercise(false)
 
-                                    UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
+                                    UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId,setcourse);
                                     setselectedPracticeTest(list)
                                     console.log(list)
 
@@ -352,7 +361,7 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                     setshowPracticeTest(false)
                                     setshowCodingExercise(true)
 
-                                    UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId);
+                                    UpdateCourseCurriculumProgress(itemCode, list.curriculumItemId,setcourse);
                                     setselectedCodingExercise(list)
                                     setseletedCurriculumItem(list.curriculumItemId)
                                     console.log(list)

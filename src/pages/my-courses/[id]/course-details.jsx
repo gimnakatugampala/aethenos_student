@@ -312,12 +312,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
             <div className="col-md-8">
         
             {showVideoPlayer ? (
-                // <Player autoPlay={true}>
-                //     <source id="videoPlayer" src={main_Video_player_url} />
-                // </Player>
-                
-
-                <MediaPlayer autoPlay={true} title={TitleVideo} src={main_Video_player_url} >
+                <MediaPlayer onPlay={(e) => console.log(e)} autoPlay={true} title={TitleVideo} src={main_Video_player_url} >
                 <MediaProvider  />
                 {/* https://files.vidstack.io/sprite-fight/thumbnails.vtt */}
                 <DefaultVideoLayout  thumbnails={main_Video_player_url} icons={defaultLayoutIcons} >
@@ -747,6 +742,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
                           setPraticeTestActiveStep={setPraticeTestActiveStep}
                           setCodingExerciseActiveStep={setCodingExerciseActiveStep}
                           setTitleVideo={setTitleVideo}
+                          
                           />
                         ))}
 

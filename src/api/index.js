@@ -2037,7 +2037,7 @@ fetch(`${BACKEND_LINK}/payment/updateOrderHasCourseProgress`, requestOptions)
   .catch((error) => console.error(error));
  }
 
- export const UpdateCourseCurriculumProgress = async(itemCode,curriculumItemId) =>{
+ export const UpdateCourseCurriculumProgress = async(itemCode,curriculumItemId,setcourse) =>{
 
   const myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
@@ -2055,7 +2055,10 @@ const requestOptions = {
 
 fetch(`${BACKEND_LINK}/payment/addReadCurriculumItem`, requestOptions)
   .then((response) => response.json())
-  .then((result) => console.log(result))
+  .then((result) => {
+    console.log(result)
+    GetMyCoursesDetails(itemCode,setcourse)
+  })
   .catch((error) => console.error(error));
 
  }
@@ -2073,7 +2076,8 @@ myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
   fetch(`${BACKEND_LINK}/payment/getPurchaseHistory`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
-  Unauthorized(result.status,"purchase-history") 
+        Unauthorized(result.status,"purchase-history") 
+
 
       // console.log(result)
       setpHistory(result)
