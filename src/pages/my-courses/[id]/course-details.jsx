@@ -143,8 +143,11 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
 
   useEffect(() => {
 
-    const curriculumItem = course.course_content[0].section_curriculum_item[0];
-    const curriculumItemType = curriculumItem.curriculum_item_type;
+    const curriculumItem = course?.course_content?.[0]?.section_curriculum_item?.[0];
+    const curriculumItemType = curriculumItem?.curriculum_item_type;
+    
+    console.log(curriculumItemType);
+    
    
      if (curriculumItemType == "Quiz") {
         console.log("Quiz");
@@ -214,8 +217,8 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
   }, [])
 
   useEffect(() => {
-    const curriculumItem = course.course_content[0].section_curriculum_item[0];
-    const curriculumItemType = curriculumItem.curriculum_item_type;
+    const curriculumItem = course?.course_content?.[0]?.section_curriculum_item?.[0];
+    const curriculumItemType = curriculumItem?.curriculum_item_type;
     
     if (curriculumItemType == "Lecture") {
         console.log("Lecture");
@@ -303,7 +306,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
   return (
 
     <section
-    className="container-fluid my-5 course-details-3"
+    className="container-fluid my-2 course-details-3"
       style={{ textAlign: "left", backgroundColor: "transparent" }}>
         <div className="row">
             <div className="col-md-8">
@@ -330,7 +333,14 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
                 {/* // Show Quiz */}
                 {showquiz && (
                   <div className="container border p-4" style={{ maxHeight: '500px', overflowY: 'scroll' }}>
-                    <QuizContainer  setselectAnswer={setselectAnswer} selectAnswer={selectAnswer} answerAlertDisplay={answerAlertDisplay} setanswerAlertDisplay={setanswerAlertDisplay} Startquiz={Startquiz} setStartquiz={setStartquiz} selectedQuiz={selectedQuiz} />
+                    <QuizContainer  
+                    setselectAnswer={setselectAnswer} 
+                    selectAnswer={selectAnswer} 
+                    answerAlertDisplay={answerAlertDisplay} 
+                    setanswerAlertDisplay={setanswerAlertDisplay} 
+                    Startquiz={Startquiz} 
+                    setStartquiz={setStartquiz} 
+                    selectedQuiz={selectedQuiz} />
                   </div>
                 )}
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ErrorAlert from '../../functions/Alert/ErrorAlert';
-import { SendEmailVerficationCode, VerifyCode } from '../../api';
+import { ChangeToNewPassword, SendEmailVerficationCode, VerifyCode } from '../../api';
 import ButtonLoadingMedium from '../../functions/Loading/ButtonLoadingMedium';
 import VerificationInput from 'react-verification-input';
 
@@ -43,7 +43,7 @@ const ForgotPasswordForm = () => {
   const handleCodeSubmit = () =>{
     console.log(VerficationCode)
 
-    if(VerficationCode.length < 12){
+    if(VerficationCode.length < 5){
       ErrorAlert("Error","Verification code is incomplete")
       return
     }
@@ -63,6 +63,9 @@ const ForgotPasswordForm = () => {
       ErrorAlert("Error","Password do not match")
       return
     }
+
+    ChangeToNewPassword(VerficationCode,email,conPassword,setBtnLoading)
+
   }
 
   return (
@@ -109,7 +112,7 @@ const ForgotPasswordForm = () => {
 
               <div>
               <div className="d-flex justify-content-center my-4">
-              <VerificationInput value={VerficationCode} onChange={(e) => setVerficationCode(e)} length={12} className="mx-auto text-center" />
+              <VerificationInput value={VerficationCode} onChange={(e) => setVerficationCode(e)} length={5} className="mx-auto text-center" />
               </div>
               
               <div className="form-group">
