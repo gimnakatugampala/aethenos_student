@@ -96,8 +96,6 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
   // ========== COMMON ========================
   const [seletedCurriculumItem, setseletedCurriculumItem] = useState(null)
   const [selectedCurriculumItemDataLastPosition, setselectedCurriculumItemDataLastPosition] = useState(null)
-  const [loadCurriculum, setloadCurriculum] = useState(false)
-  const [LoadVideo, setLoadVideo] = useState(false)
   const [TitleVideo, setTitleVideo] = useState("")
   const [isDataFetched, setisDataFetched] = useState(false)
   const [isLoadingContent, setisLoadingContent] = useState(false)
@@ -379,21 +377,70 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
 
   // ===============
 
-  const [storedVideoPlayerTimestamp, setstoredVideoPlayerTimestamp] = useState(0)
+
   const playerRef = useRef(null);
 
+  const handleVideoPosition = () => {
+    const currentTime = playerRef.current?.currentTime;
 
-  const handleEnded = () => {
 
-    setstoredVideoPlayerTimestamp(parseInt(playerRef.current?.currentTime))
-      const currentTime = parseInt(playerRef.current?.currentTime);
-      
-      if(currentTime > storedVideoPlayerTimestamp){
-        setstoredVideoPlayerTimestamp(currentTime)
-      }
-      
+    // Retrieve the array from localStorage
+    let videoArray = JSON.parse(localStorage.getItem('videoPlayerTimestampArray')) || [];
+  
+    // Find the index of the existing object
+    const index = videoArray.findIndex(
+      item => item.itemC == itemCode && item.curriItem == seletedCurriculumItem
+    );
+  
+    if (index !== -1) {
+      // Update the existing object
+      videoArray[index].videoStamp = currentTime;
+    } else {
+      let videoObject = {
+        itemC: itemCode,
+        curriItem: seletedCurriculumItem,
+        videoStamp: currentTime
+      };
+  
+      // Add the new object
+      videoArray.push(videoObject);
+    }
+  
+    // Save the updated array back to localStorage
+    localStorage.setItem('videoPlayerTimestampArray', JSON.stringify(videoArray));
   };
-
+  
+  useEffect(() => {
+    const setVideoCurrentTime = () => {
+      // Retrieve the array from localStorage
+      const videoArray = JSON.parse(localStorage.getItem('videoPlayerTimestampArray')) || [];
+  
+      // Find the current object based on itemCode and seletedCurriculumItem
+      const currentObject = videoArray.find(
+        item => item.itemC == itemCode && item.curriItem == seletedCurriculumItem
+      );
+  
+      // If the object is found, set the player's currentTime to the saved videoStamp
+      if (currentObject && playerRef.current) {
+        playerRef.current.currentTime = currentObject.videoStamp;
+      }
+    };
+  
+    // Set video current time when playerRef is available
+    if (playerRef.current) {
+      setVideoCurrentTime();
+    }
+  
+    // Add event listener to ensure currentTime is set when player is ready
+    playerRef.current?.addEventListener('loadedmetadata', setVideoCurrentTime);
+  
+    // Clean up event listener on unmount
+    return () => {
+      playerRef.current?.removeEventListener('loadedmetadata', setVideoCurrentTime);
+    };
+  }, [itemCode, seletedCurriculumItem]);
+  
+  
 
   return (
 
@@ -408,7 +455,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
             {isLoadingContent && <MediumLoading />}
         
             {showVideoPlayer ? (
-                <MediaPlayer ref={playerRef}   onTimeUpdate={handleEnded} autoPlay={true} title={TitleVideo} src={main_Video_player_url} >
+                <MediaPlayer ref={playerRef}  onTransitionEnd={handleVideoPosition} autoPlay={true} title={TitleVideo} src={main_Video_player_url} >
                 <MediaProvider  />
                 {/* https://files.vidstack.io/sprite-fight/thumbnails.vtt */}
                 <DefaultVideoLayout  thumbnails={main_Video_player_url} icons={defaultLayoutIcons} >
