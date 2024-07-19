@@ -302,6 +302,8 @@ setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertD
                                     
                                     GetMyCoursesDetails(courseItemCode, setcourse)
 
+                                    setselectedAssignment(list)
+
                                     console.log(list)
                                 }} key={index}>
                                     <CardMainContainer className={seletedCurriculumItem == list.curriculumItemId && `bg-secondary`}>
