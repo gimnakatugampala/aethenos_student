@@ -8,6 +8,13 @@ import Typography from '@mui/material/Typography';
 import { Player } from 'video-react';
 import { IMG_HOST } from '../../../../api';
 
+import '@vidstack/react/player/styles/default/theme.css';
+import '@vidstack/react/player/styles/default/layouts/audio.css';
+import '@vidstack/react/player/styles/default/layouts/video.css';
+
+import { MediaPlayer, MediaProvider, Gesture ,useVideoQualityOptions , Menu  , SeekButton , Captions   } from '@vidstack/react';
+import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/layouts/default';
+
 const steps = ['Coding exercise information and instructions', 'Coding exercise questions', 'Solutions'];
 
 const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCodingExercise, selectedCodingExercise }) => {
@@ -74,9 +81,14 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
             {activeStepCodingExercise === 0 && (
               <div className='my-2'>
                 {codingExercise.codingVideo ? (
-                  <Player autoPlay={true}>
-                    <source id="videoPlayer" src={`${IMG_HOST}${codingExercise.codingVideo}`} />
-                  </Player>
+
+                  <MediaPlayer id="videoPlayer"  autoPlay={true} title={"Coding Exercise"} src={`${IMG_HOST}${codingExercise.codingVideo}`} >
+                  <MediaProvider  />
+
+                  <DefaultVideoLayout  icons={defaultLayoutIcons} >
+                  </DefaultVideoLayout>
+                  </MediaPlayer>
+                  
                 ) : (
                   <p className='text-center my-4'>No Video Available</p>
                 )}
@@ -118,9 +130,12 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
             {activeStepCodingExercise === 1 && (
               <div className='my-2'>
                 {codingExercise.codingExerciseVideo ? (
-                  <Player autoPlay={true}>
-                    <source id="videoPlayer" src={`${IMG_HOST}${codingExercise.codingExerciseVideo}`} />
-                  </Player>
+                  <MediaPlayer id="videoPlayer"  autoPlay={true} title={"Coding Exercise"} src={`${IMG_HOST}${codingExercise.codingExerciseVideo}`} >
+                  <MediaProvider  />
+
+                  <DefaultVideoLayout  icons={defaultLayoutIcons} >
+                  </DefaultVideoLayout>
+                  </MediaPlayer>
                 ) : (
                   <p className='text-center my-4'>No Video Available</p>
                 )}
@@ -145,9 +160,13 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
               <React.Fragment>
                 <div className='my-2'>
                   {codingExercise.codingSolutionsVideo ? (
-                    <Player autoPlay={true}>
-                      <source id="videoPlayer" src={`${IMG_HOST}${codingExercise.codingSolutionsVideo}`} />
-                    </Player>
+                  <MediaPlayer id="videoPlayer"  autoPlay={true} title={"Coding Exercise"} src={`${IMG_HOST}${codingExercise.codingSolutionsVideo}`}  >
+                  <MediaProvider  />
+
+                  <DefaultVideoLayout  icons={defaultLayoutIcons} >
+                  </DefaultVideoLayout>
+                  </MediaPlayer>
+
                   ) : (
                     <p className='text-center my-4'>No Video Available</p>
                   )}

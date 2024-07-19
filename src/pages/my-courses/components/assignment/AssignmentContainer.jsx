@@ -98,7 +98,7 @@ const AssignmentContainer = ({ activeStep,  setActiveStep,  selectedAssignment }
         
                     <DefaultVideoLayout  icons={defaultLayoutIcons} >
                     </DefaultVideoLayout>
-                    </MediaPlayer>
+                </MediaPlayer>
 
               
                 </div>
