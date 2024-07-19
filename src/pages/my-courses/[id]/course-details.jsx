@@ -28,7 +28,7 @@ import SingleComment from "./single-comment";
 import CommentFormCourse from '../../../components/forms/comment-form-course';
 import Accordian from '../../../components/course-content/accordian'
 import { useEffect } from "react";
-import { AddQuestion, GetAllAnnoucement, GetAllQuestion, GetLastMarkedCurriculum, GetMyCoursesDetails, GetReviews, IMG_HOST } from "../../../api";
+import { AddQuestion, GetAllAnnoucement, GetAllQuestion, GetLastMarkedCurriculum, GetMyCoursesDetails, GetReviews, IMG_HOST, StoreLastMarkedCurriculum, UpdateCourseCurriculumProgress } from "../../../api";
 import moment from "moment";
 import ErrorAlert from "../../../functions/Alert/ErrorAlert";
 import Commentbox from "../../../components/comment-box/Commentbox";
@@ -97,10 +97,9 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
 
   // ========== COMMON ========================
   const [seletedCurriculumItem, setseletedCurriculumItem] = useState(null)
+  const [selectedCurriculumItemDataLastPosition, setselectedCurriculumItemDataLastPosition] = useState(null)
   const [LoadVideo, setLoadVideo] = useState(false)
   const [TitleVideo, setTitleVideo] = useState("")
-
-
 
 
   // ======= QUESTIONS
@@ -131,150 +130,263 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
     GetAllQuestion(itemCode,setquestions)
   }, [itemCode])
   
-
-
   // get the Reviews
   useEffect(() => {
     GetReviews(id,setfeatured_reviews)
   }, [featured_reviews])
 
   useEffect(() => {
-
-    GetLastMarkedCurriculum(id,setseletedCurriculumItem)
-
-    const curriculumItem = course?.course_content?.[0]?.section_curriculum_item?.[0];
-    const curriculumItemType = curriculumItem?.curriculum_item_type;
+  }, [id])
+  
+  
+  useEffect(() => {
     
-    // console.log(curriculumItemType);
-    
-   
-     if (curriculumItemType == "Quiz") {
+    GetLastMarkedCurriculum(id,setseletedCurriculumItem,setselectedCurriculumItemDataLastPosition)
+
+  
+    const selectedSectionId = selectedCurriculumItemDataLastPosition?.sectionId;
+const selectedCurriculumItemId = selectedCurriculumItemDataLastPosition?.previousSectionCurriculumItemId;
+
+if (selectedSectionId && selectedCurriculumItemId) {
+  const curriculumItem = course?.course_content
+    .find((s) => s.section_id == selectedSectionId)
+    ?.section_curriculum_item
+    .find((c) => c.curriculumItemId == seletedCurriculumItem);
+
+    console.log(curriculumItem)
+
+  if (curriculumItem) {
+    switch (curriculumItem.curriculum_item_type) {
+      case "Quiz":
         console.log("Quiz");
 
-        setselectedQuiz(null)
-        setStartquiz(false)
-        setanswerAlertDisplay(null)
-        setselectAnswer(0)
-
+        setselectedQuiz(null);
+        setStartquiz(false);
+        setanswerAlertDisplay(null);
+        setselectAnswer(0);
         setarticle("");
-        setshowVideoPlayer(false); 
-        setshowAssignment(false)
-        setshowquiz(true)
-        setshowPracticeTest(false)
-        setshowCodingExercise(false)
+        setshowVideoPlayer(false);
+        setshowAssignment(false);
+        setshowquiz(true);
+        setshowPracticeTest(false);
+        setshowCodingExercise(false);
 
-        setselectedQuiz(curriculumItem)
+        setselectedQuiz(curriculumItem);
 
-        // setseletedCurriculumItem(curriculumItem.curriculumItemId)
+          //  --------------------- CALCULATE THE MARK --------------------
+          UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId,setcourse);
+          //  --------------------- CALCULATE THE MARK --------------------
+
+
+        // ---------------- STORE AS LAST POSITION -------
+        StoreLastMarkedCurriculum(itemCode,curriculumItem.curriculumItemId)
+        // ---------------- STORE AS LAST POSITION -------
 
         console.log(curriculumItem);
-    } else if (curriculumItemType == "Practice Test") {
+        break;
+
+      case "Practice Test":
         console.log("Practice Test");
 
-        setPraticeTestActiveStep(0)
-        setselectedPracticeTest(null)
+        setPraticeTestActiveStep(0);
+        setselectedPracticeTest(null);
         setarticle("");
-        setshowVideoPlayer(false); 
-        setshowAssignment(false)
-        setshowquiz(false)
-        setshowPracticeTest(true)
-        setshowCodingExercise(false)
+        setshowVideoPlayer(false);
+        setshowAssignment(false);
+        setshowquiz(false);
+        setshowPracticeTest(true);
+        setshowCodingExercise(false);
 
-        setselectedPracticeTest(curriculumItem)
-        // setseletedCurriculumItem(curriculumItem.curriculumItemId)
+        setselectedPracticeTest(curriculumItem);
+
+            //  --------------------- CALCULATE THE MARK --------------------
+            UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId,setcourse);
+            //  --------------------- CALCULATE THE MARK --------------------
+  
+  
+          // ---------------- STORE AS LAST POSITION -------
+          StoreLastMarkedCurriculum(itemCode,curriculumItem.curriculumItemId)
+          // ---------------- STORE AS LAST POSITION -------
 
         console.log(curriculumItem);
-    } else if (curriculumItemType == "Coding Exercise") {
+        break;
+
+      case "Coding Exercise":
         console.log("Coding Exercise");
 
-        setCodingExerciseActiveStep(0)
+        setCodingExerciseActiveStep(0);
         setarticle("");
-        setshowVideoPlayer(false); 
-        setshowAssignment(false)
-        setshowquiz(false)
-        setshowPracticeTest(false)
-        setshowCodingExercise(true)
+        setshowVideoPlayer(false);
+        setshowAssignment(false);
+        setshowquiz(false);
+        setshowPracticeTest(false);
+        setshowCodingExercise(true);
 
-        setselectedCodingExercise(curriculumItem)
-        // setseletedCurriculumItem(curriculumItem.curriculumItemId)
+        setselectedCodingExercise(curriculumItem);
 
-        console.log(curriculumItem);
-    } else if (curriculumItemType == "Assignment") {
-      setActiveStep(0)
-      setarticle("");
-      setshowVideoPlayer(false); 
-      setshowAssignment(true)
-      setshowquiz(false)
-      setshowPracticeTest(false)
-      setshowCodingExercise(false)
-
-      setselectedAssignment(curriculumItem)
-      // setseletedCurriculumItem(curriculumItem.curriculumItemId)
+            //  --------------------- CALCULATE THE MARK --------------------
+            UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId,setcourse);
+            //  --------------------- CALCULATE THE MARK --------------------
+  
+  
+          // ---------------- STORE AS LAST POSITION -------
+          StoreLastMarkedCurriculum(itemCode,curriculumItem.curriculumItemId)
+          // ---------------- STORE AS LAST POSITION -------
 
         console.log(curriculumItem);
-    }
+        break;
 
-    
-   
+      case "Assignment":
+        console.log("Assignment");
 
+        setAssignmentActiveStep(0);
+        setarticle("");
+        setshowVideoPlayer(false);
+        setshowAssignment(true);
+        setshowquiz(false);
+        setshowPracticeTest(false);
+        setshowCodingExercise(false);
 
-  }, [])
+        setselectedAssignment(curriculumItem);
 
-  useEffect(() => {
-    const curriculumItem = course?.course_content?.[0]?.section_curriculum_item?.[0];
-    const curriculumItemType = curriculumItem?.curriculum_item_type;
-    
-    if (curriculumItemType == "Lecture") {
-        console.log("Lecture");
+            //  --------------------- CALCULATE THE MARK --------------------
+            UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId,setcourse);
+            //  --------------------- CALCULATE THE MARK --------------------
+  
+  
+          // ---------------- STORE AS LAST POSITION -------
+          StoreLastMarkedCurriculum(itemCode,curriculumItem.curriculumItemId)
+          // ---------------- STORE AS LAST POSITION -------
 
+        console.log(curriculumItem);
+        break;
 
-        // === VIDEO ===
-        if (curriculumItem.article == "N/A") {
-            curriculumItem.get_CurriculumItem_File.forEach((type) => {
-                if (type.curriculum_item_file_type == "Video") {
-                    const videoUrl = `${IMG_HOST}${type.url}`;
-                    setmain_Video_player_url(videoUrl);
-                    const videoPlayer = document.querySelector(".video-react-video");
-                    const videoSource = document.getElementById("videoPlayer");
-
-                      if (videoSource) {
-                        videoSource.src = videoUrl;
-                        videoPlayer.load();
-                    } else {
-                        console.error("Video player element not found");
-                        setLoadVideo(true)
-                      
-                    }
-                   
+        case "Lecture" :
+          
+          if(curriculumItem.article == "N/A"){
+          console.log("Video");
 
 
-                    setarticle("");
-                    setshowVideoPlayer(true); 
-                    setshowAssignment(false)
-                    setshowquiz(false)
-                    setshowPracticeTest(false)
-                    setshowCodingExercise(false)
+          setarticle("");
+          setshowVideoPlayer(true); 
+          setshowAssignment(false)
+          setshowquiz(false)
+          setshowPracticeTest(false)
+          setshowCodingExercise(false)
+          setTitleVideo(curriculumItem.title)
 
-                    
-                }
-            });
-        }
+          curriculumItem.get_CurriculumItem_File.forEach((type) => {
+            if (type.curriculum_item_file_type == "Video") {
+         
+              // Calculate the delay based on video length and set timeout to update progress
+              const delay = (2 / 3) * type.videoLength * 1000;
+              setTimeout(() => {
+                UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId, setcourse);
+              }, delay);
+            }
+          });
 
-        // === Article ==
-        if (curriculumItem.article != "N/A") {
+
+
+        }else{
+          console.log("Article");
+
           setarticle(curriculumItem.article);
           setshowVideoPlayer(false); 
           setshowAssignment(false)
           setshowquiz(false)
           setshowPracticeTest(false)
           setshowCodingExercise(false)
+          setseletedCurriculumItem(curriculumItem.curriculumItemId)
+
+              //  --------------------- CALCULATE THE MARK --------------------
+              UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId,setcourse);
+              //  --------------------- CALCULATE THE MARK --------------------
+    
+    
+            // ---------------- STORE AS LAST POSITION -------
+            StoreLastMarkedCurriculum(itemCode,curriculumItem.curriculumItemId)
+            // ---------------- STORE AS LAST POSITION -------
+
         }
 
-        setseletedCurriculumItem(curriculumItem.curriculumItemId)
+        
+        break;
 
-        // console.log(curriculumItem);
+      default:
+        console.log("Unknown curriculum item type");
+        break;
     }
-  }, [LoadVideo])
+  } else {
+    console.error("Curriculum item not found");
+  }
+} else {
+  console.error("Invalid section or curriculum item ID");
+}
+
+
+
+
+   
+
+
+  }, [seletedCurriculumItem])
+
+  // useEffect(() => {
+  //   const curriculumItem = course?.course_content?.[0]?.section_curriculum_item?.[0];
+  //   const curriculumItemType = curriculumItem?.curriculum_item_type;
+    
+  //   if (curriculumItemType == "Lecture") {
+  //       console.log("Lecture");
+
+
+  //       // === VIDEO ===
+  //       if (curriculumItem.article == "N/A") {
+  //           curriculumItem.get_CurriculumItem_File.forEach((type) => {
+  //               if (type.curriculum_item_file_type == "Video") {
+  //                   const videoUrl = `${IMG_HOST}${type.url}`;
+  //                   setmain_Video_player_url(videoUrl);
+  //                   const videoPlayer = document.querySelector(".video-react-video");
+  //                   const videoSource = document.getElementById("videoPlayer");
+
+  //                     if (videoSource) {
+  //                       videoSource.src = videoUrl;
+  //                       videoPlayer.load();
+  //                   } else {
+  //                       console.error("Video player element not found");
+  //                       setLoadVideo(true)
+                      
+  //                   }
+                   
+
+
+  //                   setarticle("");
+  //                   setshowVideoPlayer(true); 
+  //                   setshowAssignment(false)
+  //                   setshowquiz(false)
+  //                   setshowPracticeTest(false)
+  //                   setshowCodingExercise(false)
+
+                    
+  //               }
+  //           });
+  //       }
+
+  //       // === Article ==
+  //       if (curriculumItem.article != "N/A") {
+  //         setarticle(curriculumItem.article);
+  //         setshowVideoPlayer(false); 
+  //         setshowAssignment(false)
+  //         setshowquiz(false)
+  //         setshowPracticeTest(false)
+  //         setshowCodingExercise(false)
+  //       }
+
+  //       setseletedCurriculumItem(curriculumItem.curriculumItemId)
+
+  //       // console.log(curriculumItem);
+  //   }
+  // }, [LoadVideo])
   
   
   
@@ -474,20 +586,21 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
 
                                 
                                   <div className="course-tab-content mt-5">
-                                      <div className="course-overview">
-                                          <h5 className="title m-0 p-0">What You’ll Learn?</h5>
-                                          <div className="row">
-                                          {course && chunkArray(course.intended_learners, 3) != null && chunkArray(course.intended_learners, course.intended_learners.length).map((chunk, index) => (
-                                          <ul key={index} className="col-md-6">
-                                              {chunk.map((learner, idx) => (
-                                                learner.intended_learner_type == " students learn" &&
-                                                  <li key={idx}>{learner.intended_learner}</li>
-                                              ))}
-                                          </ul>
+                                  <div className="course-overview">
+                                    <h5 className="title m-0 p-0">What You’ll Learn?</h5>
+                                    <div className="row">
+                                      {course && course.intended_learners && chunkArray(course.intended_learners, 3).map((chunk, index) => (
+                                        <ul key={index} className="col-md-6">
+                                          {chunk.map((learner, idx) => (
+                                            learner.intended_learner_type === "students learn" && (
+                                              <li key={idx}>{learner.intended_learner}</li>
+                                            )
+                                          ))}
+                                        </ul>
                                       ))}
-                                          </div>
-                                      </div>
+                                    </div>
                                   </div>
+                                </div>
 
                                   <h3 className="heading-title m-0">Course Description</h3>
                                   <p>{course && course.course_main_desc}</p>
@@ -504,15 +617,16 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
                                   <p>{course && course.instructor_desc}</p>
 
 
-                                  <h3 className="heading-title p-0 m-0">Requirements</h3>
-                                  <div className="row">
-                                          <ul className="col-md-12">
-                                            {course != null && course.intended_learners.map((req,index) => (
-                                              req.intended_learner_type == "requirements" &&
-                                              <li key={index}>{req.intended_learner}</li>
-                                            ))}
-                                          </ul>
-                                  </div>
+                               <h3 className="heading-title p-0 m-0">Requirements</h3>
+<div className="row">
+  <ul className="col-md-12">
+    {course && course.intended_learners && course.intended_learners.map((req, index) => (
+      req.intended_learner_type === "requirements" && (
+        <li key={index}>{req.intended_learner}</li>
+      )
+    ))}
+  </ul>
+</div>
 
                                 </div>
                                           

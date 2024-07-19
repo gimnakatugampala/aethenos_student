@@ -98,7 +98,9 @@ const QuizContainer = ({ selectAnswer, setselectAnswer, answerAlertDisplay, seta
         <React.Fragment>
         
           
-          <h5 className='my-3'>{selectedQuiz.getQuizs[activeStep].question}</h5>
+        {selectedQuiz && selectedQuiz.getQuizs && selectedQuiz.getQuizs[activeStep] && (
+        <h5 className='my-3'>{selectedQuiz.getQuizs[activeStep].question}</h5>
+      )}
 
           {answerAlertDisplay != null && (
           <>
@@ -125,19 +127,21 @@ const QuizContainer = ({ selectAnswer, setselectAnswer, answerAlertDisplay, seta
           </>
         )}
 
-          <FormControl>        
-          <RadioGroup
-          
-            name="radio-buttons-group"
-            value={selectAnswer}
-            onChange={(e) => setselectAnswer(e.target.value)}
-          >
-            {selectedQuiz.getQuizs != null && selectedQuiz.getQuizs[activeStep].answers.map((answer,index) =>(
-               <FormControlLabel className='p-1 my-1 border border-dark' key={index} value={answer.id} control={<Radio />} label={answer.name} />
-            ))}
-          </RadioGroup>
-          </FormControl>
-
+{selectedQuiz.getQuizs[activeStep] !=null ? selectedQuiz.getQuizs[activeStep].answers && (
+  <>
+            <FormControl>
+              <RadioGroup>
+                {selectedQuiz.getQuizs[activeStep].answers.map((answer, index) => (
+                  <FormControlLabel
+                    className='p-1 my-1 border border-dark'
+                    key={index}
+                    value={answer.id}
+                    control={<Radio />}
+                    label={answer.name}
+                  />
+                ))}
+              </RadioGroup>
+            </FormControl>
           <br />
 
           <button onClick={() => {
@@ -179,6 +183,9 @@ const QuizContainer = ({ selectAnswer, setselectAnswer, answerAlertDisplay, seta
               {activeStep === selectedQuiz.getQuizs.length - 1 ? <button onClick={handleReset} className='edu-btn btn-small'>Retake quiz</button> : <button onClick={handleNext} className='edu-btn btn-small'>Next question <NavigateNextIcon /></button>}
             </Button>
           </Box>
+          </>
+          ) : <div><h6>No Quiz Available</h6></div>}
+
 
         </React.Fragment>
       
