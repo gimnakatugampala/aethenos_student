@@ -10,12 +10,12 @@ import CardMainContainer from '../../pages/my-courses/[id]/CardMainContainer';
 const Accordian = ({show=false,content,id,setmain_Video_player_url,itemCode, setshowVideoPlayer, setarticle, setshowquiz, setselectedQuiz, setshowAssignment , setselectedAssignment , setshowPracticeTest , setselectedPracticeTest, setshowCodingExercise , setselectedCodingExercise , setcourse , courseItemCode,
 setseletedCurriculumItem , seletedCurriculumItem, setStartquiz , setanswerAlertDisplay , setselectAnswer , activeStep, setActiveStep, setPraticeTestActiveStep , setCodingExerciseActiveStep, setTitleVideo}) => {
 
-    useEffect(() => {
-        content.section_curriculum_item.map((list,index) => (
-            list.curriculum_item_type == "Lecture" && list.get_CurriculumItem_File.map((type) => (
-                type.curriculum_item_file_type == "Video" == setmain_Video_player_url(`${IMG_HOST}${type.url}`)
-            ))))
-    }, [content])
+    // useEffect(() => {
+    //     content.section_curriculum_item.map((list,index) => (
+    //         list.curriculum_item_type == "Lecture" && list.get_CurriculumItem_File.map((type) => (
+    //             type.curriculum_item_file_type == "Video" == setmain_Video_player_url(`${IMG_HOST}${type.url}`)
+    //         ))))
+    // }, [content])
 
 
  
