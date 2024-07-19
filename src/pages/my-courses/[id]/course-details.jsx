@@ -96,10 +96,10 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
   const [seletedCurriculumItem, setseletedCurriculumItem] = useState(null)
   const [selectedCurriculumItemDataLastPosition, setselectedCurriculumItemDataLastPosition] = useState(null)
   const [loadCurriculum, setloadCurriculum] = useState(false)
-  const [isDataFetched, setIsDataFetched] = useState(false);  // New state to track data fetch status
-
   const [LoadVideo, setLoadVideo] = useState(false)
   const [TitleVideo, setTitleVideo] = useState("")
+  const [isDataFetched, setisDataFetched] = useState(false)
+  const [isLoadingContent, setisLoadingContent] = useState(false)
 
 
   // ======= QUESTIONS
@@ -138,208 +138,217 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
 
   
 
-  
-  
-
   useEffect(() => {
     const fetchData = async () => {
       await GetLastMarkedCurriculum(id, setseletedCurriculumItem, setselectedCurriculumItemDataLastPosition);
-      setIsDataFetched(true);  // Set data fetched flag to true
+      setisDataFetched(true); // Set data fetched flag to true
     };
-
+  
     fetchData();
-  }, []); 
-
+  }, []);
+  
   useEffect(() => {
     if (!isDataFetched) return;
-
+  
     const selectedSectionId = selectedCurriculumItemDataLastPosition?.sectionId;
     const selectedCurriculumItemId = selectedCurriculumItemDataLastPosition?.previousSectionCurriculumItemId;
-
-    // console.log("Section ID" + selectedSectionId);
-    // console.log("curriculum " + selectedCurriculumItemId);
-
+    const curriculumItemType = selectedCurriculumItemDataLastPosition?.curriculumItemType;
+  
+    // console.log("Section ID " + selectedSectionId);
+    // console.log("Curriculum Item ID " + selectedCurriculumItemId);
+  
     let curriculumItem = null;
-    if (selectedSectionId && selectedCurriculumItemId) {
+  
+    // Check if all required fields are empty strings
+    if (selectedSectionId == "" && selectedCurriculumItemId == "" && curriculumItemType =="") {
+      // Default to the first object in the array if all are empty
+      curriculumItem = course?.course_content?.[0]?.section_curriculum_item?.[0];
+      setisLoadingContent(false)
+
+    } else if (selectedSectionId && selectedCurriculumItemId) {
       curriculumItem = course?.course_content
         .find((s) => s.section_id == selectedSectionId)
         ?.section_curriculum_item
         .find((c) => c.curriculumItemId == selectedCurriculumItemId);
+        setisLoadingContent(false)
+
+    }else{
+      setisLoadingContent(true)
+
     }
 
-    if (!curriculumItem) {
-      curriculumItem = course?.course_content?.[0]?.section_curriculum_item?.[0];
-    }
 
-    console.log(curriculumItem);
-
+  
     if (curriculumItem) {
-      switch (curriculumItem.curriculum_item_type) {
-        case "Quiz":
-          console.log("Quiz");
-
-          setselectedQuiz(null);
-          setStartquiz(false);
-          setanswerAlertDisplay(null);
-          setselectAnswer(0);
-          setarticle("");
-          setshowVideoPlayer(false);
-          setshowAssignment(false);
-          setshowquiz(true);
-          setshowPracticeTest(false);
-          setshowCodingExercise(false);
-          setseletedCurriculumItem(curriculumItem.curriculumItemId);
-
-          setselectedQuiz(curriculumItem);
-
-          //  --------------------- CALCULATE THE MARK --------------------
-          UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId, setcourse);
-          //  --------------------- CALCULATE THE MARK --------------------
-
-          // ---------------- STORE AS LAST POSITION -------
-          StoreLastMarkedCurriculum(itemCode, curriculumItem.curriculumItemId);
-          // ---------------- STORE AS LAST POSITION -------
-
-          console.log(curriculumItem);
-          break;
-
-        case "Practice Test":
-          console.log("Practice Test");
-
-          setPraticeTestActiveStep(0);
-          setselectedPracticeTest(null);
-          setarticle("");
-          setshowVideoPlayer(false);
-          setshowAssignment(false);
-          setshowquiz(false);
-          setshowPracticeTest(true);
-          setshowCodingExercise(false);
-          setseletedCurriculumItem(curriculumItem.curriculumItemId);
-
-          setselectedPracticeTest(curriculumItem);
-
-          //  --------------------- CALCULATE THE MARK --------------------
-          UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId, setcourse);
-          //  --------------------- CALCULATE THE MARK --------------------
-
-          // ---------------- STORE AS LAST POSITION -------
-          StoreLastMarkedCurriculum(itemCode, curriculumItem.curriculumItemId);
-          // ---------------- STORE AS LAST POSITION -------
-
-          console.log(curriculumItem);
-          break;
-
-        case "Coding Exercise":
-          console.log("Coding Exercise");
-
-          setCodingExerciseActiveStep(0);
-          setarticle("");
-          setshowVideoPlayer(false);
-          setshowAssignment(false);
-          setshowquiz(false);
-          setshowPracticeTest(false);
-          setshowCodingExercise(true);
-          setseletedCurriculumItem(curriculumItem.curriculumItemId);
-
-          setselectedCodingExercise(curriculumItem);
-
-          //  --------------------- CALCULATE THE MARK --------------------
-          UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId, setcourse);
-          //  --------------------- CALCULATE THE MARK --------------------
-
-          // ---------------- STORE AS LAST POSITION -------
-          StoreLastMarkedCurriculum(itemCode, curriculumItem.curriculumItemId);
-          // ---------------- STORE AS LAST POSITION -------
-
-          console.log(curriculumItem);
-          break;
-
-        case "Assignment":
-          console.log("Assignment");
-
-          setAssignmentActiveStep(0);
-          setarticle("");
-          setshowVideoPlayer(false);
-          setshowAssignment(true);
-          setshowquiz(false);
-          setshowPracticeTest(false);
-          setshowCodingExercise(false);
-
-          setselectedAssignment(curriculumItem);
-          setseletedCurriculumItem(curriculumItem.curriculumItemId);
-
-          //  --------------------- CALCULATE THE MARK --------------------
-          UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId, setcourse);
-          //  --------------------- CALCULATE THE MARK --------------------
-
-          // ---------------- STORE AS LAST POSITION -------
-          StoreLastMarkedCurriculum(itemCode, curriculumItem.curriculumItemId);
-          // ---------------- STORE AS LAST POSITION -------
-
-          console.log(curriculumItem);
-          break;
-
-        case "Lecture":
-          if (curriculumItem.article == "N/A") {
-            console.log("Video");
-
-            setarticle("");
-            setshowVideoPlayer(true);
-            setshowAssignment(false);
-            setshowquiz(false);
-            setshowPracticeTest(false);
-            setshowCodingExercise(false);
-            setTitleVideo(curriculumItem.title);
-            setseletedCurriculumItem(curriculumItem.curriculumItemId);
-
-            curriculumItem.get_CurriculumItem_File.forEach((type) => {
-              if (type.curriculum_item_file_type == "Video") {
-                setmain_Video_player_url(`${IMG_HOST}${type.url}`);
-
-                var videoPlayer = document.querySelector(".video-react-video");
-                var videoSource = document.getElementById("videoPlayer");
-                if (videoSource) {
-                  videoSource.src = `${IMG_HOST}${type.url}`;
-                  videoPlayer.load();
-                }
-
-                const delay = (2 / 3) * type.videoLength * 1000;
-                setTimeout(() => {
-                  UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId, setcourse);
-                }, delay);
-              }
-            });
-          } else {
-            console.log("Article");
-
-            setarticle(curriculumItem.article);
-            setshowVideoPlayer(false);
-            setshowAssignment(false);
-            setshowquiz(false);
-            setshowPracticeTest(false);
-            setshowCodingExercise(false);
-            setseletedCurriculumItem(curriculumItem.curriculumItemId);
-
-            //  --------------------- CALCULATE THE MARK --------------------
-            UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId, setcourse);
-            //  --------------------- CALCULATE THE MARK --------------------
-
-            // ---------------- STORE AS LAST POSITION -------
-            StoreLastMarkedCurriculum(itemCode, curriculumItem.curriculumItemId);
-            // ---------------- STORE AS LAST POSITION -------
-          }
-          break;
-
-        default:
-          console.log("Unknown curriculum item type");
-          break;
-      }
+      handleCheckCurriculum(curriculumItem);
     } else {
       console.error("Curriculum item not found");
-      setloadCurriculum(true);
     }
   }, [isDataFetched, selectedCurriculumItemDataLastPosition]);
-
+  
+  const handleCheckCurriculum = (curriculumItem) => {
+    switch (curriculumItem.curriculum_item_type) {
+      case "Quiz":
+        console.log("Quiz");
+  
+        setselectedQuiz(null);
+        setStartquiz(false);
+        setanswerAlertDisplay(null);
+        setselectAnswer(0);
+        setarticle("");
+        setshowVideoPlayer(false);
+        setshowAssignment(false);
+        setshowquiz(true);
+        setshowPracticeTest(false);
+        setshowCodingExercise(false);
+        setseletedCurriculumItem(curriculumItem.curriculumItemId);
+  
+        setselectedQuiz(curriculumItem);
+  
+        //  --------------------- CALCULATE THE MARK --------------------
+        UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId, setcourse);
+        //  --------------------- CALCULATE THE MARK --------------------
+  
+        // ---------------- STORE AS LAST POSITION -------
+        StoreLastMarkedCurriculum(itemCode, curriculumItem.curriculumItemId);
+        // ---------------- STORE AS LAST POSITION -------
+  
+        console.log(curriculumItem);
+        break;
+  
+      case "Practice Test":
+        console.log("Practice Test");
+  
+        setPraticeTestActiveStep(0);
+        setselectedPracticeTest(null);
+        setarticle("");
+        setshowVideoPlayer(false);
+        setshowAssignment(false);
+        setshowquiz(false);
+        setshowPracticeTest(true);
+        setshowCodingExercise(false);
+        setseletedCurriculumItem(curriculumItem.curriculumItemId);
+  
+        setselectedPracticeTest(curriculumItem);
+  
+        //  --------------------- CALCULATE THE MARK --------------------
+        UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId, setcourse);
+        //  --------------------- CALCULATE THE MARK --------------------
+  
+        // ---------------- STORE AS LAST POSITION -------
+        StoreLastMarkedCurriculum(itemCode, curriculumItem.curriculumItemId);
+        // ---------------- STORE AS LAST POSITION -------
+  
+        console.log(curriculumItem);
+        break;
+  
+      case "Coding Exercise":
+        console.log("Coding Exercise");
+  
+        setCodingExerciseActiveStep(0);
+        setarticle("");
+        setshowVideoPlayer(false);
+        setshowAssignment(false);
+        setshowquiz(false);
+        setshowPracticeTest(false);
+        setshowCodingExercise(true);
+        setseletedCurriculumItem(curriculumItem.curriculumItemId);
+  
+        setselectedCodingExercise(curriculumItem);
+  
+        //  --------------------- CALCULATE THE MARK --------------------
+        UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId, setcourse);
+        //  --------------------- CALCULATE THE MARK --------------------
+  
+        // ---------------- STORE AS LAST POSITION -------
+        StoreLastMarkedCurriculum(itemCode, curriculumItem.curriculumItemId);
+        // ---------------- STORE AS LAST POSITION -------
+  
+        console.log(curriculumItem);
+        break;
+  
+      case "Assignment":
+        console.log("Assignment");
+  
+        setAssignmentActiveStep(0);
+        setarticle("");
+        setshowVideoPlayer(false);
+        setshowAssignment(true);
+        setshowquiz(false);
+        setshowPracticeTest(false);
+        setshowCodingExercise(false);
+  
+        setselectedAssignment(curriculumItem);
+        setseletedCurriculumItem(curriculumItem.curriculumItemId);
+  
+        //  --------------------- CALCULATE THE MARK --------------------
+        UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId, setcourse);
+        //  --------------------- CALCULATE THE MARK --------------------
+  
+        // ---------------- STORE AS LAST POSITION -------
+        StoreLastMarkedCurriculum(itemCode, curriculumItem.curriculumItemId);
+        // ---------------- STORE AS LAST POSITION -------
+  
+        console.log(curriculumItem);
+        break;
+  
+      case "Lecture":
+        if (curriculumItem.article === "N/A") {
+          console.log("Video");
+  
+          setarticle("");
+          setshowVideoPlayer(true);
+          setshowAssignment(false);
+          setshowquiz(false);
+          setshowPracticeTest(false);
+          setshowCodingExercise(false);
+          setTitleVideo(curriculumItem.title);
+          setseletedCurriculumItem(curriculumItem.curriculumItemId);
+  
+          curriculumItem.get_CurriculumItem_File.forEach((type) => {
+            if (type.curriculum_item_file_type === "Video") {
+              setmain_Video_player_url(`${IMG_HOST}${type.url}`);
+  
+              const videoPlayer = document.querySelector(".video-react-video");
+              const videoSource = document.getElementById("videoPlayer");
+              if (videoSource) {
+                videoSource.src = `${IMG_HOST}${type.url}`;
+                videoPlayer.load();
+              }
+  
+              const delay = (2 / 3) * type.videoLength * 1000;
+              setTimeout(() => {
+                UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId, setcourse);
+              }, delay);
+            }
+          });
+        } else {
+          console.log("Article");
+  
+          setarticle(curriculumItem.article);
+          setshowVideoPlayer(false);
+          setshowAssignment(false);
+          setshowquiz(false);
+          setshowPracticeTest(false);
+          setshowCodingExercise(false);
+          setseletedCurriculumItem(curriculumItem.curriculumItemId);
+  
+          //  --------------------- CALCULATE THE MARK --------------------
+          UpdateCourseCurriculumProgress(itemCode, curriculumItem.curriculumItemId, setcourse);
+          //  --------------------- CALCULATE THE MARK --------------------
+  
+          // ---------------- STORE AS LAST POSITION -------
+          StoreLastMarkedCurriculum(itemCode, curriculumItem.curriculumItemId);
+          // ---------------- STORE AS LAST POSITION -------
+        }
+        break;
+  
+      default:
+        console.log("Unknown curriculum item type");
+        break;
+    }
+  };
+  
 
 
 
@@ -391,6 +400,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
     className="container-fluid my-2 course-details-3"
       style={{ textAlign: "left", backgroundColor: "transparent" }}>
         <div className="row">
+          {isLoadingContent && <h1>Loading..</h1>}
             <div className="col-md-8">
         
             {showVideoPlayer ? (

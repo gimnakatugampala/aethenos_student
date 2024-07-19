@@ -2442,7 +2442,7 @@ fetch(`${BACKEND_LINK}/payment/addPreviousView`, requestOptions)
 
 }
 
-export const GetLastMarkedCurriculum = async(id,setreloadSelectedCurriculumItem,setselectedCurriculumItemDataLastPosition) =>{
+export const GetLastMarkedCurriculum = async(id,setseletedCurriculumItem, setselectedCurriculumItemDataLastPosition) =>{
 
   const myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
@@ -2457,7 +2457,7 @@ fetch(`${BACKEND_LINK}/payment/getPreviousView/${id}`, requestOptions)
   .then((response) => response.json())
   .then((result) => {
     console.log(result)
-    setreloadSelectedCurriculumItem(result.previousSectionCurriculumItemId)
+    setseletedCurriculumItem(result.previousSectionCurriculumItemId)
     setselectedCurriculumItemDataLastPosition(result)
   })
   .catch((error) => console.error(error));
