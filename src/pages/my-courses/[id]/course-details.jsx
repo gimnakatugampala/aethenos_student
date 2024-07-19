@@ -45,6 +45,7 @@ import '@vidstack/react/player/styles/default/layouts/video.css';
 
 import { MediaPlayer, MediaProvider, Gesture ,useVideoQualityOptions , Menu  , SeekButton , Captions   } from '@vidstack/react';
 import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/layouts/default';
+import MediumLoading from "../../../functions/Loading/MediumLoading";
 
 
 const CourseDetailsArea1 = ({id, course , setcourse}) => {
@@ -400,8 +401,11 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
     className="container-fluid my-2 course-details-3"
       style={{ textAlign: "left", backgroundColor: "transparent" }}>
         <div className="row">
-          {isLoadingContent && <h1>Loading..</h1>}
+
+          
             <div className="col-md-8">
+
+            {isLoadingContent && <MediumLoading />}
         
             {showVideoPlayer ? (
                 <MediaPlayer ref={playerRef}   onTimeUpdate={handleEnded} autoPlay={true} title={TitleVideo} src={main_Video_player_url} >
