@@ -7,6 +7,12 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Player } from 'video-react';
 import { IMG_HOST } from '../../../../api';
+import '@vidstack/react/player/styles/default/theme.css';
+import '@vidstack/react/player/styles/default/layouts/audio.css';
+import '@vidstack/react/player/styles/default/layouts/video.css';
+
+import { MediaPlayer, MediaProvider, Gesture ,useVideoQualityOptions , Menu  , SeekButton , Captions   } from '@vidstack/react';
+import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/layouts/default';
 
 const steps = ['Assignment information and instructions', 'Questions', 'Solutions'];
 
@@ -86,9 +92,15 @@ const AssignmentContainer = ({ activeStep,  setActiveStep,  selectedAssignment }
 
               {selectedAssignment.getAssignments[0].assignmentVideo !== "" ? (
                 <div className='m-3'>
-                  <Player autoPlay={true}>
-                    <source id="videoPlayer" src={`${IMG_HOST}${selectedAssignment.getAssignments[0].assignmentVideo}`} />
-                  </Player>
+
+                <MediaPlayer id="videoPlayer"  autoPlay={true} title={"Assignment"} src={`${IMG_HOST}${selectedAssignment.getAssignments[0].assignmentVideo}`} >
+                    <MediaProvider  />
+        
+                    <DefaultVideoLayout  icons={defaultLayoutIcons} >
+                    </DefaultVideoLayout>
+                    </MediaPlayer>
+
+              
                 </div>
               ) : (
                 <p className='text-center my-4'>No Video Available</p>
@@ -141,10 +153,18 @@ const AssignmentContainer = ({ activeStep,  setActiveStep,  selectedAssignment }
                 <React.Fragment>
                 <div className='my-2'>
 
+                
+
                 {selectedAssignment.getAssignments[0].solutionVideo != "" ?
-                    <Player autoPlay={true}>
-                    <source id="videoPlayer" src={`${IMG_HOST}${selectedAssignment.getAssignments[0].solutionVideo}`} />
-                    </Player> : <p className='text-center my-4'>No Video Available</p>}
+                    <MediaPlayer  autoPlay={true} title={"Assignment"} src={`${IMG_HOST}${selectedAssignment.getAssignments[0].solutionVideo}`} >
+                    <MediaProvider  />
+                  
+                    <DefaultVideoLayout  icons={defaultLayoutIcons} >
+                    </DefaultVideoLayout>
+                    </MediaPlayer>
+                    : 
+                    <p className='text-center my-4'>No Video Available</p>
+                  }
     
                     <h6 className='m-0 p-0'>{selectedAssignment.getAssignments[0].question}</h6>
 
