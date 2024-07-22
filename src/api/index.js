@@ -1575,8 +1575,7 @@ export const GetMyCourses = async(setCourses,setloading) =>{
 }
 
 
-export const GetMyCoursesDetails = async(id,setcourse) =>{
-
+export const GetMyCoursesDetails = async(id, setcourse) => {
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
 
@@ -1585,18 +1584,26 @@ export const GetMyCoursesDetails = async(id,setcourse) =>{
     headers: myHeaders,
     redirect: "follow"
   };
-  
+
   fetch(`${BACKEND_LINK}/payment/getPurchasedCourseDetailsByItemCode/${id}`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
-      console.log(result)
-      Unauthorized(result.status,`my-courses/${id}`)
-      setcourse(result)
+      console.log(result);
+      Unauthorized(result.status, `my-courses/${id}`);
+
+      // Sort each section's curriculum items by arrangeNo
+      result.course_content.forEach(section => {
+        section.section_curriculum_item.sort((a, b) => {
+          if (a.arrangeNo === null || a.arrangeNo === undefined) return 1;
+          if (b.arrangeNo === null || b.arrangeNo === undefined) return -1;
+          return parseInt(a.arrangeNo, 10) - parseInt(b.arrangeNo, 10);
+        });
+      });
+
+      setcourse(result);
     })
     .catch((error) => console.error(error));
-
-
-}
+};
 
 export const SubmitCourseReview = async(id,msg,rating,setbtnloading) =>{
 
