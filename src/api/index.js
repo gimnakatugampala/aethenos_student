@@ -2471,7 +2471,7 @@ fetch(`${BACKEND_LINK}/payment/getPreviousView/${id}`, requestOptions)
 
 }
 
-export const CheckAndSaveRefCode = async (ref) => {
+export const CheckAndSaveRefCode = async (ref, router) => {
   const myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
 
@@ -2492,19 +2492,39 @@ export const CheckAndSaveRefCode = async (ref) => {
       };
 
       // Retrieve the existing array from local storage, or initialize a new one if it doesn't exist
-      const existingData = JSON.parse(localStorage.getItem('aethenos_referral_codes')) || [];
+      let existingData = JSON.parse(localStorage.getItem('aethenos_referral_codes')) || [];
 
-      // Add the new referral data
-      existingData.push(refData);
+      // Check if courseCode already exists
+      const index = existingData.findIndex(item => item.courseCode === result.courseCode);
+
+      if (index !== -1) {
+        // Update existing entry
+        existingData[index].refCode = ref;
+        console.log('Referral code updated:', refData);
+      } else {
+        // Add new entry
+        existingData.push(refData);
+        console.log('Referral code saved:', refData);
+      }
 
       // Save the updated array back to local storage
       localStorage.setItem('aethenos_referral_codes', JSON.stringify(existingData));
 
-      console.log('Referral code saved:', refData);
+      router.push(`/course-details/${result.courseCode}`);
+
+      
+
+      // router.push('/');
+
     } else {
       console.log('Invalid referral code:', result.message);
+      // Redirect to home if validation is false
+      router.push('/');
     }
   } catch (error) {
     console.error('Error checking referral code:', error);
+    // Redirect to home if there's an error
+    router.push('/');
   }
 };
+

@@ -16,12 +16,9 @@ export default function Home() {
         if (router.isReady) {
           const { ref } = router.query;
           if (ref) {
-            // setRefCode(ref);
-            CheckAndSaveRefCode(ref)
-            // console.log(ref)
+            CheckAndSaveRefCode(ref, router);
           }
         }
-
       }, [router.isReady, router.query]);
 
     return (
