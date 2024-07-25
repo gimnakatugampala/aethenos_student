@@ -2470,3 +2470,41 @@ fetch(`${BACKEND_LINK}/payment/getPreviousView/${id}`, requestOptions)
   .catch((error) => console.error(error));
 
 }
+
+export const CheckAndSaveRefCode = async (ref) => {
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
+  try {
+    const response = await fetch(`${BACKEND_LINK}/course/checkReferralCodeValidation/${ref}`, requestOptions);
+    const result = await response.json();
+
+    if (result.validation) {
+      const refData = {
+        refCode: ref,
+        courseCode: result.courseCode,
+      };
+
+      // Retrieve the existing array from local storage, or initialize a new one if it doesn't exist
+      const existingData = JSON.parse(localStorage.getItem('aethenos_referral_codes')) || [];
+
+      // Add the new referral data
+      existingData.push(refData);
+
+      // Save the updated array back to local storage
+      localStorage.setItem('aethenos_referral_codes', JSON.stringify(existingData));
+
+      console.log('Referral code saved:', refData);
+    } else {
+      console.log('Invalid referral code:', result.message);
+    }
+  } catch (error) {
+    console.error('Error checking referral code:', error);
+  }
+};
