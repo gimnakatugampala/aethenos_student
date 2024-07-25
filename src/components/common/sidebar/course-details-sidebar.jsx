@@ -71,12 +71,15 @@ const CourseDetailsSidebar = ({ course,details_2=false }) => {
 
     const handleEnroll = (course) =>{
 
+        // console.log(course)
+
         var rawData = {
           "paymentMethod": "3",
           "discount": 0,
           "totalPrice": 0,
           "currency": "USD",
           "country": JSON.parse(COUNTRY).country_name,
+          "courseType":2,
           "courses": [{
               "courseCode": `${course.course_code}`,
               "itemPrice": 0,

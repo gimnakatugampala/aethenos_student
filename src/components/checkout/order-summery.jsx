@@ -117,6 +117,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
             "totalPrice": `${total}`,
             "currency": GetCurrencyByCountry(cartCourses[0].other_data).toLowerCase(),
             "country": JSON.parse(COUNTRY).country_name,
+            "courseType":4,
             "courses": calculatedPurchasedCourse
             };
     
