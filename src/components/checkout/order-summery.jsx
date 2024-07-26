@@ -125,7 +125,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
             return
         }
 
-        console.log(total)
+        
 
 
     }, [cartCourses, total]);
@@ -190,43 +190,52 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                     </div>
                 }
 
-                {cartCourses.length > 0 &&
-                    <table className="table summery-table">
-                        <tbody>
-                            {cartCourses.map((item,i) => (
-                                <tr key={i}>
-                                    <td><img className='mx-3 rounded' height={70} width={60} src={`${IMG_HOST}${item.other_data.img}`} />{item.title.substring(0,25)}... <span className="quantity">x 1</span></td>
-                                    <td>
+{cartCourses.length > 0 &&
+    <table className="table summery-table">
+        <tbody>
+            {cartCourses.map((item, i) => {
+                // Find the coupon for the current item, if it exists
+                const coupon = couponValue.find(coupon => coupon.id === item.id);
+                // Calculate the discounted price
+                const originalPrice = CalculateDiscountedPrice(item.other_data) || 0;
+                const discountedPrice = coupon 
+                    ? (coupon.couponType === 1 
+                        ? 0 // Free coupon
+                        : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+                    ) 
+                    : originalPrice;
 
+                return (
+                    <tr key={i}>
+                        <td>
+                            <img className='mx-3 rounded' height={70} width={60} src={`${IMG_HOST}${item.other_data.img}`} />
+                            {item.title.substring(0, 25)}... <span className="quantity">x 1</span>
+                        </td>
+                        <td>
+                            {getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} 
+                            {discountedPrice.toFixed(2)}
+                            
+                            {coupon && (
+                                <span className="text-decoration-line-through mx-2">
                                     {getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} 
-                                    {(1 * CalculateDiscountedPrice(item.other_data) - 
-                                        (couponValue.length > 0 && couponValue.some(coupon => {
-                                            return coupon.id == item.id && coupon.couponType == 1;
-                                        }) ? 
-                                        CalculateDiscountedPrice(item.other_data) : 
-                                        (couponValue.length > 0 && couponValue.some(coupon => {
-                                            return coupon.id == item.id && coupon.couponType == 2;
-                                        })) ? CalculateDiscountedPrice(item.other_data) : 0)
-                                    ).toFixed(2)}
+                                    {originalPrice.toFixed(2)}
+                                </span>
+                            )}
+                        </td>
+                    </tr>
+                );
+            })}
+            <tr className="order-total">
+                <td>Order Total</td>
+                <td>
+                    {cartCourses.length > 0 && getSymbolFromCurrency(GetCurrencyByCountry(cartCourses[0].other_data))}
+                    {total.toFixed(2)}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
 
-
-                                    {couponValue.length > 0 && couponValue.some(coupon => coupon.id == item.id) && (
-                                        <span className="text-decoration-line-through mx-2">
-                                            {getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} 
-                                            {(1 * CalculateDiscountedPrice(item.other_data)).toFixed(2)}
-                                        </span>
-                                    )}
-
-                                    </td>
-                                </tr>
-                            ))}
-                            <tr className="order-total">
-                                <td>Order Total</td>
-                                <td>{cartCourses.length > 0 && getSymbolFromCurrency(GetCurrencyByCountry(cartCourses[0].other_data))}{(total).toFixed(2)}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                }
 
                     <div className='my-3'>
                         {/* CHips  */}
