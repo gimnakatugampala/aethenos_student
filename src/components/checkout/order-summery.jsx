@@ -105,17 +105,25 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
             return
         }
 
-        if(total != 0){
+        if (total !== 0) {
+            const calculatedPurchasedCourse = cartCourses.map((course) => {
+                const coupon = couponValue.find(coupon => coupon.id === course.id);
+                const originalPrice = CalculateDiscountedPrice(course.other_data) || 0;
+                const discountedPrice = coupon 
+                    ? (coupon.couponType === 1 
+                        ? 0 // Free coupon
+                        : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+                    ) 
+                    : originalPrice;
 
-            const calculatedPurchasedCourse = cartCourses != null && cartCourses.map((course) => ({
-            courseCode: course.other_data.course_code,
-            currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
-            itemPrice: 1 * (CalculateDiscountedPrice(course.other_data))
-            }));
-    
-            setPurchasedCourse(calculatedPurchasedCourse);
+                return {
+                    courseCode: course.other_data.course_code,
+                    currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
+                    itemPrice: discountedPrice.toFixed(2)
+                };
+            });
 
-           
+            // Determine courseType and calculate discount
             let courseType = 1;
             let discount = 0;
 
@@ -141,7 +149,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
             )) {
                 courseType = 4;
             }
-    
+
             const calculatedBuyCourseOrder = {
             "paymentMethod": "1",
             "discount": discount,
@@ -170,7 +178,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
 
           if(buyCourseOrder != null && total != 0){
               console.log(buyCourseOrder);
-              console.log(JSON.stringify(buyCourseOrder));
+            //   console.log(JSON.stringify(buyCourseOrder));
              var rawData =  JSON.stringify(buyCourseOrder)
             //   BuyCourseByStudent(rawData)
               return
