@@ -58,22 +58,26 @@ const OrderSummery = ({showStripe,showPaypal}) => {
 
 // console.log(cartCourses)
 
-const newPricing = cartCourses != null && cartCourses.map((course) => ({
-    img: course.img,
-    title:course.title,
-    qty:1,
-    desc:course.other_data.course_main_desc,
-    currency:GetCurrencyByCountry(course.other_data).toLowerCase(),
-    price:(CalculateDiscountedPrice(course.other_data)) == null ? 0 : (1 * CalculateDiscountedPrice(course.other_data) - 
-    (couponValue.length > 0 && couponValue.some(coupon => {
-        return coupon.id == course.id && coupon.couponType == 1;
-    }) ? 
-    CalculateDiscountedPrice(course.other_data) : 
-    (couponValue.length > 0 && couponValue.some(coupon => {
-        return coupon.id == course.id && coupon.couponType == 2;
-    })) ? CalculateDiscountedPrice(course.other_data) : 0)
-).toFixed(2)
-}))
+const newPricing = cartCourses != null && cartCourses.map((course) => {
+    const coupon = couponValue.find(coupon => coupon.id === course.id);
+    const originalPrice = CalculateDiscountedPrice(course.other_data) || 0;
+    const discountedPrice = coupon 
+        ? (coupon.couponType === 1 
+            ? 0 // Free coupon
+            : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+        ) 
+        : originalPrice;
+
+    return {
+        img: course.img,
+        title: course.title,
+        qty: 1,
+        desc: course.other_data.course_main_desc,
+        currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
+        price: discountedPrice.toFixed(2)
+    };
+});
+
 
 
 // Items For Paypal
@@ -324,7 +328,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                 </PayPalScriptProvider>
                 )}
 
-                     
+{showStripe && <button onClick={() => console.log(newPricing)}>button</button> }
             
                 {showStripe && <form action="/api/checkout_sessions" method="POST">
                     <input type="hidden" name="cartCourses" value={JSON.stringify(newPricing)} />

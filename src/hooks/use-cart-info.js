@@ -23,10 +23,10 @@ const useCartInfo = () => {
         
     }, [couponValue]); // Empty dependency array to run the effect only once on component mount
     
-    useEffect(() => {
-        console.log(couponValue);
-        console.log(cartItems);
-    }, [couponValue]); // Add couponValue to the dependency array
+    // useEffect(() => {
+    //     console.log(couponValue);
+    //     console.log(cartItems);
+    // }, [couponValue]); // Add couponValue to the dependency array
 
 
     useEffect(() => {
