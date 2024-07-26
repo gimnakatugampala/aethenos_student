@@ -114,14 +114,41 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
             }));
     
             setPurchasedCourse(calculatedPurchasedCourse);
+
+           
+            let courseType = 1;
+            let discount = 0;
+
+            if (couponValue.length > 0) {
+                courseType = 3;
+                discount = cartCourses.reduce((acc, course) => {
+                    const coupon = couponValue.find(coupon => coupon.id === course.id);
+                    const originalPrice = CalculateDiscountedPrice(course.other_data) || 0;
+                    if (coupon) {
+                        if (coupon.couponType === 1) {
+                            acc += originalPrice; // Full discount
+                        } else {
+                            acc += coupon.global_discount_price || 0; // Apply global discount
+                        }
+                    }
+                    return acc;
+                }, 0);
+            }
+
+            let existingData = JSON.parse(localStorage.getItem('aethenos_referral_codes')) || [];
+            if (existingData.some(data => 
+                calculatedPurchasedCourse.some(course => course.courseCode === data.courseCode)
+            )) {
+                courseType = 4;
+            }
     
             const calculatedBuyCourseOrder = {
             "paymentMethod": "1",
-            "discount": 0,
+            "discount": discount,
             "totalPrice": `${total}`,
             "currency": GetCurrencyByCountry(cartCourses[0].other_data).toLowerCase(),
             "country": JSON.parse(COUNTRY).country_name,
-            "courseType":4,
+            "courseType": courseType,
             "courses": calculatedPurchasedCourse
             };
     
@@ -145,7 +172,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
               console.log(buyCourseOrder);
               console.log(JSON.stringify(buyCourseOrder));
              var rawData =  JSON.stringify(buyCourseOrder)
-              BuyCourseByStudent(rawData)
+            //   BuyCourseByStudent(rawData)
               return
           }
     
@@ -194,51 +221,51 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                     </div>
                 }
 
-{cartCourses.length > 0 &&
-    <table className="table summery-table">
-        <tbody>
-            {cartCourses.map((item, i) => {
-                // Find the coupon for the current item, if it exists
-                const coupon = couponValue.find(coupon => coupon.id === item.id);
-                // Calculate the discounted price
-                const originalPrice = CalculateDiscountedPrice(item.other_data) || 0;
-                const discountedPrice = coupon 
-                    ? (coupon.couponType === 1 
-                        ? 0 // Free coupon
-                        : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
-                    ) 
-                    : originalPrice;
+                {cartCourses.length > 0 &&
+                    <table className="table summery-table">
+                        <tbody>
+                            {cartCourses.map((item, i) => {
+                                // Find the coupon for the current item, if it exists
+                                const coupon = couponValue.find(coupon => coupon.id === item.id);
+                                // Calculate the discounted price
+                                const originalPrice = CalculateDiscountedPrice(item.other_data) || 0;
+                                const discountedPrice = coupon 
+                                    ? (coupon.couponType === 1 
+                                        ? 0 // Free coupon
+                                        : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+                                    ) 
+                                    : originalPrice;
 
-                return (
-                    <tr key={i}>
-                        <td>
-                            <img className='mx-3 rounded' height={70} width={60} src={`${IMG_HOST}${item.other_data.img}`} />
-                            {item.title.substring(0, 25)}... <span className="quantity">x 1</span>
-                        </td>
-                        <td>
-                            {getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} 
-                            {discountedPrice.toFixed(2)}
-                            
-                            {coupon && (
-                                <span className="text-decoration-line-through mx-2">
-                                    {getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} 
-                                    {originalPrice.toFixed(2)}
-                                </span>
-                            )}
-                        </td>
-                    </tr>
-                );
-            })}
-            <tr className="order-total">
-                <td>Order Total</td>
-                <td>
-                    {cartCourses.length > 0 && getSymbolFromCurrency(GetCurrencyByCountry(cartCourses[0].other_data))}
-                    {total.toFixed(2)}
-                </td>
-            </tr>
-        </tbody>
-    </table>
-}
+                                return (
+                                    <tr key={i}>
+                                        <td>
+                                            <img className='mx-3 rounded' height={70} width={60} src={`${IMG_HOST}${item.other_data.img}`} />
+                                            {item.title.substring(0, 25)}... <span className="quantity">x 1</span>
+                                        </td>
+                                        <td>
+                                            {getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} 
+                                            {discountedPrice.toFixed(2)}
+                                            
+                                            {coupon && (
+                                                <span className="text-decoration-line-through mx-2">
+                                                    {getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} 
+                                                    {originalPrice.toFixed(2)}
+                                                </span>
+                                            )}
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                            <tr className="order-total">
+                                <td>Order Total</td>
+                                <td>
+                                    {cartCourses.length > 0 && getSymbolFromCurrency(GetCurrencyByCountry(cartCourses[0].other_data))}
+                                    {total.toFixed(2)}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
 
 
                     <div className='my-3'>
@@ -328,7 +355,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                 </PayPalScriptProvider>
                 )}
 
-{showStripe && <button onClick={() => console.log(newPricing)}>button</button> }
+
             
                 {showStripe && <form action="/api/checkout_sessions" method="POST">
                     <input type="hidden" name="cartCourses" value={JSON.stringify(newPricing)} />
