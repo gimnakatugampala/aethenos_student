@@ -1,66 +1,49 @@
-import React from 'react'
+import React from 'react';
 import Cookies from 'js-cookie';
-import { getCurrencyExchangeRate } from '../../api';
 
+const COUNTRY = Cookies.get('aethenos_user_origin');
+const EX_RATES = Cookies.get('aethenos_currency');
 
-const COUNTRY = Cookies.get('aethenos_user_origin')
-const EX_RATES = Cookies.get('aethenos_currency')
-
-const CalculateCouponDiscountedPrice = (data) => {
-   
+const CalculateCouponDiscountedPrice = async (data) => {
+    // Extract user's country from the cookie
     let countryToFind = "";
-     // -----------------------------
-    
-
     if (COUNTRY) {
         try {
             const parsedCountry = JSON.parse(COUNTRY);
             countryToFind = parsedCountry.country_name;
         } catch (error) {
-            console.error("Error parsing COUNTRY:", error);
+            console.error("Error parsing COUNTRY cookie:", error);
         }
     }
     
-    let net_price = ""
-
-    if (data.course_prices != null && data.course_prices.prices != null) {
-        let foundPrice = null; 
+    // Initialize the net price variable
+    let net_price = 2.0;
     
-        data.course_prices.prices.some(single_price => {
-            if (countryToFind === single_price.country) {
-                foundPrice = single_price;
-                return true; 
-            }
+    // Check if course_prices and prices exist
+    // if (data.course_prices) {
+    //     // Check if the user's country exists in the prices array
+    //     const foundPrice = data.course_prices.find(single_price => single_price.countryName == countryToFind);
+        
+    //     if (foundPrice) {
+    //         // If the price for the user's country is found, return the discounted price
+    //         if (foundPrice.discountPrice > 0) {
+    //             return foundPrice.discountPrice;
+    //         } else {
+    //             // Convert the global discount price to the local currency if needed
+    //             if (EX_RATES) {
+                    return (parseFloat(data.course_prices.global_discount_price) * parseFloat(JSON.parse(EX_RATES))).toFixed(2);
+    //             } else {
+    //                 return data.course_prices.global_discount_price;
+    //             }
+    //         }
+    //     } else {
+    //         // If the user's country is not found, return the global discount price
+    //         return data.course_prices.global_discount_price;
+    //     }
+    // }
     
-            return false;
-        });
-    
-        if (foundPrice) {
+    // Return the default global discount price if course_prices is not available
+    // return 2;
+};
 
-
-            getCurrencyExchangeRate(JSON.parse(COUNTRY).currency.toLowerCase())
-            if (foundPrice.netPrice == 0) {
-                // Convert the $ to The Native Currency
-                if(EX_RATES != null){
-                    return  net_price = (Number.parseFloat(data.course_prices.global_discount_price) * Number.parseFloat(JSON.parse(EX_RATES))).toFixed(2);
-                }
-                
-
-            } else {
-                return net_price = foundPrice.global_discount_price;
-            }
-           
-
-        } else {
-
-            net_price = data.course_prices.globalNetPrice
-            
-        }
-
-        return net_price
-    }else{
-        return net_price = "0"
-    }
-}
-
-export default CalculateCouponDiscountedPrice
+export default CalculateCouponDiscountedPrice;
