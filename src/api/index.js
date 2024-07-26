@@ -1343,7 +1343,7 @@ export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorTe
   fetch(`${BACKEND_LINK}/payment/getCouponValidationByCode/${coupon}`, requestOptions)
     .then(response => response.json())
     .then(result => {
-      // console.log(result)
+      console.log(result)
 
       if(result.variable == "404"){
         setCouponErrorText(result.message)
@@ -1352,9 +1352,17 @@ export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorTe
         return
       }
 
+      if(result.validation == "This coupon has expired"){
+            setCouponErrorText(result.validation)
+            setcouponError(true)
+            setbtnLoading(false)
+            setcoupon("")
+            return
+      }
+
       
       
-      if(result.validation == "This Coupon is Valid"){
+      if(result.validation == "This coupon is valid"){
 
         // Check if the Course Exist in the Cart
         const found = cartCourses.some(item => item.id == result.course_Id);
@@ -1384,7 +1392,11 @@ export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorTe
                   id: result.course_Id,
                   text: coupon,
                   couponType:result.couponTypeId,
-                  course_prices:result.course_prices
+                  course_prices:result.course_prices,
+                  course_Code:result.course_code,
+                  global_discount:result.global_discount,
+                  global_discount_percentage:result.global_discount_percentage,
+                  global_discount_price:result.global_discount_price
               }
           ])
 
@@ -1393,7 +1405,11 @@ export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorTe
             id: result.course_Id,
             text: coupon,
             couponType:result.couponTypeId,
-            course_prices:result.course_prices
+            course_prices:result.course_prices,
+            course_Code:result.course_code,
+            global_discount:result.global_discount,
+            global_discount_percentage:result.global_discount_percentage,
+            global_discount_price:result.global_discount_price
         }]))
 
           setbtnLoading(false)

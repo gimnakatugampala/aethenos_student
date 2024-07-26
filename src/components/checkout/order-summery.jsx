@@ -125,6 +125,8 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
             return
         }
 
+        console.log(total)
+
 
     }, [cartCourses, total]);
 

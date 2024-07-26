@@ -23,9 +23,10 @@ const useCartInfo = () => {
         
     }, [couponValue]); // Empty dependency array to run the effect only once on component mount
     
-    // useEffect(() => {
-    //     console.log(couponValue);
-    // }, [couponValue]); // Add couponValue to the dependency array
+    useEffect(() => {
+        console.log(couponValue);
+        console.log(cartItems);
+    }, [couponValue]); // Add couponValue to the dependency array
 
 
     useEffect(() => {
@@ -33,7 +34,7 @@ const useCartInfo = () => {
             const { id, price, quantity } = cartItem;
             // const itemTotal = price * quantity;
             const coupon = couponValue.length > 0 && couponValue.find(coupon => coupon.id == id);
-            let itemTotal;
+            let itemTotal= 0;
 
             if (coupon != null) {
                 if (coupon.couponType == 1) {
@@ -41,7 +42,7 @@ const useCartInfo = () => {
                     itemTotal = CalculateDiscountedPrice(cartItem.other_data) - CalculateDiscountedPrice(cartItem.other_data);
                 } else {
                     // Apply discount directly from the coupon value
-                    itemTotal = CalculateDiscountedPrice(cartItem.other_data) - CalculateDiscountedPrice(coupon);
+                    itemTotal = coupon.global_discount_price == null ? CalculateDiscountedPrice(cartItem.other_data) :  CalculateDiscountedPrice(cartItem.other_data) - coupon.global_discount_price;
                 }
             } else {
                 // If the coupon array is empty, don't reduce the amount
