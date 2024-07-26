@@ -1478,7 +1478,7 @@ export const getCourseData = async (setCourses) => {
     .catch((error) => console.log("error", error));
 };
 
-export const BuyCourseByStudent = async(rawData,router) =>{
+export const BuyCourseByStudent = async(rawData,router,buyCourseOrder) =>{
 
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -1515,7 +1515,11 @@ Swal.fire({
       SuccessAlert("Success",result.message)      
       window.localStorage.removeItem('cart_items');
       window.localStorage.removeItem('coupons');
-      window.localStorage.removeItem('aethenos_referral_codes');
+
+      if(buyCourseOrder.courseType == 4){
+        window.localStorage.removeItem('aethenos_referral_codes');
+      }
+
 
       setTimeout(() => {
           // window.location.href = "/my-courses"

@@ -180,7 +180,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
               console.log(buyCourseOrder);
             //   console.log(JSON.stringify(buyCourseOrder));
              var rawData =  JSON.stringify(buyCourseOrder)
-              BuyCourseByStudent(rawData,router)
+              BuyCourseByStudent(rawData,router,buyCourseOrder)
               return
           }
     
@@ -352,7 +352,7 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                             };
 
                             var rawData =  JSON.stringify(calculatedBuyCourseOrder)
-                            BuyCourseByStudent(rawData,router)
+                            BuyCourseByStudent(rawData,router,buyCourseOrder)
 
                             console.log(calculatedBuyCourseOrder)
 
