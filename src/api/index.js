@@ -2109,7 +2109,7 @@ myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
         Unauthorized(result.status,"purchase-history") 
 
 
-      // console.log(result)
+      console.log(result)
       setpHistory(result)
     })
     .catch((error) => console.error(error));
@@ -2285,7 +2285,7 @@ fetch(`${BACKEND_LINK}/payment/getOwnAllRefunds`, requestOptions)
 
 }
 
-export const SendRefundReq = async(selectedTransactionCode,selectedAmount,refundText,setrefundText,setShow,setisReqSubmitted) =>{
+export const SendRefundReq = async(selectedTransactionCode,selectedItemCode,selectedAmount,refundText,setrefundText,setShow,setisReqSubmitted) =>{
 
 
   const myHeaders = new Headers();
@@ -2295,6 +2295,7 @@ const formdata = new FormData();
 formdata.append("transactionCode", `${selectedTransactionCode}`);
 formdata.append("reason", `${refundText}`);
 formdata.append("refundAmount", `${selectedAmount}`);
+formdata.append("itemCode", `${selectedItemCode}`);
 
 const requestOptions = {
   method: "POST",

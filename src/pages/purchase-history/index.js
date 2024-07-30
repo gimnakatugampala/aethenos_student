@@ -26,6 +26,7 @@ const index = () => {
   const [refundText, setrefundText] = useState("")
   const [selectedTransactionCode, setselectedTransactionCode] = useState("")
   const [selectedAmount, setselectedAmount] = useState("")
+  const [selectedItemCode, setselectedItemCode] = useState("")
 
   const [isReqSubmitted, setisReqSubmitted] = useState(false)
  
@@ -40,6 +41,7 @@ const index = () => {
     console.log(p)
     setselectedTransactionCode(p.transactionCode)
     setselectedAmount(p.amount)
+    setselectedItemCode(p.itemCode)
     setShow(true)
   };
 
@@ -56,7 +58,7 @@ const index = () => {
         return
       }
 
-      SendRefundReq(selectedTransactionCode,selectedAmount,refundText,setrefundText,setShow,setisReqSubmitted)
+      SendRefundReq(selectedTransactionCode,selectedItemCode,selectedAmount,refundText,setrefundText,setShow,setisReqSubmitted)
 
 
   }
@@ -121,7 +123,7 @@ const index = () => {
 
                                 {pHistory.length > 0 ? pHistory.map((p,index) => (
                                 <tr key={index}>
-                                  <td><ShoppingCartIcon /> {p.courseTitles[0]}</td>
+                                  <td><ShoppingCartIcon /> {p.courseDetails[0].courseTitle}</td>
                                   <td>{moment(p.createdDate).format('MMM DD,YYYY')}</td>
                                   <td>{getSymbolFromCurrency(p.currency)}{p.amount}</td>
                                   <td>{getSymbolFromCurrency(p.currency)}{p.amount} {p.paymentType}</td>
@@ -158,7 +160,7 @@ const index = () => {
                                       {refunds.length > 0 ? (
                                           refunds.map((p, index) => (
                                               <tr key={index}>
-                                                  <td>{p.courseTitles[0]}</td>
+                                                  <td>{p.courseTitle}</td>
                                                   <td>{moment(p.date).format('MMM DD,YYYY')}</td>
                                                   <td>{getSymbolFromCurrency(p.currency)}{(p.amount).toUpperCase()}</td>
                                                   <td>{p.refundedTo}</td>
