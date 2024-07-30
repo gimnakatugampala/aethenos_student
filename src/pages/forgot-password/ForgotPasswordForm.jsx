@@ -134,6 +134,8 @@ const ForgotPasswordForm = () => {
               <div className="d-flex justify-content-center my-4">
               <VerificationInput value={VerficationCode} onChange={(e) => setVerficationCode(e)} length={5} className="mx-auto text-center" />
               </div>
+
+              
               
               <div className="form-group">
                   {btnLoading ? (
@@ -142,6 +144,8 @@ const ForgotPasswordForm = () => {
                     <button onClick={handleCodeSubmit} className="edu-btn btn-medium">Verify</button>
                   )}
               </div>
+
+              <p onClick={handleSubmit} role="button" tabindex="0" className='text-center my-3 user-select-none'><b>Resend code</b></p>
               
               <p className='text-center my-2'>We have sent you a code to your email. Please check</p>
               </div>
