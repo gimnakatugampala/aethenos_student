@@ -5996,10 +5996,10 @@ react-paginate@^8.1.3:
   dependencies:
     prop-types "^15.6.1"
 
-react-password-checklist@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.npmjs.org/react-password-checklist/-/react-password-checklist-1.5.0.tgz"
-  integrity sha512-LjhF6fHZB3Ouv8ijcUvMPmpLoFZ0fjf5q55bXTYXdkj+zJai+u4B8QOaqVU5/VRE9o+rCeI/PvwnWoUir1CIaQ==
+react-password-checklist@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.npmjs.org/react-password-checklist/-/react-password-checklist-1.6.0.tgz"
+  integrity sha512-jw/U4+3SFGeBGcQyokEtFFqLQpuCFnDUFLGHdvtopyV5lCgRo4YlZORRCusY7SP8W+05+1oYE6caEE4V5O59Ng==
 
 react-popper@^2.3.0:
   version "2.3.0"
