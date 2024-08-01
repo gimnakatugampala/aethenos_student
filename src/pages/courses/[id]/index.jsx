@@ -562,7 +562,7 @@ const GetCourseByCategory = () => {
                                             <img
                                                 src={item.image}
                                                 alt={item.title}
-                                                style={{borderRadius:'50%'}}
+                                                style={{borderRadius:'50%',height:'50px',width:'55px'}}
                                             />
                                             </div>
                                             <div className="col-md-9">
