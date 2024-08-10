@@ -1966,15 +1966,14 @@ fetch(`${BACKEND_LINK}/studentProfile/updateStudentProfile`, requestOptions)
  }
 
 
- export const AddSendMessage = async(selectedInstructorCode,messageTextAdd,selectedCourse,setmessageTextAdd,GetAllChatRooms,setchatRooms,setshowAddMessage) =>{
-
-  var myHeaders = new Headers();
+ export const AddSendMessage = async (selectedInstructorCode, messageTextAdd, selectedCourse, setmessageTextAdd, GetAllChatRooms, setchatRooms, setshowAddMessage) => {
+  const myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
 
   const formdata = new FormData();
-  formdata.append("message", `${messageTextAdd}`);
-  formdata.append("courseCode", `${selectedCourse}`);
-  formdata.append("toUserCode", `${selectedInstructorCode}`);
+  formdata.append("message", messageTextAdd);
+  formdata.append("courseCode", selectedCourse);
+  formdata.append("toUserCode", selectedInstructorCode);
 
   const requestOptions = {
     method: "POST",
@@ -1983,27 +1982,26 @@ fetch(`${BACKEND_LINK}/studentProfile/updateStudentProfile`, requestOptions)
     redirect: "follow"
   };
 
-fetch(`${BACKEND_LINK}/chat/sendChat`, requestOptions)
-  .then((response) => response.json())
-  .then((result) => {
-    console.log(result)
+  try {
+    const response = await fetch(`${BACKEND_LINK}/chat/sendChat`, requestOptions);
+    const result = await response.json();
 
-    Unauthorized(result.status,"messages") 
+    Unauthorized(result.status, "messages");
 
-    if(result.variable == "200"){
-      setmessageTextAdd("")
-      GetAllChatRooms(setchatRooms)
-      setshowAddMessage(false)
+    if (result.variable === "200") {
+      setmessageTextAdd("");
+      await GetAllChatRooms(setchatRooms);  // Ensure GetAllChatRooms is awaited
+      setshowAddMessage(false);
     }
-  })
-  .catch((error) => console.error(error));
+  } catch (error) {
+    console.error(error);
+  }
+};
 
- }
 
 
- export const GetAllChatRooms = async(setchatRooms) =>{
-
-  var myHeaders = new Headers();
+export const GetAllChatRooms = async (setchatRooms) => {
+  const myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
 
   const requestOptions = {
@@ -2011,17 +2009,18 @@ fetch(`${BACKEND_LINK}/chat/sendChat`, requestOptions)
     headers: myHeaders,
     redirect: "follow"
   };
-  
-  fetch(`${BACKEND_LINK}/chat/getChatRoomDetailsByStudent`, requestOptions)
-    .then((response) => response.json())
-    .then((result) => {
-      Unauthorized(result.status,"messages") 
-      setchatRooms(result.chatRoomDetails)
-      console.log(result)
-    })
-    .catch((error) => console.error(error));
 
- }
+  try {
+    const response = await fetch(`${BACKEND_LINK}/chat/getChatRoomDetailsByStudent`, requestOptions);
+    const result = await response.json();
+
+    Unauthorized(result.status, "messages");
+    setchatRooms(result.chatRoomDetails);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 
  export const GetAllChatRoomMessages = async(chatCode,setroomMessages) =>{
 
