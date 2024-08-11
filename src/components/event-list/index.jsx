@@ -11,7 +11,7 @@ const index = () => {
                 <Header no_top_bar={true} />
                 <BreadcrumbThree title="Event Page" subtitle="Event 2" />
                 <EventListArea/>
-                <Footer style_2={'footer-dark bg-image footer-style-2'} />
+             <Footer />
             </div>
         </div>
     )

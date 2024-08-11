@@ -20,7 +20,7 @@ const index = () => {
                 <CtaArea/>
                 <TeamArea about_p_3={true}/>
                 <TestimonialArea/>
-                <Footer style_2={'footer-dark bg-image footer-style-2'} />
+             <Footer />
             </div>
         </div>
     )

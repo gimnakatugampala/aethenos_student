@@ -10,10 +10,10 @@ const index = () => {
                 <Header no_top_bar={true} />
                 {/* <BreadcrumbThree title="Cart Page" subtitle="Cart Page" /> */}
                 <CartArea/>
-                <Footer style_2={'footer-dark bg-image footer-style-2'} />
+                <Footer  />
             </div>
         </div>
     )
 }
 
-export default index;
+export default index; 

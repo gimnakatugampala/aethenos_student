@@ -9,11 +9,11 @@ const category_contents = [
 
 const CategoryArea = () => {
     return (
-        <div className="features-area-2">
-            <div className="container">
-                <div className="features-grid-wrap">
+        <div className="features-area-2 ">
+            <div className="container ">
+                <div className="d-flex justify-content-evenly ">
                     {category_contents.map((category, i) => (
-                        <div key={i} className="features-box features-style-2 edublink-svg-animate">
+                        <div key={i} className="features-box features-style-2 edublink-svg-animate ">
                             <div className="icon">
                                 {category.icon}
                             </div>

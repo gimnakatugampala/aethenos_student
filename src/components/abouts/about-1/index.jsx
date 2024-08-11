@@ -21,7 +21,7 @@ const index = () => {
                 <Testimonial/>
                 <CounterArea/>
                 <TeamArea about_p={true} />
-                <Footer style_2={'footer-dark bg-image footer-style-2'} />
+             <Footer />
             </div>
         </div>
     )

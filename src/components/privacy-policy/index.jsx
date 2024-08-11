@@ -10,7 +10,7 @@ const index = () => {
                 <Header no_top_bar={true} />
                 <BreadcrumbThree title="Privacy Policy" subtitle="Privacy Policy" />
                 <PolicyArea/>
-                <Footer style_2={'footer-dark bg-image footer-style-2'} />
+             <Footer />
             </div>
         </div>
     )

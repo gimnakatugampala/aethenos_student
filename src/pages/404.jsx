@@ -69,7 +69,7 @@ const ErrorPage = () => {
                     </li>
                 </ul>
             </section>
-            <Footer style_2={'footer-dark bg-image footer-style-2'} />
+         <Footer />
         </Wrapper>
     );
 }
