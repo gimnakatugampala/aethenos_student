@@ -3,10 +3,8 @@ import { buffer } from 'micro';
 import Cors from 'micro-cors';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
-// Stripe requires the raw body to construct the event.
 export const config = {
   api: {
     bodyParser: false,
@@ -17,6 +15,24 @@ const cors = Cors({
   allowMethods: ['POST', 'HEAD'],
 });
 
+const getBalanceTransaction = async (chargeId) => {
+  try {
+    const charge = await stripe.charges.retrieve(chargeId);
+    console.log(`Retrieved charge: ${JSON.stringify(charge)}`); // Log the retrieved charge
+
+    const balanceTransactionId = charge.balance_transaction;
+    console.log(`Balance Transaction ID: ${balanceTransactionId}`); // Log the balance transaction ID
+
+    const balanceTransaction = await stripe.balanceTransactions.retrieve(balanceTransactionId);
+    console.log(`Retrieved balance transaction: ${JSON.stringify(balanceTransaction)}`); // Log the retrieved balance transaction
+
+    return balanceTransaction;
+  } catch (err) {
+    console.error(`❌ Error retrieving balance transaction: ${err.message}`);
+    return null;
+  }
+};
+
 const webhookHandler = async (req, res) => {
   if (req.method === 'POST') {
     const buf = await buffer(req);
@@ -24,47 +40,52 @@ const webhookHandler = async (req, res) => {
 
     let event;
     try {
-      event = stripe.webhooks.constructEvent(
-        buf.toString(),
-        signature,
-        webhookSecret
-      );
+      event = stripe.webhooks.constructEvent(buf.toString(), signature, webhookSecret);
+      console.log(`✅ Webhook event constructed: ${JSON.stringify(event)}`); // Log the constructed event
     } catch (err) {
-      // On error, log and return the error message.
-      console.log(`❌ Error message: ${err.message}`);
+      console.error(`❌ Error verifying webhook signature: ${err.message}`);
       res.status(400).send(`Webhook Error: ${err.message}`);
       return;
     }
 
-    // Successfully constructed event.
-    console.log('✅ Success:', event.id);
+    try {
+      if (event.type === 'checkout.session.completed') {
+        const session = event.data.object;
+        console.log(`Session object: ${JSON.stringify(session)}`); // Log the session object
 
-    switch (event.type) {
-      case 'payment_intent.succeeded': {
-        const paymentIntent = event.data.object;
-        console.log(`PaymentIntent status: ${paymentIntent.status}`);
-        break;
-      }
-      case 'payment_intent.payment_failed': {
-        const paymentIntent = event.data.object;
-        console.log(
-          `❌ Payment failed: ${paymentIntent.last_payment_error?.message}`
-        );
-        break;
-      }
-      case 'charge.succeeded': {
-        const charge = event.data.object;
-        console.log(`Charge id: ${charge.id}`);
-        break;
-      }
-      default: {
+        const paymentIntentId = session.payment_intent;
+        console.log(`Payment Intent ID: ${paymentIntentId}`); // Log the payment intent ID
+
+        const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+        console.log(`Retrieved Payment Intent: ${JSON.stringify(paymentIntent)}`); // Log the payment intent
+
+        const chargeId = paymentIntent.charges.data[0].id; // Assuming there's at least one charge
+        console.log(`Charge ID: ${chargeId}`); // Log the charge ID
+
+        const balanceTransaction = await getBalanceTransaction(chargeId);
+        if (balanceTransaction) {
+          const feeAmount = balanceTransaction.fee;
+          const netAmount = balanceTransaction.net;
+
+          console.log(`Transaction ID: ${session.id}`);
+          console.log(`Total amount: ${session.amount_total / 100}`);
+          console.log(`Stripe commission (fee): ${feeAmount / 100}`);
+          console.log(`Net amount after fees: ${netAmount / 100}`);
+        } else {
+          console.error('❌ Failed to retrieve balance transaction');
+        }
+      } else {
         console.warn(`Unhandled event type: ${event.type}`);
-        break;
-      }
-    }
 
-    // Return a response to acknowledge receipt of the event.
-    res.json({ received: true });
+        console.log('Checkout Session Metadata:', session.metadata);
+
+      }
+
+      res.json({ received: true });
+    } catch (err) {
+      console.error(`❌ Error handling event: ${err.message}`);
+      res.status(500).send(`Webhook Error: ${err.message}`);
+    }
   } else {
     res.setHeader('Allow', 'POST');
     res.status(405).end('Method Not Allowed');

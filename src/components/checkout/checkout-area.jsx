@@ -5,15 +5,7 @@ import OrderSummery from './order-summery';
 
 
 
-const countries = [ 
-    'Select Option', 
-    'Australia', 
-    'England', 
-    'New Zealand', 
-    'Switzerland', 
-    'United Kindom (UK)',
-    'United States (USA)'
-];
+
 
 const CheckoutArea = () => {
     const [showPaypal, setshowPaypal] = useState(false)
