@@ -59,14 +59,14 @@ const SearchResults = ({ allcourses }) => {
   };
 
   return (
-    <div className="edu-course-area mt-5">
+    <div className="edu-course-area course-area-1">
       <div>
-        <div className="row g-1">
-          <div className="col-md-3">
+        <div className="row g-5">
+          <div className="col-xxl-3 ">
             <CourseSidebarTwo course_items={courses} />
           </div>
 
-          <div className={`col-lg-9 col-pl--5`}>
+          <div className={`col-xxl-9 col-pl--35`}>
             <SortingArea
               course_items={courses}
               num={showing}

@@ -10,7 +10,7 @@ const index = () => {
                 <Header no_top_bar={true} />
                 <BreadcrumbSix title="Course Details" page="Course Details 3" />
                 <CourseDetailsThree/>
-                <Footer style_2={'footer-dark bg-image footer-style-2'} />
+             <Footer />
             </div>
         </div>
     )
