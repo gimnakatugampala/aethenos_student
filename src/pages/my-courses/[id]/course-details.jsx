@@ -532,7 +532,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
               {showquiz && (
                 <div
                   className="container border p-4"
-                  style={{ maxHeight: "500px", overflowY: "scroll" }}
+                  style={{ maxHeight: "620px", overflowY: "scroll" }}
                 >
                   <QuizContainer
                     setselectAnswer={setselectAnswer}
@@ -773,7 +773,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                           <p>{course && course.course_main_desc}</p>
 
                           <h3 className="heading-title">Instructor</h3>
-                          <div className="d-flex align-items-center">
+                          <div className="d-flex align-items-center my-3">
                             {course && (
                               <Avatar
                                 alt={`${course.instructor}`}
@@ -790,7 +790,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                             </a>
                           </div>
 
-                          <p>{course && course.instructor_title}</p>
+                          <h5>{course && course.instructor_title}</h5>
 
                           <p>{course && course.instructor_desc}</p>
 
@@ -1102,7 +1102,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
             <Card.Header>
               <h6 className="m-2">Course Content</h6>
             </Card.Header>
-            <Card.Body style={{ height: "550px", overflowY: "scroll" }}>
+            <Card.Body style={{ height: "100%" }}>
               <div className="faq-accordion">
                 <div className="accordion">
                   {course != null &&

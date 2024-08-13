@@ -215,34 +215,32 @@ const ViewProfile = () => {
                 </div>
               </div>
               <div className="d-flex justify-content-end">
-                  {btn_loading ? (
-                    <Button variant="contained">
-                      <Spinner size="sm" animation="border" variant="light" />
-                    </Button>
-                  ) : (
-                    <Button
-                      onClick={handleProfileData}
-                      variant="contained"
-                      className="edu-btn btn-small float-end mx-3 mt-1"
-                    >
-                      Save
-                    </Button>
-                  )}
-                </div>
+                {btn_loading ? (
+                  <Button variant="contained">
+                    <Spinner size="sm" animation="border" variant="light" />
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={handleProfileData}
+                    variant="contained"
+                    className="edu-btn btn-small float-end mx-3 mt-1"
+                  >
+                    Save
+                  </Button>
+                )}
+              </div>
             </div>
-
-      
           </Tab>
 
           <Tab eventKey="profile" title="Profile Picture">
-            <div className="mx-3 mb-5">
-              <div className="col-md-12">
+            <div className="row mx-5 mb-5">
+              <div className="col-md-6">
                 <p className="m-0 p-0">
                   <b>Image preview</b>
                 </p>
                 <label>Minimum 200x200 pixels, Maximum 6000x6000 pixels</label>
 
-                <div className="my-4 bg-light border p-3 text-center">
+                <div className="my-4 bg-light border p-3 text-center col-md-12">
                   {profile_img == "" && uploadImage == "" ? (
                     <img src="https://img-c.udemycdn.com/user/200_H/anonymous_3.png" />
                   ) : uploadImage != "" ? (
@@ -259,7 +257,9 @@ const ViewProfile = () => {
                     />
                   )}
                 </div>
+              </div>
 
+              <div className="col-md-6">
                 <div class="mb-3">
                   <label for="formFile" class="form-label">
                     Upload Image
@@ -272,6 +272,7 @@ const ViewProfile = () => {
                     id="formFile"
                   />
                 </div>
+
                 <div className="d-flex justify-content-end">
                   {btn_loading ? (
                     <Button variant="contained">

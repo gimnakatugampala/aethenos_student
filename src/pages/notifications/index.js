@@ -19,6 +19,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import LargeLoading from "../../functions/Loading/LargeLoading";
+import { Card } from "react-bootstrap";
 
 const index = () => {
   const [notifications, setnotifications] = useState(null);
@@ -32,10 +33,10 @@ const index = () => {
       <SEO pageTitle={"Notifications"} />
       <Header />
 
-      <div className="edu-brand-area brand-area-1 p-5 bg-lighten01">
+      <div className="edu-brand-area brand-area-1 p-5 ">
         <div className="container-fluid">
-          <div className="row">
-            <div className="mb-4">
+          <div className="row mx-5">
+            <div className="mb-4 ">
               <h3 className="title m-0">Notifications</h3>
             </div>
 
@@ -46,29 +47,36 @@ const index = () => {
                 sx={{
                   width: "100%",
 
-                  bgcolor: "background.paper",
+                  bgcolor: "bg-dark",
                 }}
               >
                 {notifications.length > 0
                   ? notifications.map((notification, index) => (
                       <>
-                        <ListItem key={index} alignItems="flex-start">
-                          <ListItemText
-                            primary={notification.notification}
-                            secondary={
-                              <div
-                                style={{
-                                  display: "flex",
-                                  justifyContent: "flex-end",
-                                }}
-                              >
-                                {moment(notification.notificationTime)
-                                  .startOf("hour")
-                                  .fromNow()}
-                              </div>
-                            }
-                          />
-                        </ListItem>
+                        <Card>
+                          <ListItem
+                            key={index}
+                            className="mx-1"
+                            alignItems="flex-start"
+                          >
+                            <ListItemText
+                              primary={notification.notification}
+                              secondary={
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "flex-end",
+                                  }}
+                                >
+                                  {moment(notification.notificationTime)
+                                    .startOf("hour")
+                                    .fromNow()}
+                                </div>
+                              }
+                            />
+                          </ListItem>
+                        </Card>
+
                         <Divider variant="inset" component="li" />
                       </>
                     ))

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/Form";
 import { Container, Row, Col } from "react-bootstrap";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import {
   Paper,
   List,
@@ -9,16 +9,21 @@ import {
   ListItemAvatar,
   ListItemText,
   Avatar,
-  Card,
   Typography,
   Divider,
-  ListItemButton
+  ListItemButton,
 } from "@mui/material";
+import Card from "react-bootstrap/Card";
 import SendIcon from "@mui/icons-material/Send";
 import SearchIcon from "@mui/icons-material/Search";
-import { MessageBox } from 'react-chat-elements';
-import 'react-chat-elements/dist/main.css';
-import { AddSendMessage, GetAllChatRoomMessages, GetAllChatRooms, GetAllInstructorsofThePurchaseMsg } from "../../api";
+import { MessageBox } from "react-chat-elements";
+import "react-chat-elements/dist/main.css";
+import {
+  AddSendMessage,
+  GetAllChatRoomMessages,
+  GetAllChatRooms,
+  GetAllInstructorsofThePurchaseMsg,
+} from "../../api";
 import ErrorAlert from "../../functions/Alert/ErrorAlert";
 
 function Messages() {
@@ -104,12 +109,17 @@ function Messages() {
       return;
     }
 
-    AddSendMessage(selectedInstructorCode, messageTextAdd, selectedCourse, () => {
-      setMessageTextAdd("");
-    });
+    AddSendMessage(
+      selectedInstructorCode,
+      messageTextAdd,
+      selectedCourse,
+      () => {
+        setMessageTextAdd("");
+      }
+    );
   };
 
-  const filteredChatRooms = chatRooms.filter(user => {
+  const filteredChatRooms = chatRooms.filter((user) => {
     const searchText = userFilter.toLowerCase();
     return (
       user.instructor.toLowerCase().includes(searchText) ||
@@ -118,26 +128,29 @@ function Messages() {
   });
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid my-5">
       <div className="col-11 m-lg-auto">
-        <div className="row">
-          <Typography className="mt-5" variant="h4" gutterBottom>
-            Messages
-          </Typography>
-        </div>
+        <Card.Header>
+          <h3 className="title mt-5">Messages</h3>
+        </Card.Header>
 
         <Card className="p-3">
           <Container fluid>
             <Row className="vh-130">
               <Col sm={5} md={5} lg={4} className="bg-light border-right">
-                <Typography className="p-3 d-flex justify-content-between" variant="h5" gutterBottom>
+                <h4 className="pt-3">
                   Chat Users
-                  <Button onClick={() => setShowAddMessage(true)} className="mx-1" variant="contained">
-                    <i className="fas fa-plus"></i>
-                  </Button>
-                </Typography>
+                  <span className="float-end">
+                    <Button
+                      onClick={() => setShowAddMessage(true)}
+                      className="edu-btn btn-small"
+                    >
+                      <i className="fas fa-plus p-0"></i>
+                    </Button>
+                  </span>
+                </h4>
 
-                <div className="input-group mb-3">
+                <div className="input-group mt-4 mb-3">
                   <input
                     type="text"
                     className="form-control"
@@ -146,12 +159,12 @@ function Messages() {
                     onChange={(e) => setUserFilter(e.target.value)}
                     value={userFilter}
                   />
-                  <Button variant="contained">
+                  <Button variant="contained" className="edu-btn btn-small">
                     <SearchIcon />
                   </Button>
                 </div>
 
-                <List sx={{ width: '100%' }}>
+                <List sx={{ width: "100%" }}>
                   {filteredChatRooms.map((user, index) => (
                     <React.Fragment key={index}>
                       <ListItem
@@ -161,15 +174,23 @@ function Messages() {
                         }}
                         alignItems="flex-start"
                       >
-                        <ListItemButton selected={selectedUser === user.instructor && user.courseTitle === selectedCourseTitleName}>
+                        <ListItemButton
+                          selected={
+                            selectedUser === user.instructor &&
+                            user.courseTitle === selectedCourseTitleName
+                          }
+                        >
                           <ListItemAvatar>
-                            <Avatar alt={user.instructor} src="/static/images/avatar/1.jpg" />
+                            <Avatar
+                              alt={user.instructor}
+                              src="/static/images/avatar/1.jpg"
+                            />
                           </ListItemAvatar>
                           <ListItemText
                             secondary={
                               <React.Fragment>
                                 <Typography
-                                  sx={{ display: 'inline' }}
+                                  sx={{ display: "inline" }}
                                   component="span"
                                   variant="body2"
                                   color="text.primary"
@@ -177,7 +198,9 @@ function Messages() {
                                   <b>{user.instructor}</b> ({user.courseTitle})
                                 </Typography>
                                 {user.lastMessage.length > 15 ? (
-                                  <span>{user.lastMessage.substring(0, 15)}...</span>
+                                  <span>
+                                    {user.lastMessage.substring(0, 15)}...
+                                  </span>
                                 ) : (
                                   user.lastMessage
                                 )}
@@ -195,35 +218,67 @@ function Messages() {
               {showAddMessage ? (
                 <Col sm={7} md={7} lg={8}>
                   <div className="d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
-                    <Typography variant="h5" className="p-3" gutterBottom>
-                      New Messages
-                    </Typography>
+                    <h4 className="py-2">New Messages</h4>
                   </div>
 
-                  <Paper elevation={3} className="p-3" style={{ minHeight: "70vh", overflowY: "auto", background: '#D5D8DC' }}>
+                  <Paper
+                    elevation={0}
+                    className="p-3"
+                    style={{
+                      minHeight: "70vh",
+                      overflowY: "auto",
+                      background: "#D5D8DC",
+                    }}
+                  >
                     <Form onSubmit={handleComposeMessage}>
-                      <Form.Select onChange={(e) => {
-                        const [instructorCode, courseCode] = e.target.value.split(':');
-                        setSelectedInstructorCode(instructorCode);
-                        setSelectedInstructor(instructorCode);
-                        setSelectedCourse(courseCode);
-                      }} className="my-3" size="md" aria-label="Select Instructor">
+                      <Form.Select
+                        onChange={(e) => {
+                          const [instructorCode, courseCode] =
+                            e.target.value.split(":");
+                          setSelectedInstructorCode(instructorCode);
+                          setSelectedInstructor(instructorCode);
+                          setSelectedCourse(courseCode);
+                        }}
+                        className="my-3"
+                        size="md"
+                        aria-label="Select Instructor"
+                      >
                         <option selected disabled value="">
                           Select Instructor
                         </option>
-                        {instructors && instructors.length > 0 && instructors.map((instructor, index) => (
-                          <option key={index} value={`${instructor.userCode}:${instructor.coursesDetails[0]?.courseCode}`}>
-                            {instructor.name} - {instructor.coursesDetails[0]?.courseName}
-                          </option>
-                        ))}
+                        {instructors &&
+                          instructors.length > 0 &&
+                          instructors.map((instructor, index) => (
+                            <option
+                              key={index}
+                              value={`${instructor.userCode}:${instructor.coursesDetails[0]?.courseCode}`}
+                            >
+                              {instructor.name} -{" "}
+                              {instructor.coursesDetails[0]?.courseName}
+                            </option>
+                          ))}
                       </Form.Select>
 
-                      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                        <Form.Label><b>Messages</b></Form.Label>
-                        <Form.Control value={messageTextAdd} onChange={(e) => setMessageTextAdd(e.target.value)} as="textarea" rows={5} />
+                      <Form.Group
+                        className="mb-3"
+                        controlId="exampleForm.ControlTextarea1"
+                      >
+                        <Form.Label>
+                          <b>Messages</b>
+                        </Form.Label>
+                        <Form.Control
+                          value={messageTextAdd}
+                          onChange={(e) => setMessageTextAdd(e.target.value)}
+                          as="textarea"
+                          rows={5}
+                        />
                       </Form.Group>
 
-                      <Button type="submit" className="mx-1" variant="contained">
+                      <Button
+                        type="submit"
+                        className=" float-end edu-btn btn-small"
+                        variant="contained"
+                      >
                         Send
                       </Button>
                     </Form>
@@ -233,30 +288,57 @@ function Messages() {
                 <Col sm={7} md={7} lg={8}>
                   <div className="d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
                     <Typography variant="h6" className="p-2" gutterBottom>
-                      Chat with <b>{selectedUser} - {selectedCourseTitleName}</b>
+                      Chat with{" "}
+                      <b>
+                        {selectedUser} - {selectedCourseTitleName}
+                      </b>
                     </Typography>
                   </div>
 
-                  <Paper elevation={3} className="p-3" style={{ minHeight: "70vh", overflowY: "auto", background: '#D5D8DC' }}>
+                  <Paper
+                    elevation={3}
+                    className="p-3"
+                    style={{
+                      minHeight: "70vh",
+                      overflowY: "auto",
+                      background: "#D5D8DC",
+                    }}
+                  >
                     {loadingMessages ? (
                       <Typography>Loading messages...</Typography>
                     ) : (
                       <List>
-                        {roomMessages && roomMessages.map((message, index) => (
-                          <MessageBox
-                            key={index}
-                            styles={{ width: 300, color: '#000', fontWeight: 'bold', background: message.from === selectedUser ? '#fff' : '#e01D20' }}
-                            onReplyMessageClick={() => console.log('reply clicked!')}
-                            position={message.from === selectedUser ? 'left' : 'right'}
-                            type={'text'}
-                            text={message.message}
-                          />
-                        ))}
+                        {roomMessages &&
+                          roomMessages.map((message, index) => (
+                            <MessageBox
+                              key={index}
+                              styles={{
+                                width: 300,
+                                color: "#000",
+                                fontWeight: "bold",
+                                background:
+                                  message.from === selectedUser
+                                    ? "#fff"
+                                    : "#e01D20",
+                              }}
+                              onReplyMessageClick={() =>
+                                console.log("reply clicked!")
+                              }
+                              position={
+                                message.from === selectedUser ? "left" : "right"
+                              }
+                              type={"text"}
+                              text={message.message}
+                            />
+                          ))}
                       </List>
                     )}
                   </Paper>
 
-                  <form onSubmit={handleSelectedMessageSend} className="input-group p-2">
+                  <form
+                    onSubmit={handleSelectedMessageSend}
+                    className="input-group p-2"
+                  >
                     <textarea
                       value={messageTextAdd}
                       onChange={(e) => setMessageTextAdd(e.target.value)}

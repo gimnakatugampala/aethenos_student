@@ -69,7 +69,7 @@ const index = () => {
     <SEO pageTitle={'Purchase History'} />
     <Header />
 
-    <div className="edu-brand-area brand-area-1 p-5 bg-lighten01">
+    <div className="edu-brand-area brand-area-1 p-5">
             <div className="container-fluid">
                 <div className="row">
 

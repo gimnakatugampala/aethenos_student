@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Player } from 'video-react';
 import { IMG_HOST } from '../../../../api';
-
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/audio.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
@@ -70,7 +70,21 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
                 stepProps.completed = false;
               }
               return (
-                <Step key={label} {...stepProps}>
+                <Step key={label} {...stepProps}   sx={{
+                 
+                  "& .MuiStepLabel-label": {
+                    fontWeight: "bold",
+                  },
+                  "& .MuiStep-root": {
+                    color: "grey",
+                  },
+                  "& .Mui-completed": {
+                    color: "red",
+                  },
+                  "& .Mui-active": {
+                    color: "red",
+                  },
+                }}>
                   <StepLabel {...labelProps}>{label}</StepLabel>
                 </Step>
               );
@@ -79,7 +93,7 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
 
           <React.Fragment>
             {activeStepCodingExercise === 0 && (
-              <div className='my-2'>
+              <div className='my-3 mx-4'>
                 {codingExercise.codingVideo ? (
 
                   <MediaPlayer id="videoPlayer"  autoPlay={true} title={"Coding Exercise"} src={`${IMG_HOST}${codingExercise.codingVideo}`} >
@@ -90,10 +104,10 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
                   </MediaPlayer>
                   
                 ) : (
-                  <p className='text-center my-4'>No Video Available</p>
+                  <p className='text-center my-4 mx-4'>No Video Available</p>
                 )}
 
-                <div className='my-3'>
+                <div className='my-3 '>
                   <h5 className='m-0 p-0'>
                     <b>{selectedCodingExercise.title}</b>
                   </h5>
@@ -128,7 +142,7 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
             )}
 
             {activeStepCodingExercise === 1 && (
-              <div className='my-2'>
+              <div className='my-3 mx-4'>
                 {codingExercise.codingExerciseVideo ? (
                   <MediaPlayer id="videoPlayer"  autoPlay={true} title={"Coding Exercise"} src={`${IMG_HOST}${codingExercise.codingExerciseVideo}`} >
                   <MediaProvider  />
@@ -158,7 +172,7 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
 
             {activeStepCodingExercise === 2 && (
               <React.Fragment>
-                <div className='my-2'>
+                <div className='my-3 mx-4'>
                   {codingExercise.codingSolutionsVideo ? (
                   <MediaPlayer id="videoPlayer"  autoPlay={true} title={"Coding Exercise"} src={`${IMG_HOST}${codingExercise.codingSolutionsVideo}`}  >
                   <MediaProvider  />
@@ -191,15 +205,15 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
             {activeStepCodingExercise === steps.length - 1 ? (
               <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                 <Button
-                  className='p-0'
+                 className="edu-btn btn-small"
                   variant="contained"
                   disabled={activeStepCodingExercise === 0}
                   onClick={handleBack}
                 >
-                  Back
+                 <ArrowBackIosNewIcon sx={{fontSize: "16px"}} /> Back
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
-                <Button variant="contained" onClick={handleReset}>Reset</Button>
+                <Button variant="contained"  className="edu-btn btn-small" onClick={handleReset}>Reset</Button>
               </Box>
             ) : (
               <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
@@ -207,12 +221,12 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
                   variant="contained"
                   disabled={activeStepCodingExercise === 0}
                   onClick={handleBack}
-                  sx={{ mr: 1 }}
+                className="edu-btn btn-small"
                 >
-                  Back
+                <ArrowBackIosNewIcon sx={{fontSize: "16px"}} /> Back
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
-                <Button onClick={handleNext}>
+                <Button onClick={handleNext}  className="edu-btn btn-small">
                   {activeStepCodingExercise === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </Box>

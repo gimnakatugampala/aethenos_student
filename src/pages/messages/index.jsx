@@ -11,9 +11,9 @@ const index = () => {
         <SEO pageTitle={'Messages'} />
         <Header />
         
-        <CardContainer>
+        {/* <CardContainer> */}
         <Messages />
-        </CardContainer>
+        {/* </CardContainer> */}
 
         <Footer />
     </Wrapper>
