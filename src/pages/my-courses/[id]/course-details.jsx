@@ -445,42 +445,49 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
   return (
 
     <section
-    className="container-fluid my-2 course-details-3"
-      style={{ textAlign: "left", backgroundColor: "transparent" }}>
-        <div className="row">
+      className="container-fluid my-2 course-details-3"
+      style={{ textAlign: "left", backgroundColor: "transparent" }}
+    >
+      <div className="row mx-5 mt-5">
+        <div className="col-md-8">
+          {isLoadingContent && <MediumLoading />}
 
-          
-            <div className="col-md-8">
+          {showVideoPlayer ? (
+            <MediaPlayer
+              ref={playerRef}
+              onTransitionEnd={handleVideoPosition}
+              autoPlay={true}
+              title={TitleVideo}
+              src={main_Video_player_url}
+            >
+              <MediaProvider />
+              {/* https://files.vidstack.io/sprite-fight/thumbnails.vtt */}
+              <DefaultVideoLayout
+                thumbnails={main_Video_player_url}
+                icons={defaultLayoutIcons}
+              ></DefaultVideoLayout>
+            </MediaPlayer>
+          ) : //  ==================
 
-            {isLoadingContent && <MediumLoading />}
-        
-            {showVideoPlayer ? (
-                <MediaPlayer ref={playerRef}  onTransitionEnd={handleVideoPosition} autoPlay={true} title={TitleVideo} src={main_Video_player_url} >
-                <MediaProvider  />
-                {/* https://files.vidstack.io/sprite-fight/thumbnails.vtt */}
-                <DefaultVideoLayout  thumbnails={main_Video_player_url} icons={defaultLayoutIcons} >
-                </DefaultVideoLayout>
-              </MediaPlayer>
-
-              
-
-              //  ==================
-          
-              ) : article == "" ? (
-                <>
-                {/* // Show Quiz */}
-                {showquiz && (
-                  <div className="container border p-4" style={{ maxHeight: '500px', overflowY: 'scroll' }}>
-                    <QuizContainer  
-                    setselectAnswer={setselectAnswer} 
-                    selectAnswer={selectAnswer} 
-                    answerAlertDisplay={answerAlertDisplay} 
-                    setanswerAlertDisplay={setanswerAlertDisplay} 
-                    Startquiz={Startquiz} 
-                    setStartquiz={setStartquiz} 
-                    selectedQuiz={selectedQuiz} />
-                  </div>
-                )}
+          article == "" ? (
+            <>
+              {/* // Show Quiz */}
+              {showquiz && (
+                <div
+                  className="container border p-4"
+                  style={{ maxHeight: "620px", overflowY: "scroll" }}
+                >
+                  <QuizContainer
+                    setselectAnswer={setselectAnswer}
+                    selectAnswer={selectAnswer}
+                    answerAlertDisplay={answerAlertDisplay}
+                    setanswerAlertDisplay={setanswerAlertDisplay}
+                    Startquiz={Startquiz}
+                    setStartquiz={setStartquiz}
+                    selectedQuiz={selectedQuiz}
+                  />
+                </div>
+              )}
 
                 {/* // Show Assignment */}
                 {showAssignment && (
@@ -618,13 +625,25 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
                                   <p>{course && course.course_main_desc}</p>
 
 
-                                  <h3 className="heading-title">Instructor</h3>
-                                  <div className="d-flex align-items-center">
-                                    {course && <Avatar alt={`${course.instructor}`} src="/static/images/avatar/1.jpg" /> }
-                                    <a className="m-1" href={`/users/${course && course.instructor_code}`}>{course && course.instructor}</a>
-                                  </div>
-                                  
-                                  <p>{course && course.instructor_title}</p>
+                          <h3 className="heading-title">Instructor</h3>
+                          <div className="d-flex align-items-center">
+                            {course && (
+                              <Avatar
+                                alt={`${course.instructor}`}
+                                src="/static/images/avatar/1.jpg"
+                              />
+                            )}
+                            <a
+                              className="m-1"
+                              href={`/users/${
+                                course && course.instructor_code
+                              }`}
+                            >
+                              {course && course.instructor}
+                            </a>
+                          </div>
+
+                          <p>{course && course.instructor_title}</p>
 
                                   <p>{course && course.instructor_desc}</p>
 
@@ -817,57 +836,56 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
 
 
         {/* Course Content */}
-            <div className="col-md-4">
-              <Card  style={{backgroundColor:'transparent'}}>
-                  <Card.Header><h6 className="m-2">Course Content</h6></Card.Header>
-                  <Card.Body style={{ maxHeight: '1400px', overflowY: 'scroll' }}>
-                  <div className="faq-accordion">
-                      <div className="accordion">
-
-                        {course !=null && course.course_content.map((content,index) => (
-                           <Accordian 
-                           setshowquiz={setshowquiz} 
-                           setarticle={setarticle} 
-                           setshowVideoPlayer={setshowVideoPlayer} 
-                           itemCode={itemCode} 
-                           setmain_Video_player_url={setmain_Video_player_url}
-                           id={index + 1}
-                           content={content}
-                           setselectedQuiz={setselectedQuiz} 
-                           setshowAssignment={setshowAssignment} 
-                           setselectedAssignment={setselectedAssignment}
-                          setshowPracticeTest={setshowPracticeTest}
-                          setselectedPracticeTest={setselectedPracticeTest}
-                          setshowCodingExercise={setshowCodingExercise}
-                          setselectedCodingExercise={setselectedCodingExercise}
-                          key={index} 
-                          courseItemCode={id}
-                          setcourse={setcourse}
-                          setseletedCurriculumItem={setseletedCurriculumItem}
-                          seletedCurriculumItem={seletedCurriculumItem}
-                          setStartquiz={setStartquiz}
-                          setanswerAlertDisplay={setanswerAlertDisplay}
-                          setselectAnswer={setselectAnswer}
-                          activeStep={activeAssignmentStep} 
-                          setActiveStep={setAssignmentActiveStep}
-                          setPraticeTestActiveStep={setPraticeTestActiveStep}
-                          setCodingExerciseActiveStep={setCodingExerciseActiveStep}
-                          setTitleVideo={setTitleVideo}
-                          
-                          />
-                        ))}
-
-                    </div>
-                    </div>
-
-                  </Card.Body>
-                </Card>
-
-            </div>
+        <div className="col-md-4">
+          <Card style={{ backgroundColor: "transparent" }}>
+            <Card.Header>
+              <h6 className="m-2">Course Content</h6>
+            </Card.Header>
+            <Card.Body style={{ height: "100%" }}>
+              <div className="faq-accordion">
+                <div className="accordion">
+                  {course != null &&
+                    course.course_content.map((content, index) => (
+                      <Accordian
+                        setshowquiz={setshowquiz}
+                        setarticle={setarticle}
+                        setshowVideoPlayer={setshowVideoPlayer}
+                        itemCode={itemCode}
+                        setmain_Video_player_url={setmain_Video_player_url}
+                        id={index + 1}
+                        content={content}
+                        setselectedQuiz={setselectedQuiz}
+                        setshowAssignment={setshowAssignment}
+                        setselectedAssignment={setselectedAssignment}
+                        setshowPracticeTest={setshowPracticeTest}
+                        setselectedPracticeTest={setselectedPracticeTest}
+                        setshowCodingExercise={setshowCodingExercise}
+                        setselectedCodingExercise={setselectedCodingExercise}
+                        key={index}
+                        courseItemCode={id}
+                        setcourse={setcourse}
+                        setseletedCurriculumItem={setseletedCurriculumItem}
+                        seletedCurriculumItem={seletedCurriculumItem}
+                        setStartquiz={setStartquiz}
+                        setanswerAlertDisplay={setanswerAlertDisplay}
+                        setselectAnswer={setselectAnswer}
+                        activeStep={activeAssignmentStep}
+                        setActiveStep={setAssignmentActiveStep}
+                        setPraticeTestActiveStep={setPraticeTestActiveStep}
+                        setCodingExerciseActiveStep={
+                          setCodingExerciseActiveStep
+                        }
+                        setTitleVideo={setTitleVideo}
+                      />
+                    ))}
+                </div>
+              </div>
+            </Card.Body>
+          </Card>
         </div>
+      </div>
 
-        
-        {/* Ask a Question Inside QA */}
+      {/* Ask a Question Inside QA */}
       <Modal show={show} onHide={handleClose}>
         <CardContainer className="p-0 m-0">
         <Modal.Header closeButton>

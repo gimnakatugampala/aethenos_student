@@ -1,23 +1,42 @@
-import React from 'react';
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { Player } from 'video-react';
-import { IMG_HOST } from '../../../../api';
+import React from "react";
+import Box from "@mui/material/Box";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { Player } from "video-react";
+import { IMG_HOST } from "../../../../api";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import "@vidstack/react/player/styles/default/theme.css";
+import "@vidstack/react/player/styles/default/layouts/audio.css";
+import "@vidstack/react/player/styles/default/layouts/video.css";
 
-import '@vidstack/react/player/styles/default/theme.css';
-import '@vidstack/react/player/styles/default/layouts/audio.css';
-import '@vidstack/react/player/styles/default/layouts/video.css';
+import {
+  MediaPlayer,
+  MediaProvider,
+  Gesture,
+  useVideoQualityOptions,
+  Menu,
+  SeekButton,
+  Captions,
+} from "@vidstack/react";
+import {
+  defaultLayoutIcons,
+  DefaultVideoLayout,
+} from "@vidstack/react/player/layouts/default";
 
-import { MediaPlayer, MediaProvider, Gesture ,useVideoQualityOptions , Menu  , SeekButton , Captions   } from '@vidstack/react';
-import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/layouts/default';
+const steps = [
+  "Coding exercise information and instructions",
+  "Coding exercise questions",
+  "Solutions",
+];
 
-const steps = ['Coding exercise information and instructions', 'Coding exercise questions', 'Solutions'];
-
-const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCodingExercise, selectedCodingExercise }) => {
+const CodingExerciseContainer = ({
+  setCodingExerciseActiveStep,
+  activeStepCodingExercise,
+  selectedCodingExercise,
+}) => {
   const [skipped, setSkipped] = React.useState(new Set());
 
   const isStepOptional = (step) => step === 1;
@@ -60,7 +79,7 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
   return (
     <>
       {selectedCodingExercise && (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: "100%" }}>
           <Stepper activeStep={activeStepCodingExercise}>
             {steps.map((label, index) => {
               const stepProps = {};
@@ -70,7 +89,24 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
                 stepProps.completed = false;
               }
               return (
-                <Step key={label} {...stepProps}>
+                <Step
+                  key={label}
+                  {...stepProps}
+                  sx={{
+                    "& .MuiStepLabel-label": {
+                      fontWeight: "bold !important",
+                    },
+                    "& .MuiStep-root": {
+                      color: "grey !important",
+                    },
+                    "& .Mui-completed": {
+                      color: "red !important",
+                    },
+                    "& .Mui-active": {
+                      color: "red !important",
+                    },
+                  }}
+                >
                   <StepLabel {...labelProps}>{label}</StepLabel>
                 </Step>
               );
@@ -79,48 +115,61 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
 
           <React.Fragment>
             {activeStepCodingExercise === 0 && (
-              <div className='my-2'>
+              <div className="my-3 mx-4">
                 {codingExercise.codingVideo ? (
+                  <MediaPlayer
+                    id="videoPlayer"
+                    autoPlay={true}
+                    title={"Coding Exercise"}
+                    src={`${IMG_HOST}${codingExercise.codingVideo}`}
+                  >
+                    <MediaProvider />
 
-                  <MediaPlayer id="videoPlayer"  autoPlay={true} title={"Coding Exercise"} src={`${IMG_HOST}${codingExercise.codingVideo}`} >
-                  <MediaProvider  />
-
-                  <DefaultVideoLayout  icons={defaultLayoutIcons} >
-                  </DefaultVideoLayout>
+                    <DefaultVideoLayout
+                      icons={defaultLayoutIcons}
+                    ></DefaultVideoLayout>
                   </MediaPlayer>
-                  
                 ) : (
-                  <p className='text-center my-4'>No Video Available</p>
+                  <p className="text-center my-4 mx-4">No Video Available</p>
                 )}
 
-                <div className='my-3'>
-                  <h5 className='m-0 p-0'>
+                <div className="my-3 ">
+                  <h5 className="m-0 p-0">
                     <b>{selectedCodingExercise.title}</b>
                   </h5>
 
                   {selectedCodingExercise.description && (
                     <>
-                      <p className='m-0 p-0'>Description</p>
-                      <h6 className='m-0 p-0'>{selectedCodingExercise.description}</h6>
+                      <p className="m-0 p-0">Description</p>
+                      <h6 className="m-0 p-0">
+                        {selectedCodingExercise.description}
+                      </h6>
                     </>
                   )}
 
                   {codingExercise.instructions && (
                     <>
-                      <p className='m-0 p-0'>Instructions</p>
-                      <h6 className='m-0 p-0'><i>{codingExercise.instructions}</i></h6>
+                      <p className="m-0 p-0">Instructions</p>
+                      <h6 className="m-0 p-0">
+                        <i>{codingExercise.instructions}</i>
+                      </h6>
                     </>
                   )}
 
                   {codingExercise.downloadableResource && (
-                    <a className='btn btn-danger my-2' href={`${IMG_HOST}${codingExercise.downloadableResource}`} download>
+                    <a
+                      className="btn btn-danger my-2"
+                      href={`${IMG_HOST}${codingExercise.downloadableResource}`}
+                      download
+                    >
                       Download Resource <i className="fas fa-download"></i>
                     </a>
                   )}
 
                   {codingExercise.externalLink && (
-                    <a className='my-2' href={codingExercise.externalLink}>
-                      {codingExercise.externalLink} <i className="fas fa-external-link-alt"></i>
+                    <a className="my-2" href={codingExercise.externalLink}>
+                      {codingExercise.externalLink}{" "}
+                      <i className="fas fa-external-link-alt"></i>
                     </a>
                   )}
                 </div>
@@ -128,20 +177,30 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
             )}
 
             {activeStepCodingExercise === 1 && (
-              <div className='my-2'>
+              <div className="my-3 mx-4">
                 {codingExercise.codingExerciseVideo ? (
-                  <MediaPlayer id="videoPlayer"  autoPlay={true} title={"Coding Exercise"} src={`${IMG_HOST}${codingExercise.codingExerciseVideo}`} >
-                  <MediaProvider  />
+                  <MediaPlayer
+                    id="videoPlayer"
+                    autoPlay={true}
+                    title={"Coding Exercise"}
+                    src={`${IMG_HOST}${codingExercise.codingExerciseVideo}`}
+                  >
+                    <MediaProvider />
 
-                  <DefaultVideoLayout  icons={defaultLayoutIcons} >
-                  </DefaultVideoLayout>
+                    <DefaultVideoLayout
+                      icons={defaultLayoutIcons}
+                    ></DefaultVideoLayout>
                   </MediaPlayer>
                 ) : (
-                  <p className='text-center my-4'>No Video Available</p>
+                  <p className="text-center my-4">No Video Available</p>
                 )}
 
                 {codingExercise.codingExerciseSheet && (
-                  <a className='btn btn-danger my-2' href={`${IMG_HOST}${codingExercise.codingExerciseSheet}`} download>
+                  <a
+                    className="btn btn-danger my-2"
+                    href={`${IMG_HOST}${codingExercise.codingExerciseSheet}`}
+                    download
+                  >
                     Download Questions <i className="fas fa-download"></i>
                   </a>
                 )}
@@ -149,8 +208,9 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
                 <br />
 
                 {codingExercise.codingExternalLink && (
-                  <a className='my-2' href={codingExercise.codingExternalLink}>
-                    {codingExercise.codingExternalLink} <i className="fas fa-external-link-alt"></i>
+                  <a className="my-2" href={codingExercise.codingExternalLink}>
+                    {codingExercise.codingExternalLink}{" "}
+                    <i className="fas fa-external-link-alt"></i>
                   </a>
                 )}
               </div>
@@ -158,21 +218,30 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
 
             {activeStepCodingExercise === 2 && (
               <React.Fragment>
-                <div className='my-2'>
+                <div className="my-3 mx-4">
                   {codingExercise.codingSolutionsVideo ? (
-                  <MediaPlayer id="videoPlayer"  autoPlay={true} title={"Coding Exercise"} src={`${IMG_HOST}${codingExercise.codingSolutionsVideo}`}  >
-                  <MediaProvider  />
+                    <MediaPlayer
+                      id="videoPlayer"
+                      autoPlay={true}
+                      title={"Coding Exercise"}
+                      src={`${IMG_HOST}${codingExercise.codingSolutionsVideo}`}
+                    >
+                      <MediaProvider />
 
-                  <DefaultVideoLayout  icons={defaultLayoutIcons} >
-                  </DefaultVideoLayout>
-                  </MediaPlayer>
-
+                      <DefaultVideoLayout
+                        icons={defaultLayoutIcons}
+                      ></DefaultVideoLayout>
+                    </MediaPlayer>
                   ) : (
-                    <p className='text-center my-4'>No Video Available</p>
+                    <p className="text-center my-4">No Video Available</p>
                   )}
 
                   {codingExercise.codingSolutionsSheet && (
-                    <a className='btn btn-danger my-2' href={`${IMG_HOST}${codingExercise.codingSolutionsSheet}`} download>
+                    <a
+                      className="btn btn-danger my-2"
+                      href={`${IMG_HOST}${codingExercise.codingSolutionsSheet}`}
+                      download
+                    >
                       Download Answers <i className="fas fa-download"></i>
                     </a>
                   )}
@@ -180,8 +249,12 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
                   <br />
 
                   {codingExercise.solutionsExternalLink && (
-                    <a className='my-2' href={codingExercise.solutionsExternalLink}>
-                      {codingExercise.solutionsExternalLink} <i className="fas fa-external-link-alt"></i>
+                    <a
+                      className="my-2"
+                      href={codingExercise.solutionsExternalLink}
+                    >
+                      {codingExercise.solutionsExternalLink}{" "}
+                      <i className="fas fa-external-link-alt"></i>
                     </a>
                   )}
                 </div>
@@ -189,31 +262,39 @@ const CodingExerciseContainer = ({ setCodingExerciseActiveStep, activeStepCoding
             )}
 
             {activeStepCodingExercise === steps.length - 1 ? (
-              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                 <Button
-                  className='p-0'
+                  className="edu-btn btn-small"
                   variant="contained"
                   disabled={activeStepCodingExercise === 0}
                   onClick={handleBack}
                 >
-                  Back
+                  <ArrowBackIosNewIcon sx={{ fontSize: "16px" }} /> Back
                 </Button>
-                <Box sx={{ flex: '1 1 auto' }} />
-                <Button variant="contained" onClick={handleReset}>Reset</Button>
+                <Box sx={{ flex: "1 1 auto" }} />
+                <Button
+                  variant="contained"
+                  className="edu-btn btn-small"
+                  onClick={handleReset}
+                >
+                  Reset
+                </Button>
               </Box>
             ) : (
-              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                 <Button
                   variant="contained"
                   disabled={activeStepCodingExercise === 0}
                   onClick={handleBack}
-                  sx={{ mr: 1 }}
+                  className="edu-btn btn-small"
                 >
-                  Back
+                  <ArrowBackIosNewIcon sx={{ fontSize: "16px" }} /> Back
                 </Button>
-                <Box sx={{ flex: '1 1 auto' }} />
-                <Button onClick={handleNext}>
-                  {activeStepCodingExercise === steps.length - 1 ? 'Finish' : 'Next'}
+                <Box sx={{ flex: "1 1 auto" }} />
+                <Button onClick={handleNext} className="edu-btn btn-small">
+                  {activeStepCodingExercise === steps.length - 1
+                    ? "Finish"
+                    : "Next"}
                 </Button>
               </Box>
             )}

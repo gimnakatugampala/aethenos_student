@@ -15,11 +15,32 @@ import { Avatar } from '@mui/material';
 const CourseDetailsArea = ({ course }) => {
   const { course_desc, course_desc_2, learn_list, course_desc_3, curriculum_desc, course_lessons, instructor_img, instructor_title, instructor_desc, social_links, reviews, instructor, rating, rating_count } = course || {};
 
-  const [featured_reviews, setfeatured_reviews] = useState(null)
-    // get the Reviews
-    useEffect(() => {
-        GetReviewsByCode(course.course_code,setfeatured_reviews)
-      }, [featured_reviews])
+  const [featured_reviews, setfeatured_reviews] = useState(null);
+  // get the Reviews
+  useEffect(() => {
+    GetReviewsByCode(course.course_code, setfeatured_reviews);
+  }, [featured_reviews]);
+
+  function timeAgo(date) {
+    const now = new Date();
+    const diff = Math.floor((now - new Date(date)) / 1000);
+    const dayDiff = Math.floor(diff / 86400);
+
+    if (isNaN(dayDiff) || dayDiff < 0) return;
+
+    return (
+      (dayDiff === 0 &&
+        ((diff < 60 && "Just now") ||
+          (diff < 120 && "1 minute ago") ||
+          (diff < 3600 && Math.floor(diff / 60) + " minutes ago") ||
+          (diff < 7200 && "1 hour ago") ||
+          (diff < 86400 && Math.floor(diff / 3600) + " hours ago"))) ||
+      (dayDiff === 1 && "Yesterday") ||
+      (dayDiff < 30 && dayDiff + " days ago") ||
+      (dayDiff < 365 && Math.ceil(dayDiff / 30) + " months ago") ||
+      "Over a year ago"
+    );
+  }
 
     return (
         <section className="edu-section-gap course-details-3">
@@ -130,49 +151,45 @@ const CourseDetailsArea = ({ course }) => {
                                                     </div>
                                                 </div>
 
-                                                <div className="mb-1">
-                            <h3>Reviews</h3>
-                                  {featured_reviews != null && (
-                                    featured_reviews.length > 0 ? (
-                                    featured_reviews.map((reviews,index) => (
-
-                                    <CardContainer key={index} className="p-1">
-                                      <div className="d-flex align-items-center">
-                                        <Avatar alt={`${reviews.fullName}`} src="/static/images/avatar/1.jpg" /> 
-                                        <h6 className="m-2 p-0">{reviews.fullName}</h6>
-                                      </div>
-                                      <Rating  size={20} readonly={true} iconsCount={5} initialValue={Number.parseInt(reviews.rating)} />
-                                      <span style={{fontSize:'12px'}} className="mt-2">{moment(reviews.date).startOf('day').fromNow()}</span>
-                                      <p style={{color:'#000'}} >{reviews.comment}</p>
-                                    </CardContainer>
-                                    ))
-
-                                  ) : "No Reviews Found"
-                               
-                                  )}
-
-                                </div>
-                                            {/* <div className="comment-form-area">
-                                                <h3 className="heading-title">Write a Review</h3>
-                                                <div className="rating-icon">
-                                                    <h6 className="title">Rating Here</h6>
-                                                    <div className="rating">
-                                                        <i className="icon-23"></i>
-                                                        <i className="icon-23"></i>
-                                                        <i className="icon-23"></i>
-                                                        <i className="icon-23"></i>
-                                                        <i className="icon-23"></i>
-                                                    </div>
-                                                </div>
-                                                <CommentFormCourse/>
-                                            </div> */}
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                      <div className="mb-1 mt-1">
+                        <h3>Reviews</h3>
+                        {featured_reviews != null &&
+                          (featured_reviews.length > 0
+                            ? featured_reviews.map((reviews, index) => (
+                                <CardContainer key={index} className="p-1">
+                                  <div className="d-flex align-items-center">
+                                    <Avatar
+                                      alt={`${reviews.fullName}`}
+                                      src="/static/images/avatar/1.jpg"
+                                    />
+                                    <h6 className="m-2 p-0">
+                                      {reviews.fullName}
+                                    </h6>
+                                  </div>
+                                  <Rating
+                                    size={20}
+                                    readonly={true}
+                                    iconsCount={5}
+                                    initialValue={Number.parseInt(
+                                      reviews.rating
+                                    )}
+                                  />
+                                  <span
+                                    style={{ fontSize: "12px" }}
+                                    className="mt-2"
+                                  >
+                                    {timeAgo(reviews.date)}
+                                  </span>
+                                </CardContainer>
+                              ))
+                            : "No Reviews Found")}
+                      </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
                     <div className="col-lg-4">
                         <CourseDetailsSidebar course={course} />

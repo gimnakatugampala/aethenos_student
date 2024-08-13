@@ -2,6 +2,7 @@ import Link from "next/link";
 import FooterSocial from "./component/footer-social";
 
 const footer_contents = {
+  exonLogo: "/images/footer/exon_icon1.png",
   logoLight: "/assets/images/logo/logo.png",
   logoDark: "/assets/images/logo/logo.png",
   desc: "Lorem ipsum dolor amet consecto adi pisicing elit sed eiusm tempor incidid unt labore dolore.",
@@ -16,7 +17,7 @@ const footer_contents = {
       footer_links: [
         { link: "about-1", title: "About Us" },
         { link: "course-style-1", title: "Contact Us" },
-        { link: "team-1", title: "Help And Support" }
+        { link: "team-1", title: "Help And Support" },
       ],
     },
     {
@@ -25,18 +26,18 @@ const footer_contents = {
       widget_title: "Terms & Conditions",
       footer_links: [
         { link: "contact-us", title: "Terms" },
-        { link: "gallery-grid", title: "Privacy Policy" }
+        { link: "gallery-grid", title: "Privacy Policy" },
       ],
     },
   ],
 };
 
-const { logoDark, logoLight, desc, add, call, email, widgets } =
+const { logoDark, logoLight, desc, add, call, email, widgets, exonLogo } =
   footer_contents;
 
 const Footer = ({ style_2, dark_bg, home_4 }) => {
   return (
-    <footer
+    <footer 
       className={`edu-footer ${
         style_2
           ? style_2
@@ -46,41 +47,8 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
       }`}
     >
       <div className={`footer-top ${style_2 ? "footer-top-2" : ""}`}>
-        <div className="container">
+        <div className="container" style={{marginLeft: "0px"}}>
           <div className="row g-5">
-
-            {/* <div className="col-lg-3 col-md-6">
-              <div className="edu-footer-widget"> */}
-                {/* <p className="description">{desc}</p> */}
-                {/* <div className="widget-information">
-                  <ul className="information-list">
-                    <li>
-                      <span>ADDRESS</span><br />
-                      Aethenos Limited, 
-                      4th Floor, Silverstream House, 
-                      45 Fitzroy Street, 
-                      London W1T 6EB,
-                      UNITED KINGDOM
-                    </li><br />
-                    <li>
-                      <span>CALL</span>
-                      <a href="tel:+447943231543">+44 7943 231543</a>
-                    </li>
-                    <li>
-                      <span>EMAIL</span>
-                      <a
-                        href="mailto:info@aethenos.com"
-                        rel="noreferrer"
-                        target="_blank"
-                      >
-                        info@aethenos.com
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div> */}
-
             {widgets.map((w, i) => (
               <div key={i} className={`col-lg-${w.col} col-sm-6`}>
                 <div className={`edu-footer-widget ${w.class}`}>
@@ -100,74 +68,33 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
               </div>
             ))}
 
-
-         
-
-            {/* <div className="col-lg-3 col-md-6 m-0">
-              <div className="edu-footer-widget"> 
-                <h4 className="widget-title"></h4>
-                <div className="inner">
-                <img
-                        className="logo-light mt-3"
-                        src={logoLight}
-                        alt="Corporate Logo"
-                      /> */}
-                  {/* <p className="description">
-                    Aethenos is an Online Learning Course Marketplace that Allows Students to Learn On Any Subject Anytime.
-                  </p> */}
-                {/* </div>
+            <div className="col-md-12 mx-3">
+              <div className="col-md-3 mx-5">
+                <img className=" w-75" src={logoLight} alt="Corporate Logo" />
               </div>
-            </div> */}
-
-            <div className="col-md-12">
-            <div className="col-md-3 mx-5">
-            <img
-              className="logo-light w-75"
-              src={logoLight}
-              alt="Corporate Logo"
-            />
             </div>
-            </div>
-
           </div>
         </div>
       </div>
 
       <div className="copyright-area">
-        <div className="container">
-          {/* <div className="logo">
-            <Link href={"/"} legacyBehavior>
-              <a>
-                {!dark_bg && (
-                  <>
-                    {!style_2 && (
-                      <img
-                        className="logo-light"
-                        src={logoLight}
-                        alt="Corporate Logo"
-                      />
-                    )}
-                  </>
-                )}
-              </a>
-            </Link>
-          </div> */}
+        <div className="">
           <div className="row">
-            <div className="col-lg-12">
-              <div className="inner text-center">
+            <div className="col-6">
+              <div className="inner mx-5 float-left">
                 <p>
-                © {new Date().getFullYear()} Aethenos Limited. All Rights Reserved 
-                  {/* <a
-                    href="https://aethenos.com"
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    Aethenos
-                  </a>{" "}
-                  Designed By{" "}
-                
-                  . All Rights Reserved */}
+                  © {new Date().getFullYear()} Aethenos Limited. All Rights
+                  Reserved
                 </p>
+              </div>
+            </div>
+            <div className="col-6">
+              <div className="inner float-end" style={{ marginRight: "4rem" }}>
+                <img
+                  style={{ height: "40px", position: "absolute" }}
+                  src={exonLogo}
+                  alt="Corporate Logo"
+                />
               </div>
             </div>
           </div>

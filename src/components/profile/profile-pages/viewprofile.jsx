@@ -161,35 +161,89 @@ const ViewProfile = () => {
 
             <label class="form-label">Youtube</label>
                 <div class="input-group mb-3">
-                <span class="input-group-text" >http://www.youtube.com/</span>
-                <input value={youtube} onChange={(e) => setyoutube(e.target.value)} type="text" class="form-control"  />
+                  <span class="input-group-text">http://www.youtube.com/</span>
+                  <input
+                    value={youtube}
+                    onChange={(e) => setyoutube(e.target.value)}
+                    type="text"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div className="d-flex justify-content-end">
+                {btn_loading ? (
+                  <Button variant="contained">
+                    <Spinner size="sm" animation="border" variant="light" />
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={handleProfileData}
+                    variant="contained"
+                    className="edu-btn btn-small float-end mx-3 mt-1"
+                  >
+                    Save
+                  </Button>
+                )}
+              </div>
             </div>
-
-            </div>
-        </div>
-
-        {btn_loading ? <Button  variant="contained"><Spinner size="sm" animation="border" variant="light" /></Button> : <Button  onClick={handleProfileData} variant="contained">Save</Button>}
-
-      </Tab>
 
       
-      <Tab eventKey="profile" title="Profile Picture">
+          </Tab>
 
-        <div className='row'>
-            <div className='col-md-6'>
+          <Tab eventKey="profile" title="Profile Picture">
+            <div className="mx-3 mb-5">
+              <div className="col-md-12">
+                <p className="m-0 p-0">
+                  <b>Image preview</b>
+                </p>
+                <label>Minimum 200x200 pixels, Maximum 6000x6000 pixels</label>
 
-            <p className='m-0 p-0'><b>Image preview</b></p>
-            <label>Minimum 200x200 pixels, Maximum 6000x6000 pixels</label>
+                <div className="my-4 bg-light border p-3 text-center">
+                  {profile_img == "" && uploadImage == "" ? (
+                    <img src="https://img-c.udemycdn.com/user/200_H/anonymous_3.png" />
+                  ) : uploadImage != "" ? (
+                    <img
+                      style={{ height: "300px" }}
+                      id="previewImage"
+                      src={`${profile_img}`}
+                    />
+                  ) : (
+                    <img
+                      style={{ height: "300px" }}
+                      id="previewImage"
+                      src={`${IMG_HOST}${profile_img}`}
+                    />
+                  )}
+                </div>
 
-            <div className='my-4 bg-light border p-3 text-center'>
-               {profile_img == "" && uploadImage == "" ? <img src='https://img-c.udemycdn.com/user/200_H/anonymous_3.png' /> : uploadImage != "" ?  <img style={{height:'300px'}} id='previewImage' src={`${profile_img}`} /> : <img style={{height:'300px'}} id='previewImage' src={`${IMG_HOST}${profile_img}`} /> } 
-            </div>
-
-            <div class="mb-3">
-                <label for="formFile" class="form-label">Upload Image</label>
-                <input onChange={(e) => handleImageUpload(e)} accept='image/*' class="form-control" type="file" id="formFile" />
-            </div>
-
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">
+                    Upload Image
+                  </label>
+                  <input
+                    onChange={(e) => handleImageUpload(e)}
+                    accept="image/*"
+                    class="form-control"
+                    type="file"
+                    id="formFile"
+                  />
+                </div>
+                <div className="d-flex justify-content-end">
+                  {btn_loading ? (
+                    <Button variant="contained">
+                      <Spinner size="sm" animation="border" variant="light" />
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={handleProfileData}
+                      variant="contained"
+                      className="edu-btn btn-small float-end mx-3  mt-1"
+                    >
+                      Save
+                    </Button>
+                  )}
+                </div>
+              </div>
             </div>
 
         </div>
