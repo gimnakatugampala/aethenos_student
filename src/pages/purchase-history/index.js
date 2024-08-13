@@ -212,7 +212,7 @@ const index = () => {
 
       ) : (
         <div className="mb-3">
-        <label for="exampleFormControlTextarea1" className="form-label">Refund Reason</label>
+        <label htmlFor="exampleFormControlTextarea1" className="form-label">Refund Reason</label>
         <textarea value={refundText} onChange={(e) => setrefundText(e.target.value)} className="form-control" placeholder='What is the Reason for the Refund ?' rows="3"></textarea>
         <Button onClick={handleRefundSubmit} className='m-2' variant="danger">Submit</Button>
       </div>

@@ -261,7 +261,7 @@ const ViewProfile = () => {
 
               <div className="col-md-6">
                 <div class="mb-3">
-                  <label for="formFile" class="form-label">
+                  <label htmlFor="formFile" class="form-label">
                     Upload Image
                   </label>
                   <input

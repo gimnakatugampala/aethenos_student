@@ -214,20 +214,20 @@ const HeroArea = () => {
         <Modal.Body>
       <form onSubmit={onFormSubmit}>
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">First Name</label>
+            <label htmlFor="exampleFormControlInput1" class="form-label">First Name</label>
             <input onChange={(e) => setfirstname(e.target.value)} type="text" class="form-control" id="exampleFormControlInput1" placeholder="First name" />
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Last Name</label>
+            <label htmlFor="exampleFormControlInput1" class="form-label">Last Name</label>
             <input onChange={(e) => setlastname(e.target.value)} type="text" class="form-control" id="exampleFormControlInput1" placeholder="Last name" />
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Email</label>
+            <label htmlFor="exampleFormControlInput1" class="form-label">Email</label>
             <input onChange={(e) => setemail(e.target.value)} type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email" />
         </div>
      
 
-        <label for="exampleFormControlInput1" className="form-label">Password</label>
+        <label htmlFor="exampleFormControlInput1" className="form-label">Password</label>
         <div className="input-group mb-3">
             <input onChange={(e) => setpassword(e.target.value)} type={showPass?"text":"password"}  className="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2" />
             <span className="input-group-text" id="basic-addon2">
@@ -236,7 +236,7 @@ const HeroArea = () => {
         </div>
 
 
-        <label for="exampleFormControlInput1" className="form-label">Confirm Password</label>
+        <label htmlFor="exampleFormControlInput1" className="form-label">Confirm Password</label>
         <div className="input-group mb-3">
             <input onChange={(e) => setconpassword(e.target.value)}  type={showPass?"text":"password"}  className="form-control" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon2" />
             <span className="input-group-text" id="basic-addon2">
