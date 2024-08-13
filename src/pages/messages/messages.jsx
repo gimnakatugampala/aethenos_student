@@ -138,7 +138,7 @@ function Messages() {
           <Container fluid>
             <Row className="vh-130">
               <Col sm={5} md={5} lg={4} className="bg-light border-right">
-                <h4 className="pt-3">
+                <h4 className="pt-3 ">
                   Chat Users
                   <span className="float-end">
                     <Button
@@ -217,7 +217,7 @@ function Messages() {
 
               {showAddMessage ? (
                 <Col sm={7} md={7} lg={8}>
-                  <div className="d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
+                  <div className="d-flex justify-content-between align-items-center p-3 ">
                     <h4 className="py-2">New Messages</h4>
                   </div>
 
@@ -227,7 +227,7 @@ function Messages() {
                     style={{
                       minHeight: "70vh",
                       overflowY: "auto",
-                      background: "#D5D8DC",
+                      background: "#ffff",
                     }}
                   >
                     <Form onSubmit={handleComposeMessage}>
@@ -270,7 +270,8 @@ function Messages() {
                           value={messageTextAdd}
                           onChange={(e) => setMessageTextAdd(e.target.value)}
                           as="textarea"
-                          rows={5}
+                          rows={8}
+                          className="bg-light"
                         />
                       </Form.Group>
 
@@ -286,22 +287,22 @@ function Messages() {
                 </Col>
               ) : (
                 <Col sm={7} md={7} lg={8}>
-                  <div className="d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
-                    <Typography variant="h6" className="p-2" gutterBottom>
-                      Chat with{" "}
-                      <b>
+                  <div className="d-flex justify-content-between align-items-center p-3 ">
+                  <h4 className="py-2">  Chat with {" "} 
+                      <b> 
                         {selectedUser} - {selectedCourseTitleName}
-                      </b>
-                    </Typography>
+                      </b></h4>
+                    
+                  
                   </div>
 
                   <Paper
                     elevation={3}
-                    className="p-3"
+                    className="p-3 m-3"
                     style={{
                       minHeight: "70vh",
                       overflowY: "auto",
-                      background: "#D5D8DC",
+                  
                     }}
                   >
                     {loadingMessages ? (
@@ -314,11 +315,13 @@ function Messages() {
                               key={index}
                               styles={{
                                 width: 300,
-                                color: "#000",
+                                color:  message.from === selectedUser
+                                ? "#000"
+                                : "#fff",
                                 fontWeight: "bold",
                                 background:
                                   message.from === selectedUser
-                                    ? "#fff"
+                                    ? "#ebeff0"
                                     : "#e01D20",
                               }}
                               onReplyMessageClick={() =>
@@ -343,10 +346,10 @@ function Messages() {
                       value={messageTextAdd}
                       onChange={(e) => setMessageTextAdd(e.target.value)}
                       placeholder="Type a Message"
-                      className="form-control"
+                      className="form-control mx-3"
                       aria-label="With textarea"
                     ></textarea>
-                    <Button type="submit" variant="contained">
+                    <Button type="submit" variant="contained"  className="edu-btn btn-small">
                       <SendIcon />
                     </Button>
                   </form>

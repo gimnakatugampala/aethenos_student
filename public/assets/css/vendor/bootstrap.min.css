@@ -7987,7 +7987,7 @@ fieldset:disabled .btn {
 .text-white-50 {
   color: rgba(255, 255, 255, 0.5) !important;
 }
-.text-reset {
+.text-reset { 
   color: inherit !important;
 }
 

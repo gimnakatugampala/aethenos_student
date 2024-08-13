@@ -37,7 +37,7 @@ const { logoDark, logoLight, desc, add, call, email, widgets, exonLogo } =
 
 const Footer = ({ style_2, dark_bg, home_4 }) => {
   return (
-    <footer
+    <footer 
       className={`edu-footer ${
         style_2
           ? style_2
@@ -47,7 +47,7 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
       }`}
     >
       <div className={`footer-top ${style_2 ? "footer-top-2" : ""}`}>
-        <div className="container">
+        <div className="container" style={{marginLeft: "0px"}}>
           <div className="row g-5">
             {widgets.map((w, i) => (
               <div key={i} className={`col-lg-${w.col} col-sm-6`}>
@@ -68,7 +68,7 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
               </div>
             ))}
 
-            <div className="col-md-12">
+            <div className="col-md-12 mx-3">
               <div className="col-md-3 mx-5">
                 <img className=" w-75" src={logoLight} alt="Corporate Logo" />
               </div>

@@ -41,8 +41,18 @@ const Accordian = ({
   setCodingExerciseActiveStep,
   setTitleVideo,
 }) => {
+  const bgcolor = "#808080";
+
   return (
     <div className="accordion-item mb-2">
+      <style>
+        {`
+          .custom-color {
+            background-color: #808080;
+          }
+         
+        `}
+      </style>
       <p className="accordion-header">
         <button
           style={{ fontSize: "16px" }}
@@ -125,14 +135,14 @@ const Accordian = ({
                           <CardMainContainer
                             className={
                               seletedCurriculumItem == list.curriculumItemId &&
-                              `bg-danger`
+                              `custom-color`
                             }
                           >
                             <CardContainer
                               className={`m-1 p-0 ${
                                 seletedCurriculumItem ==
                                   list.curriculumItemId &&
-                                `bg-danger text-light`
+                                `custom-color text-light`
                               }`}
                             >
                               <Form.Check
@@ -270,13 +280,13 @@ const Accordian = ({
                       <CardMainContainer
                         className={
                           seletedCurriculumItem == list.curriculumItemId &&
-                          `bg-danger`
+                          `custom-color`
                         }
                       >
                         <CardContainer
                           className={`m-1 p-0 ${
                             seletedCurriculumItem == list.curriculumItemId &&
-                            `bg-danger text-light`
+                            `custom-color text-light`
                           }`}
                         >
                           <Form.Check
@@ -408,13 +418,13 @@ const Accordian = ({
                     <CardMainContainer
                       className={
                         seletedCurriculumItem == list.curriculumItemId &&
-                        `bg-danger`
+                        `custom-color`
                       }
                     >
                       <CardContainer
                         className={`m-1 p-0 ${
                           seletedCurriculumItem == list.curriculumItemId &&
-                          `bg-danger text-white`
+                          `custom-color text-white`
                         }`}
                       >
                         <Form.Check
@@ -481,13 +491,13 @@ const Accordian = ({
                     <CardMainContainer
                       className={
                         seletedCurriculumItem == list.curriculumItemId &&
-                        `bg-danger`
+                        `custom-color`
                       }
                     >
                       <CardContainer
                         className={`m-1 p-0 ${
                           seletedCurriculumItem == list.curriculumItemId &&
-                          `bg-danger text-light`
+                          `custom-color text-light`
                         }`}
                       >
                         <Form.Check
@@ -555,13 +565,13 @@ const Accordian = ({
                     <CardMainContainer
                       className={
                         seletedCurriculumItem == list.curriculumItemId &&
-                        `bg-danger`
+                        `custom-color`
                       }
                     >
                       <CardContainer
                         className={`m-1 p-0 ${
                           seletedCurriculumItem == list.curriculumItemId &&
-                          `bg-danger text-light`
+                          `custom-color text-light`
                         }`}
                       >
                         <Form.Check
@@ -625,13 +635,13 @@ const Accordian = ({
                     <CardMainContainer
                       className={
                         seletedCurriculumItem == list.curriculumItemId &&
-                        `bg-danger`
+                        `custom-color`
                       }
                     >
                       <CardContainer
                         className={`m-1 p-0 ${
                           seletedCurriculumItem == list.curriculumItemId &&
-                          `bg-danger text-light`
+                          `custom-color text-light`
                         }`}
                       >
                         <Form.Check
