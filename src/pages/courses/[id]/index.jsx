@@ -313,9 +313,9 @@ const GetCourseByCategory = () => {
 
 
         <section className="edu-section-gap course-details-area p-0">
-            <div className="mx-5">
+            <div className="container">
 
-                    <div className="row mx-5">
+                    <div className="row">
 
                     {loading_top_title ? (
                         <>
@@ -334,7 +334,7 @@ const GetCourseByCategory = () => {
 
                     <div className="col-lg-5">
                         <div className="course-details-content">
-                            <ul className="nav nav-tabs justify-content-start" id="myTab" role="tablist">
+                            <ul className="nav nav-tabs" id="myTab" role="tablist">
 
                                 <li className="nav-item" role="presentation">
                                     <button className="nav-link active" id="most-popular-tab" data-bs-toggle="tab" data-bs-target="#most-popular"

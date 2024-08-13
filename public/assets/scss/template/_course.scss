@@ -533,7 +533,7 @@
         }
     }
     &.course-style-5 {
-        background-color: var(--color-white);
+        background-color: var(--color-lighten04);
         border-radius: 4px;
         .thumbnail {
             a {
@@ -551,7 +551,7 @@
             }
             .course-level {
                 background-color: transparent;
-                color: var(--color-body);
+                color: var(--color-secondary);
                 font-size: 15px;
                 padding: 0;
             }

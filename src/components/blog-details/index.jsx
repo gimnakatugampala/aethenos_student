@@ -13,7 +13,7 @@ const index = ({blog}) => {
                 <BreadcrumbThree title="Blog Details" subtitle="Blog Details" />
                 <BlogDetailsArea blog={blog}/>
                 <AdBanner/>
-             <Footer />
+                <Footer style_2={'footer-dark bg-image footer-style-2'} />
             </div>
         </div>
     )

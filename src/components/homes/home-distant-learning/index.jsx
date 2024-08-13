@@ -26,7 +26,7 @@ const index = () => {
                 <BrandArea/>
                 <FaqArea/>
                 <BlogArea style_2={'blog-area-2 svg-image--2 bg-image gap-bottom-equal'} />
-             <Footer />
+                <Footer style_2={'footer-dark bg-image footer-style-2'} />
             </div>
         </div>
     )

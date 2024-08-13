@@ -127,7 +127,7 @@ const index = () => {
                                   <td>{moment(p.createdDate).format('MMM DD,YYYY')}</td>
                                   <td>{getSymbolFromCurrency(p.currency)}{p.amount}</td>
                                   <td>{getSymbolFromCurrency(p.currency)}{p.amount} {p.paymentType}</td>
-                                  <td className='d-flex justify-content-center'><Button variant="outline-danger "><a href={`/card-receipt/${p.transActionCode}`}>Receipt</a></Button></td>
+                                  <td><Button variant="outline-danger"><a href={`/card-receipt/${p.transActionCode}`}>Receipt</a></Button></td>
                                   
                                 </tr>
                                 )) : <p> No Purchase History </p>}
@@ -165,7 +165,7 @@ const index = () => {
                                                   <td>{getSymbolFromCurrency(p.currency)}{(p.amount).toUpperCase()}</td>
                                                   <td>{p.refundedTo}</td>
                                                   <td>{p.status}</td>
-                                                  <td className='d-flex justify-content-center'>
+                                                  <td>
                                                     {p.refundedTo != "Free Course" && p.status == "Not Started" && (
                                                     <Button onClick={() => handleShow(p)} variant="outline-danger">Request a Refund</Button>
                                                     )}

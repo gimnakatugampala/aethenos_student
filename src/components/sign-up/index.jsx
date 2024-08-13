@@ -10,7 +10,7 @@ const index = () => {
                 <Header no_top_bar={true} />
                 {/* <BreadcrumbThree title="My Account" subtitle="Account" /> */}
                 <SignUpArea />
-             <Footer />
+                <Footer style_2={'footer-dark bg-image footer-style-2'} />
             </div>
         </div>
     )

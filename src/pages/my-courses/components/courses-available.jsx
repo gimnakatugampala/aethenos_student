@@ -42,9 +42,9 @@ const CourseFourArea = () => {
 
     return (
         <div className="edu-course-area course-area-1 section-gap-equal">
-            <div className="">
+            <div className="container">
 
-                <h3 className='ms-5'>My Courses</h3>
+                <h3>My Courses</h3>
                 
                     
                         {/* sorting area start */}
@@ -54,7 +54,7 @@ const CourseFourArea = () => {
                         {loading ? <LargeLoading /> : (
 
                             courses !=null && courses.length > 0 ? 
-                            <div className="row g-5 mx-auto justify-content-center">
+                            <div className="row g-5 mx-auto">
                                 <div className="col-lg-11 col-pl--35">
                                 <CourseItems itemsPerPage={5} items={items} course_style="6" setShowing={setShowing} />
                                 </div>

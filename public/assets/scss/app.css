@@ -7480,7 +7480,7 @@ body.sal-disabled [data-sal|=flip] {
   background-color: rgba(255, 255, 255, 0.3);
 }
 .edu-course.course-style-5 {
-  background-color: var(--color-white);
+  background-color: var(--color-lighten04);
   border-radius: 4px;
 }
 .edu-course.course-style-5 .thumbnail a:after {

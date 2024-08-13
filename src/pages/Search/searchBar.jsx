@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import Dropdown from "react-bootstrap/Dropdown";
+import Dropdown from 'react-bootstrap/Dropdown';
 import { SearchItemsByKeyword } from "../../api";
 
-const SearchBar = ({ setShowDropdown, setsearchResults }) => {
+
+const SearchBar = ({setShowDropdown , setsearchResults}) => {
+  
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
 
@@ -20,6 +22,8 @@ const SearchBar = ({ setShowDropdown, setsearchResults }) => {
     }
   };
 
+ 
+
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSearch();
@@ -32,15 +36,17 @@ const SearchBar = ({ setShowDropdown, setsearchResults }) => {
 
   const handleBlur = () => {
     setTimeout(() => {
+      
       setShowDropdown(false);
-      setsearchResults(null);
+      setsearchResults(null)
     }, 100);
   };
 
-  const handleKeywordSearch = (e) => {
-    SearchItemsByKeyword(e.target.value, setsearchResults);
-    setKeyword(e.target.value);
-  };
+
+  const handleKeywordSearch = (e) =>{
+    SearchItemsByKeyword(e.target.value,setsearchResults)
+    setKeyword(e.target.value)
+  }
 
   return (
     <div className="input-group d-none d-sm-flex">
@@ -58,6 +64,8 @@ const SearchBar = ({ setShowDropdown, setsearchResults }) => {
       <button className="search-btn" type="button" onClick={handleSearch}>
         <i className="icon-2"></i>
       </button>
+
+      
     </div>
   );
 };

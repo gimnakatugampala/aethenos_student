@@ -12,7 +12,7 @@ const index = ({team}) => {
                 <BreadcrumbThree title="Instructor Details" subtitle="Instructor Details" />
                 <TeamArea team={team} />
                 <CourseArea name={team.name}/>
-             <Footer />
+                <Footer style_2={'footer-dark bg-image footer-style-2'} />
             </div>
         </div>
     )

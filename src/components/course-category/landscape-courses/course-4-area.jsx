@@ -49,13 +49,13 @@ const CourseFourArea = ({ allcourses }) => {
 
   return (
     <div className="edu-course-area course-area-1">
-      <div className="">
+      <div className="container">
         <div className="row g-5">
-          <div className="col-xxl-3 ">
+          <div className="col-lg-3">
             {courses != null && <CourseSidebar course_items={courses} />}
           </div>
 
-          <div className="col-xxl-9 col-pl--35">
+          <div className="col-lg-9 col-pl--35">
             {/* sorting area start */}
             <SortingArea
               course_items={courses}

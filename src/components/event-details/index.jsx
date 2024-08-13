@@ -10,7 +10,7 @@ const index = ({event}) => {
                 <Header no_top_bar={true} />
                 <BreadcrumbFour title={event?.title} date={event?.date} time={event?.time} city={event?.event_meta} />
                 <EventDetailsArea event={event}/>
-             <Footer />
+                <Footer style_2={'footer-dark bg-image footer-style-2'} />
             </div>
         </div>
     )
