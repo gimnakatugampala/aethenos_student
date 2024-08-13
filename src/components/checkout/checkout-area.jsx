@@ -5,8 +5,6 @@ import OrderSummery from './order-summery';
 
 
 
-
-
 const CheckoutArea = () => {
     const [showPaypal, setshowPaypal] = useState(false)
     const [showStripe, setshowStripe] = useState(true)

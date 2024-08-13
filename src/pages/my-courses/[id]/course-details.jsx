@@ -630,15 +630,15 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
 
 
                                <h3 className="heading-title p-0 m-0">Requirements</h3>
-<div className="row">
-  <ul className="col-md-12">
-    {course && course.intended_learners && course.intended_learners.map((req, index) => (
-      req.intended_learner_type === "requirements" && (
-        <li key={index}>{req.intended_learner}</li>
-      )
-    ))}
-  </ul>
-</div>
+                                <div className="row">
+                                  <ul className="col-md-12">
+                                    {course && course.intended_learners && course.intended_learners.map((req, index) => (
+                                      req.intended_learner_type === "requirements" && (
+                                        <li key={index}>{req.intended_learner}</li>
+                                      )
+                                    ))}
+                                  </ul>
+                                </div>
 
                                 </div>
                                           
@@ -820,7 +820,7 @@ const CourseDetailsArea1 = ({id, course , setcourse}) => {
             <div className="col-md-4">
               <Card  style={{backgroundColor:'transparent'}}>
                   <Card.Header><h6 className="m-2">Course Content</h6></Card.Header>
-                  <Card.Body style={{ height: '550px', overflowY: 'scroll' }}>
+                  <Card.Body style={{ maxHeight: '1400px', overflowY: 'scroll' }}>
                   <div className="faq-accordion">
                       <div className="accordion">
 

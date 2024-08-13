@@ -1,4 +1,4 @@
-import { CheckAndSaveRefCode } from '../api';
+import { CheckAndSaveRefCode, LoginWithToken } from '../api';
 import HomeMain from '../components/homes/home';
 import SEO from '../components/seo';
 import { Wrapper } from '../layout';
@@ -14,10 +14,20 @@ export default function Home() {
 
     useEffect(() => {
         if (router.isReady) {
-          const { ref } = router.query;
+          const { ref , token } = router.query;
+
+          // Check Referrel code
           if (ref) {
             CheckAndSaveRefCode(ref, router);
           }
+
+          // Check the Login Token
+          if(token){
+            console.log(token)
+            LoginWithToken(token)
+          }
+
+
         }
       }, [router.isReady, router.query]);
 

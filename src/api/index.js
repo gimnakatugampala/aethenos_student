@@ -166,7 +166,7 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading,
     fetch(`${BACKEND_LINK}/register/add`, requestOptions)
       .then(response => response.json())
       .then(result => {
-        // console.log(result)
+        console.log(result)
 
         if(result.variable == "200"){
 
@@ -191,7 +191,7 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading,
 
               
 
-              // router.push(`/student-interests?token=${result.token}`)
+           
               window.location.href = `/student-interests?token=${result.token}`
               
            
@@ -230,7 +230,7 @@ export const StudentSignIn = async(email, password,setloading,router,rediect_url
     fetch(`https://aethenosadmin.exon.lk:2053/aethenos-api/authentication/student`, requestOptions)
     .then(response => response.json())
     .then(result => {
-        // console.log(result)
+        console.log(result)
 
         if(result.message == "User not found"){
 
@@ -272,17 +272,10 @@ export const StudentSignIn = async(email, password,setloading,router,rediect_url
 
               }
 
-
-
-              
-
               if(rediect_url == "none"){
-                // router.push(`/?login=success`)
                 window.location.href = "/?login=success"
-
               }else{
                 router.push(`/checkout`)
-
               }
 
 
@@ -1377,6 +1370,8 @@ export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorTe
             console.log("Discounted Coupon")
           }
 
+          setCouponErrorText("")
+
        
           if(tags.some(tag => tag.id == result.course_Id)){
             setCouponErrorText("Course Already has A Coupon")
@@ -1589,7 +1584,12 @@ export const GetMyCourses = async(setCourses,setloading) =>{
       console.log(result)
       Unauthorized(result.status,"my-courses")
 
-      setCourses(result)
+       // Sort courses by purchaseDate in descending order (latest first)
+       const sortedCourses = result && result.length > 0 
+       ? result.sort((a, b) => new Date(b.purchaseDate) - new Date(a.purchaseDate))
+       : [];
+
+      setCourses(sortedCourses);
       setloading(false)
 
     })
@@ -2551,3 +2551,57 @@ export const CheckAndSaveRefCode = async (ref, router) => {
   }
 };
 
+export const LoginWithToken = async (token, router,rediect_url = "none") => {
+
+  const requestOptions = {
+    method: "POST",
+    redirect: "follow"
+  };
+  
+  fetch(`${BACKEND_LINK}/authentication/studentLoginWithloginToken/${token}`, requestOptions)
+    .then((response) => response.json())
+    .then(result => {
+      console.log(result)
+
+      if(result.variable == "404"){
+        Swal.fire({
+          title: `Error`,
+          text: `${result.message}`,
+          icon: 'error',
+        })
+
+        return
+      }else{
+
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title:"Logged in!",
+          text: "Successfully loggedIn",
+          showConfirmButton: false,
+          timer: 1500
+        });
+
+
+
+        if(ENV_STATUS =="dev"){
+          Cookies.set('aethenos', `${result.token}`, { expires: 7 })
+        }else{
+          Cookies.set('aethenos', `${result.token}`, { expires: 7, domain: '.aethenos.com' });
+
+        }
+
+        if(rediect_url == "none"){
+          window.location.href = "/?login=success"
+        }else{
+          router.push(`/checkout`)
+        }
+
+
+      }
+
+   
+  })
+    .catch((error) => console.error(error));
+
+}

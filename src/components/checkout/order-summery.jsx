@@ -96,6 +96,8 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
 
     useEffect(() => {
 
+        // console.log(total)
+
         // Check The User Token
         VerfiyCheckoutUser()
 
@@ -309,76 +311,90 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                     </div>
 
                     {showPaypal && (
-    <PayPalScriptProvider options={{ clientId: "AbhfyGv-hhPIo4dZ_Wia7_0sevNZC3B871Ndw8aDEIm8h6O59L1sV0TzgFXyCpwx-_GC93sKwsU_GtEF" }}>
-        <PayPalButtons
-            style={{ color: "blue", layout: "horizontal" }}
-            createOrder={async () => {
-                try {
-                    const response = await fetch('/api/paypal_checkout', {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            cartData: PaypalItems,
-                            totalPrice: total
-                        })
-                    });
+                        <PayPalScriptProvider options={{ clientId: "AbhfyGv-hhPIo4dZ_Wia7_0sevNZC3B871Ndw8aDEIm8h6O59L1sV0TzgFXyCpwx-_GC93sKwsU_GtEF" }}>
+                            <PayPalButtons
+                                style={{ color: "blue", layout: "horizontal" }}
+                                createOrder={async () => {
+                                    try {
+                                        const response = await fetch('/api/paypal_checkout', {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/json"
+                                            },
+                                            body: JSON.stringify({
+                                                cartData: PaypalItems,
+                                                totalPrice: total
+                                            })
+                                        });
 
-                    if (!response.ok) throw new Error('Failed to create PayPal order');
+                                        if (!response.ok) throw new Error('Failed to create PayPal order');
 
-                    const order = await response.json();
-                    console.log('PayPal Order Created:', order);
-                    return order.id;
-                } catch (error) {
-                    console.error('PayPal Order Creation Error:', error);
-                }
-            }}
-            onApprove={async (data, actions) => {
-                try {
-                    await actions.order.capture();
-                    console.log('PayPal Order Approved:', data);
+                                        const order = await response.json();
+                                        console.log('PayPal Order Created:', order);
+                                        return order.id;
+                                    } catch (error) {
+                                        console.error('PayPal Order Creation Error:', error);
+                                    }
+                                }}
+                                onApprove={async (data, actions) => {
+                                    try {
+                                        await actions.order.capture();
+                                        console.log('PayPal Order Approved:', data);
 
-                    // Create the order data to send to your server
-                    const calculatedPurchasedCourse = cartCourses.map((course) => ({
-                        courseCode: course.other_data.course_code,
-                        currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
-                        itemPrice: 1 * CalculateDiscountedPrice(course.other_data)
-                    }));
+                                        // Create the order data to send to your server
+                                        const calculatedPurchasedCourse = cartCourses.map((course) => ({
+                                            courseCode: course.other_data.course_code,
+                                            currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
+                                            itemPrice: 1 * CalculateDiscountedPrice(course.other_data)
+                                        }));
 
-                    const calculatedBuyCourseOrder = {
-                        "paymentMethod": "2",
-                        "discount": 0,
-                        "totalPrice": `${total}`,
-                        "currency": GetCurrencyByCountry(cartCourses[0].other_data).toLowerCase(),
-                        "courses": calculatedPurchasedCourse
-                    };
+                                        const calculatedBuyCourseOrder = {
+                                            "paymentMethod": "2",
+                                            "discount": 0,
+                                            "totalPrice": `${total}`,
+                                            "currency": GetCurrencyByCountry(cartCourses[0].other_data).toLowerCase(),
+                                            "courses": calculatedPurchasedCourse
+                                        };
 
-                    const rawData = JSON.stringify(calculatedBuyCourseOrder);
-                    await BuyCourseByStudent(rawData, router, buyCourseOrder);
+                                        const rawData = JSON.stringify(calculatedBuyCourseOrder);
+                                        await BuyCourseByStudent(rawData, router, buyCourseOrder);
 
-                    console.log('Order placed:', calculatedBuyCourseOrder);
-                } catch (error) {
-                    console.error('PayPal Order Approval Error:', error);
-                }
-            }}
-        />
-    </PayPalScriptProvider>
-)}
+                                        console.log('Order placed:', calculatedBuyCourseOrder);
+                                    } catch (error) {
+                                        console.error('PayPal Order Approval Error:', error);
+                                    }
+                                }}
+                            />
+                        </PayPalScriptProvider>
+                    )}
 
 
             
-                {showStripe && <form action="/api/checkout_sessions" method="POST">
-                    <input type="hidden" name="cartCourses" value={JSON.stringify(newPricing)} />
-                    
-                    <section>
-                    <button  type="submit" className='w-100 my-2 edu-btn btn-medium checkout-btn'>
-                    <span className='d-flex justify-content-center align-items-center'>
-                              Complete Checkout
+                    {showStripe && (
+                    total === 0 ? (
+                        <button onClick={() => {
+                            var rawData =  JSON.stringify(buyCourseOrder)
+                            BuyCourseByStudent(rawData,router,buyCourseOrder)
+                            return
+                        }} className="w-100 my-2 edu-btn btn-medium checkout-btn">
+                        <span className="d-flex justify-content-center align-items-center">
+                            Complete Checkout
+                        </span>
+                        </button>
+                    ) : (
+                        <form action="/api/checkout_sessions" method="POST">
+                        <input type="hidden" name="cartCourses" value={JSON.stringify(newPricing)} />
+                        <section>
+                            <button type="submit" className="w-100 my-2 edu-btn btn-medium checkout-btn">
+                            <span className="d-flex justify-content-center align-items-center">
+                                Complete Checkout
                             </span>
-                    </button>
-                    </section>
-                    </form>}
+                            </button>
+                        </section>
+                        </form>
+                    )
+                    )}
+
 
                     
                 
