@@ -12,7 +12,7 @@ const index = () => {
                 <BreadcrumbThree title="Contact Me" subtitle="Contact Me" />
                 <ContactMeArea/>
                 <ContactMeFormArea/>
-                <Footer style_2={'footer-dark bg-image footer-style-2'} />
+             <Footer />
             </div>
         </div>
     )

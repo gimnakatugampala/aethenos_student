@@ -11,7 +11,7 @@ const index = ({team}) => {
                 <Header no_top_bar={true} />
                 <BreadcrumbThree title="Frequently Asked Questions" subtitle="Frequently Asked Questions" />
                 <FaqArea/>
-                <Footer style_2={'footer-dark bg-image footer-style-2'} />
+             <Footer />
             </div>
         </div>
     )

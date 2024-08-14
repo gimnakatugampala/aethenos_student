@@ -121,7 +121,10 @@ function Messages() {
 
   const filteredChatRooms = chatRooms.filter((user) => {
     const searchText = userFilter.toLowerCase();
-    return user.instructor.toLowerCase().includes(searchText) || user.courseTitle.toLowerCase().includes(searchText);
+    return (
+      user.instructor.toLowerCase().includes(searchText) ||
+      user.courseTitle.toLowerCase().includes(searchText)
+    );
   });
 
   return (

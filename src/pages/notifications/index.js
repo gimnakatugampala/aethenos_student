@@ -22,13 +22,11 @@ import LargeLoading from "../../functions/Loading/LargeLoading";
 import { Card } from "react-bootstrap";
 
 const index = () => {
+  const [notifications, setnotifications] = useState(null);
 
-    const [notifications, setnotifications] = useState(null)
-
-    useEffect(() => {
-        GetNotifications(setnotifications)
-    }, [])
-    
+  useEffect(() => {
+    GetNotifications(setnotifications);
+  }, []);
 
   return (
     <Wrapper>
@@ -90,9 +88,9 @@ const index = () => {
         </div>
       </div>
 
-    <Footer />
+      <Footer />
     </Wrapper>
-  )
-}
+  );
+};
 
-export default index
+export default index;

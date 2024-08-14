@@ -62,10 +62,10 @@ const CourseFiveArea = () => {
 
   return (
     <div className="edu-course-area course-area-1 section-gap-equal">
-      <div className="container">
-        <div className="row g-5">
+      <div className="mx-5">
+        <div className="row g-5 mx-5">
           {loading ? (
-            <div className="col-md-5 m-auto">
+            <div className="col-md-5 mx-5">
               {" "}
               <SpinnerCircular
                 size={100}
@@ -78,7 +78,7 @@ const CourseFiveArea = () => {
             <div className="row col-md-12">
               <div className="col-md-8">
                 <div>
-                  <p className="m-0 p-0">
+                  <p className="m-0 p-0 mb-3">
                     <b>INSTRUCTOR</b>
                   </p>
                   <h1 className="m-0 p-0">{instructor_details.name}</h1>
@@ -99,7 +99,7 @@ const CourseFiveArea = () => {
                   </div>
                 </div>
 
-                <div className="my-3">
+                <div className="my-3 mx-3">
                   <h5 className="m-0 p-0">About me</h5>
                   <span className="ri-1x">{instructor_details.about}</span>
                 </div>
