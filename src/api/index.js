@@ -105,7 +105,6 @@ var requestOptions = {
 fetch(`${BACKEND_LINK}/instructor/getInstructorProfileDetails`, requestOptions)
   .then(response => response.json())
   .then(result => {
-    console.log(result)
 
     if(result.status == 401){
       // if(ENV_STATUS == "dev"){
@@ -2158,6 +2157,37 @@ fetch(`${BACKEND_LINK}/payment/getAllRefunds`, requestOptions)
 
  }
 
+
+ 
+export const updateNotifications = async(notificationCode) =>{
+  
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  const requestOptions = {
+    method: "PUT",
+    headers: myHeaders,
+    redirect: "follow"
+  };
+  
+  fetch(`${BACKEND_LINK}/notification/readNotification/${notificationCode}`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+
+      console.log(notificationCode)
+      console.log(result)
+      if(result.variable == "200"){
+        console.log(result)
+      }else{
+        ErrorAlert("Error",result.message)      
+        return
+      }
+
+    })
+    .catch((error) => console.error(error));
+
+}
+
  export const GetNotifications = async(setnotifications) =>{
 
   const myHeaders = new Headers();
@@ -2174,7 +2204,8 @@ fetch(`${BACKEND_LINK}/payment/getAllRefunds`, requestOptions)
     .then((result) => {
       Unauthorized(result.status,`notifications`) 
       console.log(result)
-      setnotifications(result)
+      const sortedNotifications = result.sort((a, b) => new Date(b.notificationTime) - new Date(a.notificationTime));
+      setnotifications(sortedNotifications);
     })
     .catch((error) => console.error(error));
 

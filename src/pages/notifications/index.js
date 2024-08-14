@@ -19,6 +19,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import LargeLoading from "../../functions/Loading/LargeLoading";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Card } from "react-bootstrap";
 
 const index = () => {
@@ -30,13 +31,12 @@ const index = () => {
 
   return (
     <Wrapper>
-    <SEO pageTitle={'Notifications'} />
-    <Header />
-
+      <SEO pageTitle={"Notifications"} />
+      <Header />
 
       <div className="edu-brand-area brand-area-1 p-5 ">
         <div className="container-fluid">
-          <div className="row mx-5">
+          <div className="row ">
             <div className="mb-4 ">
               <h3 className="title m-0">Notifications</h3>
             </div>
@@ -44,45 +44,52 @@ const index = () => {
             {notifications == null ? (
               <LargeLoading />
             ) : (
-              <List
-                sx={{
-                  width: "100%",
-
-                  bgcolor: "bg-dark",
-                }}
-              >
-                {notifications.length > 0
-                  ? notifications.map((notification, index) => (
-                      <>
-                        <Card>
-                          <ListItem
-                            key={index}
-                            className="mx-1"
-                            alignItems="flex-start"
-                          >
-                            <ListItemText
-                              primary={notification.notification}
-                              secondary={
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    justifyContent: "flex-end",
-                                  }}
-                                >
-                                  {moment(notification.notificationTime)
-                                    .startOf("hour")
-                                    .fromNow()}
-                                </div>
-                              }
-                            />
-                          </ListItem>
-                        </Card>
-
-                        <Divider variant="inset" component="li" />
-                      </>
-                    ))
-                  : "No Notifications"}
-              </List>
+              <div className="col-lg-12 p-3">
+                <div className="tab-content" id="myTabContent">
+                  <div
+                    className="tab-pane fade show active"
+                    id="courses"
+                    role="tabpanel"
+                    aria-labelledby="courses-tab"
+                  >
+                    <div className="course-tab-content">
+                      <div className="course-overview">
+                        {notifications != null && (
+                          <Table striped bordered hover>
+                            <thead>
+                              <tr>
+                                  <th></th>
+                                <th>Notification</th>
+                                <th>Time</th>
+                               
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {notifications.length > 0 ? (
+                                notifications.map((notification, index) => (
+                                  <tr key={index}>
+                                    <td style={{ border: "none", textAlign: "center" }}>
+                                      <NotificationsIcon />
+                                    </td>
+                                    <td>{notification.notification}</td>
+                                    <td>
+                                      {moment(notification.notificationTime)
+                                        .startOf("hour")
+                                        .fromNow()}
+                                    </td>
+                                  </tr>
+                                ))
+                              ) : (
+                                <p> No Notifications </p>
+                              )}
+                            </tbody>
+                          </Table>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             )}
           </div>
         </div>

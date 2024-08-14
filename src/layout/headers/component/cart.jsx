@@ -12,10 +12,6 @@ const Cart = () => {
     const cartItems = useSelector(state => state.cart.cartCourses);
     const dispatch = useDispatch();
     const {total} = useCartInfo();
-
-    // useEffect(() => {
-    //   console.log(cartItems)
-    // })
     
     
     return (
