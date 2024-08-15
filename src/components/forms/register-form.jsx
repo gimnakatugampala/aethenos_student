@@ -157,10 +157,11 @@ const RegisterForm = () => {
 
         if(VerficationCode.length != 5){
             ErrorAlert("Error","Please Enter a Valid Code")
+            setloading(false)
             return
         }
 
-        VerifyEmail(email, VerficationCode)
+        VerifyEmail(email, VerficationCode, setloading)
 
         console.log(VerficationCode)
     }
@@ -195,7 +196,13 @@ const RegisterForm = () => {
         <VerificationInput value={VerficationCode} onChange={(e) => setVerficationCode(e)} length={5} className="mx-auto text-center" />
         </div>
 
-        <button onClick={handleVerifyEmail}  className="edu-btn btn-medium mx-auto w-100">Verify</button>
+                    {loading ? (
+                        <ButtonLoadingMedium />
+                    ) : (
+
+                        <button onClick={handleVerifyEmail}  className="edu-btn btn-medium mx-auto w-100">Verify</button>
+                    )}
+
         </>
         ) : (
             <>

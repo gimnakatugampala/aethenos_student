@@ -211,7 +211,9 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading,
 
 }
 
-export const VerifyEmail = async(email, VerficationCode) =>{
+export const VerifyEmail = async(email, VerficationCode, setloading) =>{
+
+  setloading(true)
 
   const formdata = new FormData();
   formdata.append("email", `${email}`);
@@ -229,10 +231,13 @@ export const VerifyEmail = async(email, VerficationCode) =>{
       console.log(result)
 
       if(result.message == "Email verified successfully"){
-        
+
+        setloading(false)
+
         window.location.href = `/student-interests?token=${CURRENT_USER}`
 
       }else{
+        setloading(false)
         ErrorAlert("Error",result.message)
       }
 
