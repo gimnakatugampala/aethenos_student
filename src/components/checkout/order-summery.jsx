@@ -341,25 +341,25 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
                                         await actions.order.capture();
                                         console.log('PayPal Order Approved:', data);
 
-                                        // Create the order data to send to your server
-                                        const calculatedPurchasedCourse = cartCourses.map((course) => ({
-                                            courseCode: course.other_data.course_code,
-                                            currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
-                                            itemPrice: 1 * CalculateDiscountedPrice(course.other_data)
-                                        }));
+                                        // // Create the order data to send to your server
+                                        // const calculatedPurchasedCourse = cartCourses.map((course) => ({
+                                        //     courseCode: course.other_data.course_code,
+                                        //     currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
+                                        //     itemPrice: 1 * CalculateDiscountedPrice(course.other_data)
+                                        // }));
 
-                                        const calculatedBuyCourseOrder = {
-                                            "paymentMethod": "2",
-                                            "discount": 0,
-                                            "totalPrice": `${total}`,
-                                            "currency": GetCurrencyByCountry(cartCourses[0].other_data).toLowerCase(),
-                                            "courses": calculatedPurchasedCourse
-                                        };
+                                        // const calculatedBuyCourseOrder = {
+                                        //     "paymentMethod": "2",
+                                        //     "discount": 0,
+                                        //     "totalPrice": `${total}`,
+                                        //     "currency": GetCurrencyByCountry(cartCourses[0].other_data).toLowerCase(),
+                                        //     "courses": calculatedPurchasedCourse
+                                        // };
 
-                                        const rawData = JSON.stringify(calculatedBuyCourseOrder);
-                                        await BuyCourseByStudent(rawData, router, buyCourseOrder);
+                                        // const rawData = JSON.stringify(calculatedBuyCourseOrder);
+                                        // await BuyCourseByStudent(rawData, router, buyCourseOrder);
 
-                                        console.log('Order placed:', calculatedBuyCourseOrder);
+                                        // console.log('Order placed:', calculatedBuyCourseOrder);
                                     } catch (error) {
                                         console.error('PayPal Order Approval Error:', error);
                                     }
