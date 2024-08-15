@@ -80,23 +80,80 @@ const newPricing = cartCourses != null && cartCourses.map((course) => {
 
 
 
-// Items For Paypal
-const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
-    name:course.title,
-    description:"Test Course Description",
-    quantity:1,
-    unit_amount:{
-        currency_code:GetCurrencyByCountry(course.other_data),
-        value:(CalculateDiscountedPrice(course.other_data)) == null ? 0 : (CalculateDiscountedPrice(course.other_data))
-    }
-}))
+
+
+
+    // // Items For Paypal
+    // const PaypalItems = cartCourses != null && cartCourses.map((course) => {
+    // const coupon = couponValue.find(coupon => coupon.id === course.id);
+    // const originalPrice = CalculateDiscountedPrice(course.other_data) || 0;
+    // const discountedPrice = coupon 
+    // ? (coupon.couponType === 1 
+    //     ? 0 // Free coupon
+    //     : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+    // ) 
+    // : originalPrice;
+
+    // return {
+    // name:course.title,
+    // description:"Test Course Description",
+    // quantity:1,
+    // unit_amount:{
+    //     currency_code:GetCurrencyByCountry(course.other_data),
+    //     value: discountedPrice.toFixed(2)
+    // }
+    // };
+    // });
+
+
+    // Function to calculate total after applying coupons - Paypal
+const calculateTotalWithCoupon = () => {
+    return cartCourses.reduce((acc, course) => {
+        const coupon = couponValue.find(coupon => coupon.id === course.id);
+        const originalPrice = CalculateDiscountedPrice(course.other_data) || 0;
+        const discountedPrice = coupon 
+            ? (coupon.couponType === 1 
+                ? 0 // Free coupon
+                : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+            ) 
+            : originalPrice;
+        return acc + discountedPrice;
+    }, 0).toFixed(2); // Fixing to 2 decimal places for PayPal
+};
+
+
+// Function to generate PayPal items with discounted prices - Paypal
+const generatePaypalItems = () => {
+    return cartCourses.map(course => {
+        const coupon = couponValue.find(coupon => coupon.id === course.id);
+        const originalPrice = CalculateDiscountedPrice(course.other_data) || 0;
+        const discountedPrice = coupon 
+            ? (coupon.couponType === 1 
+                ? 0 // Free coupon
+                : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+            ) 
+            : originalPrice;
+        
+        return {
+            name: course.title,
+            unit_amount: {
+                currency_code: GetCurrencyByCountry(course.other_data),
+                value: discountedPrice.toFixed(2)
+            },
+            quantity: '1' // Assuming quantity is 1; adjust if needed
+        };
+    });
+};
 
 
 // console.log(newPricing)
 
     useEffect(() => {
 
-        // console.log(total)
+
+        // Update the Paypal Total
+        calculateTotalWithCoupon()
+        generatePaypalItems()
 
         // Check The User Token
         VerfiyCheckoutUser()
@@ -210,6 +267,11 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
 
 
         ValidateCouponOnCart(coupon,setcouponError,setCouponErrorText,setTags,cartCourses,setbtnLoading,setcoupon,tags)
+
+        // Update the Paypal Total
+        calculateTotalWithCoupon()
+        generatePaypalItems()
+
         setcouponEmpty(false)
     }
 
@@ -217,6 +279,10 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
     const handleDelete = (t) => {
         const updatedTags = tags.filter(tag => tag.id != t.id);
         window.localStorage.setItem("coupons", updatedTags);
+
+        // Update the Paypal Total
+        calculateTotalWithCoupon()
+        generatePaypalItems()
 
         setTags(updatedTags);
       };
@@ -312,59 +378,42 @@ const PaypalItems = cartCourses != null && cartCourses.map((course) => ({
 
                     {showPaypal && (
                         <PayPalScriptProvider options={{ clientId: "AbhfyGv-hhPIo4dZ_Wia7_0sevNZC3B871Ndw8aDEIm8h6O59L1sV0TzgFXyCpwx-_GC93sKwsU_GtEF" }}>
-                            <PayPalButtons
-                                style={{ color: "blue", layout: "horizontal" }}
-                                createOrder={async () => {
-                                    try {
-                                        const response = await fetch('/api/paypal_checkout', {
-                                            method: "POST",
-                                            headers: {
-                                                "Content-Type": "application/json"
+                             <PayPalButtons
+                        style={{ layout: "vertical" }}
+                        createOrder={(data, actions) => {
+                            return actions.order.create({
+                                purchase_units: [{
+                                    amount: {
+                                        value: calculateTotalWithCoupon(),
+                                        currency_code: GetCurrencyByCountry(cartCourses[0].other_data),
+                                        breakdown: {
+                                            item_total: { 
+                                                currency_code: GetCurrencyByCountry(cartCourses[0].other_data),
+                                                value: calculateTotalWithCoupon() 
                                             },
-                                            body: JSON.stringify({
-                                                cartData: PaypalItems,
-                                                totalPrice: total
-                                            })
-                                        });
+                                        }
+                                    },
+                                    items: generatePaypalItems()
+                                }]
+                            });
+                        }}
+                        onCancel={() => {
+                            window.location.reload()
+                        }}
+                        onApprove={(data, actions) => {
+                            return actions.order.capture().then((details) => {
+                                console.log(details);
 
-                                        if (!response.ok) throw new Error('Failed to create PayPal order');
-
-                                        const order = await response.json();
-                                        console.log('PayPal Order Created:', order);
-                                        return order.id;
-                                    } catch (error) {
-                                        console.error('PayPal Order Creation Error:', error);
-                                    }
-                                }}
-                                onApprove={async (data, actions) => {
-                                    try {
-                                        await actions.order.capture();
-                                        console.log('PayPal Order Approved:', data);
-
-                                        // // Create the order data to send to your server
-                                        // const calculatedPurchasedCourse = cartCourses.map((course) => ({
-                                        //     courseCode: course.other_data.course_code,
-                                        //     currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
-                                        //     itemPrice: 1 * CalculateDiscountedPrice(course.other_data)
-                                        // }));
-
-                                        // const calculatedBuyCourseOrder = {
-                                        //     "paymentMethod": "2",
-                                        //     "discount": 0,
-                                        //     "totalPrice": `${total}`,
-                                        //     "currency": GetCurrencyByCountry(cartCourses[0].other_data).toLowerCase(),
-                                        //     "courses": calculatedPurchasedCourse
-                                        // };
-
-                                        // const rawData = JSON.stringify(calculatedBuyCourseOrder);
-                                        // await BuyCourseByStudent(rawData, router, buyCourseOrder);
-
-                                        // console.log('Order placed:', calculatedBuyCourseOrder);
-                                    } catch (error) {
-                                        console.error('PayPal Order Approval Error:', error);
-                                    }
-                                }}
-                            />
+                                buyCourseOrder.paymentMethod = "2";
+                                console.log(buyCourseOrder);
+                                //   console.log(JSON.stringify(buyCourseOrder));
+                                 var rawData =  JSON.stringify(buyCourseOrder)
+                                  BuyCourseByStudent(rawData,router,buyCourseOrder)
+                                  return
+                                // router.push("/checkout?success=true");
+                            });
+                        }}
+                    />
                         </PayPalScriptProvider>
                     )}
 
