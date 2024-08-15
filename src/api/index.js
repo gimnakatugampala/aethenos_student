@@ -132,7 +132,7 @@ fetch(`${BACKEND_LINK}/instructor/getInstructorProfileDetails`, requestOptions)
  }
 
 
-export const StudentSignUp = async(fname, lname, email , conpassword,setloading,router) =>{
+export const StudentSignUp = async(fname, lname, email , conpassword,setloading,setisShownEmailVerificarion, router) =>{
 
   const COUNTRY = Cookies.get('aethenos_user_origin')
   let countryToFind = "";
@@ -179,6 +179,7 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading,
               });
 
               setloading(false)
+              setisShownEmailVerificarion(true)
 
               if(ENV_STATUS == "dev"){
                 Cookies.set('aethenos', `${result.token}`, { expires: 7 })
@@ -191,7 +192,7 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading,
               
 
            
-              window.location.href = `/student-interests?token=${result.token}`
+              // window.location.href = `/student-interests?token=${result.token}`
               
            
         }else{
@@ -210,6 +211,51 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading,
 
 }
 
+export const VerifyEmail = async(email, VerficationCode) =>{
+
+  const formdata = new FormData();
+  formdata.append("email", `${email}`);
+  formdata.append("verificationCode", `${VerficationCode}`);
+  
+  const requestOptions = {
+    method: "POST",
+    body: formdata,
+    redirect: "follow"
+  };
+  
+  fetch(`${BACKEND_LINK}/register/checkUserEmailVerificationCode`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result)
+
+      if(result.message == "Email verified successfully"){
+        
+        window.location.href = `/student-interests?token=${CURRENT_USER}`
+
+      }else{
+        ErrorAlert("Error",result.message)
+      }
+
+    })
+    .catch((error) => console.error(error));
+
+}
+
+export const ResendCode = async(email) =>{
+
+  const requestOptions = {
+    method: "POST",
+    redirect: "follow"
+  };
+  
+  fetch(`${BACKEND_LINK}/register/resendUserEmailVerificationCode/${email}`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result)
+    })
+    .catch((error) => console.error(error));
+
+}
 
 export const StudentSignIn = async(email, password,setloading,router,rediect_url = "none") =>{
 

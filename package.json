@@ -27,6 +27,7 @@
         "accordion-js": "^3.3.4",
         "antd": "^5.12.6",
         "bootstrap": "^5.2.0",
+        "bootstrap-icons": "^1.11.3",
         "cors": "^2.8.5",
         "currency-symbol-map": "^5.1.0",
         "emailjs-com": "^3.2.0",

@@ -401,7 +401,8 @@ const Header = ({
                          
                               <a className="cart-icon">
                                 <i class="bi bi-bell"></i>
-                                <span className="count">{ notifications.filter(notification => !notification.isRead).length}</span>
+                                <span className="count">  {notifications ? notifications.filter(notification => !notification.isRead).length : 0}
+                                </span>
                               </a>
                         
                             <Notification />
