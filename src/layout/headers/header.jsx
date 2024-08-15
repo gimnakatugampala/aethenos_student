@@ -12,7 +12,7 @@ import HeaderTopLeft from "../headers/component/header-top-left";
 import HeaderTopRight from "../headers/component/header-top-right";
 import MainMenu from "../headers/component/main-menu";
 import Cart from "./component/cart";
-import Notification from "./component/notification"
+import Notification from "./component/notification";
 import SearchBar from "../../pages/search/searchBar";
 import { GetCourseCategory, GetCategoriesMenu, IMG_HOST } from "../../api";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -80,7 +80,7 @@ const Header = ({
   const [searchResults, setsearchResults] = useState(null);
 
   const router = useRouter();
-  
+
   const [notifications, setNotifications] = useState(null);
 
   useEffect(() => {
@@ -366,7 +366,7 @@ const Header = ({
                       </a>
                     </Link>
                   </li>
-                  <li className="icon">
+                  <li className="icon cart-icon">
                     <Link href="/cart" legacyBehavior>
                       <a className="cart-icon">
                         <i className="icon-3"></i>
@@ -397,14 +397,19 @@ const Header = ({
                         </>
                       ) : (
                         <>
-                          <li className="icon">
-                         
+                          <li className="icon cart-icon">
+                            <Link href="/cart" legacyBehavior>
                               <a className="cart-icon">
                                 <i class="bi bi-bell"></i>
-                                <span className="count">  {notifications ? notifications.filter(notification => !notification.isRead).length : 0}
+                                <span className="count">
+                                  {
+                                    notifications.filter(
+                                      (notification) => !notification.isRead
+                                    ).length
+                                  }
                                 </span>
                               </a>
-                        
+                            </Link>
                             <Notification />
                           </li>
 
