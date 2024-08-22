@@ -2687,3 +2687,9 @@ export const LoginWithToken = async (token, router,rediect_url = "none") => {
     .catch((error) => console.error(error));
 
 }
+
+export const VideoStreaming = async (filePath) => {
+  // Properly encode the file path and return the complete URL
+  let encodedFilePath = encodeURIComponent(filePath);
+  return `${BACKEND_LINK}/videoStreming/video?url=${encodedFilePath}`;
+};
