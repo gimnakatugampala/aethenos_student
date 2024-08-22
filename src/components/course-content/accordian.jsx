@@ -7,6 +7,7 @@ import {
   StoreLastMarkedCurriculum,
   UpdateCourseCurriculumProgress,
   UpdateCourseProgress,
+  VideoStreaming,
 } from "../../api";
 import { CheckBox } from "@mui/icons-material";
 import Form from "react-bootstrap/Form";
@@ -84,7 +85,7 @@ const Accordian = ({
                       type.curriculum_item_file_type === "Video" && (
                         <span
                           key={idx}
-                          onClick={() => {
+                          onClick={async () => {
                             setarticle("");
                             setshowVideoPlayer(true);
                             setshowAssignment(false);
@@ -92,14 +93,16 @@ const Accordian = ({
                             setshowPracticeTest(false);
                             setshowCodingExercise(false);
 
-                            setmain_Video_player_url(`${IMG_HOST}${type.url}`);
+                            const videoSourceUrl = await VideoStreaming(type.url);
+
+                            setmain_Video_player_url(`${videoSourceUrl}`);
 
                             var videoPlayer =
                               document.querySelector(".video-react-video");
                             var videoSource =
                               document.getElementById("videoPlayer");
                             if (videoSource) {
-                              videoSource.src = `${IMG_HOST}${type.url}`;
+                              videoSource.src = `${videoSourceUrl}`;
                               videoPlayer.load();
                             }
 

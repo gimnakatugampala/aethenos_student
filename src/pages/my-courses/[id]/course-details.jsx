@@ -38,6 +38,7 @@ import {
   IMG_HOST,
   StoreLastMarkedCurriculum,
   UpdateCourseCurriculumProgress,
+  VideoStreaming,
 } from "../../../api";
 import moment from "moment";
 import ErrorAlert from "../../../functions/Alert/ErrorAlert";
@@ -338,14 +339,17 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
           setTitleVideo(curriculumItem.title);
           setseletedCurriculumItem(curriculumItem.curriculumItemId);
 
-          curriculumItem.get_CurriculumItem_File.forEach((type) => {
+          curriculumItem.get_CurriculumItem_File.forEach(async (type) => {
             if (type.curriculum_item_file_type === "Video") {
-              setmain_Video_player_url(`${IMG_HOST}${type.url}`);
+
+              const videoSourceUrl = await VideoStreaming(type.url);
+
+              setmain_Video_player_url(`${videoSourceUrl}`);
 
               const videoPlayer = document.querySelector(".video-react-video");
               const videoSource = document.getElementById("videoPlayer");
               if (videoSource) {
-                videoSource.src = `${IMG_HOST}${type.url}`;
+                videoSource.src = `${videoSourceUrl}`;
                 videoPlayer.load();
               }
 
