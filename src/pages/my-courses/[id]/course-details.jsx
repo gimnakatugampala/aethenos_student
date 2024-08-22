@@ -785,7 +785,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                               />
                             )}
                             <a
-                              className="m-1"
+                              className="mx-2"
                               href={`/users/${
                                 course && course.instructor_code
                               }`}
@@ -794,26 +794,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                             </a>
                           </div>
 
-                          <p>{course && course.instructor_title}</p>
-                          <h3 className="heading-title">Instructor</h3>
-                          <div className="d-flex align-items-center">
-                            {course && (
-                              <Avatar
-                                alt={`${course.instructor}`}
-                                src="/static/images/avatar/1.jpg"
-                              />
-                            )}
-                            <a
-                              className="m-1"
-                              href={`/users/${
-                                course && course.instructor_code
-                              }`}
-                            >
-                              {course && course.instructor}
-                            </a>
-                          </div>
-
-                          <p>{course && course.instructor_title}</p>
+                          <p className="my-2" >{course && course.instructor_title}</p>
 
                           <p>{course && course.instructor_desc}</p>
 
