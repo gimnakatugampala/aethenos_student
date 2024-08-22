@@ -602,7 +602,11 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
             <div className="row">
               <div className="col-md-12">
                 <div className="course-details-content">
-                  <ul className="nav nav-tabs float-start" id="myTab" role="tablist">
+                  <ul
+                    className="nav nav-tabs float-start"
+                    id="myTab"
+                    role="tablist"
+                  >
                     <li className="nav-item" role="presentation">
                       <button
                         className="nav-link active"
@@ -773,7 +777,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                           <p>{course && course.course_main_desc}</p>
 
                           <h3 className="heading-title">Instructor</h3>
-                          <div className="d-flex align-items-center">
+                          <div className="d-flex align-items-center my-2">
                             {course && (
                               <Avatar
                                 alt={`${course.instructor}`}
@@ -781,26 +785,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                               />
                             )}
                             <a
-                              className="m-1"
-                              href={`/users/${
-                                course && course.instructor_code
-                              }`}
-                            >
-                              {course && course.instructor}
-                            </a>
-                          </div>
-
-                          <p>{course && course.instructor_title}</p>
-                          <h3 className="heading-title">Instructor</h3>
-                          <div className="d-flex align-items-center">
-                            {course && (
-                              <Avatar
-                                alt={`${course.instructor}`}
-                                src="/static/images/avatar/1.jpg"
-                              />
-                            )}
-                            <a
-                              className="m-1"
+                              className="m-1 mx-1"
                               href={`/users/${
                                 course && course.instructor_code
                               }`}
@@ -811,26 +796,28 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
 
                           <p>{course && course.instructor_title}</p>
 
-                          <p>{course && course.instructor_desc}</p>
-
-
-                               <h3 className="heading-title p-0 m-0">Requirements</h3>
-                                <div className="row">
-                                  <ul className="col-md-12">
-                                    {course && course.intended_learners && course.intended_learners.map((req, index) => (
-                                      req.intended_learner_type === "requirements" && (
-                                        <li key={index}>{req.intended_learner}</li>
-                                      )
-                                    ))}
-                                  </ul>
-                                </div>
-
-                                </div>
-                                          
-                                    
-                                </div>
-                            </div>
+                          <h3 className="heading-title p-0 m-0">
+                            Requirements
+                          </h3>
+                          <div className="row">
+                            <ul className="col-md-12">
+                              {course &&
+                                course.intended_learners &&
+                                course.intended_learners.map(
+                                  (req, index) =>
+                                    req.intended_learner_type ===
+                                      "requirements" && (
+                                      <li key={index}>
+                                        {req.intended_learner}
+                                      </li>
+                                    )
+                                )}
+                            </ul>
+                          </div>
                         </div>
+                      </div>
+                    </div>
+                  </div>
 
                   {/* Q&A */}
                   {course && course.isPaid == true && (
