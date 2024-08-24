@@ -402,12 +402,10 @@ const Header = ({
                               <a className="cart-icon">
                                 <i class="bi bi-bell"></i>
                                 <span className="count">
-                                {
-                              (notifications && notifications.length > 0
+                                {(notifications && notifications.length > 0
                                 ? notifications.filter(notification => !notification.isRead).length
                                 : 0
-                              )
-                            }
+                              )}
 
                                 </span>
                               </a>

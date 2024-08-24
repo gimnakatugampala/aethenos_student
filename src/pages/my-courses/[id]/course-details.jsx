@@ -27,6 +27,9 @@ import SingleProgressbar from "./single-progressbar";
 import SingleComment from "./single-comment";
 import CommentFormCourse from "../../../components/forms/comment-form-course";
 import Accordian from "../../../components/course-content/accordian";
+import CalculateTimeAgo from "../../../functions/calculateTimeAgo";
+
+
 import { useEffect } from "react";
 import {
   AddQuestion,
@@ -1050,6 +1053,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
 
                           <div className="mb-1 mt-1">
                             <h3>Reviews</h3>
+                            
                             {featured_reviews != null &&
                               (featured_reviews.length > 0
                                 ? featured_reviews.map((reviews, index) => (
@@ -1059,32 +1063,22 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                                           alt={`${reviews.fullName}`}
                                           src="/static/images/avatar/1.jpg"
                                         />
-                                        <h6 className="m-2 p-0">
-                                          {reviews.fullName}
-                                        </h6>
+                                        <h6 className="m-2 p-0">{reviews.fullName}</h6>
                                       </div>
                                       <Rating
                                         size={20}
                                         readonly={true}
                                         iconsCount={5}
-                                        initialValue={Number.parseInt(
-                                          reviews.rating
-                                        )}
+                                        initialValue={Number.parseInt(reviews.rating)}
                                       />
-                                      <span
-                                        style={{ fontSize: "12px" }}
-                                        className="mt-2"
-                                      >
-                                        {moment(reviews.date)
-                                          .startOf("day")
-                                          .fromNow()}
+                                      <span style={{ fontSize: "12px" }} className="mt-2">
+                                        {CalculateTimeAgo(reviews.date)}
                                       </span>
-                                      <p style={{ color: "#000" }}>
-                                        {reviews.comment}
-                                      </p>
+                                      <p style={{ color: "#000" }}>{reviews.comment}</p>
                                     </div>
                                   ))
                                 : "No Reviews Found")}
+
                           </div>
                         </div>
                       </div>
