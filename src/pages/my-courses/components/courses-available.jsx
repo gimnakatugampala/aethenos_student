@@ -18,16 +18,22 @@ const course_items =
 
 const CourseFourArea = () => {
   const [courses, setCourses] = useState([]);
-  const [loading, setloading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [showing, setShowing] = useState(0);
   const { categories, instructors, levels, languages } = useSelector(
     (state) => state.filter
   );
 
   useEffect(() => {
-    GetMyCourses(setCourses, setloading);
-  }, [courses, loading]);
+    GetMyCourses(setCourses, setLoading);
+  }, []); // Empty dependency array ensures it runs only once
 
+  // Wait until the data is loaded
+  if (loading) {
+    return <LargeLoading />;
+  }
+
+  // Apply filtering
   let items = courses
     ?.filter((item1) =>
       categories?.length !== 0
@@ -53,13 +59,7 @@ const CourseFourArea = () => {
   return (
     <div className="edu-course-area course-area-1 my-5">
       <div className="">
-        {/* sorting area start */}
-        {/* <SortingArea course_items={course_items} course_list={true} num={showing} setCourses={setCourses} courses={courses} items={items}  /> */}
-        {/* sorting area end */}
-
-        {loading ? (
-          <LargeLoading />
-        ) : courses != null && courses.length > 0 ? (
+        {courses != null && courses.length > 0 ? (
           <div className="row g-5 mx-auto justify-content-center">
             <div className="col-lg-11 col-pl--35">
               <h3 className="">My Courses</h3>
