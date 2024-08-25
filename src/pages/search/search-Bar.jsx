@@ -16,7 +16,7 @@ const SearchBar = ({ setShowDropdown, setsearchResults }) => {
         icon: "error",
       });
     } else {
-      router.push(`/search?keyword=${keyword}`);
+      router.push(`/search?keyword=${encodeURIComponent(keyword)}`);
     }
   };
 
@@ -33,7 +33,9 @@ const SearchBar = ({ setShowDropdown, setsearchResults }) => {
   const handleBlur = () => {
     setTimeout(() => {
       setShowDropdown(false);
-      setsearchResults(null);
+      if (setsearchResults) {
+        setsearchResults(null);
+      }
     }, 100);
   };
 

@@ -13,7 +13,7 @@ import HeaderTopRight from "../headers/component/header-top-right";
 import MainMenu from "../headers/component/main-menu";
 import Cart from "./component/cart";
 import Notification from "./component/notification";
-import SearchBar from "../../pages/search/searchBar";
+import SearchBar from "../../pages/search/search-Bar";
 import { GetCourseCategory, GetCategoriesMenu, IMG_HOST } from "../../api";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import SmallRedLoading from "../../functions/Loading/SmallRedLoading";

@@ -13,7 +13,7 @@ const footer_contents = {
     {
       col: "3",
       class: "explore-widget",
-      widget_title: "About Aethenos",
+    
       footer_links: [
         { link: "about-1", title: "About Us" },
         { link: "course-style-1", title: "Contact Us" },
@@ -23,7 +23,7 @@ const footer_contents = {
     {
       col: "3",
       class: "quick-link-widget",
-      widget_title: "Terms & Conditions",
+    
       footer_links: [
         { link: "contact-us", title: "Terms" },
         { link: "gallery-grid", title: "Privacy Policy" },

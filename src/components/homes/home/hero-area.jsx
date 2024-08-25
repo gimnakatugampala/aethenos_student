@@ -21,16 +21,17 @@ const HeroArea = () => {
                                     Find courses<i className="icon-4"></i>
                                 </a> */}
                             </div>
-                            <ul className="shape-group">
+                            {/* <ul className="shape-group">
                                 <motion.li className="shape-1 scene" data-sal-delay="1000" data-sal="fade" data-sal-duration="1000" 
                                     animate={ {
                                         x: mouseReverse(25).x,
                                         y: mouseReverse(25).y
                                     } }
                                 >
-                                    <img src="/assets/images/about/shape-13.png" alt="Shape" />
+                               
                                 </motion.li>
-                            </ul>
+                                <img src="/assets/images/about/shape-13.png" alt="Shape" />
+                            </ul> */}
                         </div>
                     </div>
                     <div className="col-lg-6">
@@ -41,7 +42,7 @@ const HeroArea = () => {
                             <div className="instructor-info" data-sal-delay="600" data-sal="slide-up" data-sal-duration="1000">
                               
                             </div>
-                            <ul className="shape-group">
+                            {/* <ul className="shape-group">
                                 <li className="shape-1" data-sal-delay="1000" data-sal="fade" data-sal-duration="1000">
                                     <img src="/assets/images/about/shape-15.png" alt="Shape" />
                                 </li>
@@ -82,7 +83,7 @@ const HeroArea = () => {
                                 >
                                     <img src="/assets/images/about/shape-18.png" alt="Shape" />
                                 </motion.li>
-                            </ul>
+                            </ul> */}
                         </div>
                     </div>
                 </div>
