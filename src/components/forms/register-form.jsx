@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import VerificationInput from 'react-verification-input';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ErrorAlert from '../../functions/Alert/ErrorAlert';
-
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 
 
@@ -32,6 +32,9 @@ const RegisterForm = () => {
     const [showPass, setshowPass] = useState(false)
 
     const [isShownEmailVerificarion, setisShownEmailVerificarion] = useState(false)
+
+    const [isClickedBack, setisClickedBack] = useState(false)
+
     const [VerficationCode, setVerficationCode] = useState("")
 
     const router = useRouter();
@@ -189,7 +192,10 @@ const RegisterForm = () => {
         {/* <LoadingBtn disapear={loading} /> */}
         {isShownEmailVerificarion ? (
         <>
-        <p onClick={() => setisShownEmailVerificarion(false)} className='text-danger' style={{ cursor: 'pointer' }}><ArrowBackIosNewIcon /> Back</p>
+        <p onClick={() => {
+            setisClickedBack(true)
+            setisShownEmailVerificarion(false)
+        }} className='text-danger' style={{ cursor: 'pointer' }}><ArrowBackIosNewIcon /> Back</p>
         <h3 className="title m-0">Verify Email</h3>
         <p onClick={handleResendCode} className='text-danger m-0' style={{ cursor: 'pointer' }}><b>Resend Code</b></p>
         <div className="d-flex justify-content-center my-4">
@@ -206,9 +212,35 @@ const RegisterForm = () => {
         </>
         ) : (
             <>
+    
+    <div className="flex" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+  <div>
+    <h3 className="title">Sign up</h3>
+    <p>
+      Already have an account? <a href="/login">Log in</a>
+    </p>
+  </div>
 
-            <h3 className="title">Sign up</h3>
-            <p>Already have an account? <a href="/login">Log in</a></p>
+  {isClickedBack && (
+    <div>
+      <p
+        onClick={() => {
+          setisClickedBack(false);
+          setisShownEmailVerificarion(true);
+        }}
+        className='text-danger'
+        style={{
+          cursor: 'pointer',
+          margin: 0, // Removes any extra margin to align with the other content
+        }}
+      >
+        Go to Verification <ArrowForwardIosIcon />
+      </p>
+    </div>
+  )}
+</div>
+
+      
 
 
             <form onSubmit={handleSubmit}>
