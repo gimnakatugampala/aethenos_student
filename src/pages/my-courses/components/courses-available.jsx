@@ -72,7 +72,7 @@ const CourseFourArea = () => {
             </div>
           </div>
         ) : (
-          <h6>No Courses Found</h6>
+          <h6  className="row g-5 my-3 mx-auto justify-content-center">No Courses Found</h6>
         )}
       </div>
     </div>

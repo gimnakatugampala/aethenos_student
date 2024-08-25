@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { cart_course } from "../../redux/features/cart-slice";
 import {
@@ -13,6 +13,7 @@ import CalculateDiscountedPrice from "../../functions/pricing/CalculateDiscounte
 import CalculateDiscountPrice from "../../functions/pricing/CalculateDiscountPrice";
 import StarsRating from "stars-rating";
 import Cookies from "js-cookie";
+import { css } from '@emotion/react';
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
@@ -27,6 +28,38 @@ const CourseTypeFour = ({ data, classes }) => {
   const mainfs = {
     fontSize: "20px",
   };
+
+  const [mouseX, setMouseX] = useState(null);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      setMouseX(event.clientX);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
+  const leftStyle = screenWidth <= 2100 ? (mouseX ? '15%' : '100%') : '50%';
+
 
   const handleWishlist = (course_item) => {
     if (wishlists.find((i) => i.id === course_item.id)) {
@@ -175,8 +208,10 @@ const CourseTypeFour = ({ data, classes }) => {
           </ul>
         </div>
       </div>
-
-      <div className="hover-content-aside">
+ 
+      <div className="hover-content-aside"   style={{
+        left: leftStyle,
+      }}>
         <div className="content">
           <span className="course-level">{data.category}</span>
           <h5 className="title">
