@@ -28,6 +28,8 @@ import SingleComment from "./single-comment";
 import CommentFormCourse from "../../../components/forms/comment-form-course";
 import Accordian from "../../../components/course-content/accordian";
 import CalculateTimeAgo from "../../../functions/calculateTimeAgo";
+import { throttle } from 'lodash'; // Use lodash's throttle function
+
 
 
 import { useEffect } from "react";
@@ -70,6 +72,7 @@ import {
   DefaultVideoLayout,
 } from "@vidstack/react/player/layouts/default";
 import MediumLoading from "../../../functions/Loading/MediumLoading";
+import { Footer } from "../../../layout";
 
 const CourseDetailsArea1 = ({ id, course, setcourse }) => {
   const [featured_reviews, setfeatured_reviews] = useState(null);
@@ -507,13 +510,63 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
     };
   }, [itemCode, seletedCurriculumItem]);
 
+
+  const [elementHeightPx, setElementHeightPx] = useState(0);
+  const elementRef = useRef(null);
+
+  useEffect(() => {
+    const calculateElementHeight = () => {
+      if (elementRef.current) {
+        setElementHeightPx(elementRef.current.clientHeight);
+      }
+    };
+
+    // Initial calculation
+    calculateElementHeight();
+
+    // Recalculate on window resize
+    window.addEventListener('resize', calculateElementHeight);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', calculateElementHeight);
+  }, []);
+
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const position = window.pageYOffset; // or document.documentElement.scrollTop
+      setScrollPosition(position);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log(scrollPosition)
+  }, [scrollPosition])
+  
+
+
+
+
+
   return (
     <section
+      ref={elementRef}
       className="container-fluid my-2 course-details-3"
-      style={{ textAlign: "left", backgroundColor: "transparent" }}
+      style={{ textAlign: "left", backgroundColor: "transparent", position: 'relative' }}
     >
-      <div className="row mx-5 mt-5">
-        <div className="col-md-8">
+
+      <div  className="row">
+      
+        <div  style={{maxHeight: `calc(150vh + (${elementHeightPx}vh))`}} className="col-md-8">
+          <div>
           {isLoadingContent && <MediumLoading />}
 
           {showVideoPlayer ? (
@@ -1088,56 +1141,63 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
               </div>
             </div>
           </div>
+          </div>
+
         </div>
 
         {/* Course Content */}
-        <div className="col-md-4">
-          <Card style={{ backgroundColor: "transparent" }}>
-            <Card.Header>
+      <div style={{ position: 'fixed',  top: scrollPosition == 0 ? '85px' : '0', right : 0, height: '150vh' }}  className="col-md-4">
+      <Card style={{ backgroundColor: "transparent", height: '100%' }}>
+        <div className="p-2" style={{ position: 'sticky', top: 0, zIndex: 1, borderBottom: '1px solid rgba(0, 0, 0, 0.175)' }}>
+            <div style={{ backgroundColor: "transparent" }}>
               <h6 className="m-2">Course Content</h6>
-            </Card.Header>
-            <Card.Body style={{ height: "100%" }}>
-              <div className="faq-accordion">
-                <div className="accordion">
-                  {course != null &&
-                    course.course_content.map((content, index) => (
-                      <Accordian
-                        setshowquiz={setshowquiz}
-                        setarticle={setarticle}
-                        setshowVideoPlayer={setshowVideoPlayer}
-                        itemCode={itemCode}
-                        setmain_Video_player_url={setmain_Video_player_url}
-                        id={index + 1}
-                        content={content}
-                        setselectedQuiz={setselectedQuiz}
-                        setshowAssignment={setshowAssignment}
-                        setselectedAssignment={setselectedAssignment}
-                        setshowPracticeTest={setshowPracticeTest}
-                        setselectedPracticeTest={setselectedPracticeTest}
-                        setshowCodingExercise={setshowCodingExercise}
-                        setselectedCodingExercise={setselectedCodingExercise}
-                        key={index}
-                        courseItemCode={id}
-                        setcourse={setcourse}
-                        setseletedCurriculumItem={setseletedCurriculumItem}
-                        seletedCurriculumItem={seletedCurriculumItem}
-                        setStartquiz={setStartquiz}
-                        setanswerAlertDisplay={setanswerAlertDisplay}
-                        setselectAnswer={setselectAnswer}
-                        activeStep={activeAssignmentStep}
-                        setActiveStep={setAssignmentActiveStep}
-                        setPraticeTestActiveStep={setPraticeTestActiveStep}
-                        setCodingExerciseActiveStep={
-                          setCodingExerciseActiveStep
-                        }
-                        setTitleVideo={setTitleVideo}
-                      />
-                    ))}
-                </div>
+            </div>
+          </div>
+          <Card.Body style={{ height: "calc(100% - 56px)", overflowY: 'auto' }}>
+            <div className="faq-accordion">
+              <div className="accordion">
+                {course != null &&
+                  course.course_content.map((content, index) => (
+                    <Accordian
+                    setshowquiz={setshowquiz}
+                    setarticle={setarticle}
+                    setshowVideoPlayer={setshowVideoPlayer}
+                    itemCode={itemCode}
+                    setmain_Video_player_url={setmain_Video_player_url}
+                    id={index + 1}
+                    content={content}
+                    setselectedQuiz={setselectedQuiz}
+                    setshowAssignment={setshowAssignment}
+                    setselectedAssignment={setselectedAssignment}
+                    setshowPracticeTest={setshowPracticeTest}
+                    setselectedPracticeTest={setselectedPracticeTest}
+                    setshowCodingExercise={setshowCodingExercise}
+                    setselectedCodingExercise={setselectedCodingExercise}
+                    key={index}
+                    courseItemCode={id}
+                    setcourse={setcourse}
+                    setseletedCurriculumItem={setseletedCurriculumItem}
+                    seletedCurriculumItem={seletedCurriculumItem}
+                    setStartquiz={setStartquiz}
+                    setanswerAlertDisplay={setanswerAlertDisplay}
+                    setselectAnswer={setselectAnswer}
+                    activeStep={activeAssignmentStep}
+                    setActiveStep={setAssignmentActiveStep}
+                    setPraticeTestActiveStep={setPraticeTestActiveStep}
+                    setCodingExerciseActiveStep={
+                      setCodingExerciseActiveStep
+                    }
+                    setTitleVideo={setTitleVideo}
+                    />
+                  ))}
               </div>
-            </Card.Body>
-          </Card>
-        </div>
+            </div>
+          </Card.Body>
+        </Card>
+       
+        
+    </div>
+
       </div>
 
       {/* Ask a Question Inside QA */}
@@ -1200,6 +1260,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
         {/* </CardContainer> */}
       </Modal>
     </section>
+   
   );
 };
 

@@ -42,7 +42,7 @@ const index = () => {
         ) : (
             <LargeLoading />
         )}
-        <Footer/>
+        {/* <Footer/> */}
 
          </Wrapper>
     )
