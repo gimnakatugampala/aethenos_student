@@ -61,8 +61,15 @@ useEffect(() => {
                     )}
 
                     {data && (
-                        
+
+                        Number.parseInt(data.progressValue) == 100 ? (
+
+                        <ProgressBar variant="success" now={data && Number.parseInt(data.progressValue)} label={`${data && Number.parseInt(data.progressValue)}%`} />
+                        ) : (
                         <ProgressBar variant="danger" now={data && Number.parseInt(data.progressValue)} label={`${data && Number.parseInt(data.progressValue)}%`} />
+                        )
+
+                        
                     )}    
 
                 </div>
