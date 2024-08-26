@@ -96,7 +96,7 @@ const HeaderMyCourse = ({ id, course }) => {
                   <NavDropdown.Item>
                     <b>
                       {course.completedItemCount} of {course.allItemsCount}
-                      Complete
+                      {" "} Complete
                     </b>{" "}
                     <br /> Finish course to get the certificate
                   </NavDropdown.Item>
@@ -104,7 +104,7 @@ const HeaderMyCourse = ({ id, course }) => {
                   <NavDropdown.Item>
                     <b>
                       {course.completedItemCount} of {course.allItemsCount}
-                      Complete
+                      {" "}Complete
                     </b>{" "}
                     <br /> We have Emailed You The Certificate
                   </NavDropdown.Item>

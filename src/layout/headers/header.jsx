@@ -245,7 +245,7 @@ const Header = ({
                       <List
                       className=""
                         sx={{
-                          maxWidth: "265px",
+                          minWidth:"100%",
                           position: "absolute",
                           bgcolor: "white",
                           overflowX: "hidden",
