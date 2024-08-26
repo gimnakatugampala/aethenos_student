@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import Dropdown from "react-bootstrap/Dropdown";
 import { SearchItemsByKeyword } from "../../api";
+import debounce from "lodash.debounce";
 
 const SearchBar = ({ setShowDropdown, setsearchResults }) => {
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
 
+  // Debounced version of the search function
+  const debouncedSearch = useCallback(
+    debounce((searchTerm) => {
+      SearchItemsByKeyword(searchTerm, setsearchResults);
+    }, 300), // Adjust debounce delay as needed
+    [setsearchResults]
+  );
+
   const handleSearch = () => {
-    if (keyword == "") {
+    if (keyword === "") {
       Swal.fire({
         title: "Empty Field!",
         text: "Please Enter Search Keyword",
@@ -40,8 +49,9 @@ const SearchBar = ({ setShowDropdown, setsearchResults }) => {
   };
 
   const handleKeywordSearch = (e) => {
-    SearchItemsByKeyword(e.target.value, setsearchResults);
-    setKeyword(e.target.value);
+    const searchTerm = e.target.value;
+    setKeyword(searchTerm);
+    debouncedSearch(searchTerm);
   };
 
   return (

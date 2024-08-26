@@ -2411,22 +2411,34 @@ fetch(`${BACKEND_LINK}/payment/addRefund`, requestOptions)
 }
 
 
-export const SearchItemsByKeyword = async(word,setsearchResults) =>{
-
+export const SearchItemsByKeyword = async (word, setsearchResults) => {
   const requestOptions = {
     method: "GET",
     redirect: "follow"
   };
-  
-  fetch(`${BACKEND_LINK}/common/searchCourseAndInstructorDetails/${word}`, requestOptions)
-    .then((response) => response.json())
-    .then((result) => {
-      console.log(result)
-      setsearchResults(result)
-    })
-    .catch((error) => console.error(error));
 
-}
+  try {
+    const response = await fetch(`${BACKEND_LINK}/common/searchCourseAndInstructorDetails/${encodeURIComponent(word)}`, requestOptions);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log(result);
+    
+    // Ensure result is in expected format (array) or fallback to empty array
+    if (Array.isArray(result)) {
+      setsearchResults(result);
+    } else {
+      console.error("Unexpected API response format:", result);
+      setsearchResults([]);
+    }
+  } catch (error) {
+    console.error("Search API error:", error);
+    setsearchResults([]);
+  }
+};
 
 
 export const SendEmailVerficationCode = async(email,setbtnLoading,setshowVerificationInputs) =>{
