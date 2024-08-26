@@ -2693,3 +2693,43 @@ export const VideoStreaming = async (filePath) => {
   let encodedFilePath = encodeURIComponent(filePath);
   return `${BACKEND_LINK}/videoStreming/video?url=${encodedFilePath}`;
 };
+
+
+export const PasswordReset = async (confirmPassword, currentPassword) => {
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  const formdata = new FormData();
+  formdata.append("newPassword", `${confirmPassword}`);
+  formdata.append("oldPassword", `${currentPassword}`);
+
+  const requestOptions = {
+    method: "PUT",
+    headers: myHeaders,
+    body: formdata,
+    redirect: "follow",
+  };
+
+  fetch(`${BACKEND_LINK}/studentProfile/resetPassword`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result);
+      Unauthorized(result.status, "profile");
+
+      if (result.variable == "200") {
+        SuccessAlert("Success", result.message);
+
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 2000);
+
+        return;
+      }
+
+      if (result.variable == "404") {
+        ErrorAlert("Error", result.message);
+        return;
+      }
+    })
+    .catch((error) => console.error(error));
+};

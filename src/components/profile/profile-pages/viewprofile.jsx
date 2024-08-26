@@ -7,12 +7,17 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
 import { Footer, Header } from "../../../layout";
+import InputGroup from "react-bootstrap/InputGroup";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import {
   GetStudentProfileDetails,
   IMG_HOST,
+  PasswordReset,
   UpdateProfileDetails,
 } from "../../../api";
 import ErrorAlert from "../../../functions/Alert/ErrorAlert";
+import PasswordChecklist from "react-password-checklist";
 
 const ViewProfile = () => {
   const [first_Name, setfirst_Name] = useState("");
@@ -97,6 +102,65 @@ const ViewProfile = () => {
     }
   };
 
+  // Password Reset
+
+  const [currentPasswordVisible, setCurrentPasswordVisible] = useState(false);
+  const [newPasswordVisible, setNewPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const [isValidPassword, setisValidPassword] = useState(false);
+
+  const [currentPassword, setcurrentPassword] = useState("");
+  const [newPassword, setnewPassword] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("");
+
+  const toggleCurrentPasswordVisibility = () => {
+    setCurrentPasswordVisible(!currentPasswordVisible);
+  };
+
+  const toggleNewPasswordVisibility = () => {
+    setNewPasswordVisible(!newPasswordVisible);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setConfirmPasswordVisible(!confirmPasswordVisible);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(newPassword);
+    console.log(confirmPassword);
+
+    if (currentPassword == "") {
+      ErrorAlert("Empty field", "Please enter the current password");
+      return;
+    }
+
+    if (newPassword == "") {
+      ErrorAlert("Empty field", "Please enter new password");
+      return;
+    }
+
+    if (confirmPassword == "") {
+      ErrorAlert("Empty field", "Please enter confirm password");
+      return;
+    }
+
+    if (newPassword != confirmPassword) {
+      ErrorAlert("Password mismatch", "The new passwords do not match");
+      return;
+    }
+
+    if (isValidPassword == false) {
+      ErrorAlert(
+        "Password Error",
+        "Your password is must be in the given criteria"
+      );
+      return;
+    }
+
+    PasswordReset(confirmPassword, currentPassword);
+  };
+
   return (
     <>
       <Header no_top_bar={true} />
@@ -112,105 +176,105 @@ const ViewProfile = () => {
           <Tab eventKey="up" title="Aethenos Profile">
             <div className="row mx-2">
               <div className="col-md-6">
-                <div class="mb-3">
-                  <label class="form-label">First Name</label>
+                <div className="mb-3">
+                  <label className="form-label">First Name</label>
                   <input
                     value={first_Name}
                     onChange={(e) => setfirst_Name(e.target.value)}
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     placeholder="First Name"
                   />
                 </div>
 
-                <div class="mb-3">
-                  <label class="form-label">Last Name</label>
+                <div className="mb-3">
+                  <label className="form-label">Last Name</label>
                   <input
                     value={last_name}
                     onChange={(e) => setlast_name(e.target.value)}
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     placeholder="Last Name"
                   />
                 </div>
 
-                <label class="form-label">Headline</label>
-                <div class="input-group mb-3">
+                <label className="form-label">Headline</label>
+                <div className="input-group mb-3">
                   <input
                     maxLength={60}
                     value={headline}
                     onChange={(e) => setheadline(e.target.value)}
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     placeholder="Instructor at Aethenos"
                   />
-                  <span class="input-group-text">{60 - headline.length}</span>
+                  <span className="input-group-text">{60 - headline.length}</span>
                 </div>
 
-                <div class="mb-3">
-                  <label class="form-label">Biography</label>
+                <div className="mb-3">
+                  <label className="form-label">Biography</label>
                   <textarea
                     value={biography}
                     onChange={(e) => setbiography(e.target.value)}
-                    class="form-control"
+                    className="form-control"
                     rows="3"
                   ></textarea>
                 </div>
               </div>
 
               <div className="col-md-6">
-                <div class="mb-3">
-                  <label class="form-label">Website</label>
+                <div className="mb-3">
+                  <label className="form-label">Website</label>
                   <input
                     value={website}
                     onChange={(e) => setwebsite(e.target.value)}
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     placeholder="URL"
                   />
                 </div>
 
-                <label class="form-label">Twitter</label>
-                <div class="input-group mb-3">
-                  <span class="input-group-text">http://www.twitter.com/</span>
+                <label className="form-label">Twitter</label>
+                <div className="input-group mb-3">
+                  <span className="input-group-text">http://www.twitter.com/</span>
                   <input
                     value={twitter}
                     onChange={(e) => settwitter(e.target.value)}
                     type="text"
-                    class="form-control"
+                    className="form-control"
                   />
                 </div>
 
-                <label class="form-label">Facebook</label>
-                <div class="input-group mb-3">
-                  <span class="input-group-text">http://www.facebook.com/</span>
+                <label className="form-label">Facebook</label>
+                <div className="input-group mb-3">
+                  <span className="input-group-text">http://www.facebook.com/</span>
                   <input
                     value={facebook}
                     onChange={(e) => setfacebook(e.target.value)}
                     type="text"
-                    class="form-control"
+                    className="form-control"
                   />
                 </div>
 
-                <label class="form-label">LinkedIn</label>
-                <div class="input-group mb-3">
-                  <span class="input-group-text">http://www.linkedin.com/</span>
+                <label className="form-label">LinkedIn</label>
+                <div className="input-group mb-3">
+                  <span className="input-group-text">http://www.linkedin.com/</span>
                   <input
                     value={linkedin}
                     onChange={(e) => setlinkedin(e.target.value)}
                     type="text"
-                    class="form-control"
+                    className="form-control"
                   />
                 </div>
 
-                <label class="form-label">Youtube</label>
-                <div class="input-group mb-3">
-                  <span class="input-group-text">http://www.youtube.com/</span>
+                <label className="form-label">Youtube</label>
+                <div className="input-group mb-3">
+                  <span className="input-group-text">http://www.youtube.com/</span>
                   <input
                     value={youtube}
                     onChange={(e) => setyoutube(e.target.value)}
                     type="text"
-                    class="form-control"
+                    className="form-control"
                   />
                 </div>
               </div>
@@ -260,14 +324,14 @@ const ViewProfile = () => {
               </div>
 
               <div className="col-md-6">
-                <div class="mb-3">
-                  <label htmlFor="formFile" class="form-label">
+                <div className="mb-3">
+                  <label htmlFor="formFile" className="form-label">
                     Upload Image
                   </label>
                   <input
                     onChange={(e) => handleImageUpload(e)}
                     accept="image/*"
-                    class="form-control"
+                    className="form-control"
                     type="file"
                     id="formFile"
                   />
@@ -291,6 +355,102 @@ const ViewProfile = () => {
               </div>
             </div>
           </Tab>
+
+
+          <Tab eventKey="password-reset" title="Password Reset">
+            <div className="row mt-5 mx-auto text-center" style={{justifyContent: "center"}}>
+              <div className="col-md-8 text-center">
+                <Form onSubmit={handleSubmit}>
+                  <InputGroup className="mb-3">
+                    <Form.Control
+                      value={currentPassword}
+                      type={currentPasswordVisible ? "text" : "password"}
+                      placeholder="Current Password"
+                      aria-label="Current Password"
+                      aria-describedby="current-password-addon"
+                      onChange={(e) => setcurrentPassword(e.target.value)}
+                    />
+                    <InputGroup.Text
+                      id="current-password-addon"
+                      onClick={toggleCurrentPasswordVisibility}
+                    >
+                      {currentPasswordVisible ? (
+                        <VisibilityOffIcon />
+                      ) : (
+                        <RemoveRedEyeIcon />
+                      )}
+                    </InputGroup.Text>
+                  </InputGroup>
+
+                  <InputGroup className="mb-3">
+                    <Form.Control
+                      value={newPassword}
+                      type={newPasswordVisible ? "text" : "password"}
+                      placeholder="New Password"
+                      aria-label="New Password"
+                      aria-describedby="new-password-addon"
+                      onChange={(e) => setnewPassword(e.target.value)}
+                    />
+                    <InputGroup.Text
+                      id="new-password-addon"
+                      onClick={toggleNewPasswordVisibility}
+                    >
+                      {newPasswordVisible ? (
+                        <VisibilityOffIcon />
+                      ) : (
+                        <RemoveRedEyeIcon />
+                      )}
+                    </InputGroup.Text>
+                  </InputGroup>
+
+                  <InputGroup className="mb-3">
+                    <Form.Control
+                      value={confirmPassword}
+                      type={confirmPasswordVisible ? "text" : "password"}
+                      placeholder="Confirm Password"
+                      aria-label="Confirm Password"
+                      aria-describedby="confirm-password-addon"
+                      onChange={(e) => setconfirmPassword(e.target.value)}
+                    />
+                    <InputGroup.Text
+                      id="confirm-password-addon"
+                      onClick={toggleConfirmPasswordVisibility}
+                    >
+                      {confirmPasswordVisible ? (
+                        <VisibilityOffIcon />
+                      ) : (
+                        <RemoveRedEyeIcon />
+                      )}
+                    </InputGroup.Text>
+                  </InputGroup>
+
+                  <PasswordChecklist
+                    rules={[
+                      "minLength",
+                      "specialChar",
+                      "number",
+                      "capital",
+                      "match",
+                    ]}
+                    minLength={5}
+                    value={newPassword}
+                    valueAgain={confirmPassword}
+                    onChange={(isValid) => {
+                      console.log(isValid);
+                      setisValidPassword(isValid);
+                    }}
+                  />
+
+                  <div className="col-md-5 mt-2" style={{display: "inline-block"}}>
+                    <Button type="submit" variant="contained">
+                      Change Password
+                    </Button>
+                  </div>
+                </Form>
+              </div>
+            </div>
+          </Tab>
+
         </Tabs>
       </div>
 
