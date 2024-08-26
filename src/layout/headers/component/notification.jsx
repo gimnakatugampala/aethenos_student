@@ -51,7 +51,7 @@ const Notification = () => {
           <h5 className="empty-cart">You have No New notifications</h5>
         </div>
       ) : (
-        <div className="wrapper" style={{ width: "550px" }}>
+        <div className="wrapper" style={{ maxWidth: "650px" , minWidth: "450px"}}>
           <ul
             className={`items ${
               unreadNotifications.length > 4 ? "cart-height" : ""
@@ -79,7 +79,7 @@ const Notification = () => {
             </li>
 
             {unreadNotifications.map((notification, index) => (
-              <li key={index} className="each-item" >
+              <li key={index} className="each-item" style={{    justifyContent: "center"}} >
                 <Card
                   onClick={() => {
                     handleClick();

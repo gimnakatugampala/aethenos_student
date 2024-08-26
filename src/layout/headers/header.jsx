@@ -230,6 +230,7 @@ const Header = ({
                       <SearchBar
                         showDropdown={showDropdown}
                         setShowDropdown={setShowDropdown}
+                        setsearchResults={setsearchResults}
                       />
                     </div>
                   </li>
@@ -242,10 +243,11 @@ const Header = ({
 
                     {showDropdown && searchResults != null && (
                       <List
+                      className=""
                         sx={{
-                          width: "450px",
+                          maxWidth: "265px",
                           position: "absolute",
-                          bgcolor: "background.paper",
+                          bgcolor: "white",
                           overflowX: "hidden",
                           overflowY: "scroll",
                           maxHeight: "250px",

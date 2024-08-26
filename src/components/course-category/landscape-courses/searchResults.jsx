@@ -62,11 +62,11 @@ const SearchResults = ({ allcourses }) => {
     <div className="edu-course-area course-area-1">
       <div>
         <div className="row g-5">
-          <div className="col-xxl-3 ">
+          <div className="col-2 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-3">
             <CourseSidebarTwo course_items={courses} />
           </div>
 
-          <div className={`col-xxl-9 col-pl--35`}>
+          <div className={`col-10 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-9 col-pl--35`}>
             <SortingArea
               course_items={courses}
               num={showing}
