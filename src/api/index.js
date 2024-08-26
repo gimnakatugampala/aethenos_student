@@ -5,6 +5,8 @@ import ErrorAlert from '../functions/Alert/ErrorAlert';
 import SuccessAlert from '../functions/Alert/SuccessAlert';
 import { useState } from 'react';
 import { ENV_STATUS } from '../functions/env';
+import { saveAs } from 'file-saver';
+
 
 export const USERTOKEN = Cookies.get('aethenos') 
 export const IMG_HOST = `https://aethenosinstructor.exon.lk:2053/aethenos-assert/`
@@ -2732,4 +2734,33 @@ export const PasswordReset = async (confirmPassword, currentPassword) => {
       }
     })
     .catch((error) => console.error(error));
+};
+
+
+export const DownloadCertificate = async (itemCode) => {
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
+  try {
+    const response = await fetch(`${BACKEND_LINK}/payment/getCertificate/${itemCode}`, requestOptions);
+    const result = await response.text();
+
+    // Assuming the result is the path to the PDF
+    const filePath = `${IMG_HOST}${result}`;
+
+    // Fetch the PDF file as a blob
+    const pdfResponse = await fetch(filePath);
+    const pdfBlob = await pdfResponse.blob();
+
+    // Use file-saver to trigger the download
+    saveAs(pdfBlob, filePath.split("/").pop());
+  } catch (error) {
+    console.error("Error downloading the certificate:", error);
+  }
 };

@@ -9,6 +9,7 @@ import Modal from "react-bootstrap/Modal";
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import CommentFormCourse from "../../components/forms/comment-form-course";
+import { DownloadCertificate } from "../../api";
 
 const HeaderMyCourse = ({ id, course }) => {
   // ------------- REVIEW ----------------------
@@ -18,6 +19,16 @@ const HeaderMyCourse = ({ id, course }) => {
   const handleShowReview = () => setshowReviewModal(true);
 
   // ------------- REVIEW ----------------------
+
+
+
+  // -------------------- DOWNLOAD CERTIFICATE -----------
+  const handleDownloadCertificate = () => {
+    console.log(id)
+
+    DownloadCertificate(id)
+
+  }
 
   return (
     <>
@@ -61,12 +72,12 @@ const HeaderMyCourse = ({ id, course }) => {
                     text={`${Number.parseInt(course.progressValue)}%`}
                     styles={{
                       path: {
-                        stroke: course.progressValue == 100 ? "green" : "",
+                        stroke: course.progressValue == 100 ? "#66FF66" : "",
                         strokeWidth: 10,
                         transition: "stroke-dashoffset 0.5s ease 0s",
                       },
                       text: {
-                        fill: course.progressValue == 100 ? "green" : "",
+                        fill: course.progressValue == 100 ? "#66FF66" : "",
                         fontWeight: "bold", 
                         fontSize: "24px",
                         strokeWidth: 10,
@@ -99,6 +110,43 @@ const HeaderMyCourse = ({ id, course }) => {
                   </NavDropdown.Item>
                 )}
               </NavDropdown>
+
+              {course.completedItemCount == course.allItemsCount && (
+
+              <Nav.Link>
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  size="small"
+                  startIcon={
+                    <i
+                      className="fa-solid fa-trophy"
+                      style={{ fontSize: "11px"}}
+                    ></i>
+                  }
+                  sx={{
+                    display: "inline-flex", // Ensures the button is inline
+                    fontSize: "9px",
+                    color: "white",
+                    borderColor: "white",
+                    padding: "9px 10px", // Adjusts padding to ensure the text is inline
+                    textTransform: "none", // Keeps the text as is (no uppercase transformation)
+                    minWidth: "auto", // Prevents the button from having a minimum width
+                    alignItems: "center", // Aligns icon and text vertically
+                    "&:hover": {
+                      backgroundColor: "rgba(255, 255, 255, 0.1)",
+                      borderColor: "white",
+                    },
+                  }}
+                  onClick={handleDownloadCertificate}
+                >
+                  Get Certificate
+                </Button>
+              </Nav.Link>
+              )}
+
+
+
             </Nav>
           </Navbar.Collapse>
         </Container>
