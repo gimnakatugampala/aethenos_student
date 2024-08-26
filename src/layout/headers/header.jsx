@@ -298,10 +298,10 @@ const Header = ({
                               <React.Fragment key={index}>
                                 <a
                                   onClick={() => {
-                                    window.location.href = `/users/${result.courseCode}`;
-                                    router.push(`/users/${result.courseCode}`);
+                                    window.location.href = `/users/${result.instructorCode}`;
+                                    router.push(`/users/${result.instructorCode}`);
                                   }}
-                                  href={`/users/${result.courseCode}`}
+                                  href={`/users/${result.instructorCode}`}
                                   style={{
                                     textDecoration: "none",
                                     color: "inherit",
@@ -309,9 +309,9 @@ const Header = ({
                                 >
                                   <ListItem
                                     onClick={() => {
-                                      window.location.href = `/users/${result.courseCode}`;
+                                      window.location.href = `/users/${result.instructorCode}`;
                                       router.push(
-                                        `/users/${result.courseCode}`
+                                        `/users/${result.instructorCode}`
                                       );
                                     }}
                                     style={{ cursor: "pointer" }}
