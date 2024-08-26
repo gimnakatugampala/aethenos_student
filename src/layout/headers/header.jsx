@@ -234,132 +234,154 @@ const Header = ({
                       />
                     </div>
                   </li>
-                  <li className="icon search-icon search-bar">
-                    <SearchBar
-                      setsearchResults={setsearchResults}
-                      showDropdown={showDropdown}
-                      setShowDropdown={setShowDropdown}
-                    />
+                  
+                  <li className="icon search-icon search-bar" style={{ position: "relative" }}>
+  <SearchBar
+    setsearchResults={setsearchResults}
+    showDropdown={showDropdown}
+    setShowDropdown={setShowDropdown}
+  />
 
-                    {showDropdown && searchResults != null && (
-                      <List
-                      className="wrapper"
-                        sx={{
-                          minWidth:"100%",
-                          position: "absolute",
-                          bgcolor: "white",
-                          overflowX: "hidden",
-                          overflowY: "scroll",
-                          maxHeight: "250px",
-                        }}
-                      >
-                        {searchResults.length > 0 ? (
-                          searchResults.map((result, index) =>
-                            result.searchType === "course" ? (
-                              <React.Fragment key={index}>
-                                <a
-                                  href={`/course-details/${result.courseCode}`}
-                                  style={{
-                                    textDecoration: "none",
-                                    color: "inherit",
-                                  }}
-                                >
-                                  <ListItem
-                                    onClick={() => {
-                                      window.location.href = `/course-details/${result.courseCode}`;
-                                      router.push(
-                                        `/course-details/${result.courseCode}`
-                                      );
-                                    }}
-                                    style={{ cursor: "pointer" }}
-                                    alignItems="flex-start"
-                                  >
-                                    <ListItemAvatar>
-                                      <Avatar
-                                        src={`${IMG_HOST}${result.courseImg}`}
-                                      />
-                                    </ListItemAvatar>
-                                    <ListItemText
-                                      primary={
-                                        <b>
-                                          <Typography
-                                            variant="body1"
-                                            sx={{ fontSize: "14px" }}
-                                          >
-                                            {result.courseTitle}
-                                          </Typography>
-                                        </b>
-                                      }
-                                      secondary={`Instructor: ${result.instructorName}`}
-                                    />
-                                  </ListItem>
-                                  <Divider />
-                                </a>
-                              </React.Fragment>
-                            ) : (
-                              <React.Fragment key={index}>
-                                <a
-                                  onClick={() => {
-                                    window.location.href = `/users/${result.instructorCode}`;
-                                    router.push(`/users/${result.instructorCode}`);
-                                  }}
-                                  href={`/users/${result.instructorCode}`}
-                                  style={{
-                                    textDecoration: "none",
-                                    color: "inherit",
-                                  }}
-                                >
-                                  <ListItem
-                                    onClick={() => {
-                                      window.location.href = `/users/${result.instructorCode}`;
-                                      router.push(
-                                        `/users/${result.instructorCode}`
-                                      );
-                                    }}
-                                    style={{ cursor: "pointer" }}
-                                    alignItems="flex-start"
-                                  >
-                                    <ListItemAvatar>
-                                      <Avatar src={result.instructorImg} />
-                                    </ListItemAvatar>
-                                    <ListItemText
-                                      primary={
-                                        <b>
-                                          <Typography
-                                            variant="body1"
-                                            sx={{ fontSize: "14px" }}
-                                          >
-                                            {result.instructorName}
-                                          </Typography>
-                                        </b>
-                                      }
-                                      secondary={"Instructor"}
-                                    />
-                                  </ListItem>
-                                  <Divider />
-                                </a>
-                              </React.Fragment>
-                            )
-                          )
-                        ) : (
-                          <ListItem
-                            style={{ cursor: "pointer" }}
-                            alignItems="flex-start"
-                          >
-                            <ListItemText
-                              primary={
-                                <b className="text-center">
-                                  <Typography variant="body1">
-                                    No Results Found
-                                  </Typography>
-                                </b>
-                              }
-                            />
-                          </ListItem>
-                        )}
-                      </List>
-                    )}
-                  </li>
+  {showDropdown && searchResults != null && (
+    <List
+      className="wrapper"
+      sx={{
+        position: "absolute",
+        top: "100%",
+        left: 0,
+        width: "450px",
+        bgcolor: "background.paper",
+        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+        borderRadius: "4px",
+        overflowY: "auto",
+        overflowX:'hidden',
+        height: "300px",
+        zIndex: 1,
+      }}
+    >
+      {searchResults.length > 0 ? (
+        searchResults.map((result, index) =>
+          result.searchType === "course" ? (
+            <React.Fragment key={index}>
+              <a
+                href={`/course-details/${result.courseCode}`}
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  display: "block",
+                }}
+              >
+                <ListItem
+                  onClick={() => {
+                    window.location.href = `/course-details/${result.courseCode}`;
+                    router.push(`/course-details/${result.courseCode}`);
+                  }}
+                  sx={{
+                    cursor: "pointer",
+                    alignItems: "flex-start",
+                    padding: "15px 15px",
+                    '&:hover': { bgcolor: "rgba(0, 0, 0, 0.04)" },
+                    width: "100%",
+                  }}
+                >
+                  <ListItemAvatar>
+                    <Avatar src={`${IMG_HOST}${result.courseImg}`} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={
+                      <b>
+                        <Typography
+                          variant="body1"
+                          sx={{ fontSize: "14px" }}
+                        >
+                          {result.courseTitle}
+                        </Typography>
+                      </b>
+                    }
+                    secondary={`Instructor: ${result.instructorName}`}
+                    sx={{ marginLeft: "10px" }}
+                  />
+                </ListItem>
+                <Divider />
+              </a>
+            </React.Fragment>
+          ) : (
+            <React.Fragment key={index}>
+              <a
+                onClick={() => {
+                  window.location.href = `/users/${result.instructorCode}`;
+                  router.push(`/users/${result.instructorCode}`);
+                }}
+                href={`/users/${result.instructorCode}`}
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  display: "block",
+                }}
+              >
+                <ListItem
+                  onClick={() => {
+                    window.location.href = `/users/${result.instructorCode}`;
+                    router.push(`/users/${result.instructorCode}`);
+                  }}
+                  sx={{
+                    cursor: "pointer",
+                    alignItems: "flex-start",
+                    padding: "10px 15px",
+                    '&:hover': { bgcolor: "rgba(0, 0, 0, 0.04)" },
+                    width: "100%",
+                  }}
+                >
+                  <ListItemAvatar>
+                    <Avatar src={result.instructorImg} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={
+                      <b>
+                        <Typography
+                          variant="body1"
+                          sx={{ fontSize: "14px" }}
+                        >
+                          {result.instructorName}
+                        </Typography>
+                      </b>
+                    }
+                    secondary={"Instructor"}
+                    sx={{ marginLeft: "10px" }}
+                  />
+                </ListItem>
+                <Divider />
+              </a>
+            </React.Fragment>
+          )
+        )
+      ) : (
+        <ListItem
+          sx={{
+            cursor: "pointer",
+            alignItems: "center",
+            padding: "20px",
+            textAlign: "center",
+            width: "100%",
+          }}
+        >
+          <ListItemText
+            primary={
+              <b className="text-center">
+                <Typography variant="body1">
+                  No Results Found
+                </Typography>
+              </b>
+            }
+          />
+        </ListItem>
+      )}
+    </List>
+  )}
+</li>
+
+
+
                   <li className="icon">
                     <Link href="/wishlist" legacyBehavior>
                       <a className="wishlist">
