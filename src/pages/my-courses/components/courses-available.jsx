@@ -34,11 +34,11 @@ const CourseFourArea = () => {
   }
 
    // Sort courses by purchaseDate in descending order
-   const sortedCourses = courses
-   .sort((a, b) => new Date(b.purchaseDate) - new Date(a.purchaseDate));
+  //  const sortedCourses = courses
+  //  .sort((a, b) => new Date(b.purchaseDate) - new Date(a.purchaseDate));
 
  // Apply filtering
- let items = sortedCourses
+ let items = courses
    ?.filter((item1) =>
      categories?.length !== 0
        ? categories?.some((item2) => item1.category === item2)
