@@ -88,9 +88,9 @@ const HeroArea = () => {
                     </div>
                 </div>
             </div>
-            <div className="shape-7">
+            {/* <div className="shape-7">
                 <img src="/assets/images/about/h-1-shape-01.png" alt="Shape" />
-            </div>
+            </div> */}
         </div>
     );
 }
