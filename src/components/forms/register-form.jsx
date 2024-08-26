@@ -15,6 +15,28 @@ import VerificationInput from 'react-verification-input';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ErrorAlert from '../../functions/Alert/ErrorAlert';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ReactCodeInput from "react-code-input"
+
+
+
+const inputStyle = {
+  fontFamily: 'Arial, sans-serif',
+  borderRadius: '8px',
+  border: '2px solid #d9d9d9',
+  width: '50px',
+  height: '50px',
+  fontSize: '20px',
+  textAlign: 'center',
+  margin: '0 5px',
+  outline: 'none',
+  transition: 'border-color 0.3s, box-shadow 0.3s',
+};
+
+const inputFocusStyle = {
+  borderColor: '#40a9ff',
+  boxShadow: '0 0 5px rgba(64, 169, 255, 0.5)',
+};
+
 
 
 
@@ -199,7 +221,9 @@ const RegisterForm = () => {
         <h3 className="title m-0">Verify Email</h3>
         <p onClick={handleResendCode} className='text-danger m-0' style={{ cursor: 'pointer' }}><b>Resend Code</b></p>
         <div className="d-flex justify-content-center my-4">
-        <VerificationInput value={VerficationCode} onChange={(e) => setVerficationCode(e)} length={5} className="mx-auto text-center" />
+        <ReactCodeInput  inputStyle={inputStyle}
+        inputFocusStyle={inputFocusStyle} value={VerficationCode} onChange={(e) => setVerficationCode(e)}  className="mx-auto text-center" type='number' fields={5} />
+        {/* <VerificationInput value={VerficationCode} onChange={(e) => setVerficationCode(e)} length={5} className="mx-auto text-center" /> */}
         </div>
 
                     {loading ? (
