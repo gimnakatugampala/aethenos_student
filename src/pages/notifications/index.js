@@ -21,6 +21,7 @@ import Typography from "@mui/material/Typography";
 import LargeLoading from "../../functions/Loading/LargeLoading";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Card } from "react-bootstrap";
+import CalculateTimeAgo from "../../functions/CalculateTimeAgo";
 
 const index = () => {
   const [notifications, setnotifications] = useState(null);
@@ -73,9 +74,7 @@ const index = () => {
                                     </td>
                                     <td>{notification.notification}</td>
                                     <td>
-                                      {moment(notification.notificationTime)
-                                        .startOf("hour")
-                                        .fromNow()}
+                                      {CalculateTimeAgo(notification.notificationTime)}
                                     </td>
                                   </tr>
                                 ))
