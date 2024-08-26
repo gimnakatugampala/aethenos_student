@@ -51,7 +51,7 @@ const Notification = () => {
           <h5 className="empty-cart">You have No New notifications</h5>
         </div>
       ) : (
-        <div className="wrapper" style={{ maxWidth: "650px" , minWidth: "450px"}}>
+        <div className="wrapper" style={{ maxWidth: "650px" , minWidth: "550px"}}>
           <ul
             className={`items ${
               unreadNotifications.length > 4 ? "cart-height" : ""
@@ -60,7 +60,7 @@ const Notification = () => {
             <li>
               <div className="row mb-3">
                 <h6 className="title float-left m-2">
-                  <i class="bi bi-bell mt-5" style={{ fontSize: "25px" }}></i>
+                  <i class="bi bi-bell" style={{ fontSize: "25px" }}></i>
                   <span className="mx-3">
                     {" "}
                     You have{" "}
@@ -79,15 +79,16 @@ const Notification = () => {
             </li>
 
             {unreadNotifications.map((notification, index) => (
-              <li key={index} className="each-item" style={{    justifyContent: "center"}} >
+              <li key={index} className="each-item " style={{  }} >
                 <Card
+                className="wrapper pt-0"
                   onClick={() => {
                     handleClick();
                     updateNotificationsID(notification.notificationCode);
                   }}
-                  style={{ border: "none", cursor: "pointer" }}
+                  style={{ border: "none", cursor: "pointer" ,width: "100%" , boxShadow: "none"}}
                 >
-                  <div className="content">
+                  <div className="content ">
                     <h6 className="title"> {notification.notification}</h6>
 
                     <p className="d-flex justify-content-end">

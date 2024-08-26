@@ -243,7 +243,7 @@ const Header = ({
 
                     {showDropdown && searchResults != null && (
                       <List
-                      className=""
+                      className="wrapper"
                         sx={{
                           maxWidth: "265px",
                           position: "absolute",
