@@ -62,10 +62,14 @@ const HeaderMyCourse = ({ id, course }) => {
                     styles={{
                       path: {
                         stroke: course.progressValue == 100 ? "green" : "",
+                        strokeWidth: 10,
                         transition: "stroke-dashoffset 0.5s ease 0s",
                       },
                       text: {
                         fill: course.progressValue == 100 ? "green" : "",
+                        fontWeight: "bold", 
+                        fontSize: "24px",
+                        strokeWidth: 10,
                       },
                     }}
                   />

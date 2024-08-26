@@ -5,7 +5,7 @@ import { useMouseMoveUI } from "../../contexts/mouse-move-context";
 
 const CourseBreadcrumb = ({ course }) => {
   const { title, instructor, language, rating_count, subtitle } = course || {};
-  const { mouseDirection, mouseReverse } = useMouseMoveUI();
+  // const { mouseDirection, mouseReverse } = useMouseMoveUI();
   return (
     <div className="edu-breadcrumb-area breadcrumb-style-3 ">
       <div className="mx-5">
@@ -110,7 +110,7 @@ const CourseBreadcrumb = ({ course }) => {
           </ul>
         </div>
       </div>
-      <ul className="shape-group">
+      {/* <ul className="shape-group">
         <li className="shape-1">
           <span></span>
         </li>
@@ -144,7 +144,7 @@ const CourseBreadcrumb = ({ course }) => {
         >
           <img src="/assets/images/about/shape-07.png" alt="shape" />
         </motion.li>
-      </ul>
+      </ul> */}
     </div>
   );
 };

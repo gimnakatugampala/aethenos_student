@@ -100,7 +100,7 @@ const SearchResults = () => {
   return (
     <div className="edu-course-area section-gap-equal gap-bottom-text ">
       <div
-        className="container-custom gap-bottom-text"       
+        className="gap-bottom-text mx-5"       
       >
         {loading ? (
           <div className="d-flex justify-content-center align-items-center">
@@ -129,12 +129,12 @@ const SearchResults = () => {
               </div>
             </h3>
 
-            <div className="col-md-3 container">
+            <div className="col-4 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-3 ">
               <CourseSidebarTwo course_items={courses} />
             </div>
 
             <div
-              className={`col-lg-9 col-pl--5 ${
+              className={`8 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-9 col-pl--5 ${
                 loading ? "fade-in" : "fade-in visible"
               }`}
             >

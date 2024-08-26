@@ -13,7 +13,7 @@ const footer_contents = {
     {
       col: "3",
       class: "explore-widget",
-      widget_title: "About Aethenos",
+    
       footer_links: [
         { link: "about-1", title: "About Us" },
         { link: "course-style-1", title: "Contact Us" },
@@ -23,7 +23,7 @@ const footer_contents = {
     {
       col: "3",
       class: "quick-link-widget",
-      widget_title: "Terms & Conditions",
+    
       footer_links: [
         { link: "contact-us", title: "Terms" },
         { link: "gallery-grid", title: "Privacy Policy" },
@@ -37,7 +37,7 @@ const { logoDark, logoLight, desc, add, call, email, widgets, exonLogo } =
 
 const Footer = ({ style_2, dark_bg, home_4 }) => {
   return (
-    <footer 
+    <footer
       className={`edu-footer ${
         style_2
           ? style_2
@@ -47,7 +47,7 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
       }`}
     >
       <div className={`footer-top ${style_2 ? "footer-top-2" : ""}`}>
-        <div className="container" style={{marginLeft: "0px"}}>
+        <div className="inner mx-5 float-left">
           <div className="row g-5">
             {widgets.map((w, i) => (
               <div key={i} className={`col-lg-${w.col} col-sm-6`}>
@@ -67,9 +67,8 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
                 </div>
               </div>
             ))}
-
-            <div className="col-md-12 mx-3">
-              <div className="col-md-3 mx-5">
+            <div className="col-md-10">
+              <div className="col-md-3 mx-lg-5 float-left">
                 <img className=" w-75" src={logoLight} alt="Corporate Logo" />
               </div>
             </div>
