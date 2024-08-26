@@ -4,7 +4,7 @@ import useFirebase from '../../hooks/use-firebase';
 import { registerSchema } from '../../utils/validation-schema';
 import Link from 'next/link';
 import { useState } from 'react';
-import { ResendCode, StudentSignUp, VerifyEmail } from '../../api';
+import { ResendCode, StudentSignUp, USERTOKEN, VerifyEmail } from '../../api';
 import validateEmail from '../../functions/emailValid';
 import LoadingBtn from '../../functions/LoadingBtn';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
@@ -215,60 +215,72 @@ const RegisterForm = () => {
         {/* <LoadingBtn disapear={loading} /> */}
         {isShownEmailVerificarion ? (
         <>
-        <p onClick={() => {
-            setisClickedBack(true)
-            setisShownEmailVerificarion(false)
-            settermsconditions(false)
-        }} className='text-danger' style={{ cursor: 'pointer' }}><ArrowBackIosNewIcon /> Back</p>
-        <h3 className="title m-0">Verify Email</h3>
-        <p onClick={handleResendCode} className='text-danger m-0' style={{ cursor: 'pointer' }}><b>Resend Code</b></p>
-        <div className="d-flex justify-content-center my-4">
-        <ReactCodeInput  inputStyle={inputStyle}
-        inputFocusStyle={inputFocusStyle} value={VerficationCode} onChange={(e) => setVerficationCode(e)}  className="mx-auto text-center" type='number' fields={5} />
-        {/* <VerificationInput value={VerficationCode} onChange={(e) => setVerficationCode(e)} length={5} className="mx-auto text-center" /> */}
+              <p onClick={() => {
+                  setisClickedBack(true)
+                  setisShownEmailVerificarion(false)
+                  settermsconditions(false)
+              }} className='text-danger' style={{ cursor: 'pointer' }}><ArrowBackIosNewIcon /> Back
+              </p>
+              <h3 className="title m-0">Verify Email</h3>
+
+              <p onClick={handleResendCode} className='text-danger m-0' style={{ cursor: 'pointer' }}><b>Resend Code</b></p>
+              <div className="d-flex justify-content-center my-4">
+              <ReactCodeInput  
+              inputStyle={inputStyle}
+              inputFocusStyle={inputFocusStyle} 
+              value={VerficationCode}
+              onChange={(e) => setVerficationCode(e)}
+              className="mx-auto text-center"
+              type='number'
+              fields={5} />
+
+
+            
+           </div>
+
+        {loading ? (
+          <ButtonLoadingMedium />
+        ) : (
+          
+          <button onClick={handleVerifyEmail}  className="edu-btn btn-medium mx-auto w-100">Verify</button>
+        )}
+
+        <div className='text-center my-3'>
+          <a href={`/student-interests?token=${USERTOKEN}`} style={{cursor:'pointer'}} className='text-danger'><b>Skip Now</b></a>
         </div>
-
-                    {loading ? (
-                        <ButtonLoadingMedium />
-                    ) : (
-
-                        <button onClick={handleVerifyEmail}  className="edu-btn btn-medium mx-auto w-100">Verify</button>
-                    )}
 
         </>
         ) : (
             <>
     
-    <div className="flex" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-  <div>
-    <h3 className="title">Sign up</h3>
-    <p>
-      Already have an account? <a href="/login">Log in</a>
-    </p>
-  </div>
+          <div className="flex" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div>
+            <h3 className="title">Sign up</h3>
+            <p>
+              Already have an account? <a href="/login">Log in</a>
+            </p>
+          </div>
 
-  {isClickedBack && (
-    <div>
-      <p
-        onClick={() => {
-          setisClickedBack(false);
-          setisShownEmailVerificarion(true);
-        }}
-        className='text-danger'
-        style={{
-          cursor: 'pointer',
-          margin: 0, // Removes any extra margin to align with the other content
-        }}
-      >
-        Go to Verification <ArrowForwardIosIcon />
-      </p>
-    </div>
-  )}
-</div>
+          {isClickedBack && (
+            <div>
+              <p
+                onClick={() => {
+                  setisClickedBack(false);
+                  setisShownEmailVerificarion(true);
+                }}
+                className='text-danger'
+                style={{
+                  cursor: 'pointer',
+                  margin: 0, // Removes any extra margin to align with the other content
+                }}
+              >
+                Go to Verification <ArrowForwardIosIcon />
+              </p>
+            </div>
+          )}
+        </div>
 
-      
-
-
+    
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="reg-name">First Name *</label>

@@ -190,6 +190,10 @@ const Surveyform = () => {
           )} 
         </div>
 
+        <div className='text-center my-3'>
+          <a href={`/`} style={{cursor:'pointer'}} className='text-danger'><b>Skip Now</b></a>
+        </div>
+
             <div
               style={{
                 display: "flex",
