@@ -163,6 +163,7 @@ const RegisterForm = () => {
         }else{
 
             setloading(true)
+            setVerficationCode("")
 
               StudentSignUp(
                 fname,
@@ -217,6 +218,7 @@ const RegisterForm = () => {
         <p onClick={() => {
             setisClickedBack(true)
             setisShownEmailVerificarion(false)
+            settermsconditions(false)
         }} className='text-danger' style={{ cursor: 'pointer' }}><ArrowBackIosNewIcon /> Back</p>
         <h3 className="title m-0">Verify Email</h3>
         <p onClick={handleResendCode} className='text-danger m-0' style={{ cursor: 'pointer' }}><b>Resend Code</b></p>
