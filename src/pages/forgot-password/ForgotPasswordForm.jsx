@@ -4,6 +4,28 @@ import { ChangeToNewPassword, SendEmailVerficationCode, VerifyCode } from '../..
 import ButtonLoadingMedium from '../../functions/Loading/ButtonLoadingMedium';
 import VerificationInput from 'react-verification-input';
 import dynamic from 'next/dynamic';
+import ReactCodeInput from "react-code-input"
+
+
+
+const inputStyle = {
+  fontFamily: 'Arial, sans-serif',
+  borderRadius: '8px',
+  border: '2px solid #d9d9d9',
+  width: '50px',
+  height: '50px',
+  fontSize: '20px',
+  textAlign: 'center',
+  margin: '0 5px',
+  outline: 'none',
+  transition: 'border-color 0.3s, box-shadow 0.3s',
+};
+
+const inputFocusStyle = {
+  borderColor: '#40a9ff',
+  boxShadow: '0 0 5px rgba(64, 169, 255, 0.5)',
+};
+
 
 const PasswordChecklist = dynamic(() => import('react-password-checklist'), { ssr: false });
 
@@ -132,7 +154,10 @@ const ForgotPasswordForm = () => {
 
               <div>
               <div className="d-flex justify-content-center my-4">
-              <VerificationInput value={VerficationCode} onChange={(e) => setVerficationCode(e)} length={5} className="mx-auto text-center" />
+              <ReactCodeInput  inputStyle={inputStyle}
+        inputFocusStyle={inputFocusStyle} value={VerficationCode} onChange={(e) => setVerficationCode(e)}   className="mx-auto text-center" type='number' fields={5} />
+
+              {/* <VerificationInput value={VerficationCode} onChange={(e) => setVerficationCode(e)} length={5} className="mx-auto text-center" /> */}
               </div>
 
               
