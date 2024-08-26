@@ -255,7 +255,7 @@ const Header = ({
         borderRadius: "4px",
         overflowY: "auto",
         overflowX:'hidden',
-        height: "300px",
+        maxHeight: "300px",
         zIndex: 1,
       }}
     >
@@ -272,6 +272,7 @@ const Header = ({
                 }}
               >
                 <ListItem
+                className="m-0"
                   onClick={() => {
                     window.location.href = `/course-details/${result.courseCode}`;
                     router.push(`/course-details/${result.courseCode}`);
