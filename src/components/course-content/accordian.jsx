@@ -12,6 +12,8 @@ import {
 import { CheckBox } from "@mui/icons-material";
 import Form from "react-bootstrap/Form";
 import CardMainContainer from "../../pages/my-courses/[id]/CardMainContainer";
+import { saveAs } from 'file-saver';
+
 
 const Accordian = ({
   show = false,
@@ -43,6 +45,16 @@ const Accordian = ({
   setTitleVideo,
 }) => {
   const bgcolor = "#808080";
+
+  const handleDownload = async (url, title) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      saveAs(blob, title);
+    } catch (error) {
+      console.error('Error downloading file:', error);
+    }
+  };
 
   return (
     <div className="accordion-item mb-2">
@@ -191,28 +203,24 @@ const Accordian = ({
                                     "Source Code"
                               ) && (
                                 <Dropdown>
-                                  <Dropdown.Toggle size="sm" variant="danger">
-                                    <i className="fas fa-folder-open"></i>{" "}
-                                    Resources
-                                  </Dropdown.Toggle>
-                                  <Dropdown.Menu>
-                                    {list.get_CurriculumItem_File.map(
-                                      (item, idx) =>
-                                        (item.curriculum_item_file_type ===
-                                          "Downloadable Items" ||
-                                          item.curriculum_item_file_type ===
-                                            "Source Code") && (
-                                          <Dropdown.Item
-                                            download={true}
-                                            key={idx}
-                                            href={`${IMG_HOST}${item.url}`}
-                                          >
-                                            {item.title}
-                                          </Dropdown.Item>
-                                        )
-                                    )}
-                                  </Dropdown.Menu>
-                                </Dropdown>
+                                <Dropdown.Toggle size="sm" variant="danger">
+                                  <i className="fas fa-folder-open"></i> Resources
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                  {list.get_CurriculumItem_File.map(
+                                    (item, idx) =>
+                                      (item.curriculum_item_file_type == "Downloadable Items" ||
+                                        item.curriculum_item_file_type == "Source Code") && (
+                                        <Dropdown.Item
+                                          key={idx}
+                                          onClick={() => handleDownload(`${IMG_HOST}${item.url}`, item.title)}
+                                        >
+                                          {item.title}
+                                        </Dropdown.Item>
+                                      )
+                                  )}
+                                </Dropdown.Menu>
+                              </Dropdown>
                               )}
                               {/* Links */}
                               {list.get_CurriculumItem_File.some(
@@ -324,25 +332,24 @@ const Accordian = ({
                               type.curriculum_item_file_type === "Source Code"
                           ) && (
                             <Dropdown>
-                              <Dropdown.Toggle size="sm" variant="danger">
-                                <i className="fas fa-folder-open"></i> Resources
-                              </Dropdown.Toggle>
-                              <Dropdown.Menu>
-                                {list.get_CurriculumItem_File.map(
-                                  (item, idx) =>
-                                    item.curriculum_item_file_type ===
-                                      "Downloadable Items" && (
-                                      <Dropdown.Item
-                                        download={true}
-                                        key={idx}
-                                        href={`${IMG_HOST}${item.url}`}
-                                      >
-                                        {item.title}
-                                      </Dropdown.Item>
-                                    )
-                                )}
-                              </Dropdown.Menu>
-                            </Dropdown>
+                            <Dropdown.Toggle size="sm" variant="danger">
+                              <i className="fas fa-folder-open"></i> Resources
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                              {list.get_CurriculumItem_File.map(
+                                (item, idx) =>
+                                  (item.curriculum_item_file_type == "Downloadable Items" ||
+                                    item.curriculum_item_file_type == "Source Code") && (
+                                    <Dropdown.Item
+                                      key={idx}
+                                      onClick={() => handleDownload(`${IMG_HOST}${item.url}`, item.title)}
+                                    >
+                                      {item.title}
+                                    </Dropdown.Item>
+                                  )
+                              )}
+                            </Dropdown.Menu>
+                          </Dropdown>
                           )}
 
                           {/* Links */}
