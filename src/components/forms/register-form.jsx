@@ -317,7 +317,7 @@ const RegisterForm = () => {
                     <div className="edu-form-check">
                         <input value={termsconditions} onChange={(e) => settermsconditions(e.target.checked)} type="checkbox" name='terms' id="terms-condition" />
                         <label htmlFor="terms-condition">I agree to the
-                            <Link href="/terms-condition">
+                            <Link href="/terms-condition">{" "}
                                 Terms & Conditions.
                             </Link>
                         </label>

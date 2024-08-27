@@ -2255,7 +2255,7 @@ export const updateNotifications = async(notificationCode) =>{
   fetch(`${BACKEND_LINK}/notification/getOwnNotifications`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
-      Unauthorized(result.status,`notifications`) 
+      // Unauthorized(result.status,`notifications`) 
       console.log(result)
       const sortedNotifications = result.sort((a, b) => new Date(b.notificationTime) - new Date(a.notificationTime));
       setnotifications(sortedNotifications);
