@@ -73,6 +73,7 @@ import {
 } from "@vidstack/react/player/layouts/default";
 import MediumLoading from "../../../functions/Loading/MediumLoading";
 import { Footer } from "../../../layout";
+import { ConvertToHTML, StripeHTML } from "../../../functions/ConvertToHTML";
 
 const CourseDetailsArea1 = ({ id, course, setcourse }) => {
   const [featured_reviews, setfeatured_reviews] = useState(null);
@@ -1012,7 +1013,8 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                                   <h4 className="heading-title">
                                     {announcement.tittle}
                                   </h4>
-                                  <p>{announcement.content}</p>
+                                  <p>        <div dangerouslySetInnerHTML={{ __html: announcement.content }} />
+                                  </p>
                                 </div>
                               </CardContainer>
                             ))}
@@ -1147,15 +1149,15 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
 
         {/* Course Content */}
         <div
-  style={{
-    position: 'fixed',
-    top: scrollPosition === 0 ? '85px' : '0',
-    right: 0,
-    height: '100vh', // Adjust to take full viewport height
-    overflowY: 'hidden', // Hide overflow on the outer container
-  }}
-  className="col-md-4"
->
+          style={{
+            position: 'fixed',
+            top: scrollPosition == 0 ? '85px' : '0',
+            right: 0,
+            height: '100vh', // Adjust to take full viewport height
+            overflowY: 'hidden', // Hide overflow on the outer container
+          }}
+          className="col-md-4"
+        >
   <Card style={{ backgroundColor: 'transparent', height: '100%' }}>
     <div
       className="p-2"
@@ -1164,7 +1166,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
         top: 0,
         zIndex: 1,
         borderBottom: '1px solid rgba(0, 0, 0, 0.175)',
-        backgroundColor: '#fff', // Ensure sticky header doesn't blend with the content
+        backgroundColor: 'transparent', // Ensure sticky header doesn't blend with the content
       }}
     >
       <h6 className="m-2">Course Content</h6>
