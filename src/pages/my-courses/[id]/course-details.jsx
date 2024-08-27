@@ -814,8 +814,8 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                                       <ul key={index} className="col-md-6">
                                         {chunk.map(
                                           (learner, idx) =>
-                                            learner.intended_learner_type ===
-                                              "students learn" && (
+                                            learner.intended_learner_type ==
+                                              " students learn" && (
                                               <li key={idx}>
                                                 {learner.intended_learner}
                                               </li>
