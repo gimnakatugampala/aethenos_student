@@ -1146,57 +1146,70 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
         </div>
 
         {/* Course Content */}
-      <div style={{ position: 'fixed',  top: scrollPosition == 0 ? '85px' : '0', right : 0, height: '150vh' }}  className="col-md-4">
-      <Card style={{ backgroundColor: "transparent", height: '100%' }}>
-        <div className="p-2" style={{ position: 'sticky', top: 0, zIndex: 1, borderBottom: '1px solid rgba(0, 0, 0, 0.175)' }}>
-            <div style={{ backgroundColor: "transparent" }}>
-              <h6 className="m-2">Course Content</h6>
-            </div>
-          </div>
-          <Card.Body style={{ height: "calc(100% - 56px)", overflowY: 'auto' }}>
-            <div className="faq-accordion">
-              <div className="accordion">
-                {course != null &&
-                  course.course_content.map((content, index) => (
-                    <Accordian
-                    setshowquiz={setshowquiz}
-                    setarticle={setarticle}
-                    setshowVideoPlayer={setshowVideoPlayer}
-                    itemCode={itemCode}
-                    setmain_Video_player_url={setmain_Video_player_url}
-                    id={index + 1}
-                    content={content}
-                    setselectedQuiz={setselectedQuiz}
-                    setshowAssignment={setshowAssignment}
-                    setselectedAssignment={setselectedAssignment}
-                    setshowPracticeTest={setshowPracticeTest}
-                    setselectedPracticeTest={setselectedPracticeTest}
-                    setshowCodingExercise={setshowCodingExercise}
-                    setselectedCodingExercise={setselectedCodingExercise}
-                    key={index}
-                    courseItemCode={id}
-                    setcourse={setcourse}
-                    setseletedCurriculumItem={setseletedCurriculumItem}
-                    seletedCurriculumItem={seletedCurriculumItem}
-                    setStartquiz={setStartquiz}
-                    setanswerAlertDisplay={setanswerAlertDisplay}
-                    setselectAnswer={setselectAnswer}
-                    activeStep={activeAssignmentStep}
-                    setActiveStep={setAssignmentActiveStep}
-                    setPraticeTestActiveStep={setPraticeTestActiveStep}
-                    setCodingExerciseActiveStep={
-                      setCodingExerciseActiveStep
-                    }
-                    setTitleVideo={setTitleVideo}
-                    />
-                  ))}
-              </div>
-            </div>
-          </Card.Body>
-        </Card>
-       
-        
+        <div
+  style={{
+    position: 'fixed',
+    top: scrollPosition === 0 ? '85px' : '0',
+    right: 0,
+    height: '100vh', // Adjust to take full viewport height
+    overflowY: 'hidden', // Hide overflow on the outer container
+  }}
+  className="col-md-4"
+>
+  <Card style={{ backgroundColor: 'transparent', height: '100%' }}>
+    <div
+      className="p-2"
+      style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 1,
+        borderBottom: '1px solid rgba(0, 0, 0, 0.175)',
+        backgroundColor: '#fff', // Ensure sticky header doesn't blend with the content
+      }}
+    >
+      <h6 className="m-2">Course Content</h6>
     </div>
+    <Card.Body style={{ height: 'calc(100vh - 85px)', overflowY: 'auto' }}>
+      <div className="faq-accordion">
+        <div className="accordion">
+          {course != null &&
+            course.course_content.map((content, index) => (
+              <Accordian
+                setshowquiz={setshowquiz}
+                setarticle={setarticle}
+                setshowVideoPlayer={setshowVideoPlayer}
+                itemCode={itemCode}
+                setmain_Video_player_url={setmain_Video_player_url}
+                id={index + 1}
+                content={content}
+                setselectedQuiz={setselectedQuiz}
+                setshowAssignment={setshowAssignment}
+                setselectedAssignment={setselectedAssignment}
+                setshowPracticeTest={setshowPracticeTest}
+                setselectedPracticeTest={setselectedPracticeTest}
+                setshowCodingExercise={setshowCodingExercise}
+                setselectedCodingExercise={setselectedCodingExercise}
+                key={index}
+                courseItemCode={id}
+                setcourse={setcourse}
+                setseletedCurriculumItem={setseletedCurriculumItem}
+                seletedCurriculumItem={seletedCurriculumItem}
+                setStartquiz={setStartquiz}
+                setanswerAlertDisplay={setanswerAlertDisplay}
+                setselectAnswer={setselectAnswer}
+                activeStep={activeAssignmentStep}
+                setActiveStep={setAssignmentActiveStep}
+                setPraticeTestActiveStep={setPraticeTestActiveStep}
+                setCodingExerciseActiveStep={setCodingExerciseActiveStep}
+                setTitleVideo={setTitleVideo}
+              />
+            ))}
+        </div>
+      </div>
+    </Card.Body>
+  </Card>
+</div>
+
 
       </div>
 
