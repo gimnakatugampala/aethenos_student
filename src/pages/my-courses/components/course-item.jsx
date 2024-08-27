@@ -49,7 +49,7 @@ const CourseItems = ({ itemsPerPage, items, course_style, setShowing }) => {
 
     return (
         <>
-            {currentItems && currentItems.sort((a, b) => new Date(b.purchaseDate) - new Date(a.purchaseDate)).map((course, i) => {
+            {currentItems && currentItems.map((course, i) => {
                 return (
                     <CourseTypeFive key={i} data={course} />
                 )

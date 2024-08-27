@@ -1638,7 +1638,7 @@ export const GetMyCourses = async(setCourses,setloading) =>{
 
        // Sort courses by purchaseDate in descending order (latest first)
        const sortedCourses = result && result.length > 0 
-       ? result.sort((a, b) => new Date(b.purchaseDate) - new Date(a.purchaseDate))
+       ? result.sort((a, b) => new Date(b.purchaseDate) - new Date(a.purchaseDate)).reverse()
        : [];
 
       setCourses(sortedCourses);
