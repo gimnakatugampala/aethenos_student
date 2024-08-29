@@ -50,22 +50,23 @@ const CalculateDiscountedPrice = (data) => {
                 
 
             } else {
-                return net_price = foundPrice.netPrice;
+                return net_price = foundPrice.netPrice.toFixed(2);
             }
            
 
         } else {
 
-            // Not in the Price Matrics
-
-            // console.log("Country Not Found");
-            // console.log("Default Price");
-            // console.log(data.course_prices)
-            net_price = data.course_prices.globalNetPrice
+   
+            net_price = data.course_prices.globalNetPrice.toFixed(2);
             
         }
 
-        return net_price
+        if (JSON.parse(COUNTRY).currency.toUpperCase() === 'JPY') {
+            return Math.round(net_price).toString(); 
+        } else {
+            return net_price; 
+        }
+
     }else{
         return net_price = "0"
     }

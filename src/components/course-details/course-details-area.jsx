@@ -91,7 +91,7 @@ const CourseDetailsArea = ({ course }) => {
                     aria-controls="carriculam"
                     aria-selected="false"
                   >
-                    Curriculam
+                    Syllabus
                   </button>
                 </li>
 
@@ -158,7 +158,7 @@ const CourseDetailsArea = ({ course }) => {
                 >
                   <div className="course-tab-content">
                     <div className="course-curriculam">
-                      <h3 className="heading-title">Course Curriculum</h3>
+                      <h3 className="heading-title">Course Syllabus</h3>
 
                       <div className="faq-accordion">
                         <div className="accordion">

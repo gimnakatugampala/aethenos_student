@@ -64,7 +64,7 @@ const DropDownProfile = ({
     setisUserLoading(true);
     setOpenProfile(false);
     LogoutAPI(setCURRENTUSER);
-    SuccessAlert("Success", "Logout Success");
+    window.location.href = "/"
 
     setTimeout(() => {
       setisUserLoading(false);

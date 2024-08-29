@@ -13,7 +13,7 @@ const CategoryArea = () => {
             <div className="container ">
                 <div className="d-flex justify-content-evenly ">
                     {category_contents.map((category, i) => (
-                        <div key={i} className="features-box features-style-2 edublink-svg-animate ">
+                        <div key={i} className="features-box features-style-2 edublink-svg-animate " style={{border: "none"}}>
                             <div className="icon">
                                 {category.icon}
                             </div>

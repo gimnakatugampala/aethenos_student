@@ -5,6 +5,8 @@ import { useMouseMoveUI } from "../../contexts/mouse-move-context";
 
 const CourseBreadcrumb = ({ course }) => {
   const { title, instructor, language, rating_count, subtitle } = course || {};
+
+  console.log(course);
   // const { mouseDirection, mouseReverse } = useMouseMoveUI();
   return (
     <div className="edu-breadcrumb-area breadcrumb-style-3 ">
@@ -86,7 +88,7 @@ const CourseBreadcrumb = ({ course }) => {
                   style={{ fontSize: "17px" }}
                   className="fa-solid fa-calendar-days m-0"
                 ></i>{" "}
-                Last updated 9/2023
+                Created Date  {course.created_date}
               </span>
             </li>
             <li>
