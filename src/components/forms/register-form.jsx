@@ -221,9 +221,21 @@ const RegisterForm = () => {
                   settermsconditions(false)
               }} className='text-danger' style={{ cursor: 'pointer' }}><ArrowBackIosNewIcon /> Back
               </p>
-              <h3 className="title m-0">Verify Email</h3>
+
+              <div className='d-flex justify-content-between'>
+
+                <div>
+                  <h3 className="title m-0">Verify Email</h3>
+                </div>
+
+                <div>
 
               <p onClick={handleResendCode} className='text-danger m-0' style={{ cursor: 'pointer' }}><b>Resend Code</b></p>
+                </div>
+
+              </div>
+                  <p className='m-0 p-0 text-center' style={{fontSize:'14px'}}>A verification email has been sent to your given email address. Please check your email and enter the verification code below</p>
+
               <div className="d-flex justify-content-center my-4">
               <ReactCodeInput  
               inputStyle={inputStyle}
