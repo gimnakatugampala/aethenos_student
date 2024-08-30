@@ -38,9 +38,6 @@ const CalculateDiscountedPrice = (data) => {
     
         if (foundPrice) {
 
-            // console.log("Country Found");
-            // console.log(foundPrice); 
-            // console.log(data.course_prices); 
             getCurrencyExchangeRate(JSON.parse(COUNTRY).currency.toLowerCase())
             if (foundPrice.netPrice == 0) {
                 // Convert the $ to The Native Currency
@@ -50,14 +47,14 @@ const CalculateDiscountedPrice = (data) => {
                 
 
             } else {
-                return net_price = foundPrice.netPrice.toFixed(2);
+                return net_price = foundPrice.netPrice
             }
            
 
         } else {
 
    
-            net_price = data.course_prices.globalNetPrice.toFixed(2);
+            net_price = data.course_prices.globalNetPrice
             
         }
 
