@@ -44,6 +44,10 @@ const OrderSummery = ({showStripe,showPaypal}) => {
     // -------------------------------------
     const [couponValue, setcouponValue] = useState([]);
 
+
+     // Add state to track if the order has been processed
+     const [isOrderProcessed, setIsOrderProcessed] = useState(false);
+
     useEffect(() => {  
         if(window.location.pathname.includes('/checkout')){
             const storedCoupons = reactLocalStorage.get('coupons');
@@ -231,25 +235,29 @@ const generatePaypalItems = () => {
 
     useEffect(() => {
         const query = new URLSearchParams(window.location.search);
+    
+       
+    
         if (query.get('success')) {
-          console.log('Order placed! You will receive an email confirmation.');
-
-
-          if(buyCourseOrder != null && total != 0){
-              console.log(buyCourseOrder);
-            //   console.log(JSON.stringify(buyCourseOrder));
-             var rawData =  JSON.stringify(buyCourseOrder)
-              BuyCourseByStudent(rawData,router,buyCourseOrder)
-              return
-          }
-
+            console.log('Order placed! You will receive an email confirmation.');
     
+            // Execute BuyCourseByStudent only if it hasn't been executed yet
+            if (!isOrderProcessed && buyCourseOrder != null && total != 0) {
+                console.log(buyCourseOrder);
     
+                // Mark the order as processed to prevent further execution
+                setIsOrderProcessed(true);
+    
+                var rawData = JSON.stringify(buyCourseOrder);
+                BuyCourseByStudent(rawData, router, buyCourseOrder);
+                return;
+            }
         }
         if (query.get('canceled')) {
-          console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
+            console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
         }
-      }, [buyCourseOrder]);
+    }, [buyCourseOrder]);
+    
 
        // Handle Coupons
     const handleCouponSubmit = () => {

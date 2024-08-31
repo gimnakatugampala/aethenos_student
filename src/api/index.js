@@ -1568,10 +1568,10 @@ Swal.fire({
       }
 
 
-      setTimeout(() => {
-          window.location.href = "/my-courses"
-          // router.push("/my-courses")
-      }, 1500);
+      // setTimeout(() => {
+      //     window.location.href = "/my-courses"
+      //     // router.push("/my-courses")
+      // }, 1500);
 
       return
     }
@@ -2591,12 +2591,11 @@ fetch(`${BACKEND_LINK}/payment/getPreviousView/${id}`, requestOptions)
 }
 
 export const CheckAndSaveRefCode = async (ref, router) => {
-  const myHeaders = new Headers();
-  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+  // const myHeaders = new Headers();
+  // myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
 
   const requestOptions = {
     method: "GET",
-    headers: myHeaders,
     redirect: "follow",
   };
 
