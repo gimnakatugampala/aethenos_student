@@ -1568,10 +1568,10 @@ Swal.fire({
       }
 
 
-      setTimeout(() => {
-          window.location.href = "/my-courses"
-          // router.push("/my-courses")
-      }, 1500);
+      // setTimeout(() => {
+      //     window.location.href = "/my-courses"
+      //     // router.push("/my-courses")
+      // }, 1500);
 
       return
     }

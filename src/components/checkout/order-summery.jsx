@@ -60,6 +60,12 @@ const OrderSummery = ({showStripe,showPaypal}) => {
     // -------------------------------------
     
 
+    useEffect(() => {
+        console.log(couponValue)
+       
+    },[couponValue])
+    
+
 // console.log(cartCourses)
 
 const newPricing = cartCourses != null && cartCourses.map((course) => {
@@ -286,7 +292,7 @@ const generatePaypalItems = () => {
     // Coupon
     const handleDelete = (t) => {
         const updatedTags = tags.filter(tag => tag.id != t.id);
-        window.localStorage.setItem("coupons", updatedTags);
+        window.localStorage.setItem("coupons", JSON.stringify(updatedTags));
 
         // Update the Paypal Total
         calculateTotalWithCoupon()
