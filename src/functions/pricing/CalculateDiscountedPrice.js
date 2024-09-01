@@ -1,73 +1,60 @@
-import React from 'react'
+import React from 'react';
 import Cookies from 'js-cookie';
 import { getCurrencyExchangeRate } from '../../api';
 
-
-const COUNTRY = Cookies.get('aethenos_user_origin')
-const EX_RATES = Cookies.get('aethenos_currency')
+const COUNTRY = Cookies.get('aethenos_user_origin');
+const EX_RATES = Cookies.get('aethenos_currency');
 
 const CalculateDiscountedPrice = (data) => {  
-    
     let countryToFind = "";
-     // -----------------------------
-     
- 
+    let net_price = "";
 
+    // Ensure COUNTRY is defined and parseable
     if (COUNTRY) {
         try {
             const parsedCountry = JSON.parse(COUNTRY);
             countryToFind = parsedCountry.country_name;
+
+            // Get exchange rate based on the parsed country's currency
+            getCurrencyExchangeRate(parsedCountry.currency.toLowerCase());
+
         } catch (error) {
             console.error("Error parsing COUNTRY:", error);
+            return "0"; // Return "0" or a default value in case of parsing error
         }
     }
-    
-    let net_price = ""
 
     if (data.course_prices != null && data.course_prices.prices != null) {
         let foundPrice = null; 
-    
+
         data.course_prices.prices.some(single_price => {
-            if (countryToFind === single_price.country) {
+            if (countryToFind == single_price.country) {
                 foundPrice = single_price;
                 return true; 
             }
-    
             return false;
         });
-    
+
         if (foundPrice) {
-
-            getCurrencyExchangeRate(JSON.parse(COUNTRY).currency.toLowerCase())
-            if (foundPrice.netPrice == 0) {
-                // Convert the $ to The Native Currency
-                if(EX_RATES != null){
-                    return  net_price = (Number.parseFloat(data.course_prices.globalNetPrice) * Number.parseFloat(JSON.parse(EX_RATES))).toFixed(2);
-                }
-                
-
+            if (foundPrice.netPrice == 0 && EX_RATES != null) {
+                // Convert the $ to the native currency using the exchange rate
+                net_price = (Number.parseFloat(data.course_prices.globalNetPrice) * Number.parseFloat(EX_RATES)).toFixed(2);
             } else {
-                return net_price = foundPrice.netPrice
+                net_price = foundPrice.netPrice;
             }
-           
-
         } else {
-
-   
-            net_price = data.course_prices.globalNetPrice
-            
+            net_price = data.course_prices.globalNetPrice;
         }
 
-        if (JSON.parse(COUNTRY).currency.toUpperCase() === 'JPY') {
+        // Handle specific currency formatting for JPY
+        if (COUNTRY && JSON.parse(COUNTRY).currency.toUpperCase() == 'JPY') {
             return Math.round(net_price).toString(); 
         } else {
             return net_price; 
         }
-
-    }else{
-        return net_price = "0"
+    } else {
+        return "0"; // Return "0" if course prices are not available
     }
+};
 
-}
-
-export default CalculateDiscountedPrice
+export default CalculateDiscountedPrice;
