@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import useFirebase from '../../hooks/use-firebase';
 import { registerSchema } from '../../utils/validation-schema';
@@ -16,7 +16,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ErrorAlert from '../../functions/Alert/ErrorAlert';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ReactCodeInput from "react-code-input"
-
+import Cookies from 'js-cookie';
 
 
 const inputStyle = {
@@ -58,6 +58,12 @@ const RegisterForm = () => {
     const [isClickedBack, setisClickedBack] = useState(false)
 
     const [VerficationCode, setVerficationCode] = useState("")
+
+    const [userToken, setUserToken] = useState(null);
+
+
+  
+
 
     const router = useRouter();
 
@@ -209,6 +215,12 @@ const RegisterForm = () => {
 
     }
 
+    useEffect(() => {
+      const token = Cookies.get('aethenos');
+      setUserToken(token);
+    }, []);
+    
+
 
     return (
         <>
@@ -258,7 +270,7 @@ const RegisterForm = () => {
         )}
 
         <div className='text-center my-3'>
-          <a href={`/student-interests?token=${USERTOKEN}`} style={{cursor:'pointer'}} className='text-danger'><b>Skip Now</b></a>
+          <a href={`/student-interests?token=${userToken}`} style={{cursor:'pointer'}} className='text-danger'><b>Skip Now</b></a>
         </div>
 
         </>

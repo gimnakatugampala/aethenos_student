@@ -60,10 +60,10 @@ const OrderSummery = ({showStripe,showPaypal}) => {
     // -------------------------------------
     
 
-    useEffect(() => {
-        console.log(couponValue)
+    // useEffect(() => {
+    //     console.log(couponValue)
        
-    },[couponValue])
+    // },[couponValue])
     
 
 // console.log(cartCourses)
