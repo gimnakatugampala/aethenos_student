@@ -157,7 +157,7 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                 <div>
                   <span style={mainfs} className="value price fw-bolder">
                     {getSymbolFromCurrency(GetCurrencyByCountry(course))}
-                    {CalculateDiscountedPrice(course).toFixed(2)}
+                    {Number(CalculateDiscountedPrice(course)).toFixed(2)}
                   </span>
                   <span className="text-decoration-line-through m-lg-2">
                     {" "}
