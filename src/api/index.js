@@ -321,8 +321,10 @@ export const StudentSignIn = async(email, password,setloading,router,rediect_url
 
               if(ENV_STATUS =="dev"){
                 Cookies.set('aethenos', `${result.token}`, { expires: 7 })
+                Cookies.set('aethenos_user_country', `Sri Lanka`)
               }else{
                 Cookies.set('aethenos', `${result.token}`, { expires: 7, domain: '.aethenos.com' });
+                Cookies.set('aethenos_user_country', `Sri Lanka`, { domain: '.aethenos.com' });
 
               }
 
@@ -526,10 +528,10 @@ export const Logout = async(setCURRENTUSER) =>{
 
   if(ENV_STATUS == "dev"){
     Cookies.remove('aethenos')
-    Cookies.remove('aethenos_user_country')
+    // Cookies.remove('aethenos_user_country')
   }else{
     Cookies.remove('aethenos', { domain: '.aethenos.com' });
-    Cookies.remove('aethenos_user_country', { domain: '.aethenos.com' });
+    // Cookies.remove('aethenos_user_country', { domain: '.aethenos.com' });
 
   }
 
