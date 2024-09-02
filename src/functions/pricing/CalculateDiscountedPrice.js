@@ -2,13 +2,15 @@ import React from 'react'
 import Cookies from 'js-cookie';
 import { getCurrencyExchangeRate, USERTOKEN } from '../../api';
 
-const COUNTRY = Cookies.get('aethenos_user_origin');
-const EX_RATES = Cookies.get('aethenos_currency');
-const USER_LOGIN_COUNTRY = Cookies.get('aethenos_user_country');
+
 
 
 
 const CalculateDiscountedPrice = (data) => {
+
+    const COUNTRY = Cookies.get('aethenos_user_origin');
+const EX_RATES = Cookies.get('aethenos_currency');
+const USER_LOGIN_COUNTRY = Cookies.get('aethenos_user_country');
 
     console.log(USER_LOGIN_COUNTRY)
     console.log(EX_RATES)
@@ -21,8 +23,8 @@ const CalculateDiscountedPrice = (data) => {
         // User is logged in, use USER_LOGIN_COUNTRY
         if (USER_LOGIN_COUNTRY) {
             try {
-                const parsedUserCountry = JSON.parse(USER_LOGIN_COUNTRY);
-                countryToFind = parsedUserCountry.country_name;
+                const parsedUserCountry = USER_LOGIN_COUNTRY;
+                countryToFind = parsedUserCountry;
             } catch (error) {
                 console.error("Error parsing USER_LOGIN_COUNTRY:", error);
             }
