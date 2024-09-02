@@ -321,10 +321,10 @@ export const StudentSignIn = async(email, password,setloading,router,rediect_url
 
               if(ENV_STATUS =="dev"){
                 Cookies.set('aethenos', `${result.token}`, { expires: 7 })
-                Cookies.set('aethenos_user_country', `Sri Lanka`)
+                Cookies.set('aethenos_user_country', `${result.country}`)
               }else{
                 Cookies.set('aethenos', `${result.token}`, { expires: 7, domain: '.aethenos.com' });
-                Cookies.set('aethenos_user_country', `Sri Lanka`, { domain: '.aethenos.com' });
+                Cookies.set('aethenos_user_country', `${result.country}`, { domain: '.aethenos.com' });
 
               }
 
