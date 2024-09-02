@@ -1,26 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react'
 import Cookies from 'js-cookie';
 import { getCurrencyExchangeRate, USERTOKEN } from '../../api';
 
+
+
 const CalculateDiscountedPrice = (data) => {
-    const [exchangeRate, setExchangeRate] = useState(Cookies.get('aethenos_currency'));
-
-    useEffect(() => {
-        const handleCurrencyChange = () => {
-            setExchangeRate(Cookies.get('aethenos_currency'));
-        };
-
-        // Listen for changes to the 'aethenos_currency' cookie
-        window.addEventListener('currencyChanged', handleCurrencyChange);
-
-        // Cleanup event listener on unmount
-        return () => {
-            window.removeEventListener('currencyChanged', handleCurrencyChange);
-        };
-    }, []);
 
     const COUNTRY = Cookies.get('aethenos_user_origin');
+    const EX_RATES = Cookies.get('aethenos_currency');
     const USER_LOGIN_COUNTRY = Cookies.get('aethenos_user_country');
+
+    console.log(USER_LOGIN_COUNTRY)
+    console.log(EX_RATES)
+    console.log(COUNTRY)
 
     let countryToFind = "";
 
@@ -62,9 +54,9 @@ const CalculateDiscountedPrice = (data) => {
 
         if (foundPrice) {
             if (foundPrice.netPrice === 0) {
-                // Convert global net price to local currency if exchangeRate is available
-                if (exchangeRate != null) {
-                    net_price = (Number.parseFloat(data.course_prices.globalNetPrice) * Number.parseFloat(exchangeRate)).toFixed(2);
+                // Convert global net price to local currency if EX_RATES is available
+                if (EX_RATES != null) {
+                    net_price = (Number.parseFloat(data.course_prices.globalNetPrice) * Number.parseFloat(JSON.parse(EX_RATES))).toFixed(2);
                 } else {
                     net_price = data.course_prices.globalNetPrice;
                 }
