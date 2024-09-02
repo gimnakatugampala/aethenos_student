@@ -69,11 +69,11 @@ export const getCurrencyExchangeRate = async (code) => {
 
 
 
-    if(ENV_STATUS =="dev"){
-      Cookies.remove('aethenos_currency')
-    }else{
-      Cookies.remove('aethenos_currency',{ domain: '.aethenos.com' });
-    }
+    // if(ENV_STATUS =="dev"){
+    //   Cookies.remove('aethenos_currency')
+    // }else{
+    //   Cookies.remove('aethenos_currency',{ domain: '.aethenos.com' });
+    // }
 
 
     if(ENV_STATUS =="dev"){

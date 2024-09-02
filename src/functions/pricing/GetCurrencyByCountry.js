@@ -1,12 +1,15 @@
 import React from 'react';
 import Cookies from 'js-cookie';
-import { USERTOKEN } from '../../api';
+import { getCurrencyExchangeRate, USERTOKEN } from '../../api';
+import countries from 'i18n-iso-countries';
+import currencyCodes from 'currency-codes';
+
+// Initialize the countries library with the English locale
+countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
 const GetCurrencyByCountry = (data) => {
     const COUNTRY = Cookies.get('aethenos_user_origin');
     const USER_LOGIN_COUNTRY = Cookies.get('aethenos_user_country');
-
-    console.log(USERTOKEN);
 
     let countryToFind = "";
 
@@ -47,15 +50,24 @@ const GetCurrencyByCountry = (data) => {
         });
 
         if (foundPrice) {
-            // If netPrice is zero, return the default USD currency
-            if (foundPrice.netPrice === 0) {
-                currency_code = JSON.parse(COUNTRY)?.currency || 'USD';
+            if (USERTOKEN) {
+                // Get ISO country code
+                const countryCode = countries.getAlpha2Code(countryToFind, 'en');
+
+                
+                // Get currency code from ISO country code
+                if (countryCode) {
+                    const currency = currencyCodes.code(countryCode);
+                    currency_code = currency ? currency.code : 'USD';
+                }
             } else {
-                currency_code = JSON.parse(COUNTRY)?.currency || 'USD';
+                // For logged out users, default to 'BRL' as specified
+            
+                currency_code = JSON.parse(COUNTRY).currency;
             }
 
             // Handle currency-specific rounding for Japanese Yen
-            if (JSON.parse(COUNTRY)?.currency.toUpperCase() === 'JPY') {
+            if (currency_code.toUpperCase() === 'JPY') {
                 return 'JPY';
             } else {
                 return currency_code;

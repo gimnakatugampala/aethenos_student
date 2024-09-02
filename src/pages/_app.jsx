@@ -11,7 +11,7 @@ import { store } from '../redux/store';
 import Theme from '../components/common/theme';
 import { MouseMoveProvider } from '../contexts/mouse-move-context';
 import SEO from '../components/seo';
-import { getUserCountry } from '../api';
+import { getCurrencyExchangeRate, getUserCountry } from '../api';
 
 function MyApp( { Component, pageProps } ) {
     const router = useRouter();
@@ -26,6 +26,7 @@ function MyApp( { Component, pageProps } ) {
     // Get User Country
     useEffect(() => {
         getUserCountry()
+        // getCurrencyExchangeRate()
     })
     
 

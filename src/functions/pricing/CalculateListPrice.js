@@ -36,7 +36,7 @@ const CalculateListPrice = (data) => {
         if (foundPrice) {
             // console.log("Country Found");
             // console.log(foundPrice.listPrice); 
-            getCurrencyExchangeRate(JSON.parse(COUNTRY).currency.toLowerCase())
+            // getCurrencyExchangeRate(JSON.parse(COUNTRY).currency.toLowerCase())
             if(foundPrice.listPrice == 0){
                 list_price = (Number.parseFloat(data.course_prices.globalListPrice) * Number.parseFloat(JSON.parse(EX_RATES))).toFixed(2);
                 
