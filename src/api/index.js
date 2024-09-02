@@ -67,11 +67,19 @@ export const getCurrencyExchangeRate = async (code) => {
     const exchangeRate = data.usd[code];
     // // console.log(exchangeRate);
 
+
+
+    if(ENV_STATUS =="dev"){
+      Cookies.remove('aethenos_currency')
+    }else{
+      Cookies.remove('aethenos_currency',{ domain: '.aethenos.com' });
+    }
+
+
     if(ENV_STATUS =="dev"){
       Cookies.set('aethenos_currency', `${exchangeRate}`)
     }else{
       Cookies.set('aethenos_currency', `${exchangeRate}`, { domain: '.aethenos.com' });
-
     }
 
 
