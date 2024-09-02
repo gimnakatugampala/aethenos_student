@@ -58,36 +58,33 @@ export const getUserCountry = async() =>{
 }
 
 
+
+
 export const getCurrencyExchangeRate = async (code) => {
   try {
-    const response = await fetch(`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json`);
+    const response = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
     const data = await response.json();
-
-
     const exchangeRate = data.usd[code];
-    // // console.log(exchangeRate);
 
-
-
-    if(ENV_STATUS =="dev"){
-      Cookies.remove('aethenos_currency')
-    }else{
-      Cookies.remove('aethenos_currency',{ domain: '.aethenos.com' });
-    }
-
-
-    if(ENV_STATUS =="dev"){
-      Cookies.set('aethenos_currency', `${exchangeRate}`)
-    }else{
+    // Update cookie based on environment status
+    if (ENV_STATUS === "dev") {
+      Cookies.remove('aethenos_currency');
+      Cookies.set('aethenos_currency', `${exchangeRate}`);
+    } else {
+      Cookies.remove('aethenos_currency', { domain: '.aethenos.com' });
       Cookies.set('aethenos_currency', `${exchangeRate}`, { domain: '.aethenos.com' });
     }
 
+    // Trigger a custom event to notify components of the currency change
+    const event = new CustomEvent('currencyChanged', { detail: { exchangeRate } });
+    window.dispatchEvent(event);
 
   } catch (error) {
     console.log("Error fetching currency exchange rate:", error);
     return null;
   }
-}
+};
+
 
 
 export const GetStudentProfile = async(setfirst_Name,
