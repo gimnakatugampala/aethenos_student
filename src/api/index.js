@@ -186,9 +186,11 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading,
               if(ENV_STATUS == "dev"){
                 Cookies.set('aethenos', `${result.token}`, { expires: 7 })
                 Cookies.set('aethenos_topic_filled', false)
+                Cookies.set('aethenos_user_country', `${countryToFind}`)
               }else{
                 Cookies.set('aethenos', `${result.token}`, { expires: 7, domain: '.aethenos.com' });
                 Cookies.set('aethenos_topic_filled', false, { domain: '.aethenos.com' });
+                Cookies.set('aethenos_user_country', `${countryToFind}`, { domain: '.aethenos.com' });
               }
 
               
@@ -338,60 +340,72 @@ export const StudentSignIn = async(email, password,setloading,router,rediect_url
 
 }
 
-export const InstructorSignUp = async(firstname,lastname,email,conpassword,router) =>{
-  var formdata = new FormData();
-  formdata.append("email", `${email}`);
-  formdata.append("firstName", `${firstname}`);
-  formdata.append("lastName", `${lastname}`);
-  formdata.append("password", `${conpassword}`);
-  formdata.append("gup_type", "2");
-  
+export const InstructorSignUp = async(firstname, lastname, email, conpassword, router) => {
+  const COUNTRY = Cookies.get('aethenos_user_origin');
+  let countryToFind = "";
+
+  if (COUNTRY) {
+    try {
+      const parsedCountry = JSON.parse(COUNTRY);
+      countryToFind = parsedCountry.country_name;
+
+      var formdata = new FormData();
+      formdata.append("email", `${email}`);
+      formdata.append("firstName", `${firstname}`);
+      formdata.append("lastName", `${lastname}`);
+      formdata.append("password", `${conpassword}`);
+      formdata.append("gup_type", "2");
+      formdata.append("countryName", `${countryToFind}`);
+
+    } catch (error) {
+      console.error("Error parsing COUNTRY:", error);
+    }
+  }
+
   var requestOptions = {
     method: 'POST',
     body: formdata,
     redirect: 'follow'
   };
-  
+
   fetch(`${BACKEND_LINK}/register/add`, requestOptions)
     .then(response => response.json())
     .then(result => {
       // console.log(result)
 
-      if(result.variable == "200"){
+      if (result.variable == "200") {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Registered!",
+          text: `${result.message}`,
+          showConfirmButton: false,
+          timer: 1500
+        });
 
-          Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title:"Registered!",
-              text: `${result.message}`,
-              showConfirmButton: false,
-              timer: 1500
-            });
+        if (ENV_STATUS == "dev") {
+          Cookies.set('aethenos', `${result.token}`, { expires: 7 });
+          Cookies.set('aethenos_user_country', `${countryToFind}`);
+        } else {
+          Cookies.set('aethenos', `${result.token}`, { expires: 7, domain: '.aethenos.com' });
+          Cookies.set('aethenos_user_country', `${countryToFind}`, { domain: '.aethenos.com' });
+        }
 
-            if(ENV_STATUS == "dev"){
-              Cookies.set('aethenos', `${result.token}`, { expires: 7 })
-            }else{
-              Cookies.set('aethenos', `${result.token}`, { expires: 7, domain: '.aethenos.com' });
+        // window.location.href = "/?login=success"
+        router.push(`/?login=success`);
 
-            }
-
-
-            // window.location.href = "/?login=success"
-
-            router.push(`/?login=success`)
-
-      }else{
-
-          Swal.fire({
-              title: 'Login error!',
-              text: `${result.message}`,
-              icon: 'error',
-            })
+      } else {
+        Swal.fire({
+          title: 'Login error!',
+          text: `${result.message}`,
+          icon: 'error',
+        });
       }
 
-  })
+    })
     .catch(error => console.log('error', error));
 }
+
 
 export const GetCategoriesMenu = async(setnavbar_list) =>{
 
@@ -512,8 +526,10 @@ export const Logout = async(setCURRENTUSER) =>{
 
   if(ENV_STATUS == "dev"){
     Cookies.remove('aethenos')
+    Cookies.remove('aethenos_user_country')
   }else{
     Cookies.remove('aethenos', { domain: '.aethenos.com' });
+    Cookies.remove('aethenos_user_country', { domain: '.aethenos.com' });
 
   }
 
