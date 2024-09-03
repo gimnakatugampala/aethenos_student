@@ -8,8 +8,10 @@ const SidebarOne = () => {
                     <h4 className="widget-title">Search</h4>
                     <div className="content">
                         <form className="blog-search" action="#">
-                            <button className="search-button"><i className="icon-2"></i></button>
-                            <input type="text" placeholder="Search" />
+                          <div>
+                          <button className="search-button"><i className="icon-2"></i></button>
+                          <input type="text" placeholder="Search" style={{paddingTop: "20px", paddingBottom: "20px"}}/>
+                          </div>
                         </form>
                     </div>
                 </div>

@@ -9,7 +9,7 @@ const index = () => {
         <div className='sticky-header'>
             <div id="main-wrapper" className="main-wrapper">
                 <Header no_top_bar={true} />
-                <BreadcrumbThree title="Terms & Condition" subtitle="Terms & Condition" />
+                <BreadcrumbThree title="Terms & Conditions" subtitle="Terms & Conditions" />
                 <ConditionArea/>
              <Footer />
             </div>

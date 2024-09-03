@@ -3,6 +3,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cart_course } from '../../redux/features/cart-slice';
 import { remove_wishlist_product } from '../../redux/features/wishlist-slice';
+import { IMG_HOST } from '../../api';
+import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice'
+import getSymbolFromCurrency from 'currency-symbol-map'
+import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
 
 const SingleWishlist = ({ item }) => {
     const dispatch = useDispatch();
@@ -11,6 +15,8 @@ const SingleWishlist = ({ item }) => {
     const handleAddToCart = (course) => {
         dispatch(cart_course(course))
     }
+
+    console.log(item)
 
     return (
         <tr>
@@ -23,7 +29,7 @@ const SingleWishlist = ({ item }) => {
             <td className="product-thumbnail">
                 <Link href={`/course-details/${item.id}`} legacyBehavior>
 
-                    <img src={item.img} alt="Books" />
+                <img src={`${IMG_HOST}${item.img}`} alt="Books" />
 
                 </Link>
             </td>
@@ -33,9 +39,9 @@ const SingleWishlist = ({ item }) => {
                 </Link>
             </td>
             <td className="product-price" data-title="Price">
-                <span className="currency-symbol">$</span>{item.price}
+            <span className="currency-symbol">{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))}</span>{(CalculateDiscountedPrice(item.other_data))}
             </td>
-            <td className="product-status" data-title="Stock"> In Stock</td>
+
             <td className="product-add-cart" onClick={() => handleAddToCart(item)}>
                 <a style={{ cursor: 'pointer' }} className="edu-btn btn-medium">
                     {cartCourses.some(course => course.id === item.id) ? 'Added to cart' : 'Add to cart'}

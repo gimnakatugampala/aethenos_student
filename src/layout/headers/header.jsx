@@ -383,9 +383,9 @@ const Header = ({
 
 
 
-                  <li className="icon">
+                  <li className="icon cart-icon">
                     <Link href="/wishlist" legacyBehavior>
-                      <a className="wishlist">
+                      <a className="cart-icon">
                         <i className="icon-22"></i>
                         <span className="count">{wishlists?.length}</span>
                       </a>

@@ -1,7 +1,6 @@
 import Link from "next/link";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { cart_course } from "../../redux/features/cart-slice";
 import {
   add_to_wishlist,
   wishlistItems,
@@ -13,7 +12,12 @@ import CalculateDiscountedPrice from "../../functions/pricing/CalculateDiscounte
 import CalculateDiscountPrice from "../../functions/pricing/CalculateDiscountPrice";
 import StarsRating from "stars-rating";
 import Cookies from "js-cookie";
-import { css } from '@emotion/react';
+import { css } from "@emotion/react";
+import {
+  cart_course,
+  decrease_quantity,
+  remove_cart_course,
+} from "../../redux/features/cart-slice";
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
@@ -37,29 +41,30 @@ const CourseTypeFour = ({ data, classes }) => {
       setMouseX(event.clientX);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
-
 
   useEffect(() => {
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
+  const leftStyle = screenWidth <= 2100 ? (mouseX ? "15%" : "100%") : "50%";
 
-  const leftStyle = screenWidth <= 2100 ? (mouseX ? '15%' : '100%') : '50%';
-
+  const handleRemoveFromCart = (item) => {
+     dispatch(remove_cart_course(item))
+  }
 
   const handleWishlist = (course_item) => {
     if (wishlists.find((i) => i.id === course_item.id)) {
@@ -141,19 +146,14 @@ const CourseTypeFour = ({ data, classes }) => {
               alt={data.title}
             />
           </Link>
-          
         </div>
 
         <div className="content">
-
-        {data.course_prices.discount > 0  && (
+          {data.course_prices.discount > 0 && (
             <div className="course-price price-round">
               {CalculateDiscountPrice(data)}
             </div>
           )}
-        
-
-   
 
           <div className=" fw-bolder mt-4 mb-2" style={mainfs}>
             <span className=""> {data.level}</span>
@@ -208,10 +208,13 @@ const CourseTypeFour = ({ data, classes }) => {
           </ul>
         </div>
       </div>
- 
-      <div className="hover-content-aside"   style={{
-        left: leftStyle,
-      }}>
+
+      <div
+        className="hover-content-aside"
+        // style={{
+        //   left: leftStyle,
+        // }}
+      >
         <div className="content">
           <span className="course-level">{data.category}</span>
           <h5 className="title">
@@ -257,15 +260,18 @@ const CourseTypeFour = ({ data, classes }) => {
             <div className="button-group">
               <a
                 className="edu-btn btn-medium"
-                onClick={() => handleAddToCart(data)}
+                onClick={() =>
+                  cartCourses.some((item) => item.id === data.id)
+                    ? handleRemoveFromCart(data)
+                    : handleAddToCart(data)
+                }
                 style={{ cursor: "pointer" }}
               >
                 {cartCourses.some((item) => item.id === data.id)
-                  ? "Added to cart"
-                  : "Add to cart"}
+                  ? "Remove from Cart"
+                  : "Add to Cart"}
                 <i className="icon-4"></i>
               </a>
-
               <button
                 onClick={() => handleWishlist(data)}
                 className={`wishlist-btn btn-outline-dark ${
