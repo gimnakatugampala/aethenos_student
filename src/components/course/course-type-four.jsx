@@ -21,7 +21,10 @@ import {
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
-const CourseTypeFour = ({ data, classes }) => {
+const CourseTypeFour = ({ data, classes, index }) => {
+
+  const isSecondOrFourthCard = (index + 1) % 2 === 0;
+
   const { cartCourses } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const wishlists = useSelector(wishlistItems);
@@ -34,33 +37,6 @@ const CourseTypeFour = ({ data, classes }) => {
   };
 
   const [mouseX, setMouseX] = useState(null);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleMouseMove = (event) => {
-      setMouseX(event.clientX);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  const leftStyle = screenWidth <= 2100 ? (mouseX ? "15%" : "100%") : "50%";
 
   const handleRemoveFromCart = (item) => {
      dispatch(remove_cart_course(item))
@@ -136,6 +112,7 @@ const CourseTypeFour = ({ data, classes }) => {
   return (
     <div
       className={`edu-course course-style-5 ${classes ? classes : ""} h-100`}
+      style={{cursor :"default"}}
     >
       <div className="inner">
         <div className="thumbnail">
@@ -210,10 +187,8 @@ const CourseTypeFour = ({ data, classes }) => {
       </div>
 
       <div
-        className="hover-content-aside"
-        // style={{
-        //   left: leftStyle,
-        // }}
+       className={`hover-content-aside ${isSecondOrFourthCard ? 'content-right' : ''}` }
+       style={{cursor :"default"}}
       >
         <div className="content">
           <span className="course-level">{data.category}</span>
@@ -221,23 +196,26 @@ const CourseTypeFour = ({ data, classes }) => {
             <n-link to="/course/course-details">{data.title}</n-link>
           </h5>
           <div className="course-rating">
-            <div className="rating">
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-              <i className="icon-23"></i>
-            </div>
-            <span className="rating-count">({data.rating})</span>
+            <StarsRating
+              edit={false}
+              count={5}
+              size={24}
+              value={data.rating}
+              color1={"gray"}
+              color2={"#F39C12"}
+            />
+            <span className="rating-count">
+              <b>({Number.parseFloat(data.rating).toFixed(1)})</b>
+            </span>
           </div>
-          <ul className="course-meta">
+          {/* <ul className="course-meta">
             <li>
               {data.lesson}{" "}
               {data.lesson + data.lesson > 1 ? "Lessons" : "Lesson"}
             </li>
             <li>{CalculateDiscountPrice(data)}</li>
             <li>{data.level}</li>
-          </ul>
+          </ul> */}
           <div className="course-feature">
             <h6 className="title">What You’ll Learn?</h6>
             <ul>
