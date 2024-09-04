@@ -129,7 +129,7 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
 
     EnrollByStudent(rawData);
 
-    // console.log(rawData)
+   
   };
 
   return (

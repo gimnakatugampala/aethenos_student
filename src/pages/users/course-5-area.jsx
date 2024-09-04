@@ -23,7 +23,7 @@ import {
 import MainLoading from "../../functions/Loading/MainLoading";
 import { SpinnerCircular } from "spinners-react";
 // import SearchResults from '../../../components/course-category/landscape-courses/searchResults'
-import SearchResults from '../../components/course-category/landscape-courses/searchResults'
+import SearchResults from "../../components/course-category/landscape-courses/searchResults";
 
 // course_items
 const course_items = course_data.filter(
@@ -51,7 +51,6 @@ const CourseFiveArea = () => {
   const [instructor_details, setinstructor_details] = useState("");
   const [loading, setloading] = useState(true);
   const [courses, setCourses] = useState([]);
-
 
   useEffect(() => {
     if (id != null) {
@@ -122,7 +121,7 @@ const CourseFiveArea = () => {
                     />
                   )}
                 </div>
-                <a
+                {/* <a
                   href={`mailto:${instructor_details.email}`}
                   className="btn btn-outline-dark text-center fs-6 mb-1"
                   style={stylesBlock}
@@ -137,99 +136,127 @@ const CourseFiveArea = () => {
                 >
                   <AlternateEmailIcon />
                   Email
-                </a>
+                </a> */}
 
-                <a
-                  href={`https://${instructor_details.website}`}
-                  className="btn btn-outline-dark text-center fs-6 mb-1"
-                  style={stylesBlock}
-                  onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = "#F0FFFF";
-                    e.target.style.color = "inherit";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = "transparent";
-                    e.target.style.color = "inherit";
-                  }}
-                >
-                  <LanguageIcon />
-                  Website
-                </a>
+                {instructor_details.email && (
+                  <a
+                    href={`mailto:${instructor_details.email}`}
+                    className="btn btn-outline-dark text-center fs-6 mb-1"
+                    style={stylesBlock}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = "#F0FFFF";
+                      e.target.style.color = "inherit";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = "transparent";
+                      e.target.style.color = "inherit";
+                    }}
+                  >
+                    <AlternateEmailIcon />
+                    Email
+                  </a>
+                )}
 
-                <a
-                  href={`https://twitter.com/${instructor_details.twitter}`}
-                  className="btn btn-outline-dark text-center fs-6 mb-1"
-                  style={stylesBlock}
-                  onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = "#F0FFFF";
-                    e.target.style.color = "inherit";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = "transparent";
-                    e.target.style.color = "inherit";
-                  }}
-                >
-                  <TwitterIcon />
-                  Twitter
-                </a>
+                {instructor_details.website && (
+                  <a
+                    href={`https://${instructor_details.website}`}
+                    className="btn btn-outline-dark text-center fs-6 mb-1"
+                    style={stylesBlock}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = "#F0FFFF";
+                      e.target.style.color = "inherit";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = "transparent";
+                      e.target.style.color = "inherit";
+                    }}
+                  >
+                    <LanguageIcon />
+                    Website
+                  </a>
+                )}
 
-                <a
-                  href={`https://www.facebook.com/${instructor_details.facebook}`}
-                  className="btn btn-outline-dark text-center fs-6 mb-1"
-                  style={stylesBlock}
-                  onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = "#F0FFFF";
-                    e.target.style.color = "inherit";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = "transparent";
-                    e.target.style.color = "inherit";
-                  }}
-                >
-                  <FacebookIcon />
-                  Facebook
-                </a>
+                {instructor_details.twitter && (
+                  <a
+                    href={`https://twitter.com/${instructor_details.twitter}`}
+                    className="btn btn-outline-dark text-center fs-6 mb-1"
+                    style={stylesBlock}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = "#F0FFFF";
+                      e.target.style.color = "inherit";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = "transparent";
+                      e.target.style.color = "inherit";
+                    }}
+                  >
+                    <TwitterIcon />
+                    Twitter
+                  </a>
+                )}
 
-                <a
-                  href={`https://www.linkedin.com/in/${instructor_details.linkedin}`}
-                  className="btn btn-outline-dark text-center fs-6 mb-1"
-                  style={stylesBlock}
-                  onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = "#F0FFFF";
-                    e.target.style.color = "inherit";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = "transparent";
-                    e.target.style.color = "inherit";
-                  }}
-                >
-                  <LinkedInIcon />
-                  LinkedIn
-                </a>
+                {instructor_details.facebook && (
+                  <a
+                    href={`https://www.facebook.com/${instructor_details.facebook}`}
+                    className="btn btn-outline-dark text-center fs-6 mb-1"
+                    style={stylesBlock}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = "#F0FFFF";
+                      e.target.style.color = "inherit";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = "transparent";
+                      e.target.style.color = "inherit";
+                    }}
+                  >
+                    <FacebookIcon />
+                    Facebook
+                  </a>
+                )}
+
+                {instructor_details.linkedin && (
+                  <a
+                    href={`https://www.linkedin.com/in/${instructor_details.linkedin}`}
+                    className="btn btn-outline-dark text-center fs-6 mb-1"
+                    style={stylesBlock}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = "#F0FFFF";
+                      e.target.style.color = "inherit";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = "transparent";
+                      e.target.style.color = "inherit";
+                    }}
+                  >
+                    <LinkedInIcon />
+                    LinkedIn
+                  </a>
+                )}
 
                 {/* Youtube */}
-                <a
-                  href={`https://www.youtube.com/c/${instructor_details.youtube}`}
-                  className="btn btn-outline-dark text-center fs-6 mb-1"
-                  style={stylesBlock}
-                  onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = "#F0FFFF";
-                    e.target.style.color = "inherit";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = "transparent";
-                    e.target.style.color = "inherit";
-                  }}
-                >
-                  <YouTubeIcon />
-                  Youtube
-                </a>
+                {instructor_details.youtube && (
+                  <a
+                    href={`https://www.youtube.com/c/${instructor_details.youtube}`}
+                    className="btn btn-outline-dark text-center fs-6 mb-1"
+                    style={stylesBlock}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = "#F0FFFF";
+                      e.target.style.color = "inherit";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = "transparent";
+                      e.target.style.color = "inherit";
+                    }}
+                  >
+                    <YouTubeIcon />
+                    Youtube
+                  </a>
+                )}
               </div>
             </div>
           )}
 
           <SearchResults allcourses={courses} />
-
         </div>
       </div>
     </div>

@@ -9,12 +9,24 @@ const Accordian = ({ show = false, id, title, lectures, lists, no_quiz }) => {
   const [isOpen, setOpen] = useState(false);
   const [selectedURL, setselectedURL] = useState("");
 
-  useEffect(() => {
-    console.log(lists);
-  }, []);
+
+  const isContentAvailable = lectures > 0 || (lists && lists.length > 0) || no_quiz > 0;
+
+  const assignmentCount = lists && lists.length > 0 
+  ? lists.filter((item) => item.curriculum_item_type === "Assignment").length 
+  : 0;
+
+  const codingExerciseCount = lists && lists.length > 0 
+  ? lists.filter((item) => item.curriculum_item_type === "Coding Exercise").length 
+  : 0;
+  
+  const practiceTestCount = lists && lists.length > 0 
+  ? lists.filter((item) => item.curriculum_item_type === "Practice Test").length 
+  : 0;
 
   return (
     <>
+     {isContentAvailable && (
       <div className="accordion-item mb-2">
         <p className="accordion-header">
           <button
@@ -27,11 +39,31 @@ const Accordian = ({ show = false, id, title, lectures, lists, no_quiz }) => {
             aria-expanded={show ? "true" : "false"}
           >
             {title}
-            <span className="m-0 p-0">
-              {lectures} {lectures == 1 ? "Lecture" : "Lectures"}  {" "} 
+            <span className="m-0 p-0"    style={{ fontSize: "14px" }}>
+
+              {lectures > 0 && (
+                <> 
+                 {" "} • {lectures} {lectures === 1 ? "Lecture" : "Lectures"}
+                </>
+              )}
               {no_quiz > 0 && (
                 <>
                  {" "} • {no_quiz} {no_quiz === 1 ? "Quiz" : "Quizzes"}
+                </>
+              )}
+              {assignmentCount > 0 && ( 
+                <>
+                 {" "} • {assignmentCount} {assignmentCount === 1 ? "Assignment" : "Assignments"}
+                </>
+              )}
+              {codingExerciseCount > 0 && (
+                <>
+                 {" "} • {codingExerciseCount} {codingExerciseCount === 1 ? "Coding exercise" : "Coding exercises"}
+                </>
+              )}
+              {practiceTestCount > 0 && (
+                <>
+                 {" "} • {practiceTestCount} {practiceTestCount === 1 ? "Practice Test" : "Practice Tests"}
                 </>
               )}
             </span>
@@ -161,6 +193,8 @@ const Accordian = ({ show = false, id, title, lectures, lists, no_quiz }) => {
           </div>
         </div>
       </div>
+     )}
+
       <React.Fragment>
         <ModalVideo
           channel="custom"
