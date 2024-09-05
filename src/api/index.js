@@ -2801,3 +2801,35 @@ export const DownloadCertificate = async (itemCode) => {
     console.error("Error downloading the certificate:", error);
   }
 };
+
+export const LoginWithTokenForItemCode = async (token) => {
+  const requestOptions = {
+    method: "POST",
+    redirect: "follow"
+  };
+
+  try {
+    const response = await fetch(`${BACKEND_LINK}/authentication/studentLoginWithloginToken/${token}`, requestOptions);
+    const result = await response.json();
+    console.log(result);
+
+    if (result.variable == "404") {
+      Swal.fire({
+        title: `Error`,
+        text: `${result.message}`,
+        icon: 'error',
+      });
+      return false;  // Authentication failed
+    } else {
+      if (ENV_STATUS == "dev") {
+        Cookies.set('aethenos', `${result.token}`, { expires: 7 });
+      } else {
+        Cookies.set('aethenos', `${result.token}`, { expires: 7, domain: '.aethenos.com' });
+      }
+      return true;  // Authentication succeeded
+    }
+  } catch (error) {
+    console.error(error);
+    return false;  // Authentication failed
+  }
+};

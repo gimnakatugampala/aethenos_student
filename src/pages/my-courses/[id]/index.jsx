@@ -4,7 +4,7 @@ import { Footer, Header } from '../../../layout';
 import CourseDetails from './course-details';
 import { Wrapper } from '../../../layout';
 import SEO from '../../../components/seo';
-import { GetMyCoursesDetails } from '../../../api';
+import { GetMyCoursesDetails, LoginWithTokenForItemCode } from '../../../api';
 import LargeLoading from '../../../functions/Loading/LargeLoading';
 import HeaderMyCourse from '../../../layout/headers/HeaderMyCourse';
 
@@ -14,16 +14,43 @@ import HeaderMyCourse from '../../../layout/headers/HeaderMyCourse';
 const index = () => {
 
     const router = useRouter();
-    const { id } = router.query;
+    const { id , loginToken } = router.query;
     const [course, setcourse] = useState(null)
     
     
-     // Get Course Details
+  // Get Course Details
   useEffect(() => {
-    if(id != null){
-        GetMyCoursesDetails(id,setcourse)
-    }
-  }, [id])
+    const fetchCourseDetails = async () => {
+      // ---------------- LOGIN TOKEN IS FOR EXCEL PLUGIN PURPOSE ONLY ----------------------
+      // Check if the login token is there
+      if (loginToken) {
+        console.log(loginToken);
+
+        const isAuthenticated = await LoginWithTokenForItemCode(loginToken);
+
+        if (isAuthenticated) {
+
+            const { pathname, query } = router;
+            delete query.loginToken;  // Remove loginToken from query
+            router.replace({ pathname, query }, undefined, { shallow: true });
+
+          // If authenticated, fetch course details
+          if (id != null) {
+            GetMyCoursesDetails(id, setcourse);
+          }
+        }
+      } else {
+        // If the login token is not there, execute this
+        if (id != null) {
+          GetMyCoursesDetails(id, setcourse);
+        }
+      }
+      // ---------------- LOGIN TOKEN IS FOR EXCEL PLUGIN PURPOSE ONLY ----------------------
+    };
+
+    fetchCourseDetails();
+  }, [id, loginToken]);
+
 
     return (
         <Wrapper>

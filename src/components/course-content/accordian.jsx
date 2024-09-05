@@ -13,6 +13,7 @@ import { CheckBox } from "@mui/icons-material";
 import Form from "react-bootstrap/Form";
 import CardMainContainer from "../../pages/my-courses/[id]/CardMainContainer";
 import { saveAs } from 'file-saver';
+import { useRouter } from "next/router";
 
 
 const Accordian = ({
@@ -45,6 +46,11 @@ const Accordian = ({
   setTitleVideo,
 }) => {
   const bgcolor = "#808080";
+
+  const router = useRouter();
+
+  // Extract the query parameters
+  const { sectionID, curriclumID, SyllabusType } = router.query;
 
   const handleDownload = async (url, title) => {
     try {
@@ -141,6 +147,14 @@ const Accordian = ({
                             // ---------------- STORE AS LAST POSITION -------
 
                             setseletedCurriculumItem(list.curriculumItemId);
+
+                         
+
+                            // Only execute if sectionID, curriclumID, and type are not null or undefined
+                            if (sectionID && curriclumID && SyllabusType) {
+                              router.replace(`/my-courses/${itemCode}`, undefined, { shallow: true });
+                            }
+
 
                             // console.log(list)
 
@@ -284,6 +298,11 @@ const Accordian = ({
                         );
                         // ---------------- STORE AS LAST POSITION -------
 
+                         // Only execute if sectionID, curriclumID, and type are not null or undefined
+                         if (sectionID && curriclumID && SyllabusType) {
+                          router.replace(`/my-courses/${itemCode}`, undefined, { shallow: true });
+                        }
+
                         GetMyCoursesDetails(courseItemCode, setcourse);
                       }}
                       key={index}
@@ -419,6 +438,11 @@ const Accordian = ({
 
                       setseletedCurriculumItem(list.curriculumItemId);
 
+                       // Only execute if sectionID, curriclumID, and type are not null or undefined
+                       if (sectionID && curriclumID && SyllabusType) {
+                        router.replace(`/my-courses/${itemCode}`, undefined, { shallow: true });
+                      }
+
                       GetMyCoursesDetails(courseItemCode, setcourse);
 
                       console.log(list);
@@ -489,6 +513,11 @@ const Accordian = ({
                         list.curriculumItemId
                       );
                       // ---------------- STORE AS LAST POSITION -------
+
+                       // Only execute if sectionID, curriclumID, and type are not null or undefined
+                       if (sectionID && curriclumID && SyllabusType) {
+                        router.replace(`/my-courses/${itemCode}`, undefined, { shallow: true });
+                      }
 
                       GetMyCoursesDetails(courseItemCode, setcourse);
 
@@ -568,6 +597,11 @@ const Accordian = ({
 
                       setseletedCurriculumItem(list.curriculumItemId);
 
+                       // Only execute if sectionID, curriclumID, and type are not null or undefined
+                       if (sectionID && curriclumID && SyllabusType) {
+                        router.replace(`/my-courses/${itemCode}`, undefined, { shallow: true });
+                      }
+
                       GetMyCoursesDetails(courseItemCode, setcourse);
                     }}
                     key={index}
@@ -638,6 +672,12 @@ const Accordian = ({
                       setselectedCodingExercise(list);
                       setseletedCurriculumItem(list.curriculumItemId);
                       console.log(list);
+
+                       // Only execute if sectionID, curriclumID, and type are not null or undefined
+                       if (sectionID && curriclumID && SyllabusType) {
+                        router.replace(`/my-courses/${itemCode}`, undefined, { shallow: true });
+                      }
+
                       GetMyCoursesDetails(courseItemCode, setcourse);
                     }}
                     key={index}
