@@ -401,7 +401,7 @@ export const InstructorSignUp = async(firstname, lastname, email, conpassword, r
           Cookies.set('aethenos_user_country', `${countryToFind}`, { domain: '.aethenos.com' });
         }
 
-        // window.location.href = "/?login=success"
+        window.location.href = "https://instructor.aethenos.com/courses"
         router.push(`/?login=success`);
 
       } else {
