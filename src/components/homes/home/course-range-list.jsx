@@ -27,10 +27,10 @@ const CourseRangeList = ({course}) => {
         />}
         
         <div className="row g-3 mb-5">
-          {courses != null && courses.slice(0, next)?.map((course) => {
+          {courses != null && courses.slice(0, next)?.map((course, index) => {
             return (
               <div key={course.id} className="col-md-6 col-xl-3">
-                <CourseTypeFour data={course} classes="course-box-shadow" />
+                <CourseTypeFour data={course} index={index} classes="course-box-shadow" />
               </div>
             );
           })}

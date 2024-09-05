@@ -2833,3 +2833,31 @@ export const LoginWithTokenForItemCode = async (token) => {
     return false;  // Authentication failed
   }
 };
+
+
+export const GetCourseTitle = async (
+  code,
+  setCourseVideoLength
+) => {
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  var requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
+  fetch(
+    `${BACKEND_LINK}/course/getCourseTitleAndApproveType/${code}`,
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result)
+
+      setCourseVideoLength(result.courseLength);
+  
+    })
+    .catch((error) => console.log("error", error));
+};

@@ -9,7 +9,7 @@ const index = () => {
         <div className='sticky-header'>
             <div id="main-wrapper" className="main-wrapper">
                 <Header no_top_bar={true} />
-                <BreadcrumbThree title="Wishlist Page" subtitle="Wishlist Page" />
+                <BreadcrumbThree title="Wishlist" subtitle="Wishlist" />
                 <WishlistArea/>
              <Footer />
             </div>

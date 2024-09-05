@@ -5,6 +5,7 @@ import { useMouseMoveUI } from '../../contexts/mouse-move-context';
 
 const BreadcrumbThree = ({ title, subtitle }) => {
     const { mouseDirection, mouseReverse } = useMouseMoveUI();
+
     return (
         <div className="edu-breadcrumb-area">
             <div className="container">
@@ -17,9 +18,7 @@ const BreadcrumbThree = ({ title, subtitle }) => {
                             <a href="/" >
                             Home
                             </a>
-                        </li>
-                        <li className="separator"><i className="icon-angle-right"></i></li>
-                        <li className="breadcrumb-item"><a href="#">Pages</a></li>
+                        </li>                                
                         <li className="separator"><i className="icon-angle-right"></i></li>
                         <li className="breadcrumb-item active" aria-current="page">{subtitle}</li>
                     </ul>

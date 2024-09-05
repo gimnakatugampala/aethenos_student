@@ -308,31 +308,31 @@ const RegisterForm = () => {
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="reg-name">First Name *</label>
-                    <input value={fname} onChange={(e) => setfname(e.target.value)} type="text" name="name" id="reg-name" placeholder="First name" />
+                    <input value={fname} onChange={(e) => setfname(e.target.value)} type="text" name="name" id="reg-name" placeholder=" Enter First name" />
                 
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="reg-name">Last Name*</label>
-                    <input value={lname} onChange={(e) => setlname(e.target.value)} type="text" name="name" id="reg-name" placeholder="Last name" />
+                    <input value={lname} onChange={(e) => setlname(e.target.value)} type="text" name="name" id="reg-name" placeholder=" Enter Last name" />
                     
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="log-email">Email*</label>
-                    <input value={email} onChange={(e) => setemail(e.target.value)} type="email" name="email" id="log-email" placeholder="Enter Email" />
+                    <input value={email} onChange={(e) => setemail(e.target.value)} type="email" name="email" id="log-email" placeholder=" Enter Email" />
                     
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="log-password">Password*</label>
-                    <input value={password}  onChange={(e) => setpassword(e.target.value)} type={showPass ? "text" : "password"}id="log-password" placeholder="Password" />
+                    <input value={password}  onChange={(e) => setpassword(e.target.value)} type={showPass ? "text" : "password"}id="log-password" placeholder=" Enter Password" />
                     {showPass ? (<span onClick={() => setshowPass(!showPass)} className="password-show"><i class="fas fa-eye-slash fa-lg"></i></span>) : (<span onClick={() => setshowPass(!showPass)} className="password-show"><i class="far fa-eye fa-lg"></i></span>)} 
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="log-password">Confirm Password*</label>
-                    <input value={conpassword} onChange={(e) => setconpassword(e.target.value)} type={showPass ? "text" : "password"}id="log-password" placeholder="Password" />
+                    <input value={conpassword} onChange={(e) => setconpassword(e.target.value)} type={showPass ? "text" : "password"}id="log-password" placeholder=" Enter Password" />
                 {showPass ? (<span onClick={() => setshowPass(!showPass)} className="password-show"><i class="fas fa-eye-slash fa-lg"></i></span>) : (<span onClick={() => setshowPass(!showPass)} className="password-show"><i class="far fa-eye fa-lg"></i></span>)} 
                 </div>
         

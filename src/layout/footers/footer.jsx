@@ -82,8 +82,7 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
             <div className="col-6">
               <div className="inner mx-5 float-left">
                 <p>
-                  © {new Date().getFullYear()} Aethenos Limited. All Rights
-                  Reserved
+                  © {new Date().getFullYear()} Aethenos | All Rights Reserved | Powered by Exon Software Solutions (Pvt) Ltd              
                 </p>
               </div>
             </div>

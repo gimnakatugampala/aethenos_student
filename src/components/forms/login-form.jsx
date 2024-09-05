@@ -83,7 +83,7 @@ const LoginForm = () => {
                  onChange={(e) => setpassword(e.target.value)}
                     type={showPass?"text":"password"} 
                     name="password"
-                    placeholder="Password" 
+                    placeholder="Enter Password" 
                 />
             
                 {showPass ? (<span onClick={() => setshowPass(!showPass)} className="password-show"><i class="fas fa-eye-slash fa-lg"></i></span>) : (<span onClick={() => setshowPass(!showPass)} className="password-show"><i class="far fa-eye fa-lg"></i></span>)} 
