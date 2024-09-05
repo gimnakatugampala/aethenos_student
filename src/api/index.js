@@ -1706,6 +1706,52 @@ export const GetMyCoursesDetails = async(id, setcourse) => {
     .catch((error) => console.error(error));
 };
 
+export const GetMyCoursesDetailsWithPlugin = async(id, setcourse) => {
+  try {
+    const token = Cookies.get('aethenos');  // Get the token from cookies
+    
+    if (!token) {
+      throw new Error('Authorization token not found');
+    }
+
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow"
+    };
+
+    const response = await fetch(`${BACKEND_LINK}/payment/getPurchasedCourseDetailsByItemCode/${id}`, requestOptions);
+    
+    if (!response.ok) {
+      if (response.status === 401) {
+        console.error("Unauthorized access - please check your token.");
+      }
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log(result);
+
+    // Sort each section's curriculum items by arrangeNo
+    result.course_content.forEach(section => {
+      section.section_curriculum_item.sort((a, b) => {
+        if (a.arrangeNo === null || a.arrangeNo === undefined) return 1;
+        if (b.arrangeNo === null || b.arrangeNo === undefined) return -1;
+        return parseInt(a.arrangeNo, 10) - parseInt(b.arrangeNo, 10);
+      });
+    });
+
+    setcourse(result);
+
+  } catch (error) {
+    console.error('Error fetching course details:', error);
+  }
+};
+
+
 export const SubmitCourseReview = async(id,msg,rating,setbtnloading) =>{
 
   setbtnloading(true)
@@ -2799,6 +2845,42 @@ export const DownloadCertificate = async (itemCode) => {
     saveAs(pdfBlob, filePath.split("/").pop());
   } catch (error) {
     console.error("Error downloading the certificate:", error);
+  }
+};
+
+export const LoginWithTokenForItemCode = async (token) => {
+  const requestOptions = {
+    method: "POST",
+    redirect: "follow"
+  };
+
+  try {
+    const response = await fetch(`${BACKEND_LINK}/authentication/studentLoginWithloginToken/${token}`, requestOptions);
+    const result = await response.json();
+    console.log(result);
+
+    if (result.variable == "404") {
+      Swal.fire({
+        title: `Error`,
+        text: `${result.message}`,
+        icon: 'error',
+      });
+      return false;  // Authentication failed
+    } else {
+      if (ENV_STATUS == "dev") {
+        Cookies.set('aethenos', `${result.token}`, { expires: 7 });
+   
+      } else {
+        Cookies.set('aethenos', `${result.token}`, { expires: 7, domain: '.aethenos.com' });
+      
+
+      }
+
+      return true;  // Authentication succeeded
+    }
+  } catch (error) {
+    console.error(error);
+    return false;  // Authentication failed
   }
 };
 

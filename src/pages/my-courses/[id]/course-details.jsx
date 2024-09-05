@@ -29,6 +29,7 @@ import CommentFormCourse from "../../../components/forms/comment-form-course";
 import Accordian from "../../../components/course-content/accordian";
 import CalculateTimeAgo from "../../../functions/calculateTimeAgo";
 import { throttle } from 'lodash'; // Use lodash's throttle function
+import { useRouter } from 'next/router';
 
 
 
@@ -41,6 +42,8 @@ import {
   GetMyCoursesDetails,
   GetReviews,
   IMG_HOST,
+  LoginWithToken,
+  LoginWithTokenForItemCode,
   StoreLastMarkedCurriculum,
   UpdateCourseCurriculumProgress,
   VideoStreaming,
@@ -76,6 +79,9 @@ import { Footer } from "../../../layout";
 import { ConvertToHTML, StripeHTML } from "../../../functions/ConvertToHTML";
 
 const CourseDetailsArea1 = ({ id, course, setcourse }) => {
+
+  const router = useRouter();
+
   const [featured_reviews, setfeatured_reviews] = useState(null);
 
   const [main_Video_player_url, setmain_Video_player_url] = useState("");
@@ -170,6 +176,39 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
   }, []);
 
   useEffect(() => {
+
+    // ------------- From Excel Plugin API -----------
+  // Extract the query parameters
+  const { sectionID, curriclumID, SyllabusType} = router.query;
+
+  // Only execute if sectionID, curriclumID, and type are not null or undefined
+  if (sectionID && curriclumID && SyllabusType) {
+
+    let curriculumItem = null;
+
+    // Find the curriculum item based on sectionID and curriclumID
+    curriculumItem = course?.course_content
+      .find((s) => s.section_id == sectionID)
+      ?.section_curriculum_item.find(
+        (c) => c.curriculumItemId == curriclumID
+      );
+
+    if (curriculumItem) {
+      // If curriculum item is found, handle it
+      handleCheckCurriculum(curriculumItem);
+    } else {
+      console.error("Curriculum item not found");
+    }
+
+    console.log("------------------");
+    console.log(curriculumItem);
+    console.log("------------------");
+
+  // ------------- From Excel Plugin API -----------
+
+  }else{
+
+    // Normal way
     if (!isDataFetched) return;
 
     const selectedSectionId = selectedCurriculumItemDataLastPosition?.sectionId;
@@ -209,6 +248,8 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
     } else {
       console.error("Curriculum item not found");
     }
+
+  }
   }, [isDataFetched, selectedCurriculumItemDataLastPosition]);
 
   const handleCheckCurriculum = (curriculumItem) => {
@@ -400,6 +441,23 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
         break;
     }
   };
+
+
+  // ------------- From Excel Plugin API -----------
+  useEffect(() => {
+
+    
+
+    // Log the extracted values (for debugging)
+    // console.log('Section ID:', sectionID);
+    // console.log('Curriculum ID:', curriclumID);
+    // console.log('Type:', type);
+
+    // Replace the URL without the query parameters and without refreshing the page
+   
+  }, [router.query]);
+
+   // ------------- From Excel Plugin API -----------
 
   // Ask a new Question
   const [showNewQuestion, setShowNewQuestion] = useState(false);
