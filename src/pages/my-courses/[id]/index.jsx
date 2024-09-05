@@ -21,9 +21,9 @@ const index = () => {
             if (loginToken) {
                 console.log(loginToken);
 
-                const isAuthenticated = await LoginWithTokenForItemCode(loginToken);
+                // const isAuthenticated = await LoginWithTokenForItemCode(loginToken);
 
-                if (isAuthenticated) {
+                // if (isAuthenticated) {
                     const { pathname, query } = router;
                     delete query.loginToken;  // Remove loginToken from query
                     router.replace({ pathname, query }, undefined, { shallow: true });
@@ -33,7 +33,7 @@ const index = () => {
                         await GetMyCoursesDetailsWithPlugin(id, setcourse);
                         return;
                     }
-                }
+                // }
             } else {
                 // If the login token is not there, execute this
                 if (id != null) {
