@@ -43,7 +43,7 @@ const Index = () => {
       <CircularProgress />
     </Box>
     <Typography variant="h5" component="h2" gutterBottom>
-      Authenticating Excel Users
+      Authenticating Excel Plugin Users
     </Typography>
     <Typography variant="body1">
       Please wait while we authenticate your credentials and redirect you to your course.
