@@ -22,7 +22,6 @@ import {
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
 const CourseTypeFour = ({ data, classes, index }) => {
-
   const isSecondOrFourthCard = (index + 1) % 2 === 0;
 
   const { cartCourses } = useSelector((state) => state.cart);
@@ -39,8 +38,8 @@ const CourseTypeFour = ({ data, classes, index }) => {
   const [mouseX, setMouseX] = useState(null);
 
   const handleRemoveFromCart = (item) => {
-     dispatch(remove_cart_course(item))
-  }
+    dispatch(remove_cart_course(item));
+  };
 
   const handleWishlist = (course_item) => {
     if (wishlists.find((i) => i.id === course_item.id)) {
@@ -112,15 +111,16 @@ const CourseTypeFour = ({ data, classes, index }) => {
   return (
     <div
       className={`edu-course course-style-5 ${classes ? classes : ""} h-100`}
-      style={{cursor :"default"}}
+      style={{ cursor: "default" }}
     >
       <div className="inner">
         <div className="thumbnail">
           <Link href={`/course-details/${data.course_code}`} legacyBehavior>
             <img
-              style={{ width: "100%", height : "25%" ,objectFit: "cover" }}
+              style={{ width: "100%", height: "300px", objectFit: "cover" }}
               src={`${IMG_HOST}${data.img}`}
               alt={data.title}
+              className="img-fluid"
             />
           </Link>
         </div>
@@ -187,13 +187,19 @@ const CourseTypeFour = ({ data, classes, index }) => {
       </div>
 
       <div
-       className={`hover-content-aside ${isSecondOrFourthCard ? 'content-right' : ''}` }
-       style={{cursor :"default"}}
+        className={`hover-content-aside ${
+          isSecondOrFourthCard ? "content-right" : ""
+        }`}
+        style={{ cursor: "default" }}
       >
         <div className="content">
           <span className="course-level">{data.category}</span>
           <h5 className="title">
-            <n-link to="/course/course-details">{data.title}</n-link>
+            <n-link to="/course/course-details">
+              {data.title.length > 20
+                ? data.title.slice(0, 35) + "..."
+                : data.title}
+            </n-link>
           </h5>
           <div className="course-rating">
             <StarsRating

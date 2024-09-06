@@ -69,7 +69,7 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
             ))}
             <div className="col-md-10">
               <div className="col-md-3 mx-lg-5 float-left">
-                <img className=" w-75" src={logoLight} alt="Corporate Logo" />
+                <img className=" w-50" src={logoLight} alt="Corporate Logo" />
               </div>
             </div>
           </div>
@@ -79,17 +79,17 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
       <div className="copyright-area">
         <div className="">
           <div className="row">
-            <div className="col-6">
+            <div className="col-10">
               <div className="inner mx-5 float-left">
-                <p>
+                <p className="fs-20 fs-md-5 fs-lg-4">
                   © {new Date().getFullYear()} Aethenos | All Rights Reserved | Powered by Exon Software Solutions (Pvt) Ltd              
                 </p>
               </div>
             </div>
-            <div className="col-6">
-              <div className="inner float-end" style={{ marginRight: "4rem" }}>
+            <div className="col-2">
+              <div className="inner float-end" style={{ marginRight: "2.5rem" }}>
                 <img
-                  style={{ height: "40px", position: "absolute" }}
+                  style={{ height: "30px", display: "flex", alignItems: "center" }}
                   src={exonLogo}
                   alt="Corporate Logo"
                 />
