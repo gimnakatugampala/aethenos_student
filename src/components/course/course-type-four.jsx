@@ -118,7 +118,7 @@ const CourseTypeFour = ({ data, classes, index }) => {
         <div className="thumbnail">
           <Link href={`/course-details/${data.course_code}`} legacyBehavior>
             <img
-              style={{ width: "100%", objectFit: "cover" }}
+              style={{ width: "100%", height : "25%" ,objectFit: "cover" }}
               src={`${IMG_HOST}${data.img}`}
               alt={data.title}
             />

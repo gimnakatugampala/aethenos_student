@@ -157,7 +157,7 @@ const Header = ({
                           <Menu
                             menuButton={
                               <a>
-                                <i className="icon-1"></i>Categories
+                                <i className="icon-1"></i>Courses
                               </a>
                             }
                           >
@@ -383,7 +383,7 @@ const Header = ({
 
 
 
-                  <li className="icon cart-icon">
+                  <li className="icon cart-icon mx-3">
                     <Link href="/wishlist" legacyBehavior>
                       <a className="cart-icon">
                         <i className="icon-22"></i>
@@ -391,7 +391,7 @@ const Header = ({
                       </a>
                     </Link>
                   </li>
-                  <li className="icon cart-icon">
+                  <li className="icon cart-icon mx-3">
                     <Link href="/cart" legacyBehavior>
                       <a className="cart-icon">
                         <i className="icon-3"></i>
@@ -408,13 +408,13 @@ const Header = ({
                     <>
                       {CURRENTUSER == null ? (
                         <>
-                          <li className="header-info">
+                          <li className="header-info mx-3">
                             <Link href="/login" legacyBehavior>
                               <a className="edu-btn btn-small">Log in</a>
                             </Link>
                           </li>
 
-                          <li className="header-info">
+                          <li className="header-info mx-3">
                             <Link href="/signup" legacyBehavior>
                               <a className="edu-btn btn-small">Sign up</a>
                             </Link>
@@ -422,7 +422,7 @@ const Header = ({
                         </>
                       ) : (
                         <>
-                          <li className="icon cart-icon">
+                          <li className="icon cart-icon mx-3">
                             <Link href="/cart" legacyBehavior>
                               <a className="cart-icon">
                                 <i class="bi bi-bell"></i>
