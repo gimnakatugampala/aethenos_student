@@ -3,19 +3,18 @@ import useModal from "../../../hooks/use-modal";
 import { Books } from "../../../svg";
 import VideoModal from "../popup-modal/video-modal";
 import { useDispatch, useSelector } from "react-redux";
-import {
+import { 
   wishlistItems,
   add_to_wishlist,
 } from "../../../redux/features/wishlist-slice";
 import { cart_course } from "../../../redux/features/cart-slice";
-import { EnrollByStudent, IMG_HOST, GetCourseTitle } from "../../../api";
+import { EnrollByStudent, IMG_HOST } from "../../../api";
 import CalculateDiscountedPrice from "../../../functions/pricing/CalculateDiscountedPrice";
 import GetCurrencyByCountry from "../../../functions/pricing/GetCurrencyByCountry";
 import getSymbolFromCurrency from "currency-symbol-map";
 import CalculateListPrice from "../../../functions/pricing/CalculateListPrice";
 import CalculateDiscountPrice from "../../../functions/pricing/CalculateDiscountPrice";
 import Cookies from "js-cookie";
-import { useEffect } from "react";
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
@@ -47,8 +46,6 @@ export const FormatVideoTimeLength = (seconds) => {
 const CourseDetailsSidebar = ({ course, details_2 = false }) => {
   const { cartCourses } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
-  const [courseVideoLength, setCourseVideoLength] = useState(0);
 
   const wishlists = useSelector(wishlistItems);
   const isWishlistSelected = wishlists.find(
@@ -91,17 +88,8 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
   } = course || {};
   const { isVideoOpen, setIsVideoOpen } = useModal();
 
-  useEffect(() => {
-    GetCourseTitle(course.course_code , setCourseVideoLength);
-
-    
-  console.log(course.course_code)
-  console.log(courseVideoLength)
-
-  }, [course.course_code]);
 
   
-
   const handleWishlist = (course_item) => {
     if (wishlists.find((i) => i.id === course_item.id)) {
       dispatch(
@@ -228,12 +216,12 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                 )}
 
 
-                {courseVideoLength > 0 && (
+                {course.duration > 0 && (
                   <li>
                     <span className="label">
                       <i className="bi bi-play-btn"></i>Total Video length
                     </span>
-                    <span className="value">{FormatVideoTimeLength(courseVideoLength)}</span>
+                    <span className="value">{FormatVideoTimeLength(course.duration)}</span>
                   </li>
                 )}
 
