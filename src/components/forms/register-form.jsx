@@ -217,8 +217,10 @@ const RegisterForm = () => {
 
     useEffect(() => {
       const token = Cookies.get('aethenos');
+      console.log(token); // Check if the token is correctly retrieved
       setUserToken(token);
-    }, []);
+    });
+    
     
 
 
@@ -269,9 +271,14 @@ const RegisterForm = () => {
           <button onClick={handleVerifyEmail}  className="edu-btn btn-medium mx-auto w-100">Verify</button>
         )}
 
-        <div className='text-center my-3'>
+      <div className='text-center my-3'>
+        {userToken ? (
           <a href={`/student-interests?token=${userToken}`} style={{cursor:'pointer'}} className='text-danger'><b>Skip Now</b></a>
-        </div>
+        ) : (
+          <p>Loading...</p> // You can display a loader or leave this empty if you don't want any text
+        )}
+      </div>
+
 
         </>
         ) : (
