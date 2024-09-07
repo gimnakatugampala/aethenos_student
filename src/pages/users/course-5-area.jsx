@@ -24,6 +24,7 @@ import MainLoading from "../../functions/Loading/MainLoading";
 import { SpinnerCircular } from "spinners-react";
 // import SearchResults from '../../../components/course-category/landscape-courses/searchResults'
 import SearchResults from "../../components/course-category/landscape-courses/searchResults";
+import LargeLoading from "../../functions/Loading/LargeLoading";
 
 
 
@@ -66,15 +67,9 @@ const CourseFiveArea = () => {
       <div className="mx-5">
         <div className="row g-5 mx-5">
           {loading ? (
-            <div className="col-md-5 mx-5">
-              {" "}
-              <SpinnerCircular
-                size={100}
-                thickness={150}
-                speed={100}
-                color="#e01D20"
-              />{" "}
-            </div>
+           
+              <LargeLoading
+              />
           ) : (
             <div className="row col-md-12">
               <div className="col-md-8">
