@@ -1492,6 +1492,9 @@ export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorTe
 
         }else{
           console.log("Not Found")
+          setCouponErrorText("Course Coupon Not Found")
+          setcouponError(true)
+          setbtnLoading(false)
         }
       }
       

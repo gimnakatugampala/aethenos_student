@@ -31,7 +31,7 @@ const CalculateCouponDiscountedPrice = async (data) => {
     //         } else {
     //             // Convert the global discount price to the local currency if needed
     //             if (EX_RATES) {
-                    return (parseFloat(data.course_prices.global_discount_price) * parseFloat(JSON.parse(EX_RATES))).toFixed(2);
+                    return (parseFloat(data.course_prices.global_discount) * parseFloat(JSON.parse(EX_RATES))).toFixed(2);
     //             } else {
     //                 return data.course_prices.global_discount_price;
     //             }

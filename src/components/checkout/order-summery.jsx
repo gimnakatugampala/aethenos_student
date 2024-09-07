@@ -74,7 +74,7 @@ const newPricing = cartCourses != null && cartCourses.map((course) => {
     const discountedPrice = coupon 
         ? (coupon.couponType === 1 
             ? 0 // Free coupon
-            : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+            : Math.max(originalPrice - (coupon.global_discount || 0), 0) // Apply global discount
         ) 
         : originalPrice;
 
@@ -100,7 +100,7 @@ const newPricing = cartCourses != null && cartCourses.map((course) => {
     // const discountedPrice = coupon 
     // ? (coupon.couponType === 1 
     //     ? 0 // Free coupon
-    //     : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+    //     : Math.max(originalPrice - (coupon.global_discount || 0), 0) // Apply global discount
     // ) 
     // : originalPrice;
 
@@ -124,7 +124,7 @@ const calculateTotalWithCoupon = () => {
         const discountedPrice = coupon 
             ? (coupon.couponType === 1 
                 ? 0 // Free coupon
-                : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+                : Math.max(originalPrice - (coupon.global_discount || 0), 0) // Apply global discount
             ) 
             : originalPrice;
         return acc + discountedPrice;
@@ -140,7 +140,7 @@ const generatePaypalItems = () => {
         const discountedPrice = coupon 
             ? (coupon.couponType === 1 
                 ? 0 // Free coupon
-                : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+                : Math.max(originalPrice - (coupon.global_discount || 0), 0) // Apply global discount
             ) 
             : originalPrice;
         
@@ -181,7 +181,7 @@ const generatePaypalItems = () => {
                 const discountedPrice = coupon 
                     ? (coupon.couponType === 1 
                         ? 0 // Free coupon
-                        : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+                        : Math.max(originalPrice - (coupon.global_discount || 0), 0) // Apply global discount
                     ) 
                     : originalPrice;
 
@@ -205,7 +205,7 @@ const generatePaypalItems = () => {
                         if (coupon.couponType === 1) {
                             acc += originalPrice; // Full discount
                         } else {
-                            acc += coupon.global_discount_price || 0; // Apply global discount
+                            acc += coupon.global_discount || 0; // Apply global discount
                         }
                     }
                     return acc;
@@ -324,7 +324,7 @@ const generatePaypalItems = () => {
                                 const discountedPrice = coupon 
                                     ? (coupon.couponType === 1 
                                         ? 0 // Free coupon
-                                        : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+                                        : Math.max(originalPrice - (coupon.global_discount || 0), 0) // Apply global discount
                                     ) 
                                     : originalPrice;
 
