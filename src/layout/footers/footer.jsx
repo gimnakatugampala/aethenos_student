@@ -52,13 +52,13 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
             {widgets.map((w, i) => (
               <div key={i} className={`col-lg-${w.col} col-sm-6`}>
                 <div className={`edu-footer-widget ${w.class}`}>
-                  <h4 className="widget-title">{w.widget_title}</h4>
+                  <h3 className="widget-title">{w.widget_title}</h3>
                   <div className="inner">
                     <ul className="footer-link link-hover">
                       {w.footer_links.map((l, i) => (
                         <li key={i}>
                           <Link href={`/${l.link}`} legacyBehavior>
-                            <a>{l.title}</a>
+                            <a style={{fontSize: "1.2rem"}}>{l.title}</a>
                           </Link>
                         </li>
                       ))}
@@ -82,7 +82,7 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
             <div className="col-10">
               <div className="inner mx-5 float-left">
                 <p className="fs-20 fs-md-5 fs-lg-4">
-                  © {new Date().getFullYear()} Aethenos | All Rights Reserved | Powered by Exon Software Solutions (Pvt) Ltd              
+                  © {new Date().getFullYear()} Aethenos             
                 </p>
               </div>
             </div>

@@ -719,12 +719,12 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
           {/* New Tab */}
           <div className="container mx-2">
             <div className="row">
-              <div className="col-md-12">
-                <div className="course-details-content">
+              <div className="col-md-12 mx-3 ">
+                <div className="course-details-content ">
                   <ul className="nav nav-tabs float-start" id="myTab" role="tablist">
                     <li className="nav-item" role="presentation">
                       <button
-                        className="nav-link active"
+                        className="nav-link active" 
                         id="overview-tab"
                         data-bs-toggle="tab"
                         data-bs-target="#overview"
