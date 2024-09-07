@@ -24,10 +24,10 @@ const useCartInfo = () => {
         
     }, [couponValue]); // Empty dependency array to run the effect only once on component mount
     
-    // useEffect(() => {
-    //     console.log(couponValue);
-    //     console.log(cartItems);
-    // }, [couponValue]); // Add couponValue to the dependency array
+    useEffect(() => {
+        console.log(couponValue);
+        // console.log(cartItems);
+    }, [couponValue]); // Add couponValue to the dependency array
 
 
     useEffect(() => {
@@ -36,6 +36,8 @@ const useCartInfo = () => {
             // const itemTotal = price * quantity;
             const coupon = couponValue.length > 0 && couponValue.find(coupon => coupon.id == id);
             let itemTotal= 0;
+
+            console.log(coupon)
 
             if (coupon != null) {
                 if (coupon.couponType == 1) {

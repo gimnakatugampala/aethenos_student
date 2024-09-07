@@ -2225,7 +2225,8 @@ Scroll Down Button Animation
 .rn-progress-parent {
   position: fixed;
   right: 30px;
-  bottom: 30px;
+  bottom: 0;
+  margin-bottom: 6.5rem;
   height: 46px;
   width: 46px;
   cursor: pointer;
@@ -7496,7 +7497,7 @@ body.sal-disabled [data-sal|=flip] {
 }
 .edu-course.course-style-5 .content .course-level {
   background-color: transparent;
-  color: var(--color-secondary);
+  color: var(--color-body);
   font-size: 15px;
   padding: 0;
 }

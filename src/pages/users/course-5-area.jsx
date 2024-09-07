@@ -25,6 +25,8 @@ import { SpinnerCircular } from "spinners-react";
 // import SearchResults from '../../../components/course-category/landscape-courses/searchResults'
 import SearchResults from "../../components/course-category/landscape-courses/searchResults";
 
+
+
 // course_items
 const course_items = course_data.filter(
   (arr, index, self) =>
@@ -157,47 +159,64 @@ const CourseFiveArea = () => {
                   </a>
                 )}
 
-                {instructor_details.website && (
-                  <a
-                    href={`https://${instructor_details.website}`}
-                    className="btn btn-outline-dark text-center fs-6 mb-1"
-                    style={stylesBlock}
-                    onMouseEnter={(e) => {
-                      e.target.style.backgroundColor = "#F0FFFF";
-                      e.target.style.color = "inherit";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.backgroundColor = "transparent";
-                      e.target.style.color = "inherit";
-                    }}
-                  >
-                    <LanguageIcon />
-                    Website
-                  </a>
-                )}
+              {instructor_details.website && (
+                <a
+                  target="_blank"
+                  href={
+                    instructor_details.website.startsWith("http")
+                      ? instructor_details.website
+                      : `https://${instructor_details.website}`
+                  }
+                  className="btn btn-outline-dark text-center fs-6 mb-1"
+                  style={stylesBlock}
+                  onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = "#F0FFFF";
+                    e.target.style.color = "inherit";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = "transparent";
+                    e.target.style.color = "inherit";
+                  }}
+                >
+                  <LanguageIcon />
+                  Website
+                </a>
+              )}
 
-                {instructor_details.twitter && (
-                  <a
-                    href={`https://twitter.com/${instructor_details.twitter}`}
-                    className="btn btn-outline-dark text-center fs-6 mb-1"
-                    style={stylesBlock}
-                    onMouseEnter={(e) => {
-                      e.target.style.backgroundColor = "#F0FFFF";
-                      e.target.style.color = "inherit";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.backgroundColor = "transparent";
-                      e.target.style.color = "inherit";
-                    }}
-                  >
-                    <TwitterIcon />
-                    Twitter
-                  </a>
-                )}
+
+                  {instructor_details.twitter && (
+                    <a
+                      target="_blank"
+                      href={
+                        instructor_details.twitter.startsWith("http")
+                          ? instructor_details.twitter
+                          : `https://twitter.com/${instructor_details.twitter}`
+                      }
+                      className="btn btn-outline-dark text-center fs-6 mb-1"
+                      style={stylesBlock}
+                      onMouseEnter={(e) => {
+                        e.target.style.backgroundColor = "#F0FFFF";
+                        e.target.style.color = "inherit";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.backgroundColor = "transparent";
+                        e.target.style.color = "inherit";
+                      }}
+                    >
+                     <i className="fa-brands fa-x-twitter"></i>
+                      Twitter
+                    </a>
+                  )}
+
 
                 {instructor_details.facebook && (
                   <a
-                    href={`https://www.facebook.com/${instructor_details.facebook}`}
+                    target="_blank"
+                    href={
+                      instructor_details.facebook.startsWith("http")
+                        ? instructor_details.facebook
+                        : `https://www.facebook.com/${instructor_details.facebook}`
+                    }
                     className="btn btn-outline-dark text-center fs-6 mb-1"
                     style={stylesBlock}
                     onMouseEnter={(e) => {
@@ -214,44 +233,57 @@ const CourseFiveArea = () => {
                   </a>
                 )}
 
-                {instructor_details.linkedin && (
-                  <a
-                    href={`https://www.linkedin.com/in/${instructor_details.linkedin}`}
-                    className="btn btn-outline-dark text-center fs-6 mb-1"
-                    style={stylesBlock}
-                    onMouseEnter={(e) => {
-                      e.target.style.backgroundColor = "#F0FFFF";
-                      e.target.style.color = "inherit";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.backgroundColor = "transparent";
-                      e.target.style.color = "inherit";
-                    }}
-                  >
-                    <LinkedInIcon />
-                    LinkedIn
-                  </a>
-                )}
+
+            {instructor_details.linkedin && (
+              <a
+                target="_blank"
+                href={
+                  instructor_details.linkedin.startsWith("http")
+                    ? instructor_details.linkedin
+                    : `https://www.linkedin.com/in/${instructor_details.linkedin}`
+                }
+                className="btn btn-outline-dark text-center fs-6 mb-1"
+                style={stylesBlock}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = "#F0FFFF";
+                  e.target.style.color = "inherit";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = "transparent";
+                  e.target.style.color = "inherit";
+                }}
+              >
+                <LinkedInIcon />
+                LinkedIn
+              </a>
+            )}
+
 
                 {/* Youtube */}
                 {instructor_details.youtube && (
-                  <a
-                    href={`https://www.youtube.com/c/${instructor_details.youtube}`}
-                    className="btn btn-outline-dark text-center fs-6 mb-1"
-                    style={stylesBlock}
-                    onMouseEnter={(e) => {
-                      e.target.style.backgroundColor = "#F0FFFF";
-                      e.target.style.color = "inherit";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.backgroundColor = "transparent";
-                      e.target.style.color = "inherit";
-                    }}
-                  >
-                    <YouTubeIcon />
-                    Youtube
-                  </a>
-                )}
+                    <a
+                      target="_blank"
+                      href={
+                        instructor_details.youtube.startsWith("http")
+                          ? instructor_details.youtube
+                          : `https://www.youtube.com/@${instructor_details.youtube}`
+                      }
+                      className="btn btn-outline-dark text-center fs-6 mb-1"
+                      style={stylesBlock}
+                      onMouseEnter={(e) => {
+                        e.target.style.backgroundColor = "#F0FFFF";
+                        e.target.style.color = "inherit";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.backgroundColor = "transparent";
+                        e.target.style.color = "inherit";
+                      }}
+                    >
+                      <YouTubeIcon />
+                      Youtube
+                    </a>
+                  )}
+
               </div>
             </div>
           )}
