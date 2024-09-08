@@ -132,15 +132,15 @@ const Header = ({
                   <Link href={"/"} legacyBehavior>
                     <a>
                       <img
-                        width={150}
-                        height={50}
+                        width={200}
+                        height={100}
                         className="logo-light"
                         src="/assets/images/logo/Header_Athenos_logo.png"
                         alt="logo"
                       />
                       <img
-                        width={150}
-                        height={50}
+                         width={200}
+                         height={100}
                         className="logo-dark"
                         src="/assets/images/logo/Header_Athenos_logo.png"
                         alt="logo"
@@ -156,8 +156,8 @@ const Header = ({
                         <li className="has-droupdown">
                           <Menu
                             menuButton={
-                              <a>
-                                <i className="icon-1"></i>Courses
+                              <a style={{fontSize: "18px"}}>
+                                <i className="icon-1"></i>Categories
                               </a>
                             }
                           >
@@ -386,7 +386,7 @@ const Header = ({
                   <li className="icon cart-icon mx-3">
                     <Link href="/wishlist" legacyBehavior>
                       <a className="cart-icon">
-                        <i className="icon-22"></i>
+                        <i className="icon-22 fs-4" ></i>
                         <span className="count">{wishlists?.length}</span>
                       </a>
                     </Link>
@@ -394,7 +394,7 @@ const Header = ({
                   <li className="icon cart-icon mx-3">
                     <Link href="/cart" legacyBehavior>
                       <a className="cart-icon">
-                        <i className="icon-3"></i>
+                        <i className="icon-3 fs-4"></i>
                         <span className="count">{quantity}</span>
                       </a>
                     </Link>
@@ -410,13 +410,13 @@ const Header = ({
                         <>
                           <li className="header-info mx-3">
                             <Link href="/login" legacyBehavior>
-                              <a className="edu-btn btn-small">Log in</a>
+                              <a className="edu-btn btn-small fs-6 fw-bold">Log in</a>
                             </Link>
                           </li>
 
-                          <li className="header-info mx-3">
+                          <li className="header-info m-3 ">
                             <Link href="/signup" legacyBehavior>
-                              <a className="edu-btn btn-small">Sign up</a>
+                              <a className="edu-btn btn-small fs-6 fw-bold">Sign up</a>
                             </Link>
                           </li>
                         </>
@@ -425,7 +425,7 @@ const Header = ({
                           <li className="icon cart-icon mx-3">
                             <Link href="/cart" legacyBehavior>
                               <a className="cart-icon">
-                                <i class="bi bi-bell"></i>
+                                <i class="bi bi-bell fs-4"></i>
                                 <span className="count">
                                 {(notifications && notifications.length > 0
                                 ? notifications.filter(notification => !notification.isRead).length
