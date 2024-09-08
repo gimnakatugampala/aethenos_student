@@ -37,7 +37,7 @@ const useCartInfo = () => {
             const coupon = couponValue.length > 0 && couponValue.find(coupon => coupon.id == id);
             let itemTotal= 0;
 
-            console.log(coupon)
+            // console.log(coupon)
 
             if (coupon != null) {
                 if (coupon.couponType == 1) {

@@ -15,6 +15,7 @@ import Stack from '@mui/material/Stack';
 import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
 import { reactLocalStorage } from 'reactjs-localstorage';
+import CalculateCouponDiscountedPrice from '../../functions/pricing/CalculateCouponDiscountedPrice';
 
 
 
@@ -70,11 +71,16 @@ const OrderSummery = ({showStripe,showPaypal}) => {
 
 const newPricing = cartCourses != null && cartCourses.map((course) => {
     const coupon = couponValue.find(coupon => coupon.id === course.id);
+    console.log(coupon)
+    
+    if(coupon){
+        console.log(CalculateCouponDiscountedPrice(coupon))
+    }
     const originalPrice = CalculateDiscountedPrice(course.other_data) || 0;
     const discountedPrice = coupon 
         ? (coupon.couponType === 1 
             ? 0 // Free coupon
-            : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+            : CalculateCouponDiscountedPrice(coupon) // Apply global discount
         ) 
         : originalPrice;
 
@@ -124,7 +130,7 @@ const calculateTotalWithCoupon = () => {
         const discountedPrice = coupon 
             ? (coupon.couponType === 1 
                 ? 0 // Free coupon
-                : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+                : CalculateCouponDiscountedPrice(coupon) // Apply global discount
             ) 
             : originalPrice;
         return acc + discountedPrice;
@@ -140,7 +146,7 @@ const generatePaypalItems = () => {
         const discountedPrice = coupon 
             ? (coupon.couponType === 1 
                 ? 0 // Free coupon
-                : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+                : CalculateCouponDiscountedPrice(coupon) // Apply global discount
             ) 
             : originalPrice;
         
@@ -181,7 +187,7 @@ const generatePaypalItems = () => {
                 const discountedPrice = coupon 
                     ? (coupon.couponType === 1 
                         ? 0 // Free coupon
-                        : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+                        : CalculateCouponDiscountedPrice(coupon) // Apply global discount
                     ) 
                     : originalPrice;
 
@@ -205,7 +211,7 @@ const generatePaypalItems = () => {
                         if (coupon.couponType === 1) {
                             acc += originalPrice; // Full discount
                         } else {
-                            acc += coupon.global_discount_price || 0; // Apply global discount
+                            acc += CalculateCouponDiscountedPrice(coupon); // Apply global discount
                         }
                     }
                     return acc;
@@ -324,7 +330,7 @@ const generatePaypalItems = () => {
                                 const discountedPrice = coupon 
                                     ? (coupon.couponType === 1 
                                         ? 0 // Free coupon
-                                        : Math.max(originalPrice - (coupon.global_discount_price || 0), 0) // Apply global discount
+                                        : CalculateCouponDiscountedPrice(coupon) // Apply global discount
                                     ) 
                                     : originalPrice;
 

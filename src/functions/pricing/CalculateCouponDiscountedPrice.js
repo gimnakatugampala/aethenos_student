@@ -1,49 +1,73 @@
 import React from 'react';
 import Cookies from 'js-cookie';
+import { getCurrencyExchangeRate, USERTOKEN } from '../../api';
+import countries from 'i18n-iso-countries';
+import { getAllInfoByISO } from 'iso-country-currency';
 
-const COUNTRY = Cookies.get('aethenos_user_origin');
-const EX_RATES = Cookies.get('aethenos_currency');
+// Initialize the countries library with the English locale
+countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
-const CalculateCouponDiscountedPrice = async (data) => {
-    // Extract user's country from the cookie
+const CalculateCouponDiscountedPrice =  (data) => {
+    const COUNTRY = Cookies.get('aethenos_user_origin');
+    const USER_LOGIN_COUNTRY = Cookies.get('aethenos_user_country');
+    // Get the updated exchange rates from the cookie
+    const EX_RATES = Cookies.get('aethenos_currency');
+
     let countryToFind = "";
-    if (COUNTRY) {
-        try {
-            const parsedCountry = JSON.parse(COUNTRY);
-            countryToFind = parsedCountry.country_name;
-        } catch (error) {
-            console.error("Error parsing COUNTRY cookie:", error);
+
+    // Determine the country based on login status
+    if (Cookies.get('USERTOKEN')) {
+        if (USER_LOGIN_COUNTRY) {
+            countryToFind = USER_LOGIN_COUNTRY;
+        }
+    } else {
+        if (COUNTRY) {
+            try {
+                const parsedCountry = JSON.parse(COUNTRY);
+                countryToFind = parsedCountry.country_name;
+            } catch (error) {
+                console.error("Error parsing COUNTRY:", error);
+            }
         }
     }
-    
-    // Initialize the net price variable
-    let net_price = 2.0;
-    
-    // Check if course_prices and prices exist
-    // if (data.course_prices) {
-    //     // Check if the user's country exists in the prices array
-    //     const foundPrice = data.course_prices.find(single_price => single_price.countryName == countryToFind);
-        
-    //     if (foundPrice) {
-    //         // If the price for the user's country is found, return the discounted price
-    //         if (foundPrice.discountPrice > 0) {
-    //             return foundPrice.discountPrice;
-    //         } else {
-    //             // Convert the global discount price to the local currency if needed
-    //             if (EX_RATES) {
-                    return (parseFloat(data.course_prices.global_discount) * parseFloat(JSON.parse(EX_RATES))).toFixed(2);
-    //             } else {
-    //                 return data.course_prices.global_discount_price;
-    //             }
-    //         }
-    //     } else {
-    //         // If the user's country is not found, return the global discount price
-    //         return data.course_prices.global_discount_price;
-    //     }
-    // }
-    
-    // Return the default global discount price if course_prices is not available
-    // return 2;
+
+    let finalPrice = "";
+    let foundPrice = null;
+
+    if (data.course_prices != null) {
+        foundPrice = data.course_prices.find(single_price => countryToFind === single_price.countryName);
+
+        // If a price is found for the user's country
+        if (foundPrice) {
+            let priceToUse = foundPrice.listPrice;
+
+            // Apply the exchange rate only if the country is in the course_prices list
+            let exchangeRate = 1; // Default to 1
+
+            if (EX_RATES) {
+                try {
+                    exchangeRate = Number.parseFloat(EX_RATES) || 1;
+                } catch (error) {
+                    console.error("Error parsing EX_RATES:", error);
+                }
+            }
+
+            // Multiply the selected price by the exchange rate
+            finalPrice = (priceToUse * exchangeRate).toFixed(2);
+
+            // Handle currency-specific rounding for Japanese Yen
+            if (countryToFind === 'Japan') {
+                return Math.round(Number(finalPrice)).toString();
+            }
+
+            return Number.parseFloat(finalPrice);
+        } else {
+            // If the country is not found, use the global_discount_price without applying the exchange rate
+            return Number.parseFloat(data.global_discount_price);
+        }
+    } else {
+        return "0";
+    }
 };
 
 export default CalculateCouponDiscountedPrice;
