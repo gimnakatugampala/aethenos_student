@@ -180,6 +180,13 @@ const Accordian = ({
                                 type={"checkbox"}
                                 id={`default-${index}`}
                                 label={""}
+                                onClick={() => {
+                                  UpdateCourseCurriculumProgress(
+                                    itemCode,
+                                    list.curriculumItemId,
+                                    setcourse
+                                  );
+                                }}
                               />
                               <li className="d-flex">
                                 <p
