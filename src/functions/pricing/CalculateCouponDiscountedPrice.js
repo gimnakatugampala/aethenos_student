@@ -16,7 +16,7 @@ const CalculateCouponDiscountedPrice =  (data) => {
     let countryToFind = "";
 
     // Determine the country based on login status
-    if (Cookies.get('USERTOKEN')) {
+    if (USERTOKEN) {
         if (USER_LOGIN_COUNTRY) {
             countryToFind = USER_LOGIN_COUNTRY;
         }
@@ -39,26 +39,47 @@ const CalculateCouponDiscountedPrice =  (data) => {
 
         // If a price is found for the user's country
         if (foundPrice) {
-            let priceToUse = foundPrice.listPrice;
+            let priceToUse = foundPrice.discountPrice;
 
             // Apply the exchange rate only if the country is in the course_prices list
             let exchangeRate = 1; // Default to 1
 
-            if (EX_RATES) {
-                try {
-                    exchangeRate = Number.parseFloat(EX_RATES) || 1;
-                } catch (error) {
-                    console.error("Error parsing EX_RATES:", error);
+            // No Discount price is assigned to the found price
+            if(priceToUse == 0){
+
+                if (EX_RATES) {
+                    try {
+                        exchangeRate = Number.parseFloat(EX_RATES) || 1;
+                    } catch (error) {
+                        console.error("Error parsing EX_RATES:", error);
+                    }
                 }
-            }
+
+            // Multiply the selected price by the exchange rate
+            finalPrice = (Number.parseFloat(data.global_discount_price) * exchangeRate).toFixed(2);
+
+            }else{
+
+                exchangeRate = 1
 
             // Multiply the selected price by the exchange rate
             finalPrice = (priceToUse * exchangeRate).toFixed(2);
+
+            }
+
+
+            
+
+         
+
+           
 
             // Handle currency-specific rounding for Japanese Yen
             if (countryToFind === 'Japan') {
                 return Math.round(Number(finalPrice)).toString();
             }
+
+            console.log(foundPrice)
 
             return Number.parseFloat(finalPrice);
         } else {

@@ -67,7 +67,7 @@ const CalculateDiscountedPrice =  (data) => {
             // console.log(countryCode)
 
             // Get the Currency Code
-            console.log(getAllInfoByISO(countryCode).currency)
+            // console.log(getAllInfoByISO(countryCode).currency)
 
             // Get the New Ex Rate
             getCurrencyExchangeRate(getAllInfoByISO(countryCode).currency.toLowerCase())

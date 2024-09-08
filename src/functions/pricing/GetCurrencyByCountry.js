@@ -47,14 +47,14 @@ const GetCurrencyByCountry = (data) => {
         data.course_prices.prices.some(single_price => {
             if (countryToFind === single_price.country) {
                 foundPrice = single_price;
-                console.log(foundPrice)
+                // console.log(foundPrice)
                 return true;
             }
-            console.log(foundPrice)
+            // console.log(foundPrice)
             return false;
         });
 
-        console.log(foundPrice)
+        // console.log(foundPrice)
 
         if (foundPrice) {
            
@@ -65,7 +65,7 @@ const GetCurrencyByCountry = (data) => {
                 currency_code = getAllInfoByISO(countryCode).currency
     
                 // Get the Currency Code
-                console.log(getAllInfoByISO(countryCode).currency)
+                // console.log(getAllInfoByISO(countryCode).currency)
     
                 
 
@@ -82,7 +82,7 @@ const GetCurrencyByCountry = (data) => {
             //     currency_code = JSON.parse(COUNTRY).currency;
             // }
 
-        console.log(currency_code)
+        // console.log(currency_code)
 
 
             // Handle currency-specific rounding for Japanese Yen
@@ -93,13 +93,13 @@ const GetCurrencyByCountry = (data) => {
             }
         } else {
             // No specific price found, default to USD
-        console.log(currency_code)
+        // console.log(currency_code)
 
             return currency_code;
         }
         
     } else {
-        console.log(currency_code)
+        // console.log(currency_code)
         return currency_code;  // Return USD if no prices are found
     }
 
