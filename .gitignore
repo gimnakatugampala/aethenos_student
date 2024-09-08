@@ -7,6 +7,8 @@
 .next.zip
 /.next
 node_modules.zip
+.next.zip
+aethenos_strudent.zip
 
 # testing
 /coverage

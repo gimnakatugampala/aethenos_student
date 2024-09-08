@@ -45,7 +45,7 @@ const useCartInfo = () => {
                     itemTotal = CalculateDiscountedPrice(cartItem.other_data) - CalculateDiscountedPrice(cartItem.other_data);
                 } else {
                     // Apply discount directly from the coupon value
-                    itemTotal = coupon.global_discount_price == null ? CalculateDiscountedPrice(cartItem.other_data) : CalculateDiscountedPrice(cartItem.other_data) - coupon.global_discount;
+                    itemTotal = coupon.global_discount_price == null ? CalculateDiscountedPrice(cartItem.other_data) : coupon.global_discount_price;
                 }
             } else {
                 // If the coupon array is empty, don't reduce the amount
