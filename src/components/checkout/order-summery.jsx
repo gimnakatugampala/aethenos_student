@@ -71,11 +71,11 @@ const OrderSummery = ({showStripe,showPaypal}) => {
 
 const newPricing = cartCourses != null && cartCourses.map((course) => {
     const coupon = couponValue.find(coupon => coupon.id === course.id);
-    console.log(coupon)
+    // console.log(coupon)
     
-    if(coupon){
-        console.log(CalculateCouponDiscountedPrice(coupon))
-    }
+    // if(coupon){
+    //     console.log(CalculateCouponDiscountedPrice(coupon))
+    // }
     const originalPrice = CalculateDiscountedPrice(course.other_data) || 0;
     const discountedPrice = coupon 
         ? (coupon.couponType === 1 

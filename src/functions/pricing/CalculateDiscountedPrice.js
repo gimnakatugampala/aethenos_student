@@ -31,6 +31,7 @@ const CalculateDiscountedPrice =  (data) => {
                 console.error("Error parsing USER_LOGIN_COUNTRY:", error);
             }
         }
+ 
     } else {
         // User is not logged in, use COUNTRY from IP location
         if (COUNTRY) {
@@ -107,6 +108,11 @@ const CalculateDiscountedPrice =  (data) => {
                 console.error("Error parsing COUNTRY for currency:", error);
             }
         }
+
+        console.log(foundPrice)
+        console.log(net_price)
+        console.log(countryToFind)
+        console.log(USERTOKEN)
 
         return net_price;
     } else {
