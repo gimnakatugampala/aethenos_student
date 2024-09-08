@@ -11,6 +11,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/audio.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
+import { saveAs } from 'file-saver';
 
 import {
   MediaPlayer,
@@ -73,6 +74,23 @@ const CodingExerciseContainer = ({
   const handleReset = () => {
     setCodingExerciseActiveStep(0);
   };
+
+
+  const handleDownload = async (filePath) => {
+    console.log('Attempting to download:', filePath);
+    try {
+      const pdfResponse = await fetch(filePath);
+      if (!pdfResponse.ok) {
+        console.error('Network response error:', pdfResponse.status, pdfResponse.statusText);
+        throw new Error('Network response was not ok');
+      }
+      const pdfBlob = await pdfResponse.blob();
+      saveAs(pdfBlob, filePath.split("/").pop());
+    } catch (error) {
+      console.error('Download failed:', error.message);
+    }
+  };
+  
 
   const codingExercise = selectedCodingExercise?.getCodingExercises?.[0] || {};
 
@@ -157,13 +175,16 @@ const CodingExerciseContainer = ({
                   )}
 
                   {codingExercise.downloadableResource && (
-                    <a
-                      className="btn btn-danger my-2"
-                      href={`${IMG_HOST}${codingExercise.downloadableResource}`}
-                      download
-                    >
-                      Download Resource <i className="fas fa-download"></i>
-                    </a>
+
+                      <Button
+                      variant="contained"
+                      color="error"
+                      className="my-2"
+                      onClick={() => handleDownload(`${IMG_HOST}${codingExercise.downloadableResource}`)}
+                      >
+                      Download Resource <i className="fas fa-download mx-2"></i>
+                      </Button>
+
                   )}
 
                   {codingExercise.externalLink && (
@@ -196,13 +217,16 @@ const CodingExerciseContainer = ({
                 )}
 
                 {codingExercise.codingExerciseSheet && (
-                  <a
-                    className="btn btn-danger my-2"
-                    href={`${IMG_HOST}${codingExercise.codingExerciseSheet}`}
-                    download
-                  >
+
+                    <Button
+                    variant="contained"
+                    color="error"
+                    className="my-2"
+                    onClick={() => handleDownload(`${IMG_HOST}${codingExercise.codingExerciseSheet}`)}
+                    >
                     Download Questions <i className="fas fa-download"></i>
-                  </a>
+                    </Button>
+
                 )}
 
                 <br />
@@ -237,18 +261,22 @@ const CodingExerciseContainer = ({
                   )}
 
                   {codingExercise.codingSolutionsSheet && (
-                    <a
-                      className="btn btn-danger my-2"
-                      href={`${IMG_HOST}${codingExercise.codingSolutionsSheet}`}
-                      download
-                    >
-                      Download Answers <i className="fas fa-download"></i>
-                    </a>
+
+                    
+                  <Button
+                  variant="contained"
+                  color="error"
+                  className="my-2"
+                  onClick={() => handleDownload(`${IMG_HOST}${codingExercise.codingSolutionsSheet}`)}
+                  >
+                  Download Answers <i className="fas fa-download"></i>
+                  </Button>
                   )}
 
                   <br />
 
                   {codingExercise.solutionsExternalLink && (
+
                     <a
                       className="my-2"
                       href={codingExercise.solutionsExternalLink}

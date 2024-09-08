@@ -696,8 +696,8 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
               {/* Show Coding Exercise */}
               {showCodingExercise && (
                 <div
-                  className="container border p-4"
-                  style={{ maxHeight: "500px", overflowY: "scroll" }}
+                  className="container border border border-dark p-4"
+                  // style={{ maxHeight: "500px", overflowY: "scroll" }}
                 >
                   <CodingExerciseContainer
                     setCodingExerciseActiveStep={setCodingExerciseActiveStep}

@@ -183,7 +183,7 @@ const AssignmentContainer = ({
                   {selectedAssignment.getAssignments[0].downloadableResource !=
                     "" && (
 
-                      <Button
+                <Button
                   variant="contained"
                   color="error"
                   className="my-2"
