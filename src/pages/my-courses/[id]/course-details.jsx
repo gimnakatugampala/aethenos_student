@@ -683,7 +683,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
               {showPracticeTest && (
                 <div
                   className="container border p-4"
-                  style={{ maxHeight: "500px", overflowY: "scroll" }}
+                  // style={{ maxHeight: "500px", overflowY: "scroll" }}
                 >
                   <PraticeTestContainer
                     PraticeTestactiveStep={PraticeTestactiveStep}

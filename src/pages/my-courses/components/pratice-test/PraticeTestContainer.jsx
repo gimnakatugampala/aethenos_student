@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { IMG_HOST } from "../../../../api";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { saveAs } from 'file-saver';
 
 const steps = [
   "Practice test information and instructions",
@@ -54,6 +55,22 @@ const PraticeTestContainer = ({
 
   const handleReset = () => {
     setPraticeTestActiveStep(0);
+  };
+
+
+  const handleDownload = async (filePath) => {
+    console.log('Attempting to download:', filePath);
+    try {
+      const pdfResponse = await fetch(filePath);
+      if (!pdfResponse.ok) {
+        console.error('Network response error:', pdfResponse.status, pdfResponse.statusText);
+        throw new Error('Network response was not ok');
+      }
+      const pdfBlob = await pdfResponse.blob();
+      saveAs(pdfBlob, filePath.split("/").pop());
+    } catch (error) {
+      console.error('Download failed:', error.message);
+    }
   };
 
   return (
@@ -168,13 +185,24 @@ const PraticeTestContainer = ({
                 {selectedPracticeTest.getPracticeTests &&
                   selectedPracticeTest.getPracticeTests[0] && (
                     <>
-                      <a
+
+                    <Button
+                      variant="contained"
+                      color="error"
+                      className="my-2"
+                      onClick={() => handleDownload(`${IMG_HOST}${selectedPracticeTest.getPracticeTests[0].practiceTestQuestionSheet}`)}
+                      >
+                      Download Questions <i className="fas fa-download mx-2"></i>
+                      </Button>
+
+                      {/* <a
                         className="btn btn-danger my-2"
                         href={`${IMG_HOST}${selectedPracticeTest.getPracticeTests[0].practiceTestQuestionSheet}`}
                         download
                       >
                         Download Questions <i className="fas fa-download"></i>
-                      </a>
+                      </a> */}
+
                       <br />
                       {selectedPracticeTest.getPracticeTests[0]
                         .questionLink && (
@@ -206,13 +234,26 @@ const PraticeTestContainer = ({
                 {selectedPracticeTest.getPracticeTests &&
                   selectedPracticeTest.getPracticeTests[0] && (
                     <>
-                      <a
+
+
+                    <Button
+                      variant="contained"
+                      color="error"
+                      className="my-2"
+                      onClick={() => handleDownload(`${IMG_HOST}${selectedPracticeTest.getPracticeTests[0].practiceTestSolutionSheet}`)}
+                      >
+                      Download Solutions <i className="fas fa-download mx-2"></i>
+                      </Button>
+
+
+                      {/* <a
                         className="btn btn-danger my-2"
                         href={`${IMG_HOST}${selectedPracticeTest.getPracticeTests[0].practiceTestSolutionSheet}`}
                         download
                       >
                         Download Solutions <i className="fas fa-download"></i>
-                      </a>
+                      </a> */}
+
                       <br />
                       {selectedPracticeTest.getPracticeTests[0]
                         .solutionLink && (
