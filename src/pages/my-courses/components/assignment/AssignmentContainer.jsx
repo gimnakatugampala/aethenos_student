@@ -11,6 +11,8 @@ import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/audio.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { saveAs } from 'file-saver';
+
 
 import {
   MediaPlayer,
@@ -80,6 +82,23 @@ const AssignmentContainer = ({
   const handleReset = () => {
     setActiveStep(0);
   };
+
+
+  const handleDownload = async (filePath) => {
+    console.log('Attempting to download:', filePath);
+    try {
+      const pdfResponse = await fetch(filePath);
+      if (!pdfResponse.ok) {
+        console.error('Network response error:', pdfResponse.status, pdfResponse.statusText);
+        throw new Error('Network response was not ok');
+      }
+      const pdfBlob = await pdfResponse.blob();
+      saveAs(pdfBlob, filePath.split("/").pop());
+    } catch (error) {
+      console.error('Download failed:', error.message);
+    }
+  };
+  
 
   return (
     <>
@@ -163,14 +182,24 @@ const AssignmentContainer = ({
                   </p>
                   {selectedAssignment.getAssignments[0].downloadableResource !=
                     "" && (
-                    <a
-                      className="btn btn-danger my-4"
-                      href={`${IMG_HOST}${selectedAssignment.getAssignments[0].downloadableResource}`}
-                      download
-                    >
-                      Download Resource
-                      <i className="fas fa-download mx-2"></i>
-                    </a>
+
+                      <Button
+                  variant="contained"
+                  color="error"
+                  className="my-2"
+                  onClick={() => handleDownload(`${IMG_HOST}${selectedAssignment.getAssignments[0].downloadableResource}`)}
+                >
+                  Download Resource <i className="fas fa-download mx-2"></i>
+                </Button>
+
+                    // <a
+                    //   className="btn btn-danger my-4"
+                    //   href={`${IMG_HOST}${selectedAssignment.getAssignments[0].downloadableResource}`}
+                    //   download
+                    // >
+                    //   Download Resource
+                    //   <i className="fas fa-download mx-2"></i>
+                    // </a>
                   )}
                 </div>
 
@@ -194,13 +223,22 @@ const AssignmentContainer = ({
                   {selectedAssignment.getAssignments[0].question}
                 </h6>
 
-                <a
+                <Button
+                  variant="contained"
+                  color="error"
+                  className="my-2"
+                  onClick={() => handleDownload(`${IMG_HOST}${selectedAssignment.getAssignments[0].questionSheet}`)}
+                >
+                  Download Questions <i className="fas fa-download"></i>
+                </Button>
+
+                {/* <a
                   className="btn btn-danger my-2"
                   href={`${IMG_HOST}${selectedAssignment.getAssignments[0].questionSheet}`}
                   download
                 >
                   Download Questions <i className="fas fa-download"></i>
-                </a>
+                </a> */}
 
                 <br />
 
@@ -237,13 +275,22 @@ const AssignmentContainer = ({
                     {selectedAssignment.getAssignments[0].question}
                   </h6>
 
-                  <a
+                  <Button
+                  variant="contained"
+                  color="error"
+                  className="my-2"
+                  onClick={() => handleDownload(`${IMG_HOST}${selectedAssignment.getAssignments[0].solutionsSheet}`)}
+                >
+                  Download Answers <i className="fas fa-download"></i>
+                </Button>
+
+                  {/* <a
                     className="btn btn-danger my-2"
                     href={`${IMG_HOST}${selectedAssignment.getAssignments[0].solutionsSheet}`}
                     download
                   >
                     Download Answers <i className="fas fa-download"></i>
-                  </a>
+                  </a> */}
 
                   <br />
 

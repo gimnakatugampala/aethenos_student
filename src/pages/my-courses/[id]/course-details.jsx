@@ -606,9 +606,9 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(scrollPosition)
-  }, [scrollPosition])
+  // useEffect(() => {
+  //   console.log(scrollPosition)
+  // }, [scrollPosition])
   
 
 
