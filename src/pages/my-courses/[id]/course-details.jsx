@@ -493,7 +493,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
       return;
     }
 
-    AddQuestion(itemCode, question, setShowNewQuestion, setquestion);
+    AddQuestion(itemCode, question, setShowNewQuestion, setquestion, setquestions);
   };
 
   // ===============

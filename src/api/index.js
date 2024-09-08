@@ -1873,7 +1873,7 @@ export const GetCourseDetailsByInstructerCode = async(id,setcourse) =>{
 
 }
 
-export const AddQuestion = async(itemCode,question,setShowNewQuestion,setquestion) =>{
+export const AddQuestion = async(itemCode,question,setShowNewQuestion,setquestion, setquestions) =>{
 
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
@@ -1900,9 +1900,11 @@ fetch(`${BACKEND_LINK}/communication/addQuestion`, requestOptions)
       setShowNewQuestion(false)
       setquestion("")
 
-      setTimeout(() => {
-        window.location.reload()
-      }, 1500);
+      GetAllQuestion(itemCode, setquestions);
+
+      // setTimeout(() => {
+      //   window.location.reload()
+      // }, 1500);
 
       return
     }
