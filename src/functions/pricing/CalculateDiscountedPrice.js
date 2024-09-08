@@ -61,10 +61,10 @@ const CalculateDiscountedPrice =  (data) => {
         if (foundPrice) {
 
             // Get the Currency Code
-            console.log(foundPrice)
-            console.log(countryToFind)
+            // console.log(foundPrice)
+            // console.log(countryToFind)
             const countryCode = countries.getAlpha2Code(countryToFind, 'en');
-            console.log(countryCode)
+            // console.log(countryCode)
 
             // Get the Currency Code
             console.log(getAllInfoByISO(countryCode).currency)
@@ -109,10 +109,10 @@ const CalculateDiscountedPrice =  (data) => {
             }
         }
 
-        console.log(foundPrice)
-        console.log(net_price)
-        console.log(countryToFind)
-        console.log(USERTOKEN)
+        // console.log(foundPrice)
+        // console.log(net_price)
+        // console.log(countryToFind)
+        // console.log(USERTOKEN)
 
         return net_price;
     } else {

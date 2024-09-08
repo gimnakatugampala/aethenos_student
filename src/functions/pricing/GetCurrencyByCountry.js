@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import { getCurrencyExchangeRate, USERTOKEN } from '../../api';
 import countries from 'i18n-iso-countries';
 import currencyCodes from 'currency-codes';
+import { getAllInfoByISO } from 'iso-country-currency';
 
 // Initialize the countries library with the English locale
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
@@ -40,31 +41,49 @@ const GetCurrencyByCountry = (data) => {
     if (data.course_prices != null && data.course_prices.prices != null) {
         let foundPrice = null;
 
+        
+
         // Find the price for the specific country
         data.course_prices.prices.some(single_price => {
             if (countryToFind === single_price.country) {
                 foundPrice = single_price;
+                console.log(foundPrice)
                 return true;
             }
+            console.log(foundPrice)
             return false;
         });
 
+        console.log(foundPrice)
+
         if (foundPrice) {
-            if (USERTOKEN) {
+           
                 // Get ISO country code
                 const countryCode = countries.getAlpha2Code(countryToFind, 'en');
+                // console.log(countryCode)
+
+                currency_code = getAllInfoByISO(countryCode).currency
+    
+                // Get the Currency Code
+                console.log(getAllInfoByISO(countryCode).currency)
+    
+                
 
                 
                 // Get currency code from ISO country code
-                if (countryCode) {
-                    const currency = currencyCodes.code(countryCode);
-                    currency_code = currency ? currency.code : 'USD';
-                }
-            } else {
-                // For logged out users, default to 'BRL' as specified
-            
-                currency_code = JSON.parse(COUNTRY).currency;
-            }
+                // if (countryCode) {
+                //     const currency = currencyCodes.code(countryCode);
+                //     currency_code = currency ? currency.code : 'USD';
+                // }
+        
+            // else {
+            //     // For logged out users, default to 'BRL' as specified
+            //     console.log(foundPrice)
+            //     currency_code = JSON.parse(COUNTRY).currency;
+            // }
+
+        console.log(currency_code)
+
 
             // Handle currency-specific rounding for Japanese Yen
             if (currency_code.toUpperCase() === 'JPY') {
@@ -74,11 +93,16 @@ const GetCurrencyByCountry = (data) => {
             }
         } else {
             // No specific price found, default to USD
+        console.log(currency_code)
+
             return currency_code;
         }
+        
     } else {
+        console.log(currency_code)
         return currency_code;  // Return USD if no prices are found
     }
+
 };
 
 export default GetCurrencyByCountry;
