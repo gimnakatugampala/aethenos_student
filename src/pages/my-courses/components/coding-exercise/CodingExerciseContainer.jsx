@@ -188,7 +188,7 @@ const CodingExerciseContainer = ({
                   )}
 
                   {codingExercise.externalLink && (
-                    <a className="my-2" href={codingExercise.externalLink}>
+                    <a   target="_blank" className="my-2" href={codingExercise.externalLink}>
                       {codingExercise.externalLink}{" "}
                       <i className="fas fa-external-link-alt"></i>
                     </a>
@@ -232,7 +232,7 @@ const CodingExerciseContainer = ({
                 <br />
 
                 {codingExercise.codingExternalLink && (
-                  <a className="my-2" href={codingExercise.codingExternalLink}>
+                  <a   target="_blank" className="my-2" href={codingExercise.codingExternalLink}>
                     {codingExercise.codingExternalLink}{" "}
                     <i className="fas fa-external-link-alt"></i>
                   </a>
@@ -278,6 +278,7 @@ const CodingExerciseContainer = ({
                   {codingExercise.solutionsExternalLink && (
 
                     <a
+                      target="_blank"
                       className="my-2"
                       href={codingExercise.solutionsExternalLink}
                     >

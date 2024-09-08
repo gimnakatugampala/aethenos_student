@@ -207,6 +207,7 @@ const AssignmentContainer = ({
 
                 {selectedAssignment.getAssignments[0].externalLink != "" && (
                   <a
+                    target="_blank"
                     className="my-2"
                     href={`${selectedAssignment.getAssignments[0].externalLink}`}
                   >
@@ -243,6 +244,7 @@ const AssignmentContainer = ({
                 <br />
 
                 <a
+                  target="_blank"
                   className="my-2"
                   href={`${selectedAssignment.getAssignments[0].questionExternalLink}`}
                 >
@@ -295,6 +297,7 @@ const AssignmentContainer = ({
                   <br />
 
                   <a
+                    target="_blank"
                     className="my-2"
                     href={
                       selectedAssignment.getAssignments[0].solutionsExternalLink
