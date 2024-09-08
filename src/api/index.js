@@ -1755,50 +1755,50 @@ export const GetMyCoursesDetailsWithPlugin = async(id, setcourse) => {
 };
 
 
-export const SubmitCourseReview = async(id,msg,rating,setbtnloading) =>{
+export const SubmitCourseReview = async (id, msg, rating,setRating, setMsg, setcourse,  setBtnLoading, onSuccess, onError) => {
+  setBtnLoading(true);
 
-  setbtnloading(true)
-
-
-  var myHeaders = new Headers();
+  const myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
 
-  const formdata = new FormData();
-formdata.append("item_code", `${id}`);
-formdata.append("comment", `${msg}`);
-formdata.append("rating", `${rating}`);
+  const formData = new FormData();
+  formData.append("item_code", `${id}`);
+  formData.append("comment", `${msg}`);
+  formData.append("rating", `${rating}`);
 
-const requestOptions = {
-  method: "POST",
-  body: formdata,
-  headers: myHeaders,
-  redirect: "follow"
+  const requestOptions = {
+      method: "POST",
+      body: formData,
+      headers: myHeaders,
+      redirect: "follow"
+  };
+
+  try {
+      const response = await fetch(`${BACKEND_LINK}/payment/submitReview`, requestOptions);
+      const result = await response.json();
+      console.log(result);
+
+      if (result.status === 401) { // Unauthorized
+          Unauthorized(result.status, `my-courses/${id}`);
+      } else if (result.variable === "200") {
+          onSuccess(result.message); // Notify success
+
+          setRating(rating)
+          setMsg(msg)
+
+          GetMyCoursesDetails(id, setcourse)
+
+      } else {
+          onError("An error occurred, please try again."); // Notify error
+      }
+  } catch (error) {
+      console.error(error);
+      onError("An unexpected error occurred.");
+  } finally {
+      setBtnLoading(false);
+  }
 };
 
-fetch(`${BACKEND_LINK}/payment/submitReview`, requestOptions)
-  .then((response) => response.json())
-  .then((result) => {
-    console.log(result)
-
-    Unauthorized(result.status,`my-courses/${id}`)
-
-
-    if(result.variable == "200"){
-      SuccessAlert("Added",result.message)
-      setbtnloading(false)
-
-      setTimeout(() => {
-        window.location.reload()
-      }, 1500);
-
-      return
-    }
-
-  })
-  .catch((error) => console.error(error));
-
-
-}
 
 export const GetAllAnnoucement = async(courseCode,setannoucements) =>{
 

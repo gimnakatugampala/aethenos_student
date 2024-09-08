@@ -3,32 +3,29 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import Modal from "react-bootstrap/Modal";
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import CommentFormCourse from "../../components/forms/comment-form-course";
 import { DownloadCertificate } from "../../api";
+import { Dialog, DialogActions, DialogContent, DialogTitle, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
-const HeaderMyCourse = ({ id, course }) => {
+const HeaderMyCourse = ({ setcourse, id, course }) => {
   // ------------- REVIEW ----------------------
-  const [showReviewModal, setshowReviewModal] = useState(false);
+  const [showReviewDialog, setShowReviewDialog] = useState(false);
 
-  const handleCloseReview = () => setshowReviewModal(false);
-  const handleShowReview = () => setshowReviewModal(true);
+  const handleCloseReview = () => setShowReviewDialog(false);
+  const handleShowReview = () => setShowReviewDialog(true);
 
   // ------------- REVIEW ----------------------
-
-
 
   // -------------------- DOWNLOAD CERTIFICATE -----------
   const handleDownloadCertificate = () => {
-    console.log(id)
-
-    DownloadCertificate(id)
-
-  }
+    console.log(id);
+    DownloadCertificate(id);
+  };
 
   return (
     <>
@@ -72,13 +69,13 @@ const HeaderMyCourse = ({ id, course }) => {
                     text={`${Number.parseInt(course.progressValue)}%`}
                     styles={{
                       path: {
-                        stroke: course.progressValue == 100 ? "#66FF66" : "",
+                        stroke: course.progressValue === 100 ? "#66FF66" : "",
                         strokeWidth: 10,
                         transition: "stroke-dashoffset 0.5s ease 0s",
                       },
                       text: {
-                        fill: course.progressValue == 100 ? "#66FF66" : "",
-                        fontWeight: "bold", 
+                        fill: course.progressValue === 100 ? "#66FF66" : "",
+                        fontWeight: "bold",
                         fontSize: "24px",
                         strokeWidth: 10,
                       },
@@ -92,7 +89,7 @@ const HeaderMyCourse = ({ id, course }) => {
                 title="Your progress"
                 id="collapsible-nav-dropdown"
               >
-                {course.completedItemCount != course.allItemsCount ? (
+                {course.completedItemCount !== course.allItemsCount ? (
                   <NavDropdown.Item>
                     <b>
                       {course.completedItemCount} of {course.allItemsCount}
@@ -111,54 +108,80 @@ const HeaderMyCourse = ({ id, course }) => {
                 )}
               </NavDropdown>
 
-              {course.completedItemCount == course.allItemsCount && (
-
-              <Nav.Link>
-                <Button
-                  variant="outlined"
-                  color="inherit"
-                  size="small"
-                  startIcon={
-                    <i
-                      className="fa-solid fa-trophy"
-                      style={{ fontSize: "11px"}}
-                    ></i>
-                  }
-                  sx={{
-                    display: "inline-flex", // Ensures the button is inline
-                    fontSize: "9px",
-                    color: "white",
-                    borderColor: "white",
-                    padding: "9px 10px", // Adjusts padding to ensure the text is inline
-                    textTransform: "none", // Keeps the text as is (no uppercase transformation)
-                    minWidth: "auto", // Prevents the button from having a minimum width
-                    alignItems: "center", // Aligns icon and text vertically
-                    "&:hover": {
-                      backgroundColor: "rgba(255, 255, 255, 0.1)",
+              {course.completedItemCount === course.allItemsCount && (
+                <Nav.Link>
+                  <Button
+                    variant="outlined"
+                    color="inherit"
+                    size="small"
+                    startIcon={
+                      <i
+                        className="fa-solid fa-trophy"
+                        style={{ fontSize: "11px" }}
+                      ></i>
+                    }
+                    sx={{
+                      display: "inline-flex",
+                      fontSize: "9px",
+                      color: "white",
                       borderColor: "white",
-                    },
-                  }}
-                  onClick={handleDownloadCertificate}
-                >
-                  Get Certificate
-                </Button>
-              </Nav.Link>
+                      padding: "9px 10px",
+                      textTransform: "none",
+                      minWidth: "auto",
+                      alignItems: "center",
+                      "&:hover": {
+                        backgroundColor: "rgba(255, 255, 255, 0.1)",
+                        borderColor: "white",
+                      },
+                    }}
+                    onClick={handleDownloadCertificate}
+                  >
+                    Get Certificate
+                  </Button>
+                </Nav.Link>
               )}
-
-
-
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
 
       {/* Add Review */}
-      <Modal show={showReviewModal} onHide={handleCloseReview}>
-        <Modal.Header closeButton>Leave a Rating</Modal.Header>
-        <Modal.Body>
-          <CommentFormCourse course={course} id={id} />
-        </Modal.Body>
-      </Modal>
+      <Dialog
+        open={showReviewDialog}
+        onClose={handleCloseReview}
+        fullWidth
+        maxWidth="sm"
+        PaperProps={{
+          sx: {
+            overflow: 'hidden', // Prevents overflow inside the dialog
+          },
+        }}
+      >
+        <DialogTitle>
+          Leave a Rating
+          <IconButton
+            edge="end"
+            color="inherit"
+            onClick={handleCloseReview}
+            aria-label="close"
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent
+          sx={{
+            overflowX: 'hidden', // Prevents horizontal overflow
+          }}
+        >
+          <CommentFormCourse setcourse={setcourse} course={course} id={id} />
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

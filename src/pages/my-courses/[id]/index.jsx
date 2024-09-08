@@ -56,7 +56,7 @@ const index = () => {
 
             {course != null ? (
                 <>
-                    <HeaderMyCourse id={id} course={course} />
+                    <HeaderMyCourse setcourse={setcourse} id={id} course={course} />
                     <CourseDetails setcourse={setcourse} id={id} course={course} />
                 </>
             ) : (
