@@ -1049,7 +1049,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                     >
                       <div className="course-tab-content">
                         <div className="course-overview">
-                          {annoucements.length > 0 &&
+                          {annoucements.length > 0 ?
                             annoucements.map((announcement, index) => (
                               <CardContainer key={index} className="mt-5">
                                 <ListItem>
@@ -1075,7 +1075,11 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                                   </p>
                                 </div>
                               </CardContainer>
-                            ))}
+                            )) : (
+                              <div className="text-center mt-5">
+                              <p className="fs-5">No announcements available</p>
+                            </div>
+                            ) }
                         </div>
                       </div>
                     </div>
