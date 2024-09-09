@@ -18,6 +18,7 @@ import {
 import { AddReplyToReview, IMG_HOST } from '../../api';
 import moment from 'moment';
 import ErrorAlert from '../../functions/Alert/ErrorAlert';
+import CalculateTimeAgo from '../../functions/CalculateTimeAgo';
 
   
 
@@ -93,7 +94,7 @@ const Commentbox = ({ replies , reviewCode }) => {
                         <img style={{objectFit:'cover'}} width={80} height={50} className='p-3 rounded-circle' src={reply.profileImg == "" ? "../images/user-profile.png" : `${IMG_HOST}${reply.profileImg}`} alt="Steve Jobes" />
                         <div className='p-3'>
                             <h5 className="mt-0 m-0 p-0">{reply.name}</h5>
-                            <small className='m-0 p-0'>{moment(reply.createdDate, "YYYYMMDD").fromNow()}</small>
+                            <small className='m-0 p-0'>{CalculateTimeAgo(reply.createdDate, "YYYYMMDD").fromNow()}</small>
                         </div>
                     </div>
                 </div>

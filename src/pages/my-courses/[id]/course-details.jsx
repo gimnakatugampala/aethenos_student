@@ -1060,11 +1060,9 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                                   </ListItemAvatar>
                                   <ListItemText
                                     primary={course.instructor}
-                                    secondary={`Post an annoucement • ${moment(
+                                    secondary={`Post an annoucement • ${calculateTimeAgo(
                                       announcement.createdDate
-                                    )
-                                      .startOf("hour")
-                                      .fromNow()}`}
+                                    )}`}
                                   />
                                 </ListItem>
                                 <div className="m-3">

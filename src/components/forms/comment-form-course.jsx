@@ -45,8 +45,8 @@ const CommentFormCourse = ({ setcourse,  course, id }) => {
     };
 
     useEffect(() => {
-        setRating(course.ownReview[0].rating)
-        setMsg(course.ownReview[0].comment)
+        setRating(course.ownReview == null ? "" : course.ownReview[0].rating)
+        setMsg(course.ownReview == null ? "" : course.ownReview[0].comment)
     }, [])
     
 
