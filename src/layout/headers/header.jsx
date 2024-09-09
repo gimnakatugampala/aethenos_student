@@ -297,7 +297,11 @@ const Header = ({
                                     width: "100%",
                                   }}
                                 >
-                                  <ListItemAvatar>
+                                  <ListItemAvatar   
+                                  loading="lazy" 
+                                  alt={result.courseTitle} 
+                                  style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                                    >
                                     <Avatar src={`${IMG_HOST}${result.courseImg}`} />
                                   </ListItemAvatar>
                                   <ListItemText
@@ -351,7 +355,11 @@ const Header = ({
                                     width: "100%",
                                   }}
                                 >
-                                  <ListItemAvatar>
+                                  <ListItemAvatar
+                                  loading="lazy" 
+                                  alt={result.instructorName} 
+                                  style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                                  >
                                     <Avatar src={result.instructorImg} />
                                   </ListItemAvatar>
                                   <ListItemText

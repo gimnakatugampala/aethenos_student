@@ -83,7 +83,7 @@ const CourseFiveArea = () => {
 
                 <div className="d-flex my-2">
                   <div className="m-3">
-                    <p className="m-0 p-0">Total students</p>
+                    <p className="m-0 p-0">Total {instructor_details.totalStudents == 1 ? 'Student' : 'Students'}</p>
                     <h5 className="m-0 p-0">
                       {instructor_details.totalStudents}
                     </h5>
