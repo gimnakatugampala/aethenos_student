@@ -111,6 +111,7 @@ const Accordian = ({ show = false, id, title, lectures, lists, no_quiz }) => {
                                           {link.previewVideo ? (
                                             // Enable text decoration for preview videos
                                             <a
+                                            style={{cursor:'pointer'}}
                                               onClick={() => {
                                                 setOpen(true);
                                                 setselectedURL(link.url);

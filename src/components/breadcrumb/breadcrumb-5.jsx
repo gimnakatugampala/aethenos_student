@@ -2,6 +2,8 @@ import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
 import { useMouseMoveUI } from "../../contexts/mouse-move-context";
+import moment from "moment";
+import DisplayCardRatings from "../ratings-display/DisplayCardRatings";
 
 const CourseBreadcrumb = ({ course }) => {
   const { title, instructor, language, rating_count, subtitle } = course || {};
@@ -45,13 +47,14 @@ const CourseBreadcrumb = ({ course }) => {
 
           <ul className="course-meta">
             <li className="course-rating">
-              <div className="rating">
+            <DisplayCardRatings rating={Number.parseFloat(course.rating).toFixed(1)} />
+              {/* <div className="rating">
                 <i className="icon-23"></i>
                 <i className="icon-23"></i>
                 <i className="icon-23"></i>
                 <i className="icon-23"></i>
                 <i className="icon-23"></i>
-              </div>
+              </div> */}
 
               <span className="rating-count">
                 <a>
@@ -62,12 +65,12 @@ const CourseBreadcrumb = ({ course }) => {
 
             <li>
               <span className="text-decoration-underline">
-                ({course.rating_count} ratings)
+                ({course.rating_count} {course.rating_count == 1 ? 'review' : 'reviews'})
               </span>
             </li>
 
             <li>
-              <span>{course.student} students</span>
+              <span>{course.student} {course.student == 1 ? 'student' : 'students'}</span>
             </li>
           </ul>
           <p className="m-0 p-0">
@@ -88,7 +91,7 @@ const CourseBreadcrumb = ({ course }) => {
                   style={{ fontSize: "17px" }}
                   className="fa-solid fa-calendar-days m-0"
                 ></i>{" "}
-                Created Date  {course.created_date}
+                Created Date  {moment(course.created_date).format('DD-MM-YYYY')}
               </span>
             </li>
             <li>

@@ -333,7 +333,7 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                 </div>
               )}
 
-              <div className="share-area">
+              {/* <div className="share-area">
                 <h4 className="title">Share On:</h4>
                 <ul className="social-share">
                   <li>
@@ -358,6 +358,7 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                   </li>
                 </ul>
               </div>
+               */}
             </div>
           </div>
         </div>

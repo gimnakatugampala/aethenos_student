@@ -180,7 +180,7 @@ const CourseTypeFour = ({ data, classes, index }) => {
             </li>
             <li>
               <i className="icon-25"></i>
-              {data.student} Students
+              {data.student} {data.student == 1 ? 'Student' : 'Students'}
             </li>
           </ul>
         </div>
