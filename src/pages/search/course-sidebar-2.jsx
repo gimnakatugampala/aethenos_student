@@ -154,26 +154,29 @@ const CourseSidebarTwo = ({ course_items }) => {
     handlePriceChange(maxPrice);
   };
 
-  const generateStars = (rating) => {
+  const allPossibleRatings = [0, 1, 2, 3, 4, 5];
+
+  const generateStars = (rating = 0) => {
     const starArray = [];
+
     for (let i = 1; i <= 5; i++) {
       starArray.push(
         <span
           key={i}
           style={{ color: "#f8b81f" }}
           className={`mx-1 icon-star ${
-            i <= rating ? " icon-star-full" : " icon-star-empty"
+            i <= rating ? "icon-star-full" : "icon-star-empty"
           }`}
         ></span>
       );
     }
+
     return starArray;
   };
 
-  const setShowInstructerFilter = Array.isArray(course_items) 
-  ? (course_items.filter((item) => item.instructor)?.length ?? 0) 
-  : 0;
-
+  const setShowInstructerFilter = Array.isArray(course_items)
+    ? course_items.filter((item) => item.instructor)?.length ?? 0
+    : 0;
 
   return (
     <div className="course-sidebar-3 mx-4">
@@ -192,32 +195,32 @@ const CourseSidebarTwo = ({ course_items }) => {
             className="content"
             style={{ display: showCategory ? "block" : "none" }}
           >
-           {all_categories.map((category, i) => {
-  const categoryCount = Array.isArray(course_items) 
-    ? (course_items.filter((item) => item.category === category)?.length ?? 0) 
-    : 0;
+            {all_categories.map((category, i) => {
+              const categoryCount = Array.isArray(course_items)
+                ? course_items.filter((item) => item.category === category)
+                    ?.length ?? 0
+                : 0;
 
-  if (categoryCount > 0) {
-    return (
-      <div key={i} className="edu-form-check">
-        <input
-          onClick={() => handleCategory(category)}
-          checked={categories.includes(category)}
-          type="checkbox"
-          id={`cat-check${i + 1}`}
-          readOnly
-        />
-        <label htmlFor={`cat-check${i + 1}`}>
-          {category}
-          <span>({categoryCount})</span>
-        </label>
-      </div>
-    );
-  } else {
-    return null;
-  }
-          })}
-
+              if (categoryCount > 0) {
+                return (
+                  <div key={i} className="edu-form-check">
+                    <input
+                      onClick={() => handleCategory(category)}
+                      checked={categories.includes(category)}
+                      type="checkbox"
+                      id={`cat-check${i + 1}`}
+                      readOnly
+                    />
+                    <label htmlFor={`cat-check${i + 1}`}>
+                      {category}
+                      <span>({categoryCount})</span>
+                    </label>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
           </div>
         </div>
       </div>
@@ -240,32 +243,32 @@ const CourseSidebarTwo = ({ course_items }) => {
             className="content"
             style={{ display: showInstructor ? "block" : "none" }}
           >
-           {all_instructors.map((instructor, i) => {
-  const instructorCount = Array.isArray(course_items) 
-    ? (course_items.filter((item) => item.instructor === instructor)?.length ?? 0) 
-    : 0;
+            {all_instructors.map((instructor, i) => {
+              const instructorCount = Array.isArray(course_items)
+                ? course_items.filter((item) => item.instructor === instructor)
+                    ?.length ?? 0
+                : 0;
 
-  if (instructorCount > 0) {
-    return (
-      <div key={i} className="edu-form-check">
-        <input
-          onClick={() => handleInstructor(instructor)}
-          checked={instructors.includes(instructor)}
-          type="checkbox"
-          id={`cat-check-2${i + 1}`}
-          readOnly
-        />
-        <label htmlFor={`cat-check-2${i + 1}`}>
-          {instructor}
-          <span>({instructorCount})</span>
-        </label>
-      </div>
-    );
-  } else {
-    return null;
-  }
-})}
-
+              if (instructorCount > 0) {
+                return (
+                  <div key={i} className="edu-form-check">
+                    <input
+                      onClick={() => handleInstructor(instructor)}
+                      checked={instructors.includes(instructor)}
+                      type="checkbox"
+                      id={`cat-check-2${i + 1}`}
+                      readOnly
+                    />
+                    <label htmlFor={`cat-check-2${i + 1}`}>
+                      {instructor}
+                      <span>({instructorCount})</span>
+                    </label>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
           </div>
         </div>
       </div>
@@ -285,7 +288,8 @@ const CourseSidebarTwo = ({ course_items }) => {
             className="content"
             style={{ display: showRating ? "block" : "none" }}
           >
-            {all_ratings.map((rating, i) => (
+            {/* Sort all_ratings before mapping */}
+            {allPossibleRatings.map((rating, i) => (
               <div key={i} className="edu-form-check">
                 <input
                   onClick={() => handleRating(rating)}
@@ -295,10 +299,13 @@ const CourseSidebarTwo = ({ course_items }) => {
                   readOnly
                 />
                 <label htmlFor={`cat-check-3${i + 1}`}>
-                  {generateStars(rating)}
+                  {generateStars(rating)} {/* Display stars for each rating */}
                   <span>
                     (
-                    {Array.isArray(course_items) ? course_items.filter((item) => item.rating === rating)?.length ?? 0 : 0}
+                    {Array.isArray(course_items)
+                      ? course_items.filter((item) => item.rating === rating)
+                          ?.length ?? 0
+                      : 0}
                     )
                   </span>
                 </label>
@@ -323,32 +330,32 @@ const CourseSidebarTwo = ({ course_items }) => {
             className="content"
             style={{ display: showLevel ? "block" : "none" }}
           >
-           {all_levels.map((level, i) => {
-  const levelCount = Array.isArray(course_items) 
-    ? course_items.filter((item) => item.level === level)?.length ?? 0 
-    : 0;
+            {all_levels.map((level, i) => {
+              const levelCount = Array.isArray(course_items)
+                ? course_items.filter((item) => item.level === level)?.length ??
+                  0
+                : 0;
 
-  if (levelCount > 0) {
-    return (
-      <div key={i} className="edu-form-check">
-        <input
-          onClick={() => handleLevel(level)}
-          checked={levels.includes(level)}
-          type="checkbox"
-          id={`cat-check-4${i + 1}`}
-          readOnly
-        />
-        <label htmlFor={`cat-check-4${i + 1}`}>
-          {level}
-          <span>({levelCount})</span>
-        </label>
-      </div>
-    );
-  } else {
-    return null;
-  }
-})}
-
+              if (levelCount > 0) {
+                return (
+                  <div key={i} className="edu-form-check">
+                    <input
+                      onClick={() => handleLevel(level)}
+                      checked={levels.includes(level)}
+                      type="checkbox"
+                      id={`cat-check-4${i + 1}`}
+                      readOnly
+                    />
+                    <label htmlFor={`cat-check-4${i + 1}`}>
+                      {level}
+                      <span>({levelCount})</span>
+                    </label>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
           </div>
         </div>
       </div>
@@ -369,31 +376,31 @@ const CourseSidebarTwo = ({ course_items }) => {
             style={{ display: showLanguage ? "block" : "none" }}
           >
             {all_languages.map((language, i) => {
-  const languageCount = Array.isArray(course_items) 
-    ? course_items.filter((item) => item.language === language)?.length ?? 0 
-    : 0;
+              const languageCount = Array.isArray(course_items)
+                ? course_items.filter((item) => item.language === language)
+                    ?.length ?? 0
+                : 0;
 
-  if (languageCount > 0) {
-    return (
-      <div key={i} className="edu-form-check">
-        <input
-          onClick={() => handleLanguage(language)}
-          checked={languages.includes(language)}
-          type="checkbox"
-          id={`cat-check-5${i + 1}`}
-          readOnly
-        />
-        <label htmlFor={`cat-check-5${i + 1}`}>
-          {language}
-          <span>({languageCount})</span>
-        </label>
-      </div>
-    );
-  } else {
-    return null;
-  }
-})}
-
+              if (languageCount > 0) {
+                return (
+                  <div key={i} className="edu-form-check">
+                    <input
+                      onClick={() => handleLanguage(language)}
+                      checked={languages.includes(language)}
+                      type="checkbox"
+                      id={`cat-check-5${i + 1}`}
+                      readOnly
+                    />
+                    <label htmlFor={`cat-check-5${i + 1}`}>
+                      {language}
+                      <span>({languageCount})</span>
+                    </label>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
           </div>
         </div>
       </div>
@@ -413,32 +420,32 @@ const CourseSidebarTwo = ({ course_items }) => {
             className="content"
             style={{ display: showTopic ? "block" : "none" }}
           >
-          {all_topics.map((topic, i) => {
-  const topicCount = Array.isArray(course_items) 
-    ? course_items.filter((item) => item.topic === topic)?.length ?? 0 
-    : 0;
+            {all_topics.map((topic, i) => {
+              const topicCount = Array.isArray(course_items)
+                ? course_items.filter((item) => item.topic === topic)?.length ??
+                  0
+                : 0;
 
-  if (topicCount > 0) {
-    return (
-      <div key={i} className="edu-form-check">
-        <input
-          onClick={() => handleTopic(topic)}
-          checked={topics.includes(topic)}
-          type="checkbox"
-          id={`cat-check-6${i + 1}`}
-          readOnly
-        />
-        <label htmlFor={`cat-check-6${i + 1}`}>
-          {topic}
-          <span>({topicCount})</span>
-        </label>
-      </div>
-    );
-  } else {
-    return null;
-  }
-})}
-
+              if (topicCount > 0) {
+                return (
+                  <div key={i} className="edu-form-check">
+                    <input
+                      onClick={() => handleTopic(topic)}
+                      checked={topics.includes(topic)}
+                      type="checkbox"
+                      id={`cat-check-6${i + 1}`}
+                      readOnly
+                    />
+                    <label htmlFor={`cat-check-6${i + 1}`}>
+                      {topic}
+                      <span>({topicCount})</span>
+                    </label>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
           </div>
         </div>
       </div>
@@ -458,37 +465,38 @@ const CourseSidebarTwo = ({ course_items }) => {
             className="content"
             style={{ display: showSubCategory ? "block" : "none" }}
           >
-          {all_SubCategorys.map((sub_category, i) => {
-  const subCategoryCount = Array.isArray(course_items) 
-    ? course_items.filter((item) => item.sub_category === sub_category)?.length ?? 0 
-    : 0;
+            {all_SubCategorys.map((sub_category, i) => {
+              const subCategoryCount = Array.isArray(course_items)
+                ? course_items.filter(
+                    (item) => item.sub_category === sub_category
+                  )?.length ?? 0
+                : 0;
 
-  if (subCategoryCount > 0) {
-    return (
-      <div key={i} className="edu-form-check">
-        <input
-          onClick={() => handleSubCategory(sub_category)}
-          checked={subcategories.includes(sub_category)}
-          type="checkbox"
-          id={`cat-check-7${i + 1}`}
-          readOnly
-        />
-        <label htmlFor={`cat-check-7${i + 1}`}>
-          {sub_category}
-          <span>({subCategoryCount})</span>
-        </label>
-      </div>
-    );
-  } else {
-    return null;
-  }
-})}
-
+              if (subCategoryCount > 0) {
+                return (
+                  <div key={i} className="edu-form-check">
+                    <input
+                      onClick={() => handleSubCategory(sub_category)}
+                      checked={subcategories.includes(sub_category)}
+                      type="checkbox"
+                      id={`cat-check-7${i + 1}`}
+                      readOnly
+                    />
+                    <label htmlFor={`cat-check-7${i + 1}`}>
+                      {sub_category}
+                      <span>({subCategoryCount})</span>
+                    </label>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
           </div>
         </div>
       </div>
 
-      <div className="edu-course-widget">
+      {/* <div className="edu-course-widget">
         <h5 className="widget-title">Price Filter</h5>
         <Slider
           value={price}
@@ -501,7 +509,7 @@ const CourseSidebarTwo = ({ course_items }) => {
         <div className="filter-price">
           Price: <span>${minPrice}</span> <span>-</span> <span>${price}</span>
         </div>
-      </div>
+      </div> */}
 
       <div className="edu-course-widget">
         <h5 className="widget-title mb-4">Reset Filter</h5>
