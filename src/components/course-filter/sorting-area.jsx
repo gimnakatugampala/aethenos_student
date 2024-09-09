@@ -3,48 +3,46 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { add_force_page, add_item_offset } from '../../redux/features/filter-slice';
 
-const SortingArea = ({course_items, num, setCourses, courses,course_list, items }) => {
+const SortingArea = ({ course_items, num, setCourses, courses, course_list, items }) => {
     const dispatch = useDispatch();
 
     const handleChange = (e) => {
-        if (e.target.value === 'Filters') {
+        const selectedOption = e.target.value;
+
+        if (selectedOption === 'Filters') {   
             setCourses(course_items);
-        } else if (e.target.value === 'Low To High') {
-            const lowToHigh = courses.slice().sort((a, b) => parseFloat(a.course_price) - parseFloat(b.course_price))
+        } else if (selectedOption === 'Low To High') {
+ 
+            const lowToHigh = courses.slice().sort((a, b) => {
+                const priceA = parseFloat(a.course_prices?.globalListPrice || 0);
+                const priceB = parseFloat(b.course_prices?.globalListPrice || 0);
+                return priceA - priceB;
+            });
             setCourses(lowToHigh);
-        } else if (e.target.value === 'High To Low') {
-            const highToHigh = courses.slice().sort((a, b) => parseFloat(b.course_price) - parseFloat(a.course_price))
-            setCourses(highToHigh);
+        } else if (selectedOption === 'High To Low') {
+
+            const highToLow = courses.slice().sort((a, b) => {
+                const priceA = parseFloat(a.course_prices?.globalListPrice || 0);
+                const priceB = parseFloat(b.course_prices?.globalListPrice || 0);
+                return priceB - priceA;
+            });
+            setCourses(highToLow);
         }
+
         dispatch(add_item_offset(0));
         dispatch(add_force_page(0));
-    }
+    };
 
     return (
         <div className="edu-sorting-area">
             <div className="sorting-left">
-                {
-                    items 
-                    ? ( <h6 className="showing-text">Showing <span>{num}</span> of <span>{items.length}</span> courses</h6> )
-                    : ( <h6 className="showing-text">Showing <span>{num}</span> courses</h6> )
-                }
+                {items ? (
+                    <h6 className="showing-text">Showing <span>{num}</span> of <span>{items.length}</span> courses</h6>
+                ) : (
+                    <h6 className="showing-text">Showing <span>{num}</span> courses</h6>
+                )}
             </div>
             <div className="sorting-right">
-                {/* <div className="layout-switcher">
-                    <label>{course_list ? 'List' : 'Grid' }</label>
-                    <ul className="switcher-btn">
-                        <li>
-                            <a href="/course-style-1" className={!course_list?"active":''}>
-                                <i className="icon-53"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/course-style-4" className={course_list?"active":''}>
-                                <i className="icon-54"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div> */}
                 <div className="edu-sorting">
                     <div className="icon"><i className="icon-55"></i></div>
                     <select onChange={handleChange} className="edu-select">
@@ -56,6 +54,6 @@ const SortingArea = ({course_items, num, setCourses, courses,course_list, items 
             </div>
         </div>
     );
-}
+};
 
 export default SortingArea;
