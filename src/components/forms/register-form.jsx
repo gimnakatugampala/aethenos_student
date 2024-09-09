@@ -193,7 +193,7 @@ const RegisterForm = () => {
             return
         }
 
-        VerifyEmail(email, VerficationCode, setloading)
+        VerifyEmail(email, VerficationCode,userToken, setloading)
 
         console.log(VerficationCode)
     }

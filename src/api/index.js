@@ -223,7 +223,7 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading,
 
 }
 
-export const VerifyEmail = async(email, VerficationCode, setloading) =>{
+export const VerifyEmail = async(email, VerficationCode,userToken, setloading) =>{
 
   setloading(true)
 
@@ -246,7 +246,7 @@ export const VerifyEmail = async(email, VerficationCode, setloading) =>{
 
         setloading(false)
 
-        window.location.href = `/student-interests?token=${CURRENT_USER}`
+        window.location.href = `/student-interests?token=${userToken}`
 
       }else{
         setloading(false)
