@@ -12,6 +12,11 @@ import { DownloadCertificate } from "../../api";
 import { Dialog, DialogActions, DialogContent, DialogTitle, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
+const mainfs = {
+  fontSize: "calc(0.5rem + 0.6vw)",
+};
+
+
 const HeaderMyCourse = ({ setcourse, id, course }) => {
   // ------------- REVIEW ----------------------
   const [showReviewDialog, setShowReviewDialog] = useState(false);
@@ -39,7 +44,7 @@ const HeaderMyCourse = ({ setcourse, id, course }) => {
         <Container className="justify-content-center mx-5">
           <Navbar.Brand href="/">
             <img
-              width={150}
+              width={200}
               height={60}
               className="logo-light"
               src="/assets/images/logo/Header_Athenos_logo.png"
@@ -50,20 +55,20 @@ const HeaderMyCourse = ({ setcourse, id, course }) => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link className="text-white">{course.title}</Nav.Link>
+              <Nav.Link className="text-white"  style={mainfs}>{course.title}</Nav.Link>
             </Nav>
 
             <Nav className="d-flex align-items-center float-end">
-              <Nav.Link
-                style={{ fontSize: "12px" }}
+              <Nav.Link        
                 onClick={handleShowReview}
                 className="text-white"
+                style={mainfs}
               >
                 <i className="far fa-star"></i> Leave a rating
               </Nav.Link>
 
               <Nav.Link className="text-white">
-                <div style={{ width: 40 }}>
+                <div style={{ width: 50 }}>
                   <CircularProgressbar
                     value={Number.parseInt(course.progressValue)}
                     text={`${Number.parseInt(course.progressValue)}%`}
@@ -88,18 +93,19 @@ const HeaderMyCourse = ({ setcourse, id, course }) => {
                 className="d-flex align-items-center p-2 mx-5"
                 title="Your progress"
                 id="collapsible-nav-dropdown"
+                style={mainfs}
               >
                 {course.completedItemCount !== course.allItemsCount ? (
-                  <NavDropdown.Item>
-                    <b>
+                  <NavDropdown.Item style={mainfs}>
+                    <b  >
                       {course.completedItemCount} of {course.allItemsCount}
                       {" "} Complete
                     </b>{" "}
                     <br /> Finish course to get the certificate
                   </NavDropdown.Item>
                 ) : (
-                  <NavDropdown.Item>
-                    <b>
+                  <NavDropdown.Item style={mainfs}> 
+                    <b  >
                       {course.completedItemCount} of {course.allItemsCount}
                       {" "}Complete
                     </b>{" "}
@@ -135,6 +141,7 @@ const HeaderMyCourse = ({ setcourse, id, course }) => {
                       },
                     }}
                     onClick={handleDownloadCertificate}
+                    style={mainfs}
                   >
                     Get Certificate
                   </Button>
