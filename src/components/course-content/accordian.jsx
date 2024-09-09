@@ -15,6 +15,10 @@ import CardMainContainer from "../../pages/my-courses/[id]/CardMainContainer";
 import { saveAs } from 'file-saver';
 import { useRouter } from "next/router";
 
+const mainfs = {
+  fontSize: "calc(0.2rem + 1vw)",
+};
+
 
 const Accordian = ({
   show = false,
@@ -74,7 +78,7 @@ const Accordian = ({
       </style>
       <p className="accordion-header">
         <button
-          style={{ fontSize: "16px" }}
+           style={mainfs}
           className={`accordion-button d-flex justify-content-between ${
             show ? "" : "collapsed"
           }`}
@@ -82,6 +86,7 @@ const Accordian = ({
           data-bs-toggle="collapse"
           data-bs-target={`#question-${id}`}
           aria-expanded={show ? "true" : "false"}
+       
         >
           Section {id} : {content.section_name}
         </button>
@@ -92,7 +97,7 @@ const Accordian = ({
         data-bs-parent="#faq-accordion"
       >
         <div className="accordion-body p-1">
-          <ol style={{ cursor: "pointer" }} className="p-0">
+          <ol style={{ cursor: "pointer" }} className="p-0" >
             {content.section_curriculum_item.map((list, index) => (
               <React.Fragment key={index}>
                 {/* Video */}
@@ -102,6 +107,7 @@ const Accordian = ({
                     (type, idx) =>
                       type.curriculum_item_file_type === "Video" && (
                         <span
+                        
                           key={idx}
                           onClick={async () => {
                             setarticle("");

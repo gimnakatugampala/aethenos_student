@@ -78,6 +78,10 @@ import MediumLoading from "../../../functions/Loading/MediumLoading";
 import { Footer } from "../../../layout";
 import { ConvertToHTML, StripeHTML } from "../../../functions/ConvertToHTML";
 
+const mainfs = {
+  fontSize: "calc(0.2rem + 1vw)",
+};
+
 const CourseDetailsArea1 = ({ id, course, setcourse }) => {
 
   const router = useRouter();
@@ -650,7 +654,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
               {/* // Show Quiz */}
               {showquiz && (
                 <div
-                  className="container border p-4"
+                  className=" border p-4"
                   style={{ maxHeight: "620px", overflowY: "scroll" }}
                 >
                   <QuizContainer
@@ -732,6 +736,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                         role="tab"
                         aria-controls="overview"
                         aria-selected="true"
+                        style={mainfs}
                       >
                         Overview
                       </button>
@@ -748,6 +753,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                           role="tab"
                           aria-controls="qa"
                           aria-selected="false"
+                          style={mainfs}
                         >
                           Q&A
                         </button>
@@ -765,6 +771,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                           role="tab"
                           aria-controls="announcement"
                           aria-selected="false"
+                          style={mainfs}
                         >
                           Announcement
                         </button>
@@ -781,6 +788,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                         role="tab"
                         aria-controls="reviews"
                         aria-selected="false"
+                        style={mainfs}
                       >
                         Reviews
                       </button>
@@ -802,16 +810,16 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                   >
                     <div className="course-tab-content">
                       <div className="course-overview">
-                        <div className="mt-5">
-                          <Typography variant="h4" gutterBottom>
+                        <div className="mt-5 mx-3">
+                          <Typography variant="h5" gutterBottom >
                             {course && course.title}
                           </Typography>
 
                           <div className="row mt-5">
                             <div className="col-md-3">
-                              <div className="d-flex align-items-center">
+                              <div className="align-items-center">
                                 {course && (
-                                  <h6 className="m-0 p-0">
+                                  <h6 className="m-0 p-0 me-2"   style={mainfs}>
                                     {Number.parseFloat(course.rating).toFixed(
                                       1
                                     )}
@@ -819,6 +827,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                                 )}
                                 {course && (
                                   <Rating
+                                
                                     size={20}
                                     readonly={true}
                                     iconsCount={5}
@@ -828,7 +837,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                                   />
                                 )}
                               </div>
-                              <span>
+                              <span style={mainfs}>
                                 {course != null &&
                                   course &&
                                   course.rating_count}{" "}
@@ -838,11 +847,11 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
 
                             <div className="col-md-2">
                               <div className="d-flex align-items-center">
-                                <h6 className="m-0 p-0">
+                                <h6 className="m-0 p-0" style={mainfs}>
                                   {course && course.enrolled_count}
                                 </h6>
                               </div>
-                              <span>
+                              <span style={mainfs}>
                                 {course && course.enrolled_count == 1
                                   ? "Student"
                                   : "Students"}
@@ -850,18 +859,18 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                             </div>
 
                             <div className="col-md-2">
-                              <div className="d-flex align-items-center">
-                                <h6 className="m-0 p-0">
+                              <div className="d-flex align-items-center" >
+                                <h6 className="m-0 p-0" style={mainfs}>
                                   {course && course.no_of_videos}
                                 </h6>
                               </div>
-                              <span>No of Videos</span>
+                              <span style={mainfs} >No of Videos</span>
                             </div>
                           </div>
 
                           <div className="course-tab-content mt-5">
                             <div className="course-overview">
-                              <h5 className="title m-0 p-0">
+                              <h5 className="title m-0 p-0" style={mainfs}>
                                 What You’ll Learn?
                               </h5>
                               <div className="row">
@@ -869,30 +878,30 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                                   course.intended_learners &&
                                   chunkArray(course.intended_learners, 3).map(
                                     (chunk, index) => (
-                                      <ul key={index} className="col-md-6">
+                                      <ul key={index} className="col-md-6" >
                                         {chunk.map(
                                           (learner, idx) =>
                                             learner.intended_learner_type ==
                                               " students learn" && (
-                                              <li key={idx}>
+                                               <li key={idx} style={mainfs} >
                                                 {learner.intended_learner}
                                               </li>
                                             )
                                         )}
                                       </ul>
-                                    )
+                                    ) 
                                   )}
                               </div>
                             </div>
                           </div>
 
-                          <h3 className="heading-title m-0">
+                          <h3 className="heading-title m-0" >
                             Course Description
                           </h3>
-                          <p>{course && course.course_main_desc}</p>
+                          <p style={mainfs}>{course && course.course_main_desc}</p>
 
                           <h3 className="heading-title">Instructor</h3>
-                          <div className="d-flex align-items-center">
+                          <div className="d-flex align-items-center" style={mainfs}>
                             {course && (
                               <Avatar
                                 alt={`${course.instructor}`}
@@ -909,17 +918,17 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                             </a>
                           </div>
 
-                          <p className="my-2" >{course && course.instructor_title}</p>
+                          <p style={mainfs} className="my-2" >{course && course.instructor_title}</p>
 
-                          <p>{course && course.instructor_desc}</p>
+                          <p style={mainfs}>{course && course.instructor_desc}</p>
 
 
                                <h3 className="heading-title p-0 m-0">Requirements</h3>
                                 <div className="row">
-                                  <ul className="col-md-12">
+                                  <ul className="col-md-12" >
                                     {course && course.intended_learners && course.intended_learners.map((req, index) => (
                                       req.intended_learner_type === "requirements" && (
-                                        <li key={index}>{req.intended_learner}</li>
+                                        <li style={mainfs} key={index}>{req.intended_learner}</li>
                                       )
                                     ))}
                                   </ul>
@@ -935,7 +944,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                   {/* Q&A */}
                   {course && course.isPaid == true && (
                     <div
-                      className="tab-pane fade"
+                      className="tab-pane fade mx-3"
                       id="qa"
                       role="tabpanel"
                       aria-labelledby="qa-tab"
@@ -944,11 +953,12 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                         <div className="course-overview">
                           <div className="row mt-5">
                             <div className="col-md-12">
-                              <InputGroup className="mb-3">
+                              <InputGroup className="mb-3" >
                                 <Form.Control
                                   placeholder="Search all courses questions"
                                   aria-label="Search all courses questions"
                                   aria-describedby="basic-addon2"
+                                  style={mainfs}
                                 />
                                 <InputGroup.Text id="basic-addon2">
                                   <SearchIcon />
@@ -960,7 +970,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                           <div className="row my-3">
                             <div className="col-md-12">
                               <span className="d-flex">
-                                <h5 className="m-0 p-0">
+                                <h5 className="m-0 p-0" style={mainfs}>
                                   All questions in this courses
                                 </h5>
                                 <span>
@@ -977,11 +987,11 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                           <div className="row my-1">
                             {questions.length > 0 &&
                               questions.map((question, index) => (
-                                <div key={index} className="col-md-12">
-                                  <CardContainer>
+                                <div key={index} className="col-md-12" >
+                                  <CardContainer >
                                     <ListItem alignItems="flex-start">
-                                      <ListItemAvatar>
-                                        <Avatar
+                                      <ListItemAvatar >
+                                        <Avatar 
                                           alt={question.userName}
                                           src={
                                             question.profileImg == null
@@ -993,7 +1003,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                                       <ListItemText
                                         primary={question.userName}
                                         secondary={
-                                          <React.Fragment>
+                                          <React.Fragment >
                                             {question.question}
                                           </React.Fragment>
                                         }
@@ -1042,7 +1052,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                   {/* Annoucements */}
                   {course && course.isPaid == true && (
                     <div
-                      className="tab-pane fade"
+                      className="tab-pane fade mx-3"
                       id="announcement"
                       role="tabpanel"
                       aria-labelledby="announcement-tab"
@@ -1060,6 +1070,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                                   </ListItemAvatar>
                                   <ListItemText
                                     primary={course.instructor}
+                                    
                                     secondary={`Post an annoucement • ${moment(
                                       announcement.createdDate
                                     )
@@ -1068,16 +1079,16 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                                   />
                                 </ListItem>
                                 <div className="m-3">
-                                  <h4 className="heading-title">
+                                  <h4 className="heading-title " >
                                     {announcement.tittle}
                                   </h4>
-                                  <p>        <div dangerouslySetInnerHTML={{ __html: announcement.content }} />
+                                  <p>        <div style={mainfs} dangerouslySetInnerHTML={{ __html: announcement.content }} />
                                   </p>
                                 </div>
                               </CardContainer>
                             )) : (
                               <div className="text-center mt-5">
-                              <p className="fs-5">No announcements available</p>
+                              <p         style={mainfs}>No announcements available</p>
                             </div>
                             ) }
                         </div>
@@ -1087,7 +1098,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
 
                   {/* Reviews */}
                   <div
-                    className="tab-pane fade"
+                    className="tab-pane fade mx-3"
                     id="reviews"
                     role="tabpanel"
                     aria-labelledby="reviews-tab"
@@ -1168,7 +1179,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                             </div>
                           </div>
 
-                          <div className="mb-1 mt-1">
+                          <div className="mb-1 mt-3">
                             <h3>Reviews</h3>
                             
                             {featured_reviews != null &&
@@ -1188,10 +1199,10 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                                         iconsCount={5}
                                         initialValue={Number.parseInt(reviews.rating)}
                                       />
-                                      <span style={{ fontSize: "12px" }} className="mt-2">
+                                      <span style={mainfs}  className="mx-2 mt-2">
                                         {CalculateTimeAgo(reviews.date)}
                                       </span>
-                                      <p style={{ color: "#000" }}>{reviews.comment}</p>
+                                      <p style={mainfs}>{reviews.comment}</p>
                                     </div>
                                   ))
                                 : "No Reviews Found")}
@@ -1211,6 +1222,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
 
         {/* Course Content */}
         <div
+        
           style={{
             position: 'fixed',
             top: scrollPosition == 0 ? '85px' : '0',
@@ -1231,7 +1243,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
         backgroundColor: 'transparent', // Ensure sticky header doesn't blend with the content
       }}
     >
-      <h6 className="m-2">Course Content</h6>
+      <h6 className="m-2"    style={mainfs}>Course Content</h6>
     </div>
     <Card.Body style={{ height: 'calc(100vh - 85px)', overflowY: 'auto' }}>
       <div className="faq-accordion">

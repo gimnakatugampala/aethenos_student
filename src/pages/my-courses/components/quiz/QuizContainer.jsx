@@ -14,6 +14,11 @@ import CheckIcon from "@mui/icons-material/Check";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
+
+
+const mainfs = {
+  fontSize: "calc(0.2rem + 1vw)",
+};
 const QuizContainer = ({
   selectAnswer,
   setselectAnswer,
@@ -83,6 +88,7 @@ const QuizContainer = ({
                   <Stepper activeStep={activeStep}>
                     {selectedQuiz.getQuizs.map((q, index) => (
                       <Step
+                      
                         key={index}
                         sx={{
                           "& .MuiStepLabel-label": {
@@ -99,14 +105,14 @@ const QuizContainer = ({
                           },
                         }}
                       >
-                        <StepLabel>Question {index + 1}</StepLabel>
+                        <StepLabel ><span         style={mainfs}>Question {index + 1}</span></StepLabel>
                       </Step>
                     ))}
                   </Stepper>
 
                   <React.Fragment>
                     {selectedQuiz.getQuizs[activeStep] && (
-                      <h5 className="my-3 mx-4">
+                      <h5 className="my-3 mx-4"         style={mainfs}>
                         {selectedQuiz.getQuizs[activeStep].question}
                       </h5>
                     )}
@@ -158,6 +164,7 @@ const QuizContainer = ({
                                     />
                                   }
                                   label={answer.name}
+                                  
                                 />
                               )
                             )}
