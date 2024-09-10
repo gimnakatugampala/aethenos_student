@@ -2381,6 +2381,12 @@ Swal.fire({
   if(result.variable == "200"){
     SuccessAlert("Success",result.message)      
     console.log(result)
+
+    setTimeout(() => {
+      window.location.href = "/my-courses"
+      // router.push("/my-courses")
+  }, 1500);
+
     // return
   }
 
