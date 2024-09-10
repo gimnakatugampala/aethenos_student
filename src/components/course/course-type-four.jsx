@@ -18,6 +18,7 @@ import {
   decrease_quantity,
   remove_cart_course,
 } from "../../redux/features/cart-slice";
+import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
@@ -31,8 +32,11 @@ const CourseTypeFour = ({ data, classes, index }) => {
     (w) => Number(w.id) === Number(data.id)
   );
 
+  const titlefs = {
+    fontSize: "calc(0.2rem + 0.8vw)",
+  };
   const mainfs = {
-    fontSize: "20px",
+    fontSize: "calc(0.3rem + 0.5vw)",
   };
 
   const [mouseX, setMouseX] = useState(null);
@@ -40,6 +44,8 @@ const CourseTypeFour = ({ data, classes, index }) => {
   const handleRemoveFromCart = (item) => {
     dispatch(remove_cart_course(item));
   };
+
+  console.log(data);
 
   const handleWishlist = (course_item) => {
     if (wishlists.find((i) => i.id === course_item.id)) {
@@ -110,7 +116,7 @@ const CourseTypeFour = ({ data, classes, index }) => {
 
   return (
     <div
-      className={`edu-course course-style-5 ${classes ? classes : ""} h-100`}
+      className={`edu-course course-style-1 ${classes ? classes : ""} h-100`}
       style={{ cursor: "default" }}
     >
       <div className="inner">
@@ -125,20 +131,35 @@ const CourseTypeFour = ({ data, classes, index }) => {
           </Link>
         </div>
 
-        <div className="content">
+        <div className="content px-4">
           {data.course_prices.discount > 0 && (
-            <div className="course-price price-round">
+            <div
+              className="course-price price-round"
+              style={{ top: "20px", position: "absolute", right: "25px" }}
+            >
               {CalculateDiscountPrice(data)}
             </div>
           )}
 
-          <div className=" fw-bolder mt-4 mb-2" style={mainfs}>
-            <span className=""> {data.level}</span>
+          <div className=" fw-bolder mt-4 mb-2">
+            <span className="course-level"> {data.level}</span>
 
             {data.isPaid ? (
-              <span className="float-end">
+              <span className="float-end course-price discounted-price m-1">
                 {getSymbolFromCurrency(GetCurrencyByCountry(data))}
                 {CalculateDiscountedPrice(data)}
+
+                {data.course_prices.discount > 0 && (
+                  <span
+                   className="course-price text-decoration-line-through m-2"
+                 
+                  >
+                  {getSymbolFromCurrency(GetCurrencyByCountry(data))}
+                  {CalculateListPrice(data)}
+                  </span>
+                )}
+
+               
               </span>
             ) : (
               <span className="course-price discounted-price float-end fw-bolder">
@@ -173,16 +194,17 @@ const CourseTypeFour = ({ data, classes, index }) => {
             </span>
           </div>
 
-          <ul className="d-flex course-meta">
+          <ol className="d-flex course-meta">
+         
+            <li>
+              <i className="icon-25"></i>
+              {data.student} {data.student == 1 ? "Student" : "Students"}
+            </li>
             <li>
               <i className="icon-24"></i>
               {data.lesson} Lessons
-            </li>
-            <li>
-              <i className="icon-25"></i>
-              {data.student} {data.student == 1 ? 'Student' : 'Students'}
-            </li>
-          </ul>
+            </li>         
+          </ol>
         </div>
       </div>
 
@@ -190,16 +212,12 @@ const CourseTypeFour = ({ data, classes, index }) => {
         className={`hover-content-aside ${
           isSecondOrFourthCard ? "content-right" : ""
         }`}
-        style={{ cursor: "default" }}
+        style={{ cursor: "default", padding: "0" }}
       >
         <div className="content">
           <span className="course-level">{data.category}</span>
-          <h5 className="title">
-            <n-link to="/course/course-details">
-              {data.title.length > 20
-                ? data.title.slice(0, 35) + "..."
-                : data.title}
-            </n-link>
+          <h5 className="title" style={titlefs}>
+            <n-link to="/course/course-details">{data.title}</n-link>
           </h5>
           <div className="course-rating">
             <StarsRating
@@ -210,7 +228,7 @@ const CourseTypeFour = ({ data, classes, index }) => {
               color1={"gray"}
               color2={"#F39C12"}
             />
-            <span className="rating-count">
+            <span className="rating-count" style={mainfs}>
               <b>({Number.parseFloat(data.rating).toFixed(1)})</b>
             </span>
           </div>
@@ -223,20 +241,20 @@ const CourseTypeFour = ({ data, classes, index }) => {
             <li>{data.level}</li>
           </ul> */}
           <div className="course-feature">
-            <h6 className="title">What You’ll Learn?</h6>
+            <h6 className="title" style={titlefs}>
+              What You’ll Learn?
+            </h6>
             <ul>
-              {data.intended_learners
-                .slice(0, 3)
-                .map(
-                  (feature, featurekey) =>
-                    feature.intended_learner_type == " students learn" && (
-                      <li key={featurekey}>
-                        {feature.intended_learner > 25
-                          ? feature.intended_learner.substring(0, 25) + "..."
-                          : feature.intended_learner}
-                      </li>
-                    )
-                )}
+              {data.intended_learners.slice(0, 3).map(
+                (feature, featurekey) =>
+                  feature.intended_learner_type == " students learn" && (
+                    <li key={featurekey} style={mainfs}>
+                      {feature.intended_learner > 25
+                        ? feature.intended_learner.substring(0, 25) + "..."
+                        : feature.intended_learner}
+                    </li>
+                  )
+              )}
             </ul>
           </div>
 
@@ -270,7 +288,7 @@ const CourseTypeFour = ({ data, classes, index }) => {
               <a
                 onClick={() => handleEnroll(data)}
                 className="edu-btn btn-medium"
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer", mainfs }}
               >
                 Enroll Now
                 <i className="icon-4"></i>
