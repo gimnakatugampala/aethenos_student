@@ -8,7 +8,6 @@ import HandleCountry from './HandleCountry';
 
 const HandleFreeCourses = (course) => {
 
-  const COUNTRY = Cookies.get('aethenos_user_origin');
 
 
   // check if the user is logged in

@@ -11,6 +11,7 @@ import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
 import getSymbolFromCurrency from 'currency-symbol-map'
 import CalculateDiscountPrice from '../../functions/pricing/CalculateDiscountPrice';
 import Cookies from 'js-cookie';
+import HandleFreeCourses from '../../functions/pricing/HandleFreeCourses';
 
 
 const COUNTRY = Cookies.get('aethenos_user_origin')
@@ -72,21 +73,23 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
 
     // console.log(data)
 
-    var rawData = {
-      "paymentMethod": "3",
-      "discount": 0,
-      "totalPrice": 0,
-      "currency": "USD",
-      "country": JSON.parse(COUNTRY).country_name,
-      "courseType":2,
-      "courses": [{
-          "courseCode": `${data.course_code}`,
-          "itemPrice": 0,
-          "currency": "USD"
-        }]
-    }
+    // var rawData = {
+    //   "paymentMethod": "3",
+    //   "discount": 0,
+    //   "totalPrice": 0,
+    //   "currency": "USD",
+    //   "country": JSON.parse(COUNTRY).country_name,
+    //   "courseType":2,
+    //   "courses": [{
+    //       "courseCode": `${data.course_code}`,
+    //       "itemPrice": 0,
+    //       "currency": "USD"
+    //     }]
+    // }
 
-    EnrollByStudent(rawData)
+    // EnrollByStudent(rawData)
+
+    HandleFreeCourses(data)
 
     // console.log(rawData)
   }

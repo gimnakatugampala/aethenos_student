@@ -19,6 +19,7 @@ import {
   remove_cart_course,
 } from "../../redux/features/cart-slice";
 import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
+import HandleFreeCourses from "../../functions/pricing/HandleFreeCourses";
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
@@ -93,23 +94,25 @@ const CourseTypeFour = ({ data, classes, index }) => {
   const handleEnroll = (data) => {
     // console.log(data)
 
-    var rawData = {
-      paymentMethod: "3",
-      discount: 0,
-      totalPrice: 0,
-      currency: "USD",
-      country: JSON.parse(COUNTRY).country_name,
-      courseType: 2,
-      courses: [
-        {
-          courseCode: `${data.course_code}`,
-          itemPrice: 0,
-          currency: "USD",
-        },
-      ],
-    };
+    // var rawData = {
+    //   paymentMethod: "3",
+    //   discount: 0,
+    //   totalPrice: 0,
+    //   currency: "USD",
+    //   country: JSON.parse(COUNTRY).country_name,
+    //   courseType: 2,
+    //   courses: [
+    //     {
+    //       courseCode: `${data.course_code}`,
+    //       itemPrice: 0,
+    //       currency: "USD",
+    //     },
+    //   ],
+    // };
 
-    EnrollByStudent(rawData);
+    // EnrollByStudent(rawData);
+
+    HandleFreeCourses(data)
 
     // console.log(rawData)
   };
