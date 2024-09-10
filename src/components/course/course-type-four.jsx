@@ -131,7 +131,7 @@ const CourseTypeFour = ({ data, classes, index }) => {
           </Link>
         </div>
 
-        <div className="content">
+        <div className="content px-4">
           {data.course_prices.discount > 0 && (
             <div
               className="course-price price-round"
@@ -194,16 +194,17 @@ const CourseTypeFour = ({ data, classes, index }) => {
             </span>
           </div>
 
-          <ul className="d-flex course-meta">
-            <li>
-              <i className="icon-24"></i>
-              {data.lesson} Lessons
-            </li>
+          <ol className="d-flex course-meta">
+         
             <li>
               <i className="icon-25"></i>
               {data.student} {data.student == 1 ? "Student" : "Students"}
             </li>
-          </ul>
+            <li>
+              <i className="icon-24"></i>
+              {data.lesson} Lessons
+            </li>         
+          </ol>
         </div>
       </div>
 
