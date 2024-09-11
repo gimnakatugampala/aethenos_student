@@ -185,7 +185,7 @@ const generatePaypalItems = () => {
         if (total !== 0) {
             const calculatedPurchasedCourse = cartCourses.map((course) => {
                 // --- list price --
-                console.log(CalculateListPrice(course.other_data))
+                // console.log(CalculateListPrice(course.other_data))
                 const coupon = couponValue.find(coupon => coupon.id === course.id);
                 const originalPrice = CalculateDiscountedPrice(course.other_data) || 0;
                 const discountedPrice = coupon 
@@ -198,7 +198,8 @@ const generatePaypalItems = () => {
                 return {
                     courseCode: course.other_data.course_code,
                     currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
-                    itemPrice: discountedPrice.toFixed(2)
+                    itemPrice: discountedPrice.toFixed(2),
+                    listPrice: CalculateListPrice(course.other_data)
                 };
             });
 

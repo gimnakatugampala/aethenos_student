@@ -4,6 +4,7 @@ import { EnrollByStudent, USERTOKEN } from '../../api';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
 import HandleCountry from './HandleCountry';
+import CalculateListPrice from './CalculateListPrice';
 
 
 const HandleFreeCourses = (course) => {
@@ -24,6 +25,7 @@ const HandleFreeCourses = (course) => {
           courseCode: `${course.course_code}`,
           itemPrice: 0,
           currency: GetCurrencyByCountry(course),
+          listPrice: 0
         },
       ],
     };
