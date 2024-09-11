@@ -79,7 +79,12 @@ import { Footer } from "../../../layout";
 import { ConvertToHTML, StripeHTML } from "../../../functions/ConvertToHTML";
 
 const mainfs = {
-  fontSize: "calc(0.2rem + 1vw)",
+  fontSize: "calc(0.4rem + 0.6vw)",
+};
+
+
+const titlefs = {
+  fontSize: "calc(0.2rem + 0.8vw)",
 };
 
 const CourseDetailsArea1 = ({ id, course, setcourse }) => {
@@ -203,10 +208,6 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
     } else {
       console.error("Curriculum item not found");
     }
-
-    console.log("------------------");
-    console.log(curriculumItem);
-    console.log("------------------");
 
   // ------------- From Excel Plugin API -----------
 
@@ -713,7 +714,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
             </>
           ) : (
             <div
-              className="container border p-4"
+              className="border p-4"
               style={{ maxHeight: "500px", overflowY: "scroll" }}
             >
               {parse(article)}
@@ -721,7 +722,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
           )}
 
           {/* New Tab */}
-          <div className="container mx-2">
+          <div className="mx-5">
             <div className="row">
               <div className="col-md-12 mx-3 ">
                 <div className="course-details-content ">
@@ -1070,7 +1071,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                                   </ListItemAvatar>
                                   <ListItemText
                                     primary={course.instructor}
-                                    secondary={`Post an annoucement • ${calculateTimeAgo(
+                                    secondary={`Post an annoucement • ${CalculateTimeAgo(
                                       announcement.createdDate
                                     )}`}
                                   />

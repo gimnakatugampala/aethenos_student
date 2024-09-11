@@ -7,8 +7,6 @@ import DisplayCardRatings from "../ratings-display/DisplayCardRatings";
 
 const CourseBreadcrumb = ({ course }) => {
   const { title, instructor, language, rating_count, subtitle } = course || {};
-
-  console.log(course);
   // const { mouseDirection, mouseReverse } = useMouseMoveUI();
   return (
     <div className="edu-breadcrumb-area breadcrumb-style-3 ">
@@ -47,14 +45,7 @@ const CourseBreadcrumb = ({ course }) => {
 
           <ul className="course-meta">
             <li className="course-rating">
-            <DisplayCardRatings rating={Number.parseFloat(course.rating).toFixed(1)} />
-              {/* <div className="rating">
-                <i className="icon-23"></i>
-                <i className="icon-23"></i>
-                <i className="icon-23"></i>
-                <i className="icon-23"></i>
-                <i className="icon-23"></i>
-              </div> */}
+            <DisplayCardRatings rating={Number.parseFloat(course.rating).toFixed(1)} />   
 
               <span className="rating-count">
                 <a>

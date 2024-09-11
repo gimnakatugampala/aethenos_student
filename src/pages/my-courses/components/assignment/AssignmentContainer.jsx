@@ -11,8 +11,7 @@ import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/audio.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { saveAs } from 'file-saver';
-
+import { saveAs } from "file-saver";
 
 import {
   MediaPlayer,
@@ -33,6 +32,34 @@ const steps = [
   "Questions",
   "Solutions",
 ];
+
+export const FormatVideoTimeLengthToHHMM = (timeString) => {
+  // Split the input string into hours and minutes
+  const [hoursStr, minutesStr] = timeString.split(":");
+
+  // Convert hours and minutes to numbers
+  const hours = parseInt(hoursStr, 10);
+  const minutes = parseInt(minutesStr, 10);
+
+  let formattedTime = "";
+
+  // Format the hours part
+  if (hours > 0) {
+    formattedTime += `${hours} hour${hours > 1 ? "s" : ""}`;
+  }
+
+  // Add a space if there are both hours and minutes
+  if (hours > 0 && minutes > 0) {
+    formattedTime += " and ";
+  }
+
+  // Format the minutes part
+  if (minutes > 0) {
+    formattedTime += `${minutes} minute${minutes > 1 ? "s" : ""}`;
+  }
+
+  return formattedTime.trim();
+};
 
 const AssignmentContainer = ({
   activeStep,
@@ -83,22 +110,24 @@ const AssignmentContainer = ({
     setActiveStep(0);
   };
 
-
   const handleDownload = async (filePath) => {
-    console.log('Attempting to download:', filePath);
+    console.log("Attempting to download:", filePath);
     try {
       const pdfResponse = await fetch(filePath);
       if (!pdfResponse.ok) {
-        console.error('Network response error:', pdfResponse.status, pdfResponse.statusText);
-        throw new Error('Network response was not ok');
+        console.error(
+          "Network response error:",
+          pdfResponse.status,
+          pdfResponse.statusText
+        );
+        throw new Error("Network response was not ok");
       }
       const pdfBlob = await pdfResponse.blob();
       saveAs(pdfBlob, filePath.split("/").pop());
     } catch (error) {
-      console.error('Download failed:', error.message);
+      console.error("Download failed:", error.message);
     }
   };
-  
 
   return (
     <>
@@ -117,7 +146,6 @@ const AssignmentContainer = ({
                   key={label}
                   {...stepProps}
                   sx={{
-                  
                     "& .MuiStepLabel-label": {
                       fontWeight: "bold !important",
                     },
@@ -165,8 +193,14 @@ const AssignmentContainer = ({
                     <b>{selectedAssignment.title} </b>
                   </h5>
                   <p className="my-2 p-0">
-                    Duration{" "}
-                    <i>({selectedAssignment.getAssignments[0].duration})</i>
+                    {" "}
+                    <h6 className="m-0 p-0">Duration</h6>
+                    <p className="m-0 p-0">
+                      {" "}
+                      {FormatVideoTimeLengthToHHMM(
+                        selectedAssignment.getAssignments[0].duration
+                      )}
+                    </p>
                   </p>
                   {selectedAssignment.description != "" && (
                     <h6 className="m-0 p-0">Description</h6>
@@ -182,15 +216,18 @@ const AssignmentContainer = ({
                   </p>
                   {selectedAssignment.getAssignments[0].downloadableResource !=
                     "" && (
-
-                <Button
-                  variant="contained"
-                  color="error"
-                  className="my-2"
-                  onClick={() => handleDownload(`${IMG_HOST}${selectedAssignment.getAssignments[0].downloadableResource}`)}
-                >
-                  Download Resource <i className="fas fa-download mx-2"></i>
-                </Button>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      className="my-2"
+                      onClick={() =>
+                        handleDownload(
+                          `${IMG_HOST}${selectedAssignment.getAssignments[0].downloadableResource}`
+                        )
+                      }
+                    >
+                      Download Resource <i className="fas fa-download mx-2"></i>
+                    </Button>
 
                     // <a
                     //   className="btn btn-danger my-4"
@@ -228,7 +265,11 @@ const AssignmentContainer = ({
                   variant="contained"
                   color="error"
                   className="my-2"
-                  onClick={() => handleDownload(`${IMG_HOST}${selectedAssignment.getAssignments[0].questionSheet}`)}
+                  onClick={() =>
+                    handleDownload(
+                      `${IMG_HOST}${selectedAssignment.getAssignments[0].questionSheet}`
+                    )
+                  }
                 >
                   Download Questions <i className="fas fa-download"></i>
                 </Button>
@@ -278,13 +319,17 @@ const AssignmentContainer = ({
                   </h6>
 
                   <Button
-                  variant="contained"
-                  color="error"
-                  className="my-2"
-                  onClick={() => handleDownload(`${IMG_HOST}${selectedAssignment.getAssignments[0].solutionsSheet}`)}
-                >
-                  Download Answers <i className="fas fa-download"></i>
-                </Button>
+                    variant="contained"
+                    color="error"
+                    className="my-2"
+                    onClick={() =>
+                      handleDownload(
+                        `${IMG_HOST}${selectedAssignment.getAssignments[0].solutionsSheet}`
+                      )
+                    }
+                  >
+                    Download Answers <i className="fas fa-download"></i>
+                  </Button>
 
                   {/* <a
                     className="btn btn-danger my-2"

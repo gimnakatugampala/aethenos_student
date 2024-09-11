@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import CardContainer from "../../pages/my-courses/[id]/CardContainer";
 import Dropdown from "react-bootstrap/Dropdown";
+import QuizIcon from "@mui/icons-material/Quiz";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import CodeIcon from "@mui/icons-material/Code";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
+import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import {
   GetMyCoursesDetails,
   IMG_HOST,
@@ -12,13 +18,15 @@ import {
 import { CheckBox } from "@mui/icons-material";
 import Form from "react-bootstrap/Form";
 import CardMainContainer from "../../pages/my-courses/[id]/CardMainContainer";
-import { saveAs } from 'file-saver';
+import { saveAs } from "file-saver";
 import { useRouter } from "next/router";
 
 const mainfs = {
-  fontSize: "calc(0.2rem + 1vw)",
+  fontSize: "calc(0.4rem + 0.6vw)!important",
 };
-
+const secfs = {
+  fontSize: "calc(1rem + 0.6vw)!important",
+};
 
 const Accordian = ({
   show = false,
@@ -52,7 +60,6 @@ const Accordian = ({
   const bgcolor = "#808080";
 
   const router = useRouter();
-
   // Extract the query parameters
   const { sectionID, curriclumID, SyllabusType } = router.query;
 
@@ -62,7 +69,7 @@ const Accordian = ({
       const blob = await response.blob();
       saveAs(blob, title);
     } catch (error) {
-      console.error('Error downloading file:', error);
+      console.error("Error downloading file:", error);
     }
   };
 
@@ -78,7 +85,7 @@ const Accordian = ({
       </style>
       <p className="accordion-header">
         <button
-           style={mainfs}
+          style={mainfs}
           className={`accordion-button d-flex justify-content-between ${
             show ? "" : "collapsed"
           }`}
@@ -86,7 +93,6 @@ const Accordian = ({
           data-bs-toggle="collapse"
           data-bs-target={`#question-${id}`}
           aria-expanded={show ? "true" : "false"}
-       
         >
           Section {id} : {content.section_name}
         </button>
@@ -97,7 +103,7 @@ const Accordian = ({
         data-bs-parent="#faq-accordion"
       >
         <div className="accordion-body p-1">
-          <ol style={{ cursor: "pointer" }} className="p-0" >
+          <ol style={{ cursor: "pointer" }} className="p-0">
             {content.section_curriculum_item.map((list, index) => (
               <React.Fragment key={index}>
                 {/* Video */}
@@ -107,7 +113,6 @@ const Accordian = ({
                     (type, idx) =>
                       type.curriculum_item_file_type === "Video" && (
                         <span
-                        
                           key={idx}
                           onClick={async () => {
                             setarticle("");
@@ -117,7 +122,9 @@ const Accordian = ({
                             setshowPracticeTest(false);
                             setshowCodingExercise(false);
 
-                            const videoSourceUrl = await VideoStreaming(type.url);
+                            const videoSourceUrl = await VideoStreaming(
+                              type.url
+                            );
 
                             setmain_Video_player_url(`${videoSourceUrl}`);
 
@@ -154,15 +161,16 @@ const Accordian = ({
 
                             setseletedCurriculumItem(list.curriculumItemId);
 
-                         
-
                             // Only execute if sectionID, curriclumID, and type are not null or undefined
                             if (sectionID && curriclumID && SyllabusType) {
-                              router.replace(`/my-courses/${itemCode}`, undefined, { shallow: true });
+                              router.replace(
+                                `/my-courses/${itemCode}`,
+                                undefined,
+                                { shallow: true }
+                              );
                             }
 
-
-                            // console.log(list)
+                       
 
                             GetMyCoursesDetails(courseItemCode, setcourse);
                           }}
@@ -202,12 +210,12 @@ const Accordian = ({
                                       ? "text-light"
                                       : ""
                                   }
+                                  style={mainfs}
                                 >
-                                  {index + 1}.
-                                  <i className="fa-solid fa-circle-play mx-2"></i>{" "}
-                                  {list.title}
+                                  {index + 1}. <PlayCircleIcon /> Video Lecture
+                                  : {list.title}
                                   {type.videoLength !== 0 && (
-                                    <span style={{ fontSize: "12px" }}>
+                                    <span>
                                       <b>
                                         <i>
                                           <i className="fas fa-tv mx-2"></i>
@@ -217,6 +225,19 @@ const Accordian = ({
                                       </b>
                                     </span>
                                   )}
+                                  <p
+                                    className={`m-1 p-0 ${
+                                      seletedCurriculumItem ===
+                                      list.curriculumItemId
+                                        ? "text-light"
+                                        : ""
+                                    }`}
+                                  >
+                                    {list.description.replace(
+                                      /<\/?[^>]+(>|$)/g,
+                                      ""
+                                    )}
+                                  </p>
                                 </p>
                               </li>
                             </CardContainer>
@@ -230,24 +251,32 @@ const Accordian = ({
                                     "Source Code"
                               ) && (
                                 <Dropdown>
-                                <Dropdown.Toggle size="sm" variant="danger">
-                                  <i className="fas fa-folder-open"></i> Resources
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                  {list.get_CurriculumItem_File.map(
-                                    (item, idx) =>
-                                      (item.curriculum_item_file_type == "Downloadable Items" ||
-                                        item.curriculum_item_file_type == "Source Code") && (
-                                        <Dropdown.Item
-                                          key={idx}
-                                          onClick={() => handleDownload(`${IMG_HOST}${item.url}`, item.title)}
-                                        >
-                                          {item.title}
-                                        </Dropdown.Item>
-                                      )
-                                  )}
-                                </Dropdown.Menu>
-                              </Dropdown>
+                                  <Dropdown.Toggle size="sm" variant="danger">
+                                    <i className="fas fa-folder-open"></i>{" "}
+                                    Resources
+                                  </Dropdown.Toggle>
+                                  <Dropdown.Menu>
+                                    {list.get_CurriculumItem_File.map(
+                                      (item, idx) =>
+                                        (item.curriculum_item_file_type ==
+                                          "Downloadable Items" ||
+                                          item.curriculum_item_file_type ==
+                                            "Source Code") && (
+                                          <Dropdown.Item
+                                            key={idx}
+                                            onClick={() =>
+                                              handleDownload(
+                                                `${IMG_HOST}${item.url}`,
+                                                item.title
+                                              )
+                                            }
+                                          >
+                                            {item.title}
+                                          </Dropdown.Item>
+                                        )
+                                    )}
+                                  </Dropdown.Menu>
+                                </Dropdown>
                               )}
                               {/* Links */}
                               {list.get_CurriculumItem_File.some(
@@ -311,9 +340,11 @@ const Accordian = ({
                         );
                         // ---------------- STORE AS LAST POSITION -------
 
-                         // Only execute if sectionID, curriclumID, and type are not null or undefined
-                         if (sectionID && curriclumID && SyllabusType) {
-                          router.replace(`/my-courses/${itemCode}`, undefined, { shallow: true });
+                        // Only execute if sectionID, curriclumID, and type are not null or undefined
+                        if (sectionID && curriclumID && SyllabusType) {
+                          router.replace(`/my-courses/${itemCode}`, undefined, {
+                            shallow: true,
+                          });
                         }
 
                         GetMyCoursesDetails(courseItemCode, setcourse);
@@ -347,10 +378,23 @@ const Accordian = ({
                                   ? "text-light"
                                   : ""
                               }
+                              style={mainfs}
                             >
-                              {index + 1}.
-                              <i className="fas fa-newspaper mx-2"></i>{" "}
+                              {index + 1}. <FileCopyIcon /> Text-Based Lecture :{" "}
                               {list.title}
+                              <p
+                                className={`m-1 p-0 ${
+                                  seletedCurriculumItem ===
+                                  list.curriculumItemId
+                                    ? "text-light"
+                                    : ""
+                                }`}
+                              >
+                                {list.description.replace(
+                                  /<\/?[^>]+(>|$)/g,
+                                  ""
+                                )}
+                              </p>
                             </p>
                           </li>
                         </CardContainer>
@@ -364,24 +408,31 @@ const Accordian = ({
                               type.curriculum_item_file_type === "Source Code"
                           ) && (
                             <Dropdown>
-                            <Dropdown.Toggle size="sm" variant="danger">
-                              <i className="fas fa-folder-open"></i> Resources
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu>
-                              {list.get_CurriculumItem_File.map(
-                                (item, idx) =>
-                                  (item.curriculum_item_file_type == "Downloadable Items" ||
-                                    item.curriculum_item_file_type == "Source Code") && (
-                                    <Dropdown.Item
-                                      key={idx}
-                                      onClick={() => handleDownload(`${IMG_HOST}${item.url}`, item.title)}
-                                    >
-                                      {item.title}
-                                    </Dropdown.Item>
-                                  )
-                              )}
-                            </Dropdown.Menu>
-                          </Dropdown>
+                              <Dropdown.Toggle size="sm" variant="danger">
+                                <i className="fas fa-folder-open"></i> Resources
+                              </Dropdown.Toggle>
+                              <Dropdown.Menu>
+                                {list.get_CurriculumItem_File.map(
+                                  (item, idx) =>
+                                    (item.curriculum_item_file_type ==
+                                      "Downloadable Items" ||
+                                      item.curriculum_item_file_type ==
+                                        "Source Code") && (
+                                      <Dropdown.Item
+                                        key={idx}
+                                        onClick={() =>
+                                          handleDownload(
+                                            `${IMG_HOST}${item.url}`,
+                                            item.title
+                                          )
+                                        }
+                                      >
+                                        {item.title}
+                                      </Dropdown.Item>
+                                    )
+                                )}
+                              </Dropdown.Menu>
+                            </Dropdown>
                           )}
 
                           {/* Links */}
@@ -451,14 +502,16 @@ const Accordian = ({
 
                       setseletedCurriculumItem(list.curriculumItemId);
 
-                       // Only execute if sectionID, curriclumID, and type are not null or undefined
-                       if (sectionID && curriclumID && SyllabusType) {
-                        router.replace(`/my-courses/${itemCode}`, undefined, { shallow: true });
+                      // Only execute if sectionID, curriclumID, and type are not null or undefined
+                      if (sectionID && curriclumID && SyllabusType) {
+                        router.replace(`/my-courses/${itemCode}`, undefined, {
+                          shallow: true,
+                        });
                       }
 
                       GetMyCoursesDetails(courseItemCode, setcourse);
 
-                      console.log(list);
+                 
                     }}
                     key={index}
                   >
@@ -488,9 +541,18 @@ const Accordian = ({
                                 ? "text-light"
                                 : ""
                             }
+                            style={mainfs}
                           >
-                            {index + 1}.<i className="fas fa-question mx-2"></i>{" "}
-                            {list.title}
+                            {index + 1}. <QuizIcon /> Quiz : {list.title}
+                            <p
+                              className={`m-1 p-0 ${
+                                seletedCurriculumItem === list.curriculumItemId
+                                  ? "text-light"
+                                  : ""
+                              }`}
+                            >
+                              {list.description.replace(/<\/?[^>]+(>|$)/g, "")}
+                            </p>
                           </p>
                         </li>
                       </CardContainer>
@@ -527,16 +589,18 @@ const Accordian = ({
                       );
                       // ---------------- STORE AS LAST POSITION -------
 
-                       // Only execute if sectionID, curriclumID, and type are not null or undefined
-                       if (sectionID && curriclumID && SyllabusType) {
-                        router.replace(`/my-courses/${itemCode}`, undefined, { shallow: true });
+                      // Only execute if sectionID, curriclumID, and type are not null or undefined
+                      if (sectionID && curriclumID && SyllabusType) {
+                        router.replace(`/my-courses/${itemCode}`, undefined, {
+                          shallow: true,
+                        });
                       }
 
                       GetMyCoursesDetails(courseItemCode, setcourse);
 
                       setselectedAssignment(list);
 
-                      console.log(list);
+                
                     }}
                     key={index}
                   >
@@ -566,10 +630,19 @@ const Accordian = ({
                                 ? "text-light"
                                 : ""
                             }
+                            style={mainfs}
                           >
-                            {index + 1}.
-                            <i className="fas fa-clipboard-list mx-2"></i>{" "}
+                            {index + 1}. <AssignmentIcon /> Assignment :{" "}
                             {list.title}
+                            <p
+                              className={`m-1 p-0 ${
+                                seletedCurriculumItem === list.curriculumItemId
+                                  ? "text-light"
+                                  : ""
+                              }`}
+                            >
+                              {list.description.replace(/<\/?[^>]+(>|$)/g, "")}
+                            </p>
                           </p>
                         </li>
                       </CardContainer>
@@ -606,13 +679,15 @@ const Accordian = ({
                       // ---------------- STORE AS LAST POSITION -------
 
                       setselectedPracticeTest(list);
-                      console.log(list);
+                  
 
                       setseletedCurriculumItem(list.curriculumItemId);
 
-                       // Only execute if sectionID, curriclumID, and type are not null or undefined
-                       if (sectionID && curriclumID && SyllabusType) {
-                        router.replace(`/my-courses/${itemCode}`, undefined, { shallow: true });
+                      // Only execute if sectionID, curriclumID, and type are not null or undefined
+                      if (sectionID && curriclumID && SyllabusType) {
+                        router.replace(`/my-courses/${itemCode}`, undefined, {
+                          shallow: true,
+                        });
                       }
 
                       GetMyCoursesDetails(courseItemCode, setcourse);
@@ -645,9 +720,19 @@ const Accordian = ({
                                 ? "text-light"
                                 : ""
                             }
+                            style={mainfs}
                           >
-                            {index + 1}.<i className="fas fa-tasks mx-2"></i>{" "}
+                            {index + 1}. <ListAltIcon /> Practice Test :{" "}
                             {list.title}
+                            <p
+                              className={`m-1 p-0 ${
+                                seletedCurriculumItem === list.curriculumItemId
+                                  ? "text-light"
+                                  : ""
+                              }`}
+                            >
+                              {list.description.replace(/<\/?[^>]+(>|$)/g, "")}
+                            </p>
                           </p>
                         </li>
                       </CardContainer>
@@ -684,11 +769,13 @@ const Accordian = ({
 
                       setselectedCodingExercise(list);
                       setseletedCurriculumItem(list.curriculumItemId);
-                      console.log(list);
+                  
 
-                       // Only execute if sectionID, curriclumID, and type are not null or undefined
-                       if (sectionID && curriclumID && SyllabusType) {
-                        router.replace(`/my-courses/${itemCode}`, undefined, { shallow: true });
+                      // Only execute if sectionID, curriclumID, and type are not null or undefined
+                      if (sectionID && curriclumID && SyllabusType) {
+                        router.replace(`/my-courses/${itemCode}`, undefined, {
+                          shallow: true,
+                        });
                       }
 
                       GetMyCoursesDetails(courseItemCode, setcourse);
@@ -721,10 +808,19 @@ const Accordian = ({
                                 ? "text-light"
                                 : ""
                             }
+                            style={mainfs}
                           >
-                            {index + 1}.
-                            <i className="fas fa-clipboard-list mx-2"></i>{" "}
+                            {index + 1}. <CodeIcon /> Coding Exercise :{" "}
                             {list.title}
+                            <p
+                              className={`m-1 p-0 ${
+                                seletedCurriculumItem === list.curriculumItemId
+                                  ? "text-light"
+                                  : ""
+                              }`}
+                            >
+                              {list.description.replace(/<\/?[^>]+(>|$)/g, "")}
+                            </p>
                           </p>
                         </li>
                       </CardContainer>

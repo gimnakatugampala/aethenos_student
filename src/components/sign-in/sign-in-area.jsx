@@ -17,7 +17,7 @@ const SignInArea = () => {
 
                    
                 </div>
-
+{/* 
                 <ul className="shape-group">
                     <li className="shape-1 scene">
                         <img src="/assets/images/about/shape-07.png" alt="Shape" />
@@ -28,7 +28,7 @@ const SignInArea = () => {
                     <li className="shape-3 scene">
                         <img src="/assets/images/counterup/shape-02.png" alt="Shape" />
                     </li>
-                </ul>
+                </ul> */}
             </div>
         </section>
     )

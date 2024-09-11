@@ -25,8 +25,7 @@ import { SpinnerCircular } from "spinners-react";
 // import SearchResults from '../../../components/course-category/landscape-courses/searchResults'
 import SearchResults from "../../components/course-category/landscape-courses/searchResults";
 import LargeLoading from "../../functions/Loading/LargeLoading";
-
-
+import DisplayCardRatings from "../../components/ratings-display/DisplayCardRatings";
 
 // course_items
 const course_items = course_data.filter(
@@ -67,9 +66,7 @@ const CourseFiveArea = () => {
       <div className="mx-5">
         <div className="row g-5 mx-5">
           {loading ? (
-           
-              <LargeLoading
-              />
+            <LargeLoading />
           ) : (
             <div className="row col-md-12">
               <div className="col-md-8">
@@ -83,15 +80,43 @@ const CourseFiveArea = () => {
 
                 <div className="d-flex my-2">
                   <div className="m-3">
-                    <p className="m-0 p-0">Total {instructor_details.totalStudents == 1 ? 'Student' : 'Students'}</p>
-                    <h5 className="m-0 p-0">
+                    <p className="m-0 p-0">
+                      Total{" "}
+                      {instructor_details.totalStudents == 1
+                        ? "Student"
+                        : "Students"}
+                    </p>
+                    <h6 className="m-0 p-0">
                       {instructor_details.totalStudents}
-                    </h5>
+                    </h6>
                   </div>
 
                   <div className="m-3">
                     <p className="m-0 p-0">Reviews</p>
-                    <h5 className="m-0 p-0">{instructor_details.reviews}</h5>
+                    <h6 className="m-0 p-0">{instructor_details.reviews}</h6>
+                  </div>
+
+                  <div className="m-3">
+                    <p className="m-0 p-0">Ratings</p>
+
+                    {instructor_details.rating && Number.parseFloat(instructor_details.rating) > 0 ? (
+                      <h5 className="m-0 p-0">
+                        <DisplayCardRatings
+                          rating={Number.parseFloat(
+                            instructor_details.rating
+                          ).toFixed(1)}
+                        />
+                        <h6>
+                          (
+                          {Number.parseFloat(instructor_details.rating).toFixed(
+                            1
+                          )}
+                          )
+                        </h6>
+                      </h5>
+                    ) : (
+                      <h6 className="m-0 p-0">0.0</h6>               
+                    )}
                   </div>
                 </div>
 
@@ -154,55 +179,53 @@ const CourseFiveArea = () => {
                   </a>
                 )}
 
-              {instructor_details.website && (
-                <a
-                  target="_blank"
-                  href={
-                    instructor_details.website.startsWith("http")
-                      ? instructor_details.website
-                      : `https://${instructor_details.website}`
-                  }
-                  className="btn btn-outline-dark text-center fs-6 mb-1"
-                  style={stylesBlock}
-                  onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = "#F0FFFF";
-                    e.target.style.color = "inherit";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = "transparent";
-                    e.target.style.color = "inherit";
-                  }}
-                >
-                  <LanguageIcon />
-                  Website
-                </a>
-              )}
+                {instructor_details.website && (
+                  <a
+                    target="_blank"
+                    href={
+                      instructor_details.website.startsWith("http")
+                        ? instructor_details.website
+                        : `https://${instructor_details.website}`
+                    }
+                    className="btn btn-outline-dark text-center fs-6 mb-1"
+                    style={stylesBlock}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = "#F0FFFF";
+                      e.target.style.color = "inherit";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = "transparent";
+                      e.target.style.color = "inherit";
+                    }}
+                  >
+                    <LanguageIcon />
+                    Website
+                  </a>
+                )}
 
-
-                  {instructor_details.twitter && (
-                    <a
-                      target="_blank"
-                      href={
-                        instructor_details.twitter.startsWith("http")
-                          ? instructor_details.twitter
-                          : `https://twitter.com/${instructor_details.twitter}`
-                      }
-                      className="btn btn-outline-dark text-center fs-6 mb-1"
-                      style={stylesBlock}
-                      onMouseEnter={(e) => {
-                        e.target.style.backgroundColor = "#F0FFFF";
-                        e.target.style.color = "inherit";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.backgroundColor = "transparent";
-                        e.target.style.color = "inherit";
-                      }}
-                    >
-                     <i className="fa-brands fa-x-twitter"></i>
-                      Twitter
-                    </a>
-                  )}
-
+                {instructor_details.twitter && (
+                  <a
+                    target="_blank"
+                    href={
+                      instructor_details.twitter.startsWith("http")
+                        ? instructor_details.twitter
+                        : `https://twitter.com/${instructor_details.twitter}`
+                    }
+                    className="btn btn-outline-dark text-center fs-6 mb-1"
+                    style={stylesBlock}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = "#F0FFFF";
+                      e.target.style.color = "inherit";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = "transparent";
+                      e.target.style.color = "inherit";
+                    }}
+                  >
+                    <i className="fa-brands fa-x-twitter"></i>
+                    Twitter
+                  </a>
+                )}
 
                 {instructor_details.facebook && (
                   <a
@@ -228,57 +251,54 @@ const CourseFiveArea = () => {
                   </a>
                 )}
 
-
-            {instructor_details.linkedin && (
-              <a
-                target="_blank"
-                href={
-                  instructor_details.linkedin.startsWith("http")
-                    ? instructor_details.linkedin
-                    : `https://www.linkedin.com/in/${instructor_details.linkedin}`
-                }
-                className="btn btn-outline-dark text-center fs-6 mb-1"
-                style={stylesBlock}
-                onMouseEnter={(e) => {
-                  e.target.style.backgroundColor = "#F0FFFF";
-                  e.target.style.color = "inherit";
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.backgroundColor = "transparent";
-                  e.target.style.color = "inherit";
-                }}
-              >
-                <LinkedInIcon />
-                LinkedIn
-              </a>
-            )}
-
+                {instructor_details.linkedin && (
+                  <a
+                    target="_blank"
+                    href={
+                      instructor_details.linkedin.startsWith("http")
+                        ? instructor_details.linkedin
+                        : `https://www.linkedin.com/in/${instructor_details.linkedin}`
+                    }
+                    className="btn btn-outline-dark text-center fs-6 mb-1"
+                    style={stylesBlock}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = "#F0FFFF";
+                      e.target.style.color = "inherit";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = "transparent";
+                      e.target.style.color = "inherit";
+                    }}
+                  >
+                    <LinkedInIcon />
+                    LinkedIn
+                  </a>
+                )}
 
                 {/* Youtube */}
                 {instructor_details.youtube && (
-                    <a
-                      target="_blank"
-                      href={
-                        instructor_details.youtube.startsWith("http")
-                          ? instructor_details.youtube
-                          : `https://www.youtube.com/@${instructor_details.youtube}`
-                      }
-                      className="btn btn-outline-dark text-center fs-6 mb-1"
-                      style={stylesBlock}
-                      onMouseEnter={(e) => {
-                        e.target.style.backgroundColor = "#F0FFFF";
-                        e.target.style.color = "inherit";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.backgroundColor = "transparent";
-                        e.target.style.color = "inherit";
-                      }}
-                    >
-                      <YouTubeIcon />
-                      Youtube
-                    </a>
-                  )}
-
+                  <a
+                    target="_blank"
+                    href={
+                      instructor_details.youtube.startsWith("http")
+                        ? instructor_details.youtube
+                        : `https://www.youtube.com/@${instructor_details.youtube}`
+                    }
+                    className="btn btn-outline-dark text-center fs-6 mb-1"
+                    style={stylesBlock}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = "#F0FFFF";
+                      e.target.style.color = "inherit";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = "transparent";
+                      e.target.style.color = "inherit";
+                    }}
+                  >
+                    <YouTubeIcon />
+                    Youtube
+                  </a>
+                )}
               </div>
             </div>
           )}
