@@ -268,7 +268,7 @@ const generatePaypalItems = () => {
                 setIsOrderProcessed(true);
     
                 var rawData = JSON.stringify(buyCourseOrder);
-                BuyCourseByStudent(rawData, router, buyCourseOrder);
+                // BuyCourseByStudent(rawData, router, buyCourseOrder);
                 return;
             }
         }
@@ -427,19 +427,45 @@ const generatePaypalItems = () => {
                         onCancel={() => {
                             window.location.reload()
                         }}
-                        onApprove={(data, actions) => {
-                            return actions.order.capture().then((details) => {
-                                console.log(details);
+                        onApprove={async (data, actions) => {
+                            try {
+                              // Capture the order on the frontend
+                              const details = await actions.order.capture();
+                              console.log('Order Details:', details);
+                          
+                              // Extract capture ID from the captured order details
+                              const captureId = details.purchase_units[0].payments.captures[0].id;
+                          
+                              // Send capture ID to the backend to retrieve processing fee
+                              const response = await fetch('/api/paypal_processing_fee', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ captureId: captureId }),
+                              });
+                          
+                              const result = await response.json();
+                              if (response.ok) {
+                                console.log('Processing Fee:', result.transaction.seller_receivable_breakdown.paypal_fee.value);
+                                // Handle successful payment and processing fee here
 
+                                // Save Data
                                 buyCourseOrder.paymentMethod = "2";
                                 console.log(buyCourseOrder);
                                 //   console.log(JSON.stringify(buyCourseOrder));
                                  var rawData =  JSON.stringify(buyCourseOrder)
-                                  BuyCourseByStudent(rawData,router,buyCourseOrder)
+                                //   BuyCourseByStudent(rawData,router,buyCourseOrder)
                                   return
                                 // router.push("/checkout?success=true");
-                            });
-                        }}
+
+                              } else {
+                                console.error('Failed to retrieve processing fee:', result.error);
+                              }
+                            } catch (error) {
+                              console.error('Error handling PayPal approval:', error);
+                            }
+                          }}
+                          
+                          
                     />
                         </PayPalScriptProvider>
                     )}
