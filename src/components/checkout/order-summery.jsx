@@ -8,6 +8,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { BuyCourseByStudent, IMG_HOST, ValidateCouponOnCart, VerfiyCheckoutUser } from '../../api';
 import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
 import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
+import CalculateListPrice from '../../functions/pricing/CalculateListPrice'
 import getSymbolFromCurrency from 'currency-symbol-map';
 import Cookies from 'js-cookie';
 import Chip from '@mui/material/Chip';
@@ -16,6 +17,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
 import { reactLocalStorage } from 'reactjs-localstorage';
 import CalculateCouponDiscountedPrice from '../../functions/pricing/CalculateCouponDiscountedPrice';
+import HandleCountry from '../../functions/pricing/HandleCountry';
 
 
 
@@ -67,7 +69,7 @@ const OrderSummery = ({showStripe,showPaypal}) => {
     // },[couponValue])
     
 
-// console.log(cartCourses)
+
 
 const newPricing = cartCourses != null && cartCourses.map((course) => {
     const coupon = couponValue.find(coupon => coupon.id === course.id);
@@ -182,6 +184,8 @@ const generatePaypalItems = () => {
 
         if (total !== 0) {
             const calculatedPurchasedCourse = cartCourses.map((course) => {
+                // --- list price --
+                console.log(CalculateListPrice(course.other_data))
                 const coupon = couponValue.find(coupon => coupon.id === course.id);
                 const originalPrice = CalculateDiscountedPrice(course.other_data) || 0;
                 const discountedPrice = coupon 
@@ -230,10 +234,12 @@ const generatePaypalItems = () => {
             "discount": discount,
             "totalPrice": `${total}`,
             "currency": GetCurrencyByCountry(cartCourses[0].other_data).toLowerCase(),
-            "country": JSON.parse(COUNTRY).country_name,
+            "country": HandleCountry(),
             "courseType": courseType,
             "courses": calculatedPurchasedCourse
             };
+
+            console.log(calculatedBuyCourseOrder)
     
             setBuyCourseOrder(calculatedBuyCourseOrder);
             return
