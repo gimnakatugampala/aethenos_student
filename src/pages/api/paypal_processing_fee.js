@@ -17,7 +17,7 @@ export default async function POST(req, res) {
             const transactionResponse = await client.execute(transactionRequest);
 
             // Log the entire response for debugging
-            // console.log('Transaction Response:', JSON.stringify(transactionResponse.result, null, 2));
+            console.log('Transaction Response:', JSON.stringify(transactionResponse.result, null, 2));
 
             // Extract processing fee
             const transaction = transactionResponse.result;

@@ -404,7 +404,7 @@ const generatePaypalItems = () => {
                     </div>
 
                     {showPaypal && (
-                        <PayPalScriptProvider options={{ clientId: "AbhfyGv-hhPIo4dZ_Wia7_0sevNZC3B871Ndw8aDEIm8h6O59L1sV0TzgFXyCpwx-_GC93sKwsU_GtEF" }}>
+                        <PayPalScriptProvider options={{ clientId: "AbhfyGv-hhPIo4dZ_Wia7_0sevNZC3B871Ndw8aDEIm8h6O59L1sV0TzgFXyCpwx-_GC93sKwsU_GtEF" ,currency : GetCurrencyByCountry(cartCourses[0].other_data)}}>
                              <PayPalButtons
                         style={{ layout: "vertical" }}
                         createOrder={(data, actions) => {
@@ -445,6 +445,7 @@ const generatePaypalItems = () => {
                           
                               const result = await response.json();
                               if (response.ok) {
+                                console.log('Paypal Pricing Great Down:', result.transaction.seller_receivable_breakdown);
                                 console.log('Processing Fee:', result.transaction.seller_receivable_breakdown.paypal_fee.value);
                                 // Handle successful payment and processing fee here
 
