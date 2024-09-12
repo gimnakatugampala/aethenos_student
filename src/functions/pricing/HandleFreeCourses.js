@@ -20,6 +20,7 @@ const HandleFreeCourses = (course) => {
       currency: GetCurrencyByCountry(course),
       country: HandleCountry(),
       courseType: 2,
+      processingFee:0,
       courses: [
         {
           courseCode: `${course.course_code}`,

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import useCartInfo from '../../hooks/use-cart-info';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { loadStripe } from '@stripe/stripe-js';
-import { BuyCourseByStudent, IMG_HOST, ValidateCouponOnCart, VerfiyCheckoutUser } from '../../api';
+import { BuyCourseByStudent, fetchStripeProcessingFee, IMG_HOST, ValidateCouponOnCart, VerfiyCheckoutUser } from '../../api';
 import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
 import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
 import CalculateListPrice from '../../functions/pricing/CalculateListPrice'
@@ -46,6 +46,9 @@ const OrderSummery = ({showStripe,showPaypal}) => {
 
     // -------------------------------------
     const [couponValue, setcouponValue] = useState([]);
+
+
+
 
 
      // Add state to track if the order has been processed
@@ -237,6 +240,7 @@ const generatePaypalItems = () => {
             "currency": GetCurrencyByCountry(cartCourses[0].other_data).toLowerCase(),
             "country": HandleCountry(),
             "courseType": courseType,
+            "processingFee" :0,
             "courses": calculatedPurchasedCourse
             };
 
@@ -251,48 +255,42 @@ const generatePaypalItems = () => {
 
     }, [cartCourses, total]);
 
-
     useEffect(() => {
         const query = new URLSearchParams(window.location.search);
-    
-       
-    
+
         if (query.get('success')) {
             console.log('Order placed! You will receive an email confirmation.');
-    
-            // Execute BuyCourseByStudent only if it hasn't been executed yet
+
             if (!isOrderProcessed && buyCourseOrder != null && total != 0) {
                 console.log(buyCourseOrder);
 
-                const fetchPayments = async () => {
-                    try {
-                      const response = await fetch('/api/stripe_processing_fee');
-                      if (!response.ok) {
-                        throw new Error('Failed to fetch payment data');
-                      }
-                      const data = await response.json();
-                      return data;
-                    } catch (error) {
-                      console.error('Error fetching payment data:', error);
-                      return [];
+                const loadPayments = async () => {
+                    const data = await fetchStripeProcessingFee();
+
+                    if(data[0]){
+
+                        console.log('Processing fee:', data[0].amount);
+    
+                        // Convert to dollars form cents
+                        buyCourseOrder.processingFee = data[0].amount / 100
+                       
+                        var rawData = JSON.stringify(buyCourseOrder);
+                        BuyCourseByStudent(rawData, router, buyCourseOrder);
+                        console.log(buyCourseOrder)
+                         
                     }
-                  };
 
-                  const loadPayments = async () => {
-                    const data = await fetchPayments();
-                    console.log(data);
-                  };
-                  loadPayments();
+                       
+                };
 
-    
-                // Mark the order as processed to prevent further execution
+
+                loadPayments();
+
                 setIsOrderProcessed(true);
-    
-                var rawData = JSON.stringify(buyCourseOrder);
-                // BuyCourseByStudent(rawData, router, buyCourseOrder);
                 return;
             }
         }
+
         if (query.get('canceled')) {
             console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
         }

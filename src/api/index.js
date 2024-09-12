@@ -1582,6 +1582,8 @@ Swal.fire({
   .then(result => {
     console.log(result)
 
+    Unauthorized(result.status,"checkout")
+
     if(result.variable == "404"){
       ErrorAlert("Error",result.message)
       return
@@ -1618,6 +1620,20 @@ Swal.fire({
 
 
 }
+
+export const fetchStripeProcessingFee = async () => {
+  try {
+      const response = await fetch('/api/stripe_processing_fee');
+      if (!response.ok) {
+          throw new Error('Failed to fetch payment data');
+      }
+      const data = await response.json();
+      return data;
+  } catch (error) {
+      console.error('Error fetching payment data:', error);
+      return { amount: 0 }; // Default to 0 if there's an error
+  }
+};
 
 export const VerfiyCheckoutUser = async() =>{
 
