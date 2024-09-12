@@ -263,6 +263,27 @@ const generatePaypalItems = () => {
             // Execute BuyCourseByStudent only if it hasn't been executed yet
             if (!isOrderProcessed && buyCourseOrder != null && total != 0) {
                 console.log(buyCourseOrder);
+
+                const fetchPayments = async () => {
+                    try {
+                      const response = await fetch('/api/get-payments');
+                      if (!response.ok) {
+                        throw new Error('Failed to fetch payment data');
+                      }
+                      const data = await response.json();
+                      return data;
+                    } catch (error) {
+                      console.error('Error fetching payment data:', error);
+                      return [];
+                    }
+                  };
+
+                  const loadPayments = async () => {
+                    const data = await fetchPayments();
+                    console.log(data);
+                  };
+                  loadPayments();
+
     
                 // Mark the order as processed to prevent further execution
                 setIsOrderProcessed(true);
@@ -276,6 +297,7 @@ const generatePaypalItems = () => {
             console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
         }
     }, [buyCourseOrder]);
+
     
 
        // Handle Coupons

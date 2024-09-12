@@ -6,6 +6,8 @@ import { IMG_HOST } from '../../api';
 import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
+import fs from 'fs';
+import path from 'path';
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 
@@ -70,7 +72,29 @@ export default async function handler(req, res) {
         success_url: `${req.headers.origin}/checkout/?success=true`,
         cancel_url: `${req.headers.origin}/checkout/?canceled=true`,
       });
+
+      // res.status(200).json({ url: stripe.checkout.sessions });
+
+      const filePath = path.join(process.cwd(), 'payments.txt');
+
+      // Delete the file if it exists
+      fs.unlink(filePath, (err) => {
+        if (err && err.code !== 'ENOENT') {
+          // If the error is not "file does not exist", log it
+          console.error('Error deleting file:', err);
+        }
+
+        // Write new data to the file
+        fs.writeFile(filePath, JSON.stringify({ pi: session.payment_intent }) + '\n', (err) => {
+          if (err) {
+            console.error('Error saving payment data:', err);
+          }
+        });
+      });
+
       res.redirect(303, session.url);
+      // res.redirect(303, session);
+      // console.log(session)
     } catch (err) {
       res.status(err.statusCode || 500).json(err.message);
     }
