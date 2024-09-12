@@ -266,7 +266,7 @@ const generatePaypalItems = () => {
 
                 const fetchPayments = async () => {
                     try {
-                      const response = await fetch('/api/get-payments');
+                      const response = await fetch('/api/stripe_processing_fee');
                       if (!response.ok) {
                         throw new Error('Failed to fetch payment data');
                       }
