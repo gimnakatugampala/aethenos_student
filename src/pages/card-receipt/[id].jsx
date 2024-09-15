@@ -74,10 +74,9 @@ const index = () => {
                   <thead>
                     <tr>
                       <th>Item</th>
-                      <th>Ordered</th>
-                      <th>Quantity</th>
-                      <th>Price</th>
-                      <th>Amount</th>
+                      <th>Ordered date</th>
+                      <th>List Price</th>
+                      <th>Your Price</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -85,10 +84,9 @@ const index = () => {
                       <tr key={index}>
                         <td>{item.courseTitle}</td>
                         <td>{moment(item.buyDate).format("MMM DD,YYYY")}</td>
-                        <td>1</td>
                         <td>
                           {getSymbolFromCurrency(item.currency)}
-                          {item.itemPrice}
+                          {item.listPrice}
                         </td>
                         <td>
                           {getSymbolFromCurrency(item.currency)}
@@ -97,34 +95,26 @@ const index = () => {
                       </tr>
                     ))}
 
-                    <tr>
-                      <td colSpan={2}></td>
-                      <td>Total</td>
-                      <td>
-                        {getSymbolFromCurrency(details.orderDetails.currency)}
-                        {details.orderDetails.total}
-                      </td>
-                      <td></td>
-                    </tr>
+              
 
                     <tr>
                       <td colSpan={2}></td>
                       <td>VAT</td>
                       <td>
                         {getSymbolFromCurrency(details.orderDetails.currency)}
-                        {details.vat}
+                        {details.vat} ({details.vatPercentage})
                       </td>
-                      <td></td>
+                
                     </tr>
 
                     <tr>
                       <td colSpan={2}></td>
                       <td>Total Paid</td>
                       <td>
-                        {getSymbolFromCurrency(details.orderDetails.currency)}
-                        {details.orderDetails.total}
+                       <b><u>{getSymbolFromCurrency(details.orderDetails.currency)}
+                        {details.amount}</u></b>
                       </td>
-                      <td></td>
+                  
                     </tr>
                   </tbody>
                 </Table>

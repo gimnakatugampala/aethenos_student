@@ -465,16 +465,17 @@ const generatePaypalItems = () => {
                           
                               const result = await response.json();
                               if (response.ok) {
-                                console.log('Paypal Pricing Great Down:', result.transaction.seller_receivable_breakdown);
+                                console.log('Paypal Pricing Break Down:', result.transaction.seller_receivable_breakdown);
                                 console.log('Processing Fee:', result.transaction.seller_receivable_breakdown.paypal_fee.value);
                                 // Handle successful payment and processing fee here
 
                                 // Save Data
                                 buyCourseOrder.paymentMethod = "2";
+                                buyCourseOrder.processingFee = +(result.transaction.seller_receivable_breakdown.paypal_fee.value);
                                 console.log(buyCourseOrder);
                                 //   console.log(JSON.stringify(buyCourseOrder));
                                  var rawData =  JSON.stringify(buyCourseOrder)
-                                //   BuyCourseByStudent(rawData,router,buyCourseOrder)
+                                  BuyCourseByStudent(rawData,router,buyCourseOrder)
                                   return
                                 // router.push("/checkout?success=true");
 
