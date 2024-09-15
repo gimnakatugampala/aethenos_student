@@ -2474,9 +2474,7 @@ export const SendRefundReq = async(selectedTransactionCode,selectedItemCode,sele
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
 
 const formdata = new FormData();
-formdata.append("transactionCode", `${selectedTransactionCode}`);
 formdata.append("reason", `${refundText}`);
-formdata.append("refundAmount", `${selectedAmount}`);
 formdata.append("itemCode", `${selectedItemCode}`);
 
 const requestOptions = {
