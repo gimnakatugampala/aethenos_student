@@ -34,7 +34,6 @@ const index = () => {
   const handleClose = () => {
     setShow(false)
     PurchaseHistory(setpHistory)
-    GetRefunds()
     GetMyRefunds(setrefunds)
   };
   const handleShow = (p) => {
@@ -47,7 +46,6 @@ const index = () => {
 
   useEffect(() => {
     PurchaseHistory(setpHistory)
-    GetRefunds()
     GetMyRefunds(setrefunds)
   }, [])
 
