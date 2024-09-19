@@ -170,8 +170,6 @@ const Accordian = ({
                               );
                             }
 
-                       
-
                             GetMyCoursesDetails(courseItemCode, setcourse);
                           }}
                         >
@@ -236,7 +234,19 @@ const Accordian = ({
                                     {list.description.replace(
                                       /<\/?[^>]+(>|$)/g,
                                       ""
-                                    )}
+                                    ) !== "N/A"
+                                      ? list.description.replace(
+                                          /<\/?[^>]+(>|$)/g,
+                                          ""
+                                        ).length > 75
+                                        ? `${list.description
+                                            .replace(/<\/?[^>]+(>|$)/g, "")
+                                            .slice(0, 75)}...`
+                                        : list.description.replace(
+                                            /<\/?[^>]+(>|$)/g,
+                                            ""
+                                          )
+                                      : null}
                                   </p>
                                 </p>
                               </li>
@@ -393,7 +403,19 @@ const Accordian = ({
                                 {list.description.replace(
                                   /<\/?[^>]+(>|$)/g,
                                   ""
-                                )}
+                                ) !== "N/A"
+                                  ? list.description.replace(
+                                      /<\/?[^>]+(>|$)/g,
+                                      ""
+                                    ).length > 75
+                                    ? `${list.description
+                                        .replace(/<\/?[^>]+(>|$)/g, "")
+                                        .slice(0, 75)}...`
+                                    : list.description.replace(
+                                        /<\/?[^>]+(>|$)/g,
+                                        ""
+                                      )
+                                  : null}
                               </p>
                             </p>
                           </li>
@@ -510,8 +532,6 @@ const Accordian = ({
                       }
 
                       GetMyCoursesDetails(courseItemCode, setcourse);
-
-                 
                     }}
                     key={index}
                   >
@@ -551,7 +571,22 @@ const Accordian = ({
                                   : ""
                               }`}
                             >
-                              {list.description.replace(/<\/?[^>]+(>|$)/g, "")}
+                              {list.description.replace(
+                                /<\/?[^>]+(>|$)/g,
+                                ""
+                              ) !== "N/A"
+                                ? list.description.replace(
+                                    /<\/?[^>]+(>|$)/g,
+                                    ""
+                                  ).length > 75
+                                  ? `${list.description
+                                      .replace(/<\/?[^>]+(>|$)/g, "")
+                                      .slice(0, 75)}...`
+                                  : list.description.replace(
+                                      /<\/?[^>]+(>|$)/g,
+                                      ""
+                                    )
+                                : null}
                             </p>
                           </p>
                         </li>
@@ -599,8 +634,6 @@ const Accordian = ({
                       GetMyCoursesDetails(courseItemCode, setcourse);
 
                       setselectedAssignment(list);
-
-                
                     }}
                     key={index}
                   >
@@ -641,7 +674,22 @@ const Accordian = ({
                                   : ""
                               }`}
                             >
-                              {list.description.replace(/<\/?[^>]+(>|$)/g, "")}
+                              {list.description.replace(
+                                /<\/?[^>]+(>|$)/g,
+                                ""
+                              ) !== "N/A"
+                                ? list.description.replace(
+                                    /<\/?[^>]+(>|$)/g,
+                                    ""
+                                  ).length > 75
+                                  ? `${list.description
+                                      .replace(/<\/?[^>]+(>|$)/g, "")
+                                      .slice(0, 75)}...`
+                                  : list.description.replace(
+                                      /<\/?[^>]+(>|$)/g,
+                                      ""
+                                    )
+                                : null}
                             </p>
                           </p>
                         </li>
@@ -679,7 +727,6 @@ const Accordian = ({
                       // ---------------- STORE AS LAST POSITION -------
 
                       setselectedPracticeTest(list);
-                  
 
                       setseletedCurriculumItem(list.curriculumItemId);
 
@@ -731,7 +778,22 @@ const Accordian = ({
                                   : ""
                               }`}
                             >
-                              {list.description.replace(/<\/?[^>]+(>|$)/g, "")}
+                              {list.description.replace(
+                                /<\/?[^>]+(>|$)/g,
+                                ""
+                              ) !== "N/A"
+                                ? list.description.replace(
+                                    /<\/?[^>]+(>|$)/g,
+                                    ""
+                                  ).length > 75
+                                  ? `${list.description
+                                      .replace(/<\/?[^>]+(>|$)/g, "")
+                                      .slice(0, 75)}...`
+                                  : list.description.replace(
+                                      /<\/?[^>]+(>|$)/g,
+                                      ""
+                                    )
+                                : null}
                             </p>
                           </p>
                         </li>
@@ -769,7 +831,6 @@ const Accordian = ({
 
                       setselectedCodingExercise(list);
                       setseletedCurriculumItem(list.curriculumItemId);
-                  
 
                       // Only execute if sectionID, curriclumID, and type are not null or undefined
                       if (sectionID && curriclumID && SyllabusType) {
@@ -819,7 +880,22 @@ const Accordian = ({
                                   : ""
                               }`}
                             >
-                              {list.description.replace(/<\/?[^>]+(>|$)/g, "")}
+                              {list.description.replace(
+                                /<\/?[^>]+(>|$)/g,
+                                ""
+                              ) !== "N/A"
+                                ? list.description.replace(
+                                    /<\/?[^>]+(>|$)/g,
+                                    ""
+                                  ).length > 75
+                                  ? `${list.description
+                                      .replace(/<\/?[^>]+(>|$)/g, "")
+                                      .slice(0, 75)}...`
+                                  : list.description.replace(
+                                      /<\/?[^>]+(>|$)/g,
+                                      ""
+                                    )
+                                : null}
                             </p>
                           </p>
                         </li>
