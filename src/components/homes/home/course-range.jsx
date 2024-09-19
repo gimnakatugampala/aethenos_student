@@ -14,6 +14,12 @@ import {
 } from "../../../api";
 import { useState } from "react";
 import CoursesPotraitSkeleton from "../../../functions/Skeletons/CoursesPotraitSkeleton";
+const mainfs = {
+  fontSize: "calc(0.8rem + 0.6vw)",
+};
+const secfs = {
+  fontSize: "calc(0.6rem + 0.6vw)",
+};
 
 const CourseRange = () => {
   const [business_courses, setbusiness_courses] = useState([]);
@@ -67,12 +73,12 @@ const CourseRange = () => {
     <div className="edu-brand-area brand-area-1 p-5 ">
       <div className="container-fluid">
         <div className="row">
-          <div className="mb-4">
-            <h3 className="title m-0 mb-3">A broad selection of courses</h3>
-            <p className="m-0">
+          <div className="mb-4"> 
+            <h2 className="title m-0 mb-3">A broad selection of courses</h2>
+            <p className="m-0" style={mainfs}>
               Choose from over 210,000 online video courses with new additions
               published every month
-            </p>
+            </p> 
           </div>
 
           <div className="col-md-12">

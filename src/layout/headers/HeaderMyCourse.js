@@ -90,7 +90,7 @@ const HeaderMyCourse = ({ setcourse, id, course }) => {
               </Nav.Link>
 
               <NavDropdown
-                className="d-flex align-items-center p-2 mx-5"
+                className="d-flex align-items-center p-2"
                 title="Your progress"
                 id="collapsible-nav-dropdown"
                 style={mainfs}
