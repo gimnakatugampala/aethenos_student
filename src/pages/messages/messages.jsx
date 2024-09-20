@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
+import { useTheme } from "next-themes";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "@mui/material/Button";
 import {
@@ -40,6 +41,7 @@ function Messages() {
   const [selectedCourseTitleName, setSelectedCourseTitleName] = useState("");
   const [chatRooms, setChatRooms] = useState([]);
   const [loadingMessages, setLoadingMessages] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   const handleUserClick = (user) => {
     setSelectedUser(user.instructor);
@@ -134,10 +136,19 @@ function Messages() {
           <h3 className="title mt-5">Messages</h3>
         </Card.Header>
 
-        <Card className="p-3">
+        <Card
+          className={`p-3 ${theme === "dark" ? "" : "bg-light"}`}
+          style={{ backgroundColor: theme === "dark" ? "#1c242f" : "" }}
+        >
           <Container fluid>
             <Row className="vh-130">
-              <Col sm={5} md={5} lg={4} className="bg-light border-right">
+              <Col
+                sm={5}
+                md={5}
+                lg={4}
+                className={`${theme === "dark" ? "" : "bg-light"}`}
+                style={{ backgroundColor: theme === "dark" ? "#1c242f" : "" }}
+              >
                 <h4 className="pt-3 ">
                   Chat Users
                   <span className="float-end">
@@ -193,16 +204,25 @@ function Messages() {
                                   sx={{ display: "inline" }}
                                   component="span"
                                   variant="body2"
+                                  style={{
+                                    color: theme === "dark" ? "#ffffff" : "",
+                                  }}
                                   color="text.primary"
                                 >
                                   <b>{user.instructor}</b> ({user.courseTitle})
                                 </Typography>
                                 {user.lastMessage.length > 15 ? (
-                                  <span>
-                                    {user.lastMessage.substring(0, 15)}...
-                                  </span>
+                                  <>
+                                    {" "}
+                                    <span>
+                                      {user.lastMessage.substring(0, 15)}...
+                                    </span>
+                                  </>
                                 ) : (
-                                  user.lastMessage
+                                  <>
+                                    {" "}
+                                    <span> {user.lastMessage}</span>
+                                  </>
                                 )}
                               </React.Fragment>
                             }
@@ -218,16 +238,16 @@ function Messages() {
               {showAddMessage ? (
                 <Col sm={7} md={7} lg={8}>
                   <div className="d-flex justify-content-between align-items-center p-3 ">
-                    <h4 className="py-2">New Messages</h4>
+                    <h4 className="py-2 ">New Messages </h4>
                   </div>
 
                   <Paper
                     elevation={0}
-                    className="p-3"
+                    className={`${theme === "dark" ? "" : "bg-light"}`}
                     style={{
                       minHeight: "70vh",
                       overflowY: "auto",
-                      background: "#ffff",
+                      backgroundColor: theme === "dark" ? "#1c242f" : "",
                     }}
                   >
                     <Form onSubmit={handleComposeMessage}>
@@ -242,6 +262,10 @@ function Messages() {
                         className="my-3"
                         size="md"
                         aria-label="Select Instructor"
+                        style={{
+                          backgroundColor: theme === "dark" ? "#1c242f" : "",
+                          color: theme === "dark" ? "#ffffff" : "",
+                        }}
                       >
                         <option selected disabled value="">
                           Select Instructor
@@ -264,14 +288,18 @@ function Messages() {
                         controlId="exampleForm.ControlTextarea1"
                       >
                         <Form.Label>
-                          <b>Messages</b>
+                          <h5 className="m-3">Messages</h5>
                         </Form.Label>
                         <Form.Control
                           value={messageTextAdd}
                           onChange={(e) => setMessageTextAdd(e.target.value)}
                           as="textarea"
                           rows={8}
-                          className="bg-light"
+                          className={`${theme === "dark" ? "" : "bg-light"}`}
+                          style={{
+                            backgroundColor: theme === "dark" ? "#1c242f" : "",
+                            color: theme === "dark" ? "#ffffff" : "",
+                          }}
                         />
                       </Form.Group>
 
@@ -287,13 +315,17 @@ function Messages() {
                 </Col>
               ) : (
                 <Col sm={7} md={7} lg={8}>
-                  <div className="d-flex justify-content-between align-items-center p-3 ">
-                  <h4 className="py-2">  Chat with {" "} 
-                      <b> 
+                  <div className="d-flex justify-content-between align-items-center p-3 "  style={{
+                            backgroundColor: theme === "dark" ? "#1c242f" : "",
+                            color: theme === "dark" ? "#ffffff" : "",
+                          }}>
+                    <h4 className="py-2">
+                      {" "}
+                      Chat with{" "}
+                      <b>
                         {selectedUser} - {selectedCourseTitleName}
-                      </b></h4>
-                    
-                  
+                      </b>
+                    </h4>
                   </div>
 
                   <Paper
@@ -302,7 +334,7 @@ function Messages() {
                     style={{
                       minHeight: "70vh",
                       overflowY: "auto",
-                  
+                      backgroundColor: theme === "dark" ? "#1c242f" : "",
                     }}
                   >
                     {loadingMessages ? (
@@ -315,9 +347,10 @@ function Messages() {
                               key={index}
                               styles={{
                                 width: 300,
-                                color:  message.from === selectedUser
-                                ? "#000"
-                                : "#fff",
+                                color:
+                                  message.from === selectedUser
+                                    ? "#000"
+                                    : "#fff",
                                 fontWeight: "bold",
                                 background:
                                   message.from === selectedUser
@@ -348,8 +381,15 @@ function Messages() {
                       placeholder="Type a Message"
                       className="form-control mx-3"
                       aria-label="With textarea"
+                      style={{                      
+                        backgroundColor: theme === "dark" ? "#1c242f" : "", color: theme === "dark" ? "#ffffff" : "",
+                      }}
                     ></textarea>
-                    <Button type="submit" variant="contained"  className="edu-btn btn-small">
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      className="edu-btn btn-small"
+                    >
                       <SendIcon />
                     </Button>
                   </form>
