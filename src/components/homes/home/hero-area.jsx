@@ -5,10 +5,10 @@ import { useMouseMoveUI } from "../../../contexts/mouse-move-context";
 const HeroArea = () => {
   const { mouseDirection, mouseReverse } = useMouseMoveUI();
   return (
-    <div className="hero-banner hero-style-1">
+    <div className="hero-banner hero-style-4">
       <div className="container">
         <div className="row align-items-center">
-          <div className="col-lg-6">
+          <div className="col-6">
             <div className="banner-content">
               <h1
                 className="title"
@@ -16,7 +16,7 @@ const HeroArea = () => {
                 data-sal="slide-up"
                 data-sal-duration="1000"
               >
-                New Excel courses coming soon!
+                New Excel Courses coming soon!
               </h1>
               <p
                 data-sal-delay="200"
@@ -52,7 +52,7 @@ const HeroArea = () => {
                             </ul> */}
             </div>
           </div>
-          <div className="col-lg-6">
+          <div className="col-6">
             <div className="banner-thumbnail">
               <div
                 className="thumbnail"
@@ -61,16 +61,11 @@ const HeroArea = () => {
                 data-sal-duration="1000"
               >
                 <img
-                  src="/assets/images/banner/Banner-image-1.jpg"
+                  className="w-100 rounded"
+                  src="/assets/images/instructor/instructerHome.jpg"
                   alt="Girl Image"
                 />
               </div>
-              <div
-                className="instructor-info"
-                data-sal-delay="600"
-                data-sal="slide-up"
-                data-sal-duration="1000"
-              ></div>
             </div>
           </div>
         </div>

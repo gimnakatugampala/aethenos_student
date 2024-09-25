@@ -6,6 +6,7 @@ import CounterArea from './counter-area';
 import Testimonial from './testimonial';
 import TeamArea from './team-area';
 import AdBanner from './ad-banner';
+import AboutArea from '../homes/home/about-area';
 
 const InstructorLogin = () => {
   return (
@@ -14,9 +15,10 @@ const InstructorLogin = () => {
         <Header/>
         <HeroArea/>
         <CategoryArea/>
-        <CounterArea/>
-        <Testimonial/>
-        <TeamArea/>
+        {/* <CounterArea/> */}
+        {/* <Testimonial/> */}
+        {/* <TeamArea/> */}
+        <AboutArea/>
         <AdBanner/>
         <Footer/>
     </div>

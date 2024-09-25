@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
 import { useEffect, useState } from "react";
+import { Margin } from "@mui/icons-material";
 
 const testimonial_data = [
     {
@@ -31,6 +32,8 @@ const testimonial_data = [
 
 const mainfs = {
     fontSize: "clamp(0.1rem, calc(0.3rem + 0.8vw), 2rem)",
+    margin: "0px",
+    marginTop: "5px"
   };
 
 export default function TestimonialArea() {
@@ -39,14 +42,14 @@ export default function TestimonialArea() {
     return (
         <div className="testimonial-area-1 section-gap-equal">
             <div className="mx-5">
-                <div className="row g-lg-5 mx-5">
-                    <div className="col-5">
+                <div className="row g-lg-5 mx-5 d-flex justify-content-center">
+                    <div className="col-lg-4 col-sm-8 ">
                         <div className="testimonial-heading-area">
                             <div className="section-title section-left" data-sal-delay="50" data-sal="slide-up" data-sal-duration="800">
                                 {/* <span className="pre-title">Testimonials</span> */}
                                 <h2 className="title">Excel App features: </h2>
                                 <span className="shape-line"><i className="icon-19"></i></span>
-                                <ul >
+                                <ul style={{lineHeight: "1"}}>
                                     <li style={mainfs }> Fully Integrated to the Excel application </li>
                                     <li style={mainfs }>Streaming video lessons</li>
                                     <li style={mainfs }>Load Excel practice files/data directly to Excel </li>
@@ -62,7 +65,7 @@ export default function TestimonialArea() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-7 d-flex align-items-center">
+                    <div className="col-8 d-flex align-items-center">
                         <Swiper
                             slidesPerView={1}
                             spaceBetween={0}
