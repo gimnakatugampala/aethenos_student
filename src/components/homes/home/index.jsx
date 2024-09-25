@@ -23,6 +23,7 @@ const index = () => {
             <div id="main-wrapper" className="main-wrapper">
                 <Header/>
                 <HeroArea/>
+                <TestimonialArea/>
                 <CategoryArea/>
                 <CourseRange />
                 {/* <TopCategories/> */}
@@ -32,7 +33,7 @@ const index = () => {
                 <Topics /> */}
                 
                 {/* <CounterUpArea/> */}
-                {/* <TestimonialArea/> */}
+            
                 {/* <CtaArea/> */}
                 {/* <TeamArea/> */}
 
