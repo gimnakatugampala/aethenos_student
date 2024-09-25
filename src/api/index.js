@@ -292,7 +292,7 @@ export const StudentSignIn = async(email, password,setloading,router,rediect_url
     redirect: 'follow'
     };
 
-    fetch(`https://aethenosadmin.exon.lk:2053/aethenos-api/authentication/student`, requestOptions)
+    fetch(`${BACKEND_LINK}/authentication/student`, requestOptions)
     .then(response => response.json())
     .then(result => {
         console.log(result)
