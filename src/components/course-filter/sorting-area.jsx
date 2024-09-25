@@ -2,9 +2,18 @@ import Link from 'next/link';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { add_force_page, add_item_offset } from '../../redux/features/filter-slice';
+import { useTheme } from 'next-themes';
+
+
 
 const SortingArea = ({ course_items, num, setCourses, courses, course_list, items }) => {
     const dispatch = useDispatch();
+    const { theme, setTheme } = useTheme();
+    const mainfs = {
+        fontSize: "calc(0.4rem + 0.3vw)",
+        color: theme === "dark" ? "#ffffff" : "",
+        backgroundColor: theme === "dark" ? "#1c242f" : "",
+      };
 
     const handleChange = (e) => {
         const selectedOption = e.target.value;
@@ -46,9 +55,9 @@ const SortingArea = ({ course_items, num, setCourses, courses, course_list, item
                 <div className="edu-sorting">
                     <div className="icon"><i className="icon-55"></i></div>
                     <select onChange={handleChange} className="edu-select">
-                        <option>Filters</option>
-                        <option>Low To High</option>
-                        <option>High To Low</option>
+                        <option style={mainfs}>Filters</option>
+                        <option style={mainfs}>Low To High</option>
+                        <option style={mainfs}>High To Low</option>
                     </select>
                 </div>
             </div>

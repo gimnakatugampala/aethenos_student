@@ -173,7 +173,7 @@ const ViewProfile = () => {
           id="uncontrolled-tab-example"
           className="my-3"
         >
-          <Tab eventKey="up" title="Aethenos Profile">
+          <Tab  eventKey="up" title="Aethenos Profile">
             <div className="row mx-2">
               <div className="col-md-6">
                 <div className="mb-3">
@@ -442,7 +442,7 @@ const ViewProfile = () => {
                   />
 
                   <div className="col-md-5 mt-2" style={{display: "inline-block"}}>
-                    <Button type="submit" variant="contained">
+                    <Button type="submit" variant="contained" className="edu-btn btn-small">
                       Change Password
                     </Button>
                   </div>

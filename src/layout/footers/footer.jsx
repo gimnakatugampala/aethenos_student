@@ -1,6 +1,10 @@
 import Link from "next/link";
 import FooterSocial from "./component/footer-social";
 
+const mainfs = {
+  fontSize: "calc(0.8rem + 0.6vw)",
+};
+
 const footer_contents = {
   exonLogo: "/images/footer/exon_icon1.png",
   logoLight: "/assets/images/logo/logo.png",
@@ -47,18 +51,18 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
       }`}
     >
       <div className={`footer-top ${style_2 ? "footer-top-2" : ""}`}>
-        <div className="inner mx-5 float-left">
+        <div className="inner float-left">
           <div className="row g-5">
             {widgets.map((w, i) => (
-              <div key={i} className={`col-lg-${w.col} col-sm-6`}>
-                <div className={`edu-footer-widget ${w.class}`}>
+              <div key={i} className={`col-lg-${w.col} col-sm-6 mx-5`}>
+                <div className={`edu-footer-widget`}>
                   <h3 className="widget-title">{w.widget_title}</h3>
                   <div className="inner">
                     <ul className="footer-link link-hover">
                       {w.footer_links.map((l, i) => (
                         <li key={i}>
                           <Link href={`/${l.link}`} legacyBehavior>
-                            <a style={{fontSize: "1.2rem"}}>{l.title}</a>
+                            <a style={{fontSize: "1rem"}}>{l.title}</a>
                           </Link>
                         </li>
                       ))}
@@ -67,9 +71,9 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
                 </div>
               </div>
             ))}
-            <div className="col-md-10">
-              <div className="col-md-3 mx-lg-5 float-left">
-                <img className=" w-50" src={logoLight} alt="Corporate Logo" />
+            <div className="col-8 mx-5">
+              <div >
+                <img className=" w-25" src={logoLight} alt="Corporate Logo" />
               </div>
             </div>
           </div>
