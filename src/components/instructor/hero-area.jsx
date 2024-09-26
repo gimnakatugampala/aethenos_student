@@ -124,7 +124,7 @@ const HeroArea = () => {
                 data-sal="slide-up"
                 data-sal-duration="1000"
               >
-                <a onClick={handleShow} className="edu-btn btn-medium">
+                <a style={{cursor: 'pointer'}} onClick={handleShow} className="edu-btn btn-medium">
                 Sign Up as an Instructor
                 </a>
               </div>
