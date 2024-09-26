@@ -103,20 +103,20 @@ const HeroArea = () => {
         <div className="row align-items-center">
           <div className="col-lg-4">
             <div className="banner-content">
-              <h1
+              <h2
                 className="title"
                 data-sal-delay="100"
                 data-sal="slide-up"
                 data-sal-duration="1000"
               >
-                Come teach with us
-              </h1>
+              Join Our Online Course Marketplace as an Instructor!
+              </h2>
               <p
                 data-sal-delay="200"
                 data-sal="slide-up"
                 data-sal-duration="1000"
               >
-                Become an instructor and change lives — including your own.
+               Are you passionate about teaching and sharing your knowledge with a global audience? Join our vibrant community of instructors and start creating impactful courses today!
               </p>
               <div
                 className="banner-btn"
@@ -125,7 +125,7 @@ const HeroArea = () => {
                 data-sal-duration="1000"
               >
                 <a onClick={handleShow} className="edu-btn btn-medium">
-                  Get Started
+                Sign Up as an Instructor
                 </a>
               </div>
             </div>
@@ -143,48 +143,12 @@ const HeroArea = () => {
                   alt="Couple Image"
                 />
               </div>
-              <ul className="shape-group">
-                <li
-                  className="shape-1"
-                  data-sal-delay="1000"
-                  data-sal="fade"
-                  data-sal-duration="1000"
-                >
-                  <img src="/assets/images/about/shape-26.png" alt="Shape" />
-                </li>
-                <li
-                  className="shape-2"
-                  data-sal-delay="1000"
-                  data-sal="fade"
-                  data-sal-duration="1000"
-                >
-                  <img src="/assets/images/about/shape-15.png" alt="Shape" />
-                </li>
-                <li
-                  className="shape-3"
-                  data-sal-delay="1000"
-                  data-sal="fade"
-                  data-sal-duration="1000"
-                >
-                  <img src="/assets/images/about/shape-13.png" alt="Shape" />
-                </li>
-                <li
-                  className="shape-4"
-                  data-sal-delay="1000"
-                  data-sal="fade"
-                  data-sal-duration="1000"
-                >
-                  <img
-                    src="/assets/images/counterup/shape-02.png"
-                    alt="Shape"
-                  />
-                </li>
-              </ul>
+            
             </div>
           </div>
         </div>
       </div>
-      <ul className="shape-group">
+      {/* <ul className="shape-group">
         <motion.li
           className="shape-1 scene"
           data-sal-delay="1000"
@@ -249,7 +213,7 @@ const HeroArea = () => {
         >
           <img src="/assets/images/others/shape-01.png" alt="Shape" />
         </motion.li>
-      </ul>
+      </ul> */}
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
