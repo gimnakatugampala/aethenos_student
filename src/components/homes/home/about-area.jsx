@@ -121,7 +121,7 @@ const AboutArea = () => {
                   </li>
                   <li style={mainfs}>
                     {" "}
-                    <b>Publish and Promote : </b> Publish and Promote: Once your
+                    <b>Publish and Promote : </b>Once your
                     course is ready, publish it on our marketplace and reach
                     thousands of eager learners.{" "}
                   </li>

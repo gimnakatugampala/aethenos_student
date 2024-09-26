@@ -13,7 +13,7 @@ const AdBanner = () => {
                         <div className="col-lg-9">
                             <div className="section-title section-center" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
                                 <h2>Ready to Inspire and Educate? </h2>
-                                <p>Sign up now and start your journey as an instructor with Aethenos!.</p>
+                                <p>Sign up now and start your journey as an instructor with Aethenos!</p>
                                 <a className="edu-btn btn-medium">
                                 Sign Up as an Instructor
                                 </a>
