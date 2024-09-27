@@ -226,7 +226,7 @@ const Accordian = ({
                                   {index + 1}. <PlayCircleIcon /> Video Lecture
                                   : {list.title}
                                   {type.videoLength != 0 && (
-                                    <span>
+                                    <span style={{ fontSize: "12px" }}>
                                       <b>
                                         <i>
                                           <i className="fas fa-tv mx-2"></i>
