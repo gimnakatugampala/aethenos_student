@@ -87,7 +87,7 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
             <div className="col-10">
               <div className="inner mx-5 float-left">
                 <p className="fs-20 fs-md-5 fs-lg-4">
-                  © {new Date().getFullYear()} Aethenos             
+                  © {new Date().getFullYear()} Aethenos Limited              
                 </p>
               </div>
             </div>
