@@ -101,7 +101,7 @@ const HeroArea = () => {
     <div className="hero-banner hero-style-4">
       <div className="container">
         <div className="row align-items-center">
-          <div className="col-lg-4">
+          <div className="col-lg-6">
             <div className="banner-content">
               <h2
                 className="title  mt-5"
@@ -130,7 +130,7 @@ const HeroArea = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-8">
+          <div className="col-lg-6">
             <div className="banner-thumbnail">
               <div
                 className="thumbnail"
@@ -139,7 +139,7 @@ const HeroArea = () => {
                 data-sal-duration="1000"
               >
                 <img
-                className="H-50"
+                className="h-50 rounded"
                   src="/assets/images/instructor/instructor-signUp.jpg"
                   alt="instructor"
                 />
