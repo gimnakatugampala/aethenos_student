@@ -25,7 +25,7 @@ const index = () => {
                 <HeroArea/>
                 <TestimonialArea/>
                 <CategoryArea/>
-                <CourseRange />
+                {/* <CourseRange /> */}
                 {/* <TopCategories/> */}
                 {/* <AboutArea/> */}
 
