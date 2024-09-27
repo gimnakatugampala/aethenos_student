@@ -25,7 +25,7 @@ const SEO = ({ pageTitle, description, imageUrl, font }) => (
         {/* Open Graph Meta Tags for Social Media */}
         <meta property="og:title" content={pageTitle ? `${pageTitle} | Aethenos` : "Aethenos"} />
         <meta property="og:description" content={description || "Explore amazing learning content at Aethenos."} />
-        <meta property="og:image" content={imageUrl || "/default-image.jpg"} />
+        <meta property="og:image" content={imageUrl || "/favicon.ico"} />
         <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : ''} />
         <meta property="og:type" content="website" />
         
@@ -33,7 +33,7 @@ const SEO = ({ pageTitle, description, imageUrl, font }) => (
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pageTitle ? `${pageTitle} | Aethenos` : "Aethenos"} />
         <meta name="twitter:description" content={description || "Explore exceptional courses on Aethenos."} />
-        <meta name="twitter:image" content={imageUrl || "/default-image.jpg"} />
+        <meta name="twitter:image" content={imageUrl || "/favicon.ico"} />
         
         {/* Font and External Stylesheets */}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
@@ -57,7 +57,7 @@ const SEO = ({ pageTitle, description, imageUrl, font }) => (
                         "@type": "Organization",
                         "name": "Aethenos",
                     },
-                    "image": imageUrl || "/default-image.jpg"
+                    "image": imageUrl || "/favicon.ico"
                 }),
             }}
         />
