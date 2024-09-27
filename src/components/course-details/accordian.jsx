@@ -3,7 +3,11 @@ import { ListGroup } from "react-bootstrap";
 
 import ReactDOM from "react-dom";
 import ModalVideo from "react-modal-video";
-import { IMG_HOST } from "../../api";
+import { IMG_HOST, VideoStreaming } from "../../api";
+
+import Swal from 'sweetalert2';
+import 'sweetalert2/src/sweetalert2.scss'
+
 
 const Accordian = ({ show = false, id, title, lectures, lists, no_quiz }) => {
   const [isOpen, setOpen] = useState(false);
@@ -23,6 +27,24 @@ const Accordian = ({ show = false, id, title, lectures, lists, no_quiz }) => {
   const practiceTestCount = lists && lists.length > 0 
   ? lists.filter((item) => item.curriculum_item_type === "Practice Test").length 
   : 0;
+
+
+  const handleVideoModal = async (url) => {
+    // Call VideoStreaming function to get the video URL
+    const streamingURL = await VideoStreaming(url);
+  
+    // Use SweetAlert to display the video in a custom modal
+    Swal.fire({
+      html: `<video width="100%" controls autoplay>
+              <source src="${streamingURL}" type="video/mp4">
+              Your browser does not support the video tag.
+             </video>`,
+      showCloseButton: true,
+      showConfirmButton: false, // Hide the confirm button
+      width: '80%', // Adjust the width as needed
+      padding: '1rem',
+    });
+  };
 
   return (
     <>
@@ -111,16 +133,12 @@ const Accordian = ({ show = false, id, title, lectures, lists, no_quiz }) => {
                                           {link.previewVideo ? (
                                             // Enable text decoration for preview videos
                                             <a
-                                            style={{cursor:'pointer'}}
-                                              onClick={() => {
-                                                setOpen(true);
-                                                setselectedURL(link.url);
-                                              }}
-                                              className="text-danger text-decoration-underline"
-                                            >
-                                              <i className="fa-solid fa-circle-play mx-2"></i>{" "}
-                                              {list.title}
-                                            </a>
+                                            style={{ cursor: 'pointer' }}
+                                            onClick={() => handleVideoModal(link.url)}
+                                            className="text-danger text-decoration-underline"
+                                          >
+                                            <i className="fa-solid fa-circle-play mx-2"></i> {list.title}
+                                          </a>
                                           ) : (
                                             // Normal link for other videos
                                             <>
@@ -201,7 +219,7 @@ const Accordian = ({ show = false, id, title, lectures, lists, no_quiz }) => {
           channel="custom"
           //   controls="0"
           isOpen={isOpen}
-          url={`${IMG_HOST}${selectedURL}`}
+          url={`${selectedURL}`}
           onClose={() => setOpen(false)}
         />
       </React.Fragment>
