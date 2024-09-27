@@ -22,6 +22,9 @@ import { saveAs } from "file-saver";
 import { useRouter } from "next/router";
 import { FormatVideoTimeLength } from "../../functions/FormatVideoTimeLength";
 
+import useDownloader from 'react-use-downloader';
+
+
 const mainfs = {
   fontSize: "calc(0.4rem + 0.6vw)!important",
 };
@@ -64,14 +67,23 @@ const Accordian = ({
   // Extract the query parameters
   const { sectionID, curriclumID, SyllabusType } = router.query;
 
+  const { size, elapsed, percentage, download, cancel, error, isInProgress } =
+  useDownloader();
+
+  
   const handleDownload = async (url, title) => {
-    try {
-      const response = await fetch(url, {mode: 'no-cors'});
-      const blob = await response.blob();
-      saveAs(blob, title);
-    } catch (error) {
-      console.error("Error downloading file:", error);
-    }
+    // try {
+    //   const response = await fetch(url);
+    //   const blob = await response.blob();
+    //   saveAs(blob, title);
+    // } catch (error) {
+    //   console.error("Error downloading file:", error);
+    // }
+
+    console.log(url)
+    console.log(title)
+
+    download(url, title)
   };
 
   return (
