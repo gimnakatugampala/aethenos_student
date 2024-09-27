@@ -20,6 +20,7 @@ import Form from "react-bootstrap/Form";
 import CardMainContainer from "../../pages/my-courses/[id]/CardMainContainer";
 import { saveAs } from "file-saver";
 import { useRouter } from "next/router";
+import { FormatVideoTimeLength } from "../../functions/FormatVideoTimeLength";
 
 const mainfs = {
   fontSize: "calc(0.4rem + 0.6vw)!important",
@@ -212,13 +213,12 @@ const Accordian = ({
                                 >
                                   {index + 1}. <PlayCircleIcon /> Video Lecture
                                   : {list.title}
-                                  {type.videoLength !== 0 && (
+                                  {type.videoLength != 0 && (
                                     <span>
                                       <b>
                                         <i>
                                           <i className="fas fa-tv mx-2"></i>
-                                          {(type.videoLength / 60).toFixed(2)}
-                                          mins
+                                          {FormatVideoTimeLength(type.videoLength)}
                                         </i>
                                       </b>
                                     </span>
