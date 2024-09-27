@@ -21,7 +21,7 @@ const CategoryArea = () => {
     <div className="features-area-1 py-5">
       <div className="container">
         <div className="text-center m-2">
-          <h2>Why Teach with Us?</h2>
+          <h2>Why Teach with Us?</h2>        
           {/* <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi harum deserunt facere! Et quaerat quo, dolorum adipisci unde ipsa assumenda provident. Hic, praesentium. Sequi, error. Dignissimos est voluptatibus dicta in?</p> */}
         </div>
         <div className="row g-5 d-flex justify-content-center">
@@ -41,7 +41,7 @@ const CategoryArea = () => {
           <FeatureBox
             delay={"100"}
             color={"color-secondary-style"}
-            icon={<NonDegreeProgram />}
+            icon={<img src="./assets/images/logo/excel-icon.png" alt="Excel Icon" />}
             title={
               <>
                 <span>Free Excel Training App</span>
@@ -115,12 +115,13 @@ export default CategoryArea;
 const FeatureBox = ({ delay, icon, color, title, text }) => {
   return (
     <div
-      className="col-3"
+     className="col-sm-7 col-md-7 col-lg-3 mx-3"
       data-sal-delay={delay}
       data-sal="slide-up"
       data-sal-duration="800"
     >
       <div className={`features-box ${color} edublink-svg-animate`}>
+    
         <div className="icon">{icon}</div>
         <div className="content">
           <h5 className="title">{title}</h5>

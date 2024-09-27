@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 import { useMouseMoveUI } from '../../contexts/mouse-move-context';
 
 const AdBanner = () => {
-    const { mouseDirection, mouseReverse } = useMouseMoveUI();
+    // const { mouseDirection, mouseReverse } = useMouseMoveUI();
     return (
-        <div className="edu-cta-banner-area cta-banner-2">
+        <div className="edu-cta-banner-area cta-banner-4">
             <div className="container">
                 <div className="edu-cta-banner">
                     <div className="row justify-content-center">
@@ -22,7 +22,7 @@ const AdBanner = () => {
                     </div>
                 </div>
             </div>
-            <ul className="shape-group">
+            {/* <ul className="shape-group">
                 <motion.li className="shape-1 scene" data-sal-delay="100" data-sal="fade" data-sal-duration="1000"
                     animate={ {
                         x: mouseDirection(30).x,
@@ -61,7 +61,7 @@ const AdBanner = () => {
                 <li className="shape-5 shape-dark" data-sal-delay="100" data-sal="fade" data-sal-duration="1000">
                     <img src="/assets/images/others/dark-map-shape.png" alt="shape" />
                 </li>
-            </ul>
+            </ul> */}
         </div>
     );
 }

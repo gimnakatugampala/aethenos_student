@@ -98,13 +98,13 @@ const HeroArea = () => {
   };
 
   return (
-    <div className="hero-banner hero-style-5">
+    <div className="hero-banner hero-style-4">
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-4">
             <div className="banner-content">
               <h2
-                className="title"
+                className="title  mt-5"
                 data-sal-delay="100"
                 data-sal="slide-up"
                 data-sal-duration="1000"
@@ -139,8 +139,9 @@ const HeroArea = () => {
                 data-sal-duration="1000"
               >
                 <img
-                  src="/assets/images/instructor/instructor-hero.jpg"
-                  alt="Couple Image"
+                className="H-50"
+                  src="/assets/images/instructor/instructor-signUp.jpg"
+                  alt="instructor"
                 />
               </div>
             
