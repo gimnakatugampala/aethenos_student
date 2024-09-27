@@ -223,7 +223,7 @@ const Accordian = ({
                                       </b>
                                     </span>
                                   )}
-                                  <p
+                                  {/* <p
                                     className={`m-1 p-0 ${
                                       seletedCurriculumItem ===
                                       list.curriculumItemId
@@ -247,7 +247,7 @@ const Accordian = ({
                                             ""
                                           )
                                       : null}
-                                  </p>
+                                  </p> */}
                                 </p>
                               </li>
                             </CardContainer>
@@ -392,7 +392,7 @@ const Accordian = ({
                             >
                               {index + 1}. <FileCopyIcon /> Text-Based Lecture :{" "}
                               {list.title}
-                              <p
+                              {/* <p
                                 className={`m-1 p-0 ${
                                   seletedCurriculumItem ===
                                   list.curriculumItemId
@@ -416,7 +416,7 @@ const Accordian = ({
                                         ""
                                       )
                                   : null}
-                              </p>
+                              </p> */}
                             </p>
                           </li>
                         </CardContainer>
@@ -564,7 +564,7 @@ const Accordian = ({
                             style={mainfs}
                           >
                             {index + 1}. <QuizIcon /> Quiz : {list.title}
-                            <p
+                            {/* <p
                               className={`m-1 p-0 ${
                                 seletedCurriculumItem === list.curriculumItemId
                                   ? "text-light"
@@ -587,7 +587,7 @@ const Accordian = ({
                                       ""
                                     )
                                 : null}
-                            </p>
+                            </p> */}
                           </p>
                         </li>
                       </CardContainer>
@@ -667,7 +667,7 @@ const Accordian = ({
                           >
                             {index + 1}. <AssignmentIcon /> Assignment :{" "}
                             {list.title}
-                            <p
+                            {/* <p
                               className={`m-1 p-0 ${
                                 seletedCurriculumItem === list.curriculumItemId
                                   ? "text-light"
@@ -690,7 +690,7 @@ const Accordian = ({
                                       ""
                                     )
                                 : null}
-                            </p>
+                            </p> */}
                           </p>
                         </li>
                       </CardContainer>
@@ -771,7 +771,7 @@ const Accordian = ({
                           >
                             {index + 1}. <ListAltIcon /> Practice Test :{" "}
                             {list.title}
-                            <p
+                            {/* <p
                               className={`m-1 p-0 ${
                                 seletedCurriculumItem === list.curriculumItemId
                                   ? "text-light"
@@ -794,7 +794,7 @@ const Accordian = ({
                                       ""
                                     )
                                 : null}
-                            </p>
+                            </p> */}
                           </p>
                         </li>
                       </CardContainer>
@@ -873,7 +873,7 @@ const Accordian = ({
                           >
                             {index + 1}. <CodeIcon /> Coding Exercise :{" "}
                             {list.title}
-                            <p
+                            {/* <p
                               className={`m-1 p-0 ${
                                 seletedCurriculumItem === list.curriculumItemId
                                   ? "text-light"
@@ -896,7 +896,7 @@ const Accordian = ({
                                       ""
                                     )
                                 : null}
-                            </p>
+                            </p> */}
                           </p>
                         </li>
                       </CardContainer>
