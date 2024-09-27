@@ -33,7 +33,7 @@ export default function Home() {
 
     return (
         <Wrapper>
-            <SEO pageTitle={'Home Main'} />
+            <SEO pageTitle={'Home'} />
             <HomeMain />
         </Wrapper>
     )
