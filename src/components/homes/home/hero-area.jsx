@@ -6,7 +6,7 @@ const HeroArea = () => {
   const { mouseDirection, mouseReverse } = useMouseMoveUI();
   return (
     <div className="hero-banner hero-style-4">
-      <div className="container">
+      <div className="mx-5">
         <div className="row align-items-center">
         <div className="col-lg-5">
             <div className="banner-content">
@@ -22,6 +22,7 @@ const HeroArea = () => {
                 data-sal-delay="200"
                 data-sal="slide-up"
                 data-sal-duration="1000"
+                  className="m-0 w-100"
               >
                 Come and experience the best Excel training courses from the top
                 instructors from around the world through our Innovative Excel
@@ -29,16 +30,7 @@ const HeroArea = () => {
                 our proprietary Excel Training App that delivers pre-recorded
                 and live classes inside the Excel Application itself.
               </p>
-              <div
-                className="banner-btn"
-                data-sal-delay="400"
-                data-sal="slide-up"
-                data-sal-duration="1000"
-              >
-                {/* <a href="#" className="edu-btn">
-                                    Find courses<i className="icon-4"></i>
-                                </a> */}
-              </div>
+           
               {/* <ul className="shape-group">
                                 <motion.li className="shape-1 scene" data-sal-delay="1000" data-sal="fade" data-sal-duration="1000" 
                                     animate={ {
@@ -53,7 +45,7 @@ const HeroArea = () => {
             </div>
           </div>
           <div className="col-lg-7">
-            <div className="banner-thumbnail">
+            <div >
               <div
                 className="thumbnail"
                 data-sal-delay="500"

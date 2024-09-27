@@ -10,6 +10,10 @@ import CardContainer from "../course-content/CardContainer";
 import moment from "moment";
 import { Avatar } from "@mui/material";
 
+const mainfs = {
+  fontSize: "clamp(0.8rem, 0.8rem + 0.6vw, 1.5rem)",  
+};
+
 const CourseDetailsArea = ({ course }) => {
   const {
     course_desc,
@@ -76,6 +80,7 @@ const CourseDetailsArea = ({ course }) => {
                     role="tab"
                     aria-controls="overview"
                     aria-selected="true"
+                    style={mainfs}
                   >
                     Overview
                   </button>
@@ -90,6 +95,7 @@ const CourseDetailsArea = ({ course }) => {
                     role="tab"
                     aria-controls="carriculam"
                     aria-selected="false"
+                    style={mainfs}
                   >
                     Syllabus
                   </button>
@@ -105,6 +111,7 @@ const CourseDetailsArea = ({ course }) => {
                     role="tab"
                     aria-controls="review"
                     aria-selected="false"
+                    style={mainfs}
                   >
                     Reviews
                   </button>
@@ -121,7 +128,7 @@ const CourseDetailsArea = ({ course }) => {
                   <div className="course-tab-content">
                     <div className="course-overview">
                       <h3 className="heading-title">Course Description</h3>
-                      <p>{course.course_main_desc}</p>
+                      <p style={mainfs} >{course.course_main_desc}</p>
 
                       <h5 className="title">What You’ll Learn?</h5>
                       <ul className="mb--60">
@@ -129,7 +136,7 @@ const CourseDetailsArea = ({ course }) => {
                           {course.intended_learners?.map(
                             (l, i) =>
                               l.intended_learner_type == " students learn" && (
-                                <li className="col-md-6" key={i}>
+                                <li  style={mainfs} className="col-md-6" key={i}>
                                   {l.intended_learner}
                                 </li>
                               )
@@ -142,7 +149,7 @@ const CourseDetailsArea = ({ course }) => {
                         {course.intended_learners?.map(
                           (l, i) =>
                             l.intended_learner_type == "requirements" && (
-                              <li key={i}>{l.intended_learner}</li>
+                              <li  style={mainfs} key={i}>{l.intended_learner}</li>
                             )
                         )}
                       </ul>

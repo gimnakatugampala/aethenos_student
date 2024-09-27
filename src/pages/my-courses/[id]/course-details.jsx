@@ -79,7 +79,7 @@ import { Footer } from "../../../layout";
 import { ConvertToHTML, StripeHTML } from "../../../functions/ConvertToHTML";
 
 const mainfs = {
-  fontSize: "calc(0.4rem + 0.6vw)",
+  fontSize: "clamp(0.8rem, 0.8rem + 0.6vw, 1.5rem)",  
 };
 
 
@@ -1203,7 +1203,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                                       <p style={mainfs}>{reviews.comment}</p>
                                     </div>
                                   ))
-                                : "No Reviews Found")}
+                                :   <p style={mainfs}>No Reviews Found</p>)}
 
                           </div>
                         </div>

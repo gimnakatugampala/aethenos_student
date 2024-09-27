@@ -8,6 +8,9 @@ import { IMG_HOST, VideoStreaming } from "../../api";
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss'
 
+const mainfs = {
+  fontSize: "clamp(0.8rem, 0.8rem + 0.6vw, 1.5rem)",  
+};
 
 const Accordian = ({ show = false, id, title, lectures, lists, no_quiz }) => {
   const [isOpen, setOpen] = useState(false);
@@ -60,8 +63,8 @@ const Accordian = ({ show = false, id, title, lectures, lists, no_quiz }) => {
             data-bs-target={`#question-${id}`}
             aria-expanded={show ? "true" : "false"}
           >
-            {title}
-            <span className="m-0 p-0"    style={{ fontSize: "14px" }}>
+           <h2 className="title" style={mainfs}> {title}</h2>
+            <span className="m-0 p-0"    style={mainfs}>
 
               {lectures > 0 && (
                 <> 
