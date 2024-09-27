@@ -450,7 +450,7 @@ const Header = ({
                       ) : (
                         <>
                           <li className="icon cart-icon mx-3">
-                            <Link href="/cart" legacyBehavior>
+                            <Link href="/notifications" legacyBehavior>
                               <a className="cart-icon">
                                 <i class="bi bi-bell fs-4"></i>
                                 <span className="count">

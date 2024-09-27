@@ -43,7 +43,7 @@ export default function TestimonialArea() {
         <div className="testimonial-area-1 section-gap-equal">
             <div className="mx-5">
                 <div className="row g-lg-5 mx-5 d-flex justify-content-center">
-                    <div className="col-lg-4 col-sm-8 ">
+                    <div className="col-xl-4 col-md-12 d-flex justify-content-center">
                         <div className="testimonial-heading-area">
                             <div className="section-title section-left" data-sal-delay="50" data-sal="slide-up" data-sal-duration="800">
                                 {/* <span className="pre-title">Testimonials</span> */}
@@ -65,7 +65,7 @@ export default function TestimonialArea() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-8 d-flex align-items-center">
+                    <div className="col-xl-8 col-md-12 d-flex align-items-center">
                         <Swiper
                             slidesPerView={1}
                             spaceBetween={0}
@@ -88,7 +88,7 @@ export default function TestimonialArea() {
                                 <SwiperSlide key={i}>
                                     <div className="testimonial-grid">
                                         <div className="">
-                                            <img src={testi.img} alt="Testimonial" />
+                                            <img src={testi.img} alt="Testimonial" style={{width: "100%"}}/>
                                             {/* <span className="qoute-icon"><i className="icon-26"></i></span> */}
                                         </div>
                                         {/* <div className="content">
