@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -30,6 +30,9 @@ const QuizContainer = ({
 }) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
+
+  const [explanationMessage, setExplanationMessage] = useState([]);
+
 
   const isStepOptional = (step) => step === 1;
 
@@ -105,14 +108,14 @@ const QuizContainer = ({
                           },
                         }}
                       >
-                        <StepLabel ><span         style={mainfs}>Question {index + 1}</span></StepLabel>
+                        <StepLabel ><span style={mainfs}>Question {index + 1}</span></StepLabel>
                       </Step>
                     ))}
                   </Stepper>
 
                   <React.Fragment>
                     {selectedQuiz.getQuizs[activeStep] && (
-                      <h5 className="my-3 mx-4"         style={mainfs}>
+                      <h5 className="my-3 mx-4"  style={mainfs}>
                         {selectedQuiz.getQuizs[activeStep].question}
                       </h5>
                     )}
@@ -172,6 +175,23 @@ const QuizContainer = ({
                         </FormControl>
                         <br />
 
+
+                        {explanationMessage.length > 0 && (
+                        <ul>
+                          {explanationMessage.map((answer) => (
+                            answer.explanation ? (  // Only render the list item if the explanation is not empty
+                              <li key={answer.id}>
+                                <strong>Explanation: {answer.explanation}</strong>
+                                {answer.correctAnswer ? " ✔" : "❌"}  {/* Using tick and cross symbols */}
+                              </li>
+                            ) : null
+                          ))}
+                        </ul>
+                      )}
+
+
+
+
                         <button
                           onClick={() => {
                             if (selectAnswer === 0) {
@@ -187,6 +207,12 @@ const QuizContainer = ({
                             setanswerAlertDisplay(
                               selectedAnswerCorrect?.correctAnswer
                             );
+
+
+                            setExplanationMessage(selectedQuiz.getQuizs[activeStep].answers)
+                            
+
+                            console.log(selectedQuiz.getQuizs[activeStep].answers)
                           }}
                           className="edu-btn btn-small mt-2"
                         >
