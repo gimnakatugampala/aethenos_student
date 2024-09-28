@@ -19,6 +19,7 @@ import getSymbolFromCurrency from "currency-symbol-map";
 import Modal from "react-bootstrap/Modal";
 import LargeLoading from "../../functions/Loading/LargeLoading";
 import ErrorAlert from "../../functions/Alert/ErrorAlert";
+import { Spinner } from "react-bootstrap";
 
 const index = () => {
   const [pHistory, setpHistory] = useState(null);
@@ -36,6 +37,7 @@ const index = () => {
   const [selectedItemCode, setselectedItemCode] = useState("");
 
   const [isReqSubmitted, setisReqSubmitted] = useState(false);
+  const [isReqLoading, setisReqLoading] = useState(false)
 
   const handleClose = () => {
     setShow(false);
@@ -68,7 +70,8 @@ const index = () => {
       refundText,
       setrefundText,
       setShow,
-      setisReqSubmitted
+      setisReqSubmitted,
+      setisReqLoading
     );
   };
 
@@ -214,7 +217,7 @@ const index = () => {
                               <th></th>
                               <th style={mainfs}>Date</th>
                               <th style={mainfs}>Amount</th>
-                              <th style={mainfs}>Refunded To</th>
+                              <th style={mainfs}>Refunded through</th>
                               <th style={mainfs}>Status</th>
                               <th></th>
                             </tr>
@@ -309,13 +312,26 @@ const index = () => {
                 placeholder="What is the Reason for the Refund ?"
                 rows="3"
               ></textarea>
-              <Button
-                onClick={handleRefundSubmit}
-                className="m-2"
-                variant="danger"
-              >
-                Submit
-              </Button>
+
+              {isReqLoading ? (
+                 <Button
+                 className="m-2"
+                 variant="danger"
+               >
+                  <Spinner size="sm" animation="border" role="status">
+                 <span className="visually-hidden">Loading...</span>
+                 </Spinner>
+               </Button>
+              ) : (
+
+                <Button
+                  onClick={handleRefundSubmit}
+                  className="m-2"
+                  variant="danger"
+                >
+                  Submit
+                </Button>
+              )}
             </div>
           )}
         </Modal.Body>

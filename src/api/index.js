@@ -2470,7 +2470,9 @@ fetch(`${BACKEND_LINK}/payment/getOwnAllRefunds`, requestOptions)
 
 }
 
-export const SendRefundReq = async(selectedTransactionCode,selectedItemCode,selectedAmount,refundText,setrefundText,setShow,setisReqSubmitted) =>{
+export const SendRefundReq = async(selectedTransactionCode,selectedItemCode,selectedAmount,refundText,setrefundText,setShow,setisReqSubmitted,setisReqLoading) =>{
+
+  setisReqLoading(true)
 
 
   const myHeaders = new Headers();
@@ -2495,12 +2497,16 @@ fetch(`${BACKEND_LINK}/payment/addRefund`, requestOptions)
       // SuccessAlert("Success",result.message)
       setrefundText("")
       setisReqSubmitted(true)
+      setisReqLoading(false)
+
       // setShow(false)
       return
     }else{
       ErrorAlert("Error",result.message)
       setrefundText("")
       setisReqSubmitted(false)
+      setisReqLoading(false)
+
       return
     }
 
