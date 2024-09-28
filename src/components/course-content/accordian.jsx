@@ -71,20 +71,24 @@ const Accordian = ({
   useDownloader();
 
   
-  const handleDownload = async (url, title) => {
-    // try {
-    //   const response = await fetch(url);
-    //   const blob = await response.blob();
-    //   saveAs(blob, title);
-    // } catch (error) {
-    //   console.error("Error downloading file:", error);
-    // }
-
-    console.log(url)
-    console.log(title)
-
-    download(url, title)
+  const handleDownload = async (url, filename) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const link = document.createElement('a');
+      const blobUrl = window.URL.createObjectURL(blob);
+      link.href = blobUrl;
+      link.setAttribute('download', filename); // Set the filename for download
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link); // Clean up the DOM
+      window.URL.revokeObjectURL(blobUrl); // Release memory
+    } catch (error) {
+      console.error("Error downloading file: ", error);
+    }
   };
+  
+  
 
   return (
     <div className="accordion-item mb-2">
