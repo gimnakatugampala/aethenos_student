@@ -166,18 +166,19 @@ const index = () => {
                                     {getSymbolFromCurrency(p.currency)}
                                     {p.amount} {p.paymentType}
                                   </td>
-                                  <td
-                                    className="d-flex justify-content-center"
-                                    style={mainfs}
-                                  >
-                                    <Button variant="outline-danger ">
-                                      <a
-                                        href={`/card-receipt/${p.transActionCode}`}
-                                      >
-                                        Receipt
-                                      </a>
+                                  <td className="d-flex justify-content-center" style={mainfs}>
+                                    <Button
+                                      variant="danger"
+                                      className="text-white"
+                                      onClick={() => {
+                                        // Navigate programmatically
+                                        window.location.href = `/card-receipt/${p.transActionCode}`;
+                                      }}
+                                    >
+                                      Receipt
                                     </Button>
                                   </td>
+
                                 </tr>
                               ))
                             ) : (
