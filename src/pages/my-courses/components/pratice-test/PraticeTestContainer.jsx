@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -21,6 +21,8 @@ const PraticeTestContainer = ({
   selectedPracticeTest,
 }) => {
   const [skipped, setSkipped] = React.useState(new Set());
+  const [isFullscreen, setIsFullscreen] = React.useState(false); // State to track fullscreen
+  const containerRef = useRef(null); // Ref for the container
 
   const isStepOptional = (step) => step === 1;
   const isStepSkipped = (step) => skipped.has(step);
@@ -57,7 +59,6 @@ const PraticeTestContainer = ({
     setPraticeTestActiveStep(0);
   };
 
-
   const handleDownload = async (filePath) => {
     console.log('Attempting to download:', filePath);
     try {
@@ -73,10 +74,39 @@ const PraticeTestContainer = ({
     }
   };
 
+  const toggleFullscreen = () => {
+    if (!isFullscreen) {
+      // Request fullscreen on the container
+      if (containerRef.current.requestFullscreen) {
+        containerRef.current.requestFullscreen();
+      } else if (containerRef.current.mozRequestFullScreen) { // Firefox
+        containerRef.current.mozRequestFullScreen();
+      } else if (containerRef.current.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+        containerRef.current.webkitRequestFullscreen();
+      } else if (containerRef.current.msRequestFullscreen) { // IE/Edge
+        containerRef.current.msRequestFullscreen();
+      }
+    } else {
+      // Exit fullscreen
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) { // Firefox
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) { // Chrome, Safari, and Opera
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { // IE/Edge
+        document.msExitFullscreen();
+      }
+    }
+    setIsFullscreen((prev) => !prev);
+  };
+
   return (
     <>
       {selectedPracticeTest && (
-        <Box sx={{ width: "100%" }}>
+        <Box sx={{ width: "100%" ,background :`${isFullscreen ? '#fff' : 'transparent'}` }} ref={containerRef}> {/* Use ref on the outer Box */}
+         
+
           <Stepper activeStep={PraticeTestactiveStep}>
             {steps.map((label, index) => {
               const stepProps = {};
@@ -89,7 +119,6 @@ const PraticeTestContainer = ({
                   key={label}
                   {...stepProps}
                   sx={{
-                  
                     "& .MuiStepLabel-label": {
                       fontWeight: "bold !important",
                     },
@@ -185,23 +214,14 @@ const PraticeTestContainer = ({
                 {selectedPracticeTest.getPracticeTests &&
                   selectedPracticeTest.getPracticeTests[0] && (
                     <>
-
-                    <Button
-                      variant="contained"
-                      color="error"
-                      className="my-2"
-                      onClick={() => handleDownload(`${IMG_HOST}${selectedPracticeTest.getPracticeTests[0].practiceTestQuestionSheet}`)}
+                      <Button
+                        variant="contained"
+                        color="error"
+                        className="my-2"
+                        onClick={() => handleDownload(`${IMG_HOST}${selectedPracticeTest.getPracticeTests[0].practiceTestQuestionSheet}`)}
                       >
-                      Download Questions <i className="fas fa-download mx-2"></i>
+                        Download Questions <i className="fas fa-download mx-2"></i>
                       </Button>
-
-                      {/* <a
-                        className="btn btn-danger my-2"
-                        href={`${IMG_HOST}${selectedPracticeTest.getPracticeTests[0].practiceTestQuestionSheet}`}
-                        download
-                      >
-                        Download Questions <i className="fas fa-download"></i>
-                      </a> */}
 
                       <br />
                       {selectedPracticeTest.getPracticeTests[0]
@@ -234,25 +254,14 @@ const PraticeTestContainer = ({
                 {selectedPracticeTest.getPracticeTests &&
                   selectedPracticeTest.getPracticeTests[0] && (
                     <>
-
-
-                    <Button
-                      variant="contained"
-                      color="error"
-                      className="my-2"
-                      onClick={() => handleDownload(`${IMG_HOST}${selectedPracticeTest.getPracticeTests[0].practiceTestSolutionSheet}`)}
+                      <Button
+                        variant="contained"
+                        color="error"
+                        className="my-2"
+                        onClick={() => handleDownload(`${IMG_HOST}${selectedPracticeTest.getPracticeTests[0].practiceTestSolutionSheet}`)}
                       >
-                      Download Solutions <i className="fas fa-download mx-2"></i>
+                        Download Solutions <i className="fas fa-download mx-2"></i>
                       </Button>
-
-
-                      {/* <a
-                        className="btn btn-danger my-2"
-                        href={`${IMG_HOST}${selectedPracticeTest.getPracticeTests[0].practiceTestSolutionSheet}`}
-                        download
-                      >
-                        Download Solutions <i className="fas fa-download"></i>
-                      </a> */}
 
                       <br />
                       {selectedPracticeTest.getPracticeTests[0]
@@ -313,6 +322,17 @@ const PraticeTestContainer = ({
                 </Button>
               </Box>
             )}
+
+             {/* Fullscreen Button */}
+          {/* <Button
+            variant="contained"
+            onClick={toggleFullscreen}
+            sx={{ mb: 2 }}
+          >
+            {isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+          </Button> */}
+
+
           </React.Fragment>
         </Box>
       )}
