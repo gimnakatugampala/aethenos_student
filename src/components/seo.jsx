@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-const SEO = ({ pageTitle, description, imageUrl, font }) => (
+const SEO = ({ pageTitle, description, imageUrl, font ,keywords }) => (
     <Head>
         {/* Dynamic Page Title */}
         <title>
@@ -12,6 +12,12 @@ const SEO = ({ pageTitle, description, imageUrl, font }) => (
         
         {/* Dynamic Meta Description */}
         <meta name="description" content={description || "Welcome to Aethenos - Your platform for exceptional learning experiences."} />
+
+
+        <meta
+            name="keywords"
+            content={keywords || "Aethenos, Aethenos.com, aethenos, aethenos.com, learning, courses, education, online platform, online courses, instructors, tutors"}
+        />
         
         {/* Robots Meta Tag */}
         <meta name="robots" content="index, follow" />
