@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 .next.zip
+.git.zip
 /.next
 node_modules.zip
 .next.zip
