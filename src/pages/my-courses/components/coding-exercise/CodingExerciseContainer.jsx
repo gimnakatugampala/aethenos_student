@@ -152,26 +152,26 @@ const CodingExerciseContainer = ({
                 )}
 
                 <div className="my-3 ">
-                  <h5 className="m-0 p-0">
+                  <h5 className="mb-4 p-0">
                     <b>{selectedCodingExercise.title}</b>
                   </h5>
 
                   {selectedCodingExercise.description && (
-                    <>
+                    <div className="my-4">
                       <p className="m-0 p-0">Description</p>
                       <h6 className="m-0 p-0">
                         {selectedCodingExercise.description}
                       </h6>
-                    </>
+                    </div>
                   )}
 
                   {codingExercise.instructions && (
-                    <>
+                    <div className="my-4">
                       <p className="m-0 p-0">Instructions</p>
                       <h6 className="m-0 p-0">
                         <i>{codingExercise.instructions}</i>
                       </h6>
-                    </>
+                    </div>
                   )}
 
                   {codingExercise.downloadableResource && (
@@ -182,7 +182,7 @@ const CodingExerciseContainer = ({
                       className="my-2"
                       onClick={() => handleDownload(`${IMG_HOST}${codingExercise.downloadableResource}`)}
                       >
-                      Download Resource <i className="fas fa-download mx-2"></i>
+                      Download Resources <i className="fas fa-download mx-2"></i>
                       </Button>
 
                   )}
@@ -224,7 +224,7 @@ const CodingExerciseContainer = ({
                     className="my-2"
                     onClick={() => handleDownload(`${IMG_HOST}${codingExercise.codingExerciseSheet}`)}
                     >
-                    Download Questions <i className="fas fa-download"></i>
+                    Download Questions <i className="fas fa-download mx-2"></i>
                     </Button>
 
                 )}
@@ -269,7 +269,7 @@ const CodingExerciseContainer = ({
                   className="my-2"
                   onClick={() => handleDownload(`${IMG_HOST}${codingExercise.codingSolutionsSheet}`)}
                   >
-                  Download Answers <i className="fas fa-download"></i>
+                  Download Answers <i className="fas fa-download mx-2"></i>
                   </Button>
                   )}
 
