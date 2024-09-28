@@ -50,7 +50,7 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
           : "footer-lighten bg-image footer-style-1"
       }`}
     >
-      <div className={`footer-top ${style_2 ? "footer-top-2" : ""}`}>
+      <div className={`footer-top pt-5 pb-5${style_2 ? "footer-top-2" : ""}`}>
         <div className="inner float-left">
           <div className="row g-5">
             {widgets.map((w, i) => (
@@ -71,9 +71,10 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
                 </div>
               </div>
             ))}
-            <div className="col-8 mx-5">
+            <div className="col-10 mx-5">
               <div >
-                <img className=" w-25" src={logoLight} alt="Corporate Logo" />
+                <img   width={200}
+                        height={100} src={logoLight} alt="Corporate Logo" />
               </div>
             </div>
           </div>
@@ -86,7 +87,7 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
             <div className="col-10">
               <div className="inner mx-5 float-left">
                 <p className="fs-20 fs-md-5 fs-lg-4">
-                  © {new Date().getFullYear()} Aethenos             
+                  © {new Date().getFullYear()} Aethenos Limited              
                 </p>
               </div>
             </div>
