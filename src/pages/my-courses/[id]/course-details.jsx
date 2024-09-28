@@ -77,6 +77,7 @@ import {
 import MediumLoading from "../../../functions/Loading/MediumLoading";
 import { Footer } from "../../../layout";
 import { ConvertToHTML, StripeHTML } from "../../../functions/ConvertToHTML";
+import { FormatVideoTimeLength } from "../../../functions/FormatVideoTimeLength";
 
 const mainfs = {
   fontSize: "clamp(0.8rem, 0.8rem + 0.6vw, 1.5rem)",  
@@ -859,13 +860,13 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                               </span>
                             </div>
 
-                            <div className="col-md-2">
+                            <div className="col-md-4">
                               <div className="d-flex align-items-center" >
                                 <h6 className="m-0 p-0" style={mainfs}>
-                                  {course && course.no_of_videos}
+                                  {course && FormatVideoTimeLength(course.totalVideoLength)}
                                 </h6>
                               </div>
-                              <span style={mainfs} >No of Videos</span>
+                              <span style={mainfs} >Total Video Length</span>
                             </div>
                           </div>
 
