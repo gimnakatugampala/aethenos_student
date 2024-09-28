@@ -21,7 +21,7 @@ const AboutArea = () => {
               <div className="about-image-gallery d-flex justify-content-center">
                 <img
                   className="w-75"
-                  src="/assets/images/instructor/instructerGetStarted.jpg"
+                  src="/assets/images/instructor/instructor-banner.jpg"
                   alt="About Image"
                 />
                 <div

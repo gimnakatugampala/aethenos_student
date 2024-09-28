@@ -140,7 +140,7 @@ const HeroArea = () => {
               >
                 <img
                 className="h-50 rounded"
-                  src="/assets/images/instructor/instructor-signUp.jpg"
+                  src="/assets/images/instructor/instructor-hero.jpg"
                   alt="instructor"
                 />
               </div>

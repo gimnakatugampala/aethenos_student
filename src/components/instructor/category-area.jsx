@@ -29,7 +29,7 @@ const CategoryArea = () => {
           <FeatureBox
             delay={"150"}
             color={"color-extra04-style"}
-            icon={<CertificateTwo />}
+            icon={<img src="./images/icons/community.png" alt="Community Icon" />}
             title={
               <>
                 <span>Reach a Global Audience </span>
@@ -68,7 +68,7 @@ const CategoryArea = () => {
           <FeatureBox
             delay={"150"}
             color={"color-extra05-style"}
-            icon={<UserTwo />}
+            icon={<img src="/images/icons/dollar-sign.png" alt="Earn Income" />}
             title={
               <>
                 <span>Earn Income</span>
@@ -80,7 +80,7 @@ const CategoryArea = () => {
           <FeatureBox
             delay={"100"}
             color={"color-secondary-style"}
-            icon={<HybridDistanceProgramsTwo />}
+            icon={<UserTwo />}
             title={
               <>
                 <span>Supportive Community</span>
@@ -94,7 +94,7 @@ const CategoryArea = () => {
           <FeatureBox
             delay={"150"}
             color={"color-primary-style"}
-            icon={<ScholarshipFacility />}
+            icon={<img src="/images/icons/personal-growth.png" alt="Professional Growth" />}
             title={
               <>
                 <span>Professional Growth</span>
