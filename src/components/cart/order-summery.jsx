@@ -10,8 +10,9 @@ import { AccountVefication, StudentSignIn } from '../../api';
 import ButtonLoadingMedium from '../../functions/Loading/ButtonLoadingMedium';
 import validateEmail from '../../functions/emailValid'
 import { useRouter } from "next/router";
+import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
 
-const OrderSummery = () => {
+const OrderSummery = ({ cartItem }) => {
   	const { total , quantity } = useCartInfo();
 	  const CURRENT_USER = Cookies.get('aethenos') 
 
@@ -79,6 +80,7 @@ const OrderSummery = () => {
 		AccountVefication(setshowLogin)
 	}, [CURRENT_USER])
 	
+	console.log(cartItem[0].other_data)
 	// console.log(total)
 	// console.log(quantity)
   	return (
@@ -88,11 +90,11 @@ const OrderSummery = () => {
 				<tbody>
 					<tr className="order-subtotal">
 						<td>Subtotal</td>
-						<td>${(total).toFixed(2)}</td>
+						<td>{cartItem[0].other_data && GetCurrencyByCountry(cartItem[0].other_data)} {(total).toFixed(2)}</td>
 					</tr>
 					<tr className="order-total">
 						<td>Order Total</td>
-						<td>${(total).toFixed(2)}</td>
+						<td>{cartItem[0].other_data && GetCurrencyByCountry(cartItem[0].other_data)} {(total).toFixed(2)}</td>
 					</tr>
 				</tbody>
 			</table>

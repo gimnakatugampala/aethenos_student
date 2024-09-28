@@ -13,6 +13,9 @@ import { MouseMoveProvider } from '../contexts/mouse-move-context';
 import SEO from '../components/seo';
 import { getCurrencyExchangeRate, getUserCountry } from '../api';
 
+import Head from 'next/head';
+
+
 function MyApp( { Component, pageProps } ) {
     const router = useRouter();
     useEffect( () => {
@@ -32,6 +35,10 @@ function MyApp( { Component, pageProps } ) {
 
     return (
         <React.Fragment>
+             <Head>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+
             <SEO font="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Spartan:wght@400;500;600;700;800&display=swap" />
             <Provider store={ store }>
                 <ThemeProvider defaultTheme="light">

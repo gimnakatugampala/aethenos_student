@@ -99,7 +99,7 @@ const CartArea = () => {
 
           <div className="row">
             <div className="col-xl-5 col-lg-7 offset-xl-7 offset-lg-5">
-              <OrderSummery />
+              <OrderSummery cartItem={cartCourses} />
             </div>
           </div>
         </div>
