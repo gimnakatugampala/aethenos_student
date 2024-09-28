@@ -189,10 +189,10 @@ const AssignmentContainer = ({
                 )}
 
                 <div className="my-2 ">
-                  <h5 className="m-0 p-0">
+                  <h5 className="my-4 p-0">
                     <b>{selectedAssignment.title} </b>
                   </h5>
-                  <p className="my-2 p-0">
+                  <p className="my-4 p-0">
                     {" "}
                     <h6 className="m-0 p-0">Duration</h6>
                     <p className="m-0 p-0">
@@ -202,10 +202,12 @@ const AssignmentContainer = ({
                       )}
                     </p>
                   </p>
+
                   {selectedAssignment.description != "" && (
                     <h6 className="m-0 p-0">Description</h6>
                   )}
                   <p className="m-0 p-0">{selectedAssignment.description}</p>
+
                   <br />
                   {selectedAssignment.getAssignments[0].instructions != "" && (
                     <h6 className="m-0 p-0">Instructions</h6>
@@ -226,7 +228,7 @@ const AssignmentContainer = ({
                         )
                       }
                     >
-                      Download Resource <i className="fas fa-download mx-2"></i>
+                      Download Resources <i className="fas fa-download mx-2"></i>
                     </Button>
 
                     // <a
@@ -271,7 +273,7 @@ const AssignmentContainer = ({
                     )
                   }
                 >
-                  Download Questions <i className="fas fa-download"></i>
+                  Download Questions <i className="fas fa-download mx-2"></i>
                 </Button>
 
                 {/* <a
@@ -314,7 +316,7 @@ const AssignmentContainer = ({
                     <p className="text-center my-4 mx-4">No Video Available</p>
                   )}
 
-                  <h6 className="m-0 p-0">
+                  <h6 className="my-3 p-0">
                     {selectedAssignment.getAssignments[0].question}
                   </h6>
 
@@ -328,7 +330,7 @@ const AssignmentContainer = ({
                       )
                     }
                   >
-                    Download Answers <i className="fas fa-download"></i>
+                    Download Answers <i className="fas fa-download mx-2"></i>
                   </Button>
 
                   {/* <a
