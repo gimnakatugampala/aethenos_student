@@ -76,18 +76,22 @@ const CodingExerciseContainer = ({
   };
 
 
-  const handleDownload = async (filePath) => {
+  const handleDownload = async (filePath,filename) => {
     console.log('Attempting to download:', filePath);
+    console.log('Attempting to download:', filename.split("/").pop());
     try {
-      const pdfResponse = await fetch(filePath);
-      if (!pdfResponse.ok) {
-        console.error('Network response error:', pdfResponse.status, pdfResponse.statusText);
-        throw new Error('Network response was not ok');
-      }
-      const pdfBlob = await pdfResponse.blob();
-      saveAs(pdfBlob, filePath.split("/").pop());
+      const response = await fetch(filePath);
+      const blob = await response.blob();
+      const link = document.createElement('a');
+      const blobUrl = window.URL.createObjectURL(blob);
+      link.href = blobUrl;
+      link.setAttribute('download', filename.split("/").pop()); // Set the filename for download
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link); // Clean up the DOM
+      window.URL.revokeObjectURL(blobUrl); // Release memory
     } catch (error) {
-      console.error('Download failed:', error.message);
+      console.error("Error downloading file: ", error);
     }
   };
   
@@ -180,7 +184,7 @@ const CodingExerciseContainer = ({
                       variant="contained"
                       color="error"
                       className="my-2"
-                      onClick={() => handleDownload(`${IMG_HOST}${codingExercise.downloadableResource}`)}
+                      onClick={() => handleDownload(`${IMG_HOST}${codingExercise.downloadableResource}`,`${codingExercise.downloadableResource}`)}
                       >
                       Download Resources <i className="fas fa-download mx-2"></i>
                       </Button>
@@ -222,7 +226,7 @@ const CodingExerciseContainer = ({
                     variant="contained"
                     color="error"
                     className="my-2"
-                    onClick={() => handleDownload(`${IMG_HOST}${codingExercise.codingExerciseSheet}`)}
+                    onClick={() => handleDownload(`${IMG_HOST}${codingExercise.codingExerciseSheet}`,`${codingExercise.codingExerciseSheet}`)}
                     >
                     Download Questions <i className="fas fa-download mx-2"></i>
                     </Button>
@@ -267,7 +271,7 @@ const CodingExerciseContainer = ({
                   variant="contained"
                   color="error"
                   className="my-2"
-                  onClick={() => handleDownload(`${IMG_HOST}${codingExercise.codingSolutionsSheet}`)}
+                  onClick={() => handleDownload(`${IMG_HOST}${codingExercise.codingSolutionsSheet}`,`${codingExercise.codingSolutionsSheet}`)}
                   >
                   Download Answers <i className="fas fa-download mx-2"></i>
                   </Button>
