@@ -206,9 +206,12 @@ const Accordian = ({
                                 id={`default-${index}`}
                                 label={""}
                                 onClick={() => {
+                                  console.log(itemCode,list)
+                                  console.log(list.curriculumItemId)
+                                  console.log(seletedCurriculumItem)
                                   UpdateCourseCurriculumProgress(
                                     itemCode,
-                                    list.curriculumItemId,
+                                    seletedCurriculumItem,
                                     setcourse
                                   );
                                 }}
