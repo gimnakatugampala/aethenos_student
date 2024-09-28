@@ -176,18 +176,19 @@ const QuizContainer = ({
                         <br />
 
 
-                        {explanationMessage.length > 0 && (
-                        <ul>
-                          {explanationMessage.map((answer) => (
-                            answer.explanation ? (  // Only render the list item if the explanation is not empty
-                              <li key={answer.id}>
-                                <strong>Explanation: {answer.explanation}</strong>
-                                {answer.correctAnswer ? " ✔" : "❌"}  {/* Using tick and cross symbols */}
-                              </li>
-                            ) : null
-                          ))}
-                        </ul>
-                      )}
+                        {explanationMessage.some(answer => answer.explanation) && ( // Check if any explanation is non-empty
+                          <ul>
+                            {explanationMessage.map((answer) => (
+                              answer.explanation ? (  // Only render the list item if the explanation is not empty
+                                <li key={answer.id}>
+                                  <strong>Explanation: {answer.explanation}</strong>
+                                  {answer.correctAnswer ? " ✔" : " ❌"}  {/* Using tick and cross symbols */}
+                                </li>
+                              ) : null
+                            ))}
+                          </ul>
+                        )}
+
 
 
 
