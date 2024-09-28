@@ -95,17 +95,43 @@ const index = () => {
                       </tr>
                     ))}
 
-              
+
+                     <br />
 
                     <tr>
                       <td colSpan={2}></td>
-                      <td>VAT</td>
+                      <td>Subtotal</td>
                       <td>
                         {getSymbolFromCurrency(details.orderDetails.currency)}
-                        {details.vat} ({details.vatPercentage})
+                        {details.amount}
                       </td>
                 
                     </tr>
+
+
+                    <tr>
+                      <td colSpan={2}></td>
+                      <td>Tax rate</td>
+                      <td>
+                        {getSymbolFromCurrency(details.orderDetails.currency)}
+                        {details.vatPercentage}
+                      </td>
+                
+                    </tr>
+
+                    <br />
+
+                    <tr>
+                      <td colSpan={2}></td>
+                      <td>Tax</td>
+                      <td>
+                        {getSymbolFromCurrency(details.orderDetails.currency)}
+                        {details.vat}
+                      </td>
+                
+                    </tr>
+
+
 
                     <tr>
                       <td colSpan={2}></td>
