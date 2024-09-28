@@ -1,8 +1,10 @@
-import { Certificate, Instructor, OnlineClass, User } from '../../../svg';
+import { Certificate, Instructor, OnlineClass, User , Excel} from '../../../svg';
+
 
 const category_contents = [
 //   { icon: <OnlineClass/>, title: '3020', subtitle: 'Online Courses' },
   { icon: <Instructor/>, title: 'Top', subtitle: 'Instructors' },
+  { icon: <Excel/>, title: 'Innovative', subtitle: 'Excel Training App' },
   { icon: <Certificate/>, title: 'Online', subtitle: 'Certifications' }
 //   { icon: <User/>, title: '6000', subtitle: 'Members' },
 ]
