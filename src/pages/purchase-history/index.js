@@ -246,7 +246,7 @@ const index = () => {
                                           onClick={() => handleShow(p)}
                                           variant="outline-danger"
                                         >
-                                          Request a Refund
+                                          Request a refund
                                         </Button>
                                       )}
                                   </td>

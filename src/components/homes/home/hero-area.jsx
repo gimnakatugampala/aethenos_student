@@ -8,7 +8,7 @@ const HeroArea = () => {
     <div className="hero-banner hero-style-4">
       <div className="mx-5">
         <div className="row align-items-center">
-        <div className="col-lg-5">
+        <div className="col-md-5">
             <div className="banner-content">
               <h1 
                 className="title mt-5"
@@ -44,7 +44,10 @@ const HeroArea = () => {
                             </ul> */}
             </div>
           </div>
-          <div className="col-lg-7">
+
+          <div className="col-md-1"></div>
+
+          <div className="col-md-6">
             <div >
               <div
                 className="thumbnail"
