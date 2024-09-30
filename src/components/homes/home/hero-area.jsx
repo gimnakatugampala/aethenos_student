@@ -24,7 +24,7 @@ const HeroArea = () => {
                 data-sal-duration="1000"
                   className="m-0 w-100"
               >
-                Come and experience the best Excel training courses from the top
+                Come and experience the best Excel training courses from top
                 instructors from around the world through our Innovative Excel
                 Training App. All our Excel courses will be delivered through
                 our proprietary Excel Training App that delivers pre-recorded
