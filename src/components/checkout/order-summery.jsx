@@ -424,7 +424,7 @@ const generatePaypalItems = () => {
                     </div>
 
                     {showPaypal && (
-                        <PayPalScriptProvider options={{ clientId: "AbhfyGv-hhPIo4dZ_Wia7_0sevNZC3B871Ndw8aDEIm8h6O59L1sV0TzgFXyCpwx-_GC93sKwsU_GtEF" ,currency : GetCurrencyByCountry(cartCourses[0].other_data)}}>
+                        <PayPalScriptProvider options={{ clientId: "Ad3sOTVUvFCOXRGLh_s8W5jEl3rwdtGkAgTp8qVgQ0RqKvh-wQMZ-AP7OPEhZxeB04NswkDbS0lKF7kd" ,currency : GetCurrencyByCountry(cartCourses[0].other_data)}}>
                              <PayPalButtons
                         style={{ layout: "vertical" }}
                         createOrder={(data, actions) => {
