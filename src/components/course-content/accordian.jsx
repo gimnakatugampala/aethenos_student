@@ -75,12 +75,12 @@ const Accordian = ({
   
   const handleDownload = async (url, filename) => {
     try {
-      const response = await axios({
-        url,
+      const response = await fetch(url, {
         method: 'GET',
-        responseType: 'blob', // Important
+        mode: 'no-cors', // Add no-cors mode
       });
-      const blob = new Blob([response.data]);
+  
+      const blob = await response.blob();
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
       link.setAttribute('download', filename);
@@ -316,14 +316,16 @@ const Accordian = ({
                                             "Source Code") && (
                                           <Dropdown.Item
                                             key={idx}
-                                            onClick={() =>
-                                              handleDownload(
-                                                `${IMG_HOST}${item.url}`,
-                                                item.title
-                                              )
-                                            }
+                                            // onClick={() =>
+                                            //   handleDownload(
+                                            //     `${IMG_HOST}${item.url}`,
+                                            //     item.title
+                                            //   )
+                                            // }
                                           >
+                                            <a download={item.title} href={`${IMG_HOST}${item.url}`}>
                                             {item.title}
+                                            </a>
                                           </Dropdown.Item>
                                         )
                                     )}
@@ -484,14 +486,16 @@ const Accordian = ({
                                         "Source Code") && (
                                       <Dropdown.Item
                                         key={idx}
-                                        onClick={() =>
-                                          handleDownload(
-                                            `${IMG_HOST}${item.url}`,
-                                            item.title
-                                          )
-                                        }
+                                        // onClick={() =>
+                                        //   handleDownload(
+                                        //     `${IMG_HOST}${item.url}`,
+                                        //     item.title
+                                        //   )
+                                        // }
                                       >
+                                        <a download={item.title} href={`${IMG_HOST}${item.url}`}>
                                         {item.title}
+                                        </a>
                                       </Dropdown.Item>
                                     )
                                 )}
