@@ -23,6 +23,8 @@ import { useRouter } from "next/router";
 import { FormatVideoTimeLength } from "../../functions/FormatVideoTimeLength";
 
 import useDownloader from 'react-use-downloader';
+import axios from 'axios';
+
 
 
 const mainfs = {
@@ -73,20 +75,41 @@ const Accordian = ({
   
   const handleDownload = async (url, filename) => {
     try {
-      const response = await fetch(url);
-      const blob = await response.blob();
+      const response = await axios({
+        url,
+        method: 'GET',
+        responseType: 'blob', // Important
+      });
+      const blob = new Blob([response.data]);
       const link = document.createElement('a');
-      const blobUrl = window.URL.createObjectURL(blob);
-      link.href = blobUrl;
-      link.setAttribute('download', filename); // Set the filename for download
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute('download', filename);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link); // Clean up the DOM
-      window.URL.revokeObjectURL(blobUrl); // Release memory
     } catch (error) {
-      console.error("Error downloading file: ", error);
+      console.error("Error downloading file:", error);
     }
   };
+  
+
+  // const handleDownload = async (url, filename) => {
+  //   try {
+  //     const response = await fetch(url, { mode: 'no-cors' });
+  //     const blob = await response.blob();
+  //     const link = document.createElement('a');
+  //     const blobUrl = window.URL.createObjectURL(blob);
+  //     link.href = blobUrl;
+  //     link.setAttribute('download', filename); // Set the filename for download
+  //     document.body.appendChild(link);
+  //     link.click();
+  //     document.body.removeChild(link); // Clean up the DOM
+  //     window.URL.revokeObjectURL(blobUrl); // Release memory
+  //   } catch (error) {
+  //     console.error("Error downloading file: ", error);
+  //   }
+  // };
+  
   
   
 
