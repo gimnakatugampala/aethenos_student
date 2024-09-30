@@ -19,9 +19,9 @@ const footer_contents = {
       class: "explore-widget",
     
       footer_links: [
-        { link: "about-1", title: "About us" },
-        { link: "course-style-1", title: "Contact us" },
-        { link: "team-1", title: "Help and Support" },
+        { link: "about-us", title: "About us" },
+        { link: "contact-us", title: "Contact us" },
+        { link: "support", title: "Help and Support" },
       ],
     },
     {
