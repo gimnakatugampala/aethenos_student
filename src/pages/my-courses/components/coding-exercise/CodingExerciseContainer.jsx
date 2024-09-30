@@ -12,6 +12,7 @@ import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/audio.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 import { saveAs } from 'file-saver';
+import axios from 'axios';
 
 import {
   MediaPlayer,
@@ -77,21 +78,21 @@ const CodingExerciseContainer = ({
 
 
   const handleDownload = async (filePath,filename) => {
-    console.log('Attempting to download:', filePath);
-    console.log('Attempting to download:', filename.split("/").pop());
     try {
-      const response = await fetch(filePath);
-      const blob = await response.blob();
+      const response = await axios({
+        filePath,
+        method: 'GET',
+        responseType: 'blob', // Important
+      });
+      const blob = new Blob([response.data]);
       const link = document.createElement('a');
-      const blobUrl = window.URL.createObjectURL(blob);
-      link.href = blobUrl;
-      link.setAttribute('download', filename.split("/").pop()); // Set the filename for download
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute('download', filename.split("/").pop());
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link); // Clean up the DOM
-      window.URL.revokeObjectURL(blobUrl); // Release memory
     } catch (error) {
-      console.error("Error downloading file: ", error);
+      console.error("Error downloading file:", error);
     }
   };
   
