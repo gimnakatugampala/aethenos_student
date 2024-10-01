@@ -47,7 +47,7 @@ const TermsPage = () => {
 
       <div style={{ height: '100vh', width: '100%', overflow: 'hidden' }}>
         <iframe
-          src="https://terms.aethenos.com/" // Replace with your WordPress page URL
+          src="https://terms.aethenos.com/terms" // Replace with your WordPress page URL
           style={{
             width: '100%',
             height: '100%',
