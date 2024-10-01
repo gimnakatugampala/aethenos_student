@@ -29,8 +29,8 @@ const footer_contents = {
       class: "quick-link-widget",
     
       footer_links: [
-        { link: "contact-us", title: "Terms" },
-        { link: "gallery-grid", title: "Privacy Policy" },
+        { link: "terms", title: "Terms" },
+        { link: "terms/privacy-policy", title: "Privacy Policy" },
       ],
     },
   ],
