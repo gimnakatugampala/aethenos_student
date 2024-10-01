@@ -335,7 +335,7 @@ const HeroArea = () => {
                 />
                 <label htmlFor="terms-condition">
                   I agree the User Agreement and{" "}
-                  <Link href="/terms-condition">Terms & Condition.</Link>
+                  <Link href="/terms">Terms & Condition.</Link>
                 </label>
               </div>
             </div>
