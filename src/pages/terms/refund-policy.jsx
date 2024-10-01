@@ -45,7 +45,7 @@ const RefundPolicyPage = () => {
         </div>
       </div>
 
-      <div style={{ height: '100vh', width: '100%', overflow: 'hidden' }}>
+      <div style={{ height:'100vh'}}>
         <iframe
           src="https://terms.aethenos.com/refund-policy" // Replace with your WordPress page URL
           style={{

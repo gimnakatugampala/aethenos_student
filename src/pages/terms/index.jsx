@@ -38,25 +38,27 @@ const TermsPage = () => {
 
   return (
     <Wrapper>
-      <SEO pageTitle={'Terms'} />
-      <div className='sticky-header'>
-        <div id="main-wrapper" className="main-wrapper">
-          <Header />
-        </div>
+    <SEO pageTitle={'Terms'} />
+    <div className='sticky-header'>
+      <div id="main-wrapper" className="main-wrapper">
+        <Header />
       </div>
+    </div>
 
-      <div style={{ height: '100vh', width: '100%', overflow: 'hidden' }}>
-        <iframe
-          src="https://terms.aethenos.com/terms" // Replace with your WordPress page URL
-          style={{
-            width: '100%',
-            height: '100%',
-            border: 'none',
-          }}
-          title="Terms and Conditions"
-        ></iframe>
-      </div>
-    </Wrapper>
+    {/* Removed height: '100vh' from this div */}
+    <div style={{ height:'300vh'}}>
+      <iframe
+        src="https://terms.aethenos.com/terms" // Replace with your WordPress page URL
+        style={{
+          width: '100%',
+          height: '100%',
+          border: 'none',
+          display: 'block', // Ensures no gaps appear
+        }}
+        title="Terms and Conditions"
+      ></iframe>
+    </div>
+  </Wrapper>
   );
 };
 

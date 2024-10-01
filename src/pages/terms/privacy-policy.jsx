@@ -45,7 +45,7 @@ const PrivacyPolicyPage = () => {
         </div>
       </div>
 
-      <div style={{ height: '100vh', width: '100%', overflow: 'hidden' }}>
+      <div style={{ height:'100vh'}}>
         <iframe
           src="https://terms.aethenos.com/privacy-policy/" // Replace with your WordPress page URL
           style={{
