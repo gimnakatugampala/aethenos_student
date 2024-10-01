@@ -63,12 +63,11 @@ const PraticeTestContainer = ({
 
   const handleDownload = async (filePath,filename) => {
     try {
-      const response = await axios({
-        filePath,
-        method: 'GET',
-        responseType: 'blob', // Important
+      const response = await fetch(filePath, {
+        method: 'GET'
       });
-      const blob = new Blob([response.data]);
+  
+      const blob = await response.blob();
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
       link.setAttribute('download', filename.split("/").pop());
