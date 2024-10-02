@@ -62,7 +62,7 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
                       {w.footer_links.map((l, i) => (
                         <li key={i}>
                           <Link href={`/${l.link}`} legacyBehavior>
-                            <a style={{fontSize: "1rem"}}>{l.title}</a>
+                            <a style={{fontSize: "clamp(1rem, 0.5rem + 0.8vw, 1.2rem)"}}>{l.title}</a>
                           </Link>
                         </li>
                       ))}
