@@ -274,7 +274,7 @@ const AdBanner = () => {
                 />
                 <label htmlFor="terms-condition">
                   I agree to <Link href="/privacy-policy">User Agreement</Link> and{" "}
-                  <Link href="/terms">Terms & Conditions.</Link>
+                  <Link target="_blank" rel="noopener noreferrer" href="/terms">Terms & Conditions.</Link>
                 </label>
               </div>
             </div>
