@@ -99,6 +99,31 @@ const Header = ({
     GetCategoriesMenu(setnavbar_list);
   }, [categories]);
 
+
+  const [logoSrc, setLogoSrc] = useState("/assets/images/logo/Header_Athenos_logo.png");
+  const [logoSize, setLogoSize] = useState({ width: "230px", height: "40px" });
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 800) {
+        setLogoSrc("/assets/images/logo/Header_Athenos_logo.png");
+        setLogoSize({ width: "230px", height: "40px" });
+      } else {
+        setLogoSrc("/assets/images/logo/excel-icon.png");
+        setLogoSize({ width: "120px", height: "50px" });
+      }
+    };
+
+    // Check screen size on initial load
+    handleResize();
+
+    // Add event listener to handle window resize
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
       <header
@@ -131,20 +156,11 @@ const Header = ({
                 <div className="logo">
                   <Link href={"/"} legacyBehavior>
                     <a>
-                      <img
-                        width={200}
-                        height={100}
-                        className="logo-light"
-                        src="/assets/images/logo/Header_Athenos_logo.png"
-                        alt="logo"
-                      />
-                      <img
-                         width={200}
-                         height={100}
-                        className="logo-dark"
-                        src="/assets/images/logo/Header_Athenos_logo.png"
-                        alt="logo"
-                      />
+                    <img
+               style={{ maxWidth: logoSize.width, height: logoSize.height }}
+              src={logoSrc}
+              alt="logo"
+            />
                     </a>
                   </Link>
                 </div>
@@ -157,7 +173,7 @@ const Header = ({
                           <Menu
                           
                             menuButton={
-                              <a style={{fontSize: "18px"}}>
+                              <a style={{fontSize: "20px"}}>
                                 <i className="icon-1"></i>Categories
                               </a>
                             }

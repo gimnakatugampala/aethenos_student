@@ -16,9 +16,9 @@ const MainMenu = () => {
     return (
         <ul className="mainmenu">
             {menu_data.map((menu, i) => (
-                menu.title == "Instructor" && CURRENTUSER != null ? <li key={i}><a style={{fontSize: "18px"}} href={"https://instructor.aethenos.com/"}>{menu.title}</a></li> : 
+                menu.title == "Instructor" && CURRENTUSER != null ? <li key={i}><a style={{fontSize: "20px"}} href={"https://instructor.aethenos.com/"}>{menu.title}</a></li> : 
                 <li key={i} >
-                   <a style={{fontSize: "18px"}} href={menu.link}>{menu.title}</a>
+                   <a style={{fontSize: "20px"}} href={menu.link}>{menu.title}</a>
                   
                 </li>
             ))}
