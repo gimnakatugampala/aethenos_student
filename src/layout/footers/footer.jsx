@@ -92,7 +92,7 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
               </div>
             </div>
             <div className="col-2">
-              <div className="inner float-end" style={{ marginRight: "2.5rem" }}>
+              <div className="inner float-end" style={{ marginRight: "2rem" }}>
                 <img
                   style={{ height: "30px", display: "flex", alignItems: "center" }}
                   src={exonLogo}

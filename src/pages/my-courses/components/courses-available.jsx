@@ -33,32 +33,32 @@ const CourseFourArea = () => {
     return <LargeLoading />;
   }
 
-   // Sort courses by purchaseDate in descending order
+  // Sort courses by purchaseDate in descending order
   //  const sortedCourses = courses
   //  .sort((a, b) => new Date(b.purchaseDate) - new Date(a.purchaseDate));
 
- // Apply filtering
- let items = courses
-   ?.filter((item1) =>
-     categories?.length !== 0
-       ? categories?.some((item2) => item1.category === item2)
-       : item1
-   )
-   .filter((item1) =>
-     instructors?.length !== 0
-       ? instructors?.some((item2) => item1.instructor === item2)
-       : item1
-   )
-   .filter((item1) =>
-     levels?.length !== 0
-       ? levels?.some((item2) => item1.level === item2)
-       : item1
-   )
-   .filter((item1) =>
-     languages?.length !== 0
-       ? languages?.some((item2) => item1.language === item2)
-       : item1
-   );
+  // Apply filtering
+  let items = courses
+    ?.filter((item1) =>
+      categories?.length !== 0
+        ? categories?.some((item2) => item1.category === item2)
+        : item1
+    )
+    .filter((item1) =>
+      instructors?.length !== 0
+        ? instructors?.some((item2) => item1.instructor === item2)
+        : item1
+    )
+    .filter((item1) =>
+      levels?.length !== 0
+        ? levels?.some((item2) => item1.level === item2)
+        : item1
+    )
+    .filter((item1) =>
+      languages?.length !== 0
+        ? languages?.some((item2) => item1.language === item2)
+        : item1
+    );
 
   return (
     <div className="edu-course-area course-area-1 my-5">
@@ -76,7 +76,14 @@ const CourseFourArea = () => {
             </div>
           </div>
         ) : (
-          <h6  className="row g-5 my-3 mx-auto justify-content-center">No Courses Found</h6>
+          <div style={{minHeight: "100vh"}}>
+            {" "}
+            <br></br>{" "}
+            <h4 className="row g-5 my-3 mx-auto justify-content-center">
+              No Courses Found
+            </h4>{" "}
+           
+          </div>
         )}
       </div>
     </div>
