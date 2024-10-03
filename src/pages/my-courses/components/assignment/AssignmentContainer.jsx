@@ -112,12 +112,12 @@ const AssignmentContainer = ({
     setActiveStep(0);
   };
 
-  const handleDownload = async (filePath,filename) => {
+  const handleDownload = async (fileUrl, filename) => {
     try {
-      const response = await fetch(filePath, {
-        method: 'GET'
+      const response = await fetch(`/api/proxy?url=${encodeURIComponent(fileUrl)}`, {
+        method: 'GET',
       });
-  
+      
       const blob = await response.blob();
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
@@ -129,7 +129,6 @@ const AssignmentContainer = ({
       console.error("Error downloading file:", error);
     }
   };
-
   // const handleDownload = async (filePath,filename) => {
   //   console.log('Attempting to download:', filePath);
   //   console.log('Attempting to download:', filename.split("/").pop());

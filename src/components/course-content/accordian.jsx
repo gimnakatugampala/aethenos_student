@@ -75,14 +75,14 @@ const Accordian = ({
   
   const handleDownload = async (url, filename) => {
     try {
-      const response = await fetch(url, {
-        method: 'GET'
+      const response = await fetch(`/api/proxy?url=${encodeURIComponent(url)}`, {
+        method: 'GET',
       });
-  
+      
       const blob = await response.blob();
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
-      link.setAttribute('download', filename);
+      link.setAttribute('download', filename.split("/").pop());
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link); // Clean up the DOM

@@ -79,10 +79,10 @@ const CodingExerciseContainer = ({
 
   const handleDownload = async (filePath,filename) => {
     try {
-      const response = await fetch(filePath, {
-        method: 'GET'
+      const response = await fetch(`/api/proxy?url=${encodeURIComponent(filePath)}`, {
+        method: 'GET',
       });
-  
+      
       const blob = await response.blob();
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
