@@ -347,7 +347,7 @@ const RegisterForm = () => {
                 <div className="form-group chekbox-area">
                     <div className="edu-form-check">
                         <input value={termsconditions} onChange={(e) => settermsconditions(e.target.checked)} type="checkbox" name='terms' id="terms-condition" />
-                        <label htmlFor="terms">I agree to the{" "}
+                        <label htmlFor="terms-condition">I agree to the{" "}
                         <Link href="https://terms.aethenos.com/terms/" target="_blank" rel="noopener noreferrer">
                                   {" "} Terms & Conditions.
                         </Link>

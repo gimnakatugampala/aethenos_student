@@ -2865,22 +2865,46 @@ export const DownloadCertificate = async (itemCode) => {
   };
 
   try {
+    // Fetch certificate URL from the backend
     const response = await fetch(`${BACKEND_LINK}/payment/getCertificate/${itemCode}`, requestOptions);
     const result = await response.text();
 
     // Assuming the result is the path to the PDF
     const filePath = `${IMG_HOST}${result}`;
+    const filename = filePath.split("/").pop(); // Extracting filename
 
-    // Fetch the PDF file as a blob
-    const pdfResponse = await fetch(filePath);
-    const pdfBlob = await pdfResponse.blob();
+    // Fetch the actual file using proxy-based download logic
+    const handleDownload = async (filePath, filename) => {
+      try {
+        const response = await fetch(`/api/proxy?url=${encodeURIComponent(filePath)}`, {
+          method: "GET",
+        });
 
-    // Use file-saver to trigger the download
-    saveAs(pdfBlob, filePath.split("/").pop());
+        if (!response.ok) {
+          throw new Error(`Failed to fetch file: ${response.statusText}`);
+        }
+
+        const blob = await response.blob(); // Convert the response to a Blob object
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+        link.setAttribute("download", filename); // Set the filename for download
+        document.body.appendChild(link); // Append link to the DOM
+        link.click(); // Trigger download
+        document.body.removeChild(link); // Clean up
+        window.URL.revokeObjectURL(link.href); // Release object URL
+      } catch (error) {
+        console.error("Error downloading the file:", error);
+      }
+    };
+
+    // Call handleDownload to trigger the download
+    await handleDownload(filePath, filename);
+
   } catch (error) {
     console.error("Error downloading the certificate:", error);
   }
 };
+
 
 export const LoginWithTokenForItemCode = async (token) => {
   const requestOptions = {

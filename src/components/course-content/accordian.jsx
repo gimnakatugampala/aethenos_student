@@ -255,6 +255,8 @@ const Accordian = ({
                                   {index + 1}. <PlayCircleIcon /> Video Lecture
                                   : {list.title}
                                   {type.videoLength != 0 && (
+                                  <>
+                                  <br />
                                     <span style={{ fontSize: "12px" }}>
                                       <b>
                                         <i>
@@ -263,6 +265,7 @@ const Accordian = ({
                                         </i>
                                       </b>
                                     </span>
+                                    </>
                                   )}
                                   {/* <p
                                     className={`m-1 p-0 ${
