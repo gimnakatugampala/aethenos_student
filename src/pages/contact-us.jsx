@@ -14,7 +14,7 @@ export default function ContactUs() {
       </div>
 
       {/* Embed WordPress Contact Us page using iframe */}
-      <div style={{ height: '300vh', width: '100%', overflow: 'hidden' }}>
+      <div style={{ height: '200vh', width: '100%', overflow: 'hidden' }}>
         <iframe
           src="https://support.aethenos.com/contact_us/"
           style={{

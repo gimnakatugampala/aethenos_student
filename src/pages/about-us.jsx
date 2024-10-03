@@ -16,7 +16,7 @@ export default function AboutUs() {
 
 
       {/* Embed WordPress page using iframe */}
-      <div style={{ height: '515vh', width: '100%', overflow: 'hidden' }}>
+      <div style={{ height: '200vh', width: '100%', overflow: 'hidden' }}>
       <iframe
         src="https://support.aethenos.com/about-us/"
         style={{
