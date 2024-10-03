@@ -21,7 +21,7 @@ const footer_contents = {
       footer_links: [
         { link: "about-us", title: "About us" },
         { link: "contact-us", title: "Contact us" },
-        // { link: "support", title: "Help and Support" },
+        { link: "support", title: "Help and Support" },
       ],
     },
     {
@@ -30,7 +30,7 @@ const footer_contents = {
     
       footer_links: [
         { link: "terms", title: "Terms" },
-        { link: "terms/privacy-policy", title: "Privacy Policy" },
+        { link: "privacy-policy", title: "Privacy Policy" },
       ],
     },
   ],

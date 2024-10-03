@@ -13,21 +13,21 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // {
-      //   source: '/about-us',
-      //   destination: 'https://support.aethenos.com/about-us/',
-      //   permanent: true,
-      // },
-      // {
-      //   source: '/contact-us',
-      //   destination: 'https://support.aethenos.com/contact_us/',
-      //   permanent: true,
-      // },
-      // {
-      //   source: '/support',
-      //   destination: 'https://support.aethenos.com/',
-      //   permanent: true,
-      // },
+      {
+        source: '/terms',
+        destination: 'https://terms.aethenos.com/terms/',
+        permanent: true,
+      },
+      {
+        source: '/privacy-policy',
+        destination: 'https://terms.aethenos.com/privacy-policy/',
+        permanent: true,
+      },
+      {
+        source: '/support',
+        destination: 'https://support.aethenos.com/',
+        permanent: true,
+      },
     ];
   },
 }
