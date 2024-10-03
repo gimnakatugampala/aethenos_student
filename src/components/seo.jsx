@@ -16,7 +16,7 @@ const SEO = ({ pageTitle, description, imageUrl, font ,keywords }) => (
 
         <meta
             name="keywords"
-            content={keywords || "Aethenos, Aethenos.com, aethenos, aethenos.com, learning, courses, education, online platform, online courses, instructors, tutors"}
+            content={keywords || "Aethenos, Aethenos.com, aethenos, aethenos.com, learning, courses, education, online platform, online courses, instructors, tutors, excel, UK, USA, data analysis, financial modeling, excel courses"}
         />
         
         {/* Robots Meta Tag */}
