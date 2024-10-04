@@ -11,6 +11,9 @@ import { saveAs } from 'file-saver';
 export const USERTOKEN = Cookies.get('aethenos') 
 export const IMG_HOST = `https://aethenos.com:2053/aethenos-assert/`
 const BACKEND_LINK = "https://aethenos.com:2053/aethenos-api"
+
+// export const IMG_HOST = `https://aethenosinstructor.exon.lk:2053/aethenos-assert/`
+// const BACKEND_LINK = "https://aethenosinstructor.exon.lk:2053/aethenos-api"
 const CURRENT_USER = Cookies.get('aethenos') 
 
 // https://aethenosinstructor.exon.lk:2053/
