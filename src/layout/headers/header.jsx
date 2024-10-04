@@ -104,6 +104,9 @@ const Header = ({
 
   const [logoSrc, setLogoSrc] = useState("/assets/images/logo/Header_Athenos_logo.png");
   const [logoSize, setLogoSize] = useState({ width: "230px", height: "40px" });
+  const [btnSize, setBtnSize] = useState({ fontSize: "16px", minWidth: "110px" ,padding: "0 20px"});
+
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -112,8 +115,14 @@ const Header = ({
         setLogoSize({ width: "230px", height: "40px" });
       } else {
         setLogoSrc("/assets/images/logo/AETHENOS_LOGO-02.png");
-        setLogoSize({ width: "60px", height: "50px" });
+        setLogoSize({ width: "40px", height: "40px" });
       }
+      if (window.innerWidth > 575) {
+        setBtnSize({fontSize: "16px", minWidth: "110px" , padding: "0 20px"});        
+      } else {
+        setBtnSize({fontSize: "14px",  minWidth: "75px", padding: "0"}); 
+      }       
+
     };
 
     handleResize();
@@ -152,7 +161,7 @@ const Header = ({
           <div className="container-fluid">
             <div className="header-navbar">
               <div className="header-brand">
-                <div className="logo">
+                <div className="mx-xs-0 mx-sm-3">
                   <Link href={"/"} legacyBehavior>
                     <a>
                     <img
@@ -241,9 +250,10 @@ const Header = ({
               </div>
               <div className="header-right">
                 <ul className="header-action">
-                  <li className="search-bar">
+                  <li className="search-bar" >
                     <div className="input-group">
                       <SearchBar
+                   
                         showDropdown={showDropdown}
                         setShowDropdown={setShowDropdown}
                         setsearchResults={setsearchResults}
@@ -251,7 +261,7 @@ const Header = ({
                     </div>
                   </li>
                   
-                  <li className="icon search-icon search-bar" style={{ position: "relative" }}>
+                  <li className="icon search-icon search-bar" style={{ position: "relative"  }}>
                   <SearchBar
                     setsearchResults={setsearchResults}
                     showDropdown={showDropdown}
@@ -425,7 +435,7 @@ const Header = ({
 
 
 
-                  <li className="icon cart-icon mx-3">
+                  <li className="icon cart-icon  mx-xs-1 mx-sm-3">
                     <Link href="/wishlist" legacyBehavior>
                       <a className="cart-icon">
                         <i className="icon-22 fs-4" ></i>
@@ -433,7 +443,7 @@ const Header = ({
                       </a>
                     </Link>
                   </li>
-                  <li className="icon cart-icon mx-3">
+                  <li className="icon cart-icon  mx-xs-1 mx-sm-3">
                     <Link href="/cart" legacyBehavior>
                       <a className="cart-icon">
                         <i className="icon-3 fs-4"></i>
@@ -450,21 +460,21 @@ const Header = ({
                     <>
                       {CURRENTUSER == null ? (
                         <>
-                          <li className="header-info mx-3">
+                          <li className="header-info mx-xs-0 mx-sm-3">
                             <Link href="/login" legacyBehavior>
-                              <a className="edu-btn btn-small fs-6 fw-bold" style={{minWidth: "110px"}}>Log in</a>
+                              <a className="edu-btn btn-small fw-bold" style={{minWidth: btnSize.minWidth, fontSize: btnSize.fontSize, padding : btnSize.padding}}>Log in</a>
                             </Link>
                           </li>
 
-                          <li className="header-info mx-3 ">
+                          <li className="header-info mx-xs-0 mx-sm-3 ">
                             <Link href="/signup" legacyBehavior>
-                              <a className="edu-btn btn-small fs-6 fw-bold" style={{minWidth: "110px"}}>Sign up</a>
+                              <a className="edu-btn btn-small fw-bold" style={{minWidth: btnSize.minWidth, fontSize: btnSize.fontSize , padding : btnSize.padding}}>Sign up</a>
                             </Link>
                           </li>
                         </>
                       ) : (
                         <>
-                          <li className="icon cart-icon mx-3">
+                          <li className="icon cart-icon  mx-xs-0 mx-sm-3">
                             <Link href="/notifications" legacyBehavior>
                               <a className="cart-icon">
                                 <i class="bi bi-bell fs-4"></i>

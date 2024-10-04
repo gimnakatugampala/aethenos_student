@@ -84,14 +84,14 @@ const Footer = ({ style_2, dark_bg, home_4 }) => {
       <div className="copyright-area">
         <div className="">
           <div className="row">
-            <div className="col-10">
+            <div className="col-8">
               <div className="inner mx-5 float-left">
                 <p className="fs-20 fs-md-5 fs-lg-4">
                   © {new Date().getFullYear()} Aethenos Limited              
                 </p>
               </div>
             </div>
-            <div className="col-2">
+            <div className="col-4 d-flex align-items-center justify-content-end">
               <div className="inner float-end" style={{ marginRight: "2rem" }}>
                 <img
                   style={{ height: "30px", display: "flex", alignItems: "center" }}
