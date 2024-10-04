@@ -55,6 +55,8 @@ const categories = [
   { link: "/courses/motivation", title: "Motivation" },
 ];
 
+
+
 const Header = ({
   header_style,
   no_top_bar,
@@ -105,22 +107,19 @@ const Header = ({
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 800) {
+      if (window.innerWidth > 935) {
         setLogoSrc("/assets/images/logo/Header_Athenos_logo.png");
         setLogoSize({ width: "230px", height: "40px" });
       } else {
-        setLogoSrc("/assets/images/logo/excel-icon.png");
-        setLogoSize({ width: "120px", height: "50px" });
+        setLogoSrc("/assets/images/logo/AETHENOS_LOGO-02.png");
+        setLogoSize({ width: "60px", height: "50px" });
       }
     };
 
-    // Check screen size on initial load
     handleResize();
 
-    // Add event listener to handle window resize
     window.addEventListener("resize", handleResize);
-
-    // Cleanup event listener on component unmount
+    
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -166,14 +165,14 @@ const Header = ({
                 </div>
 
                 {!disable_category && (
-                  <div className="header-category">
+                  <div className="header-category mx-0">
                     <nav className="mainmenu-nav">
                       <ul className="mainmenu">
                         <li style={{cursor:'pointer'}} className="has-droupdown">
                           <Menu
                           
                             menuButton={
-                              <a style={{fontSize: "20px"}}>
+                              <a style={{fontSize: "20px", padding : "0px 18px"}}>
                                 <i className="icon-1"></i>Categories
                               </a>
                             }
@@ -453,13 +452,13 @@ const Header = ({
                         <>
                           <li className="header-info mx-3">
                             <Link href="/login" legacyBehavior>
-                              <a className="edu-btn btn-small fs-6 fw-bold">Log in</a>
+                              <a className="edu-btn btn-small fs-6 fw-bold" style={{minWidth: "110px"}}>Log in</a>
                             </Link>
                           </li>
 
-                          <li className="header-info m-3 ">
+                          <li className="header-info mx-3 ">
                             <Link href="/signup" legacyBehavior>
-                              <a className="edu-btn btn-small fs-6 fw-bold">Sign up</a>
+                              <a className="edu-btn btn-small fs-6 fw-bold" style={{minWidth: "110px"}}>Sign up</a>
                             </Link>
                           </li>
                         </>
