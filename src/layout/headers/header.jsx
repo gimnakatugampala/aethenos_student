@@ -111,8 +111,8 @@ const Header = ({
         setLogoSrc("/assets/images/logo/Header_Athenos_logo.png");
         setLogoSize({ width: "230px", height: "40px" });
       } else {
-        setLogoSrc("/assets/images/logo/excel-icon.png");
-        setLogoSize({ width: "120px", height: "50px" });
+        setLogoSrc("/assets/images/logo/AETHENOS_LOGO-02.png");
+        setLogoSize({ width: "60px", height: "50px" });
       }
     };
 
@@ -152,7 +152,7 @@ const Header = ({
           <div className="container-fluid">
             <div className="header-navbar">
               <div className="header-brand">
-                <div className="logo" style={{marginRight: "20px"}}>
+                <div className="logo">
                   <Link href={"/"} legacyBehavior>
                     <a>
                     <img
