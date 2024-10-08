@@ -50,9 +50,9 @@ if (data.course_prices != null  && data.course_prices.prices != null) {
         if(data.course_prices.discountTypeId == 1){
             discount = ""
         }else if(data.course_prices.discountTypeId == 2){
-            discount = `${FormatNumbers(data.course_prices.discount)}%`
+            discount = `${data.course_prices.discount}%`
         }else if(data.course_prices.discountTypeId == 3){
-            discount = `${FormatNumbers(data.course_prices.discountAmount)}`
+            discount = `${data.course_prices.discountAmount}`
         }
         
     }

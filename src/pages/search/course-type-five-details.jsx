@@ -15,6 +15,7 @@ import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
 import StarsRating from 'stars-rating'
 import Cookies from 'js-cookie';
 import HandleFreeCourses from "../../functions/pricing/HandleFreeCourses";
+import FormatNumbers from "../../functions/FormatNumbers";
 
 const COUNTRY = Cookies.get('aethenos_user_origin')
 
@@ -127,7 +128,7 @@ const CourseTypeFive = ({ data, classes }) => {
           {data != null && CalculateDiscountPrice(data) != "" && (
             <div className="time-top">
               <span style={{ background: "#e01D20" }} className="duration">
-                {CalculateDiscountPrice(data)} OFF
+                {FormatNumbers(CalculateDiscountPrice(data))}
               </span>
             </div>
           )}
@@ -144,7 +145,7 @@ const CourseTypeFive = ({ data, classes }) => {
                         >
                             <b>
                                 {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                                {CalculateDiscountedPrice(data)}
+                                {FormatNumbers(CalculateDiscountedPrice(data))}
                             </b>
                         </div>
 
@@ -153,7 +154,7 @@ const CourseTypeFive = ({ data, classes }) => {
                             className="course-price m-0 p-0 text-decoration-line-through"
                         >
                             {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                            {CalculateListPrice(data)}
+                            {FormatNumbers(CalculateListPrice(data))}
                         </div>
                     </div>
                 ) : (

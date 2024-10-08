@@ -189,7 +189,7 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                 <div>
                   <span style={mainfs} className="value price fw-bolder">
                     {getSymbolFromCurrency(GetCurrencyByCountry(course))}
-                    {Number(CalculateDiscountedPrice(course)).toFixed(2)}
+                    {FormatNumbers(CalculateDiscountedPrice(course))}
                   </span>
                   <span className="text-decoration-line-through m-lg-2">
                     {" "}
@@ -198,7 +198,7 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                   </span>
                   {CalculateDiscountPrice(course) != "" && (
                     <span className="m-lg-1 fw-semibold">
-                      {CalculateDiscountPrice(course)}
+                      {FormatNumbers(CalculateDiscountPrice(course))}
                     </span>
                   )}
                 </div>

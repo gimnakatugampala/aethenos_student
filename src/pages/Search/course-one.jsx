@@ -13,6 +13,11 @@ import GetCurrencyByCountry from "../../functions/pricing/GetCurrencyByCountry";
 import CalculateDiscountedPrice from "../../functions/pricing/CalculateDiscountedPrice";
 import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
 import StarsRating from 'stars-rating'
+import FormatNumbers from "../../functions/FormatNumbers";
+
+const mainfs = {
+  fontSize: "20px",
+};
 
 const CourseTypeOne = ({ course }) => {
   if (!course || !course.id) return null;
@@ -101,7 +106,7 @@ const CourseTypeOne = ({ course }) => {
           {course != null && CalculateDiscountPrice(course) != "" && (
             <div className="time-top">
               <span style={{ background: "#e01D20" }} className="duration">
-                {CalculateDiscountPrice(course)} OFF
+                {FormatNumbers(CalculateDiscountPrice(course))}%
               </span>
             </div>
           )}
@@ -126,18 +131,31 @@ const CourseTypeOne = ({ course }) => {
           </div>
           <span className="rating-count ml-4"><b>{Number.parseFloat(course.rating).toFixed(1)}</b></span>
         </div>
-          <div className="d-flex">
-            <div className="course-price discounted-price m-1">
-              <b>
-                {getSymbolFromCurrency(GetCurrencyByCountry(course))}
-                {CalculateDiscountedPrice(course)}
-              </b>
-            </div>
-            <div className="course-price text-decoration-line-through m-2">
-              {getSymbolFromCurrency(GetCurrencyByCountry(course))}
-              {CalculateListPrice(course)}
-            </div>
-          </div>
+
+        {course !=null &&  course.isPaid ? ( 
+      <div className="d-flex">
+      <div className="course-price discounted-price m-1">
+        <b>
+          {getSymbolFromCurrency(GetCurrencyByCountry(course))}
+          {FormatNumbers(CalculateDiscountedPrice(course))}
+        </b>
+      </div>
+      <div className="course-price text-decoration-line-through m-2">
+        {getSymbolFromCurrency(GetCurrencyByCountry(course))}
+        {FormatNumbers(CalculateListPrice(course))}
+      </div>
+      </div>
+        ) : (
+            <span style={mainfs} className="course-price  price fw-bolder">
+                  Free
+            </span>
+        )
+        
+      
+      }
+
+         
+
           <ul className="course-meta">
             <li>
               <i className="icon-24"></i>
