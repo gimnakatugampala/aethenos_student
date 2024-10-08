@@ -16,6 +16,8 @@ import CalculateListPrice from "../../../functions/pricing/CalculateListPrice";
 import CalculateDiscountPrice from "../../../functions/pricing/CalculateDiscountPrice";
 import Cookies from "js-cookie";
 import HandleFreeCourses from "../../../functions/pricing/HandleFreeCourses";
+import CalculateOffPrices from "../../../functions/pricing/CalculateOffPrices";
+import FormatNumbers from "../../../functions/FormatNumbers";
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
@@ -192,11 +194,11 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                   <span className="text-decoration-line-through m-lg-2">
                     {" "}
                     {getSymbolFromCurrency(GetCurrencyByCountry(course))}
-                    {CalculateListPrice(course)}
+                    {FormatNumbers(CalculateListPrice(course))}
                   </span>
                   {CalculateDiscountPrice(course) != "" && (
                     <span className="m-lg-1 fw-semibold">
-                      {CalculateDiscountPrice(course)} OFF
+                      {CalculateOffPrices(course)}
                     </span>
                   )}
                 </div>
