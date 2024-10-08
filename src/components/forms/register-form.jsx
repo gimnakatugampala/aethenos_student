@@ -349,9 +349,16 @@ const RegisterForm = () => {
                         <input value={termsconditions} onChange={(e) => settermsconditions(e.target.checked)} type="checkbox" name='terms' id="terms-condition" />
                         <label htmlFor="terms-condition">I agree to the{" "}
                         <Link href="https://terms.aethenos.com/terms/" target="_blank" rel="noopener noreferrer">
-                                  {" "} Terms & Conditions.
+                                  {" "} Terms & Conditions
+                        </Link>
+                        {" "} and {" "}
+                        <Link href="https://terms.aethenos.com/privacy-policy/" target="_blank" rel="noopener noreferrer">
+                                  {" "} Privacy Policy.
                         </Link>
                         </label>
+
+                     
+                        
                     </div>
                 </div>
             
