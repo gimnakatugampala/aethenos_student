@@ -53,16 +53,17 @@ export default async function handler(req, res) {
 
       const lineItems = cartCourses.map(product => ({
         price_data: {
-          currency:`${product.currency}`,
-          product_data:{
+          currency: `${product.currency}`,
+          product_data: {
             images: [`${IMG_HOST}${product.img}`],
-            name: product.title
+            name: product.title,
+            description: `${product.desc}`, // Move description here
           },
-          unit_amount: Math.round(product.price* 100),
+          unit_amount: Math.round(product.price * 100),
         },
-        description: `${product.desc}`,
         quantity: Number.parseInt(product.qty),
       }));
+      
       
       // Create Checkout Sessions from body params.
       const session = await stripe.checkout.sessions.create({
