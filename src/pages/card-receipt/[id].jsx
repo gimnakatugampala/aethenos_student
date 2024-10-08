@@ -113,7 +113,6 @@ const index = () => {
                       <td colSpan={2}></td>
                       <td>Tax rate</td>
                       <td>
-                        {getSymbolFromCurrency(details.orderDetails.currency)}
                         {details.vatPercentage}
                       </td>
                 

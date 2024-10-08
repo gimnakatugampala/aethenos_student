@@ -223,7 +223,7 @@ const ViewProfile = () => {
               </div>
 
               <div className="col-md-6">
-                <div className="mb-3">
+                {/* <div className="mb-3">
                   <label className="form-label">Website</label>
                   <input
                     value={website}
@@ -232,7 +232,7 @@ const ViewProfile = () => {
                     className="form-control"
                     placeholder="URL"
                   />
-                </div>
+                </div> */}
 
                 <label className="form-label">Twitter</label>
                 <div className="input-group mb-3">
