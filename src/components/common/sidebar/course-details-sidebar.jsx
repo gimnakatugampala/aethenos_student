@@ -198,7 +198,7 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                   </span>
                   {CalculateDiscountPrice(course) != "" && (
                     <span className="m-lg-1 fw-semibold">
-                      {CalculateOffPrices(course)}
+                      {CalculateDiscountPrice(course)}
                     </span>
                   )}
                 </div>

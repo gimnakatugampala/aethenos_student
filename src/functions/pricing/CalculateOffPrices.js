@@ -1,7 +1,7 @@
 import React from 'react'
 
-const CalculateOffPrices = (course_price) => {
-  console.log(course_price)
+const CalculateOffPrices = (data) => {
+  console.log(data)
 }
 
 export default CalculateOffPrices
