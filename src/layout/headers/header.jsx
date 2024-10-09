@@ -144,19 +144,11 @@ const Header = ({
       >
         {!no_top_bar && (
           <div className="header-top-bar">
-            <div className="container-fluid">
-              {/* <div className="header-top" style={{height:40}}>
-                                <div className="header-top-left">
-                                    <HeaderTopLeft />
-                                </div>
-                                <div className="header-top-right">
-                                    <HeaderTopRight />
-                                </div>
-                            </div> */}
+            <div className="container-fluid">            
             </div>
           </div>
         )}
-        <div id="edu-sticky-placeholder"></div>
+        <div id="edu-sticky-placeholder" style={{ height: sticky ? '80px' : '' }}></div>
         <div className={`header-mainmenu ${sticky ? "edu-sticky" : ""}`}>
           <div className="container-fluid">
             <div className="header-navbar">
