@@ -24,7 +24,7 @@ const BreadcrumbThree = ({ title, subtitle }) => {
                     </ul>
                 </div>
             </div>
-            <ul className="shape-group">
+            {/* <ul className="shape-group">
                 <li className="shape-1">
                     <span></span>
                 </li>
@@ -53,7 +53,7 @@ const BreadcrumbThree = ({ title, subtitle }) => {
                 >
                     <img src="/assets/images/about/shape-07.png" alt="shape" />
                 </motion.li>
-            </ul>
+            </ul> */}
         </div>
     );
 }
