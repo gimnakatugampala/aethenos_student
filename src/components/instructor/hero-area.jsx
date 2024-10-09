@@ -335,9 +335,9 @@ const HeroArea = () => {
                 />
                 <label htmlFor="terms-condition">
                   I agree the {" "}
-                  <Link target="_blank" rel="noopener noreferrer" href="/privacy-policy">User Agreement.</Link>
+                  <a className="text-danger" target="_blank" rel="noopener noreferrer" href="/privacy-policy">User Agreement.</a>
                    and{" "}
-                  <Link target="_blank" rel="noopener noreferrer" href="/terms">Terms & Condition.</Link>
+                  <a className="text-danger" target="_blank" rel="noopener noreferrer" href="/terms">Terms & Conditions.</a>
                 </label>
               </div>
             </div>
