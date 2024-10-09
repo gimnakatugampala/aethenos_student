@@ -48,7 +48,7 @@ const CategoryArea = () => {
               </>
             }
             text={
-              "Give your Excel students a novel and awesome learning experience through delivering your course on our innovative App."
+              "Give your Excel students a novel and awesome learning experience with our innovative App."
             }
           />
 
