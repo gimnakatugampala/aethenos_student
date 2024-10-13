@@ -51,7 +51,7 @@ const CourseFourArea = ({ allcourses }) => {
     <div className="edu-course-area course-area-1">
       <div className="">
         <div className="row g-5">
-        <div className="col-4 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-3">
+        <div className="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-3">
             {courses != null && <CourseSidebar course_items={courses} />}
           </div>
 

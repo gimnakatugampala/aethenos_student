@@ -179,7 +179,7 @@ const CourseSidebarTwo = ({ course_items }) => {
     : 0;
 
   return (
-    <div className="course-sidebar-3 mx-4">
+    <div className="course-sidebar-3 mx-xs-0 mx-sm-4">
       <div className="edu-course-widget widget-category">
         <div className="inner">
           <h5

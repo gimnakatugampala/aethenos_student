@@ -129,7 +129,7 @@ const SearchResults = () => {
               </div>
             </h3>
 
-            <div className="col-4 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-3 ">
+            <div className="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-3 ">
               <CourseSidebarTwo course_items={courses} />
             </div>
 
