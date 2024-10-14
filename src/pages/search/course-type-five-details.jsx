@@ -1,24 +1,25 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cart_course } from "../../redux/features/cart-slice";
 import {
   add_to_wishlist,
   wishlistItems,
 } from "../../redux/features/wishlist-slice";
-import { IMG_HOST , EnrollByStudent } from "../../api";
+import { IMG_HOST, EnrollByStudent } from "../../api";
 import getSymbolFromCurrency from "currency-symbol-map";
 import CalculateDiscountPrice from "../../functions/pricing/CalculateDiscountedPrice";
 import GetCurrencyByCountry from "../../functions/pricing/GetCurrencyByCountry";
 import CalculateDiscountedPrice from "../../functions/pricing/CalculateDiscountedPrice";
 import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
-import StarsRating from 'stars-rating'
-import Cookies from 'js-cookie';
+import StarsRating from "stars-rating";
+import Cookies from "js-cookie";
 import HandleFreeCourses from "../../functions/pricing/HandleFreeCourses";
 import FormatNumbers from "../../functions/FormatNumbers";
 import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
+import { Height } from "@mui/icons-material";
 
-const COUNTRY = Cookies.get('aethenos_user_origin')
+const COUNTRY = Cookies.get("aethenos_user_origin");
 
 const CourseTypeFive = ({ data, classes }) => {
   const { cartCourses } = useSelector((state) => state.cart);
@@ -27,6 +28,17 @@ const CourseTypeFive = ({ data, classes }) => {
   const isWishlistSelected = wishlists.find(
     (w) => Number(w.id) === Number(data.id)
   );
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handleWishlist = (course_item) => {
     if (wishlists.find((i) => i.id === course_item.id)) {
@@ -85,8 +97,7 @@ const CourseTypeFive = ({ data, classes }) => {
   //   return starArray;
   // };
 
-  const handleEnroll = (data) =>{
-
+  const handleEnroll = (data) => {
     // console.log(data)
 
     // var rawData = {
@@ -105,11 +116,15 @@ const CourseTypeFive = ({ data, classes }) => {
 
     // EnrollByStudent(rawData)
 
-    HandleFreeCourses(data)
+    HandleFreeCourses(data);
 
     // console.log(rawData)
-  }
+  };
 
+  const positionStyle = {
+    width: windowWidth >= 576 ? "300px" : "450px",
+    objectFit: "contain",
+  };
 
   return (
     <div
@@ -118,12 +133,12 @@ const CourseTypeFive = ({ data, classes }) => {
       }`}
     >
       <div className="inner">
-        <div className="thumbnail">
+        <div className="thumbnail col-sm-6 col-xxl-4">
           <Link href={`/course-details/${data != null && data.course_code}`}>
             <img
               src={`${IMG_HOST}/${data != undefined && data.img}`}
               alt="Course Thumb"
-              style={{ width: "300px", height: "200px", objectFit: "cover" }}
+              style={{ maxHeight: "250px" }}
             />
           </Link>
           {data != null && CalculateOffPrices(data) != "" && (
@@ -135,13 +150,13 @@ const CourseTypeFive = ({ data, classes }) => {
           )}
         </div>
 
-        <div className="content">
-        <div className="d-flex justify-content-end text-end">
+        <div className="content col-sm-6 col-xxl-8">
+          <div className="d-flex justify-content-end text-end p-3">
             {data && (
                 data.isPaid ? (
                     <div>
                         <div
-                            style={{ fontSize: "20px" }}
+                            // style={{ fontSize: "20px" }}
                             className="course-price m-0 p-0"
                         >
                             <b>
@@ -151,7 +166,7 @@ const CourseTypeFive = ({ data, classes }) => {
                         </div>
 
                         <div
-                            style={{ fontSize: "13px" }}
+                            // style={{ fontSize: "13px" }}
                             className="course-price m-0 p-0 text-decoration-line-through"
                         >
                             {getSymbolFromCurrency(GetCurrencyByCountry(data))}
@@ -159,11 +174,12 @@ const CourseTypeFive = ({ data, classes }) => {
                         </div>
                     </div>
                 ) : (
+
+                  
                     <span className="course-price discounted-price m-lg-3">Free</span>
                 )
             )}
         </div>
-
 
           <p className="title">
             <b>
@@ -187,59 +203,69 @@ const CourseTypeFive = ({ data, classes }) => {
             {data != undefined && data.instructor}
           </span>
 
-          <span className="course-level mx-4">
+          <div className="course-rating">
+            <div className="rating">
+              {data != null && (
+                <StarsRating
+                  edit={false}
+                  count={5}
+                  size={24}
+                  value={data.rating}
+                  color1={"gray"}
+                  color2={"#F39C12"}
+                />
+              )}
+            </div>
+            <span className="rating-count ml-4">
+              <b>{data != null && Number.parseFloat(data.rating).toFixed(1)}</b>
+            </span>
+          </div>
+
+          <span className="course-level">
             {data != undefined && data.level}
           </span>
 
-          <div className="course-rating">
-          <div className="rating">
-            {data != null && (
-                <StarsRating
-                edit={false}
-                count={5}
-                size={24}
-                value={data.rating}
-                color1={'gray'}
-                color2={'#F39C12'} />
-            )}
-            
+          <div className="col-12 col-xs-6">
+            <ul className="course-meta">
+              <li>{data != undefined && data.language} </li>
+              <li>{data != undefined && data.lesson} Lessons</li>
+              <li>{data != undefined && data.student} Students</li>
+              <li>{data != undefined && data.category}</li>
+            </ul>
           </div>
-          <span className="rating-count ml-4"><b>{data != null && Number.parseFloat(data.rating).toFixed(1)}</b></span>
-        </div>
-          <ul className="course-meta d-flex">
-            <li>{data != undefined && data.language} </li>
-            <li>{data != undefined && data.lesson} Lessons</li>
-            <li>{data != undefined && data.student} Students</li>
-            <li>{data != undefined && data.category}</li>
-          </ul>
 
-          {data !=null && data.isPaid ? (
+          <div style={{ marginBottom: "50px", marginInlineEnd: "-12px" }}>
+            {data != null && data.isPaid ? (
+              <a
+                onClick={() => handleAddToCart(data)}
+                style={{ cursor: "pointer" }}
+                className="edu-btn btn-small button-group float-end mt-2 mx-2"
+              >
+                {cartCourses.some((course) => course.id == data.id)
+                  ? "Added to cart"
+                  : "Add to cart"}
+              </a>
+            ) : (
+              <a
+                onClick={() => handleEnroll(data)}
+                className="edu-btn btn-small button-group float-end mt-2 mx-2"
+                style={{ cursor: "pointer" }}
+              >
+                Enroll Now
+                <i className="icon-4"></i>
+              </a>
+            )}
 
-          <a
-            onClick={() => handleAddToCart(data)}
-            style={{ cursor: "pointer" }}
-            className="edu-btn btn-small button-group float-end mt-2 mx-2"
-          >
-            {cartCourses.some((course) => course.id == data.id)
-              ? "Added to cart"
-              : "Add to cart"}
-          </a>
-          ) : (
-            <a onClick={() => handleEnroll(data)}  className="edu-btn btn-small button-group float-end mt-2 mx-2" style={{ cursor: 'pointer' }}> 
-            Enroll Now 
-            <i className="icon-4"></i>
-             </a>
-          )}
-
-          <button
-            onClick={() => handleWishlist(data)}
-            style={{ cursor: "pointer" }}
-            className={`btn-outline-dark float-end wishlist-btn ${
-              isWishlistSelected ? "active" : ""
-            }`}
-          >
-            <i className="icon-22"></i>
-          </button>
+            <button
+              onClick={() => handleWishlist(data)}
+              style={{ cursor: "pointer" }}
+              className={`btn-outline-dark float-end wishlist-btn ${
+                isWishlistSelected ? "active" : ""
+              }`}
+            >
+              <i className="icon-22"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>

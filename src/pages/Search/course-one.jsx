@@ -12,7 +12,7 @@ import CalculateDiscountPrice from "../../functions/pricing/CalculateDiscountedP
 import GetCurrencyByCountry from "../../functions/pricing/GetCurrencyByCountry";
 import CalculateDiscountedPrice from "../../functions/pricing/CalculateDiscountedPrice";
 import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
-import StarsRating from 'stars-rating'
+import StarsRating from "stars-rating";
 import FormatNumbers from "../../functions/FormatNumbers";
 import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
 
@@ -89,18 +89,19 @@ const CourseTypeOne = ({ course }) => {
   return (
     <div
       className={`edu-course course-style-1 course-box-shadow hover-button-bg-white h-100`}
+      style={{  height: "460px !important" }}
     >
       <div
         className="inner"
         key={course.id}
-        style={{ textAlign: "left", height: "" }}
+        style={{ textAlign: "left" }}
       >
         <div className="thumbnail" style={{ display: "grid" }}>
           <Link href={`/course-details-/${course.id}`}>
             <img
               src={`${IMG_HOST}/${course.img}`}
               alt="Course Meta"
-              style={{ Width: "180px", height: "160px" }}
+              style={{ Width: "180px", height: "160px", objectFit: "cover" }}
             />
           </Link>
 
@@ -111,7 +112,6 @@ const CourseTypeOne = ({ course }) => {
               </span>
             </div>
           )}
-
         </div>
         <div className="content px-4">
           <span className="course-level px-2">{course.level}</span>
@@ -121,41 +121,39 @@ const CourseTypeOne = ({ course }) => {
             </a>
           </h6>
           <div className="course-rating">
-          <div className="rating">
+            <div className="rating">
               <StarsRating
-                  edit={false}
-                  count={5}
-                  size={24}
-                  value={course.rating}
-                  color1={'gray'}
-                  color2={'#F39C12'} />
-          </div>
-          <span className="rating-count ml-4"><b>{Number.parseFloat(course.rating).toFixed(1)}</b></span>
-        </div>
-
-        {course !=null &&  course.isPaid ? ( 
-      <div className="d-flex">
-      <div className="course-price discounted-price m-1">
-        <b>
-          {getSymbolFromCurrency(GetCurrencyByCountry(course))}
-          {FormatNumbers(CalculateDiscountedPrice(course))}
-        </b>
-      </div>
-      <div className="course-price text-decoration-line-through m-2">
-        {getSymbolFromCurrency(GetCurrencyByCountry(course))}
-        {FormatNumbers(CalculateListPrice(course))}
-      </div>
-      </div>
-        ) : (
-            <span style={mainfs} className="course-price  price fw-bolder">
-                  Free
+                edit={false}
+                count={5}
+                size={24}
+                value={course.rating}
+                color1={"gray"}
+                color2={"#F39C12"}
+              />
+            </div>
+            <span className="rating-count ml-4">
+              <b>{Number.parseFloat(course.rating).toFixed(1)}</b>
             </span>
-        )
-        
-      
-      }
+          </div>
 
-         
+          {course != null && course.isPaid ? (
+            <div className="d-flex">
+              <div className="course-price discounted-price m-1">
+                <b>
+                  {getSymbolFromCurrency(GetCurrencyByCountry(course))}
+                  {FormatNumbers(CalculateDiscountedPrice(course))}
+                </b>
+              </div>
+              <div className="course-price text-decoration-line-through m-2">
+                {getSymbolFromCurrency(GetCurrencyByCountry(course))}
+                {FormatNumbers(CalculateListPrice(course))}
+              </div>
+            </div>
+          ) : (
+            <span style={mainfs} className="course-price  price fw-bolder">
+              Free
+            </span>
+          )}
 
           <ul className="course-meta">
             <li>

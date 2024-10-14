@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { getNewCourses } from "../../api/index";
 import CourseTypeOne from "./course-one";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+// Import Swiper core and required modules
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper';  // Update this line
+
+// Import Swiper styles
+import 'swiper/swiper-bundle.min.css';
+
 
 const CourseArea = ({ searchKey }) => {
   const [courses, setCourses] = useState([]);
+  const [coursesPerRow, setCoursesPerRow] = useState(4);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,55 +28,64 @@ const CourseArea = ({ searchKey }) => {
     fetchData();
   }, [searchKey]);
 
-  const numSets = Math.ceil(courses.length / 4);
+  useEffect(() => {
+    const handleResize = () => {
+      const windowWidth = window.innerWidth;
+      if (windowWidth < 525) {
+        setCoursesPerRow(1);
+      } else if (windowWidth < 768) {
+        setCoursesPerRow(2); 
+      } else if (windowWidth < 992) {
+        setCoursesPerRow(2); 
+      }else if (windowWidth < 1400) {
+        setCoursesPerRow(2); 
+      } else {
+        setCoursesPerRow(4);
+      }
+    };
 
-  console.log(numSets + " numsets");
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Call initially to set the correct layout
+    
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
+  const numSets = Math.ceil(courses.length / coursesPerRow);
   const paddedCourses = [
     ...courses,
-    ...Array(4 - (courses.length % 4)).fill(null),
+    ...Array(coursesPerRow - (courses.length % coursesPerRow)).fill(null),
   ];
 
   return (
     <div className="edu-course-area">
       <div className="carousel-container">
-        <h3
-          className="heading-title"
-          data-sal-delay="150"
-          data-sal-duration="400"
-        >
+        <h3 className="heading-title" data-sal-delay="150" data-sal-duration="400">
           Hot and Fresh Courses
         </h3>
 
-        <Carousel
-          showThumbs={false}
-          showStatus={false}
-          infiniteLoop={true}
-          emulateTouch={true}
-          autoPlay={false}
-          centerMode={false}
-          showArrows={true}
-          selectedItem={0}
-          interval={5000}
-          transitionTime={500}
-          showIndicators={false}
-          stopOnHover={true}
-          duration={500}
-          animation="slide"
-          navButtonsAlwaysVisible={true}
-          indicators={false}
+        {/* Swiper Carousel */}
+        <Swiper
+          modules={[Navigation, Pagination]}
+          spaceBetween={10}
+          slidesPerView={coursesPerRow}  // Dynamically set based on screen size
+          // navigation
+          // pagination={{ clickable: true }}
+          loop={false}
+          style={{ height: '500px' }} 
         >
-          {courses != null && courses.length > 0 ? (
+          {paddedCourses != null && paddedCourses.length > 0 ? (
             Array.from({ length: numSets }, (_, setIndex) => (
-              <div key={setIndex} className="row">
-                {[0, 1, 2, 3].map((offset) => {
-                  const courseIndex = setIndex * 4 + offset;
+              <div key={setIndex} className="row" >
+                {[...Array(coursesPerRow)].map((_, offset) => {
+                  const courseIndex = setIndex * coursesPerRow + offset;
                   return (
-                    <div key={offset} className="col-md-4">
+                    <SwiperSlide key={offset} style={{height: "95%"}}>
                       {paddedCourses[courseIndex] && (
                         <CourseTypeOne course={paddedCourses[courseIndex]} />
                       )}
-                    </div>
+                    </SwiperSlide>
                   );
                 })}
               </div>
@@ -77,7 +93,7 @@ const CourseArea = ({ searchKey }) => {
           ) : (
             <h4>No Courses Available</h4>
           )}
-        </Carousel>
+        </Swiper>
       </div>
     </div>
   );

@@ -38,7 +38,7 @@ const SortingArea = ({
 
   return (
     <div className="edu-sorting-area">
-      <div className="sorting-right">
+      <div className="sorting-right mt-3">
         {items ? (
           <h5 className="showing-text">
             Showing <span>{num}</span> of <span>{course_items.length}</span>{" "}
