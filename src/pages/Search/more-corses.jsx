@@ -65,7 +65,7 @@ const CourseArea = ({ searchKey }) => {
                 {[0, 1, 2, 3].map((offset) => {
                   const courseIndex = setIndex * 4 + offset;
                   return (
-                    <div key={offset} className="col-md-3">
+                    <div key={offset} className="col-md-4">
                       {paddedCourses[courseIndex] && (
                         <CourseTypeOne course={paddedCourses[courseIndex]} />
                       )}

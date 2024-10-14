@@ -14,6 +14,7 @@ import CalculateDiscountedPrice from "../../functions/pricing/CalculateDiscounte
 import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
 import StarsRating from 'stars-rating'
 import FormatNumbers from "../../functions/FormatNumbers";
+import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
 
 const mainfs = {
   fontSize: "20px",
@@ -103,10 +104,10 @@ const CourseTypeOne = ({ course }) => {
             />
           </Link>
 
-          {course != null && CalculateDiscountPrice(course) != "" && (
+          {course != null && CalculateOffPrices(course) != "" && (
             <div className="time-top">
               <span style={{ background: "#e01D20" }} className="duration">
-                {FormatNumbers(CalculateDiscountPrice(course))}%
+                {CalculateOffPrices(course)}
               </span>
             </div>
           )}
