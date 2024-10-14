@@ -13,6 +13,7 @@ import CalculateDiscountedPrice from "../../functions/pricing/CalculateDiscounte
 import GetCurrencyByCountry from "../../functions/pricing/GetCurrencyByCountry";
 import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
 import StarsRating from "stars-rating";
+import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
 
 const CourseTypeFive = ({ data, classes }) => {
   const { cartCourses } = useSelector((state) => state.cart);
@@ -90,10 +91,10 @@ const CourseTypeFive = ({ data, classes }) => {
               />
             )}
           </Link>
-          {CalculateDiscountPrice(data) != "" && (
+          {CalculateOffPrices(data) != "" && (
             <div className="time-top">
               <span style={{ background: "#e01D20" }} className="duration">
-                {CalculateDiscountPrice(data)} OFF
+                {CalculateOffPrices(data)}
               </span>
             </div>
           )}

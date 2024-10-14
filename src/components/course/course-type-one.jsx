@@ -12,6 +12,7 @@ import getSymbolFromCurrency from 'currency-symbol-map'
 import CalculateDiscountPrice from '../../functions/pricing/CalculateDiscountPrice';
 import Cookies from 'js-cookie';
 import HandleFreeCourses from '../../functions/pricing/HandleFreeCourses';
+import CalculateOffPrices from '../../functions/pricing/CalculateOffPrices';
 
 
 const COUNTRY = Cookies.get('aethenos_user_origin')
@@ -108,9 +109,9 @@ const CourseTypeOne = ({ data, classes, image_location_path='01' }) => {
 
                     
 
-                    {CalculateDiscountPrice(data) != "" && (
+                    {CalculateOffPrices(data) != "" && (
                     <div className="time-top">
-                        <span className="duration" style={{background:'#e01D20'}}>{CalculateDiscountPrice(data)} OFF</span>
+                        <span className="duration" style={{background:'#e01D20'}}>{CalculateOffPrices(data)}</span>
                     </div>
                     )}
                 </div>
