@@ -191,14 +191,14 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                     {getSymbolFromCurrency(GetCurrencyByCountry(course))}
                     {FormatNumbers(CalculateDiscountedPrice(course))}
                   </span>
-                  <span className="text-decoration-line-through m-lg-2">
+                  <span className="text-decoration-line-through m-lg-1">
                     {" "}
                     {getSymbolFromCurrency(GetCurrencyByCountry(course))}
                     {FormatNumbers(CalculateListPrice(course))}
                   </span>
-                  {CalculateDiscountPrice(course) != "" && (
-                    <span className="m-lg-1 fw-semibold">
-                      {FormatNumbers(CalculateDiscountPrice(course))}
+                  {CalculateOffPrices(course) != "" && (
+                    <span className="fw-semibold small">
+                      {CalculateOffPrices(course)}
                     </span>
                   )}
                 </div>

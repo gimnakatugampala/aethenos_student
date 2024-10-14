@@ -5,6 +5,7 @@ import CourseDetailsArea from './course-details-area';
 
 const index = ({course}) => {
    
+    console.log(course)
 
     return (
         <div className='sticky-header'>
