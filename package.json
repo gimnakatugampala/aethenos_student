@@ -99,7 +99,7 @@
         "stripe": "^8.202.0",
         "styled-components": "^6.0.8",
         "sweetalert2": "^11.6.13",
-        "swiper": "^8.3.2",
+        "swiper": "^8.4.7",
         "video-react": "^0.16.0",
         "yup": "^0.32.11"
     },

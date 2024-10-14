@@ -29,15 +29,19 @@ const CourseTypeFive = ({ data, classes }) => {
     (w) => Number(w.id) === Number(data.id)
   );
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(0);  // Default value for SSR
 
   useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
+    if (typeof window !== "undefined") {  // Check if window is available
+      setWindowWidth(window.innerWidth);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+      const handleResize = () => setWindowWidth(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
   }, []);
 
   const handleWishlist = (course_item) => {
