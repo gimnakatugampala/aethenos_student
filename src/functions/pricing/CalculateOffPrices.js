@@ -65,7 +65,7 @@ const CalculateOffPrices = (data) => {
       if (foundPrice) {
 
           // Get the Currency Code
-          // console.log(foundPrice)
+          console.log(foundPrice)
           // console.log(countryToFind)
           const countryCode = countries.getAlpha2Code(countryToFind, 'en');
           // console.log(countryCode)
@@ -78,6 +78,8 @@ const CalculateOffPrices = (data) => {
 
           const EX_RATES = Cookies.get('aethenos_currency');
 
+          console.log(foundPrice)
+
 
           if (foundPrice.discountType == "By Percentage") {
         
@@ -87,14 +89,34 @@ const CalculateOffPrices = (data) => {
           } else if(foundPrice.discountType == "By Value") {
 
                  // Convert global net price to local currency if EX_RATES is available
-                  discount = data.course_prices.discountAmount;
+                  discount = (data.course_prices.discountAmount / data.course_prices.listPrice) * 100;
             
           }else {
-              discount = foundPrice.discount;
+
+            // Glo
+
+              discount = 0;
           }
+
       } else {
-          // No specific price found, use global net price
-          discount = data.course_prices.discount;
+          // Global Price
+
+          if (data.course_prices.discountType == "By Percentage") {
+        
+            // Convert global net price to local currency if EX_RATES is available
+                discount = data.course_prices.discount;
+            
+        } else if(data.course_prices.discountType == "By Value") {
+
+               // Convert global net price to local currency if EX_RATES is available
+                discount = (data.course_prices.discountAmount / data.course_prices.globalListPrice) * 100;
+          
+        }else {
+
+          // Glo
+            discount = 0;
+        }
+
       }
 
       // Handle currency-specific rounding for Japanese Yen
@@ -114,7 +136,8 @@ const CalculateOffPrices = (data) => {
       // console.log(countryToFind)
       // console.log(USERTOKEN)
 
-      return `${FormatNumbers(discount)}% OFF`;
+      return discount == 0 ? "" : `${FormatNumbers(discount)}% OFF`;
+
   } else {
       return "0";
   }
