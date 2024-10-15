@@ -31,7 +31,7 @@ const testimonial_data = [
 ];
 
 const mainfs = {
-  fontSize: "clamp(0.1rem, calc(0.3rem + 0.8vw), 2rem)",
+  fontSize: "clamp(0.6rem, calc(0.3rem + 1.8vw), 1.5rem)",
   margin: "0px",
   marginTop: "5px",
 };
@@ -42,7 +42,7 @@ export default function TestimonialArea() {
   return (
     <div className="testimonial-area-1 section-gap-equal">
       <div className="inner">
-        <div className="row g-lg-5 mx-5 d-flex justify-content-center">
+        <div className="row g-lg-5 mx-4 d-flex justify-content-center">
           <div className="col-xl-4 col-md-12 d-flex justify-content-center">
             <div className="testimonial-heading-area">
               <div
@@ -77,7 +77,7 @@ export default function TestimonialArea() {
               </div>
             </div>
           </div>
-          <div className="col-xl-8 col-md-12 d-flex align-items-center">
+          <div className="col-xs-12 col-xl-8 col-md-12 d-flex align-items-center">
             <Swiper
               slidesPerView={1}
               spaceBetween={0}
@@ -94,16 +94,16 @@ export default function TestimonialArea() {
                 577: {
                   slidesPerView: 1,
                 },
-              }}
+              }}            
             >
               {testimonial_data.map((testi, i) => (
                 <SwiperSlide key={i}>
                   <div className="testimonial-grid p-0 m-0">
-                    <div className="">
+                    <div>
                       <img
                         src={testi.img}
                         alt="Testimonial"
-                        style={{ width: "100%", border: "none" }}
+                        style={{minHeight: "110px",  width: "100%", border: "none" }}
                       />
                     </div>
                   </div>

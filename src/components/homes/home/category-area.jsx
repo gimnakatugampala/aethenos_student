@@ -36,7 +36,7 @@ const CategoryArea = () => {
 
   return (
     <div className="features-area-2 ">
-      <div className="mx-3 ">
+      <div >
         <div className={view}>
           {category_contents.map((category, i) => (
             <div
