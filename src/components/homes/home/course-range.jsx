@@ -74,11 +74,11 @@ const CourseRange = () => {
       <div className="container-fluid">
         <div className="row">
           <div className="mb-4"> 
-            <h2 className="title m-0 mb-3">A broad selection of courses</h2>
-            <p className="m-0" style={mainfs}>
+            <h2 className="title m-0 mb-1">A broad selection of courses</h2>
+            {/* <p className="m-0" style={mainfs}>
               Choose from over 210,000 online video courses with new additions
               published every month
-            </p> 
+            </p>  */}
           </div>
 
           <div className="col-md-12">

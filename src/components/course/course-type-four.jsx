@@ -138,9 +138,9 @@ const CourseTypeFour = ({ data, classes, index }) => {
           {data.course_prices.discount > 0 && (
             <div
               className="course-price price-round"
-              style={{ top: "20px", position: "absolute", right: "25px" }}
+              style={{ top: "20px", position: "absolute", right: "25px" , fontSize: "10px" }}
             >
-              {CalculateDiscountPrice(data)}
+              {CalculateDiscountPrice(data)} OFF
             </div>
           )}
 
@@ -177,10 +177,10 @@ const CourseTypeFour = ({ data, classes, index }) => {
             </Link>
           </h5>
 
-          <p>
-            {data.curriculum_desc.length > 60
-              ? data.curriculum_desc.substring(0, 60) + "..."
-              : data.curriculum_desc}
+          <p className="m-0 p-0">
+            {data.instructor.length > 60
+              ? data.instructor.substring(0, 60) + "..."
+              : data.instructor}
           </p>
 
           <div className="course-rating">
