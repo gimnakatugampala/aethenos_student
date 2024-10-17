@@ -84,6 +84,7 @@ const CourseRange = () => {
           <div className="col-md-12">
             <div className="course-details-content">
               <ul className="nav nav-tabs" id="myTab" role="tablist">
+                
                 <li className="nav-item" role="presentation">
                   <button
                     className="nav-link active"
@@ -188,12 +189,14 @@ const CourseRange = () => {
                     Personal Development
                   </button>
                 </li>
+
               </ul>
             </div>
           </div>
 
           <div className="col-lg-12 p-3">
             <div className="tab-content" id="myTabContent">
+
               <div
                 className="tab-pane fade show active"
                 id="business"
@@ -511,6 +514,8 @@ const CourseRange = () => {
                   </div>
                 </div>
               </div>
+
+
             </div>
           </div>
         </div>
