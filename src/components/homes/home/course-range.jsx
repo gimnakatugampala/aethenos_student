@@ -85,7 +85,7 @@ const CourseRange = () => {
             <div className="course-details-content">
               <ul className="nav nav-tabs" id="myTab" role="tablist">
                 
-                <li className="nav-item" role="presentation">
+                {/* <li className="nav-item" role="presentation">
                   <button
                     className="nav-link active"
                     id="business-tab"
@@ -173,7 +173,7 @@ const CourseRange = () => {
                   >
                     IT & Software
                   </button>
-                </li>
+                </li> */}
 
                 <li className="nav-item" role="presentation">
                   <button
@@ -186,7 +186,7 @@ const CourseRange = () => {
                     aria-controls="personal-development"
                     aria-selected="false"
                   >
-                    Personal Development
+                    Excel Courses
                   </button>
                 </li>
 
@@ -197,7 +197,7 @@ const CourseRange = () => {
           <div className="col-lg-12 p-3">
             <div className="tab-content" id="myTabContent">
 
-              <div
+              {/* <div
                 className="tab-pane fade show active"
                 id="business"
                 role="tabpanel"
@@ -205,7 +205,7 @@ const CourseRange = () => {
               >
                 <div className="course-tab-content">
                   <div className="course-overview">
-                    {/* <CourseRangeList /> */}
+                 
 
                     {loading_business_courses ? (
                       <div className="row">
@@ -225,24 +225,12 @@ const CourseRange = () => {
                       <h4 className="mt-3 d-flex justify-content-center">No Business Courses Available</h4>
                     )}
 
-                    {/* {next < business_courses.length && (
-                                    <div
-                                        onClick={handleLoadData}
-                                        className="load-more-btn"
-                                        data-sal-delay="100"
-                                        data-sal="slide-up"
-                                        data-sal-duration="1200"
-                                    >
-                                        <a className="edu-btn mb-5" style={{ cursor: "pointer" }}>
-                                        Load More <i className="icon-56"></i>
-                                        </a>
-                                    </div>
-                                    )} */}
+            
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              <div
+              {/* <div
                 className="tab-pane fade"
                 id="design"
                 role="tabpanel"
@@ -250,7 +238,7 @@ const CourseRange = () => {
               >
                 <div className="course-tab-content">
                   <div className="course-overview">
-                    {/* <CourseRangeList /> */}
+                
 
                     {loading_design_courses ? (
                       <div className="row">
@@ -269,24 +257,11 @@ const CourseRange = () => {
                       <h4 className="mt-3 d-flex justify-content-center">No Design Courses Available</h4>
                     )}
 
-                    {/* {next < new_courses.length && (
-                                    <div
-                                        onClick={handleLoadData}
-                                        className="load-more-btn"
-                                        data-sal-delay="100"
-                                        data-sal="slide-up"
-                                        data-sal-duration="1200"
-                                    >
-                                        <a className="edu-btn mb-5" style={{ cursor: "pointer" }}>
-                                        Load More <i className="icon-56"></i>
-                                        </a>
-                                    </div>
-                                    )} */}
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              <div
+              {/* <div
                 className="tab-pane fade"
                 id="photography-video"
                 role="tabpanel"
@@ -294,7 +269,7 @@ const CourseRange = () => {
               >
                 <div className="course-tab-content">
                   <div className="course-overview">
-                    {/* <CourseRangeList /> */}
+                  
 
                     {loading_photography_courses ? (
                       <div className="row">
@@ -314,24 +289,12 @@ const CourseRange = () => {
                       <h4 className="mt-3 d-flex justify-content-center">No Photography Courses Available</h4>
                     )}
 
-                    {/* {next < trending_courses.length && (
-                                    <div
-                                        onClick={handleLoadData}
-                                        className="load-more-btn"
-                                        data-sal-delay="100"
-                                        data-sal="slide-up"
-                                        data-sal-duration="1200"
-                                    >
-                                        <a className="edu-btn mb-5" style={{ cursor: "pointer" }}>
-                                        Load More <i className="icon-56"></i>
-                                        </a>
-                                    </div>
-                                    )} */}
+                
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              <div
+              {/* <div
                 className="tab-pane fade"
                 id="development"
                 role="tabpanel"
@@ -339,7 +302,7 @@ const CourseRange = () => {
               >
                 <div className="course-tab-content">
                   <div className="course-overview">
-                    {/* <CourseRangeList /> */}
+                  
 
                     {loading_development_courses ? (
                       <div className="row">
@@ -359,24 +322,12 @@ const CourseRange = () => {
                       <h4 className="mt-3 d-flex justify-content-center">No Development Courses Available</h4>
                     )}
 
-                    {/* {next < trending_courses.length && (
-                                    <div
-                                        onClick={handleLoadData}
-                                        className="load-more-btn"
-                                        data-sal-delay="100"
-                                        data-sal="slide-up"
-                                        data-sal-duration="1200"
-                                    >
-                                        <a className="edu-btn mb-5" style={{ cursor: "pointer" }}>
-                                        Load More <i className="icon-56"></i>
-                                        </a>
-                                    </div>
-                                    )} */}
+                  
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              <div
+              {/* <div
                 className="tab-pane fade"
                 id="marketing"
                 role="tabpanel"
@@ -384,7 +335,7 @@ const CourseRange = () => {
               >
                 <div className="course-tab-content">
                   <div className="course-overview">
-                    {/* <CourseRangeList /> */}
+                 
 
                     {loading_marketing_courses ? (
                       <div className="row">
@@ -404,24 +355,12 @@ const CourseRange = () => {
                       <h4 className="mt-3 d-flex justify-content-center">No Marketing Courses Available</h4>
                     )}
 
-                    {/* {next < trending_courses.length && (
-                                    <div
-                                        onClick={handleLoadData}
-                                        className="load-more-btn"
-                                        data-sal-delay="100"
-                                        data-sal="slide-up"
-                                        data-sal-duration="1200"
-                                    >
-                                        <a className="edu-btn mb-5" style={{ cursor: "pointer" }}>
-                                        Load More <i className="icon-56"></i>
-                                        </a>
-                                    </div>
-                                    )} */}
+                  
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              <div
+              {/* <div
                 className="tab-pane fade"
                 id="it-software"
                 role="tabpanel"
@@ -429,7 +368,7 @@ const CourseRange = () => {
               >
                 <div className="course-tab-content">
                   <div className="course-overview">
-                    {/* <CourseRangeList /> */}
+               
 
                     {loading_it_software_courses ? (
                       <div className="row">
@@ -451,22 +390,10 @@ const CourseRange = () => {
                       </h4>
                     )}
 
-                    {/* {next < trending_courses.length && (
-                                    <div
-                                        onClick={handleLoadData}
-                                        className="load-more-btn"
-                                        data-sal-delay="100"
-                                        data-sal="slide-up"
-                                        data-sal-duration="1200"
-                                    >
-                                        <a className="edu-btn mb-5" style={{ cursor: "pointer" }}>
-                                        Load More <i className="icon-56"></i>
-                                        </a>
-                                    </div>
-                                    )} */}
+         
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div
                 className="tab-pane fade"
@@ -494,7 +421,7 @@ const CourseRange = () => {
                       <CourseRangeList course={personal_development_courses} />
                     ) : (
                       <h4 className="mt-3 d-flex justify-content-center" >
-                        No Personal Development Courses Available
+                        No Excel Courses Available
                       </h4>
                     )}
 
