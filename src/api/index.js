@@ -1391,7 +1391,7 @@ export const GetCourseHomePersonalDevelopment = async(setpersonal_development_co
   fetch(`${BACKEND_LINK}/displayCourse/getLimitedCountCoursesForHomeByLinkName/personal-development`, requestOptions)
     .then(response => response.json())
     .then(result => {
-      // console.log(result)
+      console.log(result)
 
       if(result.variable == "404"){
         setpersonal_development_courses([])

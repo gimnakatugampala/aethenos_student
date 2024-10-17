@@ -30,7 +30,7 @@ const CourseRangeList = ({ course }) => {
         {courses != null &&
           courses.slice(0, next)?.map((course, index) => {
             return (
-              <div key={course.id} className="col-md-6 col-xl-3">
+              <div key={course.id} className="col-md-6 col-xl-4">
                 <CourseTypeFour
                   data={course}
                   index={index}
