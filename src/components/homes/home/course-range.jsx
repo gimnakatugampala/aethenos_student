@@ -70,11 +70,11 @@ const CourseRange = () => {
   }, []);
 
   return (
-    <div className="edu-brand-area brand-area-1 p-5 ">
+    <div className="edu-brand-area brand-area-1 p-3 ">
       <div className="container-fluid">
         <div className="row">
           <div className="mb-4"> 
-            <h2 className="title m-0 mb-1">A broad selection of courses</h2>
+            <h2 className="title m-0 mb-1 mt-1">A broad selection of courses</h2>
             {/* <p className="m-0" style={mainfs}>
               Choose from over 210,000 online video courses with new additions
               published every month

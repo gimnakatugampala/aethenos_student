@@ -27,15 +27,17 @@ const CourseTypeFour = ({ data, classes, index }) => {
   const hoverAside = (index + 1) % 2 === 0;
   const [thirdHoverAside, setthirdHoverAside] = useState(false);
 
+  console.log(data);
+
   useEffect(() => {
     const handleResize = () => {
       const windowWidth = window.innerWidth;
       if (windowWidth > 1199) {
         if (index === 2) {
-          setthirdHoverAside(true);     
+          setthirdHoverAside(true);
         }
       } else {
-        setthirdHoverAside(false);   
+        setthirdHoverAside(false);
       }
     };
 
@@ -46,6 +48,12 @@ const CourseTypeFour = ({ data, classes, index }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  function getTotalLecturesCount(course) {
+    return course.course_content.reduce((total, section) => {
+      return total + (section.no_of_lectures || 0);
+    }, 0);
+  }
 
   const { cartCourses } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -66,8 +74,6 @@ const CourseTypeFour = ({ data, classes, index }) => {
   const handleRemoveFromCart = (item) => {
     dispatch(remove_cart_course(item));
   };
-
-  console.log(data);
 
   const handleWishlist = (course_item) => {
     if (wishlists.find((i) => i.id === course_item.id)) {
@@ -163,10 +169,11 @@ const CourseTypeFour = ({ data, classes, index }) => {
                 top: "20px",
                 position: "absolute",
                 right: "25px",
-                fontSize: "10px",
+                fontSize: "14px",
               }}
             >
-              {CalculateDiscountPrice(data)} OFF
+              <div style={{lineHeight: "4.3"}}>{CalculateDiscountPrice(data)}</div>
+              <div style={{marginTop: "-45px"}}>OFF</div>
             </div>
           )}
 
@@ -225,7 +232,7 @@ const CourseTypeFour = ({ data, classes, index }) => {
             </li>
             <li>
               <i className="icon-24"></i>
-              {data.lesson} Lessons
+              {getTotalLecturesCount(data)} Lessons
             </li>
           </ol>
         </div>

@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getNewCourses } from "../../api/index";
 import CourseTypeOne from "./course-one";
-
-// Import Swiper core and required modules
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper';  // Update this line
-
-// Import Swiper styles
+import { Navigation, Pagination } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
 
 
@@ -45,7 +41,7 @@ const CourseArea = ({ searchKey }) => {
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Call initially to set the correct layout
+    handleResize();
     
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -69,9 +65,7 @@ const CourseArea = ({ searchKey }) => {
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={10}
-          slidesPerView={coursesPerRow}  // Dynamically set based on screen size
-          // navigation
-          // pagination={{ clickable: true }}
+          slidesPerView={coursesPerRow} 
           loop={false}
           style={{ height: '500px' }} 
         >
