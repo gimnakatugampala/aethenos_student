@@ -24,7 +24,28 @@ import HandleFreeCourses from "../../functions/pricing/HandleFreeCourses";
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
 const CourseTypeFour = ({ data, classes, index }) => {
-  const isSecondOrFourthCard = (index + 1) % 2 === 0;
+  const hoverAside = (index + 1) % 2 === 0;
+  const [thirdHoverAside, setthirdHoverAside] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const windowWidth = window.innerWidth;
+      if (windowWidth > 1199) {
+        if (index === 2) {
+          setthirdHoverAside(true);     
+        }
+      } else {
+        setthirdHoverAside(false);   
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const { cartCourses } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -112,7 +133,7 @@ const CourseTypeFour = ({ data, classes, index }) => {
 
     // EnrollByStudent(rawData);
 
-    HandleFreeCourses(data)
+    HandleFreeCourses(data);
 
     // console.log(rawData)
   };
@@ -138,7 +159,12 @@ const CourseTypeFour = ({ data, classes, index }) => {
           {data.course_prices.discount > 0 && (
             <div
               className="course-price price-round"
-              style={{ top: "20px", position: "absolute", right: "25px" , fontSize: "10px" }}
+              style={{
+                top: "20px",
+                position: "absolute",
+                right: "25px",
+                fontSize: "10px",
+              }}
             >
               {CalculateDiscountPrice(data)} OFF
             </div>
@@ -153,16 +179,11 @@ const CourseTypeFour = ({ data, classes, index }) => {
                 {CalculateDiscountedPrice(data)}
 
                 {data.course_prices.discount > 0 && (
-                  <span
-                   className="course-price text-decoration-line-through m-2"
-                 
-                  >
-                  {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                  {CalculateListPrice(data)}
+                  <span className="course-price text-decoration-line-through m-2">
+                    {getSymbolFromCurrency(GetCurrencyByCountry(data))}
+                    {CalculateListPrice(data)}
                   </span>
                 )}
-
-               
               </span>
             ) : (
               <span className="course-price discounted-price float-end fw-bolder">
@@ -198,7 +219,6 @@ const CourseTypeFour = ({ data, classes, index }) => {
           </div>
 
           <ol className="d-flex course-meta">
-         
             <li>
               <i className="icon-25"></i>
               {data.student} {data.student == 1 ? "Student" : "Students"}
@@ -206,15 +226,15 @@ const CourseTypeFour = ({ data, classes, index }) => {
             <li>
               <i className="icon-24"></i>
               {data.lesson} Lessons
-            </li>         
+            </li>
           </ol>
         </div>
       </div>
 
       <div
-        className={`hover-content-aside ${
-          isSecondOrFourthCard ? "content-right" : ""
-        }`}
+        className={`hover-content-aside 
+      ${hoverAside ? "content-right" : ""} 
+      ${thirdHoverAside ? "content-right" : ""}`}
         style={{ cursor: "default", padding: "0" }}
       >
         <div className="content">
