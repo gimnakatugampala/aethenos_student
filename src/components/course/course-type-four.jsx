@@ -23,21 +23,27 @@ import HandleFreeCourses from "../../functions/pricing/HandleFreeCourses";
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
-const CourseTypeFour = ({ data, classes, index }) => {
+const CourseTypeFour = ({ data, classes, index, courses }) => {
   const hoverAside = (index + 1) % 2 === 0;
   const [thirdHoverAside, setthirdHoverAside] = useState(false);
-
-  console.log(data);
+  const [showHover, setShowHover] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       const windowWidth = window.innerWidth;
+
       if (windowWidth > 1199) {
         if (index === 2) {
           setthirdHoverAside(true);
         }
       } else {
         setthirdHoverAside(false);
+      }
+
+      if (windowWidth < 768) {
+        setShowHover(false);
+      } else {
+        setShowHover(true);
       }
     };
 
@@ -47,7 +53,7 @@ const CourseTypeFour = ({ data, classes, index }) => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [courses]);
 
   function getTotalLecturesCount(course) {
     return course.course_content.reduce((total, section) => {
@@ -172,8 +178,10 @@ const CourseTypeFour = ({ data, classes, index }) => {
                 fontSize: "14px",
               }}
             >
-              <div style={{lineHeight: "4.3"}}>{CalculateDiscountPrice(data)}</div>
-              <div style={{marginTop: "-45px"}}>OFF</div>
+              <div style={{ lineHeight: "4.3" }}>
+                {CalculateDiscountPrice(data)}
+              </div>
+              <div style={{ marginTop: "-45px" }}>OFF</div>
             </div>
           )}
 
@@ -238,104 +246,106 @@ const CourseTypeFour = ({ data, classes, index }) => {
         </div>
       </div>
 
-      <div
-        className={`hover-content-aside 
-      ${hoverAside ? "content-right" : ""} 
-      ${thirdHoverAside ? "content-right" : ""}`}
-        style={{ cursor: "default", padding: "0" }}
-      >
-        <div className="content">
-          <span className="course-level">{data.category}</span>
-          <h5 className="title" style={titlefs}>
-            <n-link to="/course/course-details">{data.title}</n-link>
-          </h5>
-          <div className="course-rating">
-            <StarsRating
-              edit={false}
-              count={5}
-              size={24}
-              value={data.rating}
-              color1={"gray"}
-              color2={"#F39C12"}
-            />
-            <span className="rating-count" style={mainfs}>
-              <b>({Number.parseFloat(data.rating).toFixed(1)})</b>
-            </span>
-          </div>
-          {/* <ul className="course-meta">
-            <li>
-              {data.lesson}{" "}
-              {data.lesson + data.lesson > 1 ? "Lessons" : "Lesson"}
-            </li>
-            <li>{CalculateDiscountPrice(data)}</li>
-            <li>{data.level}</li>
-          </ul> */}
-          <div className="course-feature">
-            <h6 className="title" style={titlefs}>
-              What You’ll Learn?
-            </h6>
-            <ul>
-              {data.intended_learners.slice(0, 3).map(
-                (feature, featurekey) =>
-                  feature.intended_learner_type == " students learn" && (
-                    <li key={featurekey} style={mainfs}>
-                      {feature.intended_learner > 25
-                        ? feature.intended_learner.substring(0, 25) + "..."
-                        : feature.intended_learner}
-                    </li>
-                  )
-              )}
-            </ul>
-          </div>
-
-          {data.isPaid ? (
-            <div className="button-group">
-              <a
-                className="edu-btn btn-medium"
-                onClick={() =>
-                  cartCourses.some((item) => item.id === data.id)
-                    ? handleRemoveFromCart(data)
-                    : handleAddToCart(data)
-                }
-                style={{ cursor: "pointer" }}
-              >
-                {cartCourses.some((item) => item.id === data.id)
-                  ? "Remove from Cart"
-                  : "Add to Cart"}
-                <i className="icon-4"></i>
-              </a>
-              <button
-                onClick={() => handleWishlist(data)}
-                className={`wishlist-btn btn-outline-dark ${
-                  isWishlistSelected ? "active" : ""
-                }`}
-              >
-                <i className="icon-22"></i>
-              </button>
+      {showHover && (
+        <div
+          className={`hover-content-aside 
+                 ${hoverAside ? "content-right" : ""} 
+                 ${thirdHoverAside ? "content-right" : ""}`}
+          style={{ cursor: "default", padding: "0" }}
+        >
+          <div className="content">
+            <span className="course-level">{data.category}</span>
+            <h5 className="title" style={titlefs}>
+              <n-link to="/course/course-details">{data.title}</n-link>
+            </h5>
+            <div className="course-rating">
+              <StarsRating
+                edit={false}
+                count={5}
+                size={24}
+                value={data.rating}
+                color1={"gray"}
+                color2={"#F39C12"}
+              />
+              <span className="rating-count" style={mainfs}>
+                <b>({Number.parseFloat(data.rating).toFixed(1)})</b>
+              </span>
             </div>
-          ) : (
-            <div className="button-group">
-              <a
-                onClick={() => handleEnroll(data)}
-                className="edu-btn btn-medium"
-                style={{ cursor: "pointer", mainfs }}
-              >
-                Enroll Now
-                <i className="icon-4"></i>
-              </a>
-
-              <button
-                onClick={() => handleWishlist(data)}
-                className={`wishlist-btn btn-outline-dark ${
-                  isWishlistSelected ? "active" : ""
-                }`}
-              >
-                <i className="icon-22"></i>
-              </button>
+            {/* <ul className="course-meta">
+                       <li>
+                         {data.lesson}{" "}
+                         {data.lesson + data.lesson > 1 ? "Lessons" : "Lesson"}
+                       </li>
+                       <li>{CalculateDiscountPrice(data)}</li>
+                       <li>{data.level}</li>
+                     </ul> */}
+            <div className="course-feature">
+              <h6 className="title" style={titlefs}>
+                What You’ll Learn?
+              </h6>
+              <ul>
+                {data.intended_learners.slice(0, 3).map(
+                  (feature, featurekey) =>
+                    feature.intended_learner_type == " students learn" && (
+                      <li key={featurekey} style={mainfs}>
+                        {feature.intended_learner > 25
+                          ? feature.intended_learner.substring(0, 25) + "..."
+                          : feature.intended_learner}
+                      </li>
+                    )
+                )}
+              </ul>
             </div>
-          )}
+
+            {data.isPaid ? (
+              <div className="button-group">
+                <a
+                  className="edu-btn btn-medium"
+                  onClick={() =>
+                    cartCourses.some((item) => item.id === data.id)
+                      ? handleRemoveFromCart(data)
+                      : handleAddToCart(data)
+                  }
+                  style={{ cursor: "pointer" }}
+                >
+                  {cartCourses.some((item) => item.id === data.id)
+                    ? "Remove from Cart"
+                    : "Add to Cart"}
+                  <i className="icon-4"></i>
+                </a>
+                <button
+                  onClick={() => handleWishlist(data)}
+                  className={`wishlist-btn btn-outline-dark ${
+                    isWishlistSelected ? "active" : ""
+                  }`}
+                >
+                  <i className="icon-22"></i>
+                </button>
+              </div>
+            ) : (
+              <div className="button-group">
+                <a
+                  onClick={() => handleEnroll(data)}
+                  className="edu-btn btn-medium"
+                  style={{ cursor: "pointer", mainfs }}
+                >
+                  Enroll Now
+                  <i className="icon-4"></i>
+                </a>
+
+                <button
+                  onClick={() => handleWishlist(data)}
+                  className={`wishlist-btn btn-outline-dark ${
+                    isWishlistSelected ? "active" : ""
+                  }`}
+                >
+                  <i className="icon-22"></i>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

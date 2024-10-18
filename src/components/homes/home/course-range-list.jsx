@@ -34,6 +34,7 @@ const CourseRangeList = ({ course }) => {
                 <CourseTypeFour
                   data={course}
                   index={index}
+                  courses={courses}
                   classes="course-box-shadow"
                 />
               </div>
