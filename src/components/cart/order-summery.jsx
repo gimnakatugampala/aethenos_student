@@ -112,7 +112,7 @@ const OrderSummery = ({ cartItem }) => {
 
 	<Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Login Form</Modal.Title>
+          <Modal.Title>Log in</Modal.Title>
         </Modal.Header>
         <Modal.Body>
 			
@@ -130,7 +130,7 @@ const OrderSummery = ({ cartItem }) => {
                 />
             </div>
 			<div className="form-group">
-			<label htmlFor="current-log-password">Password*</label>
+			<label htmlFor="current-log-password">Password <span className='text-danger'>*</span></label>
 			<div className="input-group mb-3">
 				<input onChange={(e) => setpassword(e.target.value)}
                     type={showPass?"text":"password"}  className="form-control" placeholder="Password"  aria-label="" aria-describedby="basic-addon2" />
@@ -141,6 +141,7 @@ const OrderSummery = ({ cartItem }) => {
 			</div>
 			</div>
             
+                <p className='text-center pb-0 mb-2'>Don’t have an account ? <span className='text-danger'>Sign up</span></p>
 
             <div className="form-group">
                 {loading ? (
@@ -151,6 +152,7 @@ const OrderSummery = ({ cartItem }) => {
 
              
             </div>
+
 
 
            
