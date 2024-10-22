@@ -136,7 +136,7 @@ const CalculateOffPrices = (data) => {
       // console.log(countryToFind)
       // console.log(USERTOKEN)
 
-      return discount == 0 ? "" : `${FormatNumbers(discount)}% OFF`;
+      return discount == 0 ? "" : `${discount}% OFF`;
 
   } else {
       return "0";
