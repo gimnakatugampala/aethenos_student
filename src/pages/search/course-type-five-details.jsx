@@ -29,10 +29,11 @@ const CourseTypeFive = ({ data, classes }) => {
     (w) => Number(w.id) === Number(data.id)
   );
 
-  const [windowWidth, setWindowWidth] = useState(0);  // Default value for SSR
+  const [windowWidth, setWindowWidth] = useState(0); // Default value for SSR
 
   useEffect(() => {
-    if (typeof window !== "undefined") {  // Check if window is available
+    if (typeof window !== "undefined") {
+      // Check if window is available
       setWindowWidth(window.innerWidth);
 
       const handleResize = () => setWindowWidth(window.innerWidth);
@@ -156,34 +157,35 @@ const CourseTypeFive = ({ data, classes }) => {
 
         <div className="content col-sm-6 col-xxl-8">
           <div className="d-flex justify-content-end text-end p-3">
-            {data && (
-                data.isPaid ? (
-                    <div>
-                        <div
-                            // style={{ fontSize: "20px" }}
-                            className="course-price m-0 p-0"
-                        >
-                            <b>
-                                {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                                {FormatNumbers(CalculateDiscountedPrice(data))}
-                            </b>
-                        </div>
+            {data &&
+              (data.isPaid ? (
+                <div>
+                  <div
+                    // style={{ fontSize: "20px" }}
+                    className="course-price m-0 p-0"
+                  >
+                    <b>
+                      {getSymbolFromCurrency(GetCurrencyByCountry(data))}
+                      {FormatNumbers(CalculateDiscountedPrice(data))}
+                    </b>
+                  </div>
 
-                        <div
-                            // style={{ fontSize: "13px" }}
-                            className="course-price m-0 p-0 text-decoration-line-through"
-                        >
-                            {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                            {FormatNumbers(CalculateListPrice(data))}
-                        </div>
+                  {data.course_prices.discount > 0 && (
+                    <div
+                      // style={{ fontSize: "13px" }}
+                      className="course-price m-0 p-0 text-decoration-line-through"
+                    >
+                      {getSymbolFromCurrency(GetCurrencyByCountry(data))}
+                      {FormatNumbers(CalculateListPrice(data))}
                     </div>
-                ) : (
-
-                  
-                    <span className="course-price discounted-price m-lg-3">Free</span>
-                )
-            )}
-        </div>
+                  )}
+                </div>
+              ) : (
+                <span className="course-price discounted-price m-lg-3">
+                  Free
+                </span>
+              ))}
+          </div>
 
           <p className="title">
             <b>

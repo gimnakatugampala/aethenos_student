@@ -12,12 +12,12 @@ import CalculateDiscountPrice from "../../functions/pricing/CalculateDiscountedP
 import GetCurrencyByCountry from "../../functions/pricing/GetCurrencyByCountry";
 import CalculateDiscountedPrice from "../../functions/pricing/CalculateDiscountedPrice";
 import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
-import StarsRating from 'stars-rating'
-import Cookies from 'js-cookie';
+import StarsRating from "stars-rating";
+import Cookies from "js-cookie";
 import HandleFreeCourses from "../../functions/pricing/HandleFreeCourses";
 import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
 
-const COUNTRY = Cookies.get('aethenos_user_origin')
+const COUNTRY = Cookies.get("aethenos_user_origin");
 
 const CourseTypeFive = ({ data, classes }) => {
   const { cartCourses } = useSelector((state) => state.cart);
@@ -68,10 +68,7 @@ const CourseTypeFive = ({ data, classes }) => {
     );
   };
 
- 
-  
-  const handleEnroll = (data) =>{
-
+  const handleEnroll = (data) => {
     // console.log(data)
 
     // var rawData = {
@@ -90,11 +87,10 @@ const CourseTypeFive = ({ data, classes }) => {
 
     // EnrollByStudent(rawData)
 
-    HandleFreeCourses(data)
+    HandleFreeCourses(data);
 
     // console.log(rawData)
-  }
-  
+  };
 
   return (
     <div
@@ -121,34 +117,37 @@ const CourseTypeFive = ({ data, classes }) => {
         </div>
 
         <div className="content">
-        <div className="d-flex justify-content-end text-end">
-            {data && (
-                data.isPaid ? (
-                    <div>
-                        <div
-                            style={{ fontSize: "20px" }}
-                            className="course-price m-0 p-0"
-                        >
-                            <b>
-                                {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                                {CalculateDiscountedPrice(data)}
-                            </b>
-                        </div>
+          <div className="d-flex justify-content-end text-end">
+            {data &&
+              (data.isPaid ? (
+                <div>
+                  <div
+                    style={{ fontSize: "20px" }}
+                    className="course-price m-0 p-0"
+                  >
+                    <b>
+                      {getSymbolFromCurrency(GetCurrencyByCountry(data))}
+                      {CalculateDiscountedPrice(data)}
+                    </b>
+                  </div>
 
-                        <div
-                            style={{ fontSize: "13px" }}
-                            className="course-price m-0 p-0 text-decoration-line-through"
-                        >
-                            {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                            {CalculateListPrice(data)}
-                        </div>
+                  {data.course_prices.discount > 0 && (
+                    <div
+                      style={{ fontSize: "13px" }}
+                      className="course-price m-0 p-0 text-decoration-line-through"
+                    >
+                      {getSymbolFromCurrency(GetCurrencyByCountry(data))}
+                      {FormatNumbers(CalculateListPrice(data))}
                     </div>
-                ) : (
-                    <span className="course-price discounted-price m-lg-3">Free</span>
-                )
-            )}
-        </div>
-        
+                  )}
+                </div>
+              ) : (
+                <span className="course-price discounted-price m-lg-3">
+                  Free
+                </span>
+              ))}
+          </div>
+
           <p className="title">
             <b>
               <Link
@@ -177,13 +176,14 @@ const CourseTypeFive = ({ data, classes }) => {
 
           <div className="course-rating">
             {data != null && (
-          <StarsRating
-              edit={false}
-              count={5}
-              size={24}
-              value={data.rating}
-              color1={'gray'}
-              color2={'#F39C12'} />
+              <StarsRating
+                edit={false}
+                count={5}
+                size={24}
+                value={data.rating}
+                color1={"gray"}
+                color2={"#F39C12"}
+              />
             )}
             <span className="rating-count ">
               ({data != undefined && Number.parseFloat(data.rating).toFixed(1)})
@@ -197,25 +197,26 @@ const CourseTypeFive = ({ data, classes }) => {
           </ul>
 
           {data != null && data.isPaid ? (
-
-          <a
-          onClick={() => handleAddToCart(data)}
-          style={{ cursor: "pointer" }}
-          className="edu-btn btn-medium button-group float-end mt-2"
-          >
-          {cartCourses.some((course) => course.id == data.id)
-            ? "Added to cart"
-            : "Add to cart"}
-          </a>
-
+            <a
+              onClick={() => handleAddToCart(data)}
+              style={{ cursor: "pointer" }}
+              className="edu-btn btn-medium button-group float-end mt-2"
+            >
+              {cartCourses.some((course) => course.id == data.id)
+                ? "Added to cart"
+                : "Add to cart"}
+            </a>
           ) : (
-            <a onClick={() => handleEnroll(data)}  className="edu-btn btn-medium button-group float-end mt-2" style={{ cursor: 'pointer' }}> 
-                        Enroll Now 
-                        <i className="icon-4"></i>
-              </a>
-
+            <a
+              onClick={() => handleEnroll(data)}
+              className="edu-btn btn-medium button-group float-end mt-2"
+              style={{ cursor: "pointer" }}
+            >
+              Enroll Now
+              <i className="icon-4"></i>
+            </a>
           )}
-          
+
           <button
             onClick={() => handleWishlist(data)}
             style={{ cursor: "pointer" }}

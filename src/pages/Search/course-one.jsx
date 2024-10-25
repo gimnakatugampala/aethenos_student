@@ -144,10 +144,12 @@ const CourseTypeOne = ({ course }) => {
                   {FormatNumbers(CalculateDiscountedPrice(course))}
                 </b>
               </div>
+              {course.course_prices.discount  > 0 && (
               <div className="course-price text-decoration-line-through m-2">
                 {getSymbolFromCurrency(GetCurrencyByCountry(course))}
                 {FormatNumbers(CalculateListPrice(course))}
               </div>
+                )}
             </div>
           ) : (
             <span style={mainfs} className="course-price  price fw-bolder">
