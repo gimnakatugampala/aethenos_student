@@ -23,6 +23,12 @@ const CourseTypeFive = ({ data, classes }) => {
     (w) => Number(w.id) === Number(data.id)
   );
 
+  function getTotalLecturesCount(course) {
+    return course.course_content.reduce((total, section) => {
+      return total + (section.no_of_lectures || 0);
+    }, 0);
+  }
+
   const handleWishlist = (course_item) => {
     if (wishlists.find((i) => i.id === course_item.id)) {
       dispatch(
@@ -101,6 +107,8 @@ const CourseTypeFive = ({ data, classes }) => {
         </div>
 
         <div className="content">
+
+          
           {data.isPaid ? (
             <div className="d-flex justify-content-end text-end">
               <div>
@@ -163,13 +171,13 @@ const CourseTypeFive = ({ data, classes }) => {
           </div>
 
           <ul className="course-meta">
-            <li>
-              <i className="icon-24"></i>
-              {data.lesson} Lessons
+          <li>
+              <i className="icon-25"></i>
+              {data.student} {data.student == 1 ? "Student" : "Students"}
             </li>
             <li>
-              <i className="icon-25"></i>
-              {data.student} Students
+              <i className="icon-24"></i>
+              {getTotalLecturesCount(data)} Lessons
             </li>
           </ul>
         </div>
@@ -201,7 +209,7 @@ const CourseTypeFive = ({ data, classes }) => {
           </div>
 
           <ul className="course-meta">
-            <li>{data.lesson} Lessons</li>
+            <li>  {getTotalLecturesCount(data)} Lessons</li>
             <li>{data.duration}</li>
             <li>{data.level}</li>
           </ul>
