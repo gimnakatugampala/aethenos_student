@@ -19,9 +19,7 @@ const CartArea = () => {
 
   const dispatch = useDispatch();
   const router = useRouter();
-  const handleReturnToCourses = () => {
-    router.back();
-  };
+  const handleReturnToCourses = () => {};
 
   // Handle Coupons
   const handleCouponSubmit = () => {
@@ -41,13 +39,14 @@ const CartArea = () => {
         <div className="container py-5">
           <h3>No Cart Items</h3>
           <div className="update-btn">
-            <a
-              style={{ cursor: "pointer" }}
-              onClick={handleReturnToCourses}
-              className="edu-btn btn-border btn-medium disabled"
-            >
-              Return to Home
-            </a>
+            <Link href={`/`} legacyBehavior>
+              <a
+                style={{ cursor: "pointer" }}
+                className="edu-btn btn-border btn-medium disabled"
+              >
+                Return to Home
+              </a>
+            </Link>
           </div>
         </div>
       )}

@@ -7,30 +7,35 @@ import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscounte
 import getSymbolFromCurrency from 'currency-symbol-map'
 import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
 
+const mainfs = {
+    fontSize: "clamp(0.2rem, 0.8rem + 0.6vw, 1rem)",  
+  };
+  
+
 const CartItem = ({ item }) => {
 
     const dispatch = useDispatch();
     const handleChange = (e) => {}
     return (
-        <tr>
+        <tr style={{paddingLeft: "40%"}}>
             <td className="product-remove" onClick={() => dispatch(remove_cart_course(item))}>
                 <a style={{ cursor: 'pointer' }} className="remove-wishlist"><i className="icon-73"></i></a>
             </td>
 
-            <td className="product-thumbnail">
+            <td className="product-thumbnail pe-5">
                 <Link href={`/course-details/${item.course_code}`} legacyBehavior>
                     <img src={`${IMG_HOST}${item.img}`} alt="Books" />
                 </Link>
             </td>
 
-            <td className="product-title">
+            <td className="product-title" style={mainfs}>
                 <Link href={`/course-details/${item.other_data.course_code}`} legacyBehavior>
                     {item.title}
                 </Link>
             </td>
 
             <td className="product-price" data-title="Price">
-                <span className="currency-symbol">{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))}</span>{(CalculateDiscountedPrice(item.other_data))}
+                <span className="currency-symbol">{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))}</span>{(CalculateDiscountedPrice(item.other_data)).toFixed(2)}
             </td>
 
             {/* <td className="product-quantity" data-title="Qty">

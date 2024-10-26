@@ -3,7 +3,7 @@ import useModal from "../../../hooks/use-modal";
 import { Books } from "../../../svg";
 import VideoModal from "../popup-modal/video-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { 
+import {
   wishlistItems,
   add_to_wishlist,
 } from "../../../redux/features/wishlist-slice";
@@ -44,7 +44,6 @@ export const FormatVideoTimeLength = (seconds) => {
 
   return timeString.trim();
 };
-
 
 const CourseDetailsSidebar = ({ course, details_2 = false }) => {
   const { cartCourses } = useSelector((state) => state.cart);
@@ -91,8 +90,6 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
   } = course || {};
   const { isVideoOpen, setIsVideoOpen } = useModal();
 
-
-  
   const handleWishlist = (course_item) => {
     if (wishlists.find((i) => i.id === course_item.id)) {
       dispatch(
@@ -154,14 +151,12 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
     //   ],
     // };
 
-    HandleFreeCourses(course)
+    HandleFreeCourses(course);
 
     // console.log(course)
     // console.log(rawData)
 
     // EnrollByStudent(rawData);
-
-   
   };
 
   return (
@@ -191,11 +186,13 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                     {getSymbolFromCurrency(GetCurrencyByCountry(course))}
                     {FormatNumbers(CalculateDiscountedPrice(course))}
                   </span>
-                  <span className="text-decoration-line-through m-lg-1">
-                    {" "}
-                    {getSymbolFromCurrency(GetCurrencyByCountry(course))}
-                    {FormatNumbers(CalculateListPrice(course))}
-                  </span>
+                  {course.course_prices.discount > 0 && (
+                    <span className="text-decoration-line-through m-lg-1">
+                      {" "}
+                      {getSymbolFromCurrency(GetCurrencyByCountry(course))}
+                      {FormatNumbers(CalculateListPrice(course))}
+                    </span>
+                  )}
                   {CalculateOffPrices(course) != "" && (
                     <span className="fw-semibold small">
                       {CalculateOffPrices(course)}
@@ -223,13 +220,14 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                   </li>
                 )}
 
-
                 {course.duration > 0 && (
                   <li>
                     <span className="label">
                       <i className="bi bi-play-btn"></i>Total Video length
                     </span>
-                    <span className="value">{FormatVideoTimeLength(course.duration)}</span>
+                    <span className="value">
+                      {FormatVideoTimeLength(course.duration)}
+                    </span>
                   </li>
                 )}
 
@@ -268,7 +266,7 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                 {getTotalAssignmentCount(course.course_content) > 0 && (
                   <li>
                     <span className="label">
-                    <i class="bi bi-clipboard2-check"></i>Assignments
+                      <i class="bi bi-clipboard2-check"></i>Assignments
                     </span>
                     <span className="value">
                       {getTotalAssignmentCount(course.course_content)}
