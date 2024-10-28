@@ -280,14 +280,8 @@ const Header = ({
                       {searchResults.length > 0 ? (
                         searchResults.map((result, index) =>
                           result.searchType === "course" ? (
-
                             // If Courses Found
-                            <React.Fragment
-                            onClick={() => {
-                              window.location.href = `/course-details/${result.courseCode}`;
-                              router.push(`/course-details/${result.courseCode}`);
-                            }}
-                            key={index}>
+                            <React.Fragment key={index}>
                               <a
                                 onClick={() => {
                                   window.location.href = `/course-details/${result.courseCode}`;
@@ -301,11 +295,7 @@ const Header = ({
                                 }}
                               >
                                 <ListItem
-                                className="m-0"
-                                  onClick={() => {
-                                    window.location.href = `/course-details/${result.courseCode}`;
-                                    router.push(`/course-details/${result.courseCode}`);
-                                  }}
+                                  className="m-0"
                                   sx={{
                                     cursor: "pointer",
                                     alignItems: "flex-start",
@@ -314,11 +304,11 @@ const Header = ({
                                     width: "100%",
                                   }}
                                 >
-                                  <ListItemAvatar   
-                                  loading="lazy" 
-                                  alt={result.courseTitle} 
-                                  style={{ width: '40px', height: '40px', borderRadius: '50%' }}
-                                    >
+                                  <ListItemAvatar
+                                    loading="lazy"
+                                    alt={result.courseTitle}
+                                    style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                                  >
                                     <Avatar src={`${IMG_HOST}${result.courseImg}`} />
                                   </ListItemAvatar>
                                   <ListItemText
@@ -340,13 +330,8 @@ const Header = ({
                               </a>
                             </React.Fragment>
                           ) : (
-                            // Instructors  Found
-                            <React.Fragment   
-                            onClick={() => {
-                              window.location.href = `/users/${result.instructorCode}`;
-                              router.push(`/users/${result.instructorCode}`);
-                            }} 
-                            key={index}>
+                            // Instructors Found
+                            <React.Fragment key={index}>
                               <a
                                 onClick={() => {
                                   window.location.href = `/users/${result.instructorCode}`;
@@ -360,10 +345,6 @@ const Header = ({
                                 }}
                               >
                                 <ListItem
-                                  onClick={() => {
-                                    window.location.href = `/users/${result.instructorCode}`;
-                                    router.push(`/users/${result.instructorCode}`);
-                                  }}
                                   sx={{
                                     cursor: "pointer",
                                     alignItems: "flex-start",
@@ -373,11 +354,11 @@ const Header = ({
                                   }}
                                 >
                                   <ListItemAvatar
-                                  loading="lazy" 
-                                  alt={result.instructorName} 
-                                  style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                                    loading="lazy"
+                                    alt={result.instructorName}
+                                    style={{ width: '40px', height: '40px', borderRadius: '50%' }}
                                   >
-                                    <Avatar src={result.instructorImg} />
+                                    <Avatar src={`${IMG_HOST}${result.instructorImg}`} />
                                   </ListItemAvatar>
                                   <ListItemText
                                     primary={
@@ -421,6 +402,7 @@ const Header = ({
                           />
                         </ListItem>
                       )}
+
                     </List>
                   )}
                 </li>

@@ -2520,24 +2520,39 @@ fetch(`${BACKEND_LINK}/payment/addRefund`, requestOptions)
 }
 
 
+// SearchItemsByKeyword.js
+let searchCache = {};  // Cache object to store search results
+
 export const SearchItemsByKeyword = async (word, setsearchResults) => {
   const requestOptions = {
     method: "GET",
-    redirect: "follow"
+    redirect: "follow",
   };
 
+  // Check if the search term is already cached
+  if (searchCache[word]) {
+    console.log("Fetching from cache:", word);
+    setsearchResults(searchCache[word]);
+    return;
+  }
+
   try {
-    const response = await fetch(`${BACKEND_LINK}/common/searchCourseAndInstructorDetails/${encodeURIComponent(word)}`, requestOptions);
-    
+    const response = await fetch(
+      `${BACKEND_LINK}/common/searchCourseAndInstructorDetails/${encodeURIComponent(word)}`,
+      requestOptions
+    );
+
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
     const result = await response.json();
-    console.log(result);
-    
+    console.log("Fetched from API:", result);
+
     // Ensure result is in expected format (array) or fallback to empty array
     if (Array.isArray(result)) {
+      // Cache the result for the search term
+      searchCache[word] = result;
       setsearchResults(result);
     } else {
       console.error("Unexpected API response format:", result);
@@ -2547,6 +2562,12 @@ export const SearchItemsByKeyword = async (word, setsearchResults) => {
     console.error("Search API error:", error);
     setsearchResults([]);
   }
+};
+
+// Optionally, clear the cache periodically or after certain events
+export const clearSearchCache = () => {
+  searchCache = {};
+  console.log("Search cache cleared");
 };
 
 
