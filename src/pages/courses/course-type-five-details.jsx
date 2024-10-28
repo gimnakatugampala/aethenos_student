@@ -16,6 +16,7 @@ import StarsRating from "stars-rating";
 import Cookies from "js-cookie";
 import HandleFreeCourses from "../../functions/pricing/HandleFreeCourses";
 import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
+import FormatNumbers from "../../functions/FormatNumbers";
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
@@ -110,7 +111,7 @@ const CourseTypeFive = ({ data, classes }) => {
           {data != null && CalculateOffPrices(data) != "" && (
             <div className="time-top">
               <span style={{ background: "#e01D20" }} className="duration">
-                {CalculateOffPrices(data)} OFF
+                {CalculateOffPrices(data)}
               </span>
             </div>
           )}
