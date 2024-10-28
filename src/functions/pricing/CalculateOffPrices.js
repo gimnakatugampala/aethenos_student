@@ -109,7 +109,7 @@ const CalculateOffPrices = (data) => {
         } else if(data.course_prices.discountType == "By Value") {
 
                // Convert global net price to local currency if EX_RATES is available
-                discount = (data.course_prices.discountAmount / data.course_prices.globalListPrice) * 100;
+                discount = Math.round((data.course_prices.discountAmount / data.course_prices.globalListPrice) * 100);
           
         }else {
 
