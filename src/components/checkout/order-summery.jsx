@@ -18,6 +18,7 @@ import Button from 'react-bootstrap/Button';
 import { reactLocalStorage } from 'reactjs-localstorage';
 import CalculateCouponDiscountedPrice from '../../functions/pricing/CalculateCouponDiscountedPrice';
 import HandleCountry from '../../functions/pricing/HandleCountry';
+import FormatHTMLRemove from '../../functions/FormatHTMLRemove';
 
 
 
@@ -93,7 +94,7 @@ const newPricing = cartCourses != null && cartCourses.map((course) => {
         img: course.img,
         title: course.title,
         qty: 1,
-        desc: course.other_data.course_main_desc,
+        desc: FormatHTMLRemove(course.other_data.course_main_desc),
         currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
         price: discountedPrice.toFixed(2)
     };

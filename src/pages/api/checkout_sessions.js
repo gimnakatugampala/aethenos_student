@@ -57,7 +57,7 @@ export default async function handler(req, res) {
           product_data: {
             images: [`${IMG_HOST}${product.img}`],
             name: product.title,
-            description: `${product.desc}`, // Move description here
+            description: `${product.desc.slice(0,1000)}`, // Move description here
           },
           unit_amount: Math.round(product.price * 100),
         },
