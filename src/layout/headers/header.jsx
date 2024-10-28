@@ -292,10 +292,11 @@ const Header = ({
                                   textDecoration: "none",
                                   color: "inherit",
                                   display: "block",
+                                  margin:0
                                 }}
                               >
                                 <ListItem
-                                  className="m-0"
+                                  className="m-0 p-0"
                                   sx={{
                                     cursor: "pointer",
                                     alignItems: "flex-start",
