@@ -9,6 +9,8 @@ import { Rating } from "react-simple-star-rating";
 import CardContainer from "../course-content/CardContainer";
 import moment from "moment";
 import { Avatar } from "@mui/material";
+import FormatToHTML from "../../functions/FormatToHTML";
+
 
 const mainfs = {
   fontSize: "clamp(0.8rem, 0.8rem + 0.6vw, 1.5rem)",  
@@ -128,7 +130,7 @@ const CourseDetailsArea = ({ course }) => {
                   <div className="course-tab-content">
                     <div className="course-overview">
                       <h3 className="heading-title">Course Description</h3>
-                      <p style={mainfs} >{course.course_main_desc}</p>
+                      <p style={mainfs} dangerouslySetInnerHTML={FormatToHTML(course.course_main_desc)} />
 
                       <h5 className="title">What You’ll Learn?</h5>
                       <ul className="mb--60">

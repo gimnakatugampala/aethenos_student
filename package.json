@@ -36,6 +36,7 @@
         "country-to-currency": "^1.1.5",
         "currency-codes": "^2.1.0",
         "currency-symbol-map": "^5.1.0",
+        "dompurify": "^3.1.7",
         "emailjs-com": "^3.2.0",
         "file-saver": "^2.0.5",
         "firebase": "^9.12.1",
