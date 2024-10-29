@@ -1510,32 +1510,58 @@ export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorTe
 }
 
 
-export const ValidateCouponOnCartFromCourseDetails = async(couponCode, router, code) =>{
-
-  var myHeaders = new Headers();
+export const ValidateCouponOnCartFromCourseDetails = async (couponCode, router, code) => {
+  const myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
 
-  var requestOptions = {
+  const requestOptions = {
     method: 'GET',
     headers: myHeaders,
     redirect: 'follow'
   };
-  
-  fetch(`${BACKEND_LINK}/payment/getCouponValidationByCode/${couponCode}`, requestOptions)
-    .then(response => response.json())
-    .then(result => {
-      console.log(result)
 
-      if(result.variable == "404"){
-        router.push(`/course-details/${code}`);
+  try {
+    const response = await fetch(`${BACKEND_LINK}/payment/getCouponValidationByCode/${couponCode}`, requestOptions);
+    const result = await response.json();
+    console.log(result);
+
+    // Redirect if the coupon is not found or expired
+    if (result.variable === "404" || result.validation === "This coupon has expired") {
+      router.push(`/course-details/${code}`);
+      return;
+    }
+
+    // Handle valid coupon
+    if (result.validation === "This coupon is valid") {
+      const coupons = JSON.parse(window.localStorage.getItem("coupons")) || [];
+
+      // Check if the coupon is already added
+      const couponExists = coupons.some((coupon) => coupon.text === couponCode);
+      if (!couponExists) {
+        coupons.push({
+          id: result.course_Id,
+          text: couponCode,
+          couponType: result.couponTypeId,
+          course_prices: result.course_prices,
+          course_Code: result.course_code,
+          global_discount: result.global_discount,
+          global_discount_percentage: result.global_discount_percentage,
+          global_discount_price: result.global_discount_price
+        });
+        window.localStorage.setItem("coupons", JSON.stringify(coupons));
+      } else {
+        console.log("Coupon already added.");
       }
+    } else {
+      router.push(`/course-details/${code}`);
+    }
 
-  
-      
-    })
-    .catch(error => console.log('error', error));
+  } catch (error) {
+    console.log('Error:', error);
+  }
+};
 
-}
+
 
 export const AccountVefication = async(setshowLogin) =>{
 
