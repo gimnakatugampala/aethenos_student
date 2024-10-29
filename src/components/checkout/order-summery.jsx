@@ -94,7 +94,7 @@ const newPricing = cartCourses != null && cartCourses.map((course) => {
         img: course.img,
         title: course.title,
         qty: 1,
-        desc: FormatHTMLRemove(course.other_data.course_main_desc),
+        desc: FormatHTMLRemove(course.other_data.course_main_desc).slice(0,1000),
         currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
         price: discountedPrice.toFixed(2)
     };
