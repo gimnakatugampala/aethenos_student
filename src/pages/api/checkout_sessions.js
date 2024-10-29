@@ -76,22 +76,22 @@ export default async function handler(req, res) {
 
       // res.status(200).json({ url: stripe.checkout.sessions });
 
-      const filePath = path.join(process.cwd(), 'payments.txt');
+      // const filePath = path.join(process.cwd(), 'payments.txt');
 
-      // Delete the file if it exists
-      fs.unlink(filePath, (err) => {
-        if (err && err.code !== 'ENOENT') {
-          // If the error is not "file does not exist", log it
-          console.error('Error deleting file:', err);
-        }
+      // // Delete the file if it exists
+      // fs.unlink(filePath, (err) => {
+      //   if (err && err.code !== 'ENOENT') {
+      //     // If the error is not "file does not exist", log it
+      //     console.error('Error deleting file:', err);
+      //   }
 
-        // Write new data to the file
-        fs.writeFile(filePath, JSON.stringify({ pi: session.payment_intent }) + '\n', (err) => {
-          if (err) {
-            console.error('Error saving payment data:', err);
-          }
-        });
-      });
+      //   // Write new data to the file
+      //   fs.writeFile(filePath, JSON.stringify({ pi: session.payment_intent }) + '\n', (err) => {
+      //     if (err) {
+      //       console.error('Error saving payment data:', err);
+      //     }
+      //   });
+      // });
 
       res.redirect(303, session.url);
       // res.redirect(303, session);
