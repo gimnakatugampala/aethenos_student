@@ -63,8 +63,8 @@ const CourseFiveArea = () => {
 
   return (
     <div className="edu-course-area course-area-1 section-gap-equal">
-      <div className="mx-5">
-        <div className="row g-5 mx-5">
+      <div className="mx-2 mx-sm-3 mx-md-4 mx-lg-5">
+        <div className="row g-5 mx-2 mx-sm-3 mx-md-4 mx-lg-5">
           {loading ? (
             <LargeLoading />
           ) : (

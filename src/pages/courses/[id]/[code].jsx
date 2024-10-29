@@ -368,8 +368,8 @@ const GetCoursesBySubCategory = () => {
       )}
 
       <section className="edu-section-gap course-details-area p-0">
-        <div className="mx-5">
-          <div className="row mx-5">
+        <div className="mx-2 mx-sm-3 mx-md-4 mx-lg-5">
+          <div className="row mx-2 mx-sm-3 mx-md-4 mx-lg-5">
             {loading_top_title ? (
               <>
                 <OneLineSkeleton height={20} />

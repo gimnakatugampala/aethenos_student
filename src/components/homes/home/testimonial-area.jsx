@@ -28,10 +28,10 @@ const testimonial_data = [
   {
     img: "/assets/images/site-ad/Slide8.PNG",
   },
-];
+]; 
 
 const mainfs = {
-  fontSize: "clamp(0.6rem, calc(0.3rem + 1.8vw), 1.5rem)",
+  fontSize: "clamp(1rem, calc(0.3rem + 1.8vw), 1.5rem)",
   margin: "0px",
   marginTop: "5px",
 };

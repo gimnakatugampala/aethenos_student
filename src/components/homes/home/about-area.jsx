@@ -6,7 +6,7 @@ import { useMouseMoveUI } from "../../../contexts/mouse-move-context";
 // const features_list = ['Expert Trainers','Online Remote Learning','Lifetime Access']
 
 const mainfs = {
-  fontSize: "clamp(0.5rem, calc(0.5rem + 0.8vw), 2rem)",
+  fontSize: "clamp(1rem, calc(0.5rem + 0.8vw), 2rem)",
 };
 
 const AboutArea = () => {
@@ -17,10 +17,10 @@ const AboutArea = () => {
       <div className="gap-bottom-equal edu-about-area about-style-1">
         <div className="container edublink-animated-shape">
           <div className="row g-5 align-items-center" style={{justifyContent: "center"}}>
-            <div className="col-10 col-xs-10 col-sm-6">
+            <div className="col-10 col-xs-10 col-md-6">
               <div className="about-image-gallery d-flex justify-content-center">
                 <img
-                  className="w-75"
+                  className="w-100"
                   src="/assets/images/instructor/instructor-banner.jpg"
                   alt="About Image"
                 />
@@ -95,7 +95,7 @@ const AboutArea = () => {
               </div>
             </div>
             <div
-              className="col-10 col-xs-10 col-sm-6"
+              className="col-10 col-xs-10 col-md-6"
               data-sal-delay="150"
               data-sal="slide-left"
               data-sal-duration="800"
