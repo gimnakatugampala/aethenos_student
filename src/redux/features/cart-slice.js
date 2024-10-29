@@ -16,13 +16,17 @@ export const cartSlice = createSlice({
             if(courseIndex >= 0){
                 state.cartCourses[courseIndex].quantity +=1;
                 toast.info(`${payload.title} removed from cart.`, {
-                    position: 'top-left'
+                    position: 'top-left',
+                    autoClose: 3000,
+                    hideProgressBar: true
                 })
             } else {
                 const tempCourse = {...payload,quantity:1};
                 state.cartCourses.push(tempCourse)
                     toast.success(`${payload.title} added to cart`, {
-                    position: 'top-left'
+                    position: 'top-left',
+                    autoClose: 3000,
+                    hideProgressBar: true
                 })
             }
             setLocalStorage('cart_items',state.cartCourses);
@@ -33,7 +37,9 @@ export const cartSlice = createSlice({
             if(state.cartCourses[cartIndex].quantity > 1){
                 state.cartCourses[cartIndex].quantity -= 1
                 toast.error(`Decrease cart quantity`, {
-                    position: 'top-left'
+                    position: 'top-left',
+                    autoClose: 3000,
+                    hideProgressBar: true
                 })
             }
             setLocalStorage('cart_items',state.cartCourses);
@@ -42,7 +48,9 @@ export const cartSlice = createSlice({
         remove_cart_course:(state,{payload}) => {
             state.cartCourses = state.cartCourses.filter(item => Number(item.id ) !== Number(payload.id));
             toast.error(`removed from your cart`, {
-                position: 'top-left'
+                position: 'top-left',
+                autoClose: 3000,
+                hideProgressBar: true
             })
             setLocalStorage('cart_items',state.cartCourses);
         },
@@ -52,7 +60,9 @@ export const cartSlice = createSlice({
             if(confirmMsg){
                 state.cartCourses = [];
                 toast.info(`All Items were removed from cart.`, {
-                    position: 'top-left'
+                    position: 'top-left',
+                    autoClose: 3000,
+                    hideProgressBar: true
                 })
             }
             
