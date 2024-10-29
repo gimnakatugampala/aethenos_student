@@ -1805,9 +1805,9 @@ Swal.fire({
 
 }
 
-export const fetchStripeProcessingFee = async () => {
+export const fetchStripeProcessingFee = async (sessionId) => {
   try {
-      const response = await fetch('/api/stripe_processing_fee');
+      const response = await fetch(`/api/stripe_processing_fee?session_id=${sessionId}`);
       if (!response.ok) {
           throw new Error('Failed to fetch payment data');
       }
@@ -1818,6 +1818,7 @@ export const fetchStripeProcessingFee = async () => {
       return { amount: 0 }; // Default to 0 if there's an error
   }
 };
+
 
 export const VerfiyCheckoutUser = async() =>{
 

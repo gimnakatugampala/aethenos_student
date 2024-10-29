@@ -264,9 +264,12 @@ const generatePaypalItems = () => {
 
             if (!isOrderProcessed && buyCourseOrder != null && total != 0) {
                 console.log(buyCourseOrder);
+                console.log(query.get('session_id'));
 
                 const loadPayments = async () => {
-                    const data = await fetchStripeProcessingFee();
+                    const data = await fetchStripeProcessingFee(query.get('session_id'));
+
+                    console.log(data)
 
                     if(data[0]){
 

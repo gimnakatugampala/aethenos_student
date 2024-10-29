@@ -70,8 +70,8 @@ export default async function handler(req, res) {
         payment_method_types: ['card'],
         line_items: lineItems,
         mode: 'payment',
-        success_url: `https://aethenos.com/checkout/?success=true`,
-        cancel_url: `https://aethenos.com/checkout/?canceled=true`
+        success_url: `${req.headers.origin}/checkout/?success=true&session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${req.headers.origin}/checkout/?canceled=true`
       });
 
       // res.status(200).json({ url: stripe.checkout.sessions });
@@ -95,7 +95,7 @@ export default async function handler(req, res) {
 
       res.redirect(303, session.url);
       // res.redirect(303, session);
-      // console.log(session)
+      console.log(session)
     } catch (err) {
       res.status(err.statusCode || 500).json(err.message);
     }

@@ -4,27 +4,37 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
-    const filePath = path.join(process.cwd(), 'payments.txt');
-    
+    const sessionId = req.query.session_id;
+
+    if (!sessionId) {
+      return res.status(400).json({ error: 'Missing session_id' });
+    }
+
     try {
-      const fileData = fs.readFileSync(filePath, 'utf8');
-      const payments = fileData.trim().split('\n').map(line => JSON.parse(line));
-      
-      if (payments.length > 0) {
-        // Assuming the last payment intent in the file is the one you want to retrieve
-        const paymentIntentId = payments[payments.length - 1].pi;
+      // Retrieve the checkout session using the session ID
+      const checkoutSession = await stripe.checkout.sessions.retrieve(sessionId, {
+        expand: ['line_items'],
+      });
 
-        const paymentIntent = await stripe.paymentIntents.retrieve(
-          paymentIntentId,
-          {
-            expand: ['latest_charge.balance_transaction'],
-          }
-        );
+      const paymentIntentId = checkoutSession.payment_intent;
+      console.log("Payment Intent ID:", paymentIntentId);
 
-        const feeDetails = paymentIntent.latest_charge.balance_transaction.fee_details;
-        res.status(200).json(feeDetails);
+      if (paymentIntentId) {
+        // Retrieve the payment intent to access the latest charge's balance transaction
+        const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId, {
+          expand: ['latest_charge.balance_transaction'],
+        });
+
+        // Get fee details from the balance transaction
+        const feeDetails = paymentIntent.latest_charge.balance_transaction?.fee_details;
+
+        if (feeDetails) {
+          res.status(200).json(feeDetails);
+        } else {
+          res.status(404).json({ error: 'No fee details found' });
+        }
       } else {
-        res.status(404).json({ error: 'No payment intents found' });
+        res.status(404).json({ error: 'No payment intent found in checkout session' });
       }
     } catch (err) {
       console.error('Error retrieving payment data:', err);
