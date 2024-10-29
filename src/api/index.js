@@ -6,6 +6,8 @@ import SuccessAlert from '../functions/Alert/SuccessAlert';
 import { useState } from 'react';
 import { ENV_STATUS } from '../functions/env';
 import { saveAs } from 'file-saver';
+import { toast } from 'react-toastify';
+
 
 
 export const USERTOKEN = Cookies.get('aethenos') 
@@ -1526,7 +1528,27 @@ export const ValidateCouponOnCartFromCourseDetails = async (couponCode, router, 
     console.log(result);
 
     // Redirect if the coupon is not found or expired
-    if (result.variable === "404" || result.validation === "This coupon has expired") {
+    if (result.variable === "404") {
+      
+      toast.error(`Coupon Not Applied.`, {
+        position: 'top-left',
+        autoClose: 3000,
+        hideProgressBar: true
+      })
+
+      router.push(`/course-details/${code}`);
+      return;
+    }
+
+
+    if (result.validation === "This coupon has expired") {
+
+      toast.error(`Coupon has expired.`, {
+        position: 'top-left',
+        autoClose: 3000,
+        hideProgressBar: true
+      })
+
       router.push(`/course-details/${code}`);
       return;
     }
@@ -1549,10 +1571,37 @@ export const ValidateCouponOnCartFromCourseDetails = async (couponCode, router, 
           global_discount_price: result.global_discount_price
         });
         window.localStorage.setItem("coupons", JSON.stringify(coupons));
+
+        toast.success(`Coupon Applied`, {
+          position: 'top-left',
+          autoClose: 3000,
+          hideProgressBar: true
+      })
+
+      router.push(`/course-details/${code}`);
+
+
       } else {
         console.log("Coupon already added.");
+
+        toast.info(`Coupon already added.`, {
+          position: 'top-left',
+          autoClose: 3000,
+          hideProgressBar: true
+        })
+
+        router.push(`/course-details/${code}`);
+
+
       }
     } else {
+
+      toast.error(`Coupon Not Applied.`, {
+        position: 'top-left',
+        autoClose: 3000,
+        hideProgressBar: true
+      })
+
       router.push(`/course-details/${code}`);
     }
 
