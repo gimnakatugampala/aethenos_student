@@ -70,6 +70,31 @@ const mainfs = {
               <span>{course.student} {course.student == 1 ? 'student' : 'students'}</span>
             </li>
           </ul>
+
+
+          {/* external ratings */}
+          <div >
+          <h6 className="m-0 p-0">External ratings</h6>
+          <ul className="course-meta m-0 p-0">
+            <li className="course-rating  m-0 p-0">
+            <DisplayCardRatings rating={Number.parseFloat(course.externalCourseDetails.externalRating).toFixed(1)} />   
+
+              <span className="rating-count m-0 p-0">
+                <a>
+                  <b>({Number.parseFloat(course.externalCourseDetails.externalRating).toFixed(1)})</b>
+                </a>
+              </span>
+            </li>
+
+
+            <li>
+              <span>{course.externalCourseDetails.externalNumberOfStudent} {course.externalCourseDetails.externalNumberOfStudent == 1 ? 'student' : 'students'}</span>
+            </li>
+          </ul>
+
+          </div>
+
+
           <p className="m-0 p-0">
             <i className="icon-58"></i> Created by{" "}
             <a
