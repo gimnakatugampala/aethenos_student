@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 const clientId = "AbhfyGv-hhPIo4dZ_Wia7_0sevNZC3B871Ndw8aDEIm8h6O59L1sV0TzgFXyCpwx-_GC93sKwsU_GtEF";
 const clientSecret = "ELvI0eNofma6wegK2amivZ2GvpokEgURE8fOIpKg98D7o5iFxhk3nEUD90mT7aXmK7tImyV94aBCaVvT";
 
-const environment = new paypal.core.SandboxEnvironment(clientId, clientSecret);
+const environment = new paypal.core.LiveEnvironment(clientId, clientSecret);
 const client = new paypal.core.PayPalHttpClient(environment);
 
 export default async function POST(req, res) {
