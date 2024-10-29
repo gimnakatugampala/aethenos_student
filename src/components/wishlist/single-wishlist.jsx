@@ -51,7 +51,7 @@ const SingleWishlist = ({ item }) => {
       </td>
 
       <td className="product-add-cart" onClick={() => handleAddToCart(item)}>
-        <a style={{ cursor: "pointer" }} className="edu-btn btn-medium">
+        <a style={{ cursor: "pointer" }} className="edu-btn btn-medium px-3">
           {cartCourses.some((course) => course.id === item.id)
             ? "Remove from Cart"
             : "Add to cart"}
