@@ -18,6 +18,7 @@ import HandleFreeCourses from "../../functions/pricing/HandleFreeCourses";
 import FormatNumbers from "../../functions/FormatNumbers";
 import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
 import { Height } from "@mui/icons-material";
+import FormatHTMLRemove from "../../functions/FormatHTMLRemove";
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
@@ -201,8 +202,8 @@ const CourseTypeFive = ({ data, classes }) => {
 
           <p className="m-0" style={{ fontSize: "14px" }}>
             {data && data.course_main_desc && data.course_main_desc.length > 70
-              ? data.course_main_desc.substring(0, 70) + "..."
-              : data && data.course_main_desc}
+              ? FormatHTMLRemove(data.course_main_desc).substring(0, 70) + "..."
+              : data && FormatHTMLRemove(data.course_main_desc)}
           </p>
 
           <span className="m-0 p-0" style={{ fontSize: "12px" }}>

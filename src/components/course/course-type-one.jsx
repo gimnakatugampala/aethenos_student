@@ -17,6 +17,7 @@ import Cookies from "js-cookie";
 import HandleFreeCourses from "../../functions/pricing/HandleFreeCourses";
 import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
 import FormatNumbers from "../../functions/FormatNumbers";
+import FormatHTMLRemove from "../../functions/FormatHTMLRemove";
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
@@ -262,8 +263,8 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
 
           <p>
             {data.curriculum_desc.length > 60
-              ? data.curriculum_desc.substring(0, 60) + "..."
-              : data.curriculum_desc}
+              ? FormatHTMLRemove(data.curriculum_desc).substring(0, 60) + "..."
+              : FormatHTMLRemove(data.curriculum_desc)}
           </p>
 
           <ol className="d-flex course-meta">

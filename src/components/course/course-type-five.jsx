@@ -14,6 +14,7 @@ import GetCurrencyByCountry from "../../functions/pricing/GetCurrencyByCountry";
 import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
 import StarsRating from "stars-rating";
 import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
+import FormatHTMLRemove from "../../functions/FormatHTMLRemove";
 
 const CourseTypeFive = ({ data, classes }) => {
   const { cartCourses } = useSelector((state) => state.cart);
@@ -146,8 +147,8 @@ const CourseTypeFive = ({ data, classes }) => {
 
           <p className="m-0" style={{ fontSize: "14px" }}>
             {data && data.course_main_desc && data.course_main_desc.length > 120
-              ? data.course_main_desc.substring(0, 120) + "..."
-              : data && data.course_main_desc}
+              ? FormatHTMLRemove(data.course_main_desc).substring(0, 120) + "..."
+              : data && FormatHTMLRemove(data.course_main_desc)}
           </p>
 
           <span className="m-0 p-0" style={{ fontSize: "12px" }}>
