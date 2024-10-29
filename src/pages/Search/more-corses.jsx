@@ -10,6 +10,10 @@ const CourseArea = ({ searchKey }) => {
   const [courses, setCourses] = useState([]);
   const [coursesPerRow, setCoursesPerRow] = useState(4);
 
+  if (searchKey == null) {
+    return null;
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {

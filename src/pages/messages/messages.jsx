@@ -131,7 +131,7 @@ function Messages() {
 
   return (
     <div className="container-fluid my-5">
-      <div className="col-11 m-lg-auto">
+      <div className="col-11 m-auto">
         <Card.Header>
           <h3 className="title mt-5">Messages</h3>
         </Card.Header>

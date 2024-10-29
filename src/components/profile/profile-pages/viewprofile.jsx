@@ -165,7 +165,7 @@ const ViewProfile = () => {
     <>
       <Header no_top_bar={true} />
 
-      <div className="mx-5 mt-5 mb-5 ">
+      <div className="mx-2 mx-xs-2 mx-sm-5 mt-5 mb-5  ">
         <h3>Profile & settings</h3>
 
         <Tabs
@@ -280,13 +280,13 @@ const ViewProfile = () => {
               </div>
               <div className="d-flex justify-content-end">
                 {btn_loading ? (
-                  <Button variant="contained">
+                  <Button variant="">
                     <Spinner size="sm" animation="border" variant="light" />
                   </Button>
                 ) : (
                   <Button
                     onClick={handleProfileData}
-                    variant="contained"
+                    variant=""
                     className="edu-btn btn-small float-end mx-3 mt-1"
                   >
                     Save
@@ -297,7 +297,7 @@ const ViewProfile = () => {
           </Tab>
 
           <Tab eventKey="profile" title="Profile Picture">
-            <div className="row mx-5 mb-5">
+            <div className="row mx-2 mx-xs-2 mx-sm-5 mb-5">
               <div className="col-md-6">
                 <p className="m-0 p-0">
                   <b>Image preview</b>
@@ -339,13 +339,13 @@ const ViewProfile = () => {
 
                 <div className="d-flex justify-content-end">
                   {btn_loading ? (
-                    <Button variant="contained">
+                    <Button variant="">
                       <Spinner size="sm" animation="border" variant="light" />
                     </Button>
                   ) : (
                     <Button
                       onClick={handleProfileData}
-                      variant="contained"
+                      variant=""
                       className="edu-btn btn-small float-end mx-3  mt-1"
                     >
                       Save

@@ -63,7 +63,7 @@ const CourseDetailsArea = ({ course }) => {
 
   return (
     <section className="edu-section-gap course-details-3">
-      <div className="mx-5">
+      <div className="mx-3 mx-sm-3 mx-md-4 mx-lg-5">
         <div className="row row--30 mx-5">
           <div className="col-lg-8 pt-0">
             <div className="course-details-content pt-0">
@@ -133,7 +133,7 @@ const CourseDetailsArea = ({ course }) => {
                       <p style={mainfs} dangerouslySetInnerHTML={FormatToHTML(course.course_main_desc)} />
 
                       <h5 className="title">What You’ll Learn?</h5>
-                      <ul className="mb--60">
+                      <ul className="mb--60 mx-3">
                         <div className="row">
                           {course.intended_learners?.map(
                             (l, i) =>
@@ -222,7 +222,7 @@ const CourseDetailsArea = ({ course }) => {
                             </span>
                           </div>
                         </div>
-                        <div className="col-md-9">
+                        <div className="col-sm-9 mt-3">
                           <div className="review-wrapper ">
                             {course.ratingDetails != null && (
                               <SingleProgressbar
@@ -258,7 +258,7 @@ const CourseDetailsArea = ({ course }) => {
                         </div>
                       </div>
 
-                      <div className="mb-1 mt-1">
+                      <div className="mb-1 mt-3">
                         <h3>Reviews</h3>
                         {featured_reviews != null &&
                           (featured_reviews.length > 0

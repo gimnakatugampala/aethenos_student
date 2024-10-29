@@ -16,8 +16,8 @@ const AboutArea = () => {
     <>
       <div className="gap-bottom-equal edu-about-area about-style-1">
         <div className="container edublink-animated-shape">
-          <div className="row g-5 align-items-center">
-            <div className="col-6">
+          <div className="row g-5 align-items-center" style={{justifyContent: "center"}}>
+            <div className="col-10 col-xs-10 col-sm-6">
               <div className="about-image-gallery d-flex justify-content-center">
                 <img
                   className="w-75"
@@ -95,7 +95,7 @@ const AboutArea = () => {
               </div>
             </div>
             <div
-              className="col-6"
+              className="col-10 col-xs-10 col-sm-6"
               data-sal-delay="150"
               data-sal="slide-left"
               data-sal-duration="800"

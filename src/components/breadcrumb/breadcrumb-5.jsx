@@ -8,10 +8,16 @@ import DisplayCardRatings from "../ratings-display/DisplayCardRatings";
 const CourseBreadcrumb = ({ course }) => {
   const { title, instructor, language, rating_count, subtitle } = course || {};
   // const { mouseDirection, mouseReverse } = useMouseMoveUI();
+
+  
+const mainfs = {
+  fontSize: "clamp(0.8rem, 0.8rem + 0.6vw, 1.5rem)",  
+};
+
   return (
     <div className="edu-breadcrumb-area breadcrumb-style-3 ">
-      <div className="mx-5">
-        <div className="breadcrumb-inner mx-5">
+      <div className="mx-2 mx-sm-3 mx-md-4 mx-lg-5">
+        <div className="breadcrumb-inner mx-2 mx-sm-5 mx-md-5 mx-lg-5">
           <ul className="edu-breadcrumb m-0 p-0">
             <li className="breadcrumb-item">
               <a href={`/courses/${course.category_link_name}`}>
@@ -79,7 +85,7 @@ const CourseBreadcrumb = ({ course }) => {
             <li>
               <span className="m-0 p-0">
                 <i
-                  style={{ fontSize: "17px" }}
+                  style={mainfs}
                   className="fa-solid fa-calendar-days m-0"
                 ></i>{" "}
                 Created Date  {moment(course.created_date).format('DD-MM-YYYY')}
@@ -87,7 +93,7 @@ const CourseBreadcrumb = ({ course }) => {
             </li>
             <li>
               <i
-                style={{ fontSize: "17px" }}
+                  style={mainfs}
                 className="fa-solid fa-globe m-0"
               ></i>{" "}
               {course.language}
@@ -95,7 +101,7 @@ const CourseBreadcrumb = ({ course }) => {
             <li>
               <span>
                 <i
-                  style={{ fontSize: "17px" }}
+                   style={mainfs}
                   className="fa-solid fa-layer-group m-0"
                 ></i>{" "}
                 {course.level}

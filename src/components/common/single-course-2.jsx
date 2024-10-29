@@ -190,7 +190,7 @@ const SingleCourseTwo = ({ course }) => {
               style={{ cursor: "pointer" }}
             >
               {cartCourses.some((item) => item.id === id)
-                ? "Added to cart"
+                ? "Remove from Cart"
                 : "Add to cart"}
               <i className="icon-4"></i>
             </a>

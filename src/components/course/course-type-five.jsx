@@ -15,6 +15,8 @@ import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
 import StarsRating from "stars-rating";
 import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
 import FormatHTMLRemove from "../../functions/FormatHTMLRemove";
+import FormatNumbers from "../../../src/functions/FormatNumbers"; 
+
 
 const CourseTypeFive = ({ data, classes }) => {
   const { cartCourses } = useSelector((state) => state.cart);
@@ -237,7 +239,7 @@ const CourseTypeFive = ({ data, classes }) => {
                 className="edu-btn btn-medium"
               >
                 {cartCourses.some((course) => course.id == data.id)
-                  ? "Added to cart"
+                  ? "Remove from Cart"
                   : "Add to cart"}
               </a>
               <button

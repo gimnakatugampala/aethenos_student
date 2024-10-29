@@ -80,7 +80,7 @@ const index = () => {
       <SEO pageTitle={"Purchase History"} />
       <Header />
 
-      <div className="edu-brand-area brand-area-1 p-5">
+      <div className="edu-brand-area brand-area-1 p-2 p-sm-2 p-md-5">
         <div className="container-fluid">
           <div className="row">
             <div className="mb-4">
@@ -136,9 +136,9 @@ const index = () => {
                   aria-labelledby="courses-tab"
                 >
                   <div className="course-tab-content">
-                    <div className="course-overview">
+                    <div className="course-overview" style={{overflow: "auto"}}>
                       {pHistory != null && pHistory.length > 0 ? (
-                        <Table striped bordered hover>
+                        <Table striped bordered hover style={{overflow: "auto"}}>
                           <thead>
                             <tr>
                               <th></th>
@@ -209,9 +209,9 @@ const index = () => {
                   aria-labelledby="refunds-tab"
                 >
                   <div className="course-tab-content">
-                    <div className="course-overview">
+                    <div className="course-overview" style={{overflow: "auto"}}>
                       {refunds != null ? (
-                        <Table striped bordered hover>
+                        <Table striped bordered hover >
                           <thead>
                             <tr>
                               <th></th>

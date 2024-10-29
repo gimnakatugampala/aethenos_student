@@ -40,7 +40,7 @@ const index = () => {
       <SEO pageTitle={"Notifications"} />
       <Header />
 
-      <div className="edu-brand-area brand-area-1 p-5 ">
+      <div className="edu-brand-area brand-area-1 p-2 p-sm-2 p-md-5 ">
         <div className="container-fluid">
           <div className="row ">
             <div className="mb-4 ">

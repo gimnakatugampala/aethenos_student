@@ -121,7 +121,7 @@ const SingleCourseTwo = ({ course }) => {
 
                         <a onClick={() => handleAddToCart(course)} className="edu-btn btn-secondary btn-small"
                         style={{ cursor: 'pointer' }}> 
-                            {cartCourses.some(item => item.id === id) ? 'Added to cart' : 'Add to cart'} 
+                            {cartCourses.some(item => item.id === id) ? 'Remove from Cart' : 'Add to cart'} 
                             <i className="icon-4"></i>
                         </a>
                     </div>

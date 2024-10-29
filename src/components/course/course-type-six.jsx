@@ -52,7 +52,7 @@ const CourseTypeSix = ({ data, classes }) => {
                     <div className="read-more-btn">
                         {data.isPaid ? (
                         <a className="edu-btn btn-small btn-secondary" onClick={() => handleAddToCart(data)} style={{ cursor: 'pointer' }}>
-                            { cartCourses.some(item => item.id === data.id) ? 'Added to cart' : 'Add to cart' }
+                            { cartCourses.some(item => item.id === data.id) ? 'Remove from Cart' : 'Add to cart' }
                             <i className="icon-4"></i>
                         </a>
                         ) : (

@@ -100,7 +100,7 @@ const SearchResults = () => {
   return (
     <div className="edu-course-area section-gap-equal gap-bottom-text ">
       <div
-        className="gap-bottom-text mx-5"       
+        className="gap-bottom-text mx-2 mx-sm-3 mx-md-4 mx-lg-5"       
       >
         {loading ? (
           <div className="d-flex justify-content-center align-items-center">

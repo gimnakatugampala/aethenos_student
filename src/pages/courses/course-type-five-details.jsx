@@ -205,7 +205,7 @@ const CourseTypeFive = ({ data, classes }) => {
               className="edu-btn btn-medium button-group float-end mt-2"
             >
               {cartCourses.some((course) => course.id == data.id)
-                ? "Added to cart"
+                ? "Remove from Cart"
                 : "Add to cart"}
             </a>
           ) : (
