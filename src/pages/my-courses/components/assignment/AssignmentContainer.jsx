@@ -13,7 +13,7 @@ import "@vidstack/react/player/styles/default/layouts/video.css";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { saveAs } from "file-saver";
 
-import axios from 'axios';
+// import axios from 'axios';
 
 import {
   MediaPlayer,

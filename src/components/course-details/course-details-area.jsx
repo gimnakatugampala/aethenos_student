@@ -64,7 +64,7 @@ const CourseDetailsArea = ({ course }) => {
   return (
     <section className="edu-section-gap course-details-3">
       <div className="mx-3 mx-sm-3 mx-md-4 mx-lg-5">
-        <div className="row row--30 mx-5">
+        <div className="row row--30 mx-3 mx-sm-3 mx-md-4 mx-lg-5">
           <div className="col-lg-8 pt-0">
             <div className="course-details-content pt-0">
               <ul
@@ -196,9 +196,9 @@ const CourseDetailsArea = ({ course }) => {
                 >
                   <div className="course-tab-content">
                     <div className="course-review">
-                      <h3 className="heading-title">Student Feedback</h3>
+                      <h3 className="heading-title mb-3">Student Feedback</h3>
 
-                      <div className="row align-items-center">
+                      <div className="row align-items-center mx-3 mx-sm-3 mx-md-3 mx-lg-2">
                         <div className="col-sm-3">
                           <div className="rating-box">
                             <div className="rating-number">
