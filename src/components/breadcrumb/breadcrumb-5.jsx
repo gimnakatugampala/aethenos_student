@@ -73,7 +73,8 @@ const mainfs = {
 
 
           {/* external ratings */}
-          <div >
+            {course.externalCourseDetails != null && (
+          <div>
           <h6 className="m-0 p-0">External ratings</h6>
           <ul className="course-meta m-0 p-0">
             <li className="course-rating  m-0 p-0">
@@ -86,13 +87,15 @@ const mainfs = {
               </span>
             </li>
 
-
+           
             <li>
               <span>{course.externalCourseDetails.externalNumberOfStudent} {course.externalCourseDetails.externalNumberOfStudent == 1 ? 'student' : 'students'}</span>
             </li>
+        
           </ul>
 
           </div>
+            )}
 
 
           <p className="m-0 p-0">
