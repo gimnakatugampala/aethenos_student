@@ -9,7 +9,7 @@ import { IMG_HOST } from "../../../../api";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { saveAs } from 'file-saver';
 
-import axios from 'axios';
+// import axios from 'axios';
 
 const steps = [
   "Practice test information and instructions",

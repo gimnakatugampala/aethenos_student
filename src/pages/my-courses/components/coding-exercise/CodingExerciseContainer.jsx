@@ -12,7 +12,7 @@ import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/audio.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 import { saveAs } from 'file-saver';
-import axios from 'axios';
+// import axios from 'axios';
 
 import {
   MediaPlayer,

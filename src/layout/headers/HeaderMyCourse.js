@@ -13,8 +13,9 @@ import { Dialog, DialogActions, DialogContent, DialogTitle, IconButton } from '@
 import CloseIcon from '@mui/icons-material/Close';
 
 const mainfs = {
-  fontSize: "calc(0.5rem + 0.6vw)",
+  fontSize: "clamp(1rem, 0.6rem + 0.6vw, 1.5rem)",  
 };
+
 
 
 const HeaderMyCourse = ({ setcourse, id, course }) => {
@@ -37,11 +38,11 @@ const HeaderMyCourse = ({ setcourse, id, course }) => {
       <Navbar
         collapseOnSelect
         expand="lg"
-        className="bg-body-tertiary"
+        className="justify-content-center bg-body-tertiary"
         bg="dark"
         data-bs-theme="dark"
       >
-        <Container className="justify-content-center mx-5">
+        <Container className="justify-content-center mx-2 mx-sm-3 mx-md-4 mx-lg-5">
           <Navbar.Brand href="/">
             <img
               width={200}
@@ -54,11 +55,9 @@ const HeaderMyCourse = ({ setcourse, id, course }) => {
 
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
+            <Nav className="me-auto align-items-center">
               <Nav.Link className="text-white"  style={mainfs}>{course.title}</Nav.Link>
-            </Nav>
-
-            <Nav className="d-flex align-items-center float-end">
+             
               <Nav.Link        
                 onClick={handleShowReview}
                 className="text-white"
@@ -93,7 +92,7 @@ const HeaderMyCourse = ({ setcourse, id, course }) => {
                 className="d-flex align-items-center p-2"
                 title="Your progress"
                 id="collapsible-nav-dropdown"
-                style={mainfs}
+                style={{mainfs}}
               >
                 {course.completedItemCount !== course.allItemsCount ? (
                   <NavDropdown.Item style={mainfs}>
@@ -147,7 +146,10 @@ const HeaderMyCourse = ({ setcourse, id, course }) => {
                   </Button>
                 </Nav.Link>
               )}
+            
             </Nav>
+
+        
           </Navbar.Collapse>
         </Container>
       </Navbar>
