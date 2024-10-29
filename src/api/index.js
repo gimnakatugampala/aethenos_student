@@ -6,6 +6,8 @@ import SuccessAlert from '../functions/Alert/SuccessAlert';
 import { useState } from 'react';
 import { ENV_STATUS } from '../functions/env';
 import { saveAs } from 'file-saver';
+import { toast } from 'react-toastify';
+
 
 
 export const USERTOKEN = Cookies.get('aethenos') 
@@ -1508,6 +1510,107 @@ export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorTe
     .catch(error => console.log('error', error));
 
 }
+
+
+export const ValidateCouponOnCartFromCourseDetails = async (couponCode, router, code) => {
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  const requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+
+  try {
+    const response = await fetch(`${BACKEND_LINK}/payment/getCouponValidationByCode/${couponCode}`, requestOptions);
+    const result = await response.json();
+    console.log(result);
+
+    // Redirect if the coupon is not found or expired
+    if (result.variable === "404") {
+      
+      toast.error(`Coupon Not Applied.`, {
+        position: 'top-left',
+        autoClose: 3000,
+        hideProgressBar: true
+      })
+
+      router.push(`/course-details/${code}`);
+      return;
+    }
+
+
+    if (result.validation === "This coupon has expired") {
+
+      toast.error(`Coupon has expired.`, {
+        position: 'top-left',
+        autoClose: 3000,
+        hideProgressBar: true
+      })
+
+      router.push(`/course-details/${code}`);
+      return;
+    }
+
+    // Handle valid coupon
+    if (result.validation === "This coupon is valid") {
+      const coupons = JSON.parse(window.localStorage.getItem("coupons")) || [];
+
+      // Check if the coupon is already added
+      const couponExists = coupons.some((coupon) => coupon.text === couponCode);
+      if (!couponExists) {
+        coupons.push({
+          id: result.course_Id,
+          text: couponCode,
+          couponType: result.couponTypeId,
+          course_prices: result.course_prices,
+          course_Code: result.course_code,
+          global_discount: result.global_discount,
+          global_discount_percentage: result.global_discount_percentage,
+          global_discount_price: result.global_discount_price
+        });
+        window.localStorage.setItem("coupons", JSON.stringify(coupons));
+
+        toast.success(`Coupon Applied`, {
+          position: 'top-left',
+          autoClose: 3000,
+          hideProgressBar: true
+      })
+
+      router.push(`/course-details/${code}`);
+
+
+      } else {
+        console.log("Coupon already added.");
+
+        toast.info(`Coupon already added.`, {
+          position: 'top-left',
+          autoClose: 3000,
+          hideProgressBar: true
+        })
+
+        router.push(`/course-details/${code}`);
+
+
+      }
+    } else {
+
+      toast.error(`Coupon Not Applied.`, {
+        position: 'top-left',
+        autoClose: 3000,
+        hideProgressBar: true
+      })
+
+      router.push(`/course-details/${code}`);
+    }
+
+  } catch (error) {
+    console.log('Error:', error);
+  }
+};
+
+
 
 export const AccountVefication = async(setshowLogin) =>{
 

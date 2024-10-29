@@ -7,7 +7,7 @@ let clientSecret = "ELvI0eNofma6wegK2amivZ2GvpokEgURE8fOIpKg98D7o5iFxhk3nEUD90mT
 
 
 // This sample uses SandboxEnvironment. In production, use LiveEnvironment
-let environment = new paypal.core.SandboxEnvironment(clientId, clientSecret);
+let environment = new paypal.core.LiveEnvironment(clientId, clientSecret);
 let client = new paypal.core.PayPalHttpClient(environment);
 
 export default async function POST(req, res){

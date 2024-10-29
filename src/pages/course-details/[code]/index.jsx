@@ -6,7 +6,7 @@ import CourseDetailsMain from '../../../components/course-details';
 import CourseDetailsTwoMain from '../../../components/course-details-2'
 import { course_data } from '../../../data';
 import { useEffect } from 'react';
-import { GetCourseDetails } from '../../../api';
+import { GetCourseDetails, ValidateCouponOnCartFromCourseDetails } from '../../../api';
 import { useState } from 'react';
 
 import LargeLoading from '../../../functions/Loading/LargeLoading';
@@ -16,13 +16,18 @@ import LargeLoading from '../../../functions/Loading/LargeLoading';
 const CourseDetails = () => {
 
   const router = useRouter();
-  const { code } = router.query;
+  const { code, couponCode  } = router.query;
   const [course, setcourse] = useState(null)
 
   useEffect(() => {
 
     if(code != null){
       GetCourseDetails(code,setcourse)
+    }
+
+    if(couponCode != null){
+      console.log(couponCode)
+      ValidateCouponOnCartFromCourseDetails(couponCode, router, code)
     }
    
   }, [code])

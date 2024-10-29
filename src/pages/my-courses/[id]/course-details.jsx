@@ -78,6 +78,7 @@ import MediumLoading from "../../../functions/Loading/MediumLoading";
 import { Footer } from "../../../layout";
 import { ConvertToHTML, StripeHTML } from "../../../functions/ConvertToHTML";
 import { FormatVideoTimeLength } from "../../../functions/FormatVideoTimeLength";
+import FormatToHTML from "../../../functions/FormatToHTML";
 
 const mainfs = {
   fontSize: "clamp(0.8rem, 0.8rem + 0.6vw, 1.5rem)",  
@@ -900,7 +901,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                           <h3 className="heading-title m-0" >
                             Course Description
                           </h3>
-                          <p style={mainfs}>{course && course.course_main_desc}</p>
+                          <p style={mainfs} dangerouslySetInnerHTML={FormatToHTML(course.course_main_desc)} />
 
                           <h3 className="heading-title">Instructor</h3>
                           <div className="d-flex align-items-center" style={mainfs}>
