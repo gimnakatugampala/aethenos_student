@@ -34,7 +34,7 @@ const CourseTypeSeven = ({ data, classes }) => {
                         <span className="rating-count">({data.rating} /{data.rating_count} Rating)</span>
                     </div>
                     <ul className="course-meta">
-                        <li><i className="icon-24"></i>{data.lesson} Lessons</li>
+                        <li><i className="icon-24"></i>{data.lesson} Lectures</li>
                         <li><i className="icon-25"></i>{data.student} Students</li>
                     </ul>
                 </div>

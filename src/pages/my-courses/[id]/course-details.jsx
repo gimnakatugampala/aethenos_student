@@ -994,12 +994,14 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                             <h3 className="heading-title m-0">
                               Course Description
                             </h3>
-                            <p
+                            {course && (
+                          <p
                               style={mainfs}
                               dangerouslySetInnerHTML={FormatToHTML(
                                 course.course_main_desc
                               )}
                             />
+                          )}
 
                             <h3 className="heading-title">Instructor</h3>
                             <div

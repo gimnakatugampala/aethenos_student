@@ -2,12 +2,24 @@ import paypal from '@paypal/checkout-server-sdk'
 import { NextResponse } from 'next/server'
 
 // Creating an environment
-let clientId = "AbhfyGv-hhPIo4dZ_Wia7_0sevNZC3B871Ndw8aDEIm8h6O59L1sV0TzgFXyCpwx-_GC93sKwsU_GtEF";
-let clientSecret = "ELvI0eNofma6wegK2amivZ2GvpokEgURE8fOIpKg98D7o5iFxhk3nEUD90mT7aXmK7tImyV94aBCaVvT";
+// let clientId = "AbhfyGv-hhPIo4dZ_Wia7_0sevNZC3B871Ndw8aDEIm8h6O59L1sV0TzgFXyCpwx-_GC93sKwsU_GtEF";
+// let clientSecret = "ELvI0eNofma6wegK2amivZ2GvpokEgURE8fOIpKg98D7o5iFxhk3nEUD90mT7aXmK7tImyV94aBCaVvT";
+
+
+// // This sample uses SandboxEnvironment. In production, use LiveEnvironment
+// let environment = new paypal.core.LiveEnvironment(clientId, clientSecret);
+// let client = new paypal.core.PayPalHttpClient(environment);
+
+
+// Creating an environment
+let clientId = process.env.PAYPAL_CLIENT_ID;
+let clientSecret = process.env.PAYPAL_SECRET_KEY;
 
 
 // This sample uses SandboxEnvironment. In production, use LiveEnvironment
-let environment = new paypal.core.LiveEnvironment(clientId, clientSecret);
+let environment = process.env.PAYPAL_ENVIRONMENT === "live" 
+    ? new paypal.core.LiveEnvironment(clientId, clientSecret) 
+    : new paypal.core.SandboxEnvironment(clientId, clientSecret);
 let client = new paypal.core.PayPalHttpClient(environment);
 
 export default async function POST(req, res){

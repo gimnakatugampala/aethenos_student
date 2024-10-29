@@ -61,7 +61,7 @@ export default function TestimonialArea() {
                     {" "}
                     Fully Integrated to the Excel application{" "}
                   </li>
-                  <li style={mainfs}>Streaming video lessons</li>
+                  <li style={mainfs}>Streaming video Lectures</li>
                   <li style={mainfs}>
                     Load Excel practice files/data directly to Excel{" "}
                   </li>

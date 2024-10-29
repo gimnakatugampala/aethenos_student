@@ -124,7 +124,7 @@ const SingleCourseTwo = ({ course }) => {
               </li>
               <li>
                 <i className="icon-24"></i>
-                {getTotalLecturesCount(course)} Lessons
+                {getTotalLecturesCount(course)} Lectures
               </li>
             </ul>
           </div>
@@ -180,7 +180,7 @@ const SingleCourseTwo = ({ course }) => {
             </li>
             <li>
               <i className="icon-24"></i>
-              {getTotalLecturesCount(data)} Lessons
+              {getTotalLecturesCount(data)} Lectures
             </li>
             </ul>
 

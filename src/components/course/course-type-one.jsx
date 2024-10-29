@@ -193,7 +193,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
             </li>
             <li>
               <i className="icon-24"></i>
-              {getTotalLecturesCount(data)} Lessons
+              {getTotalLecturesCount(data)} Lectures
             </li>
           </ol>
         </div>
@@ -274,7 +274,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
             </li>
             <li>
               <i className="icon-24"></i>
-              {getTotalLecturesCount(data)} Lessons
+              {getTotalLecturesCount(data)} Lectures
             </li>
           </ol>
 

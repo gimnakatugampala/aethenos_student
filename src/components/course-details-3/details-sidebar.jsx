@@ -22,7 +22,7 @@ const DetailsSidebar = () => {
                                 <span className="value">3 weeks</span>
                             </li>
                             <li>
-                                <span className="label"><Books />Lessons:</span>
+                                <span className="label"><Books />Lectures:</span>
                                 <span className="value">8</span>
                             </li>
                             <li>

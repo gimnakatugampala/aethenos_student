@@ -240,7 +240,7 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
             </li>
             <li>
               <i className="icon-24"></i>
-              {getTotalLecturesCount(data)} Lessons
+              {getTotalLecturesCount(data)} Lectures
             </li>
           </ol>
         </div>
@@ -274,7 +274,7 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
             {/* <ul className="course-meta">
                        <li>
                          {data.lesson}{" "}
-                         {data.lesson + data.lesson > 1 ? "Lessons" : "Lesson"}
+                         {data.lesson + data.lesson > 1 ? "Lectures" : "Lesson"}
                        </li>
                        <li>{CalculateDiscountPrice(data)}</li>
                        <li>{data.level}</li>
