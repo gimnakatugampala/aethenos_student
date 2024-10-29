@@ -67,7 +67,7 @@ const SearchResults = ({ allcourses }) => {
           </div>
 
           <div
-              className={`8 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-9 col-pl--5 ${
+              className={`8 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-9 col-pl--5 px-0 ${
                 loading ? "fade-in" : "fade-in visible"
               }`}
             >

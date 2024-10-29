@@ -63,8 +63,8 @@ const CourseFiveArea = () => {
 
   return (
     <div className="edu-course-area course-area-1 section-gap-equal">
-      <div className="mx-2 mx-sm-3 mx-md-4 mx-lg-5">
-        <div className="row g-5 mx-2 mx-sm-3 mx-md-4 mx-lg-5">
+      <div className="mx-2 mx-sm-3 mx-md-4 mx-lg-3">
+        <div className="row g-5 mx-2 mx-sm-3 mx-md-4 mx-lg-3  justify-content-center">
           {loading ? (
             <LargeLoading />
           ) : (
@@ -99,7 +99,8 @@ const CourseFiveArea = () => {
                   <div className="m-3">
                     <p className="m-0 p-0">Ratings</p>
 
-                    {instructor_details.rating && Number.parseFloat(instructor_details.rating) > 0 ? (
+                    {instructor_details.rating &&
+                    Number.parseFloat(instructor_details.rating) > 0 ? (
                       <h5 className="m-0 p-0">
                         <DisplayCardRatings
                           rating={Number.parseFloat(
@@ -115,7 +116,7 @@ const CourseFiveArea = () => {
                         </h6>
                       </h5>
                     ) : (
-                      <h6 className="m-0 p-0">0.0</h6>               
+                      <h6 className="m-0 p-0">0.0</h6>
                     )}
                   </div>
                 </div>
