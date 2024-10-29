@@ -10,7 +10,7 @@ const SortingArea = ({ course_items, num, setCourses, courses, course_list, item
     const dispatch = useDispatch();
     const { theme, setTheme } = useTheme();
     const mainfs = {
-        fontSize: "calc(0.4rem + 0.3vw)",
+        fontSize: "clamp(0.8rem, 0.6rem + 0.6vw, 1rem)",
         color: theme === "dark" ? "#ffffff" : "",
         backgroundColor: theme === "dark" ? "#1c242f" : "",
       };
