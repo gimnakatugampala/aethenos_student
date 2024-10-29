@@ -77,7 +77,7 @@ const SingleCourseTwo = ({ course }) => {
                         <div className="course-price">${course_price}</div>
 
                         <ul className="course-meta">
-                            <li><i className="icon-24"></i>{lesson} Lessons</li>
+                            <li><i className="icon-24"></i>{lesson} Lectures</li>
                             <li><i className="icon-25"></i>{student} Students</li>
                         </ul>
                     </div>
@@ -115,7 +115,7 @@ const SingleCourseTwo = ({ course }) => {
                         <p>{short_desc}</p>
 
                         <ul className="course-meta">
-                            <li><i className="icon-24"></i>{lesson} Lessons</li>
+                            <li><i className="icon-24"></i>{lesson} Lectures</li>
                             <li><i className="icon-25"></i>{student} Students</li>
                         </ul>
 

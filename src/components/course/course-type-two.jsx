@@ -35,7 +35,7 @@ const CourseTypeTwo = ({ data, classes }) => {
             </li>
             <li>
               <i className="icon-24"></i>
-              {getTotalLecturesCount(data)} Lessons
+              {getTotalLecturesCount(data)} Lectures
             </li>
           </ul>
         </div>

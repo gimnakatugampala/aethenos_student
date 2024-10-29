@@ -50,7 +50,7 @@ const CourseDetailsSidebar = ({ course,details_2=false }) => {
                                 <li>
                                     <span className="label">
                                         <Books />
-                                        Lessons:</span>
+                                        Lectures:</span>
                                     <span className="value">8</span>
                                 </li>
 

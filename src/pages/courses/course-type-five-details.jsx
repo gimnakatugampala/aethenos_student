@@ -193,7 +193,7 @@ const CourseTypeFive = ({ data, classes }) => {
           </div>
           <ul className="course-meta">
             <li>{data != undefined && data.language} </li>
-            <li>{data != undefined && data.lesson} Lessons</li>
+            <li>{data != undefined && data.lesson} Lectures</li>
             <li>{data != undefined && data.student} Students</li>
             <li>{data != undefined && data.category}</li>
           </ul>

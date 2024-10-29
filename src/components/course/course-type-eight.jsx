@@ -114,7 +114,7 @@ const CourseTypeEight = ({ data, classes }) => {
             </li>
             <li>
               <i className="icon-24"></i>
-              {getTotalLecturesCount(data)} Lessons
+              {getTotalLecturesCount(data)} Lectures
             </li>
           </ul>
         </div>
@@ -141,7 +141,7 @@ const CourseTypeEight = ({ data, classes }) => {
           </div>
 
           <ul className="course-meta">
-            <li>{data.lesson} Lessons8</li>
+            <li>{data.lesson} Lectures</li>
             <li>{data.duration}</li>
             <li>{data.level}</li>
           </ul>

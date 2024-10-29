@@ -39,7 +39,7 @@ const CoursesArea = () => {
                                                 </Link>
                                             </h5>
                                             <ul className="course-meta">
-                                                <li><i className="icon-24"></i>{lesson} Lessons</li>
+                                                <li><i className="icon-24"></i>{lesson} Lectures</li>
                                                 <li><i className="icon-25"></i>{student} Students</li>
                                             </ul>
                                             <p>{short_desc}</p>
