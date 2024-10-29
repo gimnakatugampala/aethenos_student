@@ -70,8 +70,8 @@ export default async function handler(req, res) {
         payment_method_types: ['card'],
         line_items: lineItems,
         mode: 'payment',
-        success_url: `${req.headers.origin}/checkout/?success=true`,
-        cancel_url: `${req.headers.origin}/checkout/?canceled=true`,
+        success_url: `https://aethenos.com/checkout/?success=true`,
+        cancel_url: `https://aethenos.com/checkout/?canceled=true`
       });
 
       // res.status(200).json({ url: stripe.checkout.sessions });

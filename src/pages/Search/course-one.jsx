@@ -97,7 +97,7 @@ const CourseTypeOne = ({ course }) => {
         style={{ textAlign: "left" }}
       >
         <div className="thumbnail" style={{ display: "grid" }}>
-          <Link href={`/course-details-/${course.id}`}>
+          <Link href={`/course-details/${course.course_code}`}>
             <img
               src={`${IMG_HOST}/${course.img}`}
               alt="Course Meta"
@@ -116,7 +116,7 @@ const CourseTypeOne = ({ course }) => {
         <div className="content px-4">
           <span className="course-level px-2">{course.level}</span>
           <h6 className="title">
-            <a style={{ color: "inherit" }} href="/courses">
+            <a style={{ color: "inherit" }} href={`/course-details/${course.course_code}`}>
               {course.title}
             </a>
           </h6>
