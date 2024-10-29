@@ -162,7 +162,7 @@ const CourseTypeEight = ({ data, classes }) => {
               className="edu-btn btn-medium"
             >
               {cartCourses.some((course) => course.id === data.id)
-                ? "Added to cart"
+                ? "Remove from Cart"
                 : "Add to cart"}
             </a>
             <button

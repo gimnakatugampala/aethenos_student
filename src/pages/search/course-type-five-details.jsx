@@ -17,10 +17,14 @@ import Cookies from "js-cookie";
 import HandleFreeCourses from "../../functions/pricing/HandleFreeCourses";
 import FormatNumbers from "../../functions/FormatNumbers";
 import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
-import { Height } from "@mui/icons-material";
+import { Height, Padding } from "@mui/icons-material";
 import FormatHTMLRemove from "../../functions/FormatHTMLRemove";
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
+
+const mainfs = {
+  fontSize: "clamp(0.8rem, 0.8rem + 0.6vw, 1.5rem)",  
+};
 
 const CourseTypeFive = ({ data, classes }) => {
   const { cartCourses } = useSelector((state) => state.cart);
@@ -128,8 +132,10 @@ const CourseTypeFive = ({ data, classes }) => {
   };
 
   const positionStyle = {
-    width: windowWidth >= 576 ? "300px" : "450px",
-    objectFit: "contain",
+    fontSize: windowWidth >= 360 ? "" : "12px",
+    Padding: windowWidth >= 360 ? "" : "10px",
+    cursor : "pointer"    
+ 
   };
 
   return (
@@ -245,18 +251,18 @@ const CourseTypeFive = ({ data, classes }) => {
             {data != null && data.isPaid ? (
               <a
                 onClick={() => handleAddToCart(data)}
-                style={{ cursor: "pointer" }}
+                style={positionStyle}
                 className="edu-btn btn-small button-group float-end mt-2 mx-2"
               >
                 {cartCourses.some((course) => course.id == data.id)
-                  ? "Added to cart"
+                  ? "Remove from Cart"
                   : "Add to cart"}
               </a>
             ) : (
               <a
                 onClick={() => handleEnroll(data)}
                 className="edu-btn btn-small button-group float-end mt-2 mx-2"
-                style={{ cursor: "pointer" }}
+                style={positionStyle}
               >
                 Enroll Now
                 <i className="icon-4"></i>

@@ -22,10 +22,7 @@ import { saveAs } from "file-saver";
 import { useRouter } from "next/router";
 import { FormatVideoTimeLength } from "../../functions/FormatVideoTimeLength";
 
-import useDownloader from 'react-use-downloader';
-import axios from 'axios';
-
-
+import useDownloader from "react-use-downloader";
 
 const mainfs = {
   fontSize: "calc(0.4rem + 0.6vw)!important",
@@ -70,19 +67,21 @@ const Accordian = ({
   const { sectionID, curriclumID, SyllabusType } = router.query;
 
   const { size, elapsed, percentage, download, cancel, error, isInProgress } =
-  useDownloader();
+    useDownloader();
 
-  
   const handleDownload = async (url, filename) => {
     try {
-      const response = await fetch(`/api/proxy?url=${encodeURIComponent(url)}`, {
-        method: 'GET',
-      });
-      
+      const response = await fetch(
+        `/api/proxy?url=${encodeURIComponent(url)}`,
+        {
+          method: "GET",
+        }
+      );
+
       const blob = await response.blob();
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);
-      link.setAttribute('download', filename.split("/").pop());
+      link.setAttribute("download", filename.split("/").pop());
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link); // Clean up the DOM
@@ -90,7 +89,6 @@ const Accordian = ({
       console.error("Error downloading file:", error);
     }
   };
-  
 
   // const handleDownload = async (url, filename) => {
   //   try {
@@ -108,9 +106,6 @@ const Accordian = ({
   //     console.error("Error downloading file: ", error);
   //   }
   // };
-  
-  
-  
 
   return (
     <div className="accordion-item mb-2">
@@ -232,9 +227,9 @@ const Accordian = ({
                                 id={`default-${index}`}
                                 label={""}
                                 onClick={() => {
-                                  console.log(itemCode,list)
-                                  console.log(list.curriculumItemId)
-                                  console.log(seletedCurriculumItem)
+                                  console.log(itemCode, list);
+                                  console.log(list.curriculumItemId);
+                                  console.log(seletedCurriculumItem);
                                   UpdateCourseCurriculumProgress(
                                     itemCode,
                                     seletedCurriculumItem,
@@ -255,16 +250,18 @@ const Accordian = ({
                                   {index + 1}. <PlayCircleIcon /> Video Lecture
                                   : {list.title}
                                   {type.videoLength != 0 && (
-                                  <>
-                                  <br />
-                                    <span style={{ fontSize: "12px" }}>
-                                      <b>
-                                        <i>
-                                          <i className="fas fa-tv mx-2"></i>
-                                          {FormatVideoTimeLength(type.videoLength)}
-                                        </i>
-                                      </b>
-                                    </span>
+                                    <>
+                                      <br />
+                                      <span style={{ fontSize: "12px" }}>
+                                        <b>
+                                          <i>
+                                            <i className="fas fa-tv mx-2"></i>
+                                            {FormatVideoTimeLength(
+                                              type.videoLength
+                                            )}
+                                          </i>
+                                        </b>
+                                      </span>
                                     </>
                                   )}
                                   {/* <p
@@ -325,9 +322,7 @@ const Accordian = ({
                                               )
                                             }
                                           >
-                                          
                                             {item.title}
-                                           
                                           </Dropdown.Item>
                                         )
                                     )}
@@ -495,9 +490,7 @@ const Accordian = ({
                                           )
                                         }
                                       >
-                                        
                                         {item.title}
-                                      
                                       </Dropdown.Item>
                                     )
                                 )}

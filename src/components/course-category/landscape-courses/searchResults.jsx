@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import CourseSidebarTwo from "../../../../src/pages/search/course-sidebar-2";
-import CourseItems from "../../../../src/pages/courses/course-item";
+import CourseItems from "../../../../src/pages/search/course-item";
 import { searchCourses } from "../../../api/index";
 import SortingArea from "../../../../src/pages/search/sortingAreaSearch";
 import { css } from "@emotion/react";
@@ -62,11 +62,15 @@ const SearchResults = ({ allcourses }) => {
     <div className="edu-course-area course-area-1">
       <div>
         <div className="row g-5">
-          <div className="col-2 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-3">
+          <div className="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-3 ">
             <CourseSidebarTwo course_items={courses} />
           </div>
 
-          <div className={`col-10 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-9 col-pl--35`}>
+          <div
+              className={`8 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-9 col-pl--5 ${
+                loading ? "fade-in" : "fade-in visible"
+              }`}
+            >
             <SortingArea
               course_items={courses}
               num={showing}

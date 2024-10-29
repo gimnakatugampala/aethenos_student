@@ -285,7 +285,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
               style={{ cursor: "pointer" }}
             >
               {cartCourses.some((item) => item.id === data.id)
-                ? "Added to cart"
+                ? "Remove from Cart"
                 : "Add to cart"}
               <i className="icon-4"></i>
             </a>

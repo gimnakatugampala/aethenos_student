@@ -321,7 +321,7 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                     style={{ cursor: "pointer" }}
                   >
                     {cartCourses.some((item) => item.id == course.id)
-                      ? "Added to cart"
+                      ? "Remove from Cart"
                       : "Add to cart"}
                     <i className="icon-4"></i>
                   </a>

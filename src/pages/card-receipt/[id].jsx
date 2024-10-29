@@ -29,7 +29,7 @@ const index = () => {
       <SEO pageTitle={"Receipt"} />
       <Header />
 
-      <div className="edu-brand-area brand-area-1 p-5 ">
+      <div className="edu-brand-area brand-area-1 p-2 p-sm-2 p-md-5 ">
         <div className="container-fluid">
           {details != null ? (
             <div className="row col-md-12">
@@ -69,7 +69,7 @@ const index = () => {
                 </div>
               </div>
 
-              <div className="col-md-7">
+              <div className="col-md-7" style={{overflow: "auto"}}>
                 <Table striped bordered hover>
                   <thead>
                     <tr>
