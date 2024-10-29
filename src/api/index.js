@@ -1509,6 +1509,34 @@ export const ValidateCouponOnCart = async(coupon,setcouponError,setCouponErrorTe
 
 }
 
+
+export const ValidateCouponOnCartFromCourseDetails = async(couponCode, router, code) =>{
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  
+  fetch(`${BACKEND_LINK}/payment/getCouponValidationByCode/${couponCode}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+
+      if(result.variable == "404"){
+        router.push(`/course-details/${code}`);
+      }
+
+  
+      
+    })
+    .catch(error => console.log('error', error));
+
+}
+
 export const AccountVefication = async(setshowLogin) =>{
 
   var myHeaders = new Headers();
