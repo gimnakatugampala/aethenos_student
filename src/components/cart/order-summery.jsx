@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import Cookies from 'js-cookie';
 import 'sweetalert2/src/sweetalert2.scss'
-import { AccountVefication, StudentSignIn } from '../../api';
+import { AccountVefication, SignUpUserViaCart, StudentSignIn } from '../../api';
 import ButtonLoadingMedium from '../../functions/Loading/ButtonLoadingMedium';
 import validateEmail from '../../functions/emailValid'
 import { useRouter } from "next/router";
@@ -45,6 +45,8 @@ const OrderSummery = ({ cartItem }) => {
     //   const [password, setpassword] = useState("");
       const [conpassword, setconpassword] = useState("");
       const [termsconditions, settermsconditions] = useState(false);
+
+      const [btnLoading, setbtnLoading] = useState(false)
 
 	  const handleSubmit = (e) =>{
         e.preventDefault()
@@ -148,7 +150,7 @@ const OrderSummery = ({ cartItem }) => {
             icon: "error",
           });
         } else {
-        //   InstructorSignUp(firstname, lastname, email, conpassword, router);
+          SignUpUserViaCart(firstname, lastname, email, conpassword, setbtnLoading);
           // console.log(firstname)
           // console.log(lastname)
           // console.log(email)
@@ -320,11 +322,19 @@ const OrderSummery = ({ cartItem }) => {
         
                     <div className="row">
                       <div className="col-md-12">
+                        {btnLoading ? (
+                          <button  className="edu-btn btn-small w-100">
+                          Loading ...
+                        </button>
+                        ) : (
                         <button type="submit" className="edu-btn btn-small w-100">
                           SignUp
                         </button>
+                        )}
                       </div>
                     </div>
+
+                    <p className='text-center pb-0 my-2'>Already have an account ? <span onClick={() => setshowRegister(false)} style={{cursor:'pointer'}} className='text-danger'>Log in</span></p>
                   </form>
                 )
             : (

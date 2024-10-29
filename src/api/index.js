@@ -425,6 +425,81 @@ export const InstructorSignUp = async(firstname, lastname, email, conpassword, r
 }
 
 
+export const SignUpUserViaCart = async(firstname, lastname, email, conpassword, setbtnLoading) => {
+
+  setbtnLoading(true)
+
+  const COUNTRY = Cookies.get('aethenos_user_origin');
+  let countryToFind = "";
+
+  if (COUNTRY) {
+    try {
+      const parsedCountry = JSON.parse(COUNTRY);
+      countryToFind = parsedCountry.country_name;
+
+      var formdata = new FormData();
+      formdata.append("email", `${email}`);
+      formdata.append("firstName", `${firstname}`);
+      formdata.append("lastName", `${lastname}`);
+      formdata.append("password", `${conpassword}`);
+      formdata.append("gup_type", "1");
+      formdata.append("countryName", `${countryToFind}`);
+
+    } catch (error) {
+      console.error("Error parsing COUNTRY:", error);
+    }
+  }
+
+  var requestOptions = {
+    method: 'POST',
+    body: formdata,
+    redirect: 'follow'
+  };
+
+  fetch(`${BACKEND_LINK}/register/add`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      // console.log(result)
+
+      if (result.variable == "200") {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Registered!",
+          text: `${result.message}`,
+          showConfirmButton: false,
+          timer: 1500
+        });
+
+        if (ENV_STATUS == "dev") {
+          Cookies.set('aethenos', `${result.token}`, { expires: 7 });
+          Cookies.set('aethenos_user_country', `${countryToFind}`);
+        } else {
+          Cookies.set('aethenos', `${result.token}`, { expires: 7, domain: '.aethenos.com' });
+          Cookies.set('aethenos_user_country', `${countryToFind}`, { domain: '.aethenos.com' });
+        }
+
+        setbtnLoading(false)
+
+        window.location.reload()
+        // router.push(`/?login=success`);
+
+      } else {
+        Swal.fire({
+          title: 'Login error!',
+          text: `${result.message}`,
+          icon: 'error',
+        });
+
+        setbtnLoading(false)
+
+      }
+
+    })
+    .catch(error => console.log('error', error));
+}
+
+
 export const GetCategoriesMenu = async(setnavbar_list) =>{
 
   var requestOptions = {
