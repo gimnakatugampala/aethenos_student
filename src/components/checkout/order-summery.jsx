@@ -76,8 +76,22 @@ const OrderSummery = ({showStripe,showPaypal}) => {
        
     // },[couponValue])
 
-
- 
+    const [currentUserCourses, setcurrentUserCourses] = useState([]);
+    const [isLoading, setisLoading] = useState(true);
+    const [hasMatchingCourses, setHasMatchingCourses] = useState(false); // State to track matching courses
+    
+    // Fetch courses of the signed-in user
+    useEffect(() => {
+        GetCoursesOfSignedInUser(setcurrentUserCourses, setisLoading);
+    }, []);
+    
+    useEffect(() => {
+        const purchasedCourseIds = currentUserCourses.map(course => course.id);
+    
+        // Check if there are matching courses
+        const matchingCourses = cartCourses.filter(course => purchasedCourseIds.includes(course.id));
+        setHasMatchingCourses(matchingCourses.length > 0);
+    }, [currentUserCourses, cartCourses]);
     
     
     
@@ -439,6 +453,7 @@ const generatePaypalItems = () => {
                     </div>
 
                     {showPaypal && (
+                        hasMatchingCourses == false && 
                         <PayPalScriptProvider options={{ clientId: "Ad3sOTVUvFCOXRGLh_s8W5jEl3rwdtGkAgTp8qVgQ0RqKvh-wQMZ-AP7OPEhZxeB04NswkDbS0lKF7kd" ,currency : GetCurrencyByCountry(cartCourses[0].other_data)}}>
                              <PayPalButtons
                         style={{ layout: "vertical" }}
@@ -521,6 +536,13 @@ const generatePaypalItems = () => {
                         </span>
                         </button>
                     ) : (
+                        hasMatchingCourses ? (
+                            <button onClick={() => window.location.href = "/cart"} className="w-100 my-2 edu-btn btn-medium checkout-btn">
+                            <span className="d-flex justify-content-center align-items-center">
+                                Go to Cart
+                            </span>
+                            </button>
+                        ) : (
                         <form action="/api/checkout_sessions" method="POST">
                         <input type="hidden" name="cartCourses" value={JSON.stringify(newPricing)} />
                         <section>
@@ -531,6 +553,7 @@ const generatePaypalItems = () => {
                             </button>
                         </section>
                         </form>
+                        )
                     )
                     )}
 
