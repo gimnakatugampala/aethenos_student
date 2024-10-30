@@ -1879,6 +1879,36 @@ export const GetMyCourses = async(setCourses,setloading) =>{
 
 }
 
+export const GetCoursesOfSignedInUser = async(setcurrentUserCourses) =>{
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
+
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  
+  fetch(`${BACKEND_LINK}/payment/getCoursesPurchasedByTheStudent`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+      // Unauthorized(result.status,"my-courses")
+
+       // Sort courses by purchaseDate in descending order (latest first)
+       const sortedCourses = result && result.length > 0 
+       ? result.sort((a, b) => new Date(b.purchaseDate) - new Date(a.purchaseDate)).reverse()
+       : [];
+
+       setcurrentUserCourses(sortedCourses);
+  
+
+    })
+    .catch(error => console.log('error', error));
+
+}
+
 
 export const GetMyCoursesDetails = async(id, setcourse) => {
   var myHeaders = new Headers();
