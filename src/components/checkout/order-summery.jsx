@@ -85,7 +85,6 @@ const OrderSummery = ({showStripe,showPaypal}) => {
 
     useEffect(() => {
         // Check for duplicate course IDs between cartCourses and currentUserCourses
-        const cartCourseIds = cartCourses.map(course => course.id);
         const purchasedCourseIds = currentUserCourses.map(course => course.id);
     
         // Find matching courses
@@ -121,7 +120,7 @@ const OrderSummery = ({showStripe,showPaypal}) => {
                 }
             });
         }
-    }, [cartCourses, currentUserCourses]); // Re-run if cartCourses or currentUserCourses change
+    }, [currentUserCourses]); // Re-run if cartCourses or currentUserCourses change
     
     
     
