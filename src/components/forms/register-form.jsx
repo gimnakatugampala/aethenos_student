@@ -19,18 +19,19 @@ import ReactCodeInput from "react-code-input"
 import Cookies from 'js-cookie';
 
 
-const inputStyle = {
-  fontFamily: 'Arial, sans-serif',
-  borderRadius: '8px',
-  border: '2px solid #d9d9d9',
-  width: '50px',
-  height: '50px',
-  fontSize: '20px',
-  textAlign: 'center',
-  margin: '0 5px',
-  outline: 'none',
-  transition: 'border-color 0.3s, box-shadow 0.3s',
-};
+
+// const inputStyle = {
+//   fontFamily: 'Arial, sans-serif',
+//   borderRadius: '8px',
+//   border: '2px solid #d9d9d9',
+//   width: '50px',
+//   height: '50px',
+//   fontSize: '20px',
+//   textAlign: 'center',
+//   margin: '0 5px',
+//   outline: 'none',
+//   transition: 'border-color 0.3s, box-shadow 0.3s',
+// };
 
 const inputFocusStyle = {
   borderColor: '#40a9ff',
@@ -60,6 +61,22 @@ const RegisterForm = () => {
     const [VerficationCode, setVerficationCode] = useState("")
 
     const [userToken, setUserToken] = useState(null);
+
+    const inputStyle = {
+      appearance: 'textfield', // Firefox
+      MozAppearance: 'textfield',
+      WebkitAppearance: 'none', // Chrome, Safari, Edge, Opera
+        fontFamily: 'Arial, sans-serif',
+  borderRadius: '8px',
+  border: '2px solid #d9d9d9',
+  width: '50px',
+  height: '50px',
+  fontSize: '20px',
+  textAlign: 'center',
+  margin: '0 5px',
+  outline: 'none',
+  transition: 'border-color 0.3s, box-shadow 0.3s',
+    };
 
 
   
@@ -251,13 +268,14 @@ const RegisterForm = () => {
                   <p className='m-0 p-0 text-center' style={{fontSize:'14px'}}>A verification email has been sent to your given email address. Please check your email and enter the verification code below</p>
 
               <div className="d-flex justify-content-center my-4">
-              <ReactCodeInput  
+              <ReactCodeInput
+                
               inputStyle={inputStyle}
               inputFocusStyle={inputFocusStyle} 
               value={VerficationCode}
               onChange={(e) => setVerficationCode(e)}
-              className="mx-auto text-center"
-              type='number'
+              className="mx-auto text-center" // Added custom class for styling
+              type='text'
               fields={5} />
 
 
