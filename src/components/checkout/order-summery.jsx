@@ -107,7 +107,7 @@ const newPricing = cartCourses != null && cartCourses.map((course) => {
         qty: 1,
         desc: FormatHTMLRemove(course.other_data.course_main_desc).slice(0,1000),
         currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
-        price: discountedPrice.toFixed(2)
+        price: discountedPrice
     };
 });
 
@@ -151,7 +151,7 @@ const calculateTotalWithCoupon = () => {
             ) 
             : originalPrice;
         return acc + discountedPrice;
-    }, 0).toFixed(2); // Fixing to 2 decimal places for PayPal
+    }, 0); // Fixing to 2 decimal places for PayPal
 };
 
 
@@ -171,7 +171,7 @@ const generatePaypalItems = () => {
             name: course.title,
             unit_amount: {
                 currency_code: GetCurrencyByCountry(course.other_data),
-                value: discountedPrice.toFixed(2)
+                value: discountedPrice
             },
             quantity: '1' // Assuming quantity is 1; adjust if needed
         };
@@ -213,7 +213,7 @@ const generatePaypalItems = () => {
                 return {
                     courseCode: course.other_data.course_code,
                     currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
-                    itemPrice: discountedPrice.toFixed(2),
+                    itemPrice: discountedPrice,
                     listPrice: CalculateListPrice(course.other_data)
                 };
             });
@@ -384,7 +384,7 @@ const generatePaypalItems = () => {
                                         </td>
                                         <td>
                                             {getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} 
-                                            {discountedPrice.toFixed(2)}
+                                            {discountedPrice}
                                             
                                             {coupon && (
                                                 <span className="text-decoration-line-through mx-2">

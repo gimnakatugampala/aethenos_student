@@ -114,7 +114,7 @@ const CalculateDiscountedPrice =  (data) => {
         // console.log(countryToFind)
         // console.log(USERTOKEN)
 
-        return net_price;
+        return Number.parseFloat(net_price).toFixed(2);
     } else {
         return "0";
     }

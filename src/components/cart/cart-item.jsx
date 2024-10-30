@@ -35,7 +35,7 @@ const CartItem = ({ item }) => {
             </td>
 
             <td className="product-price" data-title="Price">
-                <span className="currency-symbol">{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))}</span>{(CalculateDiscountedPrice(item.other_data)).toFixed(2)}
+                <span className="currency-symbol">{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))}</span>{(CalculateDiscountedPrice(item.other_data))}
             </td>
 
             {/* <td className="product-quantity" data-title="Qty">

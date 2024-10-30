@@ -81,10 +81,10 @@ const CalculateCouponDiscountedPrice =  (data) => {
 
             console.log(foundPrice)
 
-            return Number.parseFloat(finalPrice);
+            return Number.parseFloat(finalPrice).toFixed(2);
         } else {
             // If the country is not found, use the global_discount_price without applying the exchange rate
-            return Number.parseFloat(data.global_discount_price);
+            return Number.parseFloat(data.global_discount_price).toFixed(2);
         }
     } else {
         return "0";
