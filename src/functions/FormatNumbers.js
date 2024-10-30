@@ -1,10 +1,12 @@
 import React from 'react';
 
 const FormatNumbers = (num) => {
-    if (isNaN(num)) return '';
+    // Convert to a number if possible, or return an empty string if invalid
+    const number = parseFloat(num);
+    if (isNaN(number)) return '';
     
     // Round the number to 2 decimal places and format with thousands separator
-    return num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return number.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 
 };
