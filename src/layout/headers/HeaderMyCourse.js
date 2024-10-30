@@ -115,6 +115,8 @@ const HeaderMyCourse = ({ setcourse, id, course }) => {
 
               {course.completedItemCount === course.allItemsCount && (
                 <Nav.Link>
+                  {course.isPaid && (
+
                   <Button
                     variant="outlined"
                     color="inherit"
@@ -144,6 +146,7 @@ const HeaderMyCourse = ({ setcourse, id, course }) => {
                   >
                     Get Certificate
                   </Button>
+                  )}
                 </Nav.Link>
               )}
             
