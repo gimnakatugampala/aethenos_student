@@ -19,6 +19,7 @@ import FormatNumbers from "../../functions/FormatNumbers";
 import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
 import { Height, Padding } from "@mui/icons-material";
 import FormatHTMLRemove from "../../functions/FormatHTMLRemove";
+import { FormatVideoTimeLength } from "../../functions/FormatVideoTimeLength";
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
@@ -232,7 +233,12 @@ const CourseTypeFive = ({ data, classes }) => {
             <span className="rating-count ml-4">
               <b>{data != null && Number.parseFloat(data.rating).toFixed(1)}</b>
             </span>
+
           </div>
+
+        
+
+          
 
           <span className="course-level">
             {data != undefined && data.level}
@@ -242,7 +248,8 @@ const CourseTypeFive = ({ data, classes }) => {
             <ul className="course-meta">
               <li>{data != undefined && data.language} </li>
               <li>{data != undefined && data.lesson} Lectures</li>
-              <li>{data != undefined && data.student} Students</li>
+              {/* <li>{data != undefined && data.student} Students</li> */}
+              <li>{data != undefined && (<><i className="icon-37"></i> {FormatVideoTimeLength(data.duration)}</>)}</li>
               <li>{data != undefined && data.category}</li>
             </ul>
           </div>

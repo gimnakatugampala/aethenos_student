@@ -18,6 +18,7 @@ import HandleFreeCourses from "../../functions/pricing/HandleFreeCourses";
 import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
 import FormatNumbers from "../../functions/FormatNumbers";
 import FormatHTMLRemove from "../../functions/FormatHTMLRemove";
+import { FormatVideoTimeLength } from "../../functions/FormatVideoTimeLength";
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
@@ -186,14 +187,34 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
             </span>
           </div>
 
+          {data.externalCourseDetails && (
+            <>
+          <p className="m-0 p-0">Verified External Ratings:</p>
+          <div className="course-rating">
+            <StarsRating
+              edit={false}
+              count={5}
+              size={24}
+              value={data.externalCourseDetails.externalRating}
+              color1={"gray"}
+              color2={"#F39C12"}
+            />
+            <span className="rating-count">
+              <b>({Number.parseFloat(data.externalCourseDetails.externalRating).toFixed(1)})</b>
+            </span>
+          </div>
+          </>
+          )}
+
           <ol className="d-flex course-meta">
             <li>
-              <i className="icon-25"></i>
-              {data.student} {data.student == 1 ? "Student" : "Students"}
+              <i className="icon-37"></i>
+              {/* {data.student} {data.student == 1 ? "Student" : "Students"} */}
+             <span>{FormatVideoTimeLength(data.duration)}</span>
             </li>
             <li>
               <i className="icon-24"></i>
-              {getTotalLecturesCount(data)} Lectures
+              <span> {getTotalLecturesCount(data)} Lectures</span>
             </li>
           </ol>
         </div>
@@ -269,12 +290,13 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
 
           <ol className="d-flex course-meta">
             <li>
-              <i className="icon-25"></i>
-              {data.student} {data.student == 1 ? "Student" : "Students"}
+              <i className="icon-37"></i>
+              {/* {data.student} {data.student == 1 ? "Student" : "Students"} */}
+             {FormatVideoTimeLength(data.duration)}
             </li>
             <li>
               <i className="icon-24"></i>
-              {getTotalLecturesCount(data)} Lectures
+               {getTotalLecturesCount(data)} Lectures
             </li>
           </ol>
 

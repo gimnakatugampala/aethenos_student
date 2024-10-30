@@ -16,6 +16,7 @@ import StarsRating from "stars-rating";
 import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
 import FormatHTMLRemove from "../../functions/FormatHTMLRemove";
 import FormatNumbers from "../../../src/functions/FormatNumbers"; 
+import { FormatVideoTimeLength } from "../../functions/FormatVideoTimeLength";
 
 
 const CourseTypeFive = ({ data, classes }) => {
@@ -175,8 +176,9 @@ const CourseTypeFive = ({ data, classes }) => {
 
           <ul className="course-meta">
           <li>
-              <i className="icon-25"></i>
-              {data.student} {data.student == 1 ? "Student" : "Students"}
+              <i className="icon-37"></i>
+              {/* {data.student} {data.student == 1 ? "Student" : "Students"} */}
+              <span>{FormatVideoTimeLength(data.duration)}</span>
             </li>
             <li>
               <i className="icon-24"></i>

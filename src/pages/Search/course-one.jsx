@@ -15,6 +15,7 @@ import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
 import StarsRating from "stars-rating";
 import FormatNumbers from "../../functions/FormatNumbers";
 import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
+import { FormatVideoTimeLength } from "../../functions/FormatVideoTimeLength";
 
 const mainfs = {
   fontSize: "20px",
@@ -120,6 +121,7 @@ const CourseTypeOne = ({ course }) => {
               {course.title}
             </a>
           </h6>
+
           <div className="course-rating">
             <div className="rating">
               <StarsRating
@@ -135,6 +137,26 @@ const CourseTypeOne = ({ course }) => {
               <b>{Number.parseFloat(course.rating).toFixed(1)}</b>
             </span>
           </div>
+
+          {course.externalCourseDetails && (
+            <>
+          <p className="m-0 p-0">Verified External Ratings:</p>
+          <div className="course-rating">
+            <StarsRating
+              edit={false}
+              count={5}
+              size={24}
+              value={course.externalCourseDetails.externalRating}
+              color1={"gray"}
+              color2={"#F39C12"}
+            />
+            <span className="rating-count">
+              <b>({Number.parseFloat(course.externalCourseDetails.externalRating).toFixed(1)})</b>
+            </span>
+          </div>
+          </>
+          )}
+
 
           {course != null && course.isPaid ? (
             <div className="d-flex">
@@ -163,8 +185,9 @@ const CourseTypeOne = ({ course }) => {
               {course.lesson} Lectures
             </li>
             <li>
-              <i className="icon-25"></i>
-              {course.student} Students
+              <i className="icon-37"></i>
+              {/* {course.student} Students */}
+              {FormatVideoTimeLength(course.duration)}
             </li>
           </ul>
         </div>

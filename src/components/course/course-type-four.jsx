@@ -20,6 +20,7 @@ import {
 } from "../../redux/features/cart-slice";
 import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
 import HandleFreeCourses from "../../functions/pricing/HandleFreeCourses";
+import { FormatVideoTimeLength } from "../../functions/FormatVideoTimeLength";
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
@@ -232,11 +233,31 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
               <b>({Number.parseFloat(data.rating).toFixed(1)})</b>
             </span>
           </div>
+          
+          {data.externalCourseDetails && (
+            <>
+          <p className="m-0 p-0">Verified External Ratings:</p>
+          <div className="course-rating">
+            <StarsRating
+              edit={false}
+              count={5}
+              size={24}
+              value={data.externalCourseDetails.externalRating}
+              color1={"gray"}
+              color2={"#F39C12"}
+            />
+            <span className="rating-count">
+              <b>({Number.parseFloat(data.externalCourseDetails.externalRating).toFixed(1)})</b>
+            </span>
+          </div>
+          </>
+          )}
 
           <ol className="d-flex course-meta">
             <li>
-              <i className="icon-25"></i>
-              {data.student} {data.student == 1 ? "Student" : "Students"}
+              <i className="icon-37"></i>
+              {/* {data.student} {data.student == 1 ? "Student" : "Students"} */}
+              {FormatVideoTimeLength(data.duration)}
             </li>
             <li>
               <i className="icon-24"></i>
