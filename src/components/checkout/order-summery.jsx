@@ -19,7 +19,7 @@ import { reactLocalStorage } from 'reactjs-localstorage';
 import CalculateCouponDiscountedPrice from '../../functions/pricing/CalculateCouponDiscountedPrice';
 import HandleCountry from '../../functions/pricing/HandleCountry';
 import FormatHTMLRemove from '../../functions/FormatHTMLRemove';
-import Swal from 'sweetalert2';
+
 
 
 
@@ -51,7 +51,6 @@ const OrderSummery = ({showStripe,showPaypal}) => {
     const [couponValue, setcouponValue] = useState([]);
 
 
-    const [currentUserCourses, setcurrentUserCourses] = useState([])
 
 
 
@@ -78,49 +77,7 @@ const OrderSummery = ({showStripe,showPaypal}) => {
     // },[couponValue])
 
 
-    useEffect(() => {
-        // Fetch courses of the signed-in user
-        GetCoursesOfSignedInUser(setcurrentUserCourses);
-    }, []);
-
-    useEffect(() => {
-        // Check for duplicate course IDs between cartCourses and currentUserCourses
-        const purchasedCourseIds = currentUserCourses.map(course => course.id);
-    
-        // Find matching courses
-        const matchingCourses = cartCourses.filter(course => purchasedCourseIds.includes(course.id));
-    
-        if (matchingCourses.length > 0) {
-            // Extract the titles of matching courses and format them as an HTML list
-            const matchingCourseList = matchingCourses
-                .map(course => `<li style="margin-bottom: 8px;">📌 ${course.title}</li>`)
-                .join('');
-    
-            Swal.fire({
-                title: '<h3 style="color: #d9534f;">Already Purchased Courses</h3>',
-                html: `
-                    <p style="font-size: 1.1em; color: #333;">The following courses in your cart have already been purchased:</p>
-                    <ul style="list-style-type: none; padding: 0; color: #333; font-size: 1em;">
-                        ${matchingCourseList}
-                    </ul>
-                    <p style="font-size: 1.1em; color: #333; margin-top: 10px;">Please go to your cart and remove them.</p>
-                `,
-                icon: 'warning',
-                iconColor: '#d9534f',
-                confirmButtonText: '<span style="padding: 5px 10px;">🛒 Go to Cart</span>',
-                allowOutsideClick: false,
-                customClass: {
-                    popup: 'swal-popup',
-                    confirmButton: 'swal-confirm-button'
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Redirect to the cart page
-                    window.location.href = '/cart';
-                }
-            });
-        }
-    }, [currentUserCourses]); // Re-run if cartCourses or currentUserCourses change
+ 
     
     
     

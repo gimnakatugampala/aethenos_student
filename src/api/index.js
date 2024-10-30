@@ -347,7 +347,8 @@ export const StudentSignIn = async(email, password,setloading,router,rediect_url
               if(rediect_url == "none"){
                 window.location.href = "/?login=success"
               }else{
-                router.push(`/checkout`)
+                // router.push(`/checkout`)
+                window.location.href = "/checkout"
               }
 
 
@@ -1879,7 +1880,7 @@ export const GetMyCourses = async(setCourses,setloading) =>{
 
 }
 
-export const GetCoursesOfSignedInUser = async(setcurrentUserCourses) =>{
+export const GetCoursesOfSignedInUser = async(setcurrentUserCourses, setisLoading) =>{
 
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
@@ -1894,7 +1895,18 @@ export const GetCoursesOfSignedInUser = async(setcurrentUserCourses) =>{
     .then(response => response.json())
     .then(result => {
       console.log(result)
-      // Unauthorized(result.status,"my-courses")
+      // Unauthorized(result.status,"cart")
+
+      // if(result.status == 401){
+
+      //   if(ENV_STATUS == "dev"){
+      //     Cookies.remove('aethenos', { path: '' })
+      //   }else{
+      //     Cookies.remove('aethenos', { domain: '.aethenos.com' })
+      //   }
+    
+      //   window.location.href = `/cart`
+      // }
 
        // Sort courses by purchaseDate in descending order (latest first)
        const sortedCourses = result && result.length > 0 
@@ -1903,6 +1915,7 @@ export const GetCoursesOfSignedInUser = async(setcurrentUserCourses) =>{
 
        setcurrentUserCourses(sortedCourses);
   
+       setisLoading(false)
 
     })
     .catch(error => console.log('error', error));
