@@ -308,7 +308,7 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                     <i className="icon-64"></i>Certificate of completion
                   </span>
                   <span className="value text-uppercase">
-                    {course.certificate}
+                    {course.isPaid ? course.certificate : "No"}
                   </span>
                 </li>
               </ul>
