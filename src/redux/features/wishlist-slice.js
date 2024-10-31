@@ -14,12 +14,16 @@ export const wishlistSlice = createSlice({
             if(payload.change_type === 'remove_wishlist'){
                 state.wishlist = state.wishlist.filter(item => item.id !== payload.item.id)
                 toast.error(`${payload.item.title} removed from wishlist`, {
-                    position: 'top-left'
+                    position: 'top-left',
+                    autoClose: 3000,
+                    hideProgressBar: true
                 })
             } else if(payload.change_type === 'add_wishlist'){
                 state.wishlist.push(payload.item);
                 toast.success(`${payload.item.title} added to wishlist`, {
-                    position: 'top-left'
+                    position: 'top-left',
+                    autoClose: 3000,
+                    hideProgressBar: true
                 })
             }
             setLocalStorage('wishlist_items',state.wishlist)
@@ -27,7 +31,9 @@ export const wishlistSlice = createSlice({
         remove_wishlist_product:(state,{payload}) => {
             state.wishlist = state.wishlist.filter(item => item.id !== payload.id);
             toast.error(`removed from your wishlist`, {
-                position: 'top-left'
+                position: 'top-left',
+                autoClose: 3000,
+                hideProgressBar: true
             })
             setLocalStorage('wishlist_items',state.wishlist)
         },
