@@ -92,14 +92,22 @@ const Header = ({
   }, [CURRENTUSER]);
 
   useEffect(() => {
-    setTimeout(() => {
+    // Function to load data once
+    const loadData = async () => {
+      setisUserLoading(true); // Start loading state
+  
+      // Fetch categories and menu items
+      await GetCourseCategory(setcategories);
+      await GetCategoriesMenu(setnavbar_list);
+  
+      // After data is loaded
       setisUserLoading(false);
-    }, 1500);
-
-    // Get Categories
-    GetCourseCategory(setcategories);
-    GetCategoriesMenu(setnavbar_list);
-  }, [categories]);
+    };
+  
+    // Call the async function
+    loadData();
+  }, []); // Empty dependency array to run only once
+  
 
 
   const [logoSrc, setLogoSrc] = useState("/assets/images/logo/Header_Athenos_logo.png");
