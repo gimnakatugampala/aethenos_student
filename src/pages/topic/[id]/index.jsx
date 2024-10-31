@@ -599,7 +599,7 @@ const GetCourseByCategory = () => {
                       );
                     })
                   ) : (
-                    <h4>No Top Courses Available</h4>
+                    <h5 className="text-center text-secondary">No Top Courses Available</h5>
                   )}
                 </div>
               )}
