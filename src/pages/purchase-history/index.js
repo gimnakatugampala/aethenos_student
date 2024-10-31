@@ -209,59 +209,47 @@ const index = () => {
                   aria-labelledby="refunds-tab"
                 >
                   <div className="course-tab-content">
-                    <div className="course-overview" style={{overflow: "auto"}}>
-                      {refunds != null ? (
-                        <Table striped bordered hover >
+                  <div className="course-overview" style={{ overflow: "auto" }}>
+                      {refunds && refunds.length > 0 ? (
+                        <Table striped bordered hover>
                           <thead>
                             <tr>
-                              <th></th>
+                              <th style={mainfs}>Course Title</th>
                               <th style={mainfs}>Date</th>
                               <th style={mainfs}>Amount</th>
                               <th style={mainfs}>Refunded through</th>
                               <th style={mainfs}>Status</th>
-                              <th></th>
+                              <th style={mainfs}>Actions</th>
                             </tr>
                           </thead>
                           <tbody>
-                            {refunds.length > 0 ? (
-                              refunds.map((p, index) => (
-                                <tr key={index}>
-                                  <td style={mainfs}>{p.courseTitle}</td>
-                                  <td style={mainfs}>
-                                    {moment(p.date).format("MMM DD,YYYY")}
-                                  </td>
-                                  <td style={mainfs}>
-                                    {getSymbolFromCurrency(p.currency)}
-                                    {p.amount.toUpperCase()}
-                                  </td>
-                                  <td style={mainfs}>{p.refundedTo}</td>
-                                  <td style={mainfs}>{p.status}</td>
-                                  <td
-                                    style={mainfs}
-                                    className="d-flex justify-content-center"
-                                  >
-                                    {p.refundedTo != "Free Course" &&
-                                      p.status == "Not Started" && (
-                                        <Button
-                                          onClick={() => handleShow(p)}
-                                          variant="outline-danger"
-                                        >
-                                          Request a refund
-                                        </Button>
-                                      )}
-                                  </td>
-                                </tr>
-                              ))
-                            ) : (
-                              <LargeLoading />
-                            )}
+                            {refunds.map((p, index) => (
+                              <tr key={index}>
+                                <td style={mainfs}>{p.courseTitle || "N/A"}</td>
+                                <td style={mainfs}>{p.date ? moment(p.date).format("MMM DD, YYYY") : "N/A"}</td>
+                                <td style={mainfs}>
+                                  {p.currency ? getSymbolFromCurrency(p.currency) : ""}
+                                  {p.amount ? p.amount.toUpperCase() : "N/A"}
+                                </td>
+                                <td style={mainfs}>{p.refundedTo || "N/A"}</td>
+                                <td style={mainfs}>{p.status || "N/A"}</td>
+                                <td style={mainfs} className="d-flex justify-content-center">
+                                  {p.refundedTo !== "Free Course" && p.status === "Not Started" ? (
+                                    <Button onClick={() => handleShow(p)} variant="outline-danger">
+                                      Request a refund
+                                    </Button>
+                                  ) : (
+                                    "-"
+                                  )}
+                                </td>
+                              </tr>
+                            ))}
                           </tbody>
                         </Table>
+                      ) : refunds === null ? (
+                        <LargeLoading />
                       ) : (
-                        <p
-                          className="d-flex justify-content-center"
-                          style={mainfs}
-                        >
+                        <p className="d-flex justify-content-center" style={mainfs}>
                           No Refunds
                         </p>
                       )}
