@@ -53,6 +53,7 @@ const CalculateOffPrices = (data) => {
     });
 
     if (foundPrice) {
+      console.log(foundPrice)
       const countryCode = countries.getAlpha2Code(countryToFind, 'en');
       const currencyCode = getAllInfoByISO(countryCode).currency.toLowerCase();
 
@@ -62,13 +63,29 @@ const CalculateOffPrices = (data) => {
         Cookies.set('aethenos_currency', exchangeRate); // Cache the result in cookies
       }
 
-      if (foundPrice.discountTypeId === 2) {
-        discount = data.course_prices.discount;
-      } else if (foundPrice.discountTypeId === 3) {
-        discount = (data.course_prices.discountAmount / data.course_prices.listPrice) * 100;
-      } else {
-        discount = 0;
+      if(foundPrice.netPrice == 0){
+
+        if (data.course_prices.discountTypeId === 2) {
+          discount = data.course_prices.discount;
+        } else if (data.course_prices.discountTypeId === 3) {
+          discount = Math.round((data.course_prices.discountAmount / data.course_prices.globalListPrice) * 100);
+        } else {
+          discount = 0;
+        }
+
+        
+      }else{
+        if (foundPrice.discountTypeId == 2) {
+          discount = Math.round(foundPrice.discount);
+        } else if (foundPrice.discountTypeId == 3) {
+          discount = Math.round((foundPrice.discountAmount / foundPrice.listPrice) * 100);
+        } else {
+          discount = 0;
+        }
       }
+
+
+
     } else {
       // Global Price
       if (data.course_prices.discountTypeId === 2) {
@@ -92,7 +109,10 @@ const CalculateOffPrices = (data) => {
       }
     }
 
-    return discount === 0 ? "" : `${discount}% OFF`;
+    console.log(discount)
+    console.log(discount)
+
+    return discount == 0 ? "" : `${discount}% OFF`;
   } else {
     return "0";
   }
