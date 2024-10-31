@@ -629,6 +629,12 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
   //   console.log(scrollPosition)
   // }, [scrollPosition])
 
+  const [expandAll, setExpandAll] = useState(false);
+
+  const handleToggleAll = () => {
+    setExpandAll(!expandAll);
+  };
+
   return (
     <section
       ref={elementRef}
@@ -750,7 +756,8 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                 }}
               >
                 <div
-                  className="p-2"
+                      className="p-2 d-flex justify-content-between align-items-center"
+
                   style={{
                     position: "sticky",
                     top: 0,
@@ -759,9 +766,16 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                     backgroundColor: "transparent", // Ensure sticky header doesn't blend with the content
                   }}
                 >
-                  <h6 className="m-2" style={mainfs}>
+                    <h6 className="m-2" style={mainfs}>
                     Course Content
                   </h6>
+                  <span
+                    onClick={handleToggleAll} // Add click handler for toggling
+                    style={{ cursor: "pointer"}}
+                    className="text-danger"
+                  >
+                    {expandAll ? "Collapse All" : "Expand All"}
+                  </span>
                 </div>
                 <Card.Body
                   style={{ height: "calc(100vh - 85px)", overflowY: "auto" }}
@@ -802,6 +816,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                               setCodingExerciseActiveStep
                             }
                             setTitleVideo={setTitleVideo}
+                            show={expandAll}
                           />
                         ))}
                     </div>
