@@ -136,30 +136,13 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
           )}
         </div>
 
-        <div className="content px-2">
+        <div className="content px-3">
      
           <div className=" fw-bolder mb-2">
             <span className="course-level"> {data.level}</span>
 
            
 
-            {data.isPaid ? (
-              <span className="float-end course-price discounted-price">
-                {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                {FormatNumbers(CalculateDiscountedPrice(data))}
-
-                {data.course_prices.discount > 0 && (
-                  <span className="course-price text-decoration-line-through">
-                    {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                    {FormatNumbers(CalculateListPrice(data))}
-                  </span>
-                )}
-              </span>
-            ) : (
-              <span className="course-price discounted-price float-end fw-bolder">
-                Free
-              </span>
-            )}
           </div>
 
     
@@ -209,6 +192,26 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
           </div>
           </>
           )}
+
+        <div>
+        {data.isPaid ? (
+              <span className="course-price discounted-price my-2">
+                {getSymbolFromCurrency(GetCurrencyByCountry(data))}
+                {FormatNumbers(CalculateDiscountedPrice(data))}
+
+                {data.course_prices.discount > 0 && (
+                  <span className="course-price text-decoration-line-through">
+                    {getSymbolFromCurrency(GetCurrencyByCountry(data))}
+                    {FormatNumbers(CalculateListPrice(data))}
+                  </span>
+                )}
+              </span>
+            ) : (
+              <span className="course-price discounted-price fw-bolder">
+                Free
+              </span>
+            )}
+      </div>
 
           <ol className="d-flex course-meta">
             <li>
