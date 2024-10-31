@@ -38,6 +38,8 @@ const CourseItems = ({
     if (currentItems && setShowing) {
       setShowing(currentItems.length);
     }
+    // console.log("-------------------------")
+    // console.log(currentItems)
   }, [currentItems, setShowing]);
 
   useEffect(() => {  

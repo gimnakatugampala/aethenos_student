@@ -165,8 +165,7 @@ const CourseTypeFive = ({ data, classes }) => {
 
         <div className="content col-sm-6 col-xxl-8">
           <div className="d-flex justify-content-end text-end p-3">
-            {data &&
-              (data.isPaid ? (
+            {data && (data.isPaid ? (
                 <div>
                   <div
                     // style={{ fontSize: "20px" }}
@@ -178,7 +177,7 @@ const CourseTypeFive = ({ data, classes }) => {
                     </b>
                   </div>
 
-                  {data.course_prices.discount > 0 && (
+                  {/* {data.course_prices.discount > 0 && ( */}
                     <div
                       // style={{ fontSize: "13px" }}
                       className="course-price m-0 p-0 text-decoration-line-through"
@@ -186,7 +185,7 @@ const CourseTypeFive = ({ data, classes }) => {
                       {getSymbolFromCurrency(GetCurrencyByCountry(data))}
                       {FormatNumbers(CalculateListPrice(data))}
                     </div>
-                  )}
+                  
                 </div>
               ) : (
                 <span className="course-price discounted-price m-lg-3">

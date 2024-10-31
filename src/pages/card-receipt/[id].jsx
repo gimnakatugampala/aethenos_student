@@ -12,6 +12,7 @@ import { useState } from "react";
 import moment from "moment/moment";
 import getSymbolFromCurrency from "currency-symbol-map";
 import { Triangle } from "react-loader-spinner";
+import FormatNumbers from "../../functions/FormatNumbers";
 
 const index = () => {
   const router = useRouter();
@@ -86,11 +87,11 @@ const index = () => {
                         <td>{moment(item.buyDate).format("MMM DD,YYYY")}</td>
                         <td>
                           {getSymbolFromCurrency(item.currency)}
-                          {item.listPrice}
+                          {FormatNumbers(item.listPrice)}
                         </td>
                         <td>
                           {getSymbolFromCurrency(item.currency)}
-                          {item.itemPrice}
+                          {FormatNumbers(item.itemPrice)}
                         </td>
                       </tr>
                     ))}
@@ -103,7 +104,7 @@ const index = () => {
                       <td>Subtotal</td>
                       <td>
                         {getSymbolFromCurrency(details.orderDetails.currency)}
-                        {details.amount}
+                        {FormatNumbers(details.amount)}
                       </td>
                 
                     </tr>
@@ -137,7 +138,7 @@ const index = () => {
                       <td>Total Paid</td>
                       <td>
                        <b><u>{getSymbolFromCurrency(details.orderDetails.currency)}
-                        {details.amount}</u></b>
+                        {FormatNumbers(details.amount)}</u></b>
                       </td>
                   
                     </tr>
