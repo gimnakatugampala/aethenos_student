@@ -187,16 +187,16 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
             </div>
           )}
 
-          <div className=" fw-bolder mt-4 mb-2">
+          <div className=" fw-bolder mb-2">
             <span className="course-level"> {data.level}</span>
 
             {data.isPaid ? (
-              <span className="float-end course-price discounted-price m-1">
+              <span className="float-end course-price discounted-price">
                 {getSymbolFromCurrency(GetCurrencyByCountry(data))}
                 {CalculateDiscountedPrice(data)}
 
                 {data.course_prices.discount > 0 && (
-                  <span className="course-price text-decoration-line-through m-2">
+                  <span className="course-price text-decoration-line-through">
                     {getSymbolFromCurrency(GetCurrencyByCountry(data))}
                     {CalculateListPrice(data)}
                   </span>
@@ -208,6 +208,7 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
               </span>
             )}
           </div>
+       
 
           <h5 className="title">
             <Link href={`/course-details/${data.course_code}`} legacyBehavior>
