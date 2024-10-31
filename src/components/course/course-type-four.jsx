@@ -22,6 +22,7 @@ import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
 import HandleFreeCourses from "../../functions/pricing/HandleFreeCourses";
 import { FormatVideoTimeLength } from "../../functions/FormatVideoTimeLength";
 import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
+import FormatNumbers from "../../functions/FormatNumbers";
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
@@ -193,12 +194,12 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
             {data.isPaid ? (
               <span className="float-end course-price discounted-price">
                 {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                {CalculateDiscountedPrice(data)}
+                {FormatNumbers(CalculateDiscountedPrice(data))}
 
                 {data.course_prices.discount > 0 && (
                   <span className="course-price text-decoration-line-through">
                     {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                    {CalculateListPrice(data)}
+                    {FormatNumbers(CalculateListPrice(data))}
                   </span>
                 )}
               </span>

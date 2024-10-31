@@ -19,6 +19,7 @@ import { reactLocalStorage } from 'reactjs-localstorage';
 import CalculateCouponDiscountedPrice from '../../functions/pricing/CalculateCouponDiscountedPrice';
 import HandleCountry from '../../functions/pricing/HandleCountry';
 import FormatHTMLRemove from '../../functions/FormatHTMLRemove';
+import FormatNumbers from '../../functions/FormatNumbers';
 
 
 
@@ -398,12 +399,12 @@ const generatePaypalItems = () => {
                                         </td>
                                         <td>
                                             {getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} 
-                                            {discountedPrice}
+                                            {FormatNumbers(discountedPrice)}
                                             
                                             {coupon && (
                                                 <span className="text-decoration-line-through mx-2">
                                                     {getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} 
-                                                    {originalPrice}
+                                                    {FormatNumbers(originalPrice)}
                                                 </span>
                                             )}
                                         </td>
@@ -414,7 +415,7 @@ const generatePaypalItems = () => {
                                 <td>Order Total</td>
                                 <td>
                                     {cartCourses.length > 0 && getSymbolFromCurrency(GetCurrencyByCountry(cartCourses[0].other_data))}
-                                    {total.toFixed(2)}
+                                    {FormatNumbers(total.toFixed(2))}
                                 </td>
                             </tr>
                         </tbody>

@@ -2,6 +2,7 @@ import Cookies from 'js-cookie';
 import { getCurrencyExchangeRate, USERTOKEN } from '../../api';
 import countries from 'i18n-iso-countries';
 import { getAllInfoByISO } from 'iso-country-currency';
+import FormatNumbers from '../FormatNumbers';
 
 // Initialize the countries library with the English locale
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));

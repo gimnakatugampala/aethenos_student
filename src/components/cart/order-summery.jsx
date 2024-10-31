@@ -11,6 +11,7 @@ import ButtonLoadingMedium from '../../functions/Loading/ButtonLoadingMedium';
 import validateEmail from '../../functions/emailValid'
 import { useRouter } from "next/router";
 import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
+import FormatNumbers from '../../functions/FormatNumbers';
 
 const OrderSummery = ({ cartItem }) => {
   	const { total , quantity } = useCartInfo();
@@ -174,11 +175,11 @@ const OrderSummery = ({ cartItem }) => {
 				<tbody>
 					<tr className="order-subtotal">
 						<td>Subtotal</td>
-						<td>{cartItem[0].other_data && GetCurrencyByCountry(cartItem[0].other_data)} {(total).toFixed(2)}</td>
+						<td>{cartItem[0].other_data && GetCurrencyByCountry(cartItem[0].other_data)} {FormatNumbers((total).toFixed(2))}</td>
 					</tr>
 					<tr className="order-total">
 						<td>Order Total</td>
-						<td>{cartItem[0].other_data && GetCurrencyByCountry(cartItem[0].other_data)} {(total).toFixed(2)}</td>
+						<td>{cartItem[0].other_data && GetCurrencyByCountry(cartItem[0].other_data)} {FormatNumbers((total).toFixed(2))}</td>
 					</tr>
 				</tbody>
 			</table>

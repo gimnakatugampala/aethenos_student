@@ -6,6 +6,7 @@ import { IMG_HOST } from '../../api';
 import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice'
 import getSymbolFromCurrency from 'currency-symbol-map'
 import GetCurrencyByCountry from '../../functions/pricing/GetCurrencyByCountry';
+import FormatNumbers from '../../functions/FormatNumbers';
 
 const mainfs = {
     fontSize: "clamp(0.2rem, 0.8rem + 0.6vw, 1rem)",  
@@ -35,7 +36,7 @@ const CartItem = ({ item }) => {
             </td>
 
             <td className="product-price" data-title="Price">
-                <span className="currency-symbol">{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))}</span>{(CalculateDiscountedPrice(item.other_data))}
+                <span className="currency-symbol">{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))}</span>{FormatNumbers(CalculateDiscountedPrice(item.other_data))}
             </td>
 
             {/* <td className="product-quantity" data-title="Qty">
@@ -47,7 +48,7 @@ const CartItem = ({ item }) => {
             </td> */}
             
             <td className="product-subtotal" data-title="Subtotal">
-                <span className="currency-symbol">{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))}</span>{(1 * (CalculateDiscountedPrice(item.other_data))).toFixed(2)}
+                <span className="currency-symbol">{getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))}</span>{FormatNumbers((1 * (CalculateDiscountedPrice(item.other_data))).toFixed(2))}
             </td>
         </tr>
     );

@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import CalculateDiscountedPrice from "../../../functions/pricing/CalculateDiscountedPrice";
 import GetCurrencyByCountry from "../../../functions/pricing/GetCurrencyByCountry";
 import getSymbolFromCurrency from "currency-symbol-map";
+import FormatNumbers from "../../../functions/FormatNumbers";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartCourses);
@@ -56,7 +57,7 @@ const Cart = () => {
                         ? "Free"
                         : `${getSymbolFromCurrency(
                             GetCurrencyByCountry(item.other_data)
-                          )} ${CalculateDiscountedPrice(item.other_data)}`}
+                          )} ${FormatNumbers(CalculateDiscountedPrice(item.other_data))}`}
                     </span>
                   </div>
                 </div>
@@ -76,7 +77,7 @@ const Cart = () => {
                 getSymbolFromCurrency(
                   GetCurrencyByCountry(cartItems[0].other_data)
                 )}
-              {parseFloat(total.toFixed(3))}
+              {FormatNumbers(parseFloat(total.toFixed(2)))}
             </span>
           </div>
 

@@ -129,7 +129,7 @@ const CourseTypeFive = ({ data, classes }) => {
                   >
                     <b>
                       {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                      {CalculateDiscountedPrice(data)}
+                      {FormatNumbers(CalculateDiscountedPrice(data))}
                     </b>
                   </div>
 

@@ -141,15 +141,17 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
           <div className=" fw-bolder mb-2">
             <span className="course-level"> {data.level}</span>
 
+           
+
             {data.isPaid ? (
               <span className="float-end course-price discounted-price">
                 {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                {CalculateDiscountedPrice(data)}
+                {FormatNumbers(CalculateDiscountedPrice(data))}
 
                 {data.course_prices.discount > 0 && (
                   <span className="course-price text-decoration-line-through">
                     {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                    {CalculateListPrice(data)}
+                    {FormatNumbers(CalculateListPrice(data))}
                   </span>
                 )}
               </span>
@@ -160,11 +162,14 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
             )}
           </div>
 
-          <h5 className="title w-100">
+    
+          <div className="w-100">
+          <h5 className="title ">
             <Link href={`/course-details/${data.course_code}`} legacyBehavior>
               {data.title}
             </Link>
           </h5>
+          </div>
 
           <p className="m-0 p-0">
             {data.instructor.length > 60
@@ -267,13 +272,13 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
               <div className="course-price discounted-price m-1">
                 <b>
                   {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                  {CalculateDiscountedPrice(data)}
+                  {FormatNumbers(CalculateDiscountedPrice(data))}
                 </b>
               </div>
               {data.course_prices.discount > 0 && (
                 <div className="course-price text-decoration-line-through m-2">
                   {getSymbolFromCurrency(GetCurrencyByCountry(data))}
-                  {CalculateListPrice(data)}
+                  {FormatNumbers(CalculateListPrice(data))}
                 </div>
               )}
             </div>
