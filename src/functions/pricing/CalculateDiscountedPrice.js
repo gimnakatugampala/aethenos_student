@@ -1,23 +1,15 @@
-import React from 'react';
 import Cookies from 'js-cookie';
 import { getCurrencyExchangeRate, USERTOKEN } from '../../api';
 import countries from 'i18n-iso-countries';
-import currencyCodes from 'currency-codes';
 import { getAllInfoByISO } from 'iso-country-currency';
-
 
 // Initialize the countries library with the English locale
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
-const CalculateDiscountedPrice =  (data) => {
+const CalculateDiscountedPrice = (data) => {
     const COUNTRY = Cookies.get('aethenos_user_origin');
-    const EX_RATES = Cookies.get('aethenos_currency');
+    let EX_RATES = Cookies.get('aethenos_currency');
     const USER_LOGIN_COUNTRY = Cookies.get('aethenos_user_country');
-
-    // console.log(USER_LOGIN_COUNTRY);
-    // console.log(EX_RATES);
-    // console.log(COUNTRY);
-    // console.log(data);
 
     let countryToFind = "";
 
@@ -31,7 +23,6 @@ const CalculateDiscountedPrice =  (data) => {
                 console.error("Error parsing USER_LOGIN_COUNTRY:", error);
             }
         }
- 
     } else {
         // User is not logged in, use COUNTRY from IP location
         if (COUNTRY) {
@@ -59,24 +50,18 @@ const CalculateDiscountedPrice =  (data) => {
         });
 
         if (foundPrice) {
-
-            // Get the Currency Code
-            // console.log(foundPrice)
-            // console.log(countryToFind)
             const countryCode = countries.getAlpha2Code(countryToFind, 'en');
-            // console.log(countryCode)
+            const currencyCode = getAllInfoByISO(countryCode).currency.toLowerCase();
 
-            // Get the Currency Code
-            // console.log(getAllInfoByISO(countryCode).currency)
-
-            // Get the New Ex Rate
-            getCurrencyExchangeRate(getAllInfoByISO(countryCode).currency.toLowerCase())
-
-            const EX_RATES = Cookies.get('aethenos_currency');
-
+            // Fetch the exchange rate only if it hasn't been fetched already
+            if (!EX_RATES) {
+                getCurrencyExchangeRate(currencyCode).then(rate => {
+                    EX_RATES = rate;
+                    Cookies.set('aethenos_currency', rate); // Cache in cookies for future use
+                });
+            }
 
             if (foundPrice.netPrice == 0) {
-          
                 // Convert global net price to local currency if EX_RATES is available
                 if (EX_RATES) {
                     try {
@@ -108,11 +93,6 @@ const CalculateDiscountedPrice =  (data) => {
                 console.error("Error parsing COUNTRY for currency:", error);
             }
         }
-
-        // console.log(foundPrice)
-        // console.log(net_price)
-        // console.log(countryToFind)
-        // console.log(USERTOKEN)
 
         return Number.parseFloat(net_price).toFixed(2);
     } else {

@@ -1,147 +1,101 @@
-import React from 'react'
+import React from 'react';
 import Cookies from 'js-cookie';
 import { getCurrencyExchangeRate, USERTOKEN } from '../../api';
 
 import countries from 'i18n-iso-countries';
-import currencyCodes from 'currency-codes';
 import { getAllInfoByISO } from 'iso-country-currency';
 import FormatNumbers from '../FormatNumbers';
-
 
 // Initialize the countries library with the English locale
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
-const COUNTRY = Cookies.get('aethenos_user_origin')
+const COUNTRY = Cookies.get('aethenos_user_origin');
 
 const CalculateOffPrices = (data) => {
   const COUNTRY = Cookies.get('aethenos_user_origin');
-  const EX_RATES = Cookies.get('aethenos_currency');
   const USER_LOGIN_COUNTRY = Cookies.get('aethenos_user_country');
 
-  // console.log(USER_LOGIN_COUNTRY);
-  // console.log(EX_RATES);
-  // console.log(COUNTRY);
-  // console.log(data);
-
   let countryToFind = "";
+  let exchangeRate = Cookies.get('aethenos_currency'); // Store the fetched exchange rate here
 
   // Determine the country based on login status
   if (USERTOKEN) {
-      // User is logged in, use USER_LOGIN_COUNTRY
-      if (USER_LOGIN_COUNTRY) {
-          try {
-              countryToFind = USER_LOGIN_COUNTRY;
-          } catch (error) {
-              console.error("Error parsing USER_LOGIN_COUNTRY:", error);
-          }
+    if (USER_LOGIN_COUNTRY) {
+      try {
+        countryToFind = USER_LOGIN_COUNTRY;
+      } catch (error) {
+        console.error("Error parsing USER_LOGIN_COUNTRY:", error);
       }
-
+    }
   } else {
-      // User is not logged in, use COUNTRY from IP location
-      if (COUNTRY) {
-          try {
-              const parsedCountry = JSON.parse(COUNTRY);
-              countryToFind = parsedCountry.country_name;
-          } catch (error) {
-              console.error("Error parsing COUNTRY:", error);
-          }
+    if (COUNTRY) {
+      try {
+        const parsedCountry = JSON.parse(COUNTRY);
+        countryToFind = parsedCountry.country_name;
+      } catch (error) {
+        console.error("Error parsing COUNTRY:", error);
       }
+    }
   }
 
   let discount = "";
 
   if (data.course_prices != null && data.course_prices.prices != null) {
-      let foundPrice = null;
+    let foundPrice = null;
 
-      // Find the price for the specific country
-      data.course_prices.prices.some(single_price => {
-          if (countryToFind === single_price.country) {
-              foundPrice = single_price;
-              return true;
-          }
-          return false;
-      });
+    // Find the price for the specific country
+    data.course_prices.prices.some(single_price => {
+      if (countryToFind === single_price.country) {
+        foundPrice = single_price;
+        return true;
+      }
+      return false;
+    });
 
-      if (foundPrice) {
+    if (foundPrice) {
+      const countryCode = countries.getAlpha2Code(countryToFind, 'en');
+      const currencyCode = getAllInfoByISO(countryCode).currency.toLowerCase();
 
-          // Get the Currency Code
-          console.log(foundPrice)
-          // console.log(countryToFind)
-          const countryCode = countries.getAlpha2Code(countryToFind, 'en');
-          // console.log(countryCode)
+      // Fetch the exchange rate only once
+      if (!exchangeRate) {
+        exchangeRate = getCurrencyExchangeRate(currencyCode);
+        Cookies.set('aethenos_currency', exchangeRate); // Cache the result in cookies
+      }
 
-          // Get the Currency Code
-          // console.log(getAllInfoByISO(countryCode).currency)
-
-          // Get the New Ex Rate
-          getCurrencyExchangeRate(getAllInfoByISO(countryCode).currency.toLowerCase())
-
-          const EX_RATES = Cookies.get('aethenos_currency');
-
-          console.log(foundPrice)
-
-
-          if (foundPrice.discountTypeId == 2) {
-        
-              // Convert global net price to local currency if EX_RATES is available
-                  discount = data.course_prices.discount;
-              
-          } else if(foundPrice.discountTypeId == 3) {
-
-                 // Convert global net price to local currency if EX_RATES is available
-                  discount = (data.course_prices.discountAmount / data.course_prices.listPrice) * 100;
-            
-          }else {
-
-            // Glo
-
-              discount = 0;
-          }
-
+      if (foundPrice.discountTypeId === 2) {
+        discount = data.course_prices.discount;
+      } else if (foundPrice.discountTypeId === 3) {
+        discount = (data.course_prices.discountAmount / data.course_prices.listPrice) * 100;
       } else {
-          // Global Price
+        discount = 0;
+      }
+    } else {
+      // Global Price
+      if (data.course_prices.discountTypeId === 2) {
+        discount = data.course_prices.discount;
+      } else if (data.course_prices.discountTypeId === 3) {
+        discount = Math.round((data.course_prices.discountAmount / data.course_prices.globalListPrice) * 100);
+      } else {
+        discount = 0;
+      }
+    }
 
-          if (data.course_prices.discountTypeId == 2) {
-        
-            // Convert global net price to local currency if EX_RATES is available
-                discount = data.course_prices.discount;
-            
-        } else if(data.course_prices.discountTypeId == 3) {
-
-               // Convert global net price to local currency if EX_RATES is available
-                discount = Math.round((data.course_prices.discountAmount / data.course_prices.globalListPrice) * 100);
-          
-        }else {
-
-          // Glo
-            discount = 0;
+    // Handle currency-specific rounding for Japanese Yen
+    if (COUNTRY) {
+      try {
+        const parsedCountry = JSON.parse(COUNTRY);
+        if (parsedCountry.currency.toUpperCase() === 'JPY') {
+          return Math.round(Number(discount)).toString();
         }
-
+      } catch (error) {
+        console.error("Error parsing COUNTRY for currency:", error);
       }
+    }
 
-      // Handle currency-specific rounding for Japanese Yen
-      if (COUNTRY) {
-          try {
-              const parsedCountry = JSON.parse(COUNTRY);
-              if (parsedCountry.currency.toUpperCase() === 'JPY') {
-                  return Math.round(Number(discount)).toString();
-              }
-          } catch (error) {
-              console.error("Error parsing COUNTRY for currency:", error);
-          }
-      }
-
-      console.log(foundPrice)
-      console.log(discount)
-      // console.log(countryToFind)
-      // console.log(USERTOKEN)
-
-      return discount == 0 ? "" : `${discount}% OFF`;
-
+    return discount === 0 ? "" : `${discount}% OFF`;
   } else {
-      return "0";
+    return "0";
   }
-
 }
 
-export default CalculateOffPrices
+export default CalculateOffPrices;
