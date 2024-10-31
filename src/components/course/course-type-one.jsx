@@ -127,7 +127,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
               className="img-fluid"
             />
           </Link>
-          {data.course_prices.discount > 0 && (
+          {data && CalculateOffPrices(data) != "" && (
             <div className="time-top">
               <span style={{ background: "#e01D20" }} className="duration">
                 {CalculateOffPrices(data)}
