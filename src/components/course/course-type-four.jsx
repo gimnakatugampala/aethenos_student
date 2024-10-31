@@ -195,6 +195,7 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
               <span className="float-end course-price discounted-price">
                 {getSymbolFromCurrency(GetCurrencyByCountry(data))}
                 {FormatNumbers(CalculateDiscountedPrice(data))}
+              
 
                 {data.course_prices.discount > 0 && (
                   <span className="course-price text-decoration-line-through">

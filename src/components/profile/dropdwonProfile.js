@@ -81,7 +81,7 @@ const DropDownProfile = ({
   };
 
   useEffect(() => {
-    setInterval(() => {
+    // setInterval(() => {
       GetStudentProfile(
         setfirst_Name,
         setlast_name,
@@ -95,7 +95,7 @@ const DropDownProfile = ({
         setyoutube,
         setprofile_img
       );
-    }, 1000);
+    // }, 1000);
   }, []);
 
   return (
