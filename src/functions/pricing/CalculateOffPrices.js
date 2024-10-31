@@ -81,12 +81,12 @@ const CalculateOffPrices = (data) => {
           console.log(foundPrice)
 
 
-          if (foundPrice.discountType == "By Percentage") {
+          if (foundPrice.discountTypeId == 2) {
         
               // Convert global net price to local currency if EX_RATES is available
                   discount = data.course_prices.discount;
               
-          } else if(foundPrice.discountType == "By Value") {
+          } else if(foundPrice.discountTypeId == 3) {
 
                  // Convert global net price to local currency if EX_RATES is available
                   discount = (data.course_prices.discountAmount / data.course_prices.listPrice) * 100;
@@ -101,12 +101,12 @@ const CalculateOffPrices = (data) => {
       } else {
           // Global Price
 
-          if (data.course_prices.discountType == "By Percentage") {
+          if (data.course_prices.discountTypeId == 2) {
         
             // Convert global net price to local currency if EX_RATES is available
                 discount = data.course_prices.discount;
             
-        } else if(data.course_prices.discountType == "By Value") {
+        } else if(data.course_prices.discountTypeId == 3) {
 
                // Convert global net price to local currency if EX_RATES is available
                 discount = Math.round((data.course_prices.discountAmount / data.course_prices.globalListPrice) * 100);
@@ -131,8 +131,8 @@ const CalculateOffPrices = (data) => {
           }
       }
 
-      // console.log(foundPrice)
-      // console.log(discount)
+      console.log(foundPrice)
+      console.log(discount)
       // console.log(countryToFind)
       // console.log(USERTOKEN)
 

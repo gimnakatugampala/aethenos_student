@@ -21,6 +21,7 @@ import {
 import CalculateListPrice from "../../functions/pricing/CalculateListPrice";
 import HandleFreeCourses from "../../functions/pricing/HandleFreeCourses";
 import { FormatVideoTimeLength } from "../../functions/FormatVideoTimeLength";
+import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
@@ -169,7 +170,7 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
         </div>
 
         <div className="content px-4">
-          {data.course_prices.discount > 0 && (
+          {data && CalculateOffPrices(data) != "" && (
             <div
               className="course-price price-round"
               style={{
@@ -179,10 +180,10 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
                 fontSize: "14px",
               }}
             >
-              <div style={{ lineHeight: "4.3" }}>
-                {CalculateDiscountPrice(data)}
+              <div >
+                {CalculateOffPrices(data)}
               </div>
-              <div style={{ marginTop: "-45px" }}>OFF</div>
+              {/* <div style={{ marginTop: "-45px" }}>OFF</div> */}
             </div>
           )}
 
