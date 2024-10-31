@@ -56,14 +56,14 @@ const CalculateCouponDiscountedPrice =  (data) => {
                 }
 
             // Multiply the selected price by the exchange rate
-            finalPrice = (Number.parseFloat(data.global_discount_price) * exchangeRate).toFixed(2);
+            finalPrice = (Number.parseFloat(data.global_discount_price) * exchangeRate);
 
             }else{
 
                 exchangeRate = 1
 
             // Multiply the selected price by the exchange rate
-            finalPrice = (priceToUse * exchangeRate).toFixed(2);
+            finalPrice = (priceToUse * exchangeRate);
 
             }
 

@@ -403,7 +403,7 @@ const generatePaypalItems = () => {
                                             {coupon && (
                                                 <span className="text-decoration-line-through mx-2">
                                                     {getSymbolFromCurrency(GetCurrencyByCountry(item.other_data))} 
-                                                    {originalPrice.toFixed(2)}
+                                                    {originalPrice}
                                                 </span>
                                             )}
                                         </td>
