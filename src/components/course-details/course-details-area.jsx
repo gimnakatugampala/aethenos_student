@@ -61,6 +61,12 @@ const CourseDetailsArea = ({ course }) => {
     );
   }
 
+  const [expandAll, setExpandAll] = useState(false);
+
+  const handleToggleAll = () => {
+    setExpandAll(!expandAll);
+  };
+
   return (
     <section className="edu-section-gap course-details-3">
       <div className="mx-3 mx-sm-3 mx-md-4 mx-lg-5">
@@ -169,6 +175,13 @@ const CourseDetailsArea = ({ course }) => {
                     <div className="course-curriculam">
                       <h3 className="heading-title">Course Syllabus</h3>
 
+                      <div className="accordion-controls mb-3 text-end">
+                    <h5 className="text-danger" onClick={handleToggleAll} style={{ cursor: "pointer"}}>
+                      {expandAll ? "Collapse All" : "Expand All"}
+                    </h5>
+                  </div>
+
+
                       <div className="faq-accordion">
                         <div className="accordion">
                           {course.course_content != null &&
@@ -180,6 +193,8 @@ const CourseDetailsArea = ({ course }) => {
                                 title={`${content.section_name}`}
                                 lectures={content.no_of_lectures}
                                 lists={content.section_curriculum_item}
+                                show={expandAll} // Pass the expand/collapse state
+
                               />
                             ))}
                         </div>
