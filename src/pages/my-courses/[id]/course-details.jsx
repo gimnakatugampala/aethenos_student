@@ -691,6 +691,20 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
   };
 
 
+  const quizRef = useRef(null); // Reference to the QuizContainer
+
+  const toggleQuizFullScreen = () => {
+    if (!isFullScreen) {
+      if (quizRef.current) {
+        quizRef.current.requestFullscreen(); // Request full screen for the container
+      }
+    } else {
+      document.exitFullscreen(); // Exit full screen
+    }
+    setIsFullScreen(!isFullScreen);
+  };
+
+
   return (
     <section
       ref={elementRef}
@@ -730,20 +744,64 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
               <>
                 {/* // Show Quiz */}
                 {showquiz && (
-                  <div
-                    className=" border p-4"
-                    style={{ maxHeight: "620px", overflowY: "scroll" }}
-                  >
-                    <QuizContainer
-                      setselectAnswer={setselectAnswer}
-                      selectAnswer={selectAnswer}
-                      answerAlertDisplay={answerAlertDisplay}
-                      setanswerAlertDisplay={setanswerAlertDisplay}
-                      Startquiz={Startquiz}
-                      setStartquiz={setStartquiz}
-                      selectedQuiz={selectedQuiz}
-                    />
-                  </div>
+               <>
+               <div
+                 onClick={toggleQuizFullScreen}
+                 style={{
+                   background: "#f0f0f0",
+                   padding: "10px",
+                   cursor: "pointer",
+                   textAlign: "center",
+                   fontWeight: "bold",
+                 }}
+               >
+                 Click to View Quiz in Full Screen
+               </div>
+         
+               <div
+                 ref={quizRef}
+                 className="border p-4"
+                 style={{
+                   maxHeight: isFullScreen ? "100vh" : "620px", // Full height in full screen
+                   overflowY: isFullScreen ? "auto" : "scroll", // Allow scrolling in full screen
+                   position: isFullScreen ? "fixed" : "static",
+                   top: 0,
+                   left: 0,
+                   width: isFullScreen ? "100vw" : "auto",
+                   height: isFullScreen ? "100vh" : "auto",
+                   backgroundColor: isFullScreen ? "#ffffff" : "transparent", // White background in full screen
+                   zIndex: isFullScreen ? 1000 : "auto", // Bring to front in full screen
+                 }}
+               >
+                 <QuizContainer
+                   setselectAnswer={setselectAnswer}
+                   selectAnswer={selectAnswer}
+                   answerAlertDisplay={answerAlertDisplay}
+                   setanswerAlertDisplay={setanswerAlertDisplay}
+                   Startquiz={Startquiz}
+                   setStartquiz={setStartquiz}
+                   selectedQuiz={selectedQuiz}
+                 />
+         
+                 {isFullScreen && (
+                   <button
+                     onClick={toggleQuizFullScreen}
+                     style={{
+                       position: "fixed",
+                       top: "20px",
+                       right: "20px",
+                       fontSize: "1.5em",
+                       color: "#000", // Close button color
+                       background: "none",
+                       border: "none",
+                       cursor: "pointer",
+                     }}
+                   >
+                     ✕
+                   </button>
+                 )}
+               </div>
+             </>
                 )}
 
                 {/* // Show Assignment */}
