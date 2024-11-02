@@ -303,6 +303,10 @@ const Header = ({
                                 }}
                               >
                                 <ListItem
+                                   onClick={() => {
+                                    window.location.href = `/course-details/${result.courseCode}`;
+                                    router.push(`/course-details/${result.courseCode}`);
+                                  }}
                                   className="m-0"
                                   sx={{
                                     cursor: "pointer",
@@ -313,6 +317,10 @@ const Header = ({
                                   }}
                                 >
                                   <ListItemAvatar
+                                     onClick={() => {
+                                      window.location.href = `/course-details/${result.courseCode}`;
+                                      router.push(`/course-details/${result.courseCode}`);
+                                    }}
                                     loading="lazy"
                                     alt={result.courseTitle}
                                     style={{ width: '40px', height: '40px', borderRadius: '50%' }}
@@ -320,6 +328,10 @@ const Header = ({
                                     <Avatar src={`${IMG_HOST}${result.courseImg}`} />
                                   </ListItemAvatar>
                                   <ListItemText
+                                     onClick={() => {
+                                      window.location.href = `/course-details/${result.courseCode}`;
+                                      router.push(`/course-details/${result.courseCode}`);
+                                    }}
                                     primary={
                                       <b>
                                         <Typography
@@ -353,6 +365,10 @@ const Header = ({
                                 }}
                               >
                                 <ListItem
+                                onClick={() => {
+                                  window.location.href = `/users/${result.instructorCode}`;
+                                  router.push(`/users/${result.instructorCode}`);
+                                }}
                                   sx={{
                                     cursor: "pointer",
                                     alignItems: "flex-start",
@@ -362,6 +378,10 @@ const Header = ({
                                   }}
                                 >
                                   <ListItemAvatar
+                                  onClick={() => {
+                                    window.location.href = `/users/${result.instructorCode}`;
+                                    router.push(`/users/${result.instructorCode}`);
+                                  }}
                                     loading="lazy"
                                     alt={result.instructorName}
                                     style={{ width: '40px', height: '40px', borderRadius: '50%' }}
@@ -369,6 +389,10 @@ const Header = ({
                                     <Avatar src={`${IMG_HOST}${result.instructorImg}`} />
                                   </ListItemAvatar>
                                   <ListItemText
+                                  onClick={() => {
+                                    window.location.href = `/users/${result.instructorCode}`;
+                                    router.push(`/users/${result.instructorCode}`);
+                                  }}
                                     primary={
                                       <b>
                                         <Typography

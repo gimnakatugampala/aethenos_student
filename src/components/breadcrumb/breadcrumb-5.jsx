@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { useMouseMoveUI } from "../../contexts/mouse-move-context";
 import moment from "moment";
 import DisplayCardRatings from "../ratings-display/DisplayCardRatings";
+import FormatNumbers from "../../functions/FormatNumbers";
+import FormatNumbersForInt from "../../functions/FormatNumbersForInt";
 
 const CourseBreadcrumb = ({ course }) => {
   const { title, instructor, language, rating_count, subtitle } = course || {};
@@ -89,7 +91,7 @@ const mainfs = {
 
            
             <li>
-              <span>{course.externalCourseDetails.externalNumberOfStudent} {course.externalCourseDetails.externalNumberOfStudent == 1 ? 'student' : 'students'}</span>
+              <span>{FormatNumbersForInt(course.externalCourseDetails.externalNumberOfStudent)} {course.externalCourseDetails.externalNumberOfStudent == 1 ? 'student' : 'students'}</span>
             </li>
         
           </ul>

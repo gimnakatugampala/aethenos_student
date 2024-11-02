@@ -314,7 +314,7 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
               </ul>
 
               {course.isPaid ? (
-                <div className="read-more-btn">
+                <div className="read-more-btn  mb-0">
                   <a
                     onClick={() => handleAddToCart(course)}
                     className="edu-btn"
@@ -327,7 +327,7 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                   </a>
                 </div>
               ) : (
-                <div className="read-more-btn">
+                <div className="read-more-btn mb-0">
                   <a
                     onClick={() => handleEnroll(course)}
                     className="edu-btn"
@@ -338,6 +338,10 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                   </a>
                 </div>
               )}
+              
+              <div className="text-center">
+              <span style={{fontSize:'12px'}} className="m-0 p-0 text-danger"><b>30-Day Money-Back Guarantee</b></span>
+              </div>
 
               {/* <div className="share-area">
                 <h4 className="title">Share On:</h4>
