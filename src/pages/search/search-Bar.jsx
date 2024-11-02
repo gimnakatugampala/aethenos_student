@@ -4,19 +4,25 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import Dropdown from "react-bootstrap/Dropdown";
 import { SearchItemsByKeyword } from "../../api";
 import debounce from "lodash.debounce";
+import { setSearchResults, setShowDropdown } from "../../redux/features/search-slice";
+import { useDispatch, useSelector } from "react-redux";
 
-const SearchBar = ({ setShowDropdown, setsearchResults }) => {
+
+const SearchBar = () => {
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
+  const dispatch = useDispatch();
+
 
   // Debounced version of the search function
   const debouncedSearch = useCallback(
     debounce((searchTerm) => {
-      SearchItemsByKeyword(searchTerm, setsearchResults);
-    }, 300), // Adjust debounce delay as needed
-    [setsearchResults]
+      SearchItemsByKeyword(searchTerm, (results) =>
+        dispatch(setSearchResults(results))
+      );
+    }, 300),
+    [dispatch]
   );
-
   const handleSearch = () => {
     if (keyword === "") {
       Swal.fire({
@@ -36,15 +42,13 @@ const SearchBar = ({ setShowDropdown, setsearchResults }) => {
   };
 
   const handleFocus = () => {
-    setShowDropdown(true);
+    dispatch(setShowDropdown(true));
   };
 
   const handleBlur = () => {
     setTimeout(() => {
-      setShowDropdown(false);
-      if (setsearchResults) {
-        setsearchResults(null);
-      }
+      dispatch(setShowDropdown(false));
+      dispatch(setSearchResults(null));
     }, 100);
   };
 

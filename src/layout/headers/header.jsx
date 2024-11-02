@@ -77,9 +77,12 @@ const Header = ({
   const [categories, setcategories] = useState([]);
   const [navbar_list, setnavbar_list] = useState([]);
 
-  const [showDropdown, setShowDropdown] = useState(false);
+  // const [showDropdown, setShowDropdown] = useState(false);
 
-  const [searchResults, setsearchResults] = useState(null);
+  // const [searchResults, setsearchResults] = useState(null);
+
+  const showDropdown = useSelector((state) => state.search.showDropdown);
+  const searchResults = useSelector((state) => state.search.searchResults);
 
   const router = useRouter();
 
@@ -254,18 +257,18 @@ const Header = ({
                     <div className="input-group">
                       <SearchBar
                    
-                        showDropdown={showDropdown}
-                        setShowDropdown={setShowDropdown}
-                        setsearchResults={setsearchResults}
+                        // showDropdown={showDropdown}
+                        // setShowDropdown={setShowDropdown}
+                        // setsearchResults={setsearchResults}
                       />
                     </div>
                   </li>
                   
                   <li className="icon search-icon search-bar" style={{ position: "relative"  }}>
                   <SearchBar
-                    setsearchResults={setsearchResults}
+                    // setsearchResults={setsearchResults}
                     showDropdown={showDropdown}
-                    setShowDropdown={setShowDropdown}
+                    // setShowDropdown={setShowDropdown}
                   />
 
                   {showDropdown && searchResults != null && (

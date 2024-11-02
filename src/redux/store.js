@@ -5,6 +5,7 @@ import wishlistSlice from './features/wishlist-slice';
 import eventSlice from './features/event-slice';
 import filterSlice from './features/filter-slice';
 import authSlice from './features/auth-slice';
+import searchSlice from './features/search-slice'
 
 const rootReducer = combineReducers({
     auth:authSlice,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     cart:cartSlice,
     wishlist:wishlistSlice,
     event:eventSlice,
-    filter:filterSlice
+    filter:filterSlice,
+    search:searchSlice
 })
 
 export const store = configureStore({
