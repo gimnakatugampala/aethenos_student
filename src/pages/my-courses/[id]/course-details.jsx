@@ -635,6 +635,21 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
     setExpandAll(!expandAll);
   };
 
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const articleRef = useRef(null); // Reference to the article container
+
+  const toggleFullScreen = () => {
+    if (!isFullScreen) {
+      if (articleRef.current) {
+        articleRef.current.requestFullscreen(); // Request full screen for the article container
+      }
+    } else {
+      document.exitFullscreen(); // Exit full screen
+    }
+    setIsFullScreen(!isFullScreen);
+  };
+
+
   return (
     <section
       ref={elementRef}
@@ -733,12 +748,63 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                 )}
               </>
             ) : (
+              <>
+              <div
+                onClick={toggleFullScreen}
+                style={{
+                  background: "#f0f0f0",
+                  padding: "10px",
+                  cursor: "pointer",
+                  textAlign: "center",
+                  fontWeight: "bold",
+                }}
+              >
+                Click to View Full Screen
+              </div>
+              
               <div
                 className="border p-4"
                 style={{ maxHeight: "500px", overflowY: "scroll" }}
               >
                 {parse(article)}
               </div>
+        
+              <div
+                ref={articleRef}
+                className={`full-screen-overlay ${isFullScreen ? 'fullscreen' : ''}`}
+                style={{
+                  position: isFullScreen ? "fixed" : "static",
+                  top: 0,
+                  left: 0,
+                  width: isFullScreen ? "100vw" : "auto",
+                  height: isFullScreen ? "100vh" : "auto",
+                  backgroundColor: isFullScreen ? "#ffffff" : "rgba(0, 0, 0, 0.8)", // White background in full screen
+                  color: isFullScreen ? "#000" : "#fff", // Black text in full screen
+                  zIndex: 1000,
+                  padding: "5px",
+                  overflowY: isFullScreen ? "auto" : "hidden",
+                }}
+              >
+                {isFullScreen && (
+                  <button
+                    onClick={toggleFullScreen}
+                    style={{
+                      position: "fixed",
+                      top: "20px",
+                      right: "20px",
+                      fontSize: "1.5em",
+                      color: "#000", // Change close button color to black for visibility on white
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                  >
+                    ✕
+                  </button>
+                )}
+                {parse(article)}
+              </div>
+            </>
             )}
 
             {/* Course Content */}
