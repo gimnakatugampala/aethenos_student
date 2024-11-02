@@ -186,7 +186,7 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                     {getSymbolFromCurrency(GetCurrencyByCountry(course))}
                     {FormatNumbers(CalculateDiscountedPrice(course))}
                   </span>
-                  {course.course_prices.discount > 0 && (
+                  {CalculateListPrice(course) != CalculateDiscountedPrice(course) && (
                     <span className="text-decoration-line-through m-lg-1">
                       {" "}
                       {getSymbolFromCurrency(GetCurrencyByCountry(course))}

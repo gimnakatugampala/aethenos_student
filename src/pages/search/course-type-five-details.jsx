@@ -178,6 +178,7 @@ const CourseTypeFive = ({ data, classes }) => {
                   </div>
 
                   {/* {data.course_prices.discount > 0 && ( */}
+                  {CalculateListPrice(data) != CalculateDiscountedPrice(data) && 
                     <div
                       // style={{ fontSize: "13px" }}
                       className="course-price m-0 p-0 text-decoration-line-through"
@@ -185,6 +186,7 @@ const CourseTypeFive = ({ data, classes }) => {
                       {getSymbolFromCurrency(GetCurrencyByCountry(data))}
                       {FormatNumbers(CalculateListPrice(data))}
                     </div>
+                  }
                   
                 </div>
               ) : (

@@ -166,7 +166,7 @@ const CourseTypeOne = ({ course }) => {
                   {FormatNumbers(CalculateDiscountedPrice(course))}
                 </b>
               </div>
-              {course.course_prices.discount  > 0 && (
+              {CalculateListPrice(data) != CalculateDiscountedPrice(data) && (
               <div className="course-price text-decoration-line-through m-2">
                 {getSymbolFromCurrency(GetCurrencyByCountry(course))}
                 {FormatNumbers(CalculateListPrice(course))}
