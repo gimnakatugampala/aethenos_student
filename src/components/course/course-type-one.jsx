@@ -289,10 +289,10 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
             <span className="course-price discounted-price m-lg-3">Free</span>
           )}
 
-          <p>
-            {data.curriculum_desc.length > 60
-              ? FormatHTMLRemove(data.curriculum_desc).substring(0, 60) + "..."
-              : FormatHTMLRemove(data.curriculum_desc)}
+          <p  style={{ cursor: "pointer" }}>
+            {data.course_main_desc.length > 60
+              ? FormatHTMLRemove(data.course_main_desc).substring(0, 60) + "..."
+              : FormatHTMLRemove(data.course_main_desc)}
           </p>
 
           <ol className="d-flex course-meta">

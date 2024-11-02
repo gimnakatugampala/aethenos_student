@@ -38,7 +38,7 @@ const CalculateOffPrices = (data) => {
     }
   }
 
-  console.log(countryToFind)
+  // console.log(countryToFind)
 
   let discount = "";
 
@@ -114,8 +114,8 @@ const CalculateOffPrices = (data) => {
       }
     }
 
-    console.log(discount)
-    console.log(discount)
+    // console.log(discount)
+    // console.log(discount)
 
     return discount == 0 ? "" : `${discount}% OFF`;
   } else {
