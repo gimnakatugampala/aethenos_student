@@ -649,6 +649,19 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
     setIsFullScreen(!isFullScreen);
   };
 
+  const exerciseRef = useRef(null); // Reference to the container
+
+  const toggleCodingExerciseFullScreen = () => {
+    if (!isFullScreen) {
+      if (exerciseRef.current) {
+        exerciseRef.current.requestFullscreen(); // Request full screen for the container
+      }
+    } else {
+      document.exitFullscreen(); // Exit full screen
+    }
+    setIsFullScreen(!isFullScreen);
+  };
+
 
   return (
     <section
@@ -735,16 +748,60 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
 
                 {/* Show Coding Exercise */}
                 {showCodingExercise && (
-                  <div
-                    className="container border border border-dark p-4"
-                    // style={{ maxHeight: "500px", overflowY: "scroll" }}
-                  >
-                    <CodingExerciseContainer
-                      setCodingExerciseActiveStep={setCodingExerciseActiveStep}
-                      activeStepCodingExercise={activeStepCodingExercise}
-                      selectedCodingExercise={selectedCodingExercise}
-                    />
-                  </div>
+                 <>
+                 <div
+                   onClick={toggleCodingExerciseFullScreen}
+                   style={{
+                     background: "#f0f0f0",
+                     padding: "10px",
+                     cursor: "pointer",
+                     textAlign: "center",
+                     fontWeight: "bold",
+                   }}
+                 >
+                   Click to View Coding Exercises in Full Screen
+                 </div>
+                 
+                 <div
+                   ref={exerciseRef}
+                   className={`container border border-dark p-4`}
+                   style={{
+                     position: isFullScreen ? "fixed" : "static",
+                     top: 0,
+                     left: 0,
+                     width: isFullScreen ? "100vw" : "auto",
+                     height: isFullScreen ? "100vh" : "auto",
+                     backgroundColor: isFullScreen ? "#ffffff" : "transparent", // White background in full screen
+                     zIndex: isFullScreen ? 1000 : "auto", // Bring to front in full screen
+                     overflowY: isFullScreen ? "auto" : "hidden", // Allow scrolling in full screen
+                   }}
+                 >
+                   <CodingExerciseContainer
+                     setCodingExerciseActiveStep={setCodingExerciseActiveStep}
+                     activeStepCodingExercise={activeStepCodingExercise}
+                     selectedCodingExercise={selectedCodingExercise}
+                   />
+                   
+                   {isFullScreen && (
+                     <button
+                       onClick={toggleCodingExerciseFullScreen}
+                       style={{
+                         position: "fixed",
+                         top: "20px",
+                         right: "20px",
+                         fontSize: "1.5em",
+                         color: "#000", // Close button color
+                         background: "none",
+                         border: "none",
+                         cursor: "pointer",
+                       }}
+                     >
+                       ✕
+                     </button>
+                   )}
+                 </div>
+               </>
+               
                 )}
               </>
             ) : (
