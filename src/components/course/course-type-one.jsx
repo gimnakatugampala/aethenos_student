@@ -278,7 +278,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
                   {FormatNumbers(CalculateDiscountedPrice(data))}
                 </b>
               </div>
-              {data.course_prices.discount > 0 && (
+              {CalculateListPrice(data) != CalculateDiscountedPrice(data) && (
                 <div className="course-price text-decoration-line-through m-2">
                   {getSymbolFromCurrency(GetCurrencyByCountry(data))}
                   {FormatNumbers(CalculateListPrice(data))}
