@@ -69,7 +69,7 @@ const mainfs = {
             </li>
 
             <li>
-              <span>{course.student} {course.student == 1 ? 'student' : 'students'}</span>
+              <span>{FormatNumbersForInt(course.student)} {course.student == 1 ? 'student' : 'students'}</span>
             </li>
           </ul>
 
