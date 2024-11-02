@@ -38,6 +38,8 @@ const CalculateOffPrices = (data) => {
     }
   }
 
+  console.log(countryToFind)
+
   let discount = "";
 
   if (data.course_prices != null && data.course_prices.prices != null) {
@@ -55,7 +57,10 @@ const CalculateOffPrices = (data) => {
     if (foundPrice) {
       console.log(foundPrice)
       const countryCode = countries.getAlpha2Code(countryToFind, 'en');
-      const currencyCode = getAllInfoByISO(countryCode).currency.toLowerCase();
+      const currencyCode =  getAllInfoByISO(countryCode).currency.toLowerCase();
+      // console.log(countryCode)
+      // console.log(countryToFind)
+      // console.log(currencyCode)
 
       // Fetch the exchange rate only once
       if (!exchangeRate) {

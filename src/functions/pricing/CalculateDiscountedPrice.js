@@ -51,7 +51,7 @@ const CalculateDiscountedPrice = (data) => {
         });
 
         if (foundPrice) {
-            const countryCode = countries.getAlpha2Code(countryToFind, 'en');
+            const countryCode =  countries.getAlpha2Code(countryToFind, 'en');
             const currencyCode = getAllInfoByISO(countryCode).currency.toLowerCase();
 
             // Fetch the exchange rate only if it hasn't been fetched already
