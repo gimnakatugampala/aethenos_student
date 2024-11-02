@@ -677,6 +677,19 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
   };
 
 
+  const assignmentRef = useRef(null); // Reference to the container
+
+  const toggleAssignmentFullScreen = () => {
+    if (!isFullScreen) {
+      if (assignmentRef.current) {
+        assignmentRef.current.requestFullscreen(); // Request full screen for the container
+      }
+    } else {
+      document.exitFullscreen(); // Exit full screen
+    }
+    setIsFullScreen(!isFullScreen);
+  };
+
 
   return (
     <section
@@ -735,16 +748,59 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
 
                 {/* // Show Assignment */}
                 {showAssignment && (
-                  <div
-                    className="container border border-dark p-4"
-                    // style={{ maxHeight: "500px", overflowY: "scroll" }}
-                  >
-                    <AssignmentContainer
-                      activeStep={activeAssignmentStep}
-                      setActiveStep={setAssignmentActiveStep}
-                      selectedAssignment={selectedAssignment}
-                    />
-                  </div>
+                 <>
+                 <div
+                   onClick={toggleAssignmentFullScreen}
+                   style={{
+                     background: "#f0f0f0",
+                     padding: "10px",
+                     cursor: "pointer",
+                     textAlign: "center",
+                     fontWeight: "bold",
+                   }}
+                 >
+                   Click to View Assignment in Full Screen
+                 </div>
+           
+                 <div
+                   ref={assignmentRef}
+                   className={`container border border-dark p-4`}
+                   style={{
+                     position: isFullScreen ? "fixed" : "static",
+                     top: 0,
+                     left: 0,
+                     width: isFullScreen ? "100vw" : "auto",
+                     height: isFullScreen ? "100vh" : "auto",
+                     backgroundColor: isFullScreen ? "#ffffff" : "transparent", // White background in full screen
+                     zIndex: isFullScreen ? 1000 : "auto", // Bring to front in full screen
+                     overflowY: isFullScreen ? "auto" : "hidden", // Allow scrolling in full screen
+                   }}
+                 >
+                   <AssignmentContainer
+                     activeStep={activeAssignmentStep}
+                     setActiveStep={setAssignmentActiveStep}
+                     selectedAssignment={selectedAssignment}
+                   />
+           
+                   {isFullScreen && (
+                     <button
+                       onClick={toggleAssignmentFullScreen}
+                       style={{
+                         position: "fixed",
+                         top: "20px",
+                         right: "20px",
+                         fontSize: "1.5em",
+                         color: "#000", // Close button color
+                         background: "none",
+                         border: "none",
+                         cursor: "pointer",
+                       }}
+                     >
+                       ✕
+                     </button>
+                   )}
+                 </div>
+               </>
                 )}
 
                 {/* Show Practice test */}
