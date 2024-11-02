@@ -59,10 +59,10 @@ const GetCurrencyByCountry = (data) => {
         if (foundPrice) {
            
                 // Get ISO country code
-                const countryCode = countries.getAlpha2Code(countryToFind, 'en');
+                const countryCode =  countries.getAlpha2Code(countryToFind, 'en');
                 // console.log(countryCode)
 
-                currency_code = getAllInfoByISO(countryCode).currency
+                currency_code = countryToFind == "Bulgaria"  || countryToFind == "Czechia" || countryToFind == "Hungary" || countryToFind == "Poland" || countryToFind == "Sweden"  ? "EUR" : getAllInfoByISO(countryCode).currency
     
                 // Get the Currency Code
                 // console.log(getAllInfoByISO(countryCode).currency)
