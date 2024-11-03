@@ -17,12 +17,14 @@ const SearchBar = () => {
   // Debounced version of the search function
   const debouncedSearch = useCallback(
     debounce((searchTerm) => {
-      SearchItemsByKeyword(searchTerm, (results) =>
-        dispatch(setSearchResults(results))
-      );
+      SearchItemsByKeyword(searchTerm, (results) => {
+        dispatch(setSearchResults(results));
+        dispatch(setShowDropdown(results && results.length > 0));
+      });
     }, 300),
     [dispatch]
   );
+
   const handleSearch = () => {
     if (keyword === "") {
       Swal.fire({
@@ -56,6 +58,11 @@ const SearchBar = () => {
     const searchTerm = e.target.value;
     setKeyword(searchTerm);
     debouncedSearch(searchTerm);
+
+    SearchItemsByKeyword(searchTerm, (results) => {
+      dispatch(setSearchResults(results));
+      dispatch(setShowDropdown(results && results.length > 0));
+    });
   };
 
   return (
