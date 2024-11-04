@@ -40,6 +40,7 @@ import { useRouter } from "next/router";
 import OneLineSkeleton from "../../functions/Skeletons/OneLineSkeleton";
 import "@szhsin/react-menu/dist/index.css";
 import { GetNotifications } from "../../api";
+import { Box } from "@mui/material";
 
 const categories = [
   { link: "/courses/design", title: "Design" },
@@ -421,6 +422,7 @@ const Header = ({
     )}
   </List>
 )}
+
 
 
 

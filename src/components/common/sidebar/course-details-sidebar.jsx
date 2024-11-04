@@ -338,10 +338,14 @@ const CourseDetailsSidebar = ({ course, details_2 = false }) => {
                   </a>
                 </div>
               )}
-              
+
+              {course && course.isPaid && (
+
               <div className="text-center">
               <span style={{fontSize:'12px'}} className="m-0 p-0 text-danger"><b>30-Day Money-Back Guarantee</b></span>
               </div>
+              )}
+              
 
               {/* <div className="share-area">
                 <h4 className="title">Share On:</h4>
