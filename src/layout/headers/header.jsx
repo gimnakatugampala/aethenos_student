@@ -254,7 +254,7 @@ const Header = ({
               </div>
               <div className="header-right">
                 <ul className="header-action">
-                  <li className="search-bar" >
+                  <li className="search-bar" style={{position:'relative'}}>
                     <div className="input-group">
                       <SearchBar
                    
@@ -265,7 +265,7 @@ const Header = ({
                     </div>
                   </li>
                   
-                  <li className="icon search-icon search-bar" >
+                  <li className="icon search-icon search-bar" style={{position:'relative'}} >
                   <SearchBar
                     // setsearchResults={setsearchResults}
                     showDropdown={showDropdown}
