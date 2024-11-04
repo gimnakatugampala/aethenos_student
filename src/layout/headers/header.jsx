@@ -284,7 +284,7 @@ const Header = ({
                           sm: "450px",      // 450px width on small screens
                           md: "450px",      // 500px width on medium screens
                           lg: "450px",      // 600px width on large screens
-                          xl: "800px",      // 800px width on extra-large screens
+                          xl: "450px",      // 800px width on extra-large screens
                         },
                         bgcolor: "background.paper",
                         boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
@@ -313,6 +313,11 @@ const Header = ({
                                 }}
                               >
                                 <ListItem
+                                  onClick={() => {
+                                    window.location.href = `/course-details/${result.courseCode}`;
+                                    router.push(`/course-details/${result.courseCode}`);
+                                  }}
+
                                   className="m-0"
                                   sx={{
                                     cursor: "pointer",
@@ -324,6 +329,11 @@ const Header = ({
                                 >
                                   <ListItemAvatar>
                                     <Avatar
+                                        onClick={() => {
+                                          window.location.href = `/course-details/${result.courseCode}`;
+                                          router.push(`/course-details/${result.courseCode}`);
+                                        }}
+
                                       src={`${IMG_HOST}${result.courseImg}`}
                                       alt={result.courseTitle}
                                       loading="lazy"
@@ -331,6 +341,10 @@ const Header = ({
                                     />
                                   </ListItemAvatar>
                                   <ListItemText
+                                        onClick={() => {
+                                          window.location.href = `/course-details/${result.courseCode}`;
+                                          router.push(`/course-details/${result.courseCode}`);
+                                        }}
                                     primary={
                                       <b>
                                         <Typography
@@ -363,6 +377,10 @@ const Header = ({
                                 }}
                               >
                                 <ListItem
+                                 onClick={() => {
+                                  window.location.href = `/users/${result.instructorCode}`;
+                                  router.push(`/users/${result.instructorCode}`);
+                                }}
                                   sx={{
                                     cursor: "pointer",
                                     alignItems: "flex-start",
@@ -373,6 +391,10 @@ const Header = ({
                                 >
                                   <ListItemAvatar>
                                     <Avatar
+                                     onClick={() => {
+                                      window.location.href = `/users/${result.instructorCode}`;
+                                      router.push(`/users/${result.instructorCode}`);
+                                    }}
                                       src={`${IMG_HOST}${result.instructorImg}`}
                                       alt={result.instructorName}
                                       loading="lazy"
@@ -380,6 +402,10 @@ const Header = ({
                                     />
                                   </ListItemAvatar>
                                   <ListItemText
+                                   onClick={() => {
+                                    window.location.href = `/users/${result.instructorCode}`;
+                                    router.push(`/users/${result.instructorCode}`);
+                                  }}
                                     primary={
                                       <b>
                                         <Typography
