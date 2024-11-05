@@ -1863,3 +1863,10 @@ body .tpd-size-medium .tpd-content {
         }
     }
 }
+
+@media (max-width: 576px) {
+    .student-count {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
