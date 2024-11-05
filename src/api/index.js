@@ -1444,7 +1444,7 @@ export const GetCourseHomeITSoftware = async(setit_software_courses,setloading_i
   fetch(`${BACKEND_LINK}/displayCourse/getLimitedCountCoursesForHomeByLinkName/it-software`, requestOptions)
     .then(response => response.json())
     .then(result => {
-      // console.log(result)
+      console.log(result)
 
       if(result.variable == "404"){
         setit_software_courses([])

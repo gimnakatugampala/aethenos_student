@@ -77,7 +77,7 @@ const mainfs = {
           {/* external ratings */}
             {course.externalCourseDetails != null && (
           <div>
-          <h6 className="m-0 p-0">External ratings</h6>
+          <h6 className="m-0 p-0">Verified external ratings</h6>
           <ul className="course-meta m-0 p-0">
             <li className="course-rating  m-0 p-0">
             <DisplayCardRatings rating={Number.parseFloat(course.externalCourseDetails.externalRating).toFixed(1)} />   
