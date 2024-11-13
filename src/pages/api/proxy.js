@@ -1,6 +1,11 @@
 // pages/api/proxy.js
 export default async function handler(req, res) {
-    const { url } = req.query;
+    let { url } = req.query;
+
+       // Check if url contains 'http' or 'https' at the beginning; if not, prepend the base URL
+       if (!/^https?:\/\//i.test(url)) {
+        url = `https://aethenos.com:2053/aethenos-api/common/downloadFile?filePath=${url}`;
+    }
     
     try {
       const response = await fetch(url); // Fetching the file from the external server

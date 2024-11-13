@@ -49,6 +49,7 @@ const CalculateListPrice = (data) => {
         });
 
         if (foundPrice) {
+            // console.log(foundPrice)
             const countryCode = countries.getAlpha2Code(countryToFind, 'en');
             const currencyCode = getAllInfoByISO(countryCode).currency.toLowerCase();
 

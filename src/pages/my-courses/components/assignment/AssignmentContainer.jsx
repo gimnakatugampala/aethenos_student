@@ -113,15 +113,16 @@ const AssignmentContainer = ({
   };
 
   const handleDownload = async (fileUrl, filename) => {
+    console.log(filename)
     try {
-      const response = await fetch(`/api/proxy?url=${encodeURIComponent(fileUrl)}`, {
+      const response = await fetch(`/api/proxy?url=${filename}`, {
         method: 'GET',
       });
       
       const blob = await response.blob();
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
-      link.setAttribute('download', filename.split("/").pop());
+      link.setAttribute('download', filename);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link); // Clean up the DOM

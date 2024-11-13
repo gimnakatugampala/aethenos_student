@@ -55,7 +55,7 @@ const mainfs = {
             <li className="course-rating">
             <DisplayCardRatings rating={Number.parseFloat(course.rating).toFixed(1)} />   
 
-              <span className="rating-count">
+              <span className="rating-count mx-1">
                 <a>
                   <b>({Number.parseFloat(course.rating).toFixed(1)})</b>
                 </a>
@@ -82,7 +82,7 @@ const mainfs = {
             <li className="course-rating  m-0 p-0">
             <DisplayCardRatings rating={Number.parseFloat(course.externalCourseDetails.externalRating).toFixed(1)} />   
 
-              <span className="rating-count m-0 p-0">
+              <span className="rating-count m-0 p-0 mx-1">
                 <a>
                   <b>({Number.parseFloat(course.externalCourseDetails.externalRating).toFixed(1)})</b>
                 </a>

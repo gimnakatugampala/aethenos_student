@@ -128,22 +128,31 @@ const CourseFiveArea = () => {
               </div>
 
               <div className="col-md-4 text-center mx-auto">
-                <div className="m-5">
-                  {instructor_details.profileImage == null ? (
-                    <img
-                      className="rounded-circle"
-                      src={`/images/course/instructor_profile_img.png`}
-                      alt={`${instructor_details.name}`}
-                    />
-                  ) : (
-                    <img
-                      className="rounded-circle w-75"
-                      style={{ height: "220px", objectFit: "cover" }}
-                      src={`${IMG_HOST}${instructor_details.profileImage}`}
-                      alt={`${instructor_details.name}`}
-                    />
-                  )}
-                </div>
+              <div
+          className="m-5"
+          style={{
+            width: "220px",
+            height: "220px",
+            margin: "0 auto", // Center the container within the parent
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img
+            className="rounded-circle"
+            style={{ width: "100%", height: "100%", objectFit: "cover" , backgroundPositionY :'40px'}}
+            src={
+              instructor_details.profileImage == null
+                ? `/images/course/instructor_profile_img.png`
+                : `${IMG_HOST}${instructor_details.profileImage}`
+            }
+            alt={`${instructor_details.name}`}
+          />
+        </div>
+
+
+
                 {/* <a
                   href={`mailto:${instructor_details.email}`}
                   className="btn btn-outline-dark text-center fs-6 mb-1"

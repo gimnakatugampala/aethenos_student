@@ -8729,6 +8729,12 @@ body .tpd-size-medium .tpd-content {
   width: 200px;
 }
 
+@media (max-width: 576px) {
+  .student-count {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
 /*-------------------
   Course Details Style
 ---------------------*/
@@ -18414,10 +18420,7 @@ a {
     justify-content: center;
   }
 }
-.header-style-1 .header-action li.search-icon {
-  display: none;
-}
-@media only screen and (max-width: 1699px) {
+@media only screen and (max-width: 3000px) {
   .header-style-1 .header-action li.search-icon {
     display: block;
   }
@@ -18611,10 +18614,7 @@ a {
     justify-content: center;
   }
 }
-.header-style-4 .header-action li.search-icon {
-  display: none;
-}
-@media only screen and (max-width: 1699px) {
+@media only screen and (max-width: 3000px) {
   .header-style-4 .header-action li.search-icon {
     display: block;
   }
@@ -18655,10 +18655,7 @@ a {
 .header-style-7 input[type=tel], .header-style-7 textarea {
   background-color: transparent;
 }
-.header-style-7 .header-action li.search-icon {
-  display: none;
-}
-@media (max-width: 1699px) {
+@media (max-width: 3000px) {
   .header-style-7 .header-action li.search-icon {
     display: block;
   }
@@ -19184,7 +19181,7 @@ a {
     margin-right: 20px;
   }
 }
-@media only screen and (max-width: 1699px) {
+@media only screen and (max-width: 3000px) {
   .header-action .search-bar {
     display: none;
   }
@@ -25944,10 +25941,3 @@ html[dir=rtl] .swiper-testimonial-slider-wrapper .swiper-slide.swiper-slide-visi
   margin-right: 40px;
   box-shadow: 70px 0px 50px 0px rgba(26, 46, 85, 0.1);
 }/*# sourceMappingURL=app.css.map */
-
-
-@media (max-width: 576px) {
-  .student-count {
-    text-align: left;
-  }
-}
