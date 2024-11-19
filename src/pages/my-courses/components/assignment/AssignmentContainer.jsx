@@ -171,13 +171,7 @@ const AssignmentContainer = ({
     
       // Revoke the object URL to free up memory
       window.URL.revokeObjectURL(url);
-      // const blob = await response.blob();
-      // const link = document.createElement('a');
-      // link.href = window.URL.createObjectURL(blob);
-      // link.setAttribute('download', filename);
-      // document.body.appendChild(link);
-      // link.click();
-      // document.body.removeChild(link); // Clean up the DOM
+
     } catch (error) {
       console.error("Error downloading file:", error);
     }

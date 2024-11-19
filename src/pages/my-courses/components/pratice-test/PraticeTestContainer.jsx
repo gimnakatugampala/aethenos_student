@@ -63,17 +63,61 @@ const PraticeTestContainer = ({
 
   const handleDownload = async (filePath,filename) => {
     try {
-      const response = await fetch(`/api/proxy?url=${encodeURIComponent(filePath)}`, {
+      const response = await fetch(`/api/proxy?url=${filename}`, {
         method: 'GET',
       });
       
       const blob = await response.blob();
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-      link.setAttribute('download', filename.split("/").pop());
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link); // Clean up the DOM
+
+      // Extract filename from the 'Content-Disposition' header
+      const contentDisposition = response.headers.get('Content-Disposition');
+      let extractedFileName = 'default_filename'; // Fallback filename
+    
+      if (contentDisposition && contentDisposition.includes('filename=')) {
+        // Parse filename from the header
+        const matches = contentDisposition.match(/filename[^;=\n]*=([^;\n]*)/);
+        if (matches && matches[1]) {
+          extractedFileName = matches[1].replace(/['"]/g, ''); // Remove quotes if present
+        }
+      }
+    
+      // Check for file extension from 'Content-Type' header
+      const contentType = response.headers.get('Content-Type');
+      const fileExtensionMap = {
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': '.xlsx',
+        'application/pdf': '.pdf',
+        'image/jpeg': '.jpg',
+        'image/png': '.png',
+        'text/plain': '.txt',
+        // Add more mappings as needed
+      };
+    
+      const extension =
+        fileExtensionMap[contentType] ||
+        extractedFileName.split('.').pop(); // Use existing extension if available
+    
+      if (!extractedFileName.includes('.')) {
+        // Append extension if not already present
+        extractedFileName += extension;
+      }
+    
+      // Create a temporary URL for the blob
+      const url = window.URL.createObjectURL(blob);
+    
+      // Create a link element
+      const a = document.createElement('a');
+      a.href = url;
+    
+      // Use extracted filename or fallback to a default
+      a.download = extractedFileName || 'Custom_File_Name';
+    
+      // Append the link, trigger click, and remove it
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    
+      // Revoke the object URL to free up memory
+      window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Error downloading file:", error);
     }
