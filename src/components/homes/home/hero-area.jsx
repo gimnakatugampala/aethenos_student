@@ -8,28 +8,16 @@ const HeroArea = () => {
     <div className="hero-banner hero-style-4">
       <div className="mx-3 mx-sm-3 mx-md-4 mx-lg-5">
         <div className="row align-items-center">
-        <div className="col-md-5">
+        <div className="col-md-12">
             <div className="banner-content">
-              <h1 
-                className="title mt-5"
+              <h2 
+                className="title"
                 data-sal-delay="100"
                 data-sal="slide-up"
                 data-sal-duration="1000"
               >
-                New Excel Courses coming soon!
-              </h1>
-              <p
-                data-sal-delay="200"
-                data-sal="slide-up"
-                data-sal-duration="1000"
-                  className="m-0 w-100"
-              >
-                Come and experience the best Excel training courses from top
-                instructors from around the world through our Innovative Excel
-                Training App. All our Excel courses will be delivered through
-                our proprietary Excel Training App that delivers pre-recorded
-                and live classes inside the Excel Application itself.
-              </p>
+                Excel Genius : Learn and Master Skills Directly Inside Excel!
+              </h2>
            
               {/* <ul className="shape-group">
                                 <motion.li className="shape-1 scene" data-sal-delay="1000" data-sal="fade" data-sal-duration="1000" 
@@ -45,7 +33,21 @@ const HeroArea = () => {
             </div>
           </div>
 
-          <div className="col-md-1"></div>
+          <div className="col-md-6">
+          <h4
+                data-sal-delay="200"
+                data-sal="slide-up"
+                data-sal-duration="1000"
+                  className="m-0 w-100 text-center"
+              >
+                Come and experience the best Excel training courses from top
+                instructors from around the world through our Innovative Excel
+                Training App. All our Excel courses will be delivered through
+                our proprietary Excel Training App that delivers pre-recorded
+                and live classes inside the Excel Application itself.
+              </h4>
+          </div>
+          {/* <div className="col-md-1"></div> */}
 
           <div className="col-md-6">
             <div >
@@ -57,8 +59,8 @@ const HeroArea = () => {
               >
                 <img
                   className="w-100 rounded"
-                  src="/assets/images/instructor/instructerHome.jpg"
-                  alt="Girl Image"
+                  src="/assets/images/instructor/aethenosCoverHero.jpg"
+                  alt="Excel App of Aethenos"
                 />
               </div>
             </div>
