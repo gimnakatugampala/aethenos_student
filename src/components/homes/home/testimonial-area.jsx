@@ -113,6 +113,13 @@ export default function TestimonialArea() {
           </div>
         </div>
       </div>
+
+      <div className="text-center">
+    <a target="_blank" href="https://support.aethenos.com/excel-app/" className="edu-btn text-center">
+      GET APP
+    </a>
+  </div>
+
     </div>
   );
 }
