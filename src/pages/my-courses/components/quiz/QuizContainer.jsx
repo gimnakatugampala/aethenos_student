@@ -8,10 +8,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
-const mainfs = {
-  fontSize: "calc(0.2rem + 1vw)",
-};
-
 const QuizContainer = ({
   selectAnswer,
   setselectAnswer,
@@ -84,29 +80,51 @@ const QuizContainer = ({
   };
 
   return (
-    <div>
+    <div style={{ maxWidth: "800px", margin: "0 auto" }}>
       {selectedQuiz ? (
         <div>
           {!Startquiz ? (
-            <div>
-              <h5 className="m-0 p-0">{selectedQuiz.title}</h5>
-              <p className="m-0 mx-4 p-0">{selectedQuiz.description}</p>
-              <button
+            <div style={{ textAlign: "center", padding: "20px" }}>
+              <h2>{selectedQuiz.title}</h2>
+              <p>{selectedQuiz.description}</p>
+              <Button
+                variant="contained"
+                color="primary"
+                className="edu-btn"
                 onClick={() => setStartquiz(true)}
-                className="edu-btn btn-small my-3"
+                sx={{
+                  marginTop: 2,
+                  padding: "10px 20px",
+                  fontSize: "1rem",
+                  backgroundColor: "#e01D20", // Updated color
+                  "&:hover": {
+                    backgroundColor: "#c21818", // Hover color
+                  },
+                }}
               >
                 Start Quiz
-              </button>
+              </Button>
             </div>
           ) : (
             <>
               {selectedQuiz.getQuizs && selectedQuiz.getQuizs.length > 0 ? (
-                <Box sx={{ width: "100%" }}>
-                  <Stepper activeStep={activeStep}>
+                <Box sx={{ width: "100%", marginTop: 2 }}>
+                  <Stepper
+                    activeStep={activeStep}
+                    alternativeLabel
+                    sx={{
+                      "& .MuiStepIcon-root": {
+                        color: "#e01D20", // Stepper color
+                      },
+                      "& .Mui-active .MuiStepIcon-root": {
+                        color: "#c21818", // Active step color
+                      },
+                    }}
+                  >
                     {selectedQuiz.getQuizs.map((_, index) => (
                       <Step key={index}>
                         <StepLabel>
-                          <span style={mainfs}>Question {index + 1}</span>
+                          <span style={{ fontSize: "1rem" }}>Q{index + 1}</span>
                         </StepLabel>
                       </Step>
                     ))}
@@ -114,7 +132,7 @@ const QuizContainer = ({
 
                   {activeStep < selectedQuiz.getQuizs.length ? (
                     <>
-                      <h5 className="my-3 mx-4" style={mainfs}>
+                      <h5 className="my-3 mx-4" style={{ fontSize: "1.2rem" }}>
                         {selectedQuiz.getQuizs[activeStep].question}
                       </h5>
 
@@ -122,6 +140,10 @@ const QuizContainer = ({
                         <Alert
                           className="my-2"
                           severity={answerAlertDisplay === true ? "success" : "error"}
+                          iconMapping={{
+                            success: <CheckIcon />,
+                            error: <NavigateNextIcon />,
+                          }}
                         >
                           {answerAlertDisplay === true
                             ? "You Chose the Right Answer"
@@ -129,9 +151,8 @@ const QuizContainer = ({
                         </Alert>
                       )}
 
-                      <FormControl>
+                      <FormControl fullWidth>
                         <RadioGroup
-                          row
                           value={selectAnswer}
                           onChange={handleAnswerChange}
                         >
@@ -152,21 +173,39 @@ const QuizContainer = ({
                         sx={{
                           display: "flex",
                           flexDirection: "row",
-                          pt: 2,
+                          justifyContent: "space-between",
+                          marginTop: 2,
                         }}
                       >
                         <Button
+                          variant="outlined"
                           disabled={activeStep === 0}
                           onClick={handleBack}
-                          className="edu-btn btn-small"
+                          sx={{
+                            padding: "8px 16px",
+                            fontSize: "0.9rem",
+                            borderColor: "#e01D20", // Updated color for outline button
+                            "&:hover": {
+                              borderColor: "#c21818", // Hover color
+                            },
+                          }}
                         >
                           <ArrowBackIosNewIcon sx={{ fontSize: "16px" }} /> Back
                         </Button>
-                        <Box sx={{ flex: "1 1 auto" }} />
+
                         <Button
-                          disabled={selectAnswer === 0} // Ensure the button is only enabled after selecting an answer
+                          variant="contained"
+                          color="primary"
+                          disabled={selectAnswer === 0}
                           onClick={handleNext}
-                          className="edu-btn btn-small"
+                          sx={{
+                            padding: "8px 16px",
+                            fontSize: "0.9rem",
+                            backgroundColor: "#e01D20", // Updated color
+                            "&:hover": {
+                              backgroundColor: "#c21818", // Hover color
+                            },
+                          }}
                         >
                           {activeStep === selectedQuiz.getQuizs.length - 1
                             ? "Go to Summary"
@@ -193,12 +232,23 @@ const QuizContainer = ({
                           </li>
                         ))}
                       </ul>
-                      <button
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        className="edu-btn btn-small"
                         onClick={handleReset}
-                        className="edu-btn btn-small mt-3"
+                        sx={{
+                          marginTop: 2,
+                          padding: "10px 20px",
+                          fontSize: "1rem",
+                          backgroundColor: "#e01D20", // Updated color
+                          "&:hover": {
+                            backgroundColor: "#c21818", // Hover color
+                          },
+                        }}
                       >
                         Retake Quiz
-                      </button>
+                      </Button>
                     </div>
                   )}
                 </Box>
