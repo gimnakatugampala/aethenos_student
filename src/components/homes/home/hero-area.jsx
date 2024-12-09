@@ -4,12 +4,16 @@ import { useMouseMoveUI } from "../../../contexts/mouse-move-context";
 
 const HeroArea = () => {
   const { mouseDirection, mouseReverse } = useMouseMoveUI();
+
+  const mainfs = {
+    fontSize: "clamp(1rem, calc(0.5rem + 1.4vw), 1.5rem)",  
+  };
   return (
     <div className="hero-banner hero-style-4">
-      <div className="mx-3 mx-sm-3 mx-md-4 mx-lg-5">
+      <div className="mx-4 mx-sm-5 mx-md-4 mx-lg-5 mb-5 mt-5">
         <div className="row align-items-center">
         <div className="col-md-12">
-            <div className="banner-content">
+            <div className="banner-content mb-0">
               <h2 
                 className="title"
                 data-sal-delay="100"
@@ -33,12 +37,13 @@ const HeroArea = () => {
             </div>
           </div>
 
-          <div className="col-md-6">
+          <div className="col-md-6 mb-5">
           <h4
                 data-sal-delay="200"
                 data-sal="slide-up"
                 data-sal-duration="1000"
-                  className="m-0 w-100 text-center"
+                  className="m-0 w-100 text-center lh-base"
+                  style={mainfs}
               >
                 Come and experience the best Excel training courses from top
                 instructors from around the world through our Innovative Excel
@@ -49,7 +54,7 @@ const HeroArea = () => {
           </div>
           {/* <div className="col-md-1"></div> */}
 
-          <div className="col-md-6">
+          <div className="col-md-6 mb-5">
             <div >
               <div
                 className="thumbnail"
@@ -60,16 +65,27 @@ const HeroArea = () => {
                 <img
                   className="w-100 rounded"
                   src="/assets/images/instructor/aethenosCoverHero.jpg"
-                  alt="Excel App of Aethenos"
+                  alt="Excel App of Aethenos"                
                 />
               </div>
             </div>
           </div>
         </div>
-      </div>
-      {/* <div className="shape-7">
-                <img src="/assets/images/about/h-1-shape-01.png" alt="Shape" />
-            </div> */}
+      </div>  
+     <style jsx>{`
+        @media (min-width: 768px) {
+          .thumbnail img {
+            height: 400px; /* Height for screens 768px and above */
+            object-fit : none;
+          }
+        }
+             @media (max-width: 768px) {
+          .thumbnail img {
+            height: 240px; /* Height for screens 768px and above */
+           object-fit : cover;
+          }
+        }
+      `}</style>
     </div>
   );
 };
