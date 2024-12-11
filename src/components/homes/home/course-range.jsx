@@ -139,7 +139,7 @@ const CourseRange = () => {
 </div>
 
 {/* Web */}
-<div className="col-md-12">
+{/* <div className="col-md-12">
   <div className="course-details-content">
     <ul className="nav nav-tabs" id="myTab" role="tablist">
       <li className="nav-item" role="presentation">
@@ -193,7 +193,7 @@ const CourseRange = () => {
       </div>
     </div>
   </div>
-</div>
+</div> */}
 
 
         </div>
