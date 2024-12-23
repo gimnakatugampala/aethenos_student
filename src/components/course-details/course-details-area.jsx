@@ -185,7 +185,13 @@ const CourseDetailsArea = ({ course }) => {
                       <div className="faq-accordion">
                         <div className="accordion">
                           {course.course_content != null &&
-                            course.course_content.map((content, index) => (
+                            course.course_content
+                            .sort((a, b) => {
+                              if (a.arrangedNo === null) return 1; 
+                              if (b.arrangedNo === null) return -1; 
+                              return a.arrangedNo - b.arrangedNo;
+                            })
+                            .map((content, index) => (
                               <Accordian
                                 key={index}
                                 id={index}

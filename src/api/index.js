@@ -1217,7 +1217,6 @@ export const GetCourseDetails = async(id,setcourse) =>{
   fetch(`${BACKEND_LINK}/course/getCourseByStudent/${id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
-      // console.log(result)
       setcourse(result)
     })
     .catch(error => console.log('error', error));
