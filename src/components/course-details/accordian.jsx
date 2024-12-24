@@ -119,7 +119,12 @@ const Accordian = ({ show = false, id, title, lectures, lists, no_quiz }) => {
           >
             <div className="accordion-body">
               <ul className="list-unstyled">
-                {lists.map((list, index) => (
+                {lists
+                  .sort((a, b) => {
+                    if (a.arrangeNo === null) return 1; 
+                    if (b.arrangeNo === null) return -1; 
+                    return a.arrangeNo - b.arrangeNo;
+                  }).map((list, index) => (
                   <>
                     {/* Lecture */}
                     {list.curriculum_item_type === "Lecture" && (
