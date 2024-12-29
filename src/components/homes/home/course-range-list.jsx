@@ -49,7 +49,7 @@ const CourseRangeList = ({ course }) => {
           data-sal-delay="100"
           data-sal="slide-up"
           data-sal-duration="1200"
-          style={{ display: next < courses ? "block" : "none" }}
+          // style={{ display: next < courses ? "block" : "none" }}
         >
           <a className="edu-btn mb-5" style={{ cursor: "pointer" }}>
             Load More <i className="icon-56"></i>
