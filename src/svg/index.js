@@ -15,6 +15,8 @@ import CertificateTwo from "./certificate-2";
 import UserTwo from "./user-2";
 import Books from "./books";
 import Excel from "./excel";
+import DayMoney from "./DayMoney";
+
 
 export {
     OnlineClass,
@@ -33,5 +35,6 @@ export {
     CertificateTwo,
     UserTwo,
     Books,
-    Excel
+    Excel,
+    DayMoney
 }
