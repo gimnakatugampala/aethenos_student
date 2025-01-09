@@ -45,7 +45,7 @@ const HeroArea = () => {
                   className="m-0 w-100 text-center lh-base"
                   style={mainfs}
               >
-                Come and experience the best Excel training courses developed by top
+                Come and experience the best Excel training courses developed by top
                 instructors from around the world through our Innovative Excel
                 Training App. All our Excel courses will be delivered through
                 our proprietary Excel Training App that delivers pre-recorded
