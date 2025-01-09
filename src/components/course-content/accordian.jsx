@@ -138,133 +138,139 @@ const Accordian = ({
       >
         <div className="accordion-body p-1">
           <ol style={{ cursor: "pointer" }} className="p-0">
-            {content.section_curriculum_item.map((list, index) => (
-              <React.Fragment key={index}>
-                {/* Video */}
-                {list.curriculum_item_type == "Lecture" &&
-                  list.article == "N/A" &&
-                  list.get_CurriculumItem_File.map(
-                    (type, idx) =>
-                      type.curriculum_item_file_type === "Video" && (
-                        <span
-                          key={idx}
-                          onClick={async () => {
-                            setarticle("");
-                            setshowVideoPlayer(true);
-                            setshowAssignment(false);
-                            setshowquiz(false);
-                            setshowPracticeTest(false);
-                            setshowCodingExercise(false);
+            {[...content.section_curriculum_item]
+              .sort((a, b) => {
+                if (a.arrangedNo === null) return 1;
+                if (b.arrangedNo === null) return -1;
+                return a.arrangedNo - b.arrangedNo;
+              })
+              .map((list, index) => (
+                <React.Fragment key={index}>
+                  {/* Video */}
+                  {list.curriculum_item_type == "Lecture" &&
+                    list.article == "N/A" &&
+                    list.get_CurriculumItem_File.map(
+                      (type, idx) =>
+                        type.curriculum_item_file_type === "Video" && (
+                          <span
+                            key={idx}
+                            onClick={async () => {
+                              setarticle("");
+                              setshowVideoPlayer(true);
+                              setshowAssignment(false);
+                              setshowquiz(false);
+                              setshowPracticeTest(false);
+                              setshowCodingExercise(false);
 
-                            const videoSourceUrl = await VideoStreaming(
-                              type.url
-                            );
+                              const videoSourceUrl = await VideoStreaming(
+                                type.url
+                              );
 
-                            setmain_Video_player_url(`${videoSourceUrl}`);
+                              setmain_Video_player_url(`${videoSourceUrl}`);
 
-                            var videoPlayer =
-                              document.querySelector(".video-react-video");
-                            var videoSource =
-                              document.getElementById("videoPlayer");
-                            if (videoSource) {
-                              videoSource.src = `${videoSourceUrl}`;
-                              videoPlayer.load();
-                            }
+                              var videoPlayer =
+                                document.querySelector(".video-react-video");
+                              var videoSource =
+                                document.getElementById("videoPlayer");
+                              if (videoSource) {
+                                videoSource.src = `${videoSourceUrl}`;
+                                videoPlayer.load();
+                              }
 
-                            setTitleVideo(list.title);
+                              setTitleVideo(list.title);
 
-                            //  --------------------- CALCULATE THE MARK --------------------
-                            let delay = (2 / 3) * type.videoLength * 1000;
+                              //  --------------------- CALCULATE THE MARK --------------------
+                              let delay = (2 / 3) * type.videoLength * 1000;
 
-                            setTimeout(() => {
-                              UpdateCourseCurriculumProgress(
+                              setTimeout(() => {
+                                UpdateCourseCurriculumProgress(
+                                  itemCode,
+                                  list.curriculumItemId,
+                                  setcourse
+                                );
+                              }, delay);
+
+                              //  --------------------- CALCULATE THE MARK --------------------
+
+                              // ---------------- STORE AS LAST POSITION -------
+                              StoreLastMarkedCurriculum(
                                 itemCode,
-                                list.curriculumItemId,
-                                setcourse
+                                list.curriculumItemId
                               );
-                            }, delay);
+                              // ---------------- STORE AS LAST POSITION -------
 
-                            //  --------------------- CALCULATE THE MARK --------------------
+                              setseletedCurriculumItem(list.curriculumItemId);
 
-                            // ---------------- STORE AS LAST POSITION -------
-                            StoreLastMarkedCurriculum(
-                              itemCode,
-                              list.curriculumItemId
-                            );
-                            // ---------------- STORE AS LAST POSITION -------
+                              // Only execute if sectionID, curriclumID, and type are not null or undefined
+                              if (sectionID && curriclumID && SyllabusType) {
+                                router.replace(
+                                  `/my-courses/${itemCode}`,
+                                  undefined,
+                                  { shallow: true }
+                                );
+                              }
 
-                            setseletedCurriculumItem(list.curriculumItemId);
-
-                            // Only execute if sectionID, curriclumID, and type are not null or undefined
-                            if (sectionID && curriclumID && SyllabusType) {
-                              router.replace(
-                                `/my-courses/${itemCode}`,
-                                undefined,
-                                { shallow: true }
-                              );
-                            }
-
-                            GetMyCoursesDetails(courseItemCode, setcourse);
-                          }}
-                        >
-                          <CardMainContainer
-                            className={
-                              seletedCurriculumItem == list.curriculumItemId &&
-                              `custom-color`
-                            }
+                              GetMyCoursesDetails(courseItemCode, setcourse);
+                            }}
                           >
-                            <CardContainer
-                              className={`m-1 p-0 ${
+                            <CardMainContainer
+                              className={
                                 seletedCurriculumItem ==
-                                  list.curriculumItemId &&
-                                `custom-color text-light`
-                              }`}
+                                  list.curriculumItemId && `custom-color`
+                              }
                             >
-                              <Form.Check
-                                className="d-flex p-0"
-                                checked={list.read}
-                                type={"checkbox"}
-                                id={`default-${index}`}
-                                label={""}
-                                onClick={() => {
-                                  console.log(itemCode, list);
-                                  console.log(list.curriculumItemId);
-                                  console.log(seletedCurriculumItem);
-                                  UpdateCourseCurriculumProgress(
-                                    itemCode,
-                                    seletedCurriculumItem,
-                                    setcourse
-                                  );
-                                }}
-                              />
-                              <li className="d-flex">
-                                <p
-                                  className={
-                                    seletedCurriculumItem ==
-                                    list.curriculumItemId
-                                      ? "text-light"
-                                      : ""
-                                  }
-                                  style={mainfs}
-                                >
-                                  {index + 1}. <PlayCircleIcon /> Video Lecture
-                                  : {list.title}
-                                  {type.videoLength != 0 && (
-                                    <>
-                                      <br />
-                                      <span style={{ fontSize: "12px" }}>
-                                        <b>
-                                          <i>
-                                            <i className="fas fa-tv mx-2"></i>
-                                            {FormatVideoTimeLength(
-                                              type.videoLength
-                                            )}
-                                          </i>
-                                        </b>
-                                      </span>
-                                    </>
-                                  )}
-                                  {/* <p
+                              <CardContainer
+                                className={`m-1 p-0 ${
+                                  seletedCurriculumItem ==
+                                    list.curriculumItemId &&
+                                  `custom-color text-light`
+                                }`}
+                              >
+                                <Form.Check
+                                  className="d-flex p-0"
+                                  checked={list.read}
+                                  type={"checkbox"}
+                                  id={`default-${index}`}
+                                  label={""}
+                                  onClick={() => {
+                                    console.log(itemCode, list);
+                                    console.log(list.curriculumItemId);
+                                    console.log(seletedCurriculumItem);
+                                    UpdateCourseCurriculumProgress(
+                                      itemCode,
+                                      seletedCurriculumItem,
+                                      setcourse
+                                    );
+                                  }}
+                                />
+                                <li className="d-flex">
+                                  <p
+                                    className={
+                                      seletedCurriculumItem ==
+                                      list.curriculumItemId
+                                        ? "text-light"
+                                        : ""
+                                    }
+                                    style={mainfs}
+                                  >
+                                    {index + 1}. <PlayCircleIcon /> Video
+                                    Lecture : {list.title}
+                                    {type.videoLength != 0 && (
+                                      <>
+                                        <br />
+                                        <span style={{ fontSize: "12px" }}>
+                                          <b>
+                                            <i>
+                                              <i className="fas fa-tv mx-2"></i>
+                                              {FormatVideoTimeLength(
+                                                type.videoLength
+                                              )}
+                                            </i>
+                                          </b>
+                                        </span>
+                                      </>
+                                    )}
+                                    {/* <p
                                     className={`m-1 p-0 ${
                                       seletedCurriculumItem ===
                                       list.curriculumItemId
@@ -289,87 +295,366 @@ const Accordian = ({
                                           )
                                       : null}
                                   </p> */}
-                                </p>
-                              </li>
-                            </CardContainer>
-                            <div className="d-flex justify-content-around">
-                              {/* Resources */}
-                              {list.get_CurriculumItem_File.some(
-                                (type) =>
-                                  type.curriculum_item_file_type ===
-                                    "Downloadable Items" ||
-                                  type.curriculum_item_file_type ===
-                                    "Source Code"
-                              ) && (
-                                <Dropdown>
-                                  <Dropdown.Toggle size="sm" variant="danger">
-                                    <i className="fas fa-folder-open"></i>{" "}
-                                    Resources
-                                  </Dropdown.Toggle>
-                                  <Dropdown.Menu>
-                                    {list.get_CurriculumItem_File.map(
-                                      (item, idx) =>
-                                        (item.curriculum_item_file_type ==
-                                          "Downloadable Items" ||
-                                          item.curriculum_item_file_type ==
-                                            "Source Code") && (
-                                          <Dropdown.Item
-                                            key={idx}
-                                            onClick={() =>
-                                              handleDownload(
-                                                `${IMG_HOST}${item.url}`,
-                                                item.title
-                                              )
-                                            }
-                                          >
-                                            {item.title}
-                                          </Dropdown.Item>
-                                        )
-                                    )}
-                                  </Dropdown.Menu>
-                                </Dropdown>
-                              )}
-                              {/* Links */}
-                              {list.get_CurriculumItem_File.some(
-                                (type) =>
-                                  type.curriculum_item_file_type ===
-                                  "External Resourses"
-                              ) && (
-                                <Dropdown>
-                                  <Dropdown.Toggle size="sm" variant="danger">
-                                    <i className="fas fa-link"></i> Links
-                                  </Dropdown.Toggle>
-                                  <Dropdown.Menu>
-                                    {list.get_CurriculumItem_File.map(
-                                      (item, idx) =>
-                                        item.curriculum_item_file_type ===
-                                          "External Resourses" && (
-                                          <Dropdown.Item
-                                            target="_blank"
-                                            key={idx}
-                                            href={`${item.url}`}
-                                          >
-                                            {item.title}
-                                          </Dropdown.Item>
-                                        )
-                                    )}
-                                  </Dropdown.Menu>
-                                </Dropdown>
-                              )}
-                            </div>
-                          </CardMainContainer>
-                        </span>
-                      )
-                  )}
+                                  </p>
+                                </li>
+                              </CardContainer>
+                              <div className="d-flex justify-content-around">
+                                {/* Resources */}
+                                {list.get_CurriculumItem_File.some(
+                                  (type) =>
+                                    type.curriculum_item_file_type ===
+                                      "Downloadable Items" ||
+                                    type.curriculum_item_file_type ===
+                                      "Source Code"
+                                ) && (
+                                  <Dropdown>
+                                    <Dropdown.Toggle size="sm" variant="danger">
+                                      <i className="fas fa-folder-open"></i>{" "}
+                                      Resources
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                      {list.get_CurriculumItem_File.map(
+                                        (item, idx) =>
+                                          (item.curriculum_item_file_type ==
+                                            "Downloadable Items" ||
+                                            item.curriculum_item_file_type ==
+                                              "Source Code") && (
+                                            <Dropdown.Item
+                                              key={idx}
+                                              onClick={() =>
+                                                handleDownload(
+                                                  `${IMG_HOST}${item.url}`,
+                                                  item.title
+                                                )
+                                              }
+                                            >
+                                              {item.title}
+                                            </Dropdown.Item>
+                                          )
+                                      )}
+                                    </Dropdown.Menu>
+                                  </Dropdown>
+                                )}
+                                {/* Links */}
+                                {list.get_CurriculumItem_File.some(
+                                  (type) =>
+                                    type.curriculum_item_file_type ===
+                                    "External Resourses"
+                                ) && (
+                                  <Dropdown>
+                                    <Dropdown.Toggle size="sm" variant="danger">
+                                      <i className="fas fa-link"></i> Links
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                      {list.get_CurriculumItem_File.map(
+                                        (item, idx) =>
+                                          item.curriculum_item_file_type ===
+                                            "External Resourses" && (
+                                            <Dropdown.Item
+                                              target="_blank"
+                                              key={idx}
+                                              href={`${item.url}`}
+                                            >
+                                              {item.title}
+                                            </Dropdown.Item>
+                                          )
+                                      )}
+                                    </Dropdown.Menu>
+                                  </Dropdown>
+                                )}
+                              </div>
+                            </CardMainContainer>
+                          </span>
+                        )
+                    )}
 
-                {/* Article  */}
-                {list.curriculum_item_type == "Lecture" &&
-                  list.article != "N/A" && (
+                  {/* Article  */}
+                  {list.curriculum_item_type == "Lecture" &&
+                    list.article != "N/A" && (
+                      <span
+                        onClick={() => {
+                          setarticle(list.article);
+                          setshowVideoPlayer(false);
+                          setshowAssignment(false);
+                          setshowquiz(false);
+                          setshowPracticeTest(false);
+                          setshowCodingExercise(false);
+
+                          setseletedCurriculumItem(list.curriculumItemId);
+
+                          //  --------------------- CALCULATE THE MARK --------------------
+                          UpdateCourseCurriculumProgress(
+                            itemCode,
+                            list.curriculumItemId,
+                            setcourse
+                          );
+                          //  --------------------- CALCULATE THE MARK --------------------
+
+                          // ---------------- STORE AS LAST POSITION -------
+                          StoreLastMarkedCurriculum(
+                            itemCode,
+                            list.curriculumItemId
+                          );
+                          // ---------------- STORE AS LAST POSITION -------
+
+                          // Only execute if sectionID, curriclumID, and type are not null or undefined
+                          if (sectionID && curriclumID && SyllabusType) {
+                            router.replace(
+                              `/my-courses/${itemCode}`,
+                              undefined,
+                              {
+                                shallow: true,
+                              }
+                            );
+                          }
+
+                          GetMyCoursesDetails(courseItemCode, setcourse);
+                        }}
+                        key={index}
+                      >
+                        <CardMainContainer
+                          className={
+                            seletedCurriculumItem == list.curriculumItemId &&
+                            `custom-color`
+                          }
+                        >
+                          <CardContainer
+                            className={`m-1 p-0 ${
+                              seletedCurriculumItem == list.curriculumItemId &&
+                              `custom-color text-light`
+                            }`}
+                          >
+                            <Form.Check
+                              className="d-flex p-0"
+                              checked={list.read}
+                              type={"checkbox"}
+                              id={`default-${index}`}
+                              label={""}
+                            />
+
+                            <li className="d-flex">
+                              <p
+                                className={
+                                  seletedCurriculumItem == list.curriculumItemId
+                                    ? "text-light"
+                                    : ""
+                                }
+                                style={mainfs}
+                              >
+                                {index + 1}. <FileCopyIcon /> Text-Based Lecture
+                                : {list.title}
+                                {/* <p
+                                className={`m-1 p-0 ${
+                                  seletedCurriculumItem ===
+                                  list.curriculumItemId
+                                    ? "text-light"
+                                    : ""
+                                }`}
+                              >
+                                {list.description.replace(
+                                  /<\/?[^>]+(>|$)/g,
+                                  ""
+                                ) !== "N/A"
+                                  ? list.description.replace(
+                                      /<\/?[^>]+(>|$)/g,
+                                      ""
+                                    ).length > 75
+                                    ? `${list.description
+                                        .replace(/<\/?[^>]+(>|$)/g, "")
+                                        .slice(0, 75)}...`
+                                    : list.description.replace(
+                                        /<\/?[^>]+(>|$)/g,
+                                        ""
+                                      )
+                                  : null}
+                              </p> */}
+                              </p>
+                            </li>
+                          </CardContainer>
+
+                          <div className="d-flex justify-content-around">
+                            {/* Resources */}
+                            {list.get_CurriculumItem_File.some(
+                              (type) =>
+                                type.curriculum_item_file_type ===
+                                  "Downloadable Items" ||
+                                type.curriculum_item_file_type === "Source Code"
+                            ) && (
+                              <Dropdown>
+                                <Dropdown.Toggle size="sm" variant="danger">
+                                  <i className="fas fa-folder-open"></i>{" "}
+                                  Resources
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                  {list.get_CurriculumItem_File.map(
+                                    (item, idx) =>
+                                      (item.curriculum_item_file_type ==
+                                        "Downloadable Items" ||
+                                        item.curriculum_item_file_type ==
+                                          "Source Code") && (
+                                        <Dropdown.Item
+                                          key={idx}
+                                          onClick={() =>
+                                            handleDownload(
+                                              `${IMG_HOST}${item.url}`,
+                                              item.title
+                                            )
+                                          }
+                                        >
+                                          {item.title}
+                                        </Dropdown.Item>
+                                      )
+                                  )}
+                                </Dropdown.Menu>
+                              </Dropdown>
+                            )}
+
+                            {/* Links */}
+                            {list.get_CurriculumItem_File.some(
+                              (type) =>
+                                type.curriculum_item_file_type ===
+                                "External Resourses"
+                            ) && (
+                              <Dropdown>
+                                <Dropdown.Toggle size="sm" variant="danger">
+                                  <i className="fas fa-link"></i> Links
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                  {list.get_CurriculumItem_File.map(
+                                    (item, idx) =>
+                                      item.curriculum_item_file_type ===
+                                        "External Resourses" && (
+                                        <Dropdown.Item
+                                          target="_blank"
+                                          key={idx}
+                                          href={`${item.url}`}
+                                        >
+                                          {item.title}
+                                        </Dropdown.Item>
+                                      )
+                                  )}
+                                </Dropdown.Menu>
+                              </Dropdown>
+                            )}
+                          </div>
+                        </CardMainContainer>
+                      </span>
+                    )}
+
+                  {/* Quiz */}
+                  {list.curriculum_item_type == "Quiz" && (
                     <span
                       onClick={() => {
-                        setarticle(list.article);
+                        setselectedQuiz(null);
+                        setStartquiz(false);
+                        setanswerAlertDisplay(null);
+                        setselectAnswer(0);
+
+                        setarticle("");
                         setshowVideoPlayer(false);
                         setshowAssignment(false);
+                        setshowquiz(true);
+                        setshowPracticeTest(false);
+                        setshowCodingExercise(false);
+
+                        //  --------------------- CALCULATE THE MARK --------------------
+                        UpdateCourseCurriculumProgress(
+                          itemCode,
+                          list.curriculumItemId,
+                          setcourse
+                        );
+                        //  --------------------- CALCULATE THE MARK --------------------
+
+                        // ---------------- STORE AS LAST POSITION -------
+                        StoreLastMarkedCurriculum(
+                          itemCode,
+                          list.curriculumItemId
+                        );
+                        // ---------------- STORE AS LAST POSITION -------
+
+                        setselectedQuiz(list);
+
+                        setseletedCurriculumItem(list.curriculumItemId);
+
+                        // Only execute if sectionID, curriclumID, and type are not null or undefined
+                        if (sectionID && curriclumID && SyllabusType) {
+                          router.replace(`/my-courses/${itemCode}`, undefined, {
+                            shallow: true,
+                          });
+                        }
+
+                        GetMyCoursesDetails(courseItemCode, setcourse);
+                      }}
+                      key={index}
+                    >
+                      <CardMainContainer
+                        className={
+                          seletedCurriculumItem == list.curriculumItemId &&
+                          `custom-color`
+                        }
+                      >
+                        <CardContainer
+                          className={`m-1 p-0 ${
+                            seletedCurriculumItem == list.curriculumItemId &&
+                            `custom-color text-white`
+                          }`}
+                        >
+                          <Form.Check
+                            className="d-flex p-0"
+                            checked={list.read}
+                            type={"checkbox"}
+                            id={`default-${index}`}
+                            label={""}
+                          />
+                          <li className="d-flex">
+                            <p
+                              className={
+                                seletedCurriculumItem == list.curriculumItemId
+                                  ? "text-light"
+                                  : ""
+                              }
+                              style={mainfs}
+                            >
+                              {index + 1}. <QuizIcon /> Quiz : {list.title}
+                              {/* <p
+                              className={`m-1 p-0 ${
+                                seletedCurriculumItem === list.curriculumItemId
+                                  ? "text-light"
+                                  : ""
+                              }`}
+                            >
+                              {list.description.replace(
+                                /<\/?[^>]+(>|$)/g,
+                                ""
+                              ) !== "N/A"
+                                ? list.description.replace(
+                                    /<\/?[^>]+(>|$)/g,
+                                    ""
+                                  ).length > 75
+                                  ? `${list.description
+                                      .replace(/<\/?[^>]+(>|$)/g, "")
+                                      .slice(0, 75)}...`
+                                  : list.description.replace(
+                                      /<\/?[^>]+(>|$)/g,
+                                      ""
+                                    )
+                                : null}
+                            </p> */}
+                            </p>
+                          </li>
+                        </CardContainer>
+                      </CardMainContainer>
+                    </span>
+                  )}
+
+                  {/* Assignment */}
+                  {list.curriculum_item_type == "Assignment" && (
+                    <span
+                      onClick={() => {
+                        setActiveStep(0);
+                        setarticle("");
+                        setshowVideoPlayer(false);
+                        setshowAssignment(true);
                         setshowquiz(false);
                         setshowPracticeTest(false);
                         setshowCodingExercise(false);
@@ -390,6 +675,112 @@ const Accordian = ({
                           list.curriculumItemId
                         );
                         // ---------------- STORE AS LAST POSITION -------
+
+                        // Only execute if sectionID, curriclumID, and type are not null or undefined
+                        if (sectionID && curriclumID && SyllabusType) {
+                          router.replace(`/my-courses/${itemCode}`, undefined, {
+                            shallow: true,
+                          });
+                        }
+
+                        GetMyCoursesDetails(courseItemCode, setcourse);
+
+                        setselectedAssignment(list);
+                      }}
+                      key={index}
+                    >
+                      <CardMainContainer
+                        className={
+                          seletedCurriculumItem == list.curriculumItemId &&
+                          `custom-color`
+                        }
+                      >
+                        <CardContainer
+                          className={`m-1 p-0 ${
+                            seletedCurriculumItem == list.curriculumItemId &&
+                            `custom-color text-light`
+                          }`}
+                        >
+                          <Form.Check
+                            className="d-flex p-0"
+                            checked={list.read}
+                            type={"checkbox"}
+                            id={`default-${index}`}
+                            label={""}
+                          />
+                          <li className="d-flex">
+                            <p
+                              className={
+                                seletedCurriculumItem == list.curriculumItemId
+                                  ? "text-light"
+                                  : ""
+                              }
+                              style={mainfs}
+                            >
+                              {index + 1}. <AssignmentIcon /> Assignment :{" "}
+                              {list.title}
+                              {/* <p
+                              className={`m-1 p-0 ${
+                                seletedCurriculumItem === list.curriculumItemId
+                                  ? "text-light"
+                                  : ""
+                              }`}
+                            >
+                              {list.description.replace(
+                                /<\/?[^>]+(>|$)/g,
+                                ""
+                              ) !== "N/A"
+                                ? list.description.replace(
+                                    /<\/?[^>]+(>|$)/g,
+                                    ""
+                                  ).length > 75
+                                  ? `${list.description
+                                      .replace(/<\/?[^>]+(>|$)/g, "")
+                                      .slice(0, 75)}...`
+                                  : list.description.replace(
+                                      /<\/?[^>]+(>|$)/g,
+                                      ""
+                                    )
+                                : null}
+                            </p> */}
+                            </p>
+                          </li>
+                        </CardContainer>
+                      </CardMainContainer>
+                    </span>
+                  )}
+
+                  {/* Practice Test */}
+                  {list.curriculum_item_type == "Practice Test" && (
+                    <span
+                      onClick={() => {
+                        setPraticeTestActiveStep(0);
+                        setselectedPracticeTest(null);
+                        setarticle("");
+                        setshowVideoPlayer(false);
+                        setshowAssignment(false);
+                        setshowquiz(false);
+                        setshowPracticeTest(true);
+                        setshowCodingExercise(false);
+
+                        //  --------------------- CALCULATE THE MARK --------------------
+                        UpdateCourseCurriculumProgress(
+                          itemCode,
+                          list.curriculumItemId,
+                          setcourse
+                        );
+                        //  --------------------- CALCULATE THE MARK --------------------
+
+                        // ---------------- STORE AS LAST POSITION -------
+                        StoreLastMarkedCurriculum(
+                          itemCode,
+                          list.curriculumItemId
+                        );
+                        // ---------------- STORE AS LAST POSITION -------
+
+                        setselectedPracticeTest(list);
+
+                        setseletedCurriculumItem(list.curriculumItemId);
 
                         // Only execute if sectionID, curriclumID, and type are not null or undefined
                         if (sectionID && curriclumID && SyllabusType) {
@@ -421,7 +812,6 @@ const Accordian = ({
                             id={`default-${index}`}
                             label={""}
                           />
-
                           <li className="d-flex">
                             <p
                               className={
@@ -431,181 +821,111 @@ const Accordian = ({
                               }
                               style={mainfs}
                             >
-                              {index + 1}. <FileCopyIcon /> Text-Based Lecture :{" "}
+                              {index + 1}. <ListAltIcon /> Practice Test :{" "}
                               {list.title}
                               {/* <p
-                                className={`m-1 p-0 ${
-                                  seletedCurriculumItem ===
-                                  list.curriculumItemId
-                                    ? "text-light"
-                                    : ""
-                                }`}
-                              >
-                                {list.description.replace(
-                                  /<\/?[^>]+(>|$)/g,
-                                  ""
-                                ) !== "N/A"
-                                  ? list.description.replace(
+                              className={`m-1 p-0 ${
+                                seletedCurriculumItem === list.curriculumItemId
+                                  ? "text-light"
+                                  : ""
+                              }`}
+                            >
+                              {list.description.replace(
+                                /<\/?[^>]+(>|$)/g,
+                                ""
+                              ) !== "N/A"
+                                ? list.description.replace(
+                                    /<\/?[^>]+(>|$)/g,
+                                    ""
+                                  ).length > 75
+                                  ? `${list.description
+                                      .replace(/<\/?[^>]+(>|$)/g, "")
+                                      .slice(0, 75)}...`
+                                  : list.description.replace(
                                       /<\/?[^>]+(>|$)/g,
                                       ""
-                                    ).length > 75
-                                    ? `${list.description
-                                        .replace(/<\/?[^>]+(>|$)/g, "")
-                                        .slice(0, 75)}...`
-                                    : list.description.replace(
-                                        /<\/?[^>]+(>|$)/g,
-                                        ""
-                                      )
-                                  : null}
-                              </p> */}
+                                    )
+                                : null}
+                            </p> */}
                             </p>
                           </li>
                         </CardContainer>
-
-                        <div className="d-flex justify-content-around">
-                          {/* Resources */}
-                          {list.get_CurriculumItem_File.some(
-                            (type) =>
-                              type.curriculum_item_file_type ===
-                                "Downloadable Items" ||
-                              type.curriculum_item_file_type === "Source Code"
-                          ) && (
-                            <Dropdown>
-                              <Dropdown.Toggle size="sm" variant="danger">
-                                <i className="fas fa-folder-open"></i> Resources
-                              </Dropdown.Toggle>
-                              <Dropdown.Menu>
-                                {list.get_CurriculumItem_File.map(
-                                  (item, idx) =>
-                                    (item.curriculum_item_file_type ==
-                                      "Downloadable Items" ||
-                                      item.curriculum_item_file_type ==
-                                        "Source Code") && (
-                                      <Dropdown.Item
-                                        key={idx}
-                                        onClick={() =>
-                                          handleDownload(
-                                            `${IMG_HOST}${item.url}`,
-                                            item.title
-                                          )
-                                        }
-                                      >
-                                        {item.title}
-                                      </Dropdown.Item>
-                                    )
-                                )}
-                              </Dropdown.Menu>
-                            </Dropdown>
-                          )}
-
-                          {/* Links */}
-                          {list.get_CurriculumItem_File.some(
-                            (type) =>
-                              type.curriculum_item_file_type ===
-                              "External Resourses"
-                          ) && (
-                            <Dropdown>
-                              <Dropdown.Toggle size="sm" variant="danger">
-                                <i className="fas fa-link"></i> Links
-                              </Dropdown.Toggle>
-                              <Dropdown.Menu>
-                                {list.get_CurriculumItem_File.map(
-                                  (item, idx) =>
-                                    item.curriculum_item_file_type ===
-                                      "External Resourses" && (
-                                      <Dropdown.Item
-                                        target="_blank"
-                                        key={idx}
-                                        href={`${item.url}`}
-                                      >
-                                        {item.title}
-                                      </Dropdown.Item>
-                                    )
-                                )}
-                              </Dropdown.Menu>
-                            </Dropdown>
-                          )}
-                        </div>
                       </CardMainContainer>
                     </span>
                   )}
 
-                {/* Quiz */}
-                {list.curriculum_item_type == "Quiz" && (
-                  <span
-                    onClick={() => {
-                      setselectedQuiz(null);
-                      setStartquiz(false);
-                      setanswerAlertDisplay(null);
-                      setselectAnswer(0);
+                  {/* Coding Exercise */}
+                  {list.curriculum_item_type == "Coding Exercise" && (
+                    <span
+                      onClick={() => {
+                        setCodingExerciseActiveStep(0);
+                        setarticle("");
+                        setshowVideoPlayer(false);
+                        setshowAssignment(false);
+                        setshowquiz(false);
+                        setshowPracticeTest(false);
+                        setshowCodingExercise(true);
 
-                      setarticle("");
-                      setshowVideoPlayer(false);
-                      setshowAssignment(false);
-                      setshowquiz(true);
-                      setshowPracticeTest(false);
-                      setshowCodingExercise(false);
+                        //  --------------------- CALCULATE THE MARK --------------------
+                        UpdateCourseCurriculumProgress(
+                          itemCode,
+                          list.curriculumItemId,
+                          setcourse
+                        );
+                        //  --------------------- CALCULATE THE MARK --------------------
 
-                      //  --------------------- CALCULATE THE MARK --------------------
-                      UpdateCourseCurriculumProgress(
-                        itemCode,
-                        list.curriculumItemId,
-                        setcourse
-                      );
-                      //  --------------------- CALCULATE THE MARK --------------------
+                        // ---------------- STORE AS LAST POSITION -------
+                        StoreLastMarkedCurriculum(
+                          itemCode,
+                          list.curriculumItemId
+                        );
+                        // ---------------- STORE AS LAST POSITION -------
 
-                      // ---------------- STORE AS LAST POSITION -------
-                      StoreLastMarkedCurriculum(
-                        itemCode,
-                        list.curriculumItemId
-                      );
-                      // ---------------- STORE AS LAST POSITION -------
+                        setselectedCodingExercise(list);
+                        setseletedCurriculumItem(list.curriculumItemId);
 
-                      setselectedQuiz(list);
+                        // Only execute if sectionID, curriclumID, and type are not null or undefined
+                        if (sectionID && curriclumID && SyllabusType) {
+                          router.replace(`/my-courses/${itemCode}`, undefined, {
+                            shallow: true,
+                          });
+                        }
 
-                      setseletedCurriculumItem(list.curriculumItemId);
-
-                      // Only execute if sectionID, curriclumID, and type are not null or undefined
-                      if (sectionID && curriclumID && SyllabusType) {
-                        router.replace(`/my-courses/${itemCode}`, undefined, {
-                          shallow: true,
-                        });
-                      }
-
-                      GetMyCoursesDetails(courseItemCode, setcourse);
-                    }}
-                    key={index}
-                  >
-                    <CardMainContainer
-                      className={
-                        seletedCurriculumItem == list.curriculumItemId &&
-                        `custom-color`
-                      }
+                        GetMyCoursesDetails(courseItemCode, setcourse);
+                      }}
+                      key={index}
                     >
-                      <CardContainer
-                        className={`m-1 p-0 ${
+                      <CardMainContainer
+                        className={
                           seletedCurriculumItem == list.curriculumItemId &&
-                          `custom-color text-white`
-                        }`}
+                          `custom-color`
+                        }
                       >
-                        <Form.Check
-                          className="d-flex p-0"
-                          checked={list.read}
-                          type={"checkbox"}
-                          id={`default-${index}`}
-                          label={""}
-                        />
-                        <li className="d-flex">
-                          <p
-                            className={
-                              seletedCurriculumItem == list.curriculumItemId
-                                ? "text-light"
-                                : ""
-                            }
-                            style={mainfs}
-                          >
-                            {index + 1}. <QuizIcon /> Quiz : {list.title}
-                            {/* <p
+                        <CardContainer
+                          className={`m-1 p-0 ${
+                            seletedCurriculumItem == list.curriculumItemId &&
+                            `custom-color text-light`
+                          }`}
+                        >
+                          <Form.Check
+                            className="mb-4 p-0"
+                            checked={list.read}
+                            type={"checkbox"}
+                            id={`default-${index}`}
+                            label={""}
+                          />
+                          <li className="d-flex">
+                            <p
+                              className={
+                                seletedCurriculumItem == list.curriculumItemId
+                                  ? "text-light"
+                                  : ""
+                              }
+                              style={mainfs}
+                            >
+                              {index + 1}. <CodeIcon /> Coding Exercise :{" "}
+                              {list.title}
+                              {/* <p
                               className={`m-1 p-0 ${
                                 seletedCurriculumItem === list.curriculumItemId
                                   ? "text-light"
@@ -629,323 +949,14 @@ const Accordian = ({
                                     )
                                 : null}
                             </p> */}
-                          </p>
-                        </li>
-                      </CardContainer>
-                    </CardMainContainer>
-                  </span>
-                )}
-
-                {/* Assignment */}
-                {list.curriculum_item_type == "Assignment" && (
-                  <span
-                    onClick={() => {
-                      setActiveStep(0);
-                      setarticle("");
-                      setshowVideoPlayer(false);
-                      setshowAssignment(true);
-                      setshowquiz(false);
-                      setshowPracticeTest(false);
-                      setshowCodingExercise(false);
-
-                      setseletedCurriculumItem(list.curriculumItemId);
-
-                      //  --------------------- CALCULATE THE MARK --------------------
-                      UpdateCourseCurriculumProgress(
-                        itemCode,
-                        list.curriculumItemId,
-                        setcourse
-                      );
-                      //  --------------------- CALCULATE THE MARK --------------------
-
-                      // ---------------- STORE AS LAST POSITION -------
-                      StoreLastMarkedCurriculum(
-                        itemCode,
-                        list.curriculumItemId
-                      );
-                      // ---------------- STORE AS LAST POSITION -------
-
-                      // Only execute if sectionID, curriclumID, and type are not null or undefined
-                      if (sectionID && curriclumID && SyllabusType) {
-                        router.replace(`/my-courses/${itemCode}`, undefined, {
-                          shallow: true,
-                        });
-                      }
-
-                      GetMyCoursesDetails(courseItemCode, setcourse);
-
-                      setselectedAssignment(list);
-                    }}
-                    key={index}
-                  >
-                    <CardMainContainer
-                      className={
-                        seletedCurriculumItem == list.curriculumItemId &&
-                        `custom-color`
-                      }
-                    >
-                      <CardContainer
-                        className={`m-1 p-0 ${
-                          seletedCurriculumItem == list.curriculumItemId &&
-                          `custom-color text-light`
-                        }`}
-                      >
-                        <Form.Check
-                          className="d-flex p-0"
-                          checked={list.read}
-                          type={"checkbox"}
-                          id={`default-${index}`}
-                          label={""}
-                        />
-                        <li className="d-flex">
-                          <p
-                            className={
-                              seletedCurriculumItem == list.curriculumItemId
-                                ? "text-light"
-                                : ""
-                            }
-                            style={mainfs}
-                          >
-                            {index + 1}. <AssignmentIcon /> Assignment :{" "}
-                            {list.title}
-                            {/* <p
-                              className={`m-1 p-0 ${
-                                seletedCurriculumItem === list.curriculumItemId
-                                  ? "text-light"
-                                  : ""
-                              }`}
-                            >
-                              {list.description.replace(
-                                /<\/?[^>]+(>|$)/g,
-                                ""
-                              ) !== "N/A"
-                                ? list.description.replace(
-                                    /<\/?[^>]+(>|$)/g,
-                                    ""
-                                  ).length > 75
-                                  ? `${list.description
-                                      .replace(/<\/?[^>]+(>|$)/g, "")
-                                      .slice(0, 75)}...`
-                                  : list.description.replace(
-                                      /<\/?[^>]+(>|$)/g,
-                                      ""
-                                    )
-                                : null}
-                            </p> */}
-                          </p>
-                        </li>
-                      </CardContainer>
-                    </CardMainContainer>
-                  </span>
-                )}
-
-                {/* Practice Test */}
-                {list.curriculum_item_type == "Practice Test" && (
-                  <span
-                    onClick={() => {
-                      setPraticeTestActiveStep(0);
-                      setselectedPracticeTest(null);
-                      setarticle("");
-                      setshowVideoPlayer(false);
-                      setshowAssignment(false);
-                      setshowquiz(false);
-                      setshowPracticeTest(true);
-                      setshowCodingExercise(false);
-
-                      //  --------------------- CALCULATE THE MARK --------------------
-                      UpdateCourseCurriculumProgress(
-                        itemCode,
-                        list.curriculumItemId,
-                        setcourse
-                      );
-                      //  --------------------- CALCULATE THE MARK --------------------
-
-                      // ---------------- STORE AS LAST POSITION -------
-                      StoreLastMarkedCurriculum(
-                        itemCode,
-                        list.curriculumItemId
-                      );
-                      // ---------------- STORE AS LAST POSITION -------
-
-                      setselectedPracticeTest(list);
-
-                      setseletedCurriculumItem(list.curriculumItemId);
-
-                      // Only execute if sectionID, curriclumID, and type are not null or undefined
-                      if (sectionID && curriclumID && SyllabusType) {
-                        router.replace(`/my-courses/${itemCode}`, undefined, {
-                          shallow: true,
-                        });
-                      }
-
-                      GetMyCoursesDetails(courseItemCode, setcourse);
-                    }}
-                    key={index}
-                  >
-                    <CardMainContainer
-                      className={
-                        seletedCurriculumItem == list.curriculumItemId &&
-                        `custom-color`
-                      }
-                    >
-                      <CardContainer
-                        className={`m-1 p-0 ${
-                          seletedCurriculumItem == list.curriculumItemId &&
-                          `custom-color text-light`
-                        }`}
-                      >
-                        <Form.Check
-                          className="d-flex p-0"
-                          checked={list.read}
-                          type={"checkbox"}
-                          id={`default-${index}`}
-                          label={""}
-                        />
-                        <li className="d-flex">
-                          <p
-                            className={
-                              seletedCurriculumItem == list.curriculumItemId
-                                ? "text-light"
-                                : ""
-                            }
-                            style={mainfs}
-                          >
-                            {index + 1}. <ListAltIcon /> Practice Test :{" "}
-                            {list.title}
-                            {/* <p
-                              className={`m-1 p-0 ${
-                                seletedCurriculumItem === list.curriculumItemId
-                                  ? "text-light"
-                                  : ""
-                              }`}
-                            >
-                              {list.description.replace(
-                                /<\/?[^>]+(>|$)/g,
-                                ""
-                              ) !== "N/A"
-                                ? list.description.replace(
-                                    /<\/?[^>]+(>|$)/g,
-                                    ""
-                                  ).length > 75
-                                  ? `${list.description
-                                      .replace(/<\/?[^>]+(>|$)/g, "")
-                                      .slice(0, 75)}...`
-                                  : list.description.replace(
-                                      /<\/?[^>]+(>|$)/g,
-                                      ""
-                                    )
-                                : null}
-                            </p> */}
-                          </p>
-                        </li>
-                      </CardContainer>
-                    </CardMainContainer>
-                  </span>
-                )}
-
-                {/* Coding Exercise */}
-                {list.curriculum_item_type == "Coding Exercise" && (
-                  <span
-                    onClick={() => {
-                      setCodingExerciseActiveStep(0);
-                      setarticle("");
-                      setshowVideoPlayer(false);
-                      setshowAssignment(false);
-                      setshowquiz(false);
-                      setshowPracticeTest(false);
-                      setshowCodingExercise(true);
-
-                      //  --------------------- CALCULATE THE MARK --------------------
-                      UpdateCourseCurriculumProgress(
-                        itemCode,
-                        list.curriculumItemId,
-                        setcourse
-                      );
-                      //  --------------------- CALCULATE THE MARK --------------------
-
-                      // ---------------- STORE AS LAST POSITION -------
-                      StoreLastMarkedCurriculum(
-                        itemCode,
-                        list.curriculumItemId
-                      );
-                      // ---------------- STORE AS LAST POSITION -------
-
-                      setselectedCodingExercise(list);
-                      setseletedCurriculumItem(list.curriculumItemId);
-
-                      // Only execute if sectionID, curriclumID, and type are not null or undefined
-                      if (sectionID && curriclumID && SyllabusType) {
-                        router.replace(`/my-courses/${itemCode}`, undefined, {
-                          shallow: true,
-                        });
-                      }
-
-                      GetMyCoursesDetails(courseItemCode, setcourse);
-                    }}
-                    key={index}
-                  >
-                    <CardMainContainer
-                      className={
-                        seletedCurriculumItem == list.curriculumItemId &&
-                        `custom-color`
-                      }
-                    >
-                      <CardContainer
-                        className={`m-1 p-0 ${
-                          seletedCurriculumItem == list.curriculumItemId &&
-                          `custom-color text-light`
-                        }`}
-                      >
-                        <Form.Check
-                          className="mb-4 p-0"
-                          checked={list.read}
-                          type={"checkbox"}
-                          id={`default-${index}`}
-                          label={""}
-                        />
-                        <li className="d-flex">
-                          <p
-                            className={
-                              seletedCurriculumItem == list.curriculumItemId
-                                ? "text-light"
-                                : ""
-                            }
-                            style={mainfs}
-                          >
-                            {index + 1}. <CodeIcon /> Coding Exercise :{" "}
-                            {list.title}
-                            {/* <p
-                              className={`m-1 p-0 ${
-                                seletedCurriculumItem === list.curriculumItemId
-                                  ? "text-light"
-                                  : ""
-                              }`}
-                            >
-                              {list.description.replace(
-                                /<\/?[^>]+(>|$)/g,
-                                ""
-                              ) !== "N/A"
-                                ? list.description.replace(
-                                    /<\/?[^>]+(>|$)/g,
-                                    ""
-                                  ).length > 75
-                                  ? `${list.description
-                                      .replace(/<\/?[^>]+(>|$)/g, "")
-                                      .slice(0, 75)}...`
-                                  : list.description.replace(
-                                      /<\/?[^>]+(>|$)/g,
-                                      ""
-                                    )
-                                : null}
-                            </p> */}
-                          </p>
-                        </li>
-                      </CardContainer>
-                    </CardMainContainer>
-                  </span>
-                )}
-              </React.Fragment>
-            ))}
+                            </p>
+                          </li>
+                        </CardContainer>
+                      </CardMainContainer>
+                    </span>
+                  )}
+                </React.Fragment>
+              ))}
           </ol>
         </div>
       </div>

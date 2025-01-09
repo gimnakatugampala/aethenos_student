@@ -662,7 +662,6 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
     setIsFullScreen(!isFullScreen);
   };
 
-
   const testRef = useRef(null); // Reference to the container
 
   const togglePracticeTestFullScreen = () => {
@@ -675,7 +674,6 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
     }
     setIsFullScreen(!isFullScreen);
   };
-
 
   const assignmentRef = useRef(null); // Reference to the container
 
@@ -690,7 +688,6 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
     setIsFullScreen(!isFullScreen);
   };
 
-
   const quizRef = useRef(null); // Reference to the QuizContainer
 
   const toggleQuizFullScreen = () => {
@@ -703,7 +700,6 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
     }
     setIsFullScreen(!isFullScreen);
   };
-
 
   return (
     <section
@@ -744,303 +740,316 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
               <>
                 {/* // Show Quiz */}
                 {showquiz && (
-               <>
-               <div
-                 onClick={toggleQuizFullScreen}
-                 style={{
-                   background: "#f0f0f0",
-                   padding: "10px",
-                   cursor: "pointer",
-                   textAlign: "center",
-                   fontWeight: "bold",
-                 }}
-               >
-                 Click to View Quiz in Full Screen
-               </div>
-         
-               <div
-                 ref={quizRef}
-                 className="border p-4"
-                 style={{
-                   maxHeight: isFullScreen ? "100vh" : "620px", // Full height in full screen
-                   overflowY: isFullScreen ? "auto" : "scroll", // Allow scrolling in full screen
-                   position: isFullScreen ? "fixed" : "static",
-                   top: 0,
-                   left: 0,
-                   width: isFullScreen ? "100vw" : "auto",
-                   height: isFullScreen ? "100vh" : "auto",
-                   backgroundColor: isFullScreen ? "#ffffff" : "transparent", // White background in full screen
-                   zIndex: isFullScreen ? 1000 : "auto", // Bring to front in full screen
-                 }}
-               >
-                 <QuizContainer
-                   setselectAnswer={setselectAnswer}
-                   selectAnswer={selectAnswer}
-                   answerAlertDisplay={answerAlertDisplay}
-                   setanswerAlertDisplay={setanswerAlertDisplay}
-                   Startquiz={Startquiz}
-                   setStartquiz={setStartquiz}
-                   selectedQuiz={selectedQuiz}
-                 />
-         
-                 {isFullScreen && (
-                   <button
-                     onClick={toggleQuizFullScreen}
-                     style={{
-                       position: "fixed",
-                       top: "20px",
-                       right: "20px",
-                       fontSize: "1.5em",
-                       color: "#000", // Close button color
-                       background: "none",
-                       border: "none",
-                       cursor: "pointer",
-                     }}
-                   >
-                     ✕
-                   </button>
-                 )}
-               </div>
-             </>
+                  <>
+                    <div
+                      onClick={toggleQuizFullScreen}
+                      style={{
+                        background: "#f0f0f0",
+                        padding: "10px",
+                        cursor: "pointer",
+                        textAlign: "center",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Click to View Quiz in Full Screen
+                    </div>
+
+                    <div
+                      ref={quizRef}
+                      className="border p-4"
+                      style={{
+                        maxHeight: isFullScreen ? "100vh" : "620px", // Full height in full screen
+                        overflowY: isFullScreen ? "auto" : "scroll", // Allow scrolling in full screen
+                        position: isFullScreen ? "fixed" : "static",
+                        top: 0,
+                        left: 0,
+                        width: isFullScreen ? "100vw" : "auto",
+                        height: isFullScreen ? "100vh" : "auto",
+                        backgroundColor: isFullScreen
+                          ? "#ffffff"
+                          : "transparent", // White background in full screen
+                        zIndex: isFullScreen ? 1000 : "auto", // Bring to front in full screen
+                      }}
+                    >
+                      <QuizContainer
+                        setselectAnswer={setselectAnswer}
+                        selectAnswer={selectAnswer}
+                        answerAlertDisplay={answerAlertDisplay}
+                        setanswerAlertDisplay={setanswerAlertDisplay}
+                        Startquiz={Startquiz}
+                        setStartquiz={setStartquiz}
+                        selectedQuiz={selectedQuiz}
+                      />
+
+                      {isFullScreen && (
+                        <button
+                          onClick={toggleQuizFullScreen}
+                          style={{
+                            position: "fixed",
+                            top: "20px",
+                            right: "20px",
+                            fontSize: "1.5em",
+                            color: "#000", // Close button color
+                            background: "none",
+                            border: "none",
+                            cursor: "pointer",
+                          }}
+                        >
+                          ✕
+                        </button>
+                      )}
+                    </div>
+                  </>
                 )}
 
                 {/* // Show Assignment */}
                 {showAssignment && (
-                 <>
-                 <div
-                   onClick={toggleAssignmentFullScreen}
-                   style={{
-                     background: "#f0f0f0",
-                     padding: "10px",
-                     cursor: "pointer",
-                     textAlign: "center",
-                     fontWeight: "bold",
-                   }}
-                 >
-                   Click to View Assignment in Full Screen
-                 </div>
-           
-                 <div
-                   ref={assignmentRef}
-                   className={`container border border-dark p-4`}
-                   style={{
-                     position: isFullScreen ? "fixed" : "static",
-                     top: 0,
-                     left: 0,
-                     width: isFullScreen ? "100vw" : "auto",
-                     height: isFullScreen ? "100vh" : "auto",
-                     backgroundColor: isFullScreen ? "#ffffff" : "transparent", // White background in full screen
-                     zIndex: isFullScreen ? 1000 : "auto", // Bring to front in full screen
-                     overflowY: isFullScreen ? "auto" : "hidden", // Allow scrolling in full screen
-                   }}
-                 >
-                   <AssignmentContainer
-                     activeStep={activeAssignmentStep}
-                     setActiveStep={setAssignmentActiveStep}
-                     selectedAssignment={selectedAssignment}
-                   />
-           
-                   {isFullScreen && (
-                     <button
-                       onClick={toggleAssignmentFullScreen}
-                       style={{
-                         position: "fixed",
-                         top: "20px",
-                         right: "20px",
-                         fontSize: "1.5em",
-                         color: "#000", // Close button color
-                         background: "none",
-                         border: "none",
-                         cursor: "pointer",
-                       }}
-                     >
-                       ✕
-                     </button>
-                   )}
-                 </div>
-               </>
+                  <>
+                    <div
+                      onClick={toggleAssignmentFullScreen}
+                      style={{
+                        background: "#f0f0f0",
+                        padding: "10px",
+                        cursor: "pointer",
+                        textAlign: "center",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Click to View Assignment in Full Screen
+                    </div>
+
+                    <div
+                      ref={assignmentRef}
+                      className={`container border border-dark p-4`}
+                      style={{
+                        position: isFullScreen ? "fixed" : "static",
+                        top: 0,
+                        left: 0,
+                        width: isFullScreen ? "100vw" : "auto",
+                        height: isFullScreen ? "100vh" : "auto",
+                        backgroundColor: isFullScreen
+                          ? "#ffffff"
+                          : "transparent", // White background in full screen
+                        zIndex: isFullScreen ? 1000 : "auto", // Bring to front in full screen
+                        overflowY: isFullScreen ? "auto" : "hidden", // Allow scrolling in full screen
+                      }}
+                    >
+                      <AssignmentContainer
+                        activeStep={activeAssignmentStep}
+                        setActiveStep={setAssignmentActiveStep}
+                        selectedAssignment={selectedAssignment}
+                      />
+
+                      {isFullScreen && (
+                        <button
+                          onClick={toggleAssignmentFullScreen}
+                          style={{
+                            position: "fixed",
+                            top: "20px",
+                            right: "20px",
+                            fontSize: "1.5em",
+                            color: "#000", // Close button color
+                            background: "none",
+                            border: "none",
+                            cursor: "pointer",
+                          }}
+                        >
+                          ✕
+                        </button>
+                      )}
+                    </div>
+                  </>
                 )}
 
                 {/* Show Practice test */}
                 {showPracticeTest && (
-               <>
-               <div
-                 onClick={togglePracticeTestFullScreen}
-                 style={{
-                   background: "#f0f0f0",
-                   padding: "10px",
-                   cursor: "pointer",
-                   textAlign: "center",
-                   fontWeight: "bold",
-                 }}
-               >
-                 Click to View Practice Test in Full Screen
-               </div>
-         
-               <div
-                 ref={testRef}
-                 className={`container border border-dark p-4`}
-                 style={{
-                   position: isFullScreen ? "fixed" : "static",
-                   top: 0,
-                   left: 0,
-                   width: isFullScreen ? "100vw" : "auto",
-                   height: isFullScreen ? "100vh" : "auto",
-                   backgroundColor: isFullScreen ? "#ffffff" : "transparent", // White background in full screen
-                   zIndex: isFullScreen ? 1000 : "auto", // Bring to front in full screen
-                   overflowY: isFullScreen ? "auto" : "hidden", // Allow scrolling in full screen
-                 }}
-               >
-                 <PraticeTestContainer
-                   PraticeTestactiveStep={PraticeTestactiveStep}
-                   setPraticeTestActiveStep={setPraticeTestActiveStep}
-                   selectedPracticeTest={selectedPracticeTest}
-                 />
-         
-                 {isFullScreen && (
-                   <button
-                     onClick={togglePracticeTestFullScreen}
-                     style={{
-                       position: "fixed",
-                       top: "20px",
-                       right: "20px",
-                       fontSize: "1.5em",
-                       color: "#000", // Close button color
-                       background: "none",
-                       border: "none",
-                       cursor: "pointer",
-                     }}
-                   >
-                     ✕
-                   </button>
-                 )}
-               </div>
-             </>
+                  <>
+                    <div
+                      onClick={togglePracticeTestFullScreen}
+                      style={{
+                        background: "#f0f0f0",
+                        padding: "10px",
+                        cursor: "pointer",
+                        textAlign: "center",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Click to View Practice Test in Full Screen
+                    </div>
+
+                    <div
+                      ref={testRef}
+                      className={`container border border-dark p-4`}
+                      style={{
+                        position: isFullScreen ? "fixed" : "static",
+                        top: 0,
+                        left: 0,
+                        width: isFullScreen ? "100vw" : "auto",
+                        height: isFullScreen ? "100vh" : "auto",
+                        backgroundColor: isFullScreen
+                          ? "#ffffff"
+                          : "transparent", // White background in full screen
+                        zIndex: isFullScreen ? 1000 : "auto", // Bring to front in full screen
+                        overflowY: isFullScreen ? "auto" : "hidden", // Allow scrolling in full screen
+                      }}
+                    >
+                      <PraticeTestContainer
+                        PraticeTestactiveStep={PraticeTestactiveStep}
+                        setPraticeTestActiveStep={setPraticeTestActiveStep}
+                        selectedPracticeTest={selectedPracticeTest}
+                      />
+
+                      {isFullScreen && (
+                        <button
+                          onClick={togglePracticeTestFullScreen}
+                          style={{
+                            position: "fixed",
+                            top: "20px",
+                            right: "20px",
+                            fontSize: "1.5em",
+                            color: "#000", // Close button color
+                            background: "none",
+                            border: "none",
+                            cursor: "pointer",
+                          }}
+                        >
+                          ✕
+                        </button>
+                      )}
+                    </div>
+                  </>
                 )}
 
                 {/* Show Coding Exercise */}
                 {showCodingExercise && (
-                 <>
-                 <div
-                   onClick={toggleCodingExerciseFullScreen}
-                   style={{
-                     background: "#f0f0f0",
-                     padding: "10px",
-                     cursor: "pointer",
-                     textAlign: "center",
-                     fontWeight: "bold",
-                   }}
-                 >
-                   Click to View Coding Exercises in Full Screen
-                 </div>
-                 
-                 <div
-                   ref={exerciseRef}
-                   className={`container border border-dark p-4`}
-                   style={{
-                     position: isFullScreen ? "fixed" : "static",
-                     top: 0,
-                     left: 0,
-                     width: isFullScreen ? "100vw" : "auto",
-                     height: isFullScreen ? "100vh" : "auto",
-                     backgroundColor: isFullScreen ? "#ffffff" : "transparent", // White background in full screen
-                     zIndex: isFullScreen ? 1000 : "auto", // Bring to front in full screen
-                     overflowY: isFullScreen ? "auto" : "hidden", // Allow scrolling in full screen
-                   }}
-                 >
-                   <CodingExerciseContainer
-                     setCodingExerciseActiveStep={setCodingExerciseActiveStep}
-                     activeStepCodingExercise={activeStepCodingExercise}
-                     selectedCodingExercise={selectedCodingExercise}
-                   />
-                   
-                   {isFullScreen && (
-                     <button
-                       onClick={toggleCodingExerciseFullScreen}
-                       style={{
-                         position: "fixed",
-                         top: "20px",
-                         right: "20px",
-                         fontSize: "1.5em",
-                         color: "#000", // Close button color
-                         background: "none",
-                         border: "none",
-                         cursor: "pointer",
-                       }}
-                     >
-                       ✕
-                     </button>
-                   )}
-                 </div>
-               </>
-               
+                  <>
+                    <div
+                      onClick={toggleCodingExerciseFullScreen}
+                      style={{
+                        background: "#f0f0f0",
+                        padding: "10px",
+                        cursor: "pointer",
+                        textAlign: "center",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Click to View Coding Exercises in Full Screen
+                    </div>
+
+                    <div
+                      ref={exerciseRef}
+                      className={`container border border-dark p-4`}
+                      style={{
+                        position: isFullScreen ? "fixed" : "static",
+                        top: 0,
+                        left: 0,
+                        width: isFullScreen ? "100vw" : "auto",
+                        height: isFullScreen ? "100vh" : "auto",
+                        backgroundColor: isFullScreen
+                          ? "#ffffff"
+                          : "transparent", // White background in full screen
+                        zIndex: isFullScreen ? 1000 : "auto", // Bring to front in full screen
+                        overflowY: isFullScreen ? "auto" : "hidden", // Allow scrolling in full screen
+                      }}
+                    >
+                      <CodingExerciseContainer
+                        setCodingExerciseActiveStep={
+                          setCodingExerciseActiveStep
+                        }
+                        activeStepCodingExercise={activeStepCodingExercise}
+                        selectedCodingExercise={selectedCodingExercise}
+                      />
+
+                      {isFullScreen && (
+                        <button
+                          onClick={toggleCodingExerciseFullScreen}
+                          style={{
+                            position: "fixed",
+                            top: "20px",
+                            right: "20px",
+                            fontSize: "1.5em",
+                            color: "#000", // Close button color
+                            background: "none",
+                            border: "none",
+                            cursor: "pointer",
+                          }}
+                        >
+                          ✕
+                        </button>
+                      )}
+                    </div>
+                  </>
                 )}
               </>
             ) : (
               <>
-              <div
-                onClick={toggleFullScreen}
-                style={{
-                  background: "#f0f0f0",
-                  padding: "10px",
-                  cursor: "pointer",
-                  textAlign: "center",
-                  fontWeight: "bold",
-                }}
-              >
-                Click to View Full Screen
-              </div>
-              
-              <div
-                className="border p-4"
-                style={{ maxHeight: "500px", overflowY: "scroll" }}
-              >
-                {parse(article)}
-              </div>
-        
-              <div
-                ref={articleRef}
-                className={`full-screen-overlay ${isFullScreen ? 'fullscreen' : ''}`}
-                style={{
-                  position: isFullScreen ? "fixed" : "static",
-                  top: 0,
-                  left: 0,
-                  width: isFullScreen ? "100vw" : "auto",
-                  height: isFullScreen ? "100vh" : "auto",
-                  backgroundColor: isFullScreen ? "#ffffff" : "rgba(0, 0, 0, 0.8)", // White background in full screen
-                  color: isFullScreen ? "#000" : "#fff", // Black text in full screen
-                  zIndex: 1000,
-                  padding: "5px",
-                  overflowY: isFullScreen ? "auto" : "hidden",
-                }}
-              >
-                {isFullScreen && (
-                  <button
-                    onClick={toggleFullScreen}
-                    style={{
-                      position: "fixed",
-                      top: "20px",
-                      right: "20px",
-                      fontSize: "1.5em",
-                      color: "#000", // Change close button color to black for visibility on white
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                    }}
-                  >
-                    ✕
-                  </button>
-                )}
-                {parse(article)}
-              </div>
-            </>
+                <div
+                  onClick={toggleFullScreen}
+                  style={{
+                    background: "#f0f0f0",
+                    padding: "10px",
+                    cursor: "pointer",
+                    textAlign: "center",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Click to View Full Screen
+                </div>
+
+                <div
+                  className="border p-4"
+                  style={{ maxHeight: "500px", overflowY: "scroll" }}
+                >
+                  {parse(article)}
+                </div>
+
+                <div
+                  ref={articleRef}
+                  className={`full-screen-overlay ${
+                    isFullScreen ? "fullscreen" : ""
+                  }`}
+                  style={{
+                    position: isFullScreen ? "fixed" : "static",
+                    top: 0,
+                    left: 0,
+                    width: isFullScreen ? "100vw" : "auto",
+                    height: isFullScreen ? "100vh" : "auto",
+                    backgroundColor: isFullScreen
+                      ? "#ffffff"
+                      : "rgba(0, 0, 0, 0.8)", // White background in full screen
+                    color: isFullScreen ? "#000" : "#fff", // Black text in full screen
+                    zIndex: 1000,
+                    padding: "5px",
+                    overflowY: isFullScreen ? "auto" : "hidden",
+                  }}
+                >
+                  {isFullScreen && (
+                    <button
+                      onClick={toggleFullScreen}
+                      style={{
+                        position: "fixed",
+                        top: "20px",
+                        right: "20px",
+                        fontSize: "1.5em",
+                        color: "#000", // Change close button color to black for visibility on white
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                      }}
+                    >
+                      ✕
+                    </button>
+                  )}
+                  {parse(article)}
+                </div>
+              </>
             )}
 
             {/* Course Content */}
             <div
               style={{
                 ...positionStyle,
-                top: scrollPosition == 0 ? "85px" : "0",              
+                top: scrollPosition == 0 ? "85px" : "0",
               }}
               className="col-12 col-md-4"
             >
@@ -1051,8 +1060,7 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                 }}
               >
                 <div
-                      className="p-2 d-flex justify-content-between align-items-center"
-
+                  className="p-2 d-flex justify-content-between align-items-center"
                   style={{
                     position: "sticky",
                     top: 0,
@@ -1061,12 +1069,12 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                     backgroundColor: "transparent", // Ensure sticky header doesn't blend with the content
                   }}
                 >
-                    <h6 className="m-2" style={mainfs}>
+                  <h6 className="m-2" style={mainfs}>
                     Course Content
                   </h6>
                   <span
                     onClick={handleToggleAll} // Add click handler for toggling
-                    style={{ cursor: "pointer"}}
+                    style={{ cursor: "pointer" }}
                     className="text-danger"
                   >
                     {expandAll ? "Collapse All" : "Expand All"}
@@ -1078,42 +1086,54 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                   <div className="faq-accordion">
                     <div className="accordion">
                       {course != null &&
-                        course.course_content.map((content, index) => (
-                          <Accordian
-                            setshowquiz={setshowquiz}
-                            setarticle={setarticle}
-                            setshowVideoPlayer={setshowVideoPlayer}
-                            itemCode={itemCode}
-                            setmain_Video_player_url={setmain_Video_player_url}
-                            id={index + 1}
-                            content={content}
-                            setselectedQuiz={setselectedQuiz}
-                            setshowAssignment={setshowAssignment}
-                            setselectedAssignment={setselectedAssignment}
-                            setshowPracticeTest={setshowPracticeTest}
-                            setselectedPracticeTest={setselectedPracticeTest}
-                            setshowCodingExercise={setshowCodingExercise}
-                            setselectedCodingExercise={
-                              setselectedCodingExercise
-                            }
-                            key={index}
-                            courseItemCode={id}
-                            setcourse={setcourse}
-                            setseletedCurriculumItem={setseletedCurriculumItem}
-                            seletedCurriculumItem={seletedCurriculumItem}
-                            setStartquiz={setStartquiz}
-                            setanswerAlertDisplay={setanswerAlertDisplay}
-                            setselectAnswer={setselectAnswer}
-                            activeStep={activeAssignmentStep}
-                            setActiveStep={setAssignmentActiveStep}
-                            setPraticeTestActiveStep={setPraticeTestActiveStep}
-                            setCodingExerciseActiveStep={
-                              setCodingExerciseActiveStep
-                            }
-                            setTitleVideo={setTitleVideo}
-                            show={expandAll}
-                          />
-                        ))}
+                        [...course.course_content]
+                          .sort((a, b) => {
+                            if (a.arrangedNo === null) return 1;
+                            if (b.arrangedNo === null) return -1;
+                            return a.arrangedNo - b.arrangedNo;
+                          })
+                          .map((content, index) => (
+                            <Accordian
+                              setshowquiz={setshowquiz}
+                              setarticle={setarticle}
+                              setshowVideoPlayer={setshowVideoPlayer}
+                              itemCode={itemCode}
+                              setmain_Video_player_url={
+                                setmain_Video_player_url
+                              }
+                              id={index + 1}
+                              content={content}
+                              setselectedQuiz={setselectedQuiz}
+                              setshowAssignment={setshowAssignment}
+                              setselectedAssignment={setselectedAssignment}
+                              setshowPracticeTest={setshowPracticeTest}
+                              setselectedPracticeTest={setselectedPracticeTest}
+                              setshowCodingExercise={setshowCodingExercise}
+                              setselectedCodingExercise={
+                                setselectedCodingExercise
+                              }
+                              key={index}
+                              courseItemCode={id}
+                              setcourse={setcourse}
+                              setseletedCurriculumItem={
+                                setseletedCurriculumItem
+                              }
+                              seletedCurriculumItem={seletedCurriculumItem}
+                              setStartquiz={setStartquiz}
+                              setanswerAlertDisplay={setanswerAlertDisplay}
+                              setselectAnswer={setselectAnswer}
+                              activeStep={activeAssignmentStep}
+                              setActiveStep={setAssignmentActiveStep}
+                              setPraticeTestActiveStep={
+                                setPraticeTestActiveStep
+                              }
+                              setCodingExerciseActiveStep={
+                                setCodingExerciseActiveStep
+                              }
+                              setTitleVideo={setTitleVideo}
+                              show={expandAll}
+                            />
+                          ))}
                     </div>
                   </div>
                 </Card.Body>
@@ -1305,13 +1325,13 @@ const CourseDetailsArea1 = ({ id, course, setcourse }) => {
                               Course Description
                             </h3>
                             {course && (
-                          <p
-                              style={mainfs}
-                              dangerouslySetInnerHTML={FormatToHTML(
-                                course.course_main_desc
-                              )}
-                            />
-                          )}
+                              <p
+                                style={mainfs}
+                                dangerouslySetInnerHTML={FormatToHTML(
+                                  course.course_main_desc
+                                )}
+                              />
+                            )}
 
                             <h3 className="heading-title">Instructor</h3>
                             <div
