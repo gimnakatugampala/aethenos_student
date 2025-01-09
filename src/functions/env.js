@@ -1,4 +1,4 @@
-export const ENV_STATUS = "prod"
+export const ENV_STATUS = "dev"
 
 
 // dev

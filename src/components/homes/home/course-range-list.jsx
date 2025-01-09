@@ -7,7 +7,7 @@ import { useState } from "react";
 const CourseRangeList = ({ course }) => {
   // console.log(course)
 
-  const coursePerView = 8;
+  const coursePerView = 20;
   const [next, setNext] = useState(coursePerView);
   const [courses, setCourses] = useState(course);
 
@@ -42,7 +42,7 @@ const CourseRangeList = ({ course }) => {
           })}
       </div>
       <div>
-      {next < courses != null && (
+      {/* {next < courses != null && (
         <div
           onClick={handleLoadData}
           className="load-more-btn"
@@ -55,7 +55,7 @@ const CourseRangeList = ({ course }) => {
             Load More <i className="icon-56"></i>
           </a>
         </div>
-      )}
+      )} */}
       </div>
    
     </>
