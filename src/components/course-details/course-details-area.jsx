@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import CourseDetailsSidebar from "../common/sidebar/course-details-sidebar";
 import CommentFormCourse from "../forms/comment-form-course";
 import SingleComment from "./single-comment";
@@ -16,7 +16,7 @@ const mainfs = {
   fontSize: "clamp(0.8rem, 0.8rem + 0.6vw, 1.5rem)",  
 };
 
-const CourseDetailsArea = ({ course }) => {
+const CourseDetailsArea = ({course , reviewTabRef }) => {
   const {
     course_desc,
     course_desc_2,
@@ -67,6 +67,10 @@ const CourseDetailsArea = ({ course }) => {
     setExpandAll(!expandAll);
   };
 
+  
+
+
+
   return (
     <section className="edu-section-gap course-details-3">
       <div className="mx-3 mx-sm-3 mx-md-4 mx-lg-5">
@@ -111,6 +115,7 @@ const CourseDetailsArea = ({ course }) => {
 
                 <li className="nav-item" role="presentation">
                   <button
+                    ref={reviewTabRef} // Ref for the "Reviews" tab
                     className="nav-link"
                     id="review-tab"
                     data-bs-toggle="tab"

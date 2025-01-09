@@ -7,13 +7,19 @@ import DisplayCardRatings from "../ratings-display/DisplayCardRatings";
 import FormatNumbers from "../../functions/FormatNumbers";
 import FormatNumbersForInt from "../../functions/FormatNumbersForInt";
 
-const CourseBreadcrumb = ({ course }) => {
+const CourseBreadcrumb = ({ course, reviewTabRef  }) => {
   const { title, instructor, language, rating_count, subtitle } = course || {};
   // const { mouseDirection, mouseReverse } = useMouseMoveUI();
 
   
 const mainfs = {
   fontSize: "clamp(0.8rem, 0.8rem + 0.6vw, 1.5rem)",  
+};
+
+const handleReviewClick = () => {
+  if (reviewTabRef?.current) {
+    reviewTabRef.current.click(); // Trigger the "Reviews" tab button click
+  }
 };
 
   return (
@@ -62,7 +68,7 @@ const mainfs = {
               </span>
             </li>
 
-            <li>
+            <li onClick={handleReviewClick} style={{cursor: 'pointer'}}>
               <span className="text-decoration-underline">
                 ({course.rating_count} {course.rating_count == 1 ? 'review' : 'reviews'})
               </span>
