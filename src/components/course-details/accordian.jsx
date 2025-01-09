@@ -119,129 +119,132 @@ const Accordian = ({ show = false, id, title, lectures, lists, no_quiz }) => {
           >
             <div className="accordion-body">
               <ul className="list-unstyled">
-                {lists
+                {[...lists]
                   .sort((a, b) => {
-                    if (a.arrangeNo === null) return 1; 
-                    if (b.arrangeNo === null) return -1; 
+                    if (a.arrangeNo === null) return 1;
+                    if (b.arrangeNo === null) return -1;
                     return a.arrangeNo - b.arrangeNo;
-                  }).map((list, index) => (
-                  <>
-                    {/* Lecture */}
-                    {list.curriculum_item_type === "Lecture" && (
-                      <li
-                        style={mainfs}
-                        key={index}
-                        className="d-flex justify-content-between align-items-center"
-                      >
-                        <span>
-                          {list.article !== "N/A" ? (
-                            <>
-                              <i className="fa-solid fa-file mx-2"></i>{" "}
-                              {list.title}
-                            </>
-                          ) : (
-                            <>
-                              {list &&
-                                list.get_CurriculumItem_File &&
-                                list.get_CurriculumItem_File.some(
-                                  (link) =>
-                                    link.curriculum_item_file_type === "Video"
-                                ) && (
-                                  <>
+                  })
+                  .map((list, index) => (
+                    <>
+                      {/* Lecture */}
+                      {list.curriculum_item_type === "Lecture" && (
+                        <li
+                          style={mainfs}
+                          key={index}
+                          className="d-flex justify-content-between align-items-center"
+                        >
+                          <span>
+                            {list.article !== "N/A" ? (
+                              <>
+                                <i className="fa-solid fa-file mx-2"></i>{" "}
+                                {list.title}
+                              </>
+                            ) : (
+                              <>
+                                {list &&
+                                  list.get_CurriculumItem_File &&
+                                  list.get_CurriculumItem_File.some(
+                                    (link) =>
+                                      link.curriculum_item_file_type === "Video"
+                                  ) && (
                                     <>
-                                      {list.get_CurriculumItem_File
-                                        .filter(
-                                          (link) =>
-                                            link.curriculum_item_file_type ===
-                                            "Video"
-                                        )
-                                        .map((link, index) => (
-                                          <span key={index}>
-                                            {link.previewVideo ? (
-                                              // Enable text decoration for preview videos
-                                              <a
-                                                style={{ cursor: "pointer" }}
-                                                onClick={() =>
-                                                  handleVideoModal(link.url)
-                                                }
-                                                className="text-danger text-decoration-underline"
-                                              >
-                                                <i className="fa-solid fa-circle-play mx-2"></i>{" "}
-                                                {list.title}
-                                              </a>
-                                            ) : (
-                                              // Normal link for other videos
-                                              <>
-                                                <i className="fa-solid fa-circle-play mx-2"></i>{" "}
-                                                {list.title}
-                                              </>
-                                            )}
-                                          </span>
-                                        ))}
+                                      <>
+                                        {list.get_CurriculumItem_File
+                                          .filter(
+                                            (link) =>
+                                              link.curriculum_item_file_type ===
+                                              "Video"
+                                          )
+                                          .map((link, index) => (
+                                            <span key={index}>
+                                              {link.previewVideo ? (
+                                                // Enable text decoration for preview videos
+                                                <a
+                                                  style={{ cursor: "pointer" }}
+                                                  onClick={() =>
+                                                    handleVideoModal(link.url)
+                                                  }
+                                                  className="text-danger text-decoration-underline"
+                                                >
+                                                  <i className="fa-solid fa-circle-play mx-2"></i>{" "}
+                                                  {list.title}
+                                                </a>
+                                              ) : (
+                                                // Normal link for other videos
+                                                <>
+                                                  <i className="fa-solid fa-circle-play mx-2"></i>{" "}
+                                                  {list.title}
+                                                </>
+                                              )}
+                                            </span>
+                                          ))}
+                                      </>
                                     </>
-                                  </>
-                                )}
-                            </>
-                          )}
-                        </span>
-                      </li>
-                    )}
+                                  )}
+                              </>
+                            )}
+                          </span>
+                        </li>
+                      )}
 
-                    {/* Quiz */}
-                    {list.curriculum_item_type == "Quiz" && (
-                      <li
-                        style={mainfs}
-                        key={index}
-                        className="d-flex justify-content-between align-items-center"
-                      >
-                        <span>
-                          <i className="fa-solid fa-circle-question mx-2"></i>{" "}
-                          {list.title}
-                        </span>
-                      </li>
-                    )}
+                      {/* Quiz */}
+                      {list.curriculum_item_type == "Quiz" && (
+                        <li
+                          style={mainfs}
+                          key={index}
+                          className="d-flex justify-content-between align-items-center"
+                        >
+                          <span>
+                            <i className="fa-solid fa-circle-question mx-2"></i>{" "}
+                            {list.title}
+                          </span>
+                        </li>
+                      )}
 
-                    {/* Assignment */}
-                    {list.curriculum_item_type == "Assignment" && (
-                      <li
-                        style={mainfs}
-                        key={index}
-                        className="d-flex justify-content-between align-items-center"
-                      >
-                        <span>
-                          <i className="fa-solid fa-list-check mx-2"></i>{" "}
-                          {list.title}
-                        </span>
-                      </li>
-                    )}
+                      {/* Assignment */}
+                      {list.curriculum_item_type == "Assignment" && (
+                        <li
+                          style={mainfs}
+                          key={index}
+                          className="d-flex justify-content-between align-items-center"
+                        >
+                          <span>
+                            <i className="fa-solid fa-list-check mx-2"></i>{" "}
+                            {list.title}
+                          </span>
+                        </li>
+                      )}
 
-                    {/* Coding Exercise */}
-                    {list.curriculum_item_type == "Coding Exercise" && (
-                      <li
-                        style={mainfs}
-                        key={index}
-                        className="d-flex justify-content-between align-items-center"
-                      >
-                        <span>
-                          <i className="fa-solid fa-code mx-2"></i> {list.title}
-                        </span>
-                      </li>
-                    )}
+                      {/* Coding Exercise */}
+                      {list.curriculum_item_type == "Coding Exercise" && (
+                        <li
+                          style={mainfs}
+                          key={index}
+                          className="d-flex justify-content-between align-items-center"
+                        >
+                          <span>
+                            <i className="fa-solid fa-code mx-2"></i>{" "}
+                            {list.title}
+                          </span>
+                        </li>
+                      )}
 
-                    {/* Practical Exercise */}
-                    {list.curriculum_item_type == "Practice Test" && (
-                      <li
-                        style={mainfs}
-                        key={index}
-                        className="d-flex justify-content-between align-items-center"
-                      >
-                        <span>
-                          <i className="fa-solid fa-book mx-2"></i> {list.title}
-                        </span>
-                      </li>
-                    )}
-                  </>
-                ))}
+                      {/* Practical Exercise */}
+                      {list.curriculum_item_type == "Practice Test" && (
+                        <li
+                          style={mainfs}
+                          key={index}
+                          className="d-flex justify-content-between align-items-center"
+                        >
+                          <span>
+                            <i className="fa-solid fa-book mx-2"></i>{" "}
+                            {list.title}
+                          </span>
+                        </li>
+                      )}
+                    </>
+                  ))}
               </ul>
             </div>
           </div>

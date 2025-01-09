@@ -11,12 +11,11 @@ import moment from "moment";
 import { Avatar } from "@mui/material";
 import FormatToHTML from "../../functions/FormatToHTML";
 
-
 const mainfs = {
-  fontSize: "clamp(0.8rem, 0.8rem + 0.6vw, 1.5rem)",  
+  fontSize: "clamp(0.8rem, 0.8rem + 0.6vw, 1.5rem)",
 };
 
-const CourseDetailsArea = ({course , reviewTabRef }) => {
+const CourseDetailsArea = ({ course, reviewTabRef }) => {
   const {
     course_desc,
     course_desc_2,
@@ -66,10 +65,6 @@ const CourseDetailsArea = ({course , reviewTabRef }) => {
   const handleToggleAll = () => {
     setExpandAll(!expandAll);
   };
-
-  
-
-
 
   return (
     <section className="edu-section-gap course-details-3">
@@ -141,7 +136,12 @@ const CourseDetailsArea = ({course , reviewTabRef }) => {
                   <div className="course-tab-content">
                     <div className="course-overview">
                       <h3 className="heading-title">Course Description</h3>
-                      <p style={mainfs} dangerouslySetInnerHTML={FormatToHTML(course.course_main_desc)} />
+                      <p
+                        style={mainfs}
+                        dangerouslySetInnerHTML={FormatToHTML(
+                          course.course_main_desc
+                        )}
+                      />
 
                       <h5 className="title">What You’ll Learn?</h5>
                       <ul className="mb--60 mx-3">
@@ -149,7 +149,7 @@ const CourseDetailsArea = ({course , reviewTabRef }) => {
                           {course.intended_learners?.map(
                             (l, i) =>
                               l.intended_learner_type == " students learn" && (
-                                <li  style={mainfs} className="col-md-6" key={i}>
+                                <li style={mainfs} className="col-md-6" key={i}>
                                   {l.intended_learner}
                                 </li>
                               )
@@ -162,7 +162,9 @@ const CourseDetailsArea = ({course , reviewTabRef }) => {
                         {course.intended_learners?.map(
                           (l, i) =>
                             l.intended_learner_type == "requirements" && (
-                              <li  style={mainfs} key={i}>{l.intended_learner}</li>
+                              <li style={mainfs} key={i}>
+                                {l.intended_learner}
+                              </li>
                             )
                         )}
                       </ul>
@@ -181,33 +183,35 @@ const CourseDetailsArea = ({course , reviewTabRef }) => {
                       <h3 className="heading-title">Course Syllabus</h3>
 
                       <div className="accordion-controls mb-3 text-end">
-                    <h5 className="text-danger" onClick={handleToggleAll} style={{ cursor: "pointer"}}>
-                      {expandAll ? "Collapse All" : "Expand All"}
-                    </h5>
-                  </div>
-
+                        <h5
+                          className="text-danger"
+                          onClick={handleToggleAll}
+                          style={{ cursor: "pointer" }}
+                        >
+                          {expandAll ? "Collapse All" : "Expand All"}
+                        </h5>
+                      </div>
 
                       <div className="faq-accordion">
                         <div className="accordion">
                           {course.course_content != null &&
-                            course.course_content
-                            .sort((a, b) => {
-                              if (a.arrangedNo === null) return 1; 
-                              if (b.arrangedNo === null) return -1; 
-                              return a.arrangedNo - b.arrangedNo;
-                            })
-                            .map((content, index) => (
-                              <Accordian
-                                key={index}
-                                id={index}
-                                no_quiz={content.no_of_qize}
-                                title={`${content.section_name}`}
-                                lectures={content.no_of_lectures}
-                                lists={content.section_curriculum_item}
-                                show={expandAll} // Pass the expand/collapse state
-
-                              />
-                            ))}
+                            [...course.course_content]
+                              .sort((a, b) => {
+                                if (a.arrangedNo === null) return 1;
+                                if (b.arrangedNo === null) return -1;
+                                return a.arrangedNo - b.arrangedNo;
+                              })
+                              .map((content, index) => (
+                                <Accordian
+                                  key={index}
+                                  id={index}
+                                  no_quiz={content.no_of_qize}
+                                  title={`${content.section_name}`}
+                                  lectures={content.no_of_lectures}
+                                  lists={content.section_curriculum_item}
+                                  show={expandAll} // Pass the expand/collapse state
+                                />
+                              ))}
                         </div>
                       </div>
                     </div>
