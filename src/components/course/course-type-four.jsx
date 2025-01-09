@@ -222,7 +222,11 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
           </div>
           
           {data.externalCourseDetails && (
-            <>
+            // data.externalCourseDetails.anyComments != "" && 
+            data.externalCourseDetails.externalNumberOfStudent != 0 && 
+            data.externalCourseDetails.externalRating != 0 && 
+            data.externalCourseDetails.linkToCourse != "" && 
+         (<>
           <p className="m-0 p-0">Verified External Ratings:</p>
           <div className="course-rating">
             <StarsRating
@@ -237,7 +241,7 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
               <b>({Number.parseFloat(data.externalCourseDetails.externalRating).toFixed(1)})</b>
             </span>
           </div>
-          </>
+          </>)
           )}
 
           <div>
