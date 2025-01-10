@@ -2438,7 +2438,7 @@ fetch(`${BACKEND_LINK}/payment/updateOrderHasCourseProgress`, requestOptions)
   .catch((error) => console.error(error));
  }
 
- export const UpdateCourseCurriculumProgress = async(itemCode,curriculumItemId,setcourse) =>{
+ export const UpdateCourseCurriculumProgress = async(itemCode,curriculumItemId,setcourse,setIsUpdating) =>{
 
   const myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${CURRENT_USER}`);
@@ -2458,7 +2458,11 @@ fetch(`${BACKEND_LINK}/payment/addReadCurriculumItem`, requestOptions)
   .then((response) => response.json())
   .then((result) => {
     console.log(result)
-    GetMyCoursesDetails(itemCode,setcourse)
+
+    if (result.variable === "200") {
+      GetMyCoursesDetails(itemCode,setcourse)
+      setIsUpdating(false);
+    }
   })
   .catch((error) => console.error(error));
 

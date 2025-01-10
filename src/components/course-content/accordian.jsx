@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CardContainer from "../../pages/my-courses/[id]/CardContainer";
 import Dropdown from "react-bootstrap/Dropdown";
 import QuizIcon from "@mui/icons-material/Quiz";
@@ -89,6 +89,9 @@ const Accordian = ({
       console.error("Error downloading file:", error);
     }
   };
+
+  const [isUpdating, setIsUpdating] = useState(false);
+
 
   // const handleDownload = async (url, filename) => {
   //   try {
@@ -183,11 +186,16 @@ const Accordian = ({
                               let delay = (2 / 3) * type.videoLength * 1000;
 
                               setTimeout(() => {
+                                if(!isUpdating){
+                          
+                                  setIsUpdating(true); // Set the flag to block additional calls
                                 UpdateCourseCurriculumProgress(
                                   itemCode,
                                   list.curriculumItemId,
-                                  setcourse
+                                  setcourse,
+                                  setIsUpdating
                                 );
+                              }
                               }, delay);
 
                               //  --------------------- CALCULATE THE MARK --------------------
@@ -239,7 +247,8 @@ const Accordian = ({
                                     UpdateCourseCurriculumProgress(
                                       itemCode,
                                       seletedCurriculumItem,
-                                      setcourse
+                                      setcourse,
+                                      setIsUpdating
                                     );
                                   }}
                                 />
@@ -386,7 +395,8 @@ const Accordian = ({
                           UpdateCourseCurriculumProgress(
                             itemCode,
                             list.curriculumItemId,
-                            setcourse
+                            setcourse,
+                            setIsUpdating
                           );
                           //  --------------------- CALCULATE THE MARK --------------------
 
@@ -558,11 +568,17 @@ const Accordian = ({
                         setshowCodingExercise(false);
 
                         //  --------------------- CALCULATE THE MARK --------------------
-                        UpdateCourseCurriculumProgress(
-                          itemCode,
-                          list.curriculumItemId,
-                          setcourse
-                        );
+                        if(!isUpdating){
+
+                          setIsUpdating(true); // Set the flag to block additional calls
+
+                          UpdateCourseCurriculumProgress(
+                            itemCode,
+                            list.curriculumItemId,
+                            setcourse,
+                            setIsUpdating
+                          );
+                        }
                         //  --------------------- CALCULATE THE MARK --------------------
 
                         // ---------------- STORE AS LAST POSITION -------
@@ -662,11 +678,15 @@ const Accordian = ({
                         setseletedCurriculumItem(list.curriculumItemId);
 
                         //  --------------------- CALCULATE THE MARK --------------------
+                        if(!isUpdating){  
+                        setIsUpdating(true); // Set the flag to block additional calls
                         UpdateCourseCurriculumProgress(
                           itemCode,
                           list.curriculumItemId,
-                          setcourse
+                          setcourse,
+                          setIsUpdating
                         );
+                      }
                         //  --------------------- CALCULATE THE MARK --------------------
 
                         // ---------------- STORE AS LAST POSITION -------
@@ -764,11 +784,16 @@ const Accordian = ({
                         setshowCodingExercise(false);
 
                         //  --------------------- CALCULATE THE MARK --------------------
+                        if(!isUpdating){
+                          
+                          setIsUpdating(true); // Set the flag to block additional calls
                         UpdateCourseCurriculumProgress(
                           itemCode,
                           list.curriculumItemId,
-                          setcourse
+                          setcourse,
+                          setIsUpdating
                         );
+                      }
                         //  --------------------- CALCULATE THE MARK --------------------
 
                         // ---------------- STORE AS LAST POSITION -------
@@ -867,11 +892,16 @@ const Accordian = ({
                         setshowCodingExercise(true);
 
                         //  --------------------- CALCULATE THE MARK --------------------
+                        if(!isUpdating){
+                          
+                          setIsUpdating(true); // Set the flag to block additional calls
                         UpdateCourseCurriculumProgress(
                           itemCode,
                           list.curriculumItemId,
-                          setcourse
+                          setcourse,
+                          setIsUpdating
                         );
+                      }
                         //  --------------------- CALCULATE THE MARK --------------------
 
                         // ---------------- STORE AS LAST POSITION -------
