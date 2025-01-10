@@ -59,6 +59,8 @@ const CourseFiveArea = () => {
       GetInstructorDetails(id, setinstructor_details, setloading);
       GetCourseDetailsByInstructerCode(id, setCourses);
     }
+
+    // console.log(instructor_details)
   }, [id]);
 
   return (
@@ -170,9 +172,9 @@ const CourseFiveArea = () => {
                   Email
                 </a> */}
 
-                {instructor_details.email && (
+                {instructor_details.secondaryEmail && (
                   <a
-                    href={`mailto:${instructor_details.email}`}
+                    href={`mailto:${instructor_details.secondaryEmail}`}
                     className="btn btn-outline-dark text-center fs-6 mb-1"
                     style={stylesBlock}
                     onMouseEnter={(e) => {
