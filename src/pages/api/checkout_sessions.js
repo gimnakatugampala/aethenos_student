@@ -8,6 +8,7 @@ import getSymbolFromCurrency from 'currency-symbol-map';
 import CalculateDiscountedPrice from '../../functions/pricing/CalculateDiscountedPrice';
 import fs from 'fs';
 import path from 'path';
+import EncodedURL from '../../functions/EncodedURL';
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 
@@ -55,9 +56,9 @@ export default async function handler(req, res) {
         price_data: {
           currency: `${product.currency}`,
           product_data: {
-            images: [`${IMG_HOST}${product.img}`],
+            images: [`${IMG_HOST}${EncodedURL(product.img)}`],
             name: product.title,
-            description: `${product.desc.slice(0,1000)}`, // Move description here
+            description: `${product.desc.slice(0,500)}`, // Move description here
           },
           unit_amount: Math.round(product.price * 100),
         },
@@ -104,4 +105,3 @@ export default async function handler(req, res) {
     res.status(405).end('Method Not Allowed');
   }
 }
-
