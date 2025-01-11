@@ -299,7 +299,12 @@ const Header = ({
                       {searchResults.length > 0 ? (
                         searchResults.map((result, index) =>
                           result.searchType === "course" ? (
-                            <React.Fragment key={index}>
+                            <React.Fragment 
+                            onClick={() => {
+                              window.location.href = `/course-details/${result.courseCode}`;
+                              router.push(`/course-details/${result.courseCode}`);
+                            }}
+                            key={index}>
                               <a
                                 onClick={() => {
                                   window.location.href = `/course-details/${result.courseCode}`;
@@ -363,7 +368,12 @@ const Header = ({
                               </a>
                             </React.Fragment>
                           ) : (
-                            <React.Fragment key={index}>
+                            <React.Fragment 
+                            onClick={() => {
+                              window.location.href = `/users/${result.instructorCode}`;
+                              router.push(`/users/${result.instructorCode}`);
+                            }}
+                            key={index}>
                               <a
                                 onClick={() => {
                                   window.location.href = `/users/${result.instructorCode}`;
