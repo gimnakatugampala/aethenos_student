@@ -42,14 +42,13 @@ const HeroArea = () => {
                 data-sal-delay="200"
                 data-sal="slide-up"
                 data-sal-duration="1000"
-                  className="m-0 w-100 text-center lh-base"
+                  className="m-0 w-100 text-left lh-base"
                   style={mainfs}
               >
-                Come and experience the best Excel training courses developed by top
-                instructors from around the world through our Innovative Excel
-                Training App. All our Excel courses will be delivered through
-                our proprietary Excel Training App that delivers pre-recorded
-                and live classes inside the Excel Application itself.
+               Come and experience the best Excel training courses developed by top instructors from around the world through our Innovative Excel Training App. 
+               <br />
+               <br />
+               All our Excel courses can be taken on our free Excel Training App that delivers pre-recorded and live courses inside the Excel Application itself.
               </h4>
           </div>
           {/* <div className="col-md-1"></div> */}
