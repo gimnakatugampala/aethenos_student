@@ -42,7 +42,7 @@ const HeroArea = () => {
                 data-sal-delay="200"
                 data-sal="slide-up"
                 data-sal-duration="1000"
-                  className="m-0 w-100 text-left lh-base"
+                  className="m-0 w-100 text-center lh-base"
                   style={mainfs}
               >
                Come and experience the best Excel training courses developed by top instructors from around the world through our Innovative Excel Training App. 
