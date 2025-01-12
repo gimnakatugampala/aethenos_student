@@ -229,7 +229,8 @@ const generatePaypalItems = () => {
                     courseCode: course.other_data.course_code,
                     currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
                     itemPrice: discountedPrice,
-                    listPrice: CalculateListPrice(course.other_data)
+                    listPrice: CalculateListPrice(course.other_data),
+                    couponCode: coupon ? coupon.text : ""
                 };
             });
 
@@ -271,7 +272,7 @@ const generatePaypalItems = () => {
             "courses": calculatedPurchasedCourse
             };
 
-            console.log(calculatedBuyCourseOrder)
+            // console.log(calculatedBuyCourseOrder)
     
             setBuyCourseOrder(calculatedBuyCourseOrder);
             return
@@ -324,6 +325,8 @@ const generatePaypalItems = () => {
         if (query.get('canceled')) {
             console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
         }
+
+        console.log(buyCourseOrder)
     }, [buyCourseOrder]);
 
     
