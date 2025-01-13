@@ -601,9 +601,9 @@ const generatePaypalItems = () => {
 
 
                             var rawData =  JSON.stringify(updatedOrder)
-                            console.log(updatedOrder)
-                            console.log(buyCourseOrder)
-                            console.log(total)
+                            // console.log(updatedOrder)
+                            // console.log(buyCourseOrder)
+                            // console.log(total)
                             BuyCourseByStudent(rawData,router,updatedOrder)
                             return
                         }} className="w-100 my-2 edu-btn btn-medium checkout-btn">
