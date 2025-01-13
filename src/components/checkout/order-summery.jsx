@@ -597,12 +597,14 @@ const generatePaypalItems = () => {
                         <button onClick={() => {
 
                
-                            calculatePurchasedCourses()
+                            const updatedOrder = calculatePurchasedCourses(); // Call the function and get the updated order
 
-                            var rawData =  JSON.stringify(buyCourseOrder)
+
+                            var rawData =  JSON.stringify(updatedOrder)
+                            console.log(updatedOrder)
                             console.log(buyCourseOrder)
                             console.log(total)
-                            // BuyCourseByStudent(rawData,router,buyCourseOrder)
+                            BuyCourseByStudent(rawData,router,updatedOrder)
                             return
                         }} className="w-100 my-2 edu-btn btn-medium checkout-btn">
                         <span className="d-flex justify-content-center align-items-center">
