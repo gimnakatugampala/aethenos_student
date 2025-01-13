@@ -272,7 +272,7 @@ const generatePaypalItems = () => {
             "courses": calculatedPurchasedCourse
             };
 
-            // console.log(calculatedBuyCourseOrder)
+            console.log(calculatedBuyCourseOrder)
     
             setBuyCourseOrder(calculatedBuyCourseOrder);
             return
@@ -367,6 +367,69 @@ const generatePaypalItems = () => {
 
         setTags(updatedTags);
       };
+
+      const calculatePurchasedCourses = () => {
+        // Map through cartCourses to calculate prices and coupon details
+        const calculatedPurchasedCourse = cartCourses.map(course => {
+            const coupon = couponValue.find(coupon => coupon.id === course.id);
+            const originalPrice = CalculateDiscountedPrice(course.other_data) || 0;
+            const discountedPrice = coupon 
+                ? (coupon.couponType === 1 
+                    ? 0 // Free coupon
+                    : CalculateCouponDiscountedPrice(coupon)) // Apply discount
+                : originalPrice;
+    
+            return {
+                courseCode: course.other_data.course_code,
+                currency: GetCurrencyByCountry(course.other_data).toLowerCase(),
+                itemPrice: discountedPrice,
+                listPrice: CalculateListPrice(course.other_data),
+                couponCode: coupon ? coupon.text : ""
+            };
+        });
+    
+        // Determine the courseType and calculate total discount
+        let courseType = 1;
+        let discount = 0;
+    
+        if (couponValue.length > 0) {
+            courseType = 3; // Coupons applied
+            discount = cartCourses.reduce((acc, course) => {
+                const coupon = couponValue.find(coupon => coupon.id === course.id);
+                const originalPrice = CalculateDiscountedPrice(course.other_data) || 0;
+                if (coupon) {
+                    acc += coupon.couponType === 1 
+                        ? originalPrice // Full discount
+                        : CalculateCouponDiscountedPrice(coupon); // Partial discount
+                }
+                return acc;
+            }, 0);
+        }
+    
+        // Check if courses are already purchased using referral codes
+        const existingData = JSON.parse(localStorage.getItem('aethenos_referral_codes')) || [];
+        if (existingData.some(data => 
+            calculatedPurchasedCourse.some(course => course.courseCode === data.courseCode))) {
+            courseType = 4; // Already purchased
+        }
+    
+        // Create the final order object
+        const calculatedBuyCourseOrder = {
+            paymentMethod: "1",
+            discount: discount,
+            totalPrice: `${total}`,
+            currency: GetCurrencyByCountry(cartCourses[0].other_data).toLowerCase(),
+            country: HandleCountry(),
+            courseType: courseType,
+            processingFee: 0,
+            courses: calculatedPurchasedCourse
+        };
+    
+        console.log(calculatedBuyCourseOrder);
+        setBuyCourseOrder(calculatedBuyCourseOrder);
+    
+        return calculatedBuyCourseOrder;
+    };
     
 
       
@@ -532,8 +595,14 @@ const generatePaypalItems = () => {
                     {showStripe && (
                     total === 0 ? (
                         <button onClick={() => {
+
+               
+                            calculatePurchasedCourses()
+
                             var rawData =  JSON.stringify(buyCourseOrder)
-                            BuyCourseByStudent(rawData,router,buyCourseOrder)
+                            console.log(buyCourseOrder)
+                            console.log(total)
+                            // BuyCourseByStudent(rawData,router,buyCourseOrder)
                             return
                         }} className="w-100 my-2 edu-btn btn-medium checkout-btn">
                         <span className="d-flex justify-content-center align-items-center">
