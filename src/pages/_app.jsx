@@ -38,7 +38,7 @@ function MyApp( { Component, pageProps } ) {
          
 
         //  // Remove existing cookies
-        //  Cookies.remove('aethenos_currency');
+         Cookies.remove('aethenos_currency');
         // Cookies.remove('aethenos_user_country');
         
         // Determine the country based on login status
@@ -60,14 +60,7 @@ function MyApp( { Component, pageProps } ) {
                 }
             }
 
-            if(ENV_STATUS == "dev"){
-                // Cookies.remove('aethenos_user_country')
-                Cookies.remove('aethenos_currency')
-            }else{
-                // Cookies.remove('aethenos_user_country', { domain: '.aethenos.com' });
-                Cookies.remove('aethenos_currency', { domain: '.aethenos.com' });
-            
-            }
+        
 
 
         // Determine the currency code
