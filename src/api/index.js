@@ -37,66 +37,46 @@ const Unauthorized = (result,rediect_url) =>{
 }
 
 
-export const getUserCountry = async() =>{
+// Fetch user country and update cookies
+export const getUserCountry = async () => {
+  try {
+    const response = await fetch('https://ipapi.co/json/');
+    const data = await response.json();
 
-  // Remove Cookie
-  // Cookies.remove('aethenos_user_origin')
+    // Determine domain for cookie handling
+    const cookieOptions = ENV_STATUS === 'dev'
+      ? {}
+      : { domain: '.aethenos.com' };
 
-  fetch('https://ipapi.co/json/')
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(data) {
-    // console.log(data)
+    // Remove existing cookie and set the new one
+    // Cookies.remove('aethenos_user_origin', cookieOptions);
+    Cookies.set('aethenos_user_origin', JSON.stringify(data), { expires: 7, ...cookieOptions });
+  } catch (error) {
+    console.error('Error fetching user country:', error);
+  }
+};
 
-    if(ENV_STATUS == "dev"){
-      Cookies.set('aethenos_user_origin', JSON.stringify(data), { expires: 7 })
-    }else{
-      Cookies.set('aethenos_user_origin', JSON.stringify(data), { expires: 7, domain: '.aethenos.com' }); 
-    }
-
-
-    // console.log(JSON.parse(Cookies.get('aethenos_user_origin')).currency)
-
-
-  })
-  .catch(function(error) {
-    console.log("Error fetching IP geolocation:", error);
-  });
-}
-
-
+// Fetch currency exchange rate and update cookies
 export const getCurrencyExchangeRate = async (code) => {
   try {
     const response = await fetch(`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json`);
     const data = await response.json();
 
-
     const exchangeRate = data.usd[code];
-    // // console.log(exchangeRate);
+    const cookieOptions = ENV_STATUS === 'dev'
+      ? {}
+      : { domain: '.aethenos.com' };
 
+    // Remove existing cookie and set the new one
+    // Cookies.remove('aethenos_currency', cookieOptions);
+    Cookies.set('aethenos_currency', `${exchangeRate}`, cookieOptions);
 
-
-    // if(ENV_STATUS =="dev"){
-    //   Cookies.remove('aethenos_currency')
-    // }else{
-    //   Cookies.remove('aethenos_currency',{ domain: '.aethenos.com' });
-    // }
-
-
-    if(ENV_STATUS =="dev"){
-      Cookies.set('aethenos_currency', `${exchangeRate}`)
-    }else{
-      Cookies.set('aethenos_currency', `${exchangeRate}`, { domain: '.aethenos.com' });
-    }
-
-
+    return exchangeRate;
   } catch (error) {
-    console.log("Error fetching currency exchange rate:", error);
+    console.error('Error fetching currency exchange rate:', error);
     return null;
   }
-}
-
+};
 
 export const GetStudentProfile = async(setfirst_Name,
   setlast_name,

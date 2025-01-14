@@ -8,6 +8,7 @@ import FormatNumbers from '../FormatNumbers';
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
 const CalculateDiscountedPrice = (data) => {
+
     const COUNTRY = Cookies.get('aethenos_user_origin');
     let EX_RATES = Cookies.get('aethenos_currency');
     const USER_LOGIN_COUNTRY = Cookies.get('aethenos_user_country');
@@ -53,6 +54,7 @@ const CalculateDiscountedPrice = (data) => {
         if (foundPrice) {
             const countryCode =  countries.getAlpha2Code(countryToFind, 'en');
             const currencyCode = getAllInfoByISO(countryCode).currency.toLowerCase();
+            // console.log(currencyCode)
 
             // Fetch the exchange rate only if it hasn't been fetched already
             if (!EX_RATES) {
@@ -67,6 +69,7 @@ const CalculateDiscountedPrice = (data) => {
                 if (EX_RATES) {
                     try {
                         const rates = JSON.parse(EX_RATES);
+                        console.log(EX_RATES)
                         net_price = (Number.parseFloat(data.course_prices.globalNetPrice) * Number.parseFloat(rates)).toFixed(2);
                     } catch (error) {
                         console.error("Error parsing EX_RATES:", error);
