@@ -44,13 +44,15 @@ export const getUserCountry = async () => {
     const data = await response.json();
 
     // Determine domain for cookie handling
-    const cookieOptions = ENV_STATUS === 'dev'
-      ? {}
-      : { domain: '.aethenos.com' };
+    // const cookieOptions = ENV_STATUS === 'dev'
+    //   ? {}
+    //   : { domain: '.aethenos.com' };
 
     // Remove existing cookie and set the new one
     // Cookies.remove('aethenos_user_origin', cookieOptions);
-    Cookies.set('aethenos_user_origin', JSON.stringify(data), { expires: 7, ...cookieOptions });
+    // Cookies.set('aethenos_user_origin', JSON.stringify(data), { expires: 7, ...cookieOptions });
+    Cookies.set('aethenos_user_origin', JSON.stringify(data), { expires: 7 });
+    return data
   } catch (error) {
     console.error('Error fetching user country:', error);
   }
@@ -63,13 +65,17 @@ export const getCurrencyExchangeRate = async (code) => {
     const data = await response.json();
 
     const exchangeRate = data.usd[code];
-    const cookieOptions = ENV_STATUS === 'dev'
-      ? {}
-      : { domain: '.aethenos.com' };
+    // const cookieOptions = ENV_STATUS === 'dev'
+    //   ? {}
+    //   : { domain: '.aethenos.com' };
+
+    // // Remove existing cookie and set the new one
+    // Cookies.remove('aethenos_currency', cookieOptions);
+    // Cookies.set('aethenos_currency', `${exchangeRate}`, cookieOptions);
 
     // Remove existing cookie and set the new one
-    // Cookies.remove('aethenos_currency', cookieOptions);
-    Cookies.set('aethenos_currency', `${exchangeRate}`, cookieOptions);
+    Cookies.remove('aethenos_currency');
+    Cookies.set('aethenos_currency', `${exchangeRate}`);
 
     return exchangeRate;
   } catch (error) {

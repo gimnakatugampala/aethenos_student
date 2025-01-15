@@ -30,61 +30,63 @@ function MyApp( { Component, pageProps } ) {
         sal();
     }, [] );
 
-     // Get User Country and Exchange Rate
-  useEffect(() => {
-    async function fetchCountryAndRates() {
-      try {
-
-         
-
-        //  // Remove existing cookies
-         Cookies.remove('aethenos_currency');
-        // Cookies.remove('aethenos_user_country');
-        
-        // Determine the country based on login status
-        if (USERTOKEN == null ) {
-
-            if(ENV_STATUS == "dev"){
-                Cookies.remove('aethenos_user_country')
-                // Cookies.remove('aethenos_currency')
-            }else{
-                Cookies.remove('aethenos_user_country', { domain: '.aethenos.com' });
-                // Cookies.remove('aethenos_currency', { domain: '.aethenos.com' });
-            
-            }
     
-                // Get the user's country
-                const countryData = await getUserCountry();
-                if (countryData) {
-                  Cookies.set('aethenos_user_country', JSON.stringify(countryData)); // Store in cookies
+       // Get User Country and Exchange Rate
+       useEffect(() => {
+        async function fetchCountryAndRates() {
+          try {
+            // Remove existing cookies
+            Cookies.remove('aethenos_currency');
+      
+            let countryData; // Declare countryData to prevent reference errors
+      
+            // Determine the country based on login status
+            if (USERTOKEN == null) {
+
+              if (ENV_STATUS === "dev") {
+                Cookies.remove('aethenos_user_country');
+              } else {
+                Cookies.remove('aethenos_user_country', { domain: '.aethenos.com' });
+              }
+      
+              // Get the user's country
+              countryData = await getUserCountry();
+              if (countryData) {
+                Cookies.set('aethenos_user_country', JSON.stringify(countryData));
+  
+              console.log(countryData)
+  
+              }
+            }
+  
+            console.log(countryData)
+      
+            // Determine the currency code if countryData is available
+            const countryCode = countryData?.country_code;
+            
+            if (countryCode) {
+              const currencyCode = countryData.currency; // Assumes the API returns the currency code
+              if (currencyCode) {
+                console.log(countryCode)
+                // Get the exchange rate for the currency
+                const exchangeRate = await getCurrencyExchangeRate(currencyCode.toLowerCase());
+                if (exchangeRate) {
+            console.log(exchangeRate)
+  
+                  Cookies.set('aethenos_currency', exchangeRate);
                 }
+              }
             }
-
-        
-
-
-        // Determine the currency code
-        const countryCode = countryData?.country_code;
-        if (countryCode) {
-          const currencyCode = countryData.currency; // Assumes the API returns the currency code
-          if (currencyCode) {
-            // Get the exchange rate for the currency
-            const exchangeRate = await getCurrencyExchangeRate(currencyCode.toLowerCase());
-            if (exchangeRate) {
-              Cookies.set('aethenos_currency', exchangeRate); // Store the exchange rate in cookies
-            }
+          } catch (error) {
+            console.error('Error fetching country or exchange rate:', error);
           }
         }
-      } catch (error) {
-        console.error('Error fetching country or exchange rate:', error);
-      }finally {
-        setIsDataReady(true); // Mark data fetching as complete
-      }
-    }
-
-    fetchCountryAndRates();
-  }, []);
-
+      
+        fetchCountryAndRates();
+      }, []);
+    
+    
+    
 //   if (!isDataReady) {
 //     // Show a loading screen while waiting for data
 //     return (
