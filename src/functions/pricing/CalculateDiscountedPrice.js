@@ -56,7 +56,7 @@ const CalculateDiscountedPrice = (data) => {
             const currencyCode = getAllInfoByISO(countryCode).currency.toLowerCase();
             // console.log(currencyCode)
 
-            // Fetch the exchange rate only if it hasn't been fetched already
+            // // Fetch the exchange rate only if it hasn't been fetched already
             // if (!EX_RATES) {
             //     getCurrencyExchangeRate(currencyCode).then(rate => {
             //         EX_RATES = rate;

@@ -11,11 +11,16 @@ import { store } from '../redux/store';
 import Theme from '../components/common/theme';
 import { MouseMoveProvider } from '../contexts/mouse-move-context';
 import SEO from '../components/seo';
-import { getCurrencyExchangeRate, getUserCountry, USERTOKEN } from '../api';
+import { getCurrency, getCurrencyExchangeRate, getUserCountry, USERTOKEN } from '../api';
 import Cookies from 'js-cookie';
 
 import Head from 'next/head';
 import { ENV_STATUS } from '../functions/env';
+
+import countries from 'i18n-iso-countries';
+
+// Initialize the countries library with the English locale
+countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
 
 function MyApp( { Component, pageProps } ) {
@@ -42,7 +47,6 @@ function MyApp( { Component, pageProps } ) {
       
             // Determine the country based on login status
             if (USERTOKEN == null) {
-
               if (ENV_STATUS === "dev") {
                 Cookies.remove('aethenos_user_country');
               } else {
@@ -54,14 +58,10 @@ function MyApp( { Component, pageProps } ) {
               if (countryData) {
                 Cookies.set('aethenos_user_country', JSON.stringify(countryData));
   
-              console.log(countryData)
-  
+              // console.log(countryData)
               }
-            }
-  
-            console.log(countryData)
-      
-            // Determine the currency code if countryData is available
+
+                     // Determine the currency code if countryData is available
             const countryCode = countryData?.country_code;
             
             if (countryCode) {
@@ -77,6 +77,52 @@ function MyApp( { Component, pageProps } ) {
                 }
               }
             }
+            }else{
+
+              // Get the country name from the cookie
+    let countryName = Cookies.get('aethenos_user_country');
+    console.log("Logged in, Country Name:", countryName);
+
+    if (countryName) {
+     
+      const currencyEx = await getCurrency(countryName);
+      // console.log(currencyEx)
+
+      if(currencyEx){
+          const exchangeRate = await getCurrencyExchangeRate(currencyEx.toLowerCase());
+          Cookies.set('aethenos_currency', exchangeRate);
+
+        console.log(exchangeRate)
+      }
+
+      // if (countryCode) {
+      //   console.log("Derived Country Code:", countryCode);
+
+      //   // Fetch the exchange rate using the country code
+      //   const exchangeRate = await getCurrencyExchangeRate(countryCode.toLowerCase());
+      //   if (exchangeRate) {
+      //     console.log("Exchange Rate:", exchangeRate);
+
+      //     // Save the exchange rate to a cookie
+      //     // Cookies.set('aethenos_currency', exchangeRate);
+
+      //     // Optionally update the country data in cookies with the country code
+      //     const updatedCountryData = { country_name: countryName, country_code: countryCode };
+      //     // Cookies.set('aethenos_user_country', JSON.stringify(updatedCountryData));
+      //   } else {
+      //     console.error("Exchange rate could not be retrieved.");
+      //   }
+      // } else {
+      //   console.error("Country code could not be derived from country name.");
+      // }
+    } else {
+      console.warn("Country name is missing in the cookie.");
+    }
+            }
+  
+            console.log(countryData)
+      
+     
           } catch (error) {
             console.error('Error fetching country or exchange rate:', error);
           }

@@ -58,6 +58,32 @@ export const getUserCountry = async () => {
   }
 };
 
+export const getCurrency = async (countryName) => {
+  try {
+    const response = await fetch(`https://restcountries.com/v3.1/name/${countryName}`);
+    const data = await response.json();
+
+    // console.log(data); // Log the full response for debugging
+
+    if (data && data[0] && data[0].currencies) {
+      const currencies = data[0].currencies;
+
+      // Extract the dynamic key
+      const currencyCode = Object.keys(currencies)[0]; // Gets the first key, e.g., "GBP"
+      const currencyDetails = currencies[currencyCode]; // Access the details using the key
+
+      return currencyCode
+    } else {
+      console.error('No currencies data found for the country:', countryName);
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching user country:', error);
+    return null;
+  }
+};
+
+
 // Fetch currency exchange rate and update cookies
 export const getCurrencyExchangeRate = async (code) => {
   try {
@@ -72,6 +98,7 @@ export const getCurrencyExchangeRate = async (code) => {
     // // Remove existing cookie and set the new one
     // Cookies.remove('aethenos_currency', cookieOptions);
     // Cookies.set('aethenos_currency', `${exchangeRate}`, cookieOptions);
+    console.log(exchangeRate)
 
     // Remove existing cookie and set the new one
     Cookies.remove('aethenos_currency');
