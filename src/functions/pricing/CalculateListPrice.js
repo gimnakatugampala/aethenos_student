@@ -54,12 +54,12 @@ const CalculateListPrice = (data) => {
             const currencyCode = getAllInfoByISO(countryCode).currency.toLowerCase();
 
             // Fetch the exchange rate only if it hasn't been fetched already
-            if (!EX_RATES) {
-                getCurrencyExchangeRate(currencyCode).then(rate => {
-                    EX_RATES = rate;
-                    Cookies.set('aethenos_currency', rate); // Cache rate in cookies for future use
-                });
-            }
+            // if (!EX_RATES) {
+            //     getCurrencyExchangeRate(currencyCode).then(rate => {
+            //         EX_RATES = rate;
+            //         Cookies.set('aethenos_currency', rate); // Cache rate in cookies for future use
+            //     });
+            // }
 
             if (foundPrice.listPrice === 0) {
                 if (EX_RATES) {

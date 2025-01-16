@@ -71,7 +71,7 @@ function MyApp( { Component, pageProps } ) {
                 // Get the exchange rate for the currency
                 const exchangeRate = await getCurrencyExchangeRate(currencyCode.toLowerCase());
                 if (exchangeRate) {
-            console.log(exchangeRate)
+                  console.log(exchangeRate)
   
                   Cookies.set('aethenos_currency', exchangeRate);
                 }

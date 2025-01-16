@@ -57,12 +57,12 @@ const CalculateDiscountedPrice = (data) => {
             // console.log(currencyCode)
 
             // Fetch the exchange rate only if it hasn't been fetched already
-            if (!EX_RATES) {
-                getCurrencyExchangeRate(currencyCode).then(rate => {
-                    EX_RATES = rate;
-                    Cookies.set('aethenos_currency', rate); // Cache in cookies for future use
-                });
-            }
+            // if (!EX_RATES) {
+            //     getCurrencyExchangeRate(currencyCode).then(rate => {
+            //         EX_RATES = rate;
+            //         Cookies.set('aethenos_currency', rate); // Cache in cookies for future use
+            //     });
+            // }
 
             if (foundPrice.netPrice == 0) {
                 // Convert global net price to local currency if EX_RATES is available
