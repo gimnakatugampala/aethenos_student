@@ -13,7 +13,8 @@ const COUNTRY = Cookies.get('aethenos_user_origin');
 
 const CalculateOffPrices = (data) => {
   const COUNTRY = Cookies.get('aethenos_user_origin');
-  const USER_LOGIN_COUNTRY = Cookies.get('aethenos_user_country');
+  // const USER_LOGIN_COUNTRY = Cookies.get('aethenos_user_country');
+  const USER_LOGIN_COUNTRY = Cookies.get('aethenos_loggedIn_user');
 
   let countryToFind = "";
   let exchangeRate = Cookies.get('aethenos_currency'); // Store the fetched exchange rate here

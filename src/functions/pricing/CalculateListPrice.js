@@ -10,7 +10,8 @@ countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 const CalculateListPrice = (data) => {
     const COUNTRY = Cookies.get('aethenos_user_origin');
     let EX_RATES = Cookies.get('aethenos_currency'); // Store exchange rate in cookies if fetched already
-    const USER_LOGIN_COUNTRY = Cookies.get('aethenos_user_country');
+    // const USER_LOGIN_COUNTRY = Cookies.get('aethenos_user_country');
+    const USER_LOGIN_COUNTRY = Cookies.get('aethenos_loggedIn_user');
 
     let countryToFind = "";
 

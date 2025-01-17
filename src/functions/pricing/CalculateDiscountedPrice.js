@@ -11,7 +11,8 @@ const CalculateDiscountedPrice = (data) => {
 
     const COUNTRY = Cookies.get('aethenos_user_origin');
     let EX_RATES = Cookies.get('aethenos_currency');
-    const USER_LOGIN_COUNTRY = Cookies.get('aethenos_user_country');
+    // const USER_LOGIN_COUNTRY = Cookies.get('aethenos_user_country');
+    const USER_LOGIN_COUNTRY = Cookies.get('aethenos_loggedIn_user');
 
     let countryToFind = "";
 

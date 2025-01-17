@@ -213,13 +213,17 @@ export const StudentSignUp = async(fname, lname, email , conpassword,setloading,
               setisShownEmailVerificarion(true)
 
               if(ENV_STATUS == "dev"){
+                Cookies.remove('aethenos_user_country');
                 Cookies.set('aethenos', `${result.token}`, { expires: 7 })
                 Cookies.set('aethenos_topic_filled', false)
                 Cookies.set('aethenos_user_country', `${countryToFind}`)
+                Cookies.set('aethenos_loggedIn_user', `${countryToFind}`)
               }else{
+                Cookies.remove('aethenos_user_country', { domain: '.aethenos.com' });
                 Cookies.set('aethenos', `${result.token}`, { expires: 7, domain: '.aethenos.com' });
                 Cookies.set('aethenos_topic_filled', false, { domain: '.aethenos.com' });
                 Cookies.set('aethenos_user_country', `${countryToFind}`, { domain: '.aethenos.com' });
+                Cookies.set('aethenos_loggedIn_user', `${countryToFind}`, { domain: '.aethenos.com' });
               }
 
               
@@ -349,11 +353,16 @@ export const StudentSignIn = async(email, password,setloading,router,rediect_url
               setloading(false)
 
               if(ENV_STATUS =="dev"){
+                Cookies.remove('aethenos_user_country');
                 Cookies.set('aethenos', `${result.token}`, { expires: 7 })
                 Cookies.set('aethenos_user_country', `${result.country}`)
+                Cookies.set('aethenos_loggedIn_user', `${result.country}`)
+                
               }else{
+                Cookies.remove('aethenos_user_country', { domain: '.aethenos.com' });
                 Cookies.set('aethenos', `${result.token}`, { expires: 7, domain: '.aethenos.com' });
                 Cookies.set('aethenos_user_country', `${result.country}`, { domain: '.aethenos.com' });
+                Cookies.set('aethenos_loggedIn_user', `${result.country}`, { domain: '.aethenos.com' });
 
               }
 
@@ -416,11 +425,17 @@ export const InstructorSignUp = async(firstname, lastname, email, conpassword, r
         });
 
         if (ENV_STATUS == "dev") {
+          Cookies.remove('aethenos_user_country');
+
           Cookies.set('aethenos', `${result.token}`, { expires: 7 });
           Cookies.set('aethenos_user_country', `${countryToFind}`);
+          Cookies.set('aethenos_loggedIn_user', `${countryToFind}`);
+          
         } else {
+          Cookies.remove('aethenos_user_country', { domain: '.aethenos.com' });
           Cookies.set('aethenos', `${result.token}`, { expires: 7, domain: '.aethenos.com' });
           Cookies.set('aethenos_user_country', `${countryToFind}`, { domain: '.aethenos.com' });
+          Cookies.set('aethenos_loggedIn_user', `${countryToFind}`, { domain: '.aethenos.com' });
         }
 
         window.location.href = "https://instructor.aethenos.com/courses"
@@ -486,11 +501,16 @@ export const SignUpUserViaCart = async(firstname, lastname, email, conpassword, 
         });
 
         if (ENV_STATUS == "dev") {
+          Cookies.remove('aethenos_user_country');
+
           Cookies.set('aethenos', `${result.token}`, { expires: 7 });
           Cookies.set('aethenos_user_country', `${countryToFind}`);
+          Cookies.set('aethenos_loggedIn_user', `${countryToFind}`);
         } else {
+          Cookies.remove('aethenos_user_country', { domain: '.aethenos.com' });
           Cookies.set('aethenos', `${result.token}`, { expires: 7, domain: '.aethenos.com' });
           Cookies.set('aethenos_user_country', `${countryToFind}`, { domain: '.aethenos.com' });
+          Cookies.set('aethenos_loggedIn_user', `${countryToFind}`, { domain: '.aethenos.com' });
         }
 
         setbtnLoading(false)
@@ -633,10 +653,12 @@ export const Logout = async(setCURRENTUSER) =>{
 
   if(ENV_STATUS == "dev"){
     Cookies.remove('aethenos')
-    // Cookies.remove('aethenos_user_country')
+    Cookies.remove('aethenos_user_country')
+    Cookies.remove('aethenos_loggedIn_user')
   }else{
     Cookies.remove('aethenos', { domain: '.aethenos.com' });
-    // Cookies.remove('aethenos_user_country', { domain: '.aethenos.com' });
+    Cookies.remove('aethenos_user_country', { domain: '.aethenos.com' });
+    Cookies.remove('aethenos_loggedIn_user', { domain: '.aethenos.com' });
 
   }
 

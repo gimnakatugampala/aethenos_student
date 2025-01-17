@@ -26,6 +26,7 @@ countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 function MyApp( { Component, pageProps } ) {
     const router = useRouter();
     const [isDataReady, setIsDataReady] = useState(false);
+    let countryOfLoggedInUser = Cookies.get('aethenos_loggedIn_user')
 
     useEffect( () => {
         sal( { threshold: 0.1, once: true } );
@@ -79,45 +80,48 @@ function MyApp( { Component, pageProps } ) {
             }
             }else{
 
-              // Get the country name from the cookie
-    let countryName = Cookies.get('aethenos_user_country');
-    console.log("Logged in, Country Name:", countryName);
+              // if(countryOfLoggedInUser){
+                // Get the country name from the cookie
+                // let countryName = Cookies.get('aethenos_loggedIn_user');
+                // console.log("Logged in, Country Name:", countryName);
+  
+                  if (countryOfLoggedInUser) {
+                  
+                    const currencyEx = await getCurrency(countryOfLoggedInUser);
+                    // console.log(currencyEx)
+  
+                        if(currencyEx){
+                            const exchangeRate = await getCurrencyExchangeRate(currencyEx.toLowerCase());
+                            Cookies.set('aethenos_currency', exchangeRate);
+  
+                          console.log(exchangeRate)
+                        }
+  
+                    // if (countryCode) {
+                    //   console.log("Derived Country Code:", countryCode);
+  
+                    //   // Fetch the exchange rate using the country code
+                    //   const exchangeRate = await getCurrencyExchangeRate(countryCode.toLowerCase());
+                    //   if (exchangeRate) {
+                    //     console.log("Exchange Rate:", exchangeRate);
+  
+                    //     // Save the exchange rate to a cookie
+                    //     // Cookies.set('aethenos_currency', exchangeRate);
+  
+                    //     // Optionally update the country data in cookies with the country code
+                    //     const updatedCountryData = { country_name: countryName, country_code: countryCode };
+                    //     // Cookies.set('aethenos_user_country', JSON.stringify(updatedCountryData));
+                    //   } else {
+                    //     console.error("Exchange rate could not be retrieved.");
+                    //   }
+                    // } else {
+                    //   console.error("Country code could not be derived from country name.");
+                    // }
+                  } else {
+                    console.warn("Country name is missing in the cookie.");
+                  }
+              // }
 
-    if (countryName) {
-     
-      const currencyEx = await getCurrency(countryName);
-      // console.log(currencyEx)
-
-      if(currencyEx){
-          const exchangeRate = await getCurrencyExchangeRate(currencyEx.toLowerCase());
-          Cookies.set('aethenos_currency', exchangeRate);
-
-        console.log(exchangeRate)
-      }
-
-      // if (countryCode) {
-      //   console.log("Derived Country Code:", countryCode);
-
-      //   // Fetch the exchange rate using the country code
-      //   const exchangeRate = await getCurrencyExchangeRate(countryCode.toLowerCase());
-      //   if (exchangeRate) {
-      //     console.log("Exchange Rate:", exchangeRate);
-
-      //     // Save the exchange rate to a cookie
-      //     // Cookies.set('aethenos_currency', exchangeRate);
-
-      //     // Optionally update the country data in cookies with the country code
-      //     const updatedCountryData = { country_name: countryName, country_code: countryCode };
-      //     // Cookies.set('aethenos_user_country', JSON.stringify(updatedCountryData));
-      //   } else {
-      //     console.error("Exchange rate could not be retrieved.");
-      //   }
-      // } else {
-      //   console.error("Country code could not be derived from country name.");
-      // }
-    } else {
-      console.warn("Country name is missing in the cookie.");
-    }
             }
   
             console.log(countryData)

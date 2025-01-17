@@ -10,7 +10,8 @@ countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
 const GetCurrencyByCountry = (data) => {
     const COUNTRY = Cookies.get('aethenos_user_origin');
-    const USER_LOGIN_COUNTRY = Cookies.get('aethenos_user_country');
+    // const USER_LOGIN_COUNTRY = Cookies.get('aethenos_user_country');
+    const USER_LOGIN_COUNTRY = Cookies.get('aethenos_loggedIn_user');
 
     let countryToFind = "";
 
