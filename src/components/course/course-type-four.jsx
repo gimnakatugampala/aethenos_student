@@ -156,7 +156,7 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
   return (
     <div
       className={`edu-course course-style-1 ${classes ? classes : ""} h-100`}
-      style={{ cursor: "default" }}
+      style={{ cursor: "default"}}
     >
       <div className="inner">
         <div className="thumbnail">
