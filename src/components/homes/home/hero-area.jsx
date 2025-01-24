@@ -9,9 +9,54 @@ const HeroArea = () => {
     fontSize: "clamp(1rem, calc(0.5rem + 1.4vw), 1.5rem)",  
   };
   return (
+    <>
+<section
+  className="hero-section d-flex align-items-center justify-content-center text-center py-5"
+  style={{
+    backgroundImage: 'url(\'/images/hero-img.jpg\')',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    position: 'relative',
+    color: '#fff',
+    minHeight: '80vh',
+  }}
+>
+  {/* Semi-transparent overlay */}
+  <div
+    style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adjust the alpha value for transparency
+      zIndex: 1,
+    }}
+  ></div>
+
+  <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+    <div className="row align-items-center">
+      <div className="col-md-12">
+        <h1 className="display-4 fw-bold mb-3 text-white">Learn Excel and Everything Else...</h1>
+      </div>
+
+      <div className="col-md-12">
+        <p className="lead mb-4 text-white">
+          Aethenos is your go-to place for learning the technical and other skills
+          that are imperative for your success in this new age.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
     <div className="hero-banner hero-style-4">
       <div className="mx-4 mx-sm-5 mx-md-4 mx-lg-5 mb-5 mt-5">
         <div className="row align-items-center">
+
+       
+
         <div className="col-md-12">
             <div className="banner-content mb-0">
               <h2 
@@ -22,18 +67,6 @@ const HeroArea = () => {
               >
                 Excel Genius : Learn and Master Skills Directly Inside Excel!
               </h2>
-           
-              {/* <ul className="shape-group">
-                                <motion.li className="shape-1 scene" data-sal-delay="1000" data-sal="fade" data-sal-duration="1000" 
-                                    animate={ {
-                                        x: mouseReverse(25).x,
-                                        y: mouseReverse(25).y
-                                    } }
-                                >
-                               
-                                </motion.li>
-                                <img src="/assets/images/about/shape-13.png" alt="Shape" />
-                            </ul> */}
             </div>
           </div>
 
@@ -86,6 +119,7 @@ const HeroArea = () => {
         }
       `}</style>
     </div>
+    </>
   );
 };
 
