@@ -44,7 +44,7 @@ const SEO = ({ pageTitle, description, imageUrl, font ,keywords }) =>  {
             />
             
             {/* Open Graph Meta Tags for Social Media */}
-            <meta property="og:title" content={pageTitle ? `${pageTitle} | Aethenos` : "Aethenos"} />
+            <meta property="og:title" content={pageTitle ? `${pageTitle} Aethenos` : "Aethenos"} />
             <meta property="og:description" content={description || "Explore amazing learning content at Aethenos."} />
             <meta property="og:image" content={imageUrl || "/favicon.ico"} />
             <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : ''} />
