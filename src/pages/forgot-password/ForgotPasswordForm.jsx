@@ -132,6 +132,7 @@ const ForgotPasswordForm = () => {
 
                 <PasswordChecklist
                 rules={["minLength","specialChar","number","capital","match"]}
+                
                 minLength={5}
                 value={password}
                 valueAgain={conPassword}
@@ -155,7 +156,7 @@ const ForgotPasswordForm = () => {
               <div>
               <div className="d-flex justify-content-center my-4">
               <ReactCodeInput  inputStyle={inputStyle}
-        inputFocusStyle={inputFocusStyle} value={VerficationCode} onChange={(e) => setVerficationCode(e)}   className="mx-auto text-center" type='number' fields={5} />
+        inputFocusStyle={inputFocusStyle} value={VerficationCode} onChange={(e) => setVerficationCode(e)}   className="mx-auto text-center" type='text' fields={5} />
 
               {/* <VerificationInput value={VerficationCode} onChange={(e) => setVerficationCode(e)} length={5} className="mx-auto text-center" /> */}
               </div>
@@ -172,7 +173,7 @@ const ForgotPasswordForm = () => {
 
               <p onClick={handleSubmit} role="button" tabindex="0" className='text-center my-3 user-select-none'><b>Resend code</b></p>
               
-              <p className='text-center my-2'>We have sent you a code to your email. Please check</p>
+              {/* <p className='text-center my-2'>We have sent you a code to your email. Please check</p> */}
               </div>
             )
 

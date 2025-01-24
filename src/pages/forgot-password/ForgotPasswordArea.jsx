@@ -9,7 +9,7 @@ const ForgotPasswordArea = () => {
                      <div className="col-lg-6">
                         <div className="login-form-box">
                             <h3 className="title">Forgot Password</h3>
-                            <p>Please enter your email, we will send you a verification code.</p>
+                            <p className='text-center'>Please enter the verification code we have sent to your email.</p>
                            <ForgotPasswordForm />
                             <p className='text-center my-3'><b><a href="/login">Return to Login</a></b></p>
                         </div>
