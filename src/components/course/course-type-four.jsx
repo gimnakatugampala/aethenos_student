@@ -162,7 +162,7 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
         <div className="thumbnail">
           <Link href={`/course-details/${data.course_code}`} legacyBehavior>
             <img
-              style={{ width: "100%", height: "300px", objectFit: "cover" }}
+              style={{ width: "100%", height: "200px", objectFit: "cover" }}
               src={`${IMG_HOST}${data.img}`}
               alt={data.title}
               className="img-fluid"
@@ -181,33 +181,33 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
                 fontSize: "14px",
               }}
             >
-              <div >
+              <div style={{fontSize : '12px'}}>
                 {CalculateOffPrices(data)}
               </div>
               {/* <div style={{ marginTop: "-45px" }}>OFF</div> */}
             </div>
           )}
 
-          <div className=" fw-bolder mb-2">
-            <span className="course-level"> {data.level}</span>
+          <div className="fw-bolder">
+            <span className="course-level m-0 mb-1"> {data.level}</span>
 
         
           </div>
        
 
-          <h5 className="title">
+          <h5 className="title"  style={{ fontSize: "13px", marginBottom: "4px" }}>
             <Link href={`/course-details/${data.course_code}`} legacyBehavior>
               {data.title}
             </Link>
           </h5>
 
-          <p className="m-0 p-0">
+          <p style={{ fontSize: "11px"}} className="m-0 p-0 fw-bolder">
             {data.instructor.length > 60
               ? data.instructor.substring(0, 60) + "..."
               : data.instructor}
           </p>
 
-          <div className="course-rating">
+          <div className="course-rating m-0 p-0">
             <StarsRating
               edit={false}
               count={5}
@@ -216,7 +216,7 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
               color1={"gray"}
               color2={"#F39C12"}
             />
-            <span className="rating-count">
+            <span className="rating-count p-0 m-0">
               <b>({Number.parseFloat(data.rating).toFixed(1)})</b>
             </span>
           </div>
@@ -227,8 +227,8 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
             data.externalCourseDetails.externalRating != 0 && 
             data.externalCourseDetails.linkToCourse != "" && 
          (<>
-          <p className="m-0 p-0">Verified External Ratings:</p>
-          <div className="course-rating">
+          <p style={{ fontSize: "11px"}} className="m-0 p-0">Verified External Ratings:</p>
+          <div className="course-rating m-0">
             <StarsRating
               edit={false}
               count={5}
@@ -246,32 +246,32 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
 
           <div>
           {data.isPaid ? (
-              <span className="course-price discounted-price my-2">
+              <span style={{ fontSize: "14px"}} className="course-price discounted-price">
                 {getSymbolFromCurrency(GetCurrencyByCountry(data))}
                 {FormatNumbers(CalculateDiscountedPrice(data))}
               
 
                 {CalculateListPrice(data) != CalculateDiscountedPrice(data) && (
-                  <span className="course-price text-decoration-line-through">
+                  <span style={{ fontSize: "14px"}} className="course-price text-decoration-line-through mx-2">
                     {getSymbolFromCurrency(GetCurrencyByCountry(data))}
                     {FormatNumbers(CalculateListPrice(data))}
                   </span>
                 )}
               </span>
             ) : (
-              <span className="course-price discounted-price fw-bolder">
+              <span style={{ fontSize: "14px"}} className="course-price discounted-price fw-bolder">
                 Free
               </span>
             )}
           </div>
 
           <ol className="d-flex course-meta">
-            <li>
+            <li style={{ fontSize: "11px"}}>
               <i className="icon-37"></i>
               {/* {data.student} {data.student == 1 ? "Student" : "Students"} */}
               {FormatVideoTimeLength(data.duration)}
             </li>
-            <li>
+            <li style={{ fontSize: "11px"}}>
               <i className="icon-24"></i>
               {getTotalLecturesCount(data)} Lectures
             </li>
@@ -339,7 +339,7 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
                       ? handleRemoveFromCart(data)
                       : handleAddToCart(data)
                   }
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", fontSize : '12px' }}
                 >
                   {cartCourses.some((item) => item.id === data.id)
                     ? "Remove from Cart"
@@ -358,9 +358,10 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
             ) : (
               <div className="button-group">
                 <a
+                
                   onClick={() => handleEnroll(data)}
                   className="edu-btn btn-medium"
-                  style={{ cursor: "pointer", mainfs }}
+                  style={{ cursor: "pointer", mainfs ,fontSize : '12px'}}
                 >
                   Enroll Now
                   <i className="icon-4"></i>
