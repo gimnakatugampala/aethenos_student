@@ -201,7 +201,7 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
             </Link>
           </h5>
 
-          <p style={{ fontSize: "11px"}} className="m-0 p-0 fw-bolder">
+          <p style={{ fontSize: "12px"}} className="m-0 p-0 fw-bolder">
             {data.instructor.length > 60
               ? data.instructor.substring(0, 60) + "..."
               : data.instructor}

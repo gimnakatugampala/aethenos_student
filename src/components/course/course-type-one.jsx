@@ -154,7 +154,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
           </h5>
           </div>
 
-          <p style={{ fontSize: "11px"}} className="m-0 p-0">
+          <p style={{ fontSize: "12px"}} className="m-0 p-0 fw-bolder">
             {data.instructor.length > 60
               ? data.instructor.substring(0, 60) + "..."
               : data.instructor}
@@ -176,7 +176,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
 
           {data.externalCourseDetails && (
             <>
-          <p className="m-0 p-0">Verified External Ratings:</p>
+          <p style={{ fontSize: "11px"}} className="m-0 p-0">Verified External Ratings:</p>
           <div className="course-rating">
             <StarsRating
               edit={false}
@@ -214,12 +214,12 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
       </div>
 
           <ol className="d-flex course-meta">
-            <li>
+            <li style={{ fontSize: "11px"}}>
               <i className="icon-37"></i>
               {/* {data.student} {data.student == 1 ? "Student" : "Students"} */}
              <span>{FormatVideoTimeLength(data.duration)}</span>
             </li>
-            <li>
+            <li style={{ fontSize: "11px"}}>
               <i className="icon-24"></i>
               <span> {getTotalLecturesCount(data)} Lectures</span>
             </li>
@@ -311,7 +311,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
             <a
               onClick={() => handleAddToCart(data)}
               className="edu-btn btn-secondary btn-small"
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer" , fontSize : '12px' }}
             >
               {cartCourses.some((item) => item.id === data.id)
                 ? "Remove from Cart"
