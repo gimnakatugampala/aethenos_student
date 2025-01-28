@@ -121,7 +121,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
         <div className="thumbnail">
           <Link href={`/course-details/${data.course_code}`} legacyBehavior>
             <img
-              style={{ width: "100%", height: "300px", objectFit: "cover" }}
+              style={{ width: "100%", height: "200px", objectFit: "cover" }}
               src={`${IMG_HOST}${data.img}`}
               alt={data.title}
               className="img-fluid"
@@ -147,14 +147,14 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
 
     
           <div className="w-100">
-          <h5 className="title ">
+          <h5 className="title " style={{ fontSize: "13px", marginBottom: "4px" }}>
             <Link href={`/course-details/${data.course_code}`} legacyBehavior>
               {data.title}
             </Link>
           </h5>
           </div>
 
-          <p className="m-0 p-0">
+          <p style={{ fontSize: "11px"}} className="m-0 p-0">
             {data.instructor.length > 60
               ? data.instructor.substring(0, 60) + "..."
               : data.instructor}
@@ -195,19 +195,19 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
 
         <div>
         {data.isPaid ? (
-              <span className="course-price discounted-price my-2">
+              <span style={{ fontSize: "14px"}} className="course-price discounted-price ">
                 {getSymbolFromCurrency(GetCurrencyByCountry(data))}
                 {FormatNumbers(CalculateDiscountedPrice(data))}
 
                 {CalculateListPrice(data) != CalculateDiscountedPrice(data) && (
-                  <span className="course-price text-decoration-line-through">
+                  <span style={{ fontSize: "14px"}} className="course-price text-decoration-line-through mx-2">
                     {getSymbolFromCurrency(GetCurrencyByCountry(data))}
                     {FormatNumbers(CalculateListPrice(data))}
                   </span>
                 )}
               </span>
             ) : (
-              <span className="course-price discounted-price fw-bolder">
+              <span style={{ fontSize: "14px"}} className="course-price discounted-price fw-bolder">
                 Free
               </span>
             )}
