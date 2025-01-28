@@ -189,7 +189,7 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
           )}
 
           <div className="fw-bolder">
-            <span className="course-level m-0 mb-1"> {data.level}</span>
+            <span className="course-level m-0 mb-2"> {data.level}</span>
 
         
           </div>
