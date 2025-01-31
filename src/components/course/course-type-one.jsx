@@ -19,6 +19,7 @@ import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
 import FormatNumbers from "../../functions/FormatNumbers";
 import FormatHTMLRemove from "../../functions/FormatHTMLRemove";
 import { FormatVideoTimeLength } from "../../functions/FormatVideoTimeLength";
+import { FormatVideoTimeLengthShow } from "../../functions/FormatVideoTimeLengthShow";
 
 const COUNTRY = Cookies.get("aethenos_user_origin");
 
@@ -217,7 +218,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
             <li style={{ fontSize: "11px"}}>
               <i className="icon-37"></i>
               {/* {data.student} {data.student == 1 ? "Student" : "Students"} */}
-             <span>{FormatVideoTimeLength(data.duration)}</span>
+             <span>{FormatVideoTimeLengthShow(data.duration)}</span>
             </li>
             <li style={{ fontSize: "11px"}}>
               <i className="icon-24"></i>
@@ -299,7 +300,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
             <li>
               <i className="icon-37"></i>
               {/* {data.student} {data.student == 1 ? "Student" : "Students"} */}
-             {FormatVideoTimeLength(data.duration)}
+             {FormatVideoTimeLengthShow(data.duration)}
             </li>
             <li>
               <i className="icon-24"></i>

@@ -17,6 +17,7 @@ import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
 import FormatHTMLRemove from "../../functions/FormatHTMLRemove";
 import FormatNumbers from "../../../src/functions/FormatNumbers"; 
 import { FormatVideoTimeLength } from "../../functions/FormatVideoTimeLength";
+import { FormatVideoTimeLengthShow } from "../../functions/FormatVideoTimeLengthShow";
 
 
 const CourseTypeFive = ({ data, classes }) => {
@@ -178,7 +179,7 @@ const CourseTypeFive = ({ data, classes }) => {
           <li>
               <i className="icon-37"></i>
               {/* {data.student} {data.student == 1 ? "Student" : "Students"} */}
-              <span>{FormatVideoTimeLength(data.duration)}</span>
+              <span>{FormatVideoTimeLengthShow(data.duration)}</span>
             </li>
             <li>
               <i className="icon-24"></i>

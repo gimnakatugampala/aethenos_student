@@ -16,6 +16,7 @@ import StarsRating from "stars-rating";
 import FormatNumbers from "../../functions/FormatNumbers";
 import CalculateOffPrices from "../../functions/pricing/CalculateOffPrices";
 import { FormatVideoTimeLength } from "../../functions/FormatVideoTimeLength";
+import { FormatVideoTimeLengthShow } from "../../functions/FormatVideoTimeLengthShow";
 
 const mainfs = {
   fontSize: "20px",
@@ -187,7 +188,7 @@ const CourseTypeOne = ({ course }) => {
             <li>
               <i className="icon-37"></i>
               {/* {course.student} Students */}
-              {FormatVideoTimeLength(course.duration)}
+              {FormatVideoTimeLengthShow(course.duration)}
             </li>
           </ul>
         </div>
