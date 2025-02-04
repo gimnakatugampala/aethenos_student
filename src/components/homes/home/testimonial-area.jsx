@@ -78,7 +78,7 @@ export default function TestimonialArea() {
             </div>
           </div>
           <div className="col-xs-12 col-xl-8 col-md-12 d-flex align-items-center">
-            <Swiper
+            {/* <Swiper
               slidesPerView={1}
               spaceBetween={0}
               loop={loop}
@@ -109,7 +109,17 @@ export default function TestimonialArea() {
                   </div>
                 </SwiperSlide>
               ))}
-            </Swiper>
+            </Swiper> */}
+            <div className="testimonial-grid p-0 m-0">
+            <video 
+              autoPlay 
+              muted 
+              loop 
+              style={{ minHeight: "110px", width: "100%", border: "none" }} 
+              src="/assets/showcase_excel_app.mp4"
+            />
+          </div>
+
           </div>
         </div>
       </div>
