@@ -122,7 +122,7 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
         <div className="thumbnail">
           <Link href={`/course-details/${data.course_code}`} legacyBehavior>
             <img
-              style={{ width: "100%", height: "200px", objectFit: "cover" }}
+              style={{ width: "100%", height: "150px", objectFit: "cover" }}
               src={`${IMG_HOST}${data.img}`}
               alt={data.title}
               className="img-fluid"
@@ -139,12 +139,12 @@ const CourseTypeOne = ({ data, classes, image_location_path = "01" }) => {
 
         <div className="content px-3">
      
-          <div className=" fw-bolder mb-2">
+          {/* <div className=" fw-bolder mb-2">
             <span className="course-level"> {data.level}</span>
 
            
 
-          </div>
+          </div> */}
 
     
           <div className="w-100">
