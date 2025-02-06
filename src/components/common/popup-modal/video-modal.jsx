@@ -17,7 +17,7 @@ const VideoModal = ({isVideoOpen,setIsVideoOpen,videoId = "9Y7ma241N8k"}) => {
         allowFullScreen={false}
 
         // url={'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'}
-            url={`${IMG_HOST}${videoId}`} 
+            url={`${IMG_HOST}videos/promotional-videos/${videoId}`} 
             autoplay isOpen={isVideoOpen} 
             // videoId={`${IMG_HOST}${videoId}`} 
             onClose={() => setIsVideoOpen(false)} 

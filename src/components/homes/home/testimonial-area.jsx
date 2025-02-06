@@ -112,6 +112,7 @@ export default function TestimonialArea() {
             </Swiper> */}
             <div className="testimonial-grid p-0 m-0">
             <video 
+            controls={true}
               autoPlay 
               muted 
               loop 
