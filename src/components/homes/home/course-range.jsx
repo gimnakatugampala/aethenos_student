@@ -71,7 +71,7 @@ const CourseRange = () => {
 
   return (
     <div className="edu-brand-area brand-area-1 p-3 ">
-      <div className="container-fluid">
+      <div className="container">
         <div className="row">
           <div> 
             <h2 className="title m-0 mb-1 mt-3">A broad selection of courses</h2>

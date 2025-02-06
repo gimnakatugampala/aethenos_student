@@ -163,7 +163,7 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
         <div className="thumbnail">
           <Link href={`/course-details/${data.course_code}`} legacyBehavior>
             <img
-              style={{ width: "100%", height: "200px", objectFit: "cover" }}
+              style={{ width: "100%", height: "140px", objectFit: "cover" }}
               src={`${IMG_HOST}${data.img}`}
               alt={data.title}
               className="img-fluid"
@@ -189,14 +189,14 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
             </div>
           )}
 
-          <div className="fw-bolder">
+          {/* <div className="fw-bolder">
             <span className="course-level m-0 mb-2"> {data.level}</span>
 
         
-          </div>
+          </div> */}
        
 
-          <h5 className="title"  style={{ fontSize: "13px", marginBottom: "4px" }}>
+          <h5 className="title"  style={{ fontSize: "13px", marginBottom: "1px" }}>
             <Link href={`/course-details/${data.course_code}`} legacyBehavior>
               {data.title}
             </Link>
@@ -229,7 +229,7 @@ const CourseTypeFour = ({ data, classes, index, courses }) => {
             data.externalCourseDetails.linkToCourse != "" && 
          (<>
           <p style={{ fontSize: "11px"}} className="m-0 p-0">Verified External Ratings:</p>
-          <div className="course-rating m-0">
+          <div className="course-rating m-0 p-0">
             <StarsRating
               edit={false}
               count={5}
