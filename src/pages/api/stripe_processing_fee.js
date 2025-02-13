@@ -29,6 +29,7 @@ export default async function handler(req, res) {
         const feeDetails = paymentIntent.latest_charge.balance_transaction?.fee_details;
 
         if (feeDetails) {
+          console.log("Fee Details"+feeDetails)
           res.status(200).json(feeDetails);
         } else {
           res.status(404).json({ error: 'No fee details found' });
