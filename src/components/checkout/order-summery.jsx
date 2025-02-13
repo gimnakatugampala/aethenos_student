@@ -305,6 +305,7 @@ const generatePaypalItems = () => {
     
                         // Convert to dollars form cents
                         buyCourseOrder.processingFee = data[0].amount / 100
+                        buyCourseOrder.stripe_pf_currency = data[0].currency
                        
                         var rawData = JSON.stringify(buyCourseOrder);
                         BuyCourseByStudent(rawData, router, buyCourseOrder);
