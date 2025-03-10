@@ -4,8 +4,10 @@ import SEO from '../../../components/seo';
 import { Wrapper } from '../../../layout';
 import CourseDetailsMain from '../../../components/course-details';
 import LargeLoading from '../../../functions/Loading/LargeLoading';
-import { GetCourseDetails, IMG_HOST, ValidateCouponOnCartFromCourseDetails } from '../../../api';
+import { GetCourseDetails, GetCourseDetailsSEO, IMG_HOST, ValidateCouponOnCartFromCourseDetails } from '../../../api';
 import FormatHTMLRemove from '../../../functions/FormatHTMLRemove';
+
+
 
 const CourseDetails = () => {
   const router = useRouter();
@@ -21,6 +23,7 @@ const CourseDetails = () => {
       try {
         setLoading(true);
         const courseData = await GetCourseDetails(code,setCourse);
+        console.log(courseData)
         setCourse(courseData);
       } catch (err) {
         setError('Failed to load course details. Please try again later.');
@@ -82,3 +85,57 @@ const CourseDetails = () => {
 };
 
 export default CourseDetails;
+
+
+// **Generate metadata dynamically for SEO**
+export async function generateMetadata({ params }) {
+  if (!params?.code) {
+    return {
+      title: "Course Not Found",
+      description: "This course does not exist.",
+    };
+  }
+
+  try {
+
+    const courseData = await GetCourseDetailsSEO(params.code);
+    
+    if (!courseData) {
+      return {
+        title: "Course Not Found",
+        description: "This course does not exist.",
+      };
+    }
+
+    return {
+      title: courseData.title,
+      description: FormatHTMLRemove(courseData.course_main_desc),
+      openGraph: {
+        title: courseData.title,
+        description: FormatHTMLRemove(courseData.course_main_desc),
+        url: `https://aethenos.com/course-details/${params.code}`,
+        type: "website",
+        images: [
+          {
+            url: `${IMG_HOST}${courseData.img}`,
+            width: 1200,
+            height: 630,
+            alt: courseData.title,
+          },
+        ],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: courseData.title,
+        description: FormatHTMLRemove(courseData.course_main_desc),
+        images: [`${IMG_HOST}${courseData.img}`],
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching metadata:", error);
+    return {
+      title: "Error Loading Course",
+      description: "There was an issue loading course details.",
+    };
+  }
+}
