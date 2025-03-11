@@ -6,15 +6,64 @@ import CourseDetailsMain from '../../../components/course-details';
 import LargeLoading from '../../../functions/Loading/LargeLoading';
 import { GetCourseDetails, GetCourseDetailsSEO, IMG_HOST, ValidateCouponOnCartFromCourseDetails } from '../../../api';
 import FormatHTMLRemove from '../../../functions/FormatHTMLRemove';
+import HeadSEOFormatHTML from '../../../functions/HeadSEOFormatHTML';
 
 
+export async function getServerSideProps({ query }) {
+  try {
+    const { code } = query;
 
-const CourseDetails = () => {
+    if (!code) {
+      return {
+        props: {
+          cCode: null,
+          title: "Course Not Found",
+          description: "This course does not exist.",
+        },
+      };
+    }
+
+    const courseData = await GetCourseDetailsSEO(code);
+    // console.log(courseData)
+
+    if (!courseData) {
+      return {
+        props: {
+          cCode: null,
+          title: "Course Not Found",
+          description: "This course does not exist.",
+        },
+      };
+    }
+
+    return {
+      props: {
+        cCode: courseData.course_code,
+        title: courseData.title,
+        imgURL : courseData.img,
+        rawDescription : courseData.course_main_desc,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching metadata:", error);
+    return {
+      props: {
+        title: "Error Loading Course",
+        rawDescription : "There was an issue loading course details.",
+      },
+    };
+  }
+}
+
+
+const CourseDetails = ({title, rawDescription, imgURL }) => {
   const router = useRouter();
   const { code, couponCode } = router.query;
   const [course, setCourse] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const description = HeadSEOFormatHTML(rawDescription); // Now cleaned on the client-side
 
   useEffect(() => {
     if (!router.isReady || !code) return; // Ensure the router is ready and code is available
@@ -43,18 +92,18 @@ const CourseDetails = () => {
   }, [router.isReady, code, couponCode]);
 
 
-  if (loading) {
-    return (
-      <Wrapper>
-        <SEO
-          imageUrl="/default-placeholder.png"
-          description="Loading course details..."
-          pageTitle="Loading Course..."
-        />
-        <LargeLoading />
-      </Wrapper>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <Wrapper>
+  //       <SEO
+  //         imageUrl="/default-placeholder.png"
+  //         description="Loading course details..."
+  //         pageTitle="Loading Course..."
+  //       />
+  //       <LargeLoading />
+  //     </Wrapper>
+  //   );
+  // }
 
   if (error) {
     return (
@@ -72,9 +121,11 @@ const CourseDetails = () => {
     );
   }
 
+
+
   return (
     <Wrapper>
-      <SEO imageUrl={course ? `${IMG_HOST}${course.img}` : 'Loading...'} description={course ? `${FormatHTMLRemove(course.course_main_desc)}` : 'Loading...'} pageTitle={course ? course.title : 'Loading...'} />
+      <SEO imageUrl={`${IMG_HOST}${imgURL}`} description={description} pageTitle={title} />
       {course ? (
         <CourseDetailsMain course={course} />
       ) : (
