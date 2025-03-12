@@ -1242,6 +1242,30 @@ export const GetInstructorDetails = async(id,setinstructor_details,setloading) =
 
 }
 
+
+export const GetInstructorDetailsSEO = async(id) =>{
+    try {
+      const requestOptions = {
+        method: 'GET',
+        redirect: 'follow',
+      };
+  
+      const response = await fetch(`${BACKEND_LINK}/course/getInstructorDetails/${id}`, requestOptions);
+  
+      if (!response.ok) {
+        throw new Error(`Error fetching instructor details: ${response.status}`);
+      }
+  
+      const result = await response.json();
+      return result; // Ensure we return the fetched data
+  
+    } catch (error) {
+      console.error('Error fetching instructor details:', error);
+      return null; // Return null or a default value in case of error
+    }
+
+}
+
 export const GetCourseDetails = async(id,setcourse) =>{
 
   var requestOptions = {
