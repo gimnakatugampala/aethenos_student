@@ -2,7 +2,7 @@ import React from 'react'
 import { Header , Footer } from '../../layout'
 import SEO from '../../components/seo'
 import CourseFiveArea from "./course-5-area";
-import { GetInstructorDetailsSEO } from '../../api';
+import { GetInstructorDetailsSEO, IMG_HOST } from '../../api';
 
 
 export async function getServerSideProps({ query }) {
@@ -52,7 +52,7 @@ export async function getServerSideProps({ query }) {
 
 
 
-const SingleInstructor = () => {
+const SingleInstructor = ({ profileImage, rawDescription, instructorName, headline   }) => {
   return (
         <div className='sticky-header'>
         <div id="main-wrapper" className="main-wrapper">
