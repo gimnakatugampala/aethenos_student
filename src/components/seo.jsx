@@ -52,7 +52,7 @@ const SEO = ({ pageTitle, description, imageUrl, font ,keywords }) =>  {
             
             {/* Twitter Card Meta Tags */}
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={pageTitle ? `${pageTitle} | Aethenos` : "Aethenos"} />
+            <meta name="twitter:title" content={pageTitle ? `${pageTitle} ● Aethenos` : "Aethenos"} />
             <meta name="twitter:description" content={description || "Explore exceptional courses on Aethenos."} />
             <meta name="twitter:image" content={imageUrl || "/favicon.ico"} />
             
