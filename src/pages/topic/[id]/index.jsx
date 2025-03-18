@@ -185,7 +185,40 @@ const options = [
   "Non-Code Development",
 ];
 
-const GetCourseByCategory = () => {
+
+export async function getServerSideProps({ query }) {
+  try {
+    const { id } = query;
+
+    if (!id) {
+      return {
+        props: {
+          TName: "Topic Not Found"
+        },
+      };
+    }
+
+    
+
+    return {
+      props: {
+        TName: id .split(/[_-]/) // Split by both underscore and hyphen
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize first letter
+        .join(" ") // Join with space
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching metadata:", error);
+    return {
+      props: {
+        TName: "Error Loading Topic details",
+      },
+    };
+  }
+}
+
+
+const GetCourseByCategory = ({ TName }) => {
   const router = useRouter();
   const { id } = router.query;
   const coursePerView = 8;
@@ -287,7 +320,7 @@ const GetCourseByCategory = () => {
 
   return (
     <Wrapper>
-      <SEO pageTitle={TopicName == "" ? "Loading ..." : TopicName} />
+      <SEO pageTitle={TName} />
       <Header />
 
       <section className="edu-section-gap course-details-area">
