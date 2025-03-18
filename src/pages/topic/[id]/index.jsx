@@ -320,7 +320,7 @@ const GetCourseByCategory = ({ TName }) => {
 
   return (
     <Wrapper>
-      <SEO pageTitle={TName} />
+      <SEO pageTitle={`Topic ● ${TName}`} />
       <Header />
 
       <section className="edu-section-gap course-details-area">
