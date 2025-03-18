@@ -178,7 +178,44 @@ const options = [
   "Non-Code Development",
 ];
 
-const GetCoursesBySubCategory = () => {
+export async function getServerSideProps({ query }) {
+  try {
+    const { id, code } = query;
+
+    if (!id) {
+      return {
+        props: {
+          SubCatName: "Sub Category Not Found",
+          CatName:"Category Not Found"
+        },
+      };
+    }
+
+    
+
+    return {
+      props: {
+        SubCatName: code.split(/[_-]/) // Split by both underscore and hyphen
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize first letter
+        .join(" ") ,
+        CatName: id.split(/[_-]/) // Split by both underscore and hyphen
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize first letter
+        .join(" ") // Join with space
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching metadata:", error);
+    return {
+      props: {
+        SubCatName: "Error Loading Sub category details",
+        CatName: "Error Loading Sub category details",
+      },
+    };
+  }
+}
+
+
+const GetCoursesBySubCategory = ({ CatName, SubCatName }) => {
   const router = useRouter();
   const { id, code } = router.query;
   const coursePerView = 8;
@@ -285,11 +322,7 @@ const GetCoursesBySubCategory = () => {
   return (
     <Wrapper>
       <SEO
-        pageTitle={
-          SubCategoryName == ""
-            ? "Loading Content ..."
-            : `${CategoryName} > ${SubCategoryName}`
-        }
+        pageTitle={`${CatName} ▶ ${SubCatName}`}
       />
       <Header />
 
